@@ -127,7 +127,7 @@ namespace GeraçãoDeTemplate
             Contexto<Template> template = new Contexto<Template>();
             Contexto<TemplateLayout> templateLayout = new Contexto<TemplateLayout>();
 
-            IEnumerable<Filme> listaFilmes = panel2.Controls.Cast<Filme>();
+            IEnumerable<Filme> listaFilmes = panel2.Controls.OfType<Filme>();
 
             Template novoTemplate = new Template()
             {

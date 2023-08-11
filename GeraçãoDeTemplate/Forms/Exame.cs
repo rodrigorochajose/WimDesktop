@@ -1,4 +1,5 @@
-﻿using GeraçãoDeTemplate.Modelos;
+﻿using Emgu.CV.OCR;
+using GeraçãoDeTemplate.Modelos;
 using iDetector;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace GeraçãoDeTemplate
     public partial class Exame : Form, EventReceiver
     {
 
-        private int m_nId = -1, indice = 0, pacienteId = 0;
+        private int m_nId = -1, indice = 0, pacienteId = 0, tipoAcao = 0;
         string caminho = "";
         Filme filmeSelecionado;
         List<Filme> listaFilmes;
@@ -35,7 +36,7 @@ namespace GeraçãoDeTemplate
 
             foreach (TemplateLayout tl in listaTemplateLayout)
             {
-                if (tl.orientacao == "Vertical")
+                if (tl.orientacao.Contains("Vertical"))
                 {
                     altura = 35;
                     largura = 25;
@@ -80,6 +81,7 @@ namespace GeraçãoDeTemplate
             DirectoryInfo di = Directory.CreateDirectory(caminho + "\\Paciente-" + pacienteId + "\\" + nomeSessao + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
             caminho = di.FullName;
         }
+
         private void ExameCarregar(object sender, EventArgs e)
         {
             m_nId = Detector.CreateDetector(this);
@@ -89,10 +91,9 @@ namespace GeraçãoDeTemplate
 
         private void CarregarImagemTela()
         {
-            string path = Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff");
-
-            using (Image img = Image.FromFile(path))
+            using (FileStream fs = File.Open(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
+                Image img = Image.FromStream(fs);
                 pictureBox1.Image = img;
                 filmeSelecionado.Image = img;
                 filmeSelecionado.Tag = System.Drawing.Color.Black;
@@ -101,6 +102,7 @@ namespace GeraçãoDeTemplate
                 filmeSelecionado = listaFilmes[indice];
                 filmeSelecionado.Tag = System.Drawing.Color.LimeGreen;
                 filmeSelecionado.Invoke((MethodInvoker)(() => filmeSelecionado.Refresh()));
+
             }
         }
 
@@ -134,6 +136,114 @@ namespace GeraçãoDeTemplate
             }
         }
 
+        private void liberarFerramentas()
+        {
+            foreach (Button ferramenta in panelFerramentas.Controls.OfType<Button>())
+            {
+                ferramenta.Invoke((MethodInvoker)(() => ferramenta.Enabled = true));
+            }
+
+        }
+
+        private void botaoImportarClique(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botaoExportarClique(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botaoExcluirClique(object sender, EventArgs e)
+        {
+            filmeSelecionado.Image = null;
+            pictureBox1.Image = null;
+        }
+
+        private void botaoCompararClique(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botaoSelecionarClique(object sender, EventArgs e)
+        {
+            tipoAcao = 0;
+        }
+
+        private void botaoMoverClique(object sender, EventArgs e)
+        {
+            tipoAcao = 1;
+        }
+
+        private void botaoLupaClique(object sender, EventArgs e)
+        {
+
+        }
+
+        private void botaoReguaClique(object sender, EventArgs e)
+        {
+            tipoAcao = 2;
+        }
+
+        private void botaoDesfazerClique(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botaoRefazerClique(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botaoFiltroClique(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void botaoDesenhoClique(object sender, EventArgs e)
+        {
+            tipoAcao = 2;
+        }
+
+        private void botaoTextoClique(object sender, EventArgs e)
+        {
+            tipoAcao = 3;
+        }
+
+        private void botaoCirculoClique(object sender, EventArgs e)
+        {
+            tipoAcao = 4;
+        }
+
+        private void botaoRetanguloClique(object sender, EventArgs e)
+        {
+            tipoAcao = 5;
+        }
+
+        private void botaoGirarEsquerdaClique(object sender, EventArgs e)
+        {
+            Image filmeAtual = pictureBox1.Image;
+            filmeAtual.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            pictureBox1.Image = filmeAtual;
+            listaFilmes[indice - 1].Image = filmeAtual;
+            filmeSelecionado.Refresh();
+        }
+
+        private void botaoGirarDireitaClique(object sender, EventArgs e)
+        {
+            Image filmeAtual = pictureBox1.Image;
+            filmeAtual.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            pictureBox1.Image = filmeAtual;
+            listaFilmes[indice - 1].Image = filmeAtual;
+            filmeSelecionado.Refresh();
+        }
+
+        private void botaoRestaurarClique(object sender, EventArgs e)
+        {
+
+        }
+
         void EventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
                        IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
         {
@@ -161,6 +271,10 @@ namespace GeraçãoDeTemplate
                                 break;
                             case SdkInterface.Cmd_StartAcq:
                                 CarregarImagemTela();
+                                if (filmeSelecionado.Image != null)
+                                {
+                                    liberarFerramentas();
+                                }
                                 break;
                             case SdkInterface.Cmd_StopAcq:
                                 MessageBox.Show("Cmd_StopAcq Ack succeed.");
@@ -269,7 +383,8 @@ namespace GeraçãoDeTemplate
                             {
                                 return;
                             }
-                            
+                            filmeSelecionado.Image = null;
+                            pictureBox1.Image = null;
                             File.Delete(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"));
                         }
 
@@ -338,6 +453,7 @@ namespace GeraçãoDeTemplate
             }
         }
 
+
         private void SaveBmp(Bitmap bmp, string path)
         {
 
@@ -351,7 +467,7 @@ namespace GeraçãoDeTemplate
 
             bmp.UnlockBits(bitmapData);
 
-            using (FileStream stream = new FileStream(path, FileMode.Create))
+            using (FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 TiffBitmapEncoder encoder = new TiffBitmapEncoder();
 

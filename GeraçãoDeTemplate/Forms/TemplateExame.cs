@@ -52,7 +52,7 @@ namespace GeraçãoDeTemplate.Forms
 
             foreach (TemplateLayout tl in listaTemplateLayout)
             {
-                if (tl.orientacao == "Vertical")
+                if (tl.orientacao.Contains("Vertical"))
                 {
                     altura = 35;
                     largura = 25;

@@ -118,34 +118,76 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icon-32x32-rotate-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-rotate-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon-32x32-delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon-32x32-rotate-right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-rotate-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-autotake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-autotake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="banner-principal.f3639437" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\banner-principal.f36394371.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-32x32-pencil2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-pencil2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_32x32_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-32x32-patients" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-patients.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-rectangle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-rectangle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-rotate-right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-rotate-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-pencil2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-pencil2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-text" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-text.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-exposure" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-exposure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-32x32-red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-32x32-autotake" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-autotake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-import" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-import.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-32x32-settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-compare" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-compare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-patients" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-patients.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-measure-tape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-measure-tape.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-rotate-left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-rotate-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon-32x32-cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="move" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\move.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
