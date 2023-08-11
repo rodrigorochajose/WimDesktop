@@ -63,6 +63,16 @@ namespace GeraçãoDeTemplate.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow {
+            get {
+                object obj = ResourceManager.GetObject("arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap banner_principal_f3639437 {
             get {
                 object obj = ResourceManager.GetObject("banner-principal.f3639437", resourceCulture);
@@ -163,16 +173,6 @@ namespace GeraçãoDeTemplate.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_32x32_measure_tape {
-            get {
-                object obj = ResourceManager.GetObject("icon-32x32-measure-tape", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_patients {
             get {
                 object obj = ResourceManager.GetObject("icon-32x32-patients", resourceCulture);
@@ -246,6 +246,16 @@ namespace GeraçãoDeTemplate.Properties {
         internal static System.Drawing.Bitmap icon_32x32_rotate_right {
             get {
                 object obj = ResourceManager.GetObject("icon-32x32-rotate-right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_ruler {
+            get {
+                object obj = ResourceManager.GetObject("icon-32x32-ruler", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

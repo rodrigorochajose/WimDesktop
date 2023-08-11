@@ -1,9 +1,11 @@
 ﻿using Emgu.CV.OCR;
+using GeraçãoDeTemplate.Interface;
 using GeraçãoDeTemplate.Modelos;
 using iDetector;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -12,17 +14,25 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-
 namespace GeraçãoDeTemplate
 {
     public partial class Exame : Form, EventReceiver
     {
 
-        private int m_nId = -1, indice = 0, pacienteId = 0, tipoAcao = 0;
+        private int m_nId = -1, indice = 0, pacienteId = 0, tipoAcao = 0, indiceHistorico = 0;
         string caminho = "";
         Filme filmeSelecionado;
         List<Filme> listaFilmes;
         Contexto<Configuracao> contextoConfig = new Contexto<Configuracao>();
+
+        System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Red, 5);
+        List<List<iDesenho>> historicoDesenhos = new List<List<iDesenho>>() { new List<iDesenho>() };
+        List<Point> diferencasPontosDesenhoLivre = new List<Point>();
+        Point posicaoClique = new Point();
+        Point primeiroPontoMoverDesenho = new Point();
+        Point ultimoPontoMoverDesenho = new Point();
+        iDesenho desenhoAtual, desenhoSelecionadoParaMover;
+        bool desenhar = false;
 
         public Exame(Paciente paciente, List<TemplateLayout> listaTemplateLayout, string nomeTemplate, string nomeSessao)
         {
@@ -94,7 +104,7 @@ namespace GeraçãoDeTemplate
             using (FileStream fs = File.Open(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image img = Image.FromStream(fs);
-                pictureBox1.Image = img;
+                filmePrincipal.Image = img;
                 filmeSelecionado.Image = img;
                 filmeSelecionado.Tag = System.Drawing.Color.Black;
 
@@ -132,9 +142,12 @@ namespace GeraçãoDeTemplate
 
             if (filmeSelecionado.ImagemCaptura == true)
             {
-                pictureBox1.Image = filmeSelecionado.Image;
+                filmePrincipal.Image = filmeSelecionado.Image;
             }
         }
+
+
+        // ferramentas 
 
         private void liberarFerramentas()
         {
@@ -158,7 +171,7 @@ namespace GeraçãoDeTemplate
         private void botaoExcluirClique(object sender, EventArgs e)
         {
             filmeSelecionado.Image = null;
-            pictureBox1.Image = null;
+            filmePrincipal.Image = null;
         }
 
         private void botaoCompararClique(object sender, EventArgs e)
@@ -203,46 +216,300 @@ namespace GeraçãoDeTemplate
 
         private void botaoDesenhoClique(object sender, EventArgs e)
         {
-            tipoAcao = 2;
+            tipoAcao = 3;
         }
 
         private void botaoTextoClique(object sender, EventArgs e)
         {
-            tipoAcao = 3;
-        }
-
-        private void botaoCirculoClique(object sender, EventArgs e)
-        {
             tipoAcao = 4;
         }
 
-        private void botaoRetanguloClique(object sender, EventArgs e)
+        private void botaoSetaClique(object sender, EventArgs e)
         {
             tipoAcao = 5;
         }
 
+        private void botaoCirculoClique(object sender, EventArgs e)
+        {
+            tipoAcao = 6;
+        }
+
+        private void botaoRetanguloClique(object sender, EventArgs e)
+        {
+            tipoAcao = 7;
+        }
+
         private void botaoGirarEsquerdaClique(object sender, EventArgs e)
         {
-            Image filmeAtual = pictureBox1.Image;
+            Image filmeAtual = filmePrincipal.Image;
             filmeAtual.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            pictureBox1.Image = filmeAtual;
+            filmePrincipal.Image = filmeAtual;
             listaFilmes[indice - 1].Image = filmeAtual;
             filmeSelecionado.Refresh();
         }
 
         private void botaoGirarDireitaClique(object sender, EventArgs e)
         {
-            Image filmeAtual = pictureBox1.Image;
+            Image filmeAtual = filmePrincipal.Image;
             filmeAtual.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            pictureBox1.Image = filmeAtual;
+            filmePrincipal.Image = filmeAtual;
             listaFilmes[indice - 1].Image = filmeAtual;
             filmeSelecionado.Refresh();
         }
-
         private void botaoRestaurarClique(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                historicoDesenhos = new List<List<iDesenho>>() { new List<iDesenho>() };
+                diferencasPontosDesenhoLivre = new List<Point>();
+                posicaoClique = new Point();
+                primeiroPontoMoverDesenho = new Point();
+                ultimoPontoMoverDesenho = new Point();
+                desenhoAtual = new Seta();
+                desenhoSelecionadoParaMover = new Seta();
+                indiceHistorico = 0;
+                tipoAcao = 0;
+                filmePrincipal.Invalidate();
+            }
         }
+
+        private void pintarFilmePrincipal(object sender, PaintEventArgs e)
+        {
+            historicoDesenhos[indiceHistorico].ForEach(d => d.desenhar(e.Graphics, pen));
+
+            if (desenhar && desenhoAtual != null)
+            {
+                desenhoAtual.desenharPrevia(e.Graphics, pen);
+            }
+        }
+
+        private void filmePrincipalMouseDown(object sender, MouseEventArgs e)
+        {
+            posicaoClique = e.Location;
+            if (tipoAcao != 0)
+            {
+                desenhar = true;
+            }
+
+            switch (tipoAcao)
+            {
+                case 3:
+                    desenhoAtual = new DesenhoLivre
+                    {
+                        graphicsPath = new GraphicsPath(),
+                        pontos = new List<Point>()
+                    };
+
+                    (desenhoAtual as DesenhoLivre).pontos.Add(e.Location);
+
+                    historicoDesenhos.Add(new List<iDesenho>(historicoDesenhos[indiceHistorico])
+                    {
+                        desenhoAtual
+                    });
+
+                    indiceHistorico = historicoDesenhos.LastIndexOf(historicoDesenhos.Last());
+
+                    break;
+                case 5:
+                    desenhoAtual = new Seta
+                    {
+                        posicaoInicial = posicaoClique,
+                        posicaoFinal = posicaoClique
+                    };
+
+                    break;
+                case 7:
+                    desenhoAtual = new Retangulo
+                    {
+                        posicaoInicial = posicaoClique,
+                        posicaoFinal = posicaoClique
+                    };
+
+                    break;
+                case 6:
+                    desenhoAtual = new Circulo
+                    {
+                        posicaoInicial = posicaoClique,
+                        posicaoFinal = posicaoClique
+                    };
+
+                    break;
+                case 4:
+                    desenhoAtual = new Texto
+                    {
+                        graphicsPath = new GraphicsPath(),
+                        posicaoInicial = posicaoClique,
+                        texto = inserirTextoDesenho().ToString(),
+                        fonte = new Font("Arial", 16),
+                        pincel = new SolidBrush(System.Drawing.Color.Red),
+                    };
+
+
+                    historicoDesenhos.Add(new List<iDesenho>(historicoDesenhos[indiceHistorico]){
+                        desenhoAtual.Clone() as iDesenho
+                    });
+                    indiceHistorico = historicoDesenhos.LastIndexOf(historicoDesenhos.Last());
+
+                    filmePrincipal.Invalidate();
+
+                    break;
+                case 1:
+                    desenhoAtual = historicoDesenhos[indiceHistorico].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(posicaoClique, pen));
+                    if (desenhoAtual != null)
+                    {
+                        desenhoSelecionadoParaMover = desenhoAtual.Clone() as iDesenho;
+
+                        primeiroPontoMoverDesenho = desenhoAtual.posicaoInicial;
+                        ultimoPontoMoverDesenho = desenhoAtual.posicaoFinal;
+
+                        if (desenhoAtual is DesenhoLivre)
+                        {
+                            diferencasPontosDesenhoLivre = new List<Point>();
+
+                            primeiroPontoMoverDesenho = (desenhoAtual as DesenhoLivre).pontos.First();
+
+                            for (int contador = 1; contador <= (desenhoAtual as DesenhoLivre).pontos.Count - 1; contador++)
+                            {
+                                diferencasPontosDesenhoLivre.Add(new Point((desenhoAtual as DesenhoLivre).pontos[contador].X - primeiroPontoMoverDesenho.X, (desenhoAtual as DesenhoLivre).pontos[contador].Y - primeiroPontoMoverDesenho.Y));
+                            }
+                        }
+                        Point p = new Point(desenhoAtual.posicaoInicial.X, desenhoAtual.posicaoFinal.Y);
+                    }
+                    break;
+            }
+        }
+
+        private void filmePrincipalMouseMove(object sender, MouseEventArgs e)
+        {
+            if (desenhar)
+            {
+                if (tipoAcao == 3)
+                {
+                    (desenhoAtual as DesenhoLivre).pontos.Add(e.Location);
+                }
+                else if (tipoAcao == 1)
+                {
+                    if (desenhoAtual != null)
+                    {
+                        desenhoAtual.posicaoInicial = new Point(e.X + primeiroPontoMoverDesenho.X - posicaoClique.X, e.Y + primeiroPontoMoverDesenho.Y - posicaoClique.Y);
+                        desenhoAtual.posicaoFinal = new Point(e.X + ultimoPontoMoverDesenho.X - posicaoClique.X, e.Y + ultimoPontoMoverDesenho.Y - posicaoClique.Y);
+
+                        if (desenhoAtual is DesenhoLivre)
+                        {
+                            Point primeiroPonto = (desenhoAtual as DesenhoLivre).pontos.First();
+                            int contador = 1;
+
+                            (desenhoAtual as DesenhoLivre).pontos[0] = new Point(e.X + primeiroPontoMoverDesenho.X - posicaoClique.X, e.Y + primeiroPontoMoverDesenho.Y - posicaoClique.Y);
+
+                            diferencasPontosDesenhoLivre.ForEach(diferencaPonto =>
+                            {
+                                (desenhoAtual as DesenhoLivre).pontos[contador] = new Point(primeiroPonto.X + diferencaPonto.X, primeiroPonto.Y + diferencaPonto.Y);
+
+                                if (contador + 1 < (desenhoAtual as DesenhoLivre).pontos.Count)
+                                {
+                                    contador++;
+                                }
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    desenhoAtual.posicaoFinal = e.Location;
+                }
+                filmePrincipal.Invalidate();
+            }
+        }
+
+        private void filmePrincipalMouseUp(object sender, MouseEventArgs e)
+        {
+            if (tipoAcao != 0)
+            {
+                if (indiceHistorico == 0)
+                {
+                    historicoDesenhos = new List<List<iDesenho>>() { new List<iDesenho>() };
+                }
+
+                if (tipoAcao == 1)
+                {
+                    historicoDesenhos[indiceHistorico - 1].Remove(historicoDesenhos[indiceHistorico - 1].Last());
+                    historicoDesenhos[indiceHistorico - 1].Add(desenhoSelecionadoParaMover);
+                } else
+                {
+                    historicoDesenhos.Add(new List<iDesenho>(historicoDesenhos[indiceHistorico]){
+                        desenhoAtual.Clone() as iDesenho
+                    });
+                }
+                indiceHistorico = historicoDesenhos.LastIndexOf(historicoDesenhos.Last());
+
+
+                desenhar = false;
+                filmePrincipal.Invalidate();
+            }
+        }
+
+        private string inserirTextoDesenho()
+        {
+            desenhar = false;
+
+            Size size = new Size(250, 100);
+
+            Form inputBox = new Form
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = size,
+                Text = "Inserir Texto"
+            };
+
+            Label label = new Label
+            {
+                Text = "Digite o texto a ser inserido",
+                Location = new Point(5, 15),
+                Width = size.Width - 10,
+                Font = new Font("Arial", 10, FontStyle.Regular)
+            };
+            inputBox.Controls.Add(label);
+
+            TextBox textBox = new TextBox
+            {
+                Size = new Size(size.Width - 10, 23),
+                Location = new Point(5, label.Location.Y + 25),
+                Font = new Font("Arial", 10, FontStyle.Regular)
+            };
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button
+            {
+                DialogResult = DialogResult.OK,
+                Name = "okButton",
+                Size = new Size(75, 23),
+                Text = "&OK",
+                Location = new Point(size.Width - 80 - 80, size.Height - 25)
+            };
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button
+            {
+                DialogResult = DialogResult.Cancel,
+                Name = "cancelButton",
+                Size = new Size(75, 23),
+                Text = "&Cancel",
+                Location = new Point(size.Width - 80, size.Height - 25)
+            };
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            inputBox.ShowDialog();
+
+            return textBox.Text;
+        }
+
+
+
+        // sdk
 
         void EventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
                        IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
@@ -384,7 +651,7 @@ namespace GeraçãoDeTemplate
                                 return;
                             }
                             filmeSelecionado.Image = null;
-                            pictureBox1.Image = null;
+                            filmePrincipal.Image = null;
                             File.Delete(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"));
                         }
 

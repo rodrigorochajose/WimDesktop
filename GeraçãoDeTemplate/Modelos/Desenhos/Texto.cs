@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using GeraçãoDeTemplate.Interface;
 
-namespace testes
+namespace GeraçãoDeTemplate
 {
     internal class Texto : iDesenho
     {

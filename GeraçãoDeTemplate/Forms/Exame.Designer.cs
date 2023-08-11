@@ -31,12 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Exame));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.filmePrincipal = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPaciente = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelFerramentas = new System.Windows.Forms.Panel();
+            this.botaoSeta = new System.Windows.Forms.Button();
             this.botaoMover = new System.Windows.Forms.Button();
             this.botaoRestaurar = new System.Windows.Forms.Button();
             this.botaoGirarDireita = new System.Windows.Forms.Button();
@@ -56,12 +58,11 @@
             this.botaoExportar = new System.Windows.Forms.Button();
             this.botaoImportar = new System.Windows.Forms.Button();
             this.conexaoSensor = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filmePrincipal)).BeginInit();
             this.panel3.SuspendLayout();
             this.panelFerramentas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.conexaoSensor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTemplate
@@ -76,12 +77,27 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.filmePrincipal);
             this.panel2.Location = new System.Drawing.Point(350, 50);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1025, 648);
             this.panel2.TabIndex = 1;
+            // 
+            // filmePrincipal
+            // 
+            this.filmePrincipal.BackColor = System.Drawing.SystemColors.ControlText;
+            this.filmePrincipal.Location = new System.Drawing.Point(0, 0);
+            this.filmePrincipal.Margin = new System.Windows.Forms.Padding(0);
+            this.filmePrincipal.Name = "filmePrincipal";
+            this.filmePrincipal.Size = new System.Drawing.Size(1025, 648);
+            this.filmePrincipal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.filmePrincipal.TabIndex = 0;
+            this.filmePrincipal.TabStop = false;
+            this.filmePrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pintarFilmePrincipal);
+            this.filmePrincipal.MouseDown += new System.Windows.Forms.MouseEventHandler(this.filmePrincipalMouseDown);
+            this.filmePrincipal.MouseMove += new System.Windows.Forms.MouseEventHandler(this.filmePrincipalMouseMove);
+            this.filmePrincipal.MouseUp += new System.Windows.Forms.MouseEventHandler(this.filmePrincipalMouseUp);
             // 
             // panel3
             // 
@@ -139,6 +155,7 @@
             // panelFerramentas
             // 
             this.panelFerramentas.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelFerramentas.Controls.Add(this.botaoSeta);
             this.panelFerramentas.Controls.Add(this.botaoMover);
             this.panelFerramentas.Controls.Add(this.botaoRestaurar);
             this.panelFerramentas.Controls.Add(this.botaoGirarDireita);
@@ -163,6 +180,20 @@
             this.panelFerramentas.Size = new System.Drawing.Size(1375, 50);
             this.panelFerramentas.TabIndex = 5;
             // 
+            // botaoSeta
+            // 
+            this.botaoSeta.Enabled = false;
+            this.botaoSeta.FlatAppearance.BorderSize = 0;
+            this.botaoSeta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.botaoSeta.Image = global::GeraçãoDeTemplate.Properties.Resources.arrow;
+            this.botaoSeta.Location = new System.Drawing.Point(882, 3);
+            this.botaoSeta.Margin = new System.Windows.Forms.Padding(0);
+            this.botaoSeta.Name = "botaoSeta";
+            this.botaoSeta.Size = new System.Drawing.Size(50, 45);
+            this.botaoSeta.TabIndex = 23;
+            this.botaoSeta.UseVisualStyleBackColor = true;
+            this.botaoSeta.Click += new System.EventHandler(this.botaoSetaClique);
+            // 
             // botaoMover
             // 
             this.botaoMover.Enabled = false;
@@ -183,7 +214,7 @@
             this.botaoRestaurar.FlatAppearance.BorderSize = 0;
             this.botaoRestaurar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoRestaurar.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_reset;
-            this.botaoRestaurar.Location = new System.Drawing.Point(1108, 3);
+            this.botaoRestaurar.Location = new System.Drawing.Point(1162, 3);
             this.botaoRestaurar.Margin = new System.Windows.Forms.Padding(0);
             this.botaoRestaurar.Name = "botaoRestaurar";
             this.botaoRestaurar.Size = new System.Drawing.Size(50, 45);
@@ -197,7 +228,7 @@
             this.botaoGirarDireita.FlatAppearance.BorderSize = 0;
             this.botaoGirarDireita.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoGirarDireita.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_rotate_right;
-            this.botaoGirarDireita.Location = new System.Drawing.Point(1054, 3);
+            this.botaoGirarDireita.Location = new System.Drawing.Point(1108, 3);
             this.botaoGirarDireita.Margin = new System.Windows.Forms.Padding(0);
             this.botaoGirarDireita.Name = "botaoGirarDireita";
             this.botaoGirarDireita.Size = new System.Drawing.Size(50, 45);
@@ -211,7 +242,7 @@
             this.botaoGirarEsquerda.FlatAppearance.BorderSize = 0;
             this.botaoGirarEsquerda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoGirarEsquerda.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_rotate_left;
-            this.botaoGirarEsquerda.Location = new System.Drawing.Point(1000, 3);
+            this.botaoGirarEsquerda.Location = new System.Drawing.Point(1054, 3);
             this.botaoGirarEsquerda.Margin = new System.Windows.Forms.Padding(0);
             this.botaoGirarEsquerda.Name = "botaoGirarEsquerda";
             this.botaoGirarEsquerda.Size = new System.Drawing.Size(50, 45);
@@ -225,7 +256,7 @@
             this.botaoRetangulo.FlatAppearance.BorderSize = 0;
             this.botaoRetangulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoRetangulo.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_rectangle;
-            this.botaoRetangulo.Location = new System.Drawing.Point(946, 3);
+            this.botaoRetangulo.Location = new System.Drawing.Point(990, 3);
             this.botaoRetangulo.Margin = new System.Windows.Forms.Padding(0);
             this.botaoRetangulo.Name = "botaoRetangulo";
             this.botaoRetangulo.Size = new System.Drawing.Size(50, 45);
@@ -239,7 +270,7 @@
             this.botaoCirculo.FlatAppearance.BorderSize = 0;
             this.botaoCirculo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoCirculo.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_circle;
-            this.botaoCirculo.Location = new System.Drawing.Point(882, 3);
+            this.botaoCirculo.Location = new System.Drawing.Point(936, 3);
             this.botaoCirculo.Margin = new System.Windows.Forms.Padding(0);
             this.botaoCirculo.Name = "botaoCirculo";
             this.botaoCirculo.Size = new System.Drawing.Size(50, 45);
@@ -263,7 +294,9 @@
             // 
             // botaoDesenho
             // 
+            this.botaoDesenho.BackColor = System.Drawing.Color.WhiteSmoke;
             this.botaoDesenho.Enabled = false;
+            this.botaoDesenho.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.botaoDesenho.FlatAppearance.BorderSize = 0;
             this.botaoDesenho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoDesenho.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_pencil2;
@@ -272,7 +305,7 @@
             this.botaoDesenho.Name = "botaoDesenho";
             this.botaoDesenho.Size = new System.Drawing.Size(50, 45);
             this.botaoDesenho.TabIndex = 15;
-            this.botaoDesenho.UseVisualStyleBackColor = true;
+            this.botaoDesenho.UseVisualStyleBackColor = false;
             this.botaoDesenho.Click += new System.EventHandler(this.botaoDesenhoClique);
             // 
             // botaoFiltro
@@ -281,7 +314,7 @@
             this.botaoFiltro.FlatAppearance.BorderSize = 0;
             this.botaoFiltro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoFiltro.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_exposure;
-            this.botaoFiltro.Location = new System.Drawing.Point(720, 3);
+            this.botaoFiltro.Location = new System.Drawing.Point(710, 3);
             this.botaoFiltro.Margin = new System.Windows.Forms.Padding(0);
             this.botaoFiltro.Name = "botaoFiltro";
             this.botaoFiltro.Size = new System.Drawing.Size(50, 45);
@@ -295,7 +328,7 @@
             this.botaoRefazer.FlatAppearance.BorderSize = 0;
             this.botaoRefazer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoRefazer.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_redo;
-            this.botaoRefazer.Location = new System.Drawing.Point(656, 3);
+            this.botaoRefazer.Location = new System.Drawing.Point(646, 3);
             this.botaoRefazer.Margin = new System.Windows.Forms.Padding(0);
             this.botaoRefazer.Name = "botaoRefazer";
             this.botaoRefazer.Size = new System.Drawing.Size(50, 45);
@@ -322,8 +355,8 @@
             this.botaoRegua.Enabled = false;
             this.botaoRegua.FlatAppearance.BorderSize = 0;
             this.botaoRegua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.botaoRegua.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_measure_tape;
-            this.botaoRegua.Location = new System.Drawing.Point(538, 3);
+            this.botaoRegua.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_ruler;
+            this.botaoRegua.Location = new System.Drawing.Point(528, 3);
             this.botaoRegua.Margin = new System.Windows.Forms.Padding(0);
             this.botaoRegua.Name = "botaoRegua";
             this.botaoRegua.Size = new System.Drawing.Size(50, 45);
@@ -337,7 +370,7 @@
             this.botaoLupa.FlatAppearance.BorderSize = 0;
             this.botaoLupa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.botaoLupa.Image = global::GeraçãoDeTemplate.Properties.Resources.icon_32x32_search;
-            this.botaoLupa.Location = new System.Drawing.Point(484, 3);
+            this.botaoLupa.Location = new System.Drawing.Point(474, 3);
             this.botaoLupa.Margin = new System.Windows.Forms.Padding(0);
             this.botaoLupa.Name = "botaoLupa";
             this.botaoLupa.Size = new System.Drawing.Size(50, 45);
@@ -426,17 +459,6 @@
             this.conexaoSensor.TabIndex = 4;
             this.conexaoSensor.TabStop = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1025, 648);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // Exame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -451,11 +473,11 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ExameCarregar);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.filmePrincipal)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panelFerramentas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.conexaoSensor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,7 +491,7 @@
         private System.Windows.Forms.Label labelTemplate;
         private System.Windows.Forms.Label labelPaciente;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox filmePrincipal;
         private System.Windows.Forms.PictureBox conexaoSensor;
         private System.Windows.Forms.Panel panelFerramentas;
         private System.Windows.Forms.Button botaoImportar;
@@ -490,5 +512,6 @@
         private System.Windows.Forms.Button botaoComparar;
         private System.Windows.Forms.Button botaoExcluir;
         private System.Windows.Forms.Button botaoMover;
+        private System.Windows.Forms.Button botaoSeta;
     }
 }
