@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace DMMDigital.Forms
@@ -111,7 +112,7 @@ namespace DMMDigital.Forms
 
         private void associateEvents()
         {
-            
+            buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
         }
 
         public int patientId { get; set; }

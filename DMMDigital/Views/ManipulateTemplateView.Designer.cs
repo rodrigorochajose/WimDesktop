@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital
 {
-    partial class GerenciarTemplate
+    partial class ManipulateTemplateView
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManipulateTemplateView));
             this.novoFilme = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.orientacaoAtual = new System.Windows.Forms.TextBox();
@@ -168,9 +169,10 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GerenciarTemplate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gerenciador Template";
+            this.Text = "Gerenciar Template";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
