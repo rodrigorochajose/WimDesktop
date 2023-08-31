@@ -113,6 +113,8 @@ namespace DMMDigital.Forms
         private void associateEvents()
         {
             buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
+
+            buttonCancelAction.Click += delegate { this.Close(); };
         }
 
         public int patientId { get; set; }

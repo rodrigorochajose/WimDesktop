@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Views;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
 namespace DMMDigital
@@ -10,13 +11,12 @@ namespace DMMDigital
         {
             InitializeComponent();
 
-            buttonGenerateTemplate.Click += delegate
-            {
-                this.Close();
+            listBoxOrientation.SelectedItem = listBoxOrientation.Items[0];
 
-            };
+            buttonGenerateTemplate.Click += delegate { eventShowManipulateTemplateView?.Invoke(this, EventArgs.Empty); };
         }
 
+        [Required(ErrorMessage = "Nome do Template é obrigatório.")]
         public string templateName 
         { 
             get { return textBoxTemplateName.Text; } 
@@ -39,6 +39,13 @@ namespace DMMDigital
         { 
             get { return listBoxOrientation.Text; }
             set { listBoxOrientation.Text = value; } 
+        }
+
+        public event EventHandler eventShowManipulateTemplateView;
+
+        private void buttonGenerateTemplate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

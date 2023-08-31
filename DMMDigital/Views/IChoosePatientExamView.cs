@@ -10,7 +10,7 @@ namespace DMMDigital.Views
 
         // Events
         event EventHandler eventSearchPatient;
-        event EventHandler eventShowAddPatientForm;
+        event EventHandler eventShowAddPatientView;
         event EventHandler eventSelectPatient;
 
         // Methods

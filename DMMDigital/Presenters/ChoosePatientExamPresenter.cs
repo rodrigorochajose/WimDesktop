@@ -1,6 +1,5 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Forms;
-using DMMDigital.Interface;
 using DMMDigital.Modelos;
 using DMMDigital.Views;
 using System;
@@ -13,19 +12,18 @@ namespace DMMDigital.Presenters
     public class ChoosePatientExamPresenter
     {
         private IChoosePatientExamView choosePatientExamView;
-        private IPatientRepository repository;
+        private IPatientRepository patientRepository;
         private BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
-
         public ChoosePatientExamPresenter(IChoosePatientExamView view, IPatientRepository repository)
         {
-            this.pacientesBindingSource = new BindingSource();
+            pacientesBindingSource = new BindingSource();
             choosePatientExamView = view;
-            this.repository = repository;
+            patientRepository = repository;
 
             choosePatientExamView.eventSearchPatient += searchPatient;
-            choosePatientExamView.eventShowAddPatientForm += showAddPatientForm;
+            choosePatientExamView.eventShowAddPatientView += showAddPatientForm;
             choosePatientExamView.eventSelectPatient += showSelectTemplateForm;
 
             choosePatientExamView.setPatientList(pacientesBindingSource);
@@ -41,37 +39,35 @@ namespace DMMDigital.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(choosePatientExamView.searchedValue);
             if (emptyValue == false)
             {
-                patientList = repository.getPatientsByName(choosePatientExamView.searchedValue);
+                patientList = patientRepository.getPatientsByName(choosePatientExamView.searchedValue);
             }
             else
             {
-                patientList = repository.getAllPatients();
+                patientList = patientRepository.getAllPatients();
             }
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView view = new ManipulatePatientView("add");
-            view.eventAddNewPatient += addNewPatient;
-            (view as Form).ShowDialog();
+            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("add");
+            manipulatePatientView.eventAddNewPatient += addNewPatient;
+            (manipulatePatientView as Form).ShowDialog();
             carregarTodosPacientes();
         }
 
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
-            IChooseTemplateExamView view = new ChooseTemplateExamView();
-            ITemplateRepository templateRepository = new TemplateRepository();
-            new ChooseTemplateExamPresenter(view, templateRepository);
+            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository());
 
-            PatientModel selectedPatient = repository.getPatientById(choosePatientExamView.selectedPatientId);
-            view.patientId = selectedPatient.id;
-            view.patientName = selectedPatient.name;
-            view.patientBirthDate = selectedPatient.birthDate;
-            view.patientPhone = selectedPatient.phone;
-            view.patientRecommendation = selectedPatient.recommendation;
-            view.patientObservation = selectedPatient.observation;
-            (view as Form).ShowDialog();
+            PatientModel selectedPatient = patientRepository.getPatientById(choosePatientExamView.selectedPatientId);
+            chooseTemplateView.patientId = selectedPatient.id;
+            chooseTemplateView.patientName = selectedPatient.name;
+            chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
+            chooseTemplateView.patientPhone = selectedPatient.phone;
+            chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
+            chooseTemplateView.patientObservation = selectedPatient.observation;
         }
 
         private void addNewPatient(object sender, EventArgs e)
@@ -89,7 +85,7 @@ namespace DMMDigital.Presenters
                 };
 
                 new Common.ModelDataValidation().Validate(newPatient);
-                MessageBox.Show(repository.add(newPatient));
+                MessageBox.Show(patientRepository.add(newPatient));
                 (sender as ManipulatePatientView).Close();
             }
             catch (Exception ex)
@@ -100,7 +96,7 @@ namespace DMMDigital.Presenters
 
         private void carregarTodosPacientes()
         {
-            patientList = repository.getAllPatients();
+            patientList = patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
             choosePatientExamView.manipulateDataGridView();
         }

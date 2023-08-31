@@ -29,99 +29,94 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManipulateTemplateView));
-            this.novoFilme = new System.Windows.Forms.Button();
+            this.buttonNewFrame = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.orientacaoAtual = new System.Windows.Forms.TextBox();
-            this.botaoGirarFilmeDireita = new System.Windows.Forms.Button();
-            this.botaoGirarFilmeEsquerda = new System.Windows.Forms.Button();
-            this.excluirFilme = new System.Windows.Forms.Button();
-            this.salvarTemplate = new System.Windows.Forms.Button();
+            this.textBoxOrientation = new System.Windows.Forms.TextBox();
+            this.buttonRotateRight = new System.Windows.Forms.Button();
+            this.buttonRotateLeft = new System.Windows.Forms.Button();
+            this.buttonDeleteFrame = new System.Windows.Forms.Button();
+            this.buttonSaveTemplate = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.filmeAtual = new System.Windows.Forms.TextBox();
+            this.textBoxSelectedFrame = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // novoFilme
+            // buttonNewFrame
             // 
-            this.novoFilme.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.novoFilme.Location = new System.Drawing.Point(37, 286);
-            this.novoFilme.Name = "novoFilme";
-            this.novoFilme.Size = new System.Drawing.Size(128, 30);
-            this.novoFilme.TabIndex = 1;
-            this.novoFilme.Text = "Novo Filme";
-            this.novoFilme.UseVisualStyleBackColor = true;
-            this.novoFilme.Click += new System.EventHandler(this.GerarNovoFilme);
+            this.buttonNewFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonNewFrame.Location = new System.Drawing.Point(37, 286);
+            this.buttonNewFrame.Name = "buttonNewFrame";
+            this.buttonNewFrame.Size = new System.Drawing.Size(128, 30);
+            this.buttonNewFrame.TabIndex = 1;
+            this.buttonNewFrame.Text = "Novo Filme";
+            this.buttonNewFrame.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.orientacaoAtual);
-            this.panel1.Controls.Add(this.botaoGirarFilmeDireita);
-            this.panel1.Controls.Add(this.botaoGirarFilmeEsquerda);
-            this.panel1.Controls.Add(this.excluirFilme);
-            this.panel1.Controls.Add(this.salvarTemplate);
+            this.panel1.Controls.Add(this.textBoxOrientation);
+            this.panel1.Controls.Add(this.buttonRotateRight);
+            this.panel1.Controls.Add(this.buttonRotateLeft);
+            this.panel1.Controls.Add(this.buttonDeleteFrame);
+            this.panel1.Controls.Add(this.buttonSaveTemplate);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.filmeAtual);
+            this.panel1.Controls.Add(this.textBoxSelectedFrame);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.novoFilme);
+            this.panel1.Controls.Add(this.buttonNewFrame);
             this.panel1.Location = new System.Drawing.Point(700, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(203, 460);
             this.panel1.TabIndex = 2;
             // 
-            // orientacaoAtual
+            // textBoxOrientation
             // 
-            this.orientacaoAtual.Enabled = false;
-            this.orientacaoAtual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.orientacaoAtual.Location = new System.Drawing.Point(13, 117);
-            this.orientacaoAtual.Name = "orientacaoAtual";
-            this.orientacaoAtual.Size = new System.Drawing.Size(157, 26);
-            this.orientacaoAtual.TabIndex = 14;
+            this.textBoxOrientation.Enabled = false;
+            this.textBoxOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBoxOrientation.Location = new System.Drawing.Point(13, 117);
+            this.textBoxOrientation.Name = "textBoxOrientation";
+            this.textBoxOrientation.Size = new System.Drawing.Size(157, 26);
+            this.textBoxOrientation.TabIndex = 14;
             // 
-            // botaoGirarFilmeDireita
+            // buttonRotateRight
             // 
-            this.botaoGirarFilmeDireita.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
-            this.botaoGirarFilmeDireita.Location = new System.Drawing.Point(101, 155);
-            this.botaoGirarFilmeDireita.Name = "botaoGirarFilmeDireita";
-            this.botaoGirarFilmeDireita.Size = new System.Drawing.Size(43, 38);
-            this.botaoGirarFilmeDireita.TabIndex = 12;
-            this.botaoGirarFilmeDireita.UseVisualStyleBackColor = true;
-            this.botaoGirarFilmeDireita.Click += new System.EventHandler(this.botaoGirarFilmeDireitaClique);
+            this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
+            this.buttonRotateRight.Location = new System.Drawing.Point(101, 155);
+            this.buttonRotateRight.Name = "buttonRotateRight";
+            this.buttonRotateRight.Size = new System.Drawing.Size(43, 38);
+            this.buttonRotateRight.TabIndex = 12;
+            this.buttonRotateRight.UseVisualStyleBackColor = true;
             // 
-            // botaoGirarFilmeEsquerda
+            // buttonRotateLeft
             // 
-            this.botaoGirarFilmeEsquerda.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
-            this.botaoGirarFilmeEsquerda.Location = new System.Drawing.Point(33, 155);
-            this.botaoGirarFilmeEsquerda.Name = "botaoGirarFilmeEsquerda";
-            this.botaoGirarFilmeEsquerda.Size = new System.Drawing.Size(43, 38);
-            this.botaoGirarFilmeEsquerda.TabIndex = 11;
-            this.botaoGirarFilmeEsquerda.UseVisualStyleBackColor = true;
-            this.botaoGirarFilmeEsquerda.Click += new System.EventHandler(this.botaoGirarFilmeEsquerdaClique);
+            this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
+            this.buttonRotateLeft.Location = new System.Drawing.Point(33, 155);
+            this.buttonRotateLeft.Name = "buttonRotateLeft";
+            this.buttonRotateLeft.Size = new System.Drawing.Size(43, 38);
+            this.buttonRotateLeft.TabIndex = 11;
+            this.buttonRotateLeft.UseVisualStyleBackColor = true;
             // 
-            // excluirFilme
+            // buttonDeleteFrame
             // 
-            this.excluirFilme.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.excluirFilme.Location = new System.Drawing.Point(37, 322);
-            this.excluirFilme.Name = "excluirFilme";
-            this.excluirFilme.Size = new System.Drawing.Size(128, 30);
-            this.excluirFilme.TabIndex = 10;
-            this.excluirFilme.Text = "Excluir Filme";
-            this.excluirFilme.UseVisualStyleBackColor = true;
-            this.excluirFilme.Click += new System.EventHandler(this.ExcluirFilme);
+            this.buttonDeleteFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonDeleteFrame.Location = new System.Drawing.Point(37, 322);
+            this.buttonDeleteFrame.Name = "buttonDeleteFrame";
+            this.buttonDeleteFrame.Size = new System.Drawing.Size(128, 30);
+            this.buttonDeleteFrame.TabIndex = 10;
+            this.buttonDeleteFrame.Text = "Excluir Filme";
+            this.buttonDeleteFrame.UseVisualStyleBackColor = true;
             // 
-            // salvarTemplate
+            // buttonSaveTemplate
             // 
-            this.salvarTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.salvarTemplate.Location = new System.Drawing.Point(55, 406);
-            this.salvarTemplate.Name = "salvarTemplate";
-            this.salvarTemplate.Size = new System.Drawing.Size(84, 30);
-            this.salvarTemplate.TabIndex = 9;
-            this.salvarTemplate.Text = "Salvar";
-            this.salvarTemplate.UseVisualStyleBackColor = true;
-            this.salvarTemplate.Click += new System.EventHandler(this.SalvarTemplate);
+            this.buttonSaveTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonSaveTemplate.Location = new System.Drawing.Point(55, 406);
+            this.buttonSaveTemplate.Name = "buttonSaveTemplate";
+            this.buttonSaveTemplate.Size = new System.Drawing.Size(84, 30);
+            this.buttonSaveTemplate.TabIndex = 9;
+            this.buttonSaveTemplate.Text = "Salvar";
+            this.buttonSaveTemplate.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -133,14 +128,14 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Orientação";
             // 
-            // filmeAtual
+            // textBoxSelectedFrame
             // 
-            this.filmeAtual.Enabled = false;
-            this.filmeAtual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.filmeAtual.Location = new System.Drawing.Point(13, 40);
-            this.filmeAtual.Name = "filmeAtual";
-            this.filmeAtual.Size = new System.Drawing.Size(157, 26);
-            this.filmeAtual.TabIndex = 3;
+            this.textBoxSelectedFrame.Enabled = false;
+            this.textBoxSelectedFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBoxSelectedFrame.Location = new System.Drawing.Point(13, 40);
+            this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
+            this.textBoxSelectedFrame.Size = new System.Drawing.Size(157, 26);
+            this.textBoxSelectedFrame.TabIndex = 3;
             // 
             // label1
             // 
@@ -161,7 +156,7 @@
             this.panel2.Size = new System.Drawing.Size(700, 460);
             this.panel2.TabIndex = 11;
             // 
-            // GerenciarTemplate
+            // ManipulateTemplateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -170,7 +165,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "GerenciarTemplate";
+            this.Name = "ManipulateTemplateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gerenciar Template";
             this.panel1.ResumeLayout(false);
@@ -180,17 +175,17 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button novoFilme;
+        private System.Windows.Forms.Button buttonNewFrame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox filmeAtual;
-        private System.Windows.Forms.Button salvarTemplate;
-        private System.Windows.Forms.Button excluirFilme;
+        private System.Windows.Forms.TextBox textBoxSelectedFrame;
+        private System.Windows.Forms.Button buttonSaveTemplate;
+        private System.Windows.Forms.Button buttonDeleteFrame;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button botaoGirarFilmeEsquerda;
-        private System.Windows.Forms.Button botaoGirarFilmeDireita;
-        private System.Windows.Forms.TextBox orientacaoAtual;
+        private System.Windows.Forms.Button buttonRotateLeft;
+        private System.Windows.Forms.Button buttonRotateRight;
+        private System.Windows.Forms.TextBox textBoxOrientation;
     }
 }
 

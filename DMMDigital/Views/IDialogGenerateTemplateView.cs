@@ -1,4 +1,6 @@
-﻿namespace DMMDigital.Views
+﻿using System;
+
+namespace DMMDigital.Views
 {
     public interface IDialogGenerateTemplateView
     {
@@ -6,5 +8,7 @@
         int rows { get; set; }
         int columns { get; set; }
         string orientation { get; set; }
+
+        event EventHandler eventShowManipulateTemplateView;
     }
 }

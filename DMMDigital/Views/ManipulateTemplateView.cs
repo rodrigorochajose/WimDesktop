@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using DMMDigital.Modelos;
 using DMMDigital.Views;
 
 namespace DMMDigital
 {
-    public partial class ManipulateTemplateView : Form, IManipulateTemplateView
+    public partial class ManipulateTemplateView : Form
     {
         public string templateName { get; set; }
-        public List<Frame> frameList { get; set; }
 
+        public event EventHandler eventSaveTemplate;
+
+        List<Frame> frameList = new List<Frame>();
         int framesCounter = 0;
         string nomeDoTemplate;
         Frame selectedFrame;
@@ -44,30 +41,29 @@ namespace DMMDigital
             {
                 for (int columnsCounter = 0, locationX = 70; columnsCounter < columns; columnsCounter++, locationX += width + 10)
                 {
-                    framesCounter++;
-
-                    Frame newFrame = new Frame
-                    {
-                        order = framesCounter,
-                        orientation = orientation,
-                        Width = width,
-                        Height = height,
-                        BackColor = Color.Black,
-                        Name = "filme" + framesCounter,
-                        Location = new Point(locationX, locationY),
-                        Tag = Color.Black,
-                    };
-
-                    newFrame.MouseDown += filmeClique;
-                    newFrame = escreverNaImagem(newFrame);
-                    panel2.Controls.Add(novoFilme);
-                    ControlExtension.Draggable(novoFilme, true);
+                    createNewFrame(orientation, width, height, locationX, locationY);
                 }
             }
+
+           buttonNewFrame.Click += delegate { createNewFrame(orientation, width, height, 0, 0); };
+        }
+        private void selectFrame(object sender, EventArgs e)
+        {
+            Frame actualSelectedFrame = frameList.Find(f => (Color)f.Tag == Color.LimeGreen);
+            if (actualSelectedFrame != null)
+            {
+                actualSelectedFrame.Tag = Color.Black;
+                actualSelectedFrame.Invalidate();
+            }
+
+            selectedFrame = (Frame)sender;
+            textBoxSelectedFrame.Text = selectedFrame.Name;
+            textBoxOrientation.Text = selectedFrame.orientation;
+            selectedFrame.Tag = Color.LimeGreen;
+            selectedFrame.Invalidate();
         }
 
-        //mudar nome
-        private void selecionarFilme(object sender, PaintEventArgs e)
+        private void paintFrameBorder(object sender, PaintEventArgs e)
         {
             Frame frame = sender as Frame;
             if ((Color)frame.Tag == Color.Black) 
@@ -80,48 +76,54 @@ namespace DMMDigital
             }
         }
 
-        private void filmeClique(object sender, EventArgs e)
-        {
-            foreach (Frame f in frameList)
-            {
-                f.Tag = Color.Black;
-                f.Paint += selecionarFilme;
-                f.Refresh();
-            }
 
-            selectedFrame = (Frame)sender;
-            filmeAtual.Text = selectedFrame.Name;
-            orientacaoAtual.Text = selectedFrame.orientation;
-            selectedFrame.Tag = Color.LimeGreen;
-            selectedFrame.Paint += selecionarFilme;
-            selectedFrame.Refresh();
-            
-        }
-
-        private void GerarNovoFilme(object sender, EventArgs e)
+        private void createNewFrame(string orientation, int width, int height, int locationX, int locationY)
         {
             framesCounter++;
             Frame newFrame = new Frame
             {
                 order = framesCounter,
-                Width = 50,
-                Height = 70,
+                orientation = orientation,
+                Width = width,
+                Height = height,
                 BackColor = Color.Black,
-                Name = "frame" + framesCounter
+                Name = "filme" + framesCounter,
+                Location = new Point(locationX, locationY),
+                Tag = Color.Black,
             };
 
-            newFrame.Click += filmeClique;
-            newFrame = escreverNaImagem(newFrame);
-
-            frameList.Add(newFrame);
+            newFrame.MouseDown += selectFrame;
+            newFrame.Paint += paintFrameBorder;
+            newFrame = drawImage(newFrame);
             panel2.Controls.Add(newFrame);
+            frameList.Add(newFrame);
+            ControlExtension.Draggable(newFrame, true);
         }
 
-        private Frame escreverNaImagem(Frame frame)
+        private Frame drawImage(Frame frame)
         {
             Bitmap image = new Bitmap(frame.Width, frame.Height);
             Graphics graphics = Graphics.FromImage(image);
-            graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
+
+            switch (frame.orientation)
+            {
+                case "Vertical Cima":
+                    graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(15, 0));
+                    break;
+
+                case "Vertical Baixo":
+                    graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(15, 45));
+                    break;
+
+                case "Horizontal Direita":
+                    graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(50, 10));
+                    break;
+
+                case "Horizontal Esquerda":
+                    graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 10));
+                    break;
+            }
+
             frame.Image = image;
             return frame;
         }
@@ -169,55 +171,60 @@ namespace DMMDigital
 
         private void botaoGirarFilmeEsquerdaClique(object sender, EventArgs e)
         {
-            switch (selectedFrame.orientation)
+            if (selectedFrame != null)
             {
-                case "Vertical Cima":
-                    selectedFrame.orientation = "Horizontal Esquerda";
-                    break;
+                switch (selectedFrame.orientation)
+                {
+                    case "Vertical Cima":
+                        selectedFrame.orientation = "Horizontal Esquerda";
+                        break;
 
-                case "Horizontal Esquerda":
-                    selectedFrame.orientation = "Vertical Baixo";
-                    break;
+                    case "Horizontal Esquerda":
+                        selectedFrame.orientation = "Vertical Baixo";
+                        break;
 
-                case "Vertical Baixo":
-                    selectedFrame.orientation = "Horizontal Direita";
-                    break;
+                    case "Vertical Baixo":
+                        selectedFrame.orientation = "Horizontal Direita";
+                        break;
 
-                case "Horizontal Direita":
-                    selectedFrame.orientation = "Vertical Cima";
-                    break;
+                    case "Horizontal Direita":
+                        selectedFrame.orientation = "Vertical Cima";
+                        break;
+                }
+
+                (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
+                textBoxOrientation.Text = selectedFrame.orientation;
+                drawImage(selectedFrame);
             }
-
-
-            (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-            orientacaoAtual.Text = selectedFrame.orientation;
-            selectedFrame.Refresh();
         }
 
         private void botaoGirarFilmeDireitaClique(object sender, EventArgs e)
         {
-            switch (selectedFrame.orientation)
+            if (selectedFrame != null)
             {
-                case "Vertical Cima":
-                    selectedFrame.orientation = "Horizontal Direita";
-                    break;
+                switch (selectedFrame.orientation)
+                {
+                    case "Vertical Cima":
+                        selectedFrame.orientation = "Horizontal Direita";
+                        break;
 
-                case "Horizontal Esquerda":
-                    selectedFrame.orientation = "Vertical Cima";
-                    break;
+                    case "Horizontal Esquerda":
+                        selectedFrame.orientation = "Vertical Cima";
+                        break;
 
-                case "Vertical Baixo":
-                    selectedFrame.orientation = "Horizontal Esquerda";
-                    break;
+                    case "Vertical Baixo":
+                        selectedFrame.orientation = "Horizontal Esquerda";
+                        break;
 
-                case "Horizontal Direita":
-                    selectedFrame.orientation = "Vertical Baixo";
-                    break;
+                    case "Horizontal Direita":
+                        selectedFrame.orientation = "Vertical Baixo";
+                        break;
+                }
+
+                (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
+                textBoxOrientation.Text = selectedFrame.orientation;
+                drawImage(selectedFrame);
             }
-
-            (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-            orientacaoAtual.Text = selectedFrame.orientation;
-            selectedFrame.Refresh();
         }
     }
 }

@@ -45,12 +45,13 @@
             // buttonGenerateTemplate
             // 
             this.buttonGenerateTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonGenerateTemplate.Location = new System.Drawing.Point(134, 238);
+            this.buttonGenerateTemplate.Location = new System.Drawing.Point(137, 259);
             this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";
             this.buttonGenerateTemplate.Size = new System.Drawing.Size(100, 30);
             this.buttonGenerateTemplate.TabIndex = 0;
             this.buttonGenerateTemplate.Text = "Gerar";
             this.buttonGenerateTemplate.UseVisualStyleBackColor = true;
+            this.buttonGenerateTemplate.Click += new System.EventHandler(this.buttonGenerateTemplate_Click);
             // 
             // label1
             // 
@@ -88,12 +89,13 @@
             this.listBoxOrientation.FormattingEnabled = true;
             this.listBoxOrientation.ItemHeight = 16;
             this.listBoxOrientation.Items.AddRange(new object[] {
-            "Vertical",
+            "Vertical Cima",
+            "Vertical Baixo",
             "Horizontal Esquerda",
             "Horizontal Direita"});
             this.listBoxOrientation.Location = new System.Drawing.Point(111, 157);
             this.listBoxOrientation.Name = "listBoxOrientation";
-            this.listBoxOrientation.Size = new System.Drawing.Size(155, 52);
+            this.listBoxOrientation.Size = new System.Drawing.Size(155, 68);
             this.listBoxOrientation.TabIndex = 6;
             // 
             // numericUpDownRows
@@ -164,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 280);
+            this.ClientSize = new System.Drawing.Size(384, 301);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxTemplateName);
             this.Controls.Add(this.numericUpDownColumns);

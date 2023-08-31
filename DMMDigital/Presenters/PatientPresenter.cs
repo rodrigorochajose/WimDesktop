@@ -18,7 +18,7 @@ namespace DMMDigital.Presenters
 
         public PatientPresenter(IPatientView view, IPatientRepository repository)
         {
-            this.pacientesBindingSource = new BindingSource();
+            pacientesBindingSource = new BindingSource();
             patientView = view;
             this.repository = repository;
 
@@ -49,25 +49,25 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView view = new ManipulatePatientView("add");
-            view.eventAddNewPatient += addNewPatient;
-            (view as Form).ShowDialog();
+            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("add");
+            manipulatePatientView.eventAddNewPatient += addNewPatient;
+            (manipulatePatientView as Form).ShowDialog();
             carregarTodosPacientes();
         }
 
         private void showEditPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView view = new ManipulatePatientView("edit");
-            view.eventSaveEditedPatient += saveEditedPatient;
+            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("edit");
+            manipulatePatientView.eventSaveEditedPatient += saveEditedPatient;
 
             selectedPatient = repository.getPatientById(patientView.selectedPatientId);
-            view.patientId = selectedPatient.id;
-            view.patientName = selectedPatient.name;
-            view.patientBirthDate = selectedPatient.birthDate;
-            view.patientPhone = selectedPatient.phone;
-            view.patientRecommendation = selectedPatient.recommendation;
-            view.patientObservation = selectedPatient.observation;
-            (view as Form).ShowDialog();
+            manipulatePatientView.patientId = selectedPatient.id;
+            manipulatePatientView.patientName = selectedPatient.name;
+            manipulatePatientView.patientBirthDate = selectedPatient.birthDate;
+            manipulatePatientView.patientPhone = selectedPatient.phone;
+            manipulatePatientView.patientRecommendation = selectedPatient.recommendation;
+            manipulatePatientView.patientObservation = selectedPatient.observation;
+            (manipulatePatientView as Form).ShowDialog();
 
             carregarTodosPacientes();
         }
@@ -132,7 +132,5 @@ namespace DMMDigital.Presenters
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
             patientView.manipulateDataGridView();
         }
-
-
     }
 }

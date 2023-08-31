@@ -8,12 +8,12 @@ namespace DMMDigital.Presenters
     public class ChooseTemplateExamPresenter
     {
         private IChooseTemplateExamView chooseTemplateExamView;
-        private ITemplateRepository repository;
+        private ITemplateRepository templateRepository;
 
         public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository)
         {
-            this.chooseTemplateExamView = view;
-            this.repository = repository;
+            chooseTemplateExamView = view;
+            templateRepository = repository;
 
             chooseTemplateExamView.eventInitializeExam += showExamForm;
             chooseTemplateExamView.eventAddNewTemplate += showAddTemplateForm;
@@ -30,7 +30,7 @@ namespace DMMDigital.Presenters
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
         }
     }
 }

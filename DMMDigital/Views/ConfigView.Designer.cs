@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigView));
             this.labelCaminho = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxPath = new System.Windows.Forms.TextBox();
@@ -70,6 +71,7 @@
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelCaminho);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfigView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configurações";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChooseTemplateExamView));
             this.buttonInitializeExam = new System.Windows.Forms.Button();
             this.buttonCancelAction = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -317,9 +318,10 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.titulo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ChooseTemplateExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "TemplateExame";
+            this.Text = "Iniciar Novo Exame";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

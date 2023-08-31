@@ -23,7 +23,7 @@ namespace DMMDigital.Forms
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
 
-            buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
+            buttonNewPatient.Click += delegate { eventShowAddPatientView?.Invoke(this, EventArgs.Empty); };
 
             buttonSelectPatient.Click += delegate 
             {
@@ -45,7 +45,7 @@ namespace DMMDigital.Forms
         }
 
         public event EventHandler eventSearchPatient;
-        public event EventHandler eventShowAddPatientForm;
+        public event EventHandler eventShowAddPatientView;
         public event EventHandler eventSelectPatient;
 
         public void manipulateDataGridView()

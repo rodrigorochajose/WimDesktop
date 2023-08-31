@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChoosePatientExamView));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSearchPatient = new System.Windows.Forms.TextBox();
             this.dataGridViewPatient = new System.Windows.Forms.DataGridView();
-            this.buttonSelectPatient = new System.Windows.Forms.Button();
-            this.buttonCancelAction = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.birthDate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phone1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSelectPatient = new System.Windows.Forms.Button();
+            this.buttonCancelAction = new System.Windows.Forms.Button();
             this.buttonNewPatient = new System.Windows.Forms.Button();
             this.buttonSearchPatient = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -84,13 +85,13 @@
             this.dataGridViewPatient.AllowUserToDeleteRows = false;
             this.dataGridViewPatient.AllowUserToResizeColumns = false;
             this.dataGridViewPatient.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -107,26 +108,6 @@
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPatient.Size = new System.Drawing.Size(526, 313);
             this.dataGridViewPatient.TabIndex = 4;
-            // 
-            // buttonSelectPatient
-            // 
-            this.buttonSelectPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonSelectPatient.Location = new System.Drawing.Point(567, 510);
-            this.buttonSelectPatient.Name = "buttonSelectPatient";
-            this.buttonSelectPatient.Size = new System.Drawing.Size(73, 34);
-            this.buttonSelectPatient.TabIndex = 6;
-            this.buttonSelectPatient.Text = "Selecionar";
-            this.buttonSelectPatient.UseVisualStyleBackColor = true;
-            // 
-            // buttonCancelAction
-            // 
-            this.buttonCancelAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.buttonCancelAction.Location = new System.Drawing.Point(30, 510);
-            this.buttonCancelAction.Name = "buttonCancelAction";
-            this.buttonCancelAction.Size = new System.Drawing.Size(73, 34);
-            this.buttonCancelAction.TabIndex = 7;
-            this.buttonCancelAction.Text = "Cancelar";
-            this.buttonCancelAction.UseVisualStyleBackColor = true;
             // 
             // id
             // 
@@ -163,6 +144,26 @@
             this.phone1.Name = "phone1";
             this.phone1.ReadOnly = true;
             this.phone1.Width = 125;
+            // 
+            // buttonSelectPatient
+            // 
+            this.buttonSelectPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonSelectPatient.Location = new System.Drawing.Point(567, 510);
+            this.buttonSelectPatient.Name = "buttonSelectPatient";
+            this.buttonSelectPatient.Size = new System.Drawing.Size(73, 34);
+            this.buttonSelectPatient.TabIndex = 6;
+            this.buttonSelectPatient.Text = "Selecionar";
+            this.buttonSelectPatient.UseVisualStyleBackColor = true;
+            // 
+            // buttonCancelAction
+            // 
+            this.buttonCancelAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonCancelAction.Location = new System.Drawing.Point(30, 510);
+            this.buttonCancelAction.Name = "buttonCancelAction";
+            this.buttonCancelAction.Size = new System.Drawing.Size(73, 34);
+            this.buttonCancelAction.TabIndex = 7;
+            this.buttonCancelAction.Text = "Cancelar";
+            this.buttonCancelAction.UseVisualStyleBackColor = true;
             // 
             // buttonNewPatient
             // 
@@ -205,7 +206,7 @@
             this.panel1.Size = new System.Drawing.Size(665, 78);
             this.panel1.TabIndex = 49;
             // 
-            // SelectPatientView
+            // ChoosePatientExamView
             // 
             this.ClientSize = new System.Drawing.Size(665, 566);
             this.Controls.Add(this.panel1);
@@ -216,7 +217,8 @@
             this.Controls.Add(this.dataGridViewPatient);
             this.Controls.Add(this.textBoxSearchPatient);
             this.Controls.Add(this.label2);
-            this.Name = "SelectPatientView";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "ChoosePatientExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecione um paciente";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();

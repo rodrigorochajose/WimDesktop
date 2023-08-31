@@ -13,6 +13,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Color = System.Drawing.Color;
+using Pen = System.Drawing.Pen;
 
 namespace DMMDigital
 {
@@ -21,11 +23,11 @@ namespace DMMDigital
 
         private int m_nId = -1, indice = 0, pacienteId = 0, tipoAcao = 0, indiceHistorico = 0;
         string caminho = "";
-        Filme filmeSelecionado;
-        List<Filme> listaFilmes;
+        Frame filmeSelecionado;
+        List<Frame> listaFilmes;
         Contexto<ConfigModel> contextoConfig = new Contexto<ConfigModel>();
 
-        System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Red, 5);
+        Pen pen = new Pen(Color.Red, 5);
         List<List<iDesenho>> historicoDesenhos = new List<List<iDesenho>>() { new List<iDesenho>() };
         List<Point> diferencasPontosDesenhoLivre = new List<Point>();
         Point posicaoClique = new Point();
@@ -46,7 +48,7 @@ namespace DMMDigital
 
             foreach (TemplateLayoutModel tl in listaTemplateLayout)
             {
-                if (tl.orientacao.Contains("Vertical"))
+                if (tl.orientation.Contains("Vertical"))
                 {
                     altura = 35;
                     largura = 25;
@@ -57,34 +59,34 @@ namespace DMMDigital
                     largura = 35;
                 }
 
-                Filme novoFilme = new Filme
+                Frame novoFilme = new Frame
                 {
                     Width = largura,
                     Height = altura,
-                    BackColor = System.Drawing.Color.Black,
-                    Ordem = tl.ordem,
-                    Name = "filme" + tl.ordem,
-                    Orientacao = tl.orientacao,
-                    ImagemCaptura = false,
+                    BackColor = Color.Black,
+                    order = tl.order,
+                    Name = "filme" + tl.order,
+                    orientation = tl.orientation,
+                    photoTook = false,
                 };
 
                 Bitmap image = new Bitmap(novoFilme.Width, novoFilme.Height);
                 Graphics graphics = Graphics.FromImage(image);
                 Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
-                graphics.DrawString(tl.ordem.ToString(), font, System.Drawing.Brushes.White, new Point(0, 0));
+                graphics.DrawString(tl.orientation.ToString(), font, System.Drawing.Brushes.White, new Point(0, 0));
                 novoFilme.Image = image;
-                novoFilme.Location = new Point(tl.posicaoX / 2, tl.posicaoY / 2);
+                novoFilme.Location = new Point(tl.locationX / 2, tl.locationY / 2);
                 novoFilme.DoubleClick += filmeDuploClique;
                 novoFilme.Paint += pintarBordaFilme;
-                if (novoFilme.Ordem == 1){
-                    novoFilme.Tag = System.Drawing.Color.LimeGreen;
+                if (novoFilme.order == 1){
+                    novoFilme.Tag = Color.LimeGreen;
                 } else {
-                    novoFilme.Tag = System.Drawing.Color.Black;
+                    novoFilme.Tag = Color.Black;
                 }
 
                 panelTemplate.Controls.Add(novoFilme);
             }
-            listaFilmes = panelTemplate.Controls.Cast<Filme>().ToList();
+            listaFilmes = panelTemplate.Controls.Cast<Frame>().ToList();
 
             caminho = contextoConfig.tabela.First().caminho_radiografia;
             
@@ -103,16 +105,16 @@ namespace DMMDigital
 
         private void CarregarImagemTela()
         {
-            using (FileStream fs = File.Open(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (FileStream fs = File.Open(Path.Combine(caminho, filmeSelecionado.order + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image img = Image.FromStream(fs);
                 filmePrincipal.Image = img;
                 filmeSelecionado.Image = img;
-                filmeSelecionado.Tag = System.Drawing.Color.Black;
+                filmeSelecionado.Tag = Color.Black;
 
                 indice++;
                 filmeSelecionado = listaFilmes[indice];
-                filmeSelecionado.Tag = System.Drawing.Color.LimeGreen;
+                filmeSelecionado.Tag = Color.LimeGreen;
                 filmeSelecionado.Invoke((MethodInvoker)(() => filmeSelecionado.Refresh()));
 
             }
@@ -120,29 +122,29 @@ namespace DMMDigital
 
         private void pintarBordaFilme(object sender, PaintEventArgs e)
         {
-            Filme filme = (Filme)sender;
-            if ((System.Drawing.Color)filme.Tag == System.Drawing.Color.Black)
+            Frame filme = (Frame)sender;
+            if ((Color)filme.Tag == Color.Black)
             {
-                ControlPaint.DrawBorder(e.Graphics, filme.ClientRectangle, (System.Drawing.Color)filme.Tag, ButtonBorderStyle.None);
+                ControlPaint.DrawBorder(e.Graphics, filme.ClientRectangle, (Color)filme.Tag, ButtonBorderStyle.None);
             }
             else
             {
-                ControlPaint.DrawBorder(e.Graphics, filme.ClientRectangle, (System.Drawing.Color)filme.Tag, 2, ButtonBorderStyle.Solid, (System.Drawing.Color)filme.Tag, 2, ButtonBorderStyle.Solid, (System.Drawing.Color)filme.Tag, 2, ButtonBorderStyle.Solid, (System.Drawing.Color)filme.Tag, 2, ButtonBorderStyle.Solid);
+                ControlPaint.DrawBorder(e.Graphics, filme.ClientRectangle, (Color)filme.Tag, 2, ButtonBorderStyle.Solid, (Color)filme.Tag, 2, ButtonBorderStyle.Solid, (Color)filme.Tag, 2, ButtonBorderStyle.Solid, (Color)filme.Tag, 2, ButtonBorderStyle.Solid);
             }
         }
 
         private void filmeDuploClique(object sender, EventArgs e)
         {
-            filmeSelecionado = listaFilmes.Find(t => (System.Drawing.Color)t.Tag == System.Drawing.Color.LimeGreen);
-            filmeSelecionado.Tag = System.Drawing.Color.Black;
+            filmeSelecionado = listaFilmes.Find(t => (Color)t.Tag == Color.LimeGreen);
+            filmeSelecionado.Tag = Color.Black;
             filmeSelecionado.Refresh();
 
-            filmeSelecionado = (Filme)sender;
-            filmeSelecionado.Tag = System.Drawing.Color.LimeGreen;
+            filmeSelecionado = (Frame)sender;
+            filmeSelecionado.Tag = Color.LimeGreen;
             filmeSelecionado.Refresh();
-            indice = filmeSelecionado.Ordem - 1;
+            indice = filmeSelecionado.order - 1;
 
-            if (filmeSelecionado.ImagemCaptura == true)
+            if (filmeSelecionado.photoTook == true)
             {
                 filmePrincipal.Image = filmeSelecionado.Image;
             }
@@ -352,7 +354,7 @@ namespace DMMDigital
                             posicaoInicial = posicaoClique,
                             texto = inserirTextoDesenho().ToString(),
                             fonte = new Font("Arial", 16),
-                            pincel = new SolidBrush(System.Drawing.Color.Red),
+                            pincel = new SolidBrush(Color.Red),
                         };
 
 
@@ -705,7 +707,7 @@ namespace DMMDigital
                     {
                         filmeSelecionado = listaFilmes[indice];
 
-                        if (filmeSelecionado.ImagemCaptura == true)
+                        if (filmeSelecionado.photoTook == true)
                         {
                             var res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
                             if (res == DialogResult.No)
@@ -714,7 +716,7 @@ namespace DMMDigital
                             }
                             filmeSelecionado.Image = null;
                             filmePrincipal.Image = null;
-                            File.Delete(Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"));
+                            File.Delete(Path.Combine(caminho, filmeSelecionado.order + "-radiografia.tiff"));
                         }
 
                         var image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
@@ -745,7 +747,7 @@ namespace DMMDigital
         {
             try
             {
-                filmeSelecionado.ImagemCaptura = true;
+                filmeSelecionado.photoTook = true;
                 
                 Bitmap pic = new Bitmap(widht, height, System.Drawing.Imaging.PixelFormat.Format16bppGrayScale);
 
@@ -758,20 +760,20 @@ namespace DMMDigital
 
                 pic.UnlockBits(picData);
 
-                if (filmeSelecionado.Orientacao == "Horizontal Esquerda")
+                if (filmeSelecionado.orientation == "Horizontal Esquerda")
                 {
                     pic.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 } 
-                else if (filmeSelecionado.Orientacao == "Horizontal Direita")
+                else if (filmeSelecionado.orientation == "Horizontal Direita")
                 {
                     pic.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 } 
-                else if (filmeSelecionado.Orientacao == "Vertical Baixo")
+                else if (filmeSelecionado.orientation == "Vertical Baixo")
                 {
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic, Path.Combine(caminho, filmeSelecionado.Ordem + "-radiografia.tiff"));
+                SaveBmp(pic, Path.Combine(caminho, filmeSelecionado.order + "-radiografia.tiff"));
 
                 pic.Dispose();
 
