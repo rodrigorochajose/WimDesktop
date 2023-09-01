@@ -21,6 +21,7 @@ namespace DMMDigital.Views
         event EventHandler eventInitializeExam;
 
         void setTemplateList(List<TemplateModel> templateList);
+        void setTemplateLayoutList(List<TemplateLayoutModel> templateLayoutList);
 
     }
 }

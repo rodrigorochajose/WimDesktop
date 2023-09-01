@@ -1,8 +1,5 @@
-﻿using DMMDigital.Modelos;
-using DMMDigital.Views;
+﻿using DMMDigital.Views;
 using System;
-using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Forms

@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IConfigRepository.cs" />
+    <Compile Include="Interface\ITemplateLayoutRepository.cs" />
     <Compile Include="Interface\ITemplateRepository.cs" />
     <Compile Include="Modelos\Annonations\DateTimeRangeAttribute.cs" />
     <Compile Include="Detector.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Views\IConfigView.cs" />
     <Compile Include="Views\IChoosePatientExamView.cs" />
     <Compile Include="Views\IDialogGenerateTemplateView.cs" />
+    <Compile Include="Views\IManipulateTemplateView.cs" />
     <Compile Include="Views\ManipulatePatientView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +200,7 @@
     </Compile>
     <Compile Include="_Repositories\ConfigRepository.cs" />
     <Compile Include="_Repositories\PatientRepository.cs" />
+    <Compile Include="_Repositories\TemplateLayoutRepository.cs" />
     <Compile Include="_Repositories\TemplateRepository.cs" />
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>

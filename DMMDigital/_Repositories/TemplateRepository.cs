@@ -10,9 +10,11 @@ namespace DMMDigital._Repositories
     {
         Contexto<TemplateModel> context = new Contexto<TemplateModel>();
 
-        public string add(TemplateModel template)
+        public int add(TemplateModel template)
         {
-            throw new NotImplementedException();
+            context.tabela.Add(template);
+            context.SaveChanges();
+            return template.id;
         }
 
         public string edit(TemplateModel template)

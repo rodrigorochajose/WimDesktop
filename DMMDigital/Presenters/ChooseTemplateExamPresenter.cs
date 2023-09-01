@@ -1,4 +1,5 @@
-﻿using DMMDigital.Interface;
+﻿using DMMDigital._Repositories;
+using DMMDigital.Interface;
 using DMMDigital.Views;
 using System;
 using System.Windows.Forms;
@@ -9,6 +10,7 @@ namespace DMMDigital.Presenters
     {
         private IChooseTemplateExamView chooseTemplateExamView;
         private ITemplateRepository templateRepository;
+        private ITemplateLayoutRepository templateLayoutRepository = new TemplateLayoutRepository();
 
         public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository)
         {
@@ -18,7 +20,8 @@ namespace DMMDigital.Presenters
             chooseTemplateExamView.eventInitializeExam += showExamForm;
             chooseTemplateExamView.eventAddNewTemplate += showAddTemplateForm;
 
-            chooseTemplateExamView.setTemplateList(repository.getAllTemplates());
+            chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
+            chooseTemplateExamView.setTemplateLayoutList(templateLayoutRepository.getAllTemplateLayout());
 
             (chooseTemplateExamView as Form).ShowDialog();
         }
@@ -31,6 +34,7 @@ namespace DMMDigital.Presenters
         private void showAddTemplateForm(object sender, EventArgs e)
         {
             new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
+            chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
         }
     }
 }

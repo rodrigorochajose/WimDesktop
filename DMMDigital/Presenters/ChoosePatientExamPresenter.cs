@@ -59,7 +59,6 @@ namespace DMMDigital.Presenters
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
             IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository());
 
             PatientModel selectedPatient = patientRepository.getPatientById(choosePatientExamView.selectedPatientId);
             chooseTemplateView.patientId = selectedPatient.id;
@@ -68,6 +67,8 @@ namespace DMMDigital.Presenters
             chooseTemplateView.patientPhone = selectedPatient.phone;
             chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
             chooseTemplateView.patientObservation = selectedPatient.observation;
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository());
         }
 
         private void addNewPatient(object sender, EventArgs e)
