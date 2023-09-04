@@ -23,7 +23,7 @@ namespace DMMDigital.Presenters
 
         private void loadImagePath(object sender, EventArgs e)
         {
-            configView.imagePath = configRepository.getAllConfig().caminho_radiografia;
+            configView.imagePath = configRepository.getAllConfig().examPath;
         }
 
         private void saveImagePath(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace DMMDigital.Presenters
             try
             {
                 ConfigModel selectedConfig = configRepository.getAllConfig();
-                selectedConfig.caminho_radiografia = configView.imagePath;
+                selectedConfig.examPath = configView.imagePath;
                 MessageBox.Show(configRepository.edit(selectedConfig));
                 (sender as ConfigView).Close();
             }

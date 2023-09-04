@@ -10,7 +10,7 @@ namespace DMMDigital.Presenters
     {
         private IManipulateTemplateView manipulateTemplateView;
         private ITemplateRepository templateRepository;
-        private ITemplateLayoutRepository templateLayoutRepository = new TemplateLayoutRepository();
+        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
         public ManipulateTemplatePresenter(IManipulateTemplateView view, ITemplateRepository repository) 
         { 
@@ -27,7 +27,7 @@ namespace DMMDigital.Presenters
             try
             {
                 int templateId = templateRepository.add(new Modelos.TemplateModel { name = manipulateTemplateView.templateName });
-                MessageBox.Show(templateLayoutRepository.add(templateId, manipulateTemplateView.framesList));
+                MessageBox.Show(templateFrameRepository.add(templateId, manipulateTemplateView.framesList));
                 (manipulateTemplateView as Form).Close();
             }
             catch (Exception ex)

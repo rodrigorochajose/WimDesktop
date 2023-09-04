@@ -32,5 +32,10 @@ namespace DMMDigital._Repositories
         {
             return context.tabela.First();
         }
+
+        public string getExamPath()
+        {
+            return context.tabela.First().examPath.ToString();
+        }
     }
 }

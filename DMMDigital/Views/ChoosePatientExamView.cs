@@ -19,14 +19,9 @@ namespace DMMDigital.Forms
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
-
             buttonNewPatient.Click += delegate { eventShowAddPatientView?.Invoke(this, EventArgs.Empty); };
-
-            buttonSelectPatient.Click += delegate 
-            {
-                eventSelectPatient?.Invoke(this, EventArgs.Empty); 
-            };
-
+            dataGridViewPatient.CellClick += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
+            buttonSelectPatient.Click += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
             buttonCancelAction.Click += delegate { this.Close(); };
         }
 

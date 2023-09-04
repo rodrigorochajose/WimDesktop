@@ -12,5 +12,6 @@ namespace DMMDigital.Interface
         string add(ConfigModel config);
         string edit(ConfigModel config);
         ConfigModel getAllConfig();
+        string getExamPath();
     }
 }

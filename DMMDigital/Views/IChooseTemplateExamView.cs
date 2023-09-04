@@ -13,15 +13,15 @@ namespace DMMDigital.Views
         string patientPhone { get; set; }
         string patientRecommendation { get; set; }
         string patientObservation { get; set; }
-
         string sessionName { get; set; }
-        int templateId { get; set; }
+        string selectedFrameName { get; }
+        List<TemplateFrameModel> templateFrames { get; }
 
         event EventHandler eventAddNewTemplate;
         event EventHandler eventInitializeExam;
 
         void setTemplateList(List<TemplateModel> templateList);
-        void setTemplateLayoutList(List<TemplateLayoutModel> templateLayoutList);
+        void setTemplateFrameList(List<TemplateFrameModel> templateFrameList);
 
     }
 }

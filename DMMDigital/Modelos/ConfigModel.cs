@@ -2,14 +2,14 @@
 
 namespace DMMDigital.Modelos
 {
-    [Table("CONFIGURACAO")]
+    [Table("CONFIG")]
     public class ConfigModel
     {
 
         [Column("ID")]
         public int id { get; set; }
 
-        [Column("CAMINHO_RADIOGRAFIA")]
-        public string caminho_radiografia { get; set; }
+        [Column("EXAM_PATH")]
+        public string examPath { get; set; }
     }
 }

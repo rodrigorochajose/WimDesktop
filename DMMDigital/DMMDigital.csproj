@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IConfigRepository.cs" />
+    <Compile Include="Interface\IExamRepository.cs" />
     <Compile Include="Interface\ITemplateLayoutRepository.cs" />
     <Compile Include="Interface\ITemplateRepository.cs" />
     <Compile Include="Modelos\Annonations\DateTimeRangeAttribute.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
+    <Compile Include="Presenters\ExamPresenter.cs" />
     <Compile Include="Presenters\ManipulateTemplatePresenter.cs" />
     <Compile Include="Views\ConfigView.cs">
       <SubType>Form</SubType>
@@ -109,7 +111,6 @@
       <DependentUpon>ConfigView.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelos\ExamModel.cs" />
-    <Compile Include="Interface\IExameRepository.cs" />
     <Compile Include="Modelos\ExamImageModel.cs" />
     <Compile Include="Interface\IPatientRepository.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Views\IConfigView.cs" />
     <Compile Include="Views\IChoosePatientExamView.cs" />
     <Compile Include="Views\IDialogGenerateTemplateView.cs" />
+    <Compile Include="Views\IExamView.cs" />
     <Compile Include="Views\IManipulateTemplateView.cs" />
     <Compile Include="Views\ManipulatePatientView.cs">
       <SubType>Form</SubType>
@@ -131,11 +133,11 @@
     <Compile Include="Views\DialogGenerateTemplateView.Designer.cs">
       <DependentUpon>DialogGenerateTemplateView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Exame.cs">
+    <Compile Include="Views\ExamView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Exame.Designer.cs">
-      <DependentUpon>Exame.cs</DependentUpon>
+    <Compile Include="Views\ExamView.Designer.cs">
+      <DependentUpon>ExamView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ManipulateTemplateView.cs">
       <SubType>Form</SubType>
@@ -178,14 +180,14 @@
     <Compile Include="Interface\iRay\IRayVariant.cs" />
     <Compile Include="Modelos\ConfigModel.cs" />
     <Compile Include="Modelos\Contexto.cs" />
-    <Compile Include="Modelos\Desenhos\Circulo.cs" />
-    <Compile Include="Modelos\Desenhos\DesenhoLivre.cs" />
-    <Compile Include="Modelos\Desenhos\Retangulo.cs" />
-    <Compile Include="Modelos\Desenhos\Seta.cs" />
-    <Compile Include="Modelos\Desenhos\Texto.cs" />
+    <Compile Include="Modelos\Drawings\Ellipse.cs" />
+    <Compile Include="Modelos\Drawings\FreeDraw.cs" />
+    <Compile Include="Modelos\Drawings\RectangleDraw.cs" />
+    <Compile Include="Modelos\Drawings\Arrow.cs" />
+    <Compile Include="Modelos\Drawings\Text.cs" />
     <Compile Include="Modelos\PatientModel.cs" />
     <Compile Include="Modelos\TemplateModel.cs" />
-    <Compile Include="Modelos\TemplateLayoutModel.cs" />
+    <Compile Include="Modelos\TemplateFrameModel.cs" />
     <Compile Include="Presenters\MenuPresenter.cs" />
     <Compile Include="Presenters\PatientPresenter.cs" />
     <Compile Include="Program.cs" />
@@ -199,8 +201,9 @@
       <DependentUpon>PatientView.cs</DependentUpon>
     </Compile>
     <Compile Include="_Repositories\ConfigRepository.cs" />
+    <Compile Include="_Repositories\ExamRepository.cs" />
     <Compile Include="_Repositories\PatientRepository.cs" />
-    <Compile Include="_Repositories\TemplateLayoutRepository.cs" />
+    <Compile Include="_Repositories\TemplateFrameRepository.cs" />
     <Compile Include="_Repositories\TemplateRepository.cs" />
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
@@ -211,8 +214,8 @@
     <EmbeddedResource Include="Views\DialogGenerateTemplateView.resx">
       <DependentUpon>DialogGenerateTemplateView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Exame.resx">
-      <DependentUpon>Exame.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ExamView.resx">
+      <DependentUpon>ExamView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManipulateTemplateView.resx">
       <DependentUpon>ManipulateTemplateView.cs</DependentUpon>

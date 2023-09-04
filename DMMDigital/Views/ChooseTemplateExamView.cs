@@ -4,14 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace DMMDigital.Forms
 {
     public partial class ChooseTemplateExamView : Form, IChooseTemplateExamView
     {
-        List<TemplateLayoutModel> templateLayoutList;
+        List<TemplateFrameModel> templateFrameList;
 
         public ChooseTemplateExamView()
         {
@@ -22,6 +21,8 @@ namespace DMMDigital.Forms
         private void associateEvents()
         {
             buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
+
+            buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
 
             buttonCancelAction.Click += delegate { this.Close(); };
 
@@ -65,12 +66,16 @@ namespace DMMDigital.Forms
             get { return textBoxSessionName.Text; }
             set { textBoxSessionName.Text = value; }
         }
-        public int templateId
+
+        public string selectedFrameName
         { 
-            get { return int.Parse(comboBoxTemplate.SelectedValue.ToString()); }
-            set { this.comboBoxTemplate.SelectedValue = value; }
+            get { return comboBoxTemplate.SelectedText; } 
         }
 
+        public List<TemplateFrameModel> templateFrames
+        { 
+            get { return templateFrameList.Where(frame => frame.templateId == int.Parse(comboBoxTemplate.SelectedValue.ToString())).ToList(); }
+        }
 
         public event EventHandler eventAddNewTemplate;
         public event EventHandler eventInitializeExam;
@@ -82,9 +87,9 @@ namespace DMMDigital.Forms
             comboBoxTemplate.ValueMember = "id";
         }
 
-        public void setTemplateLayoutList(List<TemplateLayoutModel> templateLayoutList)
+        public void setTemplateFrameList(List<TemplateFrameModel> templateFrameList)
         {
-            this.templateLayoutList = templateLayoutList;
+            this.templateFrameList = templateFrameList;
             comboBoxTemplate.SelectedItem = comboBoxTemplate.Items[0];
             showTemplateOnPanel();
         }
@@ -95,11 +100,11 @@ namespace DMMDigital.Forms
 
             int templateId = int.Parse(comboBoxTemplate.SelectedValue.ToString());
 
-            List<TemplateLayoutModel> templateLayoutListToShow = templateLayoutList.Where(tl => tl.templateId == templateId).ToList();
+            List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == templateId).ToList();
 
             int height, width;
 
-            foreach (TemplateLayoutModel tl in  templateLayoutListToShow)
+            foreach (TemplateFrameModel tl in framesToShow)
             {
                 if (tl.orientation.Contains("Vertical"))
                 {
@@ -122,8 +127,7 @@ namespace DMMDigital.Forms
 
                 Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
                 Graphics graphics = Graphics.FromImage(image);
-                Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
-                graphics.DrawString(tl.order.ToString(), font, Brushes.White, new Point(0, 0));
+                graphics.DrawString(tl.order.ToString(), new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
                 newFrame.Image = image;
                 newFrame.Location = new Point(tl.locationX / 2, tl.locationY / 2);
 

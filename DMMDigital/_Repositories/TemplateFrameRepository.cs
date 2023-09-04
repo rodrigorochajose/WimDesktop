@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace DMMDigital._Repositories
 {
-    public class TemplateLayoutRepository : ITemplateLayoutRepository
+    public class TemplateFrameRepository : ITemplateFrameRepository
     {
-        Contexto<TemplateLayoutModel> context = new Contexto<TemplateLayoutModel>();
+        Contexto<TemplateFrameModel> context = new Contexto<TemplateFrameModel>();
 
         public string add(int templateId, IList<Frame> framesList)
         {
@@ -16,7 +16,7 @@ namespace DMMDigital._Repositories
             {
                 foreach (Frame frame in framesList)
                 {
-                    context.tabela.Add(new TemplateLayoutModel
+                    context.tabela.Add(new TemplateFrameModel
                     {
                         templateId = templateId,
                         locationX = frame.Location.X,
@@ -34,7 +34,7 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public List<TemplateLayoutModel> getAllTemplateLayout()
+        public List<TemplateFrameModel> getAllTemplateFrame()
         {
             return context.tabela.ToList();
         }

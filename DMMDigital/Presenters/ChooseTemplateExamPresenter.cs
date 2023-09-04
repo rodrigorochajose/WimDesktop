@@ -1,5 +1,6 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface;
+using DMMDigital.Modelos;
 using DMMDigital.Views;
 using System;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace DMMDigital.Presenters
     {
         private IChooseTemplateExamView chooseTemplateExamView;
         private ITemplateRepository templateRepository;
-        private ITemplateLayoutRepository templateLayoutRepository = new TemplateLayoutRepository();
+        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
         public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository)
         {
@@ -21,14 +22,20 @@ namespace DMMDigital.Presenters
             chooseTemplateExamView.eventAddNewTemplate += showAddTemplateForm;
 
             chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
-            chooseTemplateExamView.setTemplateLayoutList(templateLayoutRepository.getAllTemplateLayout());
+            chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
 
             (chooseTemplateExamView as Form).ShowDialog();
         }
 
         private void showExamForm(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            PatientModel patient = new PatientModel
+            {
+                id = chooseTemplateExamView.patientId,
+                name = chooseTemplateExamView.patientName,
+            };
+            new ExamPresenter(new ExamView(patient, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedFrameName, chooseTemplateExamView.sessionName), new ExamRepository());
+
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

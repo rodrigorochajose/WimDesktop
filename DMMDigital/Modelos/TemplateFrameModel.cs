@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DMMDigital.Modelos
 {
-    [Table("TEMPLATE_LAYOUT")]
-    public class TemplateLayoutModel
+    [Table("TEMPLATE_FRAME")]
+    public class TemplateFrameModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

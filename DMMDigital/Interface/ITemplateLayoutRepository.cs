@@ -4,10 +4,10 @@ using System.Runtime.InteropServices;
 
 namespace DMMDigital.Interface
 {
-    public interface ITemplateLayoutRepository
+    public interface ITemplateFrameRepository
     {
         string add(int templateId, IList<Frame> framesList);
 
-        List<TemplateLayoutModel> getAllTemplateLayout();
+        List<TemplateFrameModel> getAllTemplateFrame();
     }
 }

@@ -98,11 +98,11 @@ namespace DMMDigital
 
         private void selectFrame(object sender, EventArgs e)
         {
-            Frame actualSelectedFrame = frames.Find(f => (Color)f.Tag == Color.LimeGreen);
-            if (actualSelectedFrame != null)
+            Frame currentSelectedFrame = frames.Find(f => (Color)f.Tag == Color.LimeGreen);
+            if (currentSelectedFrame != null)
             {
-                actualSelectedFrame.Tag = Color.Black;
-                actualSelectedFrame.Invalidate();
+                currentSelectedFrame.Tag = Color.Black;
+                currentSelectedFrame.Invalidate();
             }
 
             selectedFrame = (Frame)sender;
@@ -130,6 +130,8 @@ namespace DMMDigital
             framesCounter--;
             framesList.Remove(selectedFrame);
             panel2.Controls.Remove(selectedFrame);
+            textBoxSelectedFrame.Text = "";
+            textBoxOrientation.Text = "";
         }
 
         private void rotateFrameLeft()

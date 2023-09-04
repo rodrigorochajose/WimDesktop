@@ -1,0 +1,19 @@
+﻿using DMMDigital.Modelos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DMMDigital.Views
+{
+    public interface IExamView
+    {
+        string patientName { get; set; }
+        string templateName { get; set; }
+        string examPath { get; set; }
+
+        event EventHandler eventGetExamPath;
+        
+    }
+}

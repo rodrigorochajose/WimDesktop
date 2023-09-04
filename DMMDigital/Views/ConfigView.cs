@@ -1,5 +1,4 @@
-﻿using DMMDigital.Presenters;
-using DMMDigital.Views;
+﻿using DMMDigital.Views;
 using System;
 using System.Windows.Forms;
 
