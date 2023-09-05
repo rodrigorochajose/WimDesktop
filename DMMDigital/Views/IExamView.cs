@@ -12,8 +12,12 @@ namespace DMMDigital.Views
         string patientName { get; set; }
         string templateName { get; set; }
         string examPath { get; set; }
+        Frame selectedFrame { get; set; }
 
         event EventHandler eventGetExamPath;
+
+        void loadImageOnMainFrame();
+        void selectFrameToLoadImage();
         
     }
 }

@@ -21,8 +21,8 @@ namespace DMMDigital
 
         public void draw(Graphics g, Pen p)
         {
-            p.StartCap = LineCap.Round;
-            p.EndCap = LineCap.Round;
+            //p.StartCap = LineCap.Flat;
+            //p.EndCap = LineCap.Flat ;
 
             graphicsPath = new GraphicsPath();
             graphicsPath.AddLines(points.ToArray());
