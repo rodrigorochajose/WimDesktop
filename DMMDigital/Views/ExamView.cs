@@ -182,21 +182,17 @@ namespace DMMDigital
 
         private void buttonImportClick(object sender, EventArgs e)
         {
-            if (selectedFrame.Image != null)
+            if (selectedFrame.photoTook == true)
             {
                 var res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
                 if (res == DialogResult.No) { return; }
 
-                try
-                {
-                    importImage.ShowDialog();
-                    Image selectedImage = Image.FromStream(importImage.OpenFile());
-                    selectedFrame.Image = selectedImage;
-                    mainFrame.Image = selectedFrame.Image;
-                    enableTools();
-                }
-                catch { return; }
             }
+            importImage.ShowDialog();
+            Image selectedImage = Image.FromStream(importImage.OpenFile());
+            selectedFrame.Image = selectedImage;
+            mainFrame.Image = selectedFrame.Image;
+            enableTools();
         }
 
         private void buttonExportClick(object sender, EventArgs e)
@@ -383,7 +379,6 @@ namespace DMMDigital
                         break;
                     case 1:
                         currentDrawing = drawingHistory[drawingHistoryIndex].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, pen));
-
                         if (currentDrawing != null)
                         {
                             drawingInitialPosition = currentDrawing.initialPosition;
@@ -466,7 +461,7 @@ namespace DMMDigital
                             Point firstPoint = (selectedDrawingToMove as FreeDraw).points.First();
                             int counter = 1;
 
-                            (selectedDrawingToMove as FreeDraw).points[0] = new Point(e.X + drawingInitialPosition.X - clickPosition.X, e.Y + drawingInitialPosition.Y - clickPosition.Y);
+                            (selectedDrawingToMove as FreeDraw).points[0] = selectedDrawingToMove.initialPosition;
 
                             pointsDifferenceFreeDrawing.ForEach(differencePoint =>
                             {
@@ -515,7 +510,7 @@ namespace DMMDigital
         {
             drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics, pen));
 
-            if (draw)
+            if (draw && currentDrawing != null)
             {
                 if (action == 3)
                 {
@@ -526,7 +521,7 @@ namespace DMMDigital
                 }
                 else
                 {
-                    currentDrawing.drawPreview(e.Graphics, pen);
+                    currentDrawing.draw(e.Graphics, pen);
                 }
             }
         }
