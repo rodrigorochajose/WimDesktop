@@ -30,9 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.mainFrame = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonColorPicker = new System.Windows.Forms.Button();
+            this.numericUpDownFontSize = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPatient = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,11 +63,16 @@
             this.buttonImport = new System.Windows.Forms.Button();
             this.sensorConnection = new System.Windows.Forms.PictureBox();
             this.importImage = new System.Windows.Forms.OpenFileDialog();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
+            this.mainFrame = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).BeginInit();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTemplate
@@ -72,37 +81,13 @@
             this.panelTemplate.Location = new System.Drawing.Point(0, 73);
             this.panelTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelTemplate.Size = new System.Drawing.Size(363, 257);
             this.panelTemplate.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.panel2.Controls.Add(this.mainFrame);
-            this.panel2.Location = new System.Drawing.Point(350, 50);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1025, 648);
-            this.panel2.TabIndex = 1;
-            // 
-            // mainFrame
-            // 
-            this.mainFrame.BackColor = System.Drawing.SystemColors.ControlText;
-            this.mainFrame.Location = new System.Drawing.Point(0, 0);
-            this.mainFrame.Margin = new System.Windows.Forms.Padding(0);
-            this.mainFrame.Name = "mainFrame";
-            this.mainFrame.Size = new System.Drawing.Size(1025, 648);
-            this.mainFrame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.mainFrame.TabIndex = 0;
-            this.mainFrame.TabStop = false;
-            this.mainFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.mainFramePaint);
-            this.mainFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseDown);
-            this.mainFrame.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseMove);
-            this.mainFrame.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseUp);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.panel1);
             this.panel3.Controls.Add(this.labelTemplate);
             this.panel3.Controls.Add(this.labelPatient);
             this.panel3.Controls.Add(this.label2);
@@ -110,8 +95,84 @@
             this.panel3.Controls.Add(this.panelTemplate);
             this.panel3.Location = new System.Drawing.Point(0, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(350, 645);
+            this.panel3.Size = new System.Drawing.Size(363, 648);
             this.panel3.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Silver;
+            this.panel1.Controls.Add(this.buttonColorPicker);
+            this.panel1.Controls.Add(this.numericUpDownFontSize);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(0, 330);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(363, 102);
+            this.panel1.TabIndex = 1;
+            // 
+            // buttonColorPicker
+            // 
+            this.buttonColorPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonColorPicker.Location = new System.Drawing.Point(56, 65);
+            this.buttonColorPicker.Name = "buttonColorPicker";
+            this.buttonColorPicker.Size = new System.Drawing.Size(75, 24);
+            this.buttonColorPicker.TabIndex = 6;
+            this.buttonColorPicker.Text = "Escolher Cor";
+            this.buttonColorPicker.UseVisualStyleBackColor = true;
+            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPickerClick);
+            // 
+            // numericUpDownFontSize
+            // 
+            this.numericUpDownFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDownFontSize.Location = new System.Drawing.Point(238, 66);
+            this.numericUpDownFontSize.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDownFontSize.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownFontSize.Name = "numericUpDownFontSize";
+            this.numericUpDownFontSize.Size = new System.Drawing.Size(67, 23);
+            this.numericUpDownFontSize.TabIndex = 3;
+            this.numericUpDownFontSize.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownFontSize.ValueChanged += new System.EventHandler(this.numericUpDownFontSizeValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(235, 50);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Tamanho";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(53, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(23, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Cor";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(115, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Opções da Ferramenta";
             // 
             // labelTemplate
             // 
@@ -464,11 +525,42 @@
             // 
             this.importImage.FileName = "openFileDialog1";
             // 
+            // mainFrame
+            // 
+            this.mainFrame.BackColor = System.Drawing.SystemColors.ControlText;
+            this.mainFrame.Dock = System.Windows.Forms.DockStyle.Right;
+            this.mainFrame.Location = new System.Drawing.Point(0, 0);
+            this.mainFrame.Margin = new System.Windows.Forms.Padding(0);
+            this.mainFrame.Name = "mainFrame";
+            this.mainFrame.Size = new System.Drawing.Size(1012, 648);
+            this.mainFrame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.mainFrame.TabIndex = 0;
+            this.mainFrame.TabStop = false;
+            this.mainFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.mainFramePaint);
+            this.mainFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseDown);
+            this.mainFrame.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseMove);
+            this.mainFrame.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseUp);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel2.Controls.Add(this.mainFrame);
+            this.panel2.Location = new System.Drawing.Point(363, 50);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1012, 648);
+            this.panel2.TabIndex = 1;
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.AnyColor = true;
+            this.colorDialog1.FullOpen = true;
+            // 
             // ExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1375, 696);
+            this.ClientSize = new System.Drawing.Size(1375, 699);
             this.Controls.Add(this.panelTools);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -478,12 +570,15 @@
             this.Text = "Exame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.examLoad);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -491,13 +586,11 @@
         #endregion
 
         private System.Windows.Forms.Panel panelTemplate;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelTemplate;
         private System.Windows.Forms.Label labelPatient;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox mainFrame;
         private System.Windows.Forms.PictureBox sensorConnection;
         private System.Windows.Forms.Panel panelTools;
         private System.Windows.Forms.Button buttonImport;
@@ -520,5 +613,14 @@
         private System.Windows.Forms.OpenFileDialog importImage;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonRestore;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox mainFrame;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button buttonColorPicker;
+        private System.Windows.Forms.NumericUpDown numericUpDownFontSize;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }

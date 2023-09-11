@@ -73,25 +73,6 @@ namespace DMMDigital
             Bitmap image = new Bitmap(frame.Width, frame.Height);
             Graphics graphics = Graphics.FromImage(image);
             graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
-            //switch (frame.orientation)
-            //{
-            //    case "Vertical Cima":
-            //        graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
-            //        break;
-
-            //    case "Vertical Baixo":
-            //        graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(15, 45));
-            //        break;
-
-            //    case "Horizontal Direita":
-            //        graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(50, 10));
-            //        break;
-
-            //    case "Horizontal Esquerda":
-            //        graphics.DrawString(framesCounter.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 10));
-            //        break;
-            //}
-
             frame.Image = image;
             return frame;
         }

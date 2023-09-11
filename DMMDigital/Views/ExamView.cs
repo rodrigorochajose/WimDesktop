@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Views;
+using System.Diagnostics;
 
 namespace DMMDigital
 {
@@ -24,7 +25,8 @@ namespace DMMDigital
         int indexFrame = 0, patientId = 0, action = 0, drawingHistoryIndex = 0;
         List<Frame> frames = new List<Frame>();
 
-        Pen pen = new Pen(Color.Red, 5);
+        Color drawingColor = Color.Red;
+        float drawingSize = 3;
         List<List<iDrawing>> drawingHistory = new List<List<iDrawing>>() { new List<iDrawing>() };
         List<Point> pointsDifferenceFreeDrawing = new List<Point>();
         Point clickPosition = new Point();
@@ -43,12 +45,14 @@ namespace DMMDigital
 
             drawTemplate(templateFrames);
             selectedFrame = frames.First();
-
-            eventGetExamPath?.Invoke(this, EventArgs.Empty);
-
-            DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
-            examPath = di.FullName;
+            Load += delegate
+            {
+                eventGetExamPath?.Invoke(this, EventArgs.Empty);
+                DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
+                examPath = di.FullName;
+            };
         }
+
         public void loadImageOnMainFrame()
         {
             using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
@@ -169,8 +173,6 @@ namespace DMMDigital
             }
         }
 
-
-        // ferramentas 
         private void enableTools()
         {
             foreach (Button tool in panelTools.Controls.OfType<Button>())
@@ -190,8 +192,7 @@ namespace DMMDigital
             }
             importImage.ShowDialog();
             Image selectedImage = Image.FromStream(importImage.OpenFile());
-            selectedFrame.Image = selectedImage;
-            mainFrame.Image = selectedFrame.Image;
+            mainFrame.Image = selectedImage;
             enableTools();
         }
 
@@ -306,8 +307,8 @@ namespace DMMDigital
                 clickPosition = new Point();
                 drawingInitialPosition = new Point();
                 drawingFinalPosition = new Point();
-                currentDrawing = new Arrow();
-                selectedDrawingToMove = new Arrow();
+                currentDrawing = new Ellipse();
+                selectedDrawingToMove = new Ellipse();
                 drawingHistoryIndex = 0;
                 action = 0;
                 mainFrame.Invalidate();
@@ -324,6 +325,7 @@ namespace DMMDigital
                 switch (action)
                 {
                     case 3:
+
                         currentDrawing = new FreeDraw
                         {
                             graphicsPath = new GraphicsPath(),
@@ -331,9 +333,6 @@ namespace DMMDigital
                         };
 
                         (currentDrawing as FreeDraw).points.Add(e.Location);
-
-                        drawingHistory.Add(new List<iDrawing>(drawingHistory[drawingHistoryIndex]){ currentDrawing });
-                        drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
 
                         break;
                     case 5:
@@ -362,6 +361,7 @@ namespace DMMDigital
                         break;
                     case 4:
                         draw = false;
+                        verifyHistoryToReset();
 
                         currentDrawing = new Text
                         {
@@ -378,7 +378,7 @@ namespace DMMDigital
 
                         break;
                     case 1:
-                        currentDrawing = drawingHistory[drawingHistoryIndex].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, pen));
+                        currentDrawing = drawingHistory[drawingHistoryIndex].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, new Pen(Color.Blue, 5)));
                         if (currentDrawing != null)
                         {
                             drawingInitialPosition = currentDrawing.initialPosition;
@@ -401,7 +401,7 @@ namespace DMMDigital
                                 case FreeDraw fd:
                                     selectedDrawingToMove = new FreeDraw
                                     {
-                                        points = (currentDrawing as FreeDraw).points,
+                                        points = new List<Point>((currentDrawing as FreeDraw).points),
                                     };
 
                                     pointsDifferenceFreeDrawing = new List<Point>();
@@ -437,7 +437,6 @@ namespace DMMDigital
                         }
                         break;
                 }
-
             }
         }
 
@@ -458,10 +457,9 @@ namespace DMMDigital
 
                         if (currentDrawing is FreeDraw)
                         {
-                            Point firstPoint = (selectedDrawingToMove as FreeDraw).points.First();
                             int counter = 1;
-
                             (selectedDrawingToMove as FreeDraw).points[0] = selectedDrawingToMove.initialPosition;
+                            Point firstPoint = (selectedDrawingToMove as FreeDraw).points[0];
 
                             pointsDifferenceFreeDrawing.ForEach(differencePoint =>
                             {
@@ -487,42 +485,32 @@ namespace DMMDigital
         {
             if (action != 0)
             {
-                if (drawingHistoryIndex == 0)
+                if (action != 1)
                 {
-                    drawingHistory = new List<List<iDrawing>>() { new List<iDrawing>() };
-                }
-
-                if (action != 1 && action != 3)
-                {
+                    verifyHistoryToReset();
                     drawingHistory.Add(new List<iDrawing>(drawingHistory[drawingHistoryIndex]){
                             currentDrawing
                     });
                     drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
-
-                }
+                } 
 
                 draw = false;
                 mainFrame.Invalidate();
             }
         }
 
+        private void numericUpDownFontSizeValueChanged(object sender, EventArgs e)
+        {
+            drawingSize = (int)numericUpDownFontSize.Value;
+        }
+
         private void mainFramePaint(object sender, PaintEventArgs e)
         {
-            drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics, pen));
+            drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics, new Pen(drawingColor, drawingSize)));
 
-            if (draw && currentDrawing != null)
+            if (draw && currentDrawing != null && action != 1)
             {
-                if (action == 3)
-                {
-                    pen.StartCap = LineCap.Round;
-                    pen.EndCap = LineCap.Round;
-                    pen.LineJoin = LineJoin.Round;
-                    selectedDrawingToMove?.drawPreview(e.Graphics, pen);
-                }
-                else
-                {
-                    currentDrawing.draw(e.Graphics, pen);
-                }
+                currentDrawing.draw(e.Graphics, new Pen(drawingColor, drawingSize));
             }
         }
 
@@ -580,6 +568,21 @@ namespace DMMDigital
 
             inputBox.ShowDialog();
             return textBox.Text;
+        }
+
+        private void verifyHistoryToReset()
+        {
+            if (drawingHistoryIndex == 0)
+            {
+                drawingHistory = new List<List<iDrawing>>() { new List<iDrawing>() };
+            }
+        }
+        private void buttonColorPickerClick(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                drawingColor = colorDialog1.Color;
+            }
         }
     }
 }
