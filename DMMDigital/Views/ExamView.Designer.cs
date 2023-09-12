@@ -114,6 +114,7 @@
             // 
             // buttonColorPicker
             // 
+            this.buttonColorPicker.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonColorPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.buttonColorPicker.Location = new System.Drawing.Point(56, 65);
             this.buttonColorPicker.Name = "buttonColorPicker";
@@ -125,15 +126,16 @@
             // 
             // numericUpDownFontSize
             // 
+            this.numericUpDownFontSize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.numericUpDownFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.numericUpDownFontSize.Location = new System.Drawing.Point(238, 66);
             this.numericUpDownFontSize.Maximum = new decimal(new int[] {
-            20,
+            70,
             0,
             0,
             0});
             this.numericUpDownFontSize.Minimum = new decimal(new int[] {
-            3,
+            5,
             0,
             0,
             0});
@@ -244,6 +246,7 @@
             // 
             // buttonArrow
             // 
+            this.buttonArrow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonArrow.Enabled = false;
             this.buttonArrow.FlatAppearance.BorderSize = 0;
             this.buttonArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -253,27 +256,33 @@
             this.buttonArrow.Name = "buttonArrow";
             this.buttonArrow.Size = new System.Drawing.Size(50, 45);
             this.buttonArrow.TabIndex = 23;
+            this.buttonArrow.Tag = "selectable";
             this.buttonArrow.UseVisualStyleBackColor = true;
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
             // 
             // buttonMove
             // 
+            this.buttonMove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMove.Enabled = false;
             this.buttonMove.FlatAppearance.BorderSize = 0;
             this.buttonMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMove.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonMove.Image = global::DMMDigital.Properties.Resources.move;
             this.buttonMove.Location = new System.Drawing.Point(420, 3);
             this.buttonMove.Margin = new System.Windows.Forms.Padding(0);
             this.buttonMove.Name = "buttonMove";
             this.buttonMove.Size = new System.Drawing.Size(50, 45);
             this.buttonMove.TabIndex = 22;
+            this.buttonMove.Tag = "selectable";
             this.buttonMove.UseVisualStyleBackColor = true;
             this.buttonMove.Click += new System.EventHandler(this.buttonMoveClick);
             // 
             // buttonRestore
             // 
+            this.buttonRestore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRestore.Enabled = false;
             this.buttonRestore.FlatAppearance.BorderSize = 0;
+            this.buttonRestore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRestore.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
             this.buttonRestore.Location = new System.Drawing.Point(1162, 3);
@@ -281,13 +290,16 @@
             this.buttonRestore.Name = "buttonRestore";
             this.buttonRestore.Size = new System.Drawing.Size(50, 45);
             this.buttonRestore.TabIndex = 21;
+            this.buttonRestore.Tag = "";
             this.buttonRestore.UseVisualStyleBackColor = true;
             this.buttonRestore.Click += new System.EventHandler(this.buttonRestoreClick);
             // 
             // buttonRotateRight
             // 
+            this.buttonRotateRight.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRotateRight.Enabled = false;
             this.buttonRotateRight.FlatAppearance.BorderSize = 0;
+            this.buttonRotateRight.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonRotateRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
             this.buttonRotateRight.Location = new System.Drawing.Point(1108, 3);
@@ -295,13 +307,16 @@
             this.buttonRotateRight.Name = "buttonRotateRight";
             this.buttonRotateRight.Size = new System.Drawing.Size(50, 45);
             this.buttonRotateRight.TabIndex = 20;
+            this.buttonRotateRight.Tag = "";
             this.buttonRotateRight.UseVisualStyleBackColor = true;
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
             // buttonRotateLeft
             // 
+            this.buttonRotateLeft.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRotateLeft.Enabled = false;
             this.buttonRotateLeft.FlatAppearance.BorderSize = 0;
+            this.buttonRotateLeft.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonRotateLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
             this.buttonRotateLeft.Location = new System.Drawing.Point(1054, 3);
@@ -309,11 +324,13 @@
             this.buttonRotateLeft.Name = "buttonRotateLeft";
             this.buttonRotateLeft.Size = new System.Drawing.Size(50, 45);
             this.buttonRotateLeft.TabIndex = 19;
+            this.buttonRotateLeft.Tag = "";
             this.buttonRotateLeft.UseVisualStyleBackColor = true;
             this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
             // buttonRectangle
             // 
+            this.buttonRectangle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRectangle.Enabled = false;
             this.buttonRectangle.FlatAppearance.BorderSize = 0;
             this.buttonRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -323,11 +340,13 @@
             this.buttonRectangle.Name = "buttonRectangle";
             this.buttonRectangle.Size = new System.Drawing.Size(50, 45);
             this.buttonRectangle.TabIndex = 18;
+            this.buttonRectangle.Tag = "selectable";
             this.buttonRectangle.UseVisualStyleBackColor = true;
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
             // 
             // buttonEllipse
             // 
+            this.buttonEllipse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonEllipse.Enabled = false;
             this.buttonEllipse.FlatAppearance.BorderSize = 0;
             this.buttonEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -337,11 +356,13 @@
             this.buttonEllipse.Name = "buttonEllipse";
             this.buttonEllipse.Size = new System.Drawing.Size(50, 45);
             this.buttonEllipse.TabIndex = 17;
+            this.buttonEllipse.Tag = "selectable";
             this.buttonEllipse.UseVisualStyleBackColor = true;
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
             // 
             // buttonText
             // 
+            this.buttonText.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonText.Enabled = false;
             this.buttonText.FlatAppearance.BorderSize = 0;
             this.buttonText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -351,12 +372,15 @@
             this.buttonText.Name = "buttonText";
             this.buttonText.Size = new System.Drawing.Size(50, 45);
             this.buttonText.TabIndex = 16;
+            this.buttonText.Tag = "selectable";
             this.buttonText.UseVisualStyleBackColor = true;
             this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
             // 
             // buttonFreeDraw
             // 
+            this.buttonFreeDraw.AutoEllipsis = true;
             this.buttonFreeDraw.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonFreeDraw.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonFreeDraw.Enabled = false;
             this.buttonFreeDraw.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.buttonFreeDraw.FlatAppearance.BorderSize = 0;
@@ -367,11 +391,13 @@
             this.buttonFreeDraw.Name = "buttonFreeDraw";
             this.buttonFreeDraw.Size = new System.Drawing.Size(50, 45);
             this.buttonFreeDraw.TabIndex = 15;
+            this.buttonFreeDraw.Tag = "selectable";
             this.buttonFreeDraw.UseVisualStyleBackColor = false;
             this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
             // 
             // buttonFilter
             // 
+            this.buttonFilter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonFilter.Enabled = false;
             this.buttonFilter.FlatAppearance.BorderSize = 0;
             this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -381,13 +407,16 @@
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(50, 45);
             this.buttonFilter.TabIndex = 14;
+            this.buttonFilter.Tag = "selectable";
             this.buttonFilter.UseVisualStyleBackColor = true;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
             // 
             // buttonRedo
             // 
+            this.buttonRedo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRedo.Enabled = false;
             this.buttonRedo.FlatAppearance.BorderSize = 0;
+            this.buttonRedo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
             this.buttonRedo.Location = new System.Drawing.Point(646, 3);
@@ -395,13 +424,16 @@
             this.buttonRedo.Name = "buttonRedo";
             this.buttonRedo.Size = new System.Drawing.Size(50, 45);
             this.buttonRedo.TabIndex = 13;
+            this.buttonRedo.Tag = "";
             this.buttonRedo.UseVisualStyleBackColor = true;
             this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
             // 
             // buttonUndo
             // 
+            this.buttonUndo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonUndo.Enabled = false;
             this.buttonUndo.FlatAppearance.BorderSize = 0;
+            this.buttonUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonUndo.Image = global::DMMDigital.Properties.Resources.icon_32x32_undo;
             this.buttonUndo.Location = new System.Drawing.Point(592, 3);
@@ -409,11 +441,13 @@
             this.buttonUndo.Name = "buttonUndo";
             this.buttonUndo.Size = new System.Drawing.Size(50, 45);
             this.buttonUndo.TabIndex = 12;
+            this.buttonUndo.Tag = "";
             this.buttonUndo.UseVisualStyleBackColor = true;
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
             // buttonRuler
             // 
+            this.buttonRuler.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonRuler.Enabled = false;
             this.buttonRuler.FlatAppearance.BorderSize = 0;
             this.buttonRuler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -423,11 +457,13 @@
             this.buttonRuler.Name = "buttonRuler";
             this.buttonRuler.Size = new System.Drawing.Size(50, 45);
             this.buttonRuler.TabIndex = 11;
+            this.buttonRuler.Tag = "selectable";
             this.buttonRuler.UseVisualStyleBackColor = true;
             this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
             // 
             // buttonZoom
             // 
+            this.buttonZoom.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonZoom.Enabled = false;
             this.buttonZoom.FlatAppearance.BorderSize = 0;
             this.buttonZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -437,11 +473,13 @@
             this.buttonZoom.Name = "buttonZoom";
             this.buttonZoom.Size = new System.Drawing.Size(50, 45);
             this.buttonZoom.TabIndex = 10;
+            this.buttonZoom.Tag = "selectable";
             this.buttonZoom.UseVisualStyleBackColor = true;
             this.buttonZoom.Click += new System.EventHandler(this.buttonZoomClick);
             // 
             // buttonSelect
             // 
+            this.buttonSelect.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonSelect.Enabled = false;
             this.buttonSelect.FlatAppearance.BorderSize = 0;
             this.buttonSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -451,11 +489,13 @@
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(50, 45);
             this.buttonSelect.TabIndex = 9;
+            this.buttonSelect.Tag = "selectable";
             this.buttonSelect.UseVisualStyleBackColor = true;
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
             // 
             // buttonCompare
             // 
+            this.buttonCompare.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonCompare.Enabled = false;
             this.buttonCompare.FlatAppearance.BorderSize = 0;
             this.buttonCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -465,13 +505,16 @@
             this.buttonCompare.Name = "buttonCompare";
             this.buttonCompare.Size = new System.Drawing.Size(50, 45);
             this.buttonCompare.TabIndex = 8;
+            this.buttonCompare.Tag = "selectable";
             this.buttonCompare.UseVisualStyleBackColor = true;
             this.buttonCompare.Click += new System.EventHandler(this.buttonCompareClick);
             // 
             // buttonDelete
             // 
+            this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDelete.Enabled = false;
             this.buttonDelete.FlatAppearance.BorderSize = 0;
+            this.buttonDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDelete.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
             this.buttonDelete.Location = new System.Drawing.Point(238, 3);
@@ -479,13 +522,16 @@
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(50, 45);
             this.buttonDelete.TabIndex = 7;
+            this.buttonDelete.Tag = "";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDeleteClick);
             // 
             // buttonExport
             // 
+            this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonExport.Enabled = false;
             this.buttonExport.FlatAppearance.BorderSize = 0;
+            this.buttonExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
             this.buttonExport.Location = new System.Drawing.Point(174, 2);
@@ -493,12 +539,15 @@
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(50, 45);
             this.buttonExport.TabIndex = 6;
+            this.buttonExport.Tag = "";
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
             // 
             // buttonImport
             // 
+            this.buttonImport.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonImport.FlatAppearance.BorderSize = 0;
+            this.buttonImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
             this.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
             this.buttonImport.Location = new System.Drawing.Point(120, 2);
@@ -506,6 +555,7 @@
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(50, 45);
             this.buttonImport.TabIndex = 5;
+            this.buttonImport.Tag = "";
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
             // 
@@ -520,10 +570,6 @@
             this.sensorConnection.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.sensorConnection.TabIndex = 4;
             this.sensorConnection.TabStop = false;
-            // 
-            // importImage
-            // 
-            this.importImage.FileName = "openFileDialog1";
             // 
             // mainFrame
             // 

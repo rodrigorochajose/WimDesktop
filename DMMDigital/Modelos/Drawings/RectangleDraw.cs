@@ -4,27 +4,13 @@ using System.Drawing.Drawing2D;
 
 namespace DMMDigital
 {
-    public class RectangleDraw : iDrawing
+    public class RectangleDraw : IDrawing
     {
-        public int id { get; set; }
         public Point initialPosition { get; set; }
-
         public Point finalPosition { get; set; }
-
         public GraphicsPath graphicsPath { get; set; }
-
-
-        public void drawPreview(Graphics g, Pen p)
-        {
-            g.DrawRectangle(p, setRectangle(initialPosition, finalPosition));
-        }
-
-        public void draw(Graphics g, Pen p)
-        {
-            graphicsPath = new GraphicsPath();
-            graphicsPath.AddRectangle(setRectangle(initialPosition, finalPosition));
-            g.DrawRectangle(p, setRectangle(initialPosition, finalPosition));
-        }
+        public Color drawingColor { get; set; }
+        public float drawingSize { get; set; }
 
         private Rectangle setRectangle(Point initialPosition, Point finalPosition)
         {
@@ -47,5 +33,18 @@ namespace DMMDigital
 
             return new Rectangle(pontoX, pontoY, largura, altura);
         }
+
+        public void drawPreview(Graphics g)
+        {
+            g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle(initialPosition, finalPosition));
+        }
+
+        public void draw(Graphics g)
+        {
+            graphicsPath = new GraphicsPath();
+            graphicsPath.AddRectangle(setRectangle(initialPosition, finalPosition));
+            g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle(initialPosition, finalPosition));
+        }
+
     }
 }

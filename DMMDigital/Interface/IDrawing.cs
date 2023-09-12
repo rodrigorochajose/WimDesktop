@@ -3,19 +3,16 @@ using System.Drawing.Drawing2D;
 
 namespace DMMDigital.Interface
 {
-    public interface iDrawing
+    public interface IDrawing
     {
-        int id { get; set; }
-
         Point initialPosition { get; set; }
-
         Point finalPosition { get; set; }
-
         GraphicsPath graphicsPath { get; set; }
+        Color drawingColor { get; set; }
+        float drawingSize { get; set; }
 
-        void drawPreview(Graphics g, Pen p);
-
-        void draw(Graphics g, Pen p);
+        void drawPreview(Graphics g);
+        void draw(Graphics g);
 
     }
 }
