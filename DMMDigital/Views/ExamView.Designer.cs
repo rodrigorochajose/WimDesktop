@@ -31,11 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonColorPicker = new System.Windows.Forms.Button();
-            this.numericUpDownFontSize = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.panelToolOptions = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPatient = new System.Windows.Forms.Label();
@@ -67,8 +64,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).BeginInit();
+            this.panelToolOptions.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
@@ -81,13 +78,13 @@
             this.panelTemplate.Location = new System.Drawing.Point(0, 73);
             this.panelTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(363, 257);
+            this.panelTemplate.Size = new System.Drawing.Size(362, 257);
             this.panelTemplate.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.panel1);
+            this.panel3.Controls.Add(this.panelToolOptions);
             this.panel3.Controls.Add(this.labelTemplate);
             this.panel3.Controls.Add(this.labelPatient);
             this.panel3.Controls.Add(this.label2);
@@ -98,82 +95,33 @@
             this.panel3.Size = new System.Drawing.Size(363, 648);
             this.panel3.TabIndex = 0;
             // 
-            // panel1
+            // panelToolOptions
             // 
-            this.panel1.BackColor = System.Drawing.Color.Silver;
-            this.panel1.Controls.Add(this.buttonColorPicker);
-            this.panel1.Controls.Add(this.numericUpDownFontSize);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(0, 330);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(363, 102);
-            this.panel1.TabIndex = 1;
+            this.panelToolOptions.BackColor = System.Drawing.Color.White;
+            this.panelToolOptions.Controls.Add(this.panel4);
+            this.panelToolOptions.Location = new System.Drawing.Point(0, 343);
+            this.panelToolOptions.Name = "panelToolOptions";
+            this.panelToolOptions.Size = new System.Drawing.Size(363, 101);
+            this.panelToolOptions.TabIndex = 4;
             // 
-            // buttonColorPicker
+            // panel4
             // 
-            this.buttonColorPicker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonColorPicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonColorPicker.Location = new System.Drawing.Point(56, 65);
-            this.buttonColorPicker.Name = "buttonColorPicker";
-            this.buttonColorPicker.Size = new System.Drawing.Size(75, 24);
-            this.buttonColorPicker.TabIndex = 6;
-            this.buttonColorPicker.Text = "Escolher Cor";
-            this.buttonColorPicker.UseVisualStyleBackColor = true;
-            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPickerClick);
-            // 
-            // numericUpDownFontSize
-            // 
-            this.numericUpDownFontSize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.numericUpDownFontSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.numericUpDownFontSize.Location = new System.Drawing.Point(238, 66);
-            this.numericUpDownFontSize.Maximum = new decimal(new int[] {
-            70,
-            0,
-            0,
-            0});
-            this.numericUpDownFontSize.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownFontSize.Name = "numericUpDownFontSize";
-            this.numericUpDownFontSize.Size = new System.Drawing.Size(67, 23);
-            this.numericUpDownFontSize.TabIndex = 3;
-            this.numericUpDownFontSize.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.numericUpDownFontSize.ValueChanged += new System.EventHandler(this.numericUpDownFontSizeValueChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(235, 50);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Tamanho";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(53, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(23, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Cor";
+            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel4.Controls.Add(this.label3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(363, 29);
+            this.panel4.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 9);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label3.Location = new System.Drawing.Point(3, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 13);
-            this.label3.TabIndex = 0;
+            this.label3.Size = new System.Drawing.Size(133, 15);
+            this.label3.TabIndex = 5;
             this.label3.Text = "Opções da Ferramenta";
             // 
             // labelTemplate
@@ -618,9 +566,9 @@
             this.Load += new System.EventHandler(this.examLoad);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFontSize)).EndInit();
+            this.panelToolOptions.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
@@ -659,14 +607,11 @@
         private System.Windows.Forms.OpenFileDialog importImage;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonRestore;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox mainFrame;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonColorPicker;
-        private System.Windows.Forms.NumericUpDown numericUpDownFontSize;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Panel panelToolOptions;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label3;
     }
 }

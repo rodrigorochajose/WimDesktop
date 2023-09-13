@@ -277,35 +277,82 @@ namespace DMMDigital
         {
             action = 3;
             selectTool(sender, e);
-            setNumericUpDownFontSize();
+
+            Label labelColor = new Label
+            {
+                AutoSize = true,
+                Location = new Point(40, 61),
+                Name = "labelColor",
+                Size = new Size(35, 23),
+                TabIndex = 0,
+                Text = "Cor"
+            };
+
+            Button buttonColorPicker = new Button
+            {
+               Cursor = Cursors.Hand,
+               Font = new Font("Microsoft Sans Serif", 9F),
+               Location = new Point(75, 56),
+               Name = "buttonColorPicker",
+               Size = new Size(75, 23),
+               TabIndex = 6,
+               Text = "Escolher Cor",
+               UseVisualStyleBackColor = true
+            };
+
+            Label labelSize = new Label
+            {
+                AutoSize = true,
+                Location = new Point(200, 61),
+                Name = "labelSize",
+                Size = new Size(35, 13),
+                TabIndex = 0,
+                Text = "Tamanho"
+            };
+
+            NumericUpDown numericUpDownSize = new NumericUpDown
+            {
+                Cursor = Cursors.Hand,
+                Font = new Font("Microsoft Sans Serif", 10F),
+                Location = new Point(261, 56),
+                Maximum = new decimal (new int[] { 70, 0, 0, 0 }),
+                Minimum = new decimal(new int[] { 5, 0, 0, 0 }),
+                Name = "numericUpDownFontSize",
+                Size = new Size(75, 23),
+                TabIndex = 3,
+                Value = new decimal (new int[] { 5, 0, 0, 0 })
+            };
+
+            panelToolOptions.Controls.Add(labelColor);
+            panelToolOptions.Controls.Add(buttonColorPicker);
+            panelToolOptions.Controls.Add(labelSize);
+            panelToolOptions.Controls.Add(numericUpDownSize);
+            panelToolOptions.Refresh();
+
         }
 
         private void buttonTextClick(object sender, EventArgs e)
         {
             action = 4;
             selectTool(sender, e);
-            setNumericUpDownFontSize();
         }
 
         private void buttonArrowClick(object sender, EventArgs e)
         {
             action = 5;
             selectTool(sender, e);
-            setNumericUpDownFontSize();
         }
 
         private void buttonEllipseClick(object sender, EventArgs e)
         {
             action = 6;
             selectTool(sender, e);
-            setNumericUpDownFontSize();
         }
 
         private void buttonRectangleDrawClick(object sender, EventArgs e)
         {
             action = 7;
             selectTool(sender, e);
-            setNumericUpDownFontSize();
         }
 
         private void buttonRotateLeftClick(object sender, EventArgs e)
@@ -546,11 +593,6 @@ namespace DMMDigital
             }
         }
 
-        private void numericUpDownFontSizeValueChanged(object sender, EventArgs e)
-        {
-            drawingSize = (int)numericUpDownFontSize.Value;
-        }
-
         private void mainFramePaint(object sender, PaintEventArgs e)
         {
             drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics));
@@ -633,20 +675,5 @@ namespace DMMDigital
             }
         }
 
-        private void setNumericUpDownFontSize()
-        {
-            int currentValue = (int)numericUpDownFontSize.Value;
-
-            if (action == 4)
-            {
-                drawingPreviousSize = currentValue;
-                numericUpDownFontSize.Value = textDrawingPreviousSize;
-            } 
-            else
-            {
-                textDrawingPreviousSize = currentValue;
-                numericUpDownFontSize.Value = drawingPreviousSize;
-            }
-        }
     }
 }
