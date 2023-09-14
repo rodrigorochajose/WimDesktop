@@ -69,7 +69,7 @@ namespace DMMDigital.Forms
 
         public string selectedFrameName
         { 
-            get { return comboBoxTemplate.SelectedText; } 
+            get { return comboBoxTemplate.Text; } 
         }
 
         public List<TemplateFrameModel> templateFrames

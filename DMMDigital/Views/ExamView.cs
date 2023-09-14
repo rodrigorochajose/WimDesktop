@@ -50,6 +50,88 @@ namespace DMMDigital
                 DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
                 examPath = di.FullName;
             };
+            teste();
+        }
+
+        public void selectFrameToLoadImage()
+        {
+            selectedFrame = frames[indexFrame];
+
+            if (selectedFrame.photoTook == true)
+            {
+                DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
+                if (res == DialogResult.No)
+                {
+                    return;
+                }
+                selectedFrame.Image = null;
+                mainFrame.Image = null;
+                File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"));
+            }
+        }
+
+        private string getTextToDraw()
+        {
+            Size size = new Size(250, 100);
+
+            Form inputBox = new Form
+            {
+                StartPosition = FormStartPosition.CenterScreen,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                ClientSize = size,
+                Text = "Inserir Texto"
+            };
+
+            Label label = new Label
+            {
+                Text = "Digite o texto a ser inserido",
+                Location = new Point(5, 15),
+                Width = size.Width - 10,
+                Font = new Font("Arial", 10, FontStyle.Regular)
+            };
+            inputBox.Controls.Add(label);
+
+            TextBox textBox = new TextBox
+            {
+                Size = new Size(size.Width - 10, 23),
+                Location = new Point(5, label.Location.Y + 25),
+                Font = new Font("Arial", 10, FontStyle.Regular)
+            };
+            inputBox.Controls.Add(textBox);
+
+            Button okButton = new Button
+            {
+                DialogResult = DialogResult.OK,
+                Name = "okButton",
+                Size = new Size(75, 23),
+                Text = "&OK",
+                Location = new Point(size.Width - 80 - 80, size.Height - 25)
+            };
+            inputBox.Controls.Add(okButton);
+
+            Button cancelButton = new Button
+            {
+                DialogResult = DialogResult.Cancel,
+                Name = "cancelButton",
+                Size = new Size(75, 23),
+                Text = "&Cancel",
+                Location = new Point(size.Width - 80, size.Height - 25)
+            };
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            inputBox.ShowDialog();
+            return textBox.Text;
+        }
+
+        private void verifyHistoryToReset()
+        {
+            if (drawingHistoryIndex == 0)
+            {
+                drawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
+            }
         }
 
         public void loadImageOnMainFrame()
@@ -70,21 +152,40 @@ namespace DMMDigital
             }
         }
         
-        public void selectFrameToLoadImage()
+        private void enableTools()
         {
-            selectedFrame = frames[indexFrame];
-
-            if (selectedFrame.photoTook == true)
+            foreach (Button tool in panelTools.Controls.OfType<Button>())
             {
-                DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
-                if (res == DialogResult.No)
-                {
-                    return;
-                }
-                selectedFrame.Image = null;
-                mainFrame.Image = null;
-                File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"));
+                tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
             }
+
+        }
+
+        private void loadToolOptions()
+        {
+            panelToolOptions.Visible = true;
+
+            if (action == 4)
+            {
+                drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                numericUpDownDrawingSize.Value = textDrawingPreviousSize;
+            } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
+            {
+                textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                numericUpDownDrawingSize.Value = drawingPreviousSize;
+            }
+        }
+
+        private void selectTool(object sender)
+        {
+            Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
+            if (selectedButton != null)
+            {
+                selectedButton.BackColor = Color.WhiteSmoke;
+                selectedButton.Tag = "selectable";
+            }
+            (sender as Control).BackColor = Color.LightGray;
+            (sender as Control).Tag = "selected";
         }
 
         private void drawTemplate(List<TemplateFrameModel> templateFrames)
@@ -135,6 +236,11 @@ namespace DMMDigital
             }
         }
 
+        private void numericUpDownDrawingSizeValueChanged(object sender, EventArgs e)
+        {
+            drawingSize = (int)numericUpDownDrawingSize.Value;
+        }
+
         private void examLoad(object sender, EventArgs e)
         {
             //m_nId = Detector.CreateDetector(this);
@@ -172,27 +278,6 @@ namespace DMMDigital
             }
         }
 
-        private void enableTools()
-        {
-            foreach (Button tool in panelTools.Controls.OfType<Button>())
-            {
-                tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
-            }
-
-        }
-
-        private void selectTool(object sender, EventArgs e)
-        {
-            Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
-            if (selectedButton != null)
-            {
-                selectedButton.BackColor = Color.WhiteSmoke;
-                selectedButton.Tag = "selectable";
-            }
-            (sender as Control).BackColor = Color.LightGray;
-            (sender as Control).Tag = "selected";
-        }
-
         private void buttonImportClick(object sender, EventArgs e)
         {
             if (selectedFrame.photoTook == true)
@@ -224,29 +309,31 @@ namespace DMMDigital
 
         private void buttonCompareClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            selectTool(sender);
         }
 
         private void buttonSelectClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            panelToolOptions.Visible = false;
+            selectTool(sender);
             action = 0;
         }
 
         private void buttonMoveClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            panelToolOptions.Visible = false;
+            selectTool(sender);
             action = 1;
         }
 
         private void buttonZoomClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            selectTool(sender);
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            selectTool(sender);
             action = 2;
         }
 
@@ -270,89 +357,42 @@ namespace DMMDigital
 
         private void buttonFilterClick(object sender, EventArgs e)
         {
-            selectTool(sender, e);
+            selectTool(sender);
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
         {
             action = 3;
-            selectTool(sender, e);
-
-            Label labelColor = new Label
-            {
-                AutoSize = true,
-                Location = new Point(40, 61),
-                Name = "labelColor",
-                Size = new Size(35, 23),
-                TabIndex = 0,
-                Text = "Cor"
-            };
-
-            Button buttonColorPicker = new Button
-            {
-               Cursor = Cursors.Hand,
-               Font = new Font("Microsoft Sans Serif", 9F),
-               Location = new Point(75, 56),
-               Name = "buttonColorPicker",
-               Size = new Size(75, 23),
-               TabIndex = 6,
-               Text = "Escolher Cor",
-               UseVisualStyleBackColor = true
-            };
-
-            Label labelSize = new Label
-            {
-                AutoSize = true,
-                Location = new Point(200, 61),
-                Name = "labelSize",
-                Size = new Size(35, 13),
-                TabIndex = 0,
-                Text = "Tamanho"
-            };
-
-            NumericUpDown numericUpDownSize = new NumericUpDown
-            {
-                Cursor = Cursors.Hand,
-                Font = new Font("Microsoft Sans Serif", 10F),
-                Location = new Point(261, 56),
-                Maximum = new decimal (new int[] { 70, 0, 0, 0 }),
-                Minimum = new decimal(new int[] { 5, 0, 0, 0 }),
-                Name = "numericUpDownFontSize",
-                Size = new Size(75, 23),
-                TabIndex = 3,
-                Value = new decimal (new int[] { 5, 0, 0, 0 })
-            };
-
-            panelToolOptions.Controls.Add(labelColor);
-            panelToolOptions.Controls.Add(buttonColorPicker);
-            panelToolOptions.Controls.Add(labelSize);
-            panelToolOptions.Controls.Add(numericUpDownSize);
-            panelToolOptions.Refresh();
-
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonTextClick(object sender, EventArgs e)
         {
             action = 4;
-            selectTool(sender, e);
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonArrowClick(object sender, EventArgs e)
         {
             action = 5;
-            selectTool(sender, e);
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonEllipseClick(object sender, EventArgs e)
         {
             action = 6;
-            selectTool(sender, e);
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonRectangleDrawClick(object sender, EventArgs e)
         {
             action = 7;
-            selectTool(sender, e);
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonRotateLeftClick(object sender, EventArgs e)
@@ -387,6 +427,15 @@ namespace DMMDigital
                 drawingHistoryIndex = 0;
                 action = 0;
                 mainFrame.Invalidate();
+            }
+        }
+
+        private void buttonColorPickerClick(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                drawingColor = colorDialog1.Color;
+                buttonColorPicker.BackColor = drawingColor;
             }
         }
 
@@ -603,77 +652,43 @@ namespace DMMDigital
             }
         }
 
-        private string getTextToDraw()
+
+        private void teste()
         {
-            Size size = new Size(250, 100);
-
-            Form inputBox = new Form
+            Button b1 = new Button
             {
-                StartPosition = FormStartPosition.CenterScreen,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                ClientSize = size,
-                Text = "Inserir Texto"
-            };
-
-            Label label = new Label
-            {
-                Text = "Digite o texto a ser inserido",
-                Location = new Point(5, 15),
-                Width = size.Width - 10,
-                Font = new Font("Arial", 10, FontStyle.Regular)
-            };
-            inputBox.Controls.Add(label);
-
-            TextBox textBox = new TextBox
-            {
-                Size = new Size(size.Width - 10, 23),
-                Location = new Point(5, label.Location.Y + 25),
-                Font = new Font("Arial", 10, FontStyle.Regular)
-            };
-            inputBox.Controls.Add(textBox);
-
-            Button okButton = new Button
-            {
-                DialogResult = DialogResult.OK,
-                Name = "okButton",
+                Font = new Font("Microsoft Sans Serif", 9F),
+                Name = "b1",
                 Size = new Size(75, 23),
-                Text = "&OK",
-                Location = new Point(size.Width - 80 - 80, size.Height - 25)
+                TabIndex = 6,
+                Text = "b1",
+                UseVisualStyleBackColor = true
             };
-            inputBox.Controls.Add(okButton);
 
-            Button cancelButton = new Button
+            Button b2 = new Button
             {
-                DialogResult = DialogResult.Cancel,
-                Name = "cancelButton",
+                Font = new Font("Microsoft Sans Serif", 9F),
+                Name = "b2",
                 Size = new Size(75, 23),
-                Text = "&Cancel",
-                Location = new Point(size.Width - 80, size.Height - 25)
+                TabIndex = 6,
+                Text = "b2",
+                UseVisualStyleBackColor = true
             };
-            inputBox.Controls.Add(cancelButton);
 
-            inputBox.AcceptButton = okButton;
-            inputBox.CancelButton = cancelButton;
-
-            inputBox.ShowDialog();
-            return textBox.Text;
-        }
-
-        private void verifyHistoryToReset()
-        {
-            if (drawingHistoryIndex == 0)
+            Button b3 = new Button
             {
-                drawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
-            }
-        }
+                Font = new Font("Microsoft Sans Serif", 9F),
+                Name = "b3",
+                Size = new Size(75, 23),
+                TabIndex = 6,
+                Text = "b3",
+                UseVisualStyleBackColor = true
+            };
 
-        private void buttonColorPickerClick(object sender, EventArgs e)
-        {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                drawingColor = colorDialog1.Color;
-            }
+            flowLayoutPanel1.Controls.Add(b1);
+            flowLayoutPanel1.Controls.Add(b2);
+            flowLayoutPanel1.Controls.Add(b3);
+            flowLayoutPanel1.Refresh();
         }
-
     }
 }

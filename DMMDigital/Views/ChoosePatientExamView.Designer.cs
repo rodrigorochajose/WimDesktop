@@ -52,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.label1.Location = new System.Drawing.Point(165, 26);
             this.label1.Name = "label1";
@@ -64,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(57, 97);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 20);
@@ -73,7 +73,7 @@
             // 
             // textBoxSearchPatient
             // 
-            this.textBoxSearchPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSearchPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSearchPatient.Location = new System.Drawing.Point(61, 120);
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
             this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 26);
@@ -86,7 +86,7 @@
             this.dataGridViewPatient.AllowUserToResizeColumns = false;
             this.dataGridViewPatient.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
@@ -147,7 +147,7 @@
             // 
             // buttonSelectPatient
             // 
-            this.buttonSelectPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonSelectPatient.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.buttonSelectPatient.Location = new System.Drawing.Point(567, 510);
             this.buttonSelectPatient.Name = "buttonSelectPatient";
             this.buttonSelectPatient.Size = new System.Drawing.Size(73, 34);
@@ -157,7 +157,7 @@
             // 
             // buttonCancelAction
             // 
-            this.buttonCancelAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.buttonCancelAction.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.buttonCancelAction.Location = new System.Drawing.Point(30, 510);
             this.buttonCancelAction.Name = "buttonCancelAction";
             this.buttonCancelAction.Size = new System.Drawing.Size(73, 34);

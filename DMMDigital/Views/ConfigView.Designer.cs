@@ -38,7 +38,7 @@
             // labelCaminho
             // 
             this.labelCaminho.AutoSize = true;
-            this.labelCaminho.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelCaminho.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.labelCaminho.Location = new System.Drawing.Point(55, 27);
             this.labelCaminho.Name = "labelCaminho";
             this.labelCaminho.Size = new System.Drawing.Size(239, 20);
@@ -47,7 +47,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.buttonSave.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.buttonSave.Location = new System.Drawing.Point(124, 141);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(95, 32);
@@ -57,7 +57,7 @@
             // 
             // textBoxPath
             // 
-            this.textBoxPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxPath.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxPath.Location = new System.Drawing.Point(16, 64);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(332, 23);

@@ -1,4 +1,6 @@
-﻿namespace DMMDigital
+﻿using System.Windows.Forms;
+
+namespace DMMDigital
 {
     partial class ExamView
     {
@@ -31,9 +33,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panelToolOptions = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.panelToolOptions = new System.Windows.Forms.Panel();
+            this.numericUpDownDrawingSize = new System.Windows.Forms.NumericUpDown();
+            this.buttonColorPicker = new System.Windows.Forms.Button();
+            this.labelColor = new System.Windows.Forms.Label();
+            this.labelSize = new System.Windows.Forms.Label();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPatient = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,9 +71,12 @@
             this.mainFrame = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3.SuspendLayout();
-            this.panelToolOptions.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panelToolOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).BeginInit();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
@@ -74,16 +85,18 @@
             // 
             // panelTemplate
             // 
-            this.panelTemplate.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTemplate.Location = new System.Drawing.Point(0, 73);
             this.panelTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(362, 257);
+            this.panelTemplate.Size = new System.Drawing.Size(363, 258);
             this.panelTemplate.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.panel1);
+            this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.panelToolOptions);
             this.panel3.Controls.Add(this.labelTemplate);
             this.panel3.Controls.Add(this.labelPatient);
@@ -95,21 +108,32 @@
             this.panel3.Size = new System.Drawing.Size(363, 648);
             this.panel3.TabIndex = 0;
             // 
-            // panelToolOptions
+            // panel1
             // 
-            this.panelToolOptions.BackColor = System.Drawing.Color.White;
-            this.panelToolOptions.Controls.Add(this.panel4);
-            this.panelToolOptions.Location = new System.Drawing.Point(0, 343);
-            this.panelToolOptions.Name = "panelToolOptions";
-            this.panelToolOptions.Size = new System.Drawing.Size(363, 101);
-            this.panelToolOptions.TabIndex = 4;
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Location = new System.Drawing.Point(0, 430);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(363, 29);
+            this.panel1.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(12, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 21);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Anotações";
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Location = new System.Drawing.Point(0, 331);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(363, 29);
             this.panel4.TabIndex = 0;
@@ -117,50 +141,124 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label3.Location = new System.Drawing.Point(3, 6);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.label3.Location = new System.Drawing.Point(12, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(133, 15);
+            this.label3.Size = new System.Drawing.Size(167, 21);
             this.label3.TabIndex = 5;
             this.label3.Text = "Opções da Ferramenta";
+            // 
+            // panelToolOptions
+            // 
+            this.panelToolOptions.BackColor = System.Drawing.Color.White;
+            this.panelToolOptions.Controls.Add(this.numericUpDownDrawingSize);
+            this.panelToolOptions.Controls.Add(this.buttonColorPicker);
+            this.panelToolOptions.Controls.Add(this.labelColor);
+            this.panelToolOptions.Controls.Add(this.labelSize);
+            this.panelToolOptions.Location = new System.Drawing.Point(0, 360);
+            this.panelToolOptions.Name = "panelToolOptions";
+            this.panelToolOptions.Size = new System.Drawing.Size(363, 70);
+            this.panelToolOptions.TabIndex = 4;
+            this.panelToolOptions.Visible = false;
+            // 
+            // numericUpDownDrawingSize
+            // 
+            this.numericUpDownDrawingSize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.numericUpDownDrawingSize.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numericUpDownDrawingSize.Location = new System.Drawing.Point(254, 19);
+            this.numericUpDownDrawingSize.Maximum = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.Name = "numericUpDownDrawingSize";
+            this.numericUpDownDrawingSize.Size = new System.Drawing.Size(75, 23);
+            this.numericUpDownDrawingSize.TabIndex = 8;
+            this.numericUpDownDrawingSize.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.ValueChanged += new System.EventHandler(this.numericUpDownDrawingSizeValueChanged);
+            // 
+            // buttonColorPicker
+            // 
+            this.buttonColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonColorPicker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonColorPicker.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
+            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonColorPicker.Location = new System.Drawing.Point(74, 19);
+            this.buttonColorPicker.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonColorPicker.Name = "buttonColorPicker";
+            this.buttonColorPicker.Size = new System.Drawing.Size(75, 21);
+            this.buttonColorPicker.TabIndex = 7;
+            this.buttonColorPicker.UseVisualStyleBackColor = false;
+            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPickerClick);
+            // 
+            // labelColor
+            // 
+            this.labelColor.AutoSize = true;
+            this.labelColor.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.labelColor.Location = new System.Drawing.Point(38, 21);
+            this.labelColor.Name = "labelColor";
+            this.labelColor.Size = new System.Drawing.Size(31, 19);
+            this.labelColor.TabIndex = 5;
+            this.labelColor.Text = "Cor";
+            // 
+            // labelSize
+            // 
+            this.labelSize.AutoSize = true;
+            this.labelSize.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.labelSize.Location = new System.Drawing.Point(182, 21);
+            this.labelSize.Name = "labelSize";
+            this.labelSize.Size = new System.Drawing.Size(64, 19);
+            this.labelSize.TabIndex = 6;
+            this.labelSize.Text = "Tamanho";
             // 
             // labelTemplate
             // 
             this.labelTemplate.AutoSize = true;
-            this.labelTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTemplate.Location = new System.Drawing.Point(70, 41);
+            this.labelTemplate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTemplate.Location = new System.Drawing.Point(92, 41);
             this.labelTemplate.Name = "labelTemplate";
-            this.labelTemplate.Size = new System.Drawing.Size(113, 13);
+            this.labelTemplate.Size = new System.Drawing.Size(138, 19);
             this.labelTemplate.TabIndex = 3;
             this.labelTemplate.Text = "Nome do Template";
             // 
             // labelPatient
             // 
             this.labelPatient.AutoSize = true;
-            this.labelPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPatient.Location = new System.Drawing.Point(70, 9);
+            this.labelPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPatient.Location = new System.Drawing.Point(92, 11);
             this.labelPatient.Name = "labelPatient";
-            this.labelPatient.Size = new System.Drawing.Size(111, 13);
+            this.labelPatient.Size = new System.Drawing.Size(133, 19);
             this.labelPatient.TabIndex = 2;
             this.labelPatient.Text = "Nome do Paciente";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 41);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 40);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.Size = new System.Drawing.Size(74, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Template:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 10);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.Size = new System.Drawing.Size(67, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Paciente:";
             // 
@@ -550,6 +648,14 @@
             this.colorDialog1.AnyColor = true;
             this.colorDialog1.FullOpen = true;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 29);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 189);
+            this.flowLayoutPanel1.TabIndex = 6;
+            // 
             // ExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -566,9 +672,13 @@
             this.Load += new System.EventHandler(this.examLoad);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panelToolOptions.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panelToolOptions.ResumeLayout(false);
+            this.panelToolOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).EndInit();
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
@@ -613,5 +723,12 @@
         private System.Windows.Forms.Panel panelToolOptions;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDownDrawingSize;
+        private System.Windows.Forms.Button buttonColorPicker;
+        private System.Windows.Forms.Label labelColor;
+        private System.Windows.Forms.Label labelSize;
+        private Panel panel1;
+        private Label label4;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

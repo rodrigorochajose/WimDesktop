@@ -44,7 +44,7 @@
             // 
             // buttonGenerateTemplate
             // 
-            this.buttonGenerateTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.buttonGenerateTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.buttonGenerateTemplate.Location = new System.Drawing.Point(137, 259);
             this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";
             this.buttonGenerateTemplate.Size = new System.Drawing.Size(100, 30);
@@ -56,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.Location = new System.Drawing.Point(14, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 17);
@@ -66,7 +66,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label2.Location = new System.Drawing.Point(217, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(157, 17);
@@ -76,7 +76,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label3.Location = new System.Drawing.Point(145, 137);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 17);
@@ -85,7 +85,7 @@
             // 
             // listBoxOrientation
             // 
-            this.listBoxOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.listBoxOrientation.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.listBoxOrientation.FormattingEnabled = true;
             this.listBoxOrientation.ItemHeight = 16;
             this.listBoxOrientation.Items.AddRange(new object[] {
@@ -100,7 +100,7 @@
             // 
             // numericUpDownRows
             // 
-            this.numericUpDownRows.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDownRows.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numericUpDownRows.Location = new System.Drawing.Point(53, 100);
             this.numericUpDownRows.Maximum = new decimal(new int[] {
             5,
@@ -123,7 +123,7 @@
             // 
             // numericUpDownColumns
             // 
-            this.numericUpDownColumns.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.numericUpDownColumns.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numericUpDownColumns.Location = new System.Drawing.Point(276, 100);
             this.numericUpDownColumns.Maximum = new decimal(new int[] {
             10,
@@ -146,7 +146,7 @@
             // 
             // textBoxTemplateName
             // 
-            this.textBoxTemplateName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxTemplateName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxTemplateName.Location = new System.Drawing.Point(148, 24);
             this.textBoxTemplateName.Name = "textBoxTemplateName";
             this.textBoxTemplateName.Size = new System.Drawing.Size(224, 23);
@@ -155,7 +155,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label4.Location = new System.Drawing.Point(14, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 17);

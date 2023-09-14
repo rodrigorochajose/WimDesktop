@@ -108,7 +108,7 @@
             // 
             // buttonNewTemplate
             // 
-            this.buttonNewTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.buttonNewTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.buttonNewTemplate.Location = new System.Drawing.Point(312, 97);
             this.buttonNewTemplate.Name = "buttonNewTemplate";
             this.buttonNewTemplate.Size = new System.Drawing.Size(125, 33);
@@ -118,7 +118,7 @@
             // 
             // comboBoxTemplate
             // 
-            this.comboBoxTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.comboBoxTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.comboBoxTemplate.FormattingEnabled = true;
             this.comboBoxTemplate.Location = new System.Drawing.Point(23, 102);
             this.comboBoxTemplate.Name = "comboBoxTemplate";
@@ -127,7 +127,7 @@
             // 
             // textBoxSessionName
             // 
-            this.textBoxSessionName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxSessionName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxSessionName.Location = new System.Drawing.Point(21, 38);
             this.textBoxSessionName.Name = "textBoxSessionName";
             this.textBoxSessionName.Size = new System.Drawing.Size(262, 23);
@@ -136,7 +136,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label8.Location = new System.Drawing.Point(19, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 17);
@@ -146,7 +146,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label10.Location = new System.Drawing.Point(19, 15);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(200, 17);
@@ -175,7 +175,7 @@
             // textBoxObservation
             // 
             this.textBoxObservation.Enabled = false;
-            this.textBoxObservation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxObservation.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxObservation.Location = new System.Drawing.Point(22, 236);
             this.textBoxObservation.Multiline = true;
             this.textBoxObservation.Name = "textBoxObservation";
@@ -186,7 +186,7 @@
             // textBoxRecommendation
             // 
             this.textBoxRecommendation.Enabled = false;
-            this.textBoxRecommendation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxRecommendation.Location = new System.Drawing.Point(22, 188);
             this.textBoxRecommendation.Name = "textBoxRecommendation";
             this.textBoxRecommendation.ReadOnly = true;
@@ -196,7 +196,7 @@
             // textBoxName
             // 
             this.textBoxName.Enabled = false;
-            this.textBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxName.Location = new System.Drawing.Point(22, 44);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
@@ -206,7 +206,7 @@
             // textBoxPhone
             // 
             this.textBoxPhone.Enabled = false;
-            this.textBoxPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxPhone.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxPhone.Location = new System.Drawing.Point(22, 141);
             this.textBoxPhone.Mask = "(99) 99999-9999";
             this.textBoxPhone.Name = "textBoxPhone";
@@ -217,7 +217,7 @@
             // textBoxBirthDate
             // 
             this.textBoxBirthDate.Enabled = false;
-            this.textBoxBirthDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.textBoxBirthDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxBirthDate.Location = new System.Drawing.Point(22, 93);
             this.textBoxBirthDate.Mask = "00/00/0000";
             this.textBoxBirthDate.Name = "textBoxBirthDate";
@@ -229,7 +229,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label5.Location = new System.Drawing.Point(19, 216);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 17);
@@ -239,7 +239,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label4.Location = new System.Drawing.Point(19, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
@@ -249,7 +249,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label3.Location = new System.Drawing.Point(19, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 17);
@@ -259,7 +259,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label2.Location = new System.Drawing.Point(19, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 17);
@@ -269,7 +269,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.Location = new System.Drawing.Point(19, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 17);
@@ -279,7 +279,7 @@
             // titulo
             // 
             this.titulo.AutoSize = true;
-            this.titulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.titulo.Font = new System.Drawing.Font("Segoe UI", 20F);
             this.titulo.Location = new System.Drawing.Point(388, 19);
             this.titulo.Name = "titulo";
             this.titulo.Size = new System.Drawing.Size(168, 31);
@@ -289,7 +289,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label6.Location = new System.Drawing.Point(37, 84);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 20);
@@ -299,7 +299,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label7.Location = new System.Drawing.Point(484, 84);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 20);

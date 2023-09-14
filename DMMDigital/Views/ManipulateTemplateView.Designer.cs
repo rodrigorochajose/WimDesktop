@@ -45,7 +45,7 @@
             // 
             // buttonNewFrame
             // 
-            this.buttonNewFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonNewFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.buttonNewFrame.Location = new System.Drawing.Point(37, 286);
             this.buttonNewFrame.Name = "buttonNewFrame";
             this.buttonNewFrame.Size = new System.Drawing.Size(128, 30);
@@ -74,7 +74,7 @@
             // textBoxOrientation
             // 
             this.textBoxOrientation.Enabled = false;
-            this.textBoxOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBoxOrientation.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxOrientation.Location = new System.Drawing.Point(13, 117);
             this.textBoxOrientation.Name = "textBoxOrientation";
             this.textBoxOrientation.Size = new System.Drawing.Size(157, 26);
@@ -100,7 +100,7 @@
             // 
             // buttonDeleteFrame
             // 
-            this.buttonDeleteFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonDeleteFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.buttonDeleteFrame.Location = new System.Drawing.Point(37, 322);
             this.buttonDeleteFrame.Name = "buttonDeleteFrame";
             this.buttonDeleteFrame.Size = new System.Drawing.Size(128, 30);
@@ -110,7 +110,7 @@
             // 
             // buttonSaveTemplate
             // 
-            this.buttonSaveTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.buttonSaveTemplate.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.buttonSaveTemplate.Location = new System.Drawing.Point(55, 406);
             this.buttonSaveTemplate.Name = "buttonSaveTemplate";
             this.buttonSaveTemplate.Size = new System.Drawing.Size(84, 30);
@@ -121,7 +121,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label2.Location = new System.Drawing.Point(9, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 20);
@@ -131,7 +131,7 @@
             // textBoxSelectedFrame
             // 
             this.textBoxSelectedFrame.Enabled = false;
-            this.textBoxSelectedFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBoxSelectedFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxSelectedFrame.Location = new System.Drawing.Point(13, 40);
             this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
             this.textBoxSelectedFrame.Size = new System.Drawing.Size(157, 26);
@@ -140,7 +140,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label1.Location = new System.Drawing.Point(9, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 20);
