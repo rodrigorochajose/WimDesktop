@@ -5,6 +5,7 @@ namespace DMMDigital.Interface
 {
     public interface IDrawing
     {
+        int id { get; set; }
         Point initialPosition { get; set; }
         Point finalPosition { get; set; }
         GraphicsPath graphicsPath { get; set; }

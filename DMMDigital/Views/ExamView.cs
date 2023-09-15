@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Views;
+using System.Drawing.Imaging;
 
 namespace DMMDigital
 {
@@ -21,7 +22,7 @@ namespace DMMDigital
         public event EventHandler eventGetExamPath;
         public event EventHandler eventGetTextToDraw;
 
-        int indexFrame = 0, patientId = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
+        int patientId, counterDrawings = 0, indexFrame = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
 
         Color drawingColor = Color.Red;
@@ -50,7 +51,6 @@ namespace DMMDigital
                 DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
                 examPath = di.FullName;
             };
-            teste();
         }
 
         public void selectFrameToLoadImage()
@@ -445,6 +445,7 @@ namespace DMMDigital
             if (action != 0)
             {
                 draw = true;
+                counterDrawings++;
 
                 switch (action)
                 {
@@ -452,6 +453,7 @@ namespace DMMDigital
 
                         currentDrawing = new FreeDraw
                         {
+                            id = counterDrawings,
                             graphicsPath = new GraphicsPath(),
                             points = new List<Point>(),
                             drawingColor = drawingColor,
@@ -464,6 +466,7 @@ namespace DMMDigital
                     case 5:
                         currentDrawing = new Arrow
                         {
+                            id = counterDrawings,
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -474,6 +477,7 @@ namespace DMMDigital
                     case 7:
                         currentDrawing = new RectangleDraw
                         {
+                            id = counterDrawings,
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -484,6 +488,7 @@ namespace DMMDigital
                     case 6:
                         currentDrawing = new Ellipse
                         {
+                            id = counterDrawings,
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -497,6 +502,7 @@ namespace DMMDigital
 
                         currentDrawing = new Text
                         {
+                            id = counterDrawings,
                             initialPosition = clickPosition,
                             text = getTextToDraw(),
                             font = new Font("Arial", drawingSize),
@@ -505,6 +511,7 @@ namespace DMMDigital
 
                         drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]){ currentDrawing });
                         drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
+                        
 
                         mainFrame.Invalidate();
 
@@ -639,56 +646,77 @@ namespace DMMDigital
 
                 draw = false;
                 mainFrame.Invalidate();
+                showDrawingHistoryOnScreen();
+                counterDrawings++;
             }
         }
 
         private void mainFramePaint(object sender, PaintEventArgs e)
         {
             drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics));
-
+            
             if (draw && currentDrawing != null && action != 1)
             {
                 currentDrawing.draw(e.Graphics);
             }
         }
 
-
-        private void teste()
+        private void saveImageDrawing()
         {
-            Button b1 = new Button
-            {
-                Font = new Font("Microsoft Sans Serif", 9F),
-                Name = "b1",
-                Size = new Size(75, 23),
-                TabIndex = 6,
-                Text = "b1",
-                UseVisualStyleBackColor = true
-            };
+            Pen p = new Pen(currentDrawing.drawingColor, currentDrawing.drawingSize);
+            Bitmap bmp = new Bitmap(mainFrame.Width, mainFrame.Height);
+            Graphics graphics = Graphics.FromImage(bmp);
+            graphics.DrawPath(p, currentDrawing.graphicsPath);
 
-            Button b2 = new Button
-            {
-                Font = new Font("Microsoft Sans Serif", 9F),
-                Name = "b2",
-                Size = new Size(75, 23),
-                TabIndex = 6,
-                Text = "b2",
-                UseVisualStyleBackColor = true
-            };
+            string path = Path.Combine(examPath, $"drawing{currentDrawing.id}.jpeg");
 
-            Button b3 = new Button
-            {
-                Font = new Font("Microsoft Sans Serif", 9F),
-                Name = "b3",
-                Size = new Size(75, 23),
-                TabIndex = 6,
-                Text = "b3",
-                UseVisualStyleBackColor = true
-            };
+            bmp.Save(path, ImageFormat.Jpeg);
 
-            flowLayoutPanel1.Controls.Add(b1);
-            flowLayoutPanel1.Controls.Add(b2);
-            flowLayoutPanel1.Controls.Add(b3);
-            flowLayoutPanel1.Refresh();
+        }
+
+        private void showDrawingHistoryOnScreen()
+        {
+            for (int counter = 0; counter < drawingHistory[drawingHistoryIndex].Count; counter++)
+            {
+                Panel panel = new Panel
+                {
+                    Size = new Size(340, 60),
+                    Name = $"panelDrawing{currentDrawing.id}"
+                };
+
+                Button button = new Button
+                {
+                    Font = new Font("Microsoft Sans Serif", 9F),
+                    Name = $"buttonDrawing{currentDrawing.id}",
+                    Size = new Size(35, 25),
+                    Location = new Point(10, 17),
+                    Image = Properties.Resources.icon_16x16_trash
+                };
+
+                PictureBox pictureBox = new PictureBox
+                {
+                    Name = $"pictureBoxDrawing{currentDrawing.id}",
+                    Size = new Size(50, 50),
+                    Location = new Point(65, 5),
+                    BackColor = Color.Silver,
+                };
+
+                Label label = new Label
+                {
+                    Name = $"labelDrawing{currentDrawing.id}",
+                    Size = new Size(150, 20),
+                    Location = new Point(125, 23),
+                    Text = drawingHistory[drawingHistoryIndex][counter].GetType().ToString()
+                };
+
+                saveImageDrawing();
+                
+
+                panel.Controls.Add(button);
+                panel.Controls.Add(pictureBox);
+                panel.Controls.Add(label);
+                flowLayoutPanel1.Controls.Add(panel);
+            }
         }
     }
 }

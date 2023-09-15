@@ -390,5 +390,8 @@
   <ItemGroup>
     <None Include="Resources\icon-96x96-transparent.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-16x16-trash.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

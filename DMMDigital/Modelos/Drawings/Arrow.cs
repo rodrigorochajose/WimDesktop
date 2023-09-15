@@ -6,6 +6,7 @@ namespace DMMDigital
 {
     public class Arrow : IDrawing
     {
+        public int id { get; set; }
         public Point initialPosition { get; set; }
         public Point finalPosition { get; set; }
         public GraphicsPath graphicsPath { get; set; }
