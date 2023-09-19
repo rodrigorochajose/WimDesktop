@@ -342,8 +342,9 @@ namespace DMMDigital
             if (drawingHistoryIndex - 1 > -1)
             {
                 drawingHistoryIndex--;
+                mainFrame.Invalidate();
+                handlerDrawingHistory();
             }
-            mainFrame.Invalidate();
         }
 
         private void buttonRedoClick(object sender, EventArgs e)
@@ -351,8 +352,9 @@ namespace DMMDigital
             if (drawingHistoryIndex + 1 < drawingHistory.Count)
             {
                 drawingHistoryIndex++;
+                mainFrame.Invalidate();
+                handlerDrawingHistory();
             }
-            mainFrame.Invalidate();
         }
 
         private void buttonFilterClick(object sender, EventArgs e)
@@ -426,6 +428,7 @@ namespace DMMDigital
                 selectedDrawingToMove = new Ellipse();
                 drawingHistoryIndex = 0;
                 action = 0;
+                flowLayoutPanel1.Controls.Clear();
                 mainFrame.Invalidate();
             }
         }
@@ -467,6 +470,7 @@ namespace DMMDigital
                         currentDrawing = new Arrow
                         {
                             id = counterDrawings,
+                            graphicsPath = new GraphicsPath(),
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -478,6 +482,7 @@ namespace DMMDigital
                         currentDrawing = new RectangleDraw
                         {
                             id = counterDrawings,
+                            graphicsPath = new GraphicsPath(),
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -489,6 +494,7 @@ namespace DMMDigital
                         currentDrawing = new Ellipse
                         {
                             id = counterDrawings,
+                            graphicsPath = new GraphicsPath(),
                             initialPosition = clickPosition,
                             finalPosition = clickPosition,
                             drawingColor = drawingColor,
@@ -503,6 +509,7 @@ namespace DMMDigital
                         currentDrawing = new Text
                         {
                             id = counterDrawings,
+                            graphicsPath = new GraphicsPath(),
                             initialPosition = clickPosition,
                             text = getTextToDraw(),
                             font = new Font("Arial", drawingSize),
@@ -564,6 +571,8 @@ namespace DMMDigital
 
                                     break;
                             }
+                            selectedDrawingToMove.id = currentDrawing.id;
+                            selectedDrawingToMove.graphicsPath = currentDrawing.graphicsPath;
                             selectedDrawingToMove.drawingColor = currentDrawing.drawingColor;
                             selectedDrawingToMove.drawingSize = currentDrawing.drawingSize;
                             selectedDrawingToMove.initialPosition = new Point(currentDrawing.initialPosition.X, currentDrawing.initialPosition.Y);
@@ -642,12 +651,12 @@ namespace DMMDigital
                             currentDrawing
                     });
                     drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
-                } 
+                    selectedDrawingToMove = null;
+                }
+                handlerDrawingHistory();
 
                 draw = false;
                 mainFrame.Invalidate();
-                showDrawingHistoryOnScreen();
-                counterDrawings++;
             }
         }
 
@@ -661,33 +670,29 @@ namespace DMMDigital
             }
         }
 
-        private void saveImageDrawing()
+        private Image generateDrawingImageAndThumb(IDrawing drawing)
         {
-            Pen p = new Pen(currentDrawing.drawingColor, currentDrawing.drawingSize);
+            Pen p = new Pen(drawing.drawingColor, drawing.drawingSize);
             Bitmap bmp = new Bitmap(mainFrame.Width, mainFrame.Height);
             Graphics graphics = Graphics.FromImage(bmp);
-            graphics.DrawPath(p, currentDrawing.graphicsPath);
+            graphics.DrawPath(p, drawing.graphicsPath);
 
-            string path = Path.Combine(examPath, $"drawing{currentDrawing.id}.jpeg");
-
-            bmp.Save(path, ImageFormat.Jpeg);
-
+            Image thumb = bmp.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+            return thumb;
         }
 
-        private void showDrawingHistoryOnScreen()
+        private void showDrawingHistoryOnScreen(IDrawing drawing)
         {
-            for (int counter = 0; counter < drawingHistory[drawingHistoryIndex].Count; counter++)
-            {
                 Panel panel = new Panel
                 {
                     Size = new Size(340, 60),
-                    Name = $"panelDrawing{currentDrawing.id}"
+                    Name = $"panelDrawing{drawing.id}"
                 };
 
                 Button button = new Button
                 {
                     Font = new Font("Microsoft Sans Serif", 9F),
-                    Name = $"buttonDrawing{currentDrawing.id}",
+                    Name = $"buttonDrawing{drawing.id}",
                     Size = new Size(35, 25),
                     Location = new Point(10, 17),
                     Image = Properties.Resources.icon_16x16_trash
@@ -695,7 +700,7 @@ namespace DMMDigital
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Name = $"pictureBoxDrawing{currentDrawing.id}",
+                    Name = $"pictureBoxDrawing{drawing.id}",
                     Size = new Size(50, 50),
                     Location = new Point(65, 5),
                     BackColor = Color.Silver,
@@ -703,20 +708,38 @@ namespace DMMDigital
 
                 Label label = new Label
                 {
-                    Name = $"labelDrawing{currentDrawing.id}",
+                    Name = $"labelDrawing{drawing.id}",
                     Size = new Size(150, 20),
                     Location = new Point(125, 23),
-                    Text = drawingHistory[drawingHistoryIndex][counter].GetType().ToString()
+                    Text = "testando"
                 };
 
-                saveImageDrawing();
-                
+                pictureBox.Image = generateDrawingImageAndThumb(drawing);
+                button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
 
                 panel.Controls.Add(button);
                 panel.Controls.Add(pictureBox);
                 panel.Controls.Add(label);
                 flowLayoutPanel1.Controls.Add(panel);
-            }
+                flowLayoutPanel1.ScrollControlIntoView(panel); 
+        }
+
+        private void handlerDrawingHistory()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistoryOnScreen(d));
+        }
+
+        private void deleteDrawingOnHistory(int drawingId)
+        {
+            drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]));
+            drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
+
+            IDrawing drawingToRemove = drawingHistory[drawingHistoryIndex].Where(drawing => drawing.id == drawingId).First();
+            drawingHistory[drawingHistoryIndex].Remove(drawingToRemove);
+
+            handlerDrawingHistory();
+            mainFrame.Invalidate();
         }
     }
 }
