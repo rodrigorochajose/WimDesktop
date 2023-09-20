@@ -19,9 +19,10 @@ namespace DMMDigital
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            IMenuView view = new MenuView();
-            new MenuPresenter(view);
-            Application.Run((Form)view);
+            //IMenuView view = new MenuView();
+            //new MenuPresenter(view);
+            //Application.Run((Form)view);
+            Application.Run(new Form1());
         }
     }
 }

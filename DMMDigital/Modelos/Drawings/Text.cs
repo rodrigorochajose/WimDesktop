@@ -29,7 +29,7 @@ namespace DMMDigital
             StringFormat format = StringFormat.GenericDefault;
 
             graphicsPath = new GraphicsPath();
-            graphicsPath.AddString(text, family, fontStyle, emSize, initialPosition, format);
+            graphicsPath.AddString(text, family, fontStyle, emSize, new Rectangle(initialPosition.X, initialPosition.Y, 100, 100), format);
 
             g.DrawString(text, font, brush, initialPosition);
         }

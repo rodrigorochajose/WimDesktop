@@ -115,6 +115,12 @@
     <Compile Include="Interface\IPatientRepository.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
     <Compile Include="Presenters\ConfigPresenter.cs" />
+    <Compile Include="Views\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IChooseTemplateExamView.cs" />
     <Compile Include="Views\IConfigView.cs" />
     <Compile Include="Views\IChoosePatientExamView.cs" />
@@ -207,6 +213,9 @@
     <Compile Include="_Repositories\TemplateRepository.cs" />
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManipulatePatientView.resx">
       <DependentUpon>ManipulatePatientView.cs</DependentUpon>

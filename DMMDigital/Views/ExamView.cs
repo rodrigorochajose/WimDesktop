@@ -20,7 +20,7 @@ namespace DMMDigital
         public Frame selectedFrame { get; set; }
 
         public event EventHandler eventGetExamPath;
-        public event EventHandler eventGetTextToDraw;
+        public event EventHandler eventDrawStringOnGp;
 
         int patientId, counterDrawings = 0, indexFrame = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
@@ -53,6 +53,84 @@ namespace DMMDigital
             };
         }
 
+        private void drawTemplate(List<TemplateFrameModel> templateFrames)
+        {
+            int height, width;
+
+            foreach (TemplateFrameModel frame in templateFrames)
+            {
+                if (frame.orientation.Contains("Vertical"))
+                {
+                    height = 35;
+                    width = 25;
+                }
+                else
+                {
+                    height = 25;
+                    width = 35;
+                }
+
+                Frame newFrame = new Frame
+                {
+                    Width = width,
+                    Height = height,
+                    BackColor = Color.Black,
+                    order = frame.order,
+                    Name = "filme" + frame.order,
+                    orientation = frame.orientation,
+                    photoTook = false,
+                    Tag = Color.Black,
+                };
+
+                Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
+                Graphics graphics = Graphics.FromImage(image);
+                Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
+                graphics.DrawString(frame.order.ToString(), font, System.Drawing.Brushes.White, new Point(0, 0));
+                newFrame.Image = image;
+                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
+                newFrame.DoubleClick += frameDoubleClick;
+
+                if (newFrame.order == 1)
+                {
+                    newFrame.Tag = Color.LimeGreen;
+                }
+                newFrame.Paint += framePaint;
+
+                panelTemplate.Controls.Add(newFrame);
+                frames.Add(newFrame);
+            }
+        }
+
+        private void framePaint(object sender, PaintEventArgs e)
+        {
+            Frame frame = (Frame)sender;
+            if ((Color)frame.Tag == Color.Black)
+            {
+                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
+            }
+            else
+            {
+                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
+            }
+        }
+
+        private void frameDoubleClick(object sender, EventArgs e)
+        {
+            selectedFrame = frames.Find(t => (Color)t.Tag == Color.LimeGreen);
+            selectedFrame.Tag = Color.Black;
+            selectedFrame.Refresh();
+
+            selectedFrame = (Frame)sender;
+            selectedFrame.Tag = Color.LimeGreen;
+            selectedFrame.Refresh();
+            indexFrame = selectedFrame.order - 1;
+
+            if (selectedFrame.photoTook == true)
+            {
+                mainFrame.Image = selectedFrame.Image;
+            }
+        }
+
         public void selectFrameToLoadImage()
         {
             selectedFrame = frames[indexFrame];
@@ -69,6 +147,61 @@ namespace DMMDigital
                 File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"));
             }
         }
+
+        public void loadImageOnMainFrame()
+        {
+            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            {
+                Image img = Image.FromStream(fs);
+                mainFrame.Image = img;
+                selectedFrame.Image = img;
+                selectedFrame.Tag = Color.Black;
+
+                indexFrame++;
+                selectedFrame = frames[indexFrame];
+                selectedFrame.Tag = Color.LimeGreen;
+                selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
+
+                enableTools();
+            }
+        }
+
+        private void enableTools()
+        {
+            foreach (Button tool in panelTools.Controls.OfType<Button>())
+            {
+                tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
+            }
+
+        }
+
+        private void selectTool(object sender)
+        {
+            Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
+            if (selectedButton != null)
+            {
+                selectedButton.BackColor = Color.WhiteSmoke;
+                selectedButton.Tag = "selectable";
+            }
+            (sender as Control).BackColor = Color.LightGray;
+            (sender as Control).Tag = "selected";
+        }
+
+        private void loadToolOptions()
+        {
+            panelToolOptions.Visible = true;
+
+            if (action == 4)
+            {
+                drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                numericUpDownDrawingSize.Value = textDrawingPreviousSize;
+            } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
+            {
+                textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                numericUpDownDrawingSize.Value = drawingPreviousSize;
+            }
+        }
+
 
         private string getTextToDraw()
         {
@@ -134,111 +267,86 @@ namespace DMMDigital
             }
         }
 
-        public void loadImageOnMainFrame()
-        {
-            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
-            {
-                Image img = Image.FromStream(fs);
-                mainFrame.Image = img;
-                selectedFrame.Image = img;
-                selectedFrame.Tag = Color.Black;
-
-                indexFrame++;
-                selectedFrame = frames[indexFrame];
-                selectedFrame.Tag = Color.LimeGreen;
-                selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
-
-                enableTools();
-            }
-        }
-        
-        private void enableTools()
-        {
-            foreach (Button tool in panelTools.Controls.OfType<Button>())
-            {
-                tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
-            }
-
-        }
-
-        private void loadToolOptions()
-        {
-            panelToolOptions.Visible = true;
-
-            if (action == 4)
-            {
-                drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                numericUpDownDrawingSize.Value = textDrawingPreviousSize;
-            } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
-            {
-                textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                numericUpDownDrawingSize.Value = drawingPreviousSize;
-            }
-        }
-
-        private void selectTool(object sender)
-        {
-            Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
-            if (selectedButton != null)
-            {
-                selectedButton.BackColor = Color.WhiteSmoke;
-                selectedButton.Tag = "selectable";
-            }
-            (sender as Control).BackColor = Color.LightGray;
-            (sender as Control).Tag = "selected";
-        }
-
-        private void drawTemplate(List<TemplateFrameModel> templateFrames)
-        {
-            int height, width;
-
-            foreach (TemplateFrameModel frame in templateFrames)
-            {
-                if (frame.orientation.Contains("Vertical"))
-                {
-                    height = 35;
-                    width = 25;
-                }
-                else
-                {
-                    height = 25;
-                    width = 35;
-                }
-
-                Frame newFrame = new Frame
-                {
-                    Width = width,
-                    Height = height,
-                    BackColor = Color.Black,
-                    order = frame.order,
-                    Name = "filme" + frame.order,
-                    orientation = frame.orientation,
-                    photoTook = false,
-                    Tag = Color.Black,
-                };
-
-                Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
-                Graphics graphics = Graphics.FromImage(image);
-                Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
-                graphics.DrawString(frame.order.ToString(), font, System.Drawing.Brushes.White, new Point(0, 0));
-                newFrame.Image = image;
-                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
-                newFrame.DoubleClick += frameDoubleClick;
-
-                if (newFrame.order == 1)
-                {
-                    newFrame.Tag = Color.LimeGreen;
-                }
-                newFrame.Paint += framePaint;
-
-                panelTemplate.Controls.Add(newFrame);
-                frames.Add(newFrame);
-            }
-        }
-
         private void numericUpDownDrawingSizeValueChanged(object sender, EventArgs e)
         {
             drawingSize = (int)numericUpDownDrawingSize.Value;
+        }
+
+        private void deleteDrawingOnHistory(int drawingId)
+        {
+            drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]));
+            drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
+
+            IDrawing drawingToRemove = drawingHistory[drawingHistoryIndex].Where(drawing => drawing.id == drawingId).First();
+            drawingHistory[drawingHistoryIndex].Remove(drawingToRemove);
+
+            drawingHistoryHandler();
+            mainFrame.Invalidate();
+        }
+
+        private Image generateDrawingImageAndThumb(IDrawing drawing)
+        {
+
+            Pen pen = new Pen(drawing.drawingColor, 1);
+            Bitmap bitmap = new Bitmap(mainFrame.Width, mainFrame.Height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+
+            graphics.DrawPath(pen, drawing.graphicsPath);
+
+            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+
+            string path = Path.Combine(examPath, $"drawing{drawing.id}.jpeg");
+            bitmap.Save(path, ImageFormat.Jpeg);
+            return thumb;
+        }
+
+        private void showDrawingHistory(IDrawing drawing)
+        {
+            Panel panel = new Panel
+            {
+                Size = new Size(340, 60),
+                Name = $"panelDrawing{drawing.id}"
+            };
+
+            Button button = new Button
+            {
+                Font = new Font("Microsoft Sans Serif", 9F),
+                Name = $"buttonDrawing{drawing.id}",
+                Size = new Size(35, 25),
+                Location = new Point(10, 17),
+                Image = Properties.Resources.icon_16x16_trash
+            };
+
+            PictureBox pictureBox = new PictureBox
+            {
+                Name = $"pictureBoxDrawing{drawing.id}",
+                Size = new Size(50, 50),
+                Location = new Point(65, 5),
+                BackColor = Color.Silver,
+            };
+
+            Label label = new Label
+            {
+                Name = $"labelDrawing{drawing.id}",
+                Size = new Size(150, 20),
+                Location = new Point(125, 23),
+                Text = "testando"
+            };
+
+            pictureBox.Image = generateDrawingImageAndThumb(drawing);
+            button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
+
+            panel.Controls.Add(button);
+            panel.Controls.Add(pictureBox);
+            panel.Controls.Add(label);
+            flowLayoutPanel1.Controls.Add(panel);
+            flowLayoutPanel1.ScrollControlIntoView(panel);
+        }
+
+        private void drawingHistoryHandler()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistory(d));
         }
 
         private void examLoad(object sender, EventArgs e)
@@ -246,36 +354,6 @@ namespace DMMDigital
             //m_nId = Detector.CreateDetector(this);
             //Detector d = Detector.DetectorList[m_nId];
             //d?.Connect();
-        }
-
-        private void framePaint(object sender, PaintEventArgs e)
-        {
-            Frame frame = (Frame)sender;
-            if ((Color)frame.Tag == Color.Black)
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
-            }
-            else
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
-            }
-        }
-
-        private void frameDoubleClick(object sender, EventArgs e)
-        {
-            selectedFrame = frames.Find(t => (Color)t.Tag == Color.LimeGreen);
-            selectedFrame.Tag = Color.Black;
-            selectedFrame.Refresh();
-
-            selectedFrame = (Frame)sender;
-            selectedFrame.Tag = Color.LimeGreen;
-            selectedFrame.Refresh();
-            indexFrame = selectedFrame.order - 1;
-
-            if (selectedFrame.photoTook == true)
-            {
-                mainFrame.Image = selectedFrame.Image;
-            }
         }
 
         private void buttonImportClick(object sender, EventArgs e)
@@ -343,7 +421,7 @@ namespace DMMDigital
             {
                 drawingHistoryIndex--;
                 mainFrame.Invalidate();
-                handlerDrawingHistory();
+                drawingHistoryHandler();
             }
         }
 
@@ -353,7 +431,7 @@ namespace DMMDigital
             {
                 drawingHistoryIndex++;
                 mainFrame.Invalidate();
-                handlerDrawingHistory();
+                drawingHistoryHandler();
             }
         }
 
@@ -514,13 +592,17 @@ namespace DMMDigital
                             text = getTextToDraw(),
                             font = new Font("Arial", drawingSize),
                             brush = new SolidBrush(drawingColor),
+                            drawingColor = drawingColor,
+                            drawingSize = drawingSize
                         };
+
+                        currentDrawing.graphicsPath.AddString((currentDrawing as Text).text, FontFamily.GenericSansSerif, (int)FontStyle.Bold, 70, new Rectangle(currentDrawing.initialPosition.X, currentDrawing.initialPosition.Y, mainFrame.Width, mainFrame.Height), new StringFormat(StringFormat.GenericDefault));
 
                         drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]){ currentDrawing });
                         drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
-                        
 
                         mainFrame.Invalidate();
+                        drawingHistoryHandler();
 
                         break;
                     case 1:
@@ -653,7 +735,7 @@ namespace DMMDigital
                     drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
                     selectedDrawingToMove = null;
                 }
-                handlerDrawingHistory();
+                drawingHistoryHandler();
 
                 draw = false;
                 mainFrame.Invalidate();
@@ -670,76 +752,5 @@ namespace DMMDigital
             }
         }
 
-        private Image generateDrawingImageAndThumb(IDrawing drawing)
-        {
-            Pen p = new Pen(drawing.drawingColor, drawing.drawingSize);
-            Bitmap bmp = new Bitmap(mainFrame.Width, mainFrame.Height);
-            Graphics graphics = Graphics.FromImage(bmp);
-            graphics.DrawPath(p, drawing.graphicsPath);
-
-            Image thumb = bmp.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
-            return thumb;
-        }
-
-        private void showDrawingHistoryOnScreen(IDrawing drawing)
-        {
-                Panel panel = new Panel
-                {
-                    Size = new Size(340, 60),
-                    Name = $"panelDrawing{drawing.id}"
-                };
-
-                Button button = new Button
-                {
-                    Font = new Font("Microsoft Sans Serif", 9F),
-                    Name = $"buttonDrawing{drawing.id}",
-                    Size = new Size(35, 25),
-                    Location = new Point(10, 17),
-                    Image = Properties.Resources.icon_16x16_trash
-                };
-
-                PictureBox pictureBox = new PictureBox
-                {
-                    Name = $"pictureBoxDrawing{drawing.id}",
-                    Size = new Size(50, 50),
-                    Location = new Point(65, 5),
-                    BackColor = Color.Silver,
-                };
-
-                Label label = new Label
-                {
-                    Name = $"labelDrawing{drawing.id}",
-                    Size = new Size(150, 20),
-                    Location = new Point(125, 23),
-                    Text = "testando"
-                };
-
-                pictureBox.Image = generateDrawingImageAndThumb(drawing);
-                button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
-
-                panel.Controls.Add(button);
-                panel.Controls.Add(pictureBox);
-                panel.Controls.Add(label);
-                flowLayoutPanel1.Controls.Add(panel);
-                flowLayoutPanel1.ScrollControlIntoView(panel); 
-        }
-
-        private void handlerDrawingHistory()
-        {
-            flowLayoutPanel1.Controls.Clear();
-            drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistoryOnScreen(d));
-        }
-
-        private void deleteDrawingOnHistory(int drawingId)
-        {
-            drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]));
-            drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
-
-            IDrawing drawingToRemove = drawingHistory[drawingHistoryIndex].Where(drawing => drawing.id == drawingId).First();
-            drawingHistory[drawingHistoryIndex].Remove(drawingToRemove);
-
-            handlerDrawingHistory();
-            mainFrame.Invalidate();
-        }
     }
 }
