@@ -1,5 +1,8 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using DMMDigital.Interface;
 
 namespace DMMDigital
@@ -28,10 +31,20 @@ namespace DMMDigital
             float emSize = font.Size;
             StringFormat format = StringFormat.GenericDefault;
 
-            graphicsPath = new GraphicsPath();
-            graphicsPath.AddString(text, family, fontStyle, emSize, new Rectangle(initialPosition.X, initialPosition.Y, 100, 100), format);
+            SizeF rectangleToDrawSize = g.MeasureString(text, font);
+            graphicsPath.AddString(text, family, fontStyle, emSize, new RectangleF(initialPosition.X, initialPosition.Y, rectangleToDrawSize.Width, rectangleToDrawSize.Height), format);
 
             g.DrawString(text, font, brush, initialPosition);
+        }
+
+        public Image generateDrawingImageAndThumb(int width, int height)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            draw(graphics);
+
+            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+            return thumb;
         }
     }
 }

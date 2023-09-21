@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -29,6 +30,16 @@ namespace DMMDigital
             graphicsPath.AddLine(initialPosition, finalPosition);
 
             g.DrawLine(pen, initialPosition, finalPosition);
+        }
+
+        public Image generateDrawingImageAndThumb(int width, int height)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            draw(graphics);
+
+            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+            return thumb;
         }
     }
 }

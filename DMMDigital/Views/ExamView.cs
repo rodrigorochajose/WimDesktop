@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Views;
-using System.Drawing.Imaging;
 
 namespace DMMDigital
 {
@@ -202,7 +201,6 @@ namespace DMMDigital
             }
         }
 
-
         private string getTextToDraw()
         {
             Size size = new Size(250, 100);
@@ -284,22 +282,6 @@ namespace DMMDigital
             mainFrame.Invalidate();
         }
 
-        private Image generateDrawingImageAndThumb(IDrawing drawing)
-        {
-
-            Pen pen = new Pen(drawing.drawingColor, 1);
-            Bitmap bitmap = new Bitmap(mainFrame.Width, mainFrame.Height);
-            Graphics graphics = Graphics.FromImage(bitmap);
-
-            graphics.DrawPath(pen, drawing.graphicsPath);
-
-            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
-
-            string path = Path.Combine(examPath, $"drawing{drawing.id}.jpeg");
-            bitmap.Save(path, ImageFormat.Jpeg);
-            return thumb;
-        }
-
         private void showDrawingHistory(IDrawing drawing)
         {
             Panel panel = new Panel
@@ -322,7 +304,7 @@ namespace DMMDigital
                 Name = $"pictureBoxDrawing{drawing.id}",
                 Size = new Size(50, 50),
                 Location = new Point(65, 5),
-                BackColor = Color.Silver,
+                BackColor = Color.WhiteSmoke,
             };
 
             Label label = new Label
@@ -333,7 +315,7 @@ namespace DMMDigital
                 Text = "testando"
             };
 
-            pictureBox.Image = generateDrawingImageAndThumb(drawing);
+            pictureBox.Image = drawing.generateDrawingImageAndThumb(examPath, mainFrame.Width, mainFrame.Height);
             button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
 
             panel.Controls.Add(button);
@@ -483,7 +465,7 @@ namespace DMMDigital
             frames[indexFrame - 1].Image = currentFrame;
             selectedFrame.Refresh();
         }
-
+        
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
             Image currentFrame = mainFrame.Image;
@@ -584,25 +566,29 @@ namespace DMMDigital
                         draw = false;
                         verifyHistoryToReset();
 
-                        currentDrawing = new Text
+                        string textToDraw = getTextToDraw();
+
+                        if (textToDraw.Length > 0)
                         {
-                            id = counterDrawings,
-                            graphicsPath = new GraphicsPath(),
-                            initialPosition = clickPosition,
-                            text = getTextToDraw(),
-                            font = new Font("Arial", drawingSize),
-                            brush = new SolidBrush(drawingColor),
-                            drawingColor = drawingColor,
-                            drawingSize = drawingSize
-                        };
+                            currentDrawing = new Text
+                            {
+                                id = counterDrawings,
+                                graphicsPath = new GraphicsPath(),
+                                initialPosition = clickPosition,
+                                text = textToDraw,
+                                font = new Font("Arial", drawingSize),
+                                brush = new SolidBrush(drawingColor),
+                                drawingColor = drawingColor,
+                                drawingSize = drawingSize
+                            };
 
-                        currentDrawing.graphicsPath.AddString((currentDrawing as Text).text, FontFamily.GenericSansSerif, (int)FontStyle.Bold, 70, new Rectangle(currentDrawing.initialPosition.X, currentDrawing.initialPosition.Y, mainFrame.Width, mainFrame.Height), new StringFormat(StringFormat.GenericDefault));
+                            drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]) { currentDrawing });
+                            drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
 
-                        drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]){ currentDrawing });
-                        drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
+                            mainFrame.Invalidate();
+                            drawingHistoryHandler();
+                        }
 
-                        mainFrame.Invalidate();
-                        drawingHistoryHandler();
 
                         break;
                     case 1:
@@ -733,8 +719,8 @@ namespace DMMDigital
                             currentDrawing
                     });
                     drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
-                    selectedDrawingToMove = null;
                 }
+                selectedDrawingToMove = null;
                 drawingHistoryHandler();
 
                 draw = false;

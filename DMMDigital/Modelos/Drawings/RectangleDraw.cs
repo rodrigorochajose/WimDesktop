@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -47,5 +48,14 @@ namespace DMMDigital
             g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle(initialPosition, finalPosition));
         }
 
+        public Image generateDrawingImageAndThumb(int width, int height)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            draw(graphics);
+
+            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+            return thumb;
+        }
     }
 }

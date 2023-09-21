@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -21,10 +22,19 @@ namespace DMMDigital
         public void draw(Graphics g)
         {
             graphicsPath = new GraphicsPath();
-            Rectangle retangulo = new Rectangle(initialPosition.X, initialPosition.Y, finalPosition.X - initialPosition.X, finalPosition.Y - initialPosition.Y);
-            graphicsPath.AddEllipse(retangulo);
+            graphicsPath.AddEllipse(new Rectangle(initialPosition.X, initialPosition.Y, finalPosition.X - initialPosition.X, finalPosition.Y - initialPosition.Y));
 
             g.DrawEllipse(new Pen(drawingColor, drawingSize), initialPosition.X, initialPosition.Y, finalPosition.X - initialPosition.X, finalPosition.Y - initialPosition.Y);
+        }
+
+        public Image generateDrawingImageAndThumb(int width, int height)
+        {
+            Bitmap bitmap = new Bitmap(width, height);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            draw(graphics);
+
+            Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
+            return thumb;
         }
     }
 }
