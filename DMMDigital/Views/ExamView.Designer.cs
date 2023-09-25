@@ -33,6 +33,10 @@ namespace DMMDigital
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.labelImageDate = new System.Windows.Forms.Label();
+            this.textBoxFrameNotes = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
@@ -68,7 +72,7 @@ namespace DMMDigital
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
             this.sensorConnection = new System.Windows.Forms.PictureBox();
-            this.importImage = new System.Windows.Forms.OpenFileDialog();
+            this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.mainFrame = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
@@ -86,15 +90,19 @@ namespace DMMDigital
             // panelTemplate
             // 
             this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTemplate.Location = new System.Drawing.Point(0, 73);
+            this.panelTemplate.Location = new System.Drawing.Point(0, 55);
             this.panelTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(363, 258);
+            this.panelTemplate.Size = new System.Drawing.Size(363, 185);
             this.panelTemplate.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.labelImageDate);
+            this.panel3.Controls.Add(this.textBoxFrameNotes);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.flowLayoutPanel1);
             this.panel3.Controls.Add(this.panel1);
             this.panel3.Controls.Add(this.panel4);
@@ -109,13 +117,53 @@ namespace DMMDigital
             this.panel3.Size = new System.Drawing.Size(363, 648);
             this.panel3.TabIndex = 0;
             // 
+            // labelImageDate
+            // 
+            this.labelImageDate.AutoSize = true;
+            this.labelImageDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelImageDate.Location = new System.Drawing.Point(111, 248);
+            this.labelImageDate.Name = "labelImageDate";
+            this.labelImageDate.Size = new System.Drawing.Size(0, 15);
+            this.labelImageDate.TabIndex = 9;
+            // 
+            // textBoxFrameNotes
+            // 
+            this.textBoxFrameNotes.Location = new System.Drawing.Point(11, 294);
+            this.textBoxFrameNotes.Multiline = true;
+            this.textBoxFrameNotes.Name = "textBoxFrameNotes";
+            this.textBoxFrameNotes.Size = new System.Drawing.Size(330, 54);
+            this.textBoxFrameNotes.TabIndex = 0;
+            this.textBoxFrameNotes.TextChanged += new System.EventHandler(this.textBoxFrameNotesTextChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(11, 274);
+            this.label6.Name = "label6";
+            this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label6.Size = new System.Drawing.Size(74, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Observações";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(11, 248);
+            this.label5.Name = "label5";
+            this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label5.Size = new System.Drawing.Size(97, 15);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Data da Imagem:";
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 459);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 474);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 189);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 174);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -123,7 +171,7 @@ namespace DMMDigital
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(0, 430);
+            this.panel1.Location = new System.Drawing.Point(0, 444);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 29);
             this.panel1.TabIndex = 6;
@@ -143,7 +191,7 @@ namespace DMMDigital
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(0, 331);
+            this.panel4.Location = new System.Drawing.Point(0, 356);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(363, 29);
             this.panel4.TabIndex = 0;
@@ -165,9 +213,9 @@ namespace DMMDigital
             this.panelToolOptions.Controls.Add(this.buttonColorPicker);
             this.panelToolOptions.Controls.Add(this.labelColor);
             this.panelToolOptions.Controls.Add(this.labelSize);
-            this.panelToolOptions.Location = new System.Drawing.Point(0, 360);
+            this.panelToolOptions.Location = new System.Drawing.Point(0, 385);
             this.panelToolOptions.Name = "panelToolOptions";
-            this.panelToolOptions.Size = new System.Drawing.Size(363, 70);
+            this.panelToolOptions.Size = new System.Drawing.Size(363, 58);
             this.panelToolOptions.TabIndex = 4;
             this.panelToolOptions.Visible = false;
             // 
@@ -233,42 +281,42 @@ namespace DMMDigital
             // labelTemplate
             // 
             this.labelTemplate.AutoSize = true;
-            this.labelTemplate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTemplate.Location = new System.Drawing.Point(92, 41);
+            this.labelTemplate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTemplate.Location = new System.Drawing.Point(80, 32);
             this.labelTemplate.Name = "labelTemplate";
-            this.labelTemplate.Size = new System.Drawing.Size(138, 19);
+            this.labelTemplate.Size = new System.Drawing.Size(113, 15);
             this.labelTemplate.TabIndex = 3;
             this.labelTemplate.Text = "Nome do Template";
             // 
             // labelPatient
             // 
             this.labelPatient.AutoSize = true;
-            this.labelPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPatient.Location = new System.Drawing.Point(92, 11);
+            this.labelPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPatient.Location = new System.Drawing.Point(80, 9);
             this.labelPatient.Name = "labelPatient";
-            this.labelPatient.Size = new System.Drawing.Size(133, 19);
+            this.labelPatient.Size = new System.Drawing.Size(109, 15);
             this.labelPatient.TabIndex = 2;
             this.labelPatient.Text = "Nome do Paciente";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 40);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(11, 31);
             this.label2.Name = "label2";
             this.label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label2.Size = new System.Drawing.Size(74, 20);
+            this.label2.Size = new System.Drawing.Size(58, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Template:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 10);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 8);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(67, 20);
+            this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Paciente:";
             // 
@@ -627,6 +675,10 @@ namespace DMMDigital
             this.sensorConnection.TabIndex = 4;
             this.sensorConnection.TabStop = false;
             // 
+            // dialogFileImage
+            // 
+            this.dialogFileImage.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            // 
             // mainFrame
             // 
             this.mainFrame.BackColor = System.Drawing.SystemColors.ControlText;
@@ -671,7 +723,6 @@ namespace DMMDigital
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.examLoad);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -716,7 +767,7 @@ namespace DMMDigital
         private System.Windows.Forms.Button buttonCompare;
         private System.Windows.Forms.Button buttonMove;
         private System.Windows.Forms.Button buttonArrow;
-        private System.Windows.Forms.OpenFileDialog importImage;
+        private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonRestore;
         private System.Windows.Forms.PictureBox mainFrame;
@@ -732,5 +783,9 @@ namespace DMMDigital
         private Panel panel1;
         private Label label4;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Label label6;
+        private Label label5;
+        private TextBox textBoxFrameNotes;
+        private Label labelImageDate;
     }
 }

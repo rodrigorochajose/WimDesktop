@@ -23,8 +23,8 @@ namespace DMMDigital.Presenters
 
         public ExamPresenter(IExamView view,  IExamRepository repository)
         {
-            this.examView = view;
-            this.examRepository = repository;
+            examView = view;
+            examRepository = repository;
 
             examView.eventGetExamPath += getExamPath;
 
@@ -166,7 +166,10 @@ namespace DMMDigital.Presenters
                     break;
                 case SdkInterface.Evt_Image:
                     {
-                        examView.selectFrameToLoadImage();
+                        if (examView.selectedFrame.photoTook == true)
+                        {
+                            examView.deleteCurrentImageToReplace();
+                        }
                         IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
                         int imageWidth = image.nWidth;
                         int imageHeight = image.nHeight;
@@ -195,6 +198,7 @@ namespace DMMDigital.Presenters
             try
             {
                 examView.selectedFrame.photoTook = true;
+                examView.selectedFrame.datePhotoTook = DateTime.Now.ToString();
 
                 Bitmap pic = new Bitmap(widht, height, System.Drawing.Imaging.PixelFormat.Format16bppGrayScale);
 
@@ -220,7 +224,7 @@ namespace DMMDigital.Presenters
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-radiografia.tiff"));
+                SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-radiografia.png"));
 
                 pic.Dispose();
 

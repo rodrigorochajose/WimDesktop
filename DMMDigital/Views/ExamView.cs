@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Views;
+using Emgu.CV.OCR;
 
 namespace DMMDigital
 {
@@ -37,13 +38,13 @@ namespace DMMDigital
         public ExamView(PatientModel patient, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
         {
             InitializeComponent();
+            ActiveControl = label1;
 
             patientId = patient.id;
             labelPatient.Text = patient.name;
             labelTemplate.Text = templateName;
 
             drawTemplate(templateFrames);
-            selectedFrame = frames.First();
             Load += delegate
             {
                 eventGetExamPath?.Invoke(this, EventArgs.Empty);
@@ -78,26 +79,50 @@ namespace DMMDigital
                     Name = "filme" + frame.order,
                     orientation = frame.orientation,
                     photoTook = false,
-                    Tag = Color.Black,
+                    Tag = Color.Black
                 };
-
-                Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
-                Graphics graphics = Graphics.FromImage(image);
-                Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
-                graphics.DrawString(frame.order.ToString(), font, System.Drawing.Brushes.White, new Point(0, 0));
-                newFrame.Image = image;
-                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
-                newFrame.DoubleClick += frameDoubleClick;
 
                 if (newFrame.order == 1)
                 {
                     newFrame.Tag = Color.LimeGreen;
+                    selectedFrame = newFrame;
                 }
+
+                newFrame.Image = drawFrameImage(newFrame);
+                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
+                newFrame.DoubleClick += frameDoubleClick;
                 newFrame.Paint += framePaint;
 
-                panelTemplate.Controls.Add(newFrame);
                 frames.Add(newFrame);
+                panelTemplate.Controls.Add(newFrame);
             }
+        }
+
+        // passar pro presenter?
+        private Image drawFrameImage(Frame currentFrame)
+        {
+            Bitmap image = new Bitmap(currentFrame.Width, currentFrame.Height);
+            Graphics graphics = Graphics.FromImage(image);
+            Font font = new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel);
+            graphics.DrawString(currentFrame.order.ToString(), font, Brushes.White, new Point(0, 0));
+
+            return image;
+        }
+
+        private void frameHandler()
+        {
+
+            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
+            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
+
+            selectedFrame.Tag = Color.Black;
+            selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
+
+            indexFrame++;
+            selectedFrame = frames[indexFrame];
+            selectedFrame.Tag = Color.LimeGreen;
+
+            selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -120,47 +145,39 @@ namespace DMMDigital
             selectedFrame.Refresh();
 
             selectedFrame = (Frame)sender;
+            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
+            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
             selectedFrame.Tag = Color.LimeGreen;
+
             selectedFrame.Refresh();
             indexFrame = selectedFrame.order - 1;
 
             if (selectedFrame.photoTook == true)
             {
-                mainFrame.Image = selectedFrame.Image;
+                using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+                {
+                    mainFrame.Image = Image.FromStream(fs);
+                }
             }
         }
 
-        public void selectFrameToLoadImage()
+        public void deleteCurrentImageToReplace()
         {
-            selectedFrame = frames[indexFrame];
-
-            if (selectedFrame.photoTook == true)
-            {
-                DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
-                if (res == DialogResult.No)
-                {
-                    return;
-                }
-                selectedFrame.Image = null;
-                mainFrame.Image = null;
-                File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"));
-            }
+            DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
+            if (res == DialogResult.No) { return; }
+            selectedFrame.Image = null;
+            mainFrame.Image = null;
+            File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
         }
 
         public void loadImageOnMainFrame()
         {
-            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.tiff"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
-                Image img = Image.FromStream(fs);
-                mainFrame.Image = img;
-                selectedFrame.Image = img;
-                selectedFrame.Tag = Color.Black;
-
-                indexFrame++;
-                selectedFrame = frames[indexFrame];
-                selectedFrame.Tag = Color.LimeGreen;
-                selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
-
+                Image image = Image.FromStream(fs);
+                mainFrame.Image = image;
+                generateImageThumbnail(image.Clone() as Image);
+                frameHandler();
                 enableTools();
             }
         }
@@ -171,7 +188,6 @@ namespace DMMDigital
             {
                 tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
             }
-
         }
 
         private void selectTool(object sender)
@@ -315,7 +331,7 @@ namespace DMMDigital
                 Text = "testando"
             };
 
-            pictureBox.Image = drawing.generateDrawingImageAndThumb(examPath, mainFrame.Width, mainFrame.Height);
+            pictureBox.Image = drawing.generateDrawingImageAndThumb(mainFrame.Width, mainFrame.Height);
             button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
 
             panel.Controls.Add(button);
@@ -331,27 +347,33 @@ namespace DMMDigital
             drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistory(d));
         }
 
-        private void examLoad(object sender, EventArgs e)
+        private void generateImageThumbnail(Image currentImage)
         {
-            //m_nId = Detector.CreateDetector(this);
-            //Detector d = Detector.DetectorList[m_nId];
-            //d?.Connect();
+            selectedFrame.photoTook = true;
+            selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
         }
 
         private void buttonImportClick(object sender, EventArgs e)
         {
+            DialogResult result;
             if (selectedFrame.photoTook == true)
             {
-                var res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
-                if (res == DialogResult.No) { return; }
+                result = MessageBox.Show("Deseja sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No) { return; }
 
             }
 
-            var result = importImage.ShowDialog();
+            result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
-                Image selectedImage = Image.FromStream(importImage.OpenFile());
+                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
                 mainFrame.Image = selectedImage;
+
+                generateImageThumbnail(selectedImage.Clone() as Image);
+                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
+
+                frameHandler();
+
                 enableTools();
             }
         }
@@ -363,8 +385,13 @@ namespace DMMDigital
 
         private void buttonDeleteClick(object sender, EventArgs e)
         {
-            selectedFrame.Image = null;
-            mainFrame.Image = null;
+            DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes) 
+            {
+                File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
+                selectedFrame.Image = drawFrameImage(selectedFrame);
+                mainFrame.Image = null;
+            }
         }
 
         private void buttonCompareClick(object sender, EventArgs e)
@@ -465,7 +492,7 @@ namespace DMMDigital
             frames[indexFrame - 1].Image = currentFrame;
             selectedFrame.Refresh();
         }
-        
+
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
             Image currentFrame = mainFrame.Image;
@@ -500,6 +527,11 @@ namespace DMMDigital
                 drawingColor = colorDialog1.Color;
                 buttonColorPicker.BackColor = drawingColor;
             }
+        }
+
+        private void textBoxFrameNotesTextChanged(object sender, EventArgs e)
+        {
+            selectedFrame.notes = textBoxFrameNotes.Text;
         }
 
         private void mainFrameMouseDown(object sender, MouseEventArgs e)
