@@ -204,17 +204,36 @@ namespace DMMDigital
 
         private void loadToolOptions()
         {
-            panelToolOptions.Visible = true;
+            if (action == 8)
+            {
+                panelToolOptions.Controls.Clear();
 
-            if (action == 4)
+                TrackBar trackBarZoom = new TrackBar
+                {
+                    Location = new Point(11, 11),
+                    Minimum = 1,
+                    Value = 1,
+                    Name = "trackBarZoom",
+                    Size = new Size(338, 45)
+                };
+
+                panelToolOptions.Controls.Add(trackBarZoom);
+
+            } 
+            else
             {
-                drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                numericUpDownDrawingSize.Value = textDrawingPreviousSize;
-            } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
-            {
-                textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                numericUpDownDrawingSize.Value = drawingPreviousSize;
+                if (action == 4)
+                {
+                    drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                    numericUpDownDrawingSize.Value = textDrawingPreviousSize;
+                } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
+                {
+                    textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                    numericUpDownDrawingSize.Value = drawingPreviousSize;
+                }
             }
+
+            panelToolOptions.Visible = true;
         }
 
         private string getTextToDraw()
@@ -415,7 +434,17 @@ namespace DMMDigital
 
         private void buttonZoomClick(object sender, EventArgs e)
         {
+            action = 8;
+            loadToolOptions();
             selectTool(sender);
+            PictureBox pictureBoxMagnifier = new PictureBox
+            {
+                Location = new Point(812, 205),
+                Name = "pictureBoxMagnifier",
+                Size = new Size(200, 200)
+            };
+            panel2.Controls.Add(pictureBoxMagnifier);
+            panel2.Controls.SetChildIndex(pictureBoxMagnifier, 0);
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
@@ -727,6 +756,14 @@ namespace DMMDigital
                 {
                     currentDrawing.finalPosition = e.Location;
                 }
+
+                if (action == 8)
+                {
+
+                }
+
+
+
                 mainFrame.Invalidate();
             }
         }
