@@ -43,10 +43,6 @@ namespace DMMDigital
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panelToolOptions = new System.Windows.Forms.Panel();
-            this.numericUpDownDrawingSize = new System.Windows.Forms.NumericUpDown();
-            this.buttonColorPicker = new System.Windows.Forms.Button();
-            this.labelColor = new System.Windows.Forms.Label();
-            this.labelSize = new System.Windows.Forms.Label();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPatient = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -79,8 +75,6 @@ namespace DMMDigital
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panelToolOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).BeginInit();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
@@ -209,74 +203,10 @@ namespace DMMDigital
             // panelToolOptions
             // 
             this.panelToolOptions.BackColor = System.Drawing.Color.White;
-            this.panelToolOptions.Controls.Add(this.numericUpDownDrawingSize);
-            this.panelToolOptions.Controls.Add(this.buttonColorPicker);
-            this.panelToolOptions.Controls.Add(this.labelColor);
-            this.panelToolOptions.Controls.Add(this.labelSize);
             this.panelToolOptions.Location = new System.Drawing.Point(0, 385);
             this.panelToolOptions.Name = "panelToolOptions";
             this.panelToolOptions.Size = new System.Drawing.Size(363, 58);
             this.panelToolOptions.TabIndex = 4;
-            this.panelToolOptions.Visible = false;
-            // 
-            // numericUpDownDrawingSize
-            // 
-            this.numericUpDownDrawingSize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.numericUpDownDrawingSize.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.numericUpDownDrawingSize.Location = new System.Drawing.Point(254, 19);
-            this.numericUpDownDrawingSize.Maximum = new decimal(new int[] {
-            70,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.Name = "numericUpDownDrawingSize";
-            this.numericUpDownDrawingSize.Size = new System.Drawing.Size(75, 23);
-            this.numericUpDownDrawingSize.TabIndex = 8;
-            this.numericUpDownDrawingSize.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.ValueChanged += new System.EventHandler(this.numericUpDownDrawingSizeValueChanged);
-            // 
-            // buttonColorPicker
-            // 
-            this.buttonColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonColorPicker.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonColorPicker.FlatAppearance.BorderColor = System.Drawing.Color.DarkGray;
-            this.buttonColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonColorPicker.Location = new System.Drawing.Point(74, 19);
-            this.buttonColorPicker.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonColorPicker.Name = "buttonColorPicker";
-            this.buttonColorPicker.Size = new System.Drawing.Size(75, 21);
-            this.buttonColorPicker.TabIndex = 7;
-            this.buttonColorPicker.UseVisualStyleBackColor = false;
-            this.buttonColorPicker.Click += new System.EventHandler(this.buttonColorPickerClick);
-            // 
-            // labelColor
-            // 
-            this.labelColor.AutoSize = true;
-            this.labelColor.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.labelColor.Location = new System.Drawing.Point(38, 21);
-            this.labelColor.Name = "labelColor";
-            this.labelColor.Size = new System.Drawing.Size(31, 19);
-            this.labelColor.TabIndex = 5;
-            this.labelColor.Text = "Cor";
-            // 
-            // labelSize
-            // 
-            this.labelSize.AutoSize = true;
-            this.labelSize.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.labelSize.Location = new System.Drawing.Point(182, 21);
-            this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(64, 19);
-            this.labelSize.TabIndex = 6;
-            this.labelSize.Text = "Tamanho";
             // 
             // labelTemplate
             // 
@@ -729,9 +659,6 @@ namespace DMMDigital
             this.panel1.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            this.panelToolOptions.ResumeLayout(false);
-            this.panelToolOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).EndInit();
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
@@ -776,10 +703,6 @@ namespace DMMDigital
         private System.Windows.Forms.Panel panelToolOptions;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown numericUpDownDrawingSize;
-        private System.Windows.Forms.Button buttonColorPicker;
-        private System.Windows.Forms.Label labelColor;
-        private System.Windows.Forms.Label labelSize;
         private Panel panel1;
         private Label label4;
         private FlowLayoutPanel flowLayoutPanel1;

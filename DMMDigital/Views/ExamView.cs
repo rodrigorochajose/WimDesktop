@@ -24,6 +24,10 @@ namespace DMMDigital
 
         int patientId, counterDrawings = 0, indexFrame = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
+        NumericUpDown numericUpDownDrawingSize = null;
+        Button buttonColorPicker = null;
+        PictureBox pictureBoxMagnifier = null;
+        TrackBar trackBarZoom = null;
 
         Color drawingColor = Color.Red;
         float drawingSize = 5;
@@ -195,6 +199,10 @@ namespace DMMDigital
             Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
             if (selectedButton != null)
             {
+                if (selectedButton.Name == "buttonZoom")
+                {
+                    panel2.Controls.Remove(pictureBoxMagnifier);
+                }
                 selectedButton.BackColor = Color.WhiteSmoke;
                 selectedButton.Tag = "selectable";
             }
@@ -204,36 +212,126 @@ namespace DMMDigital
 
         private void loadToolOptions()
         {
-            if (action == 8)
+            panelToolOptions.Controls.Clear();
+            switch (action)
             {
-                panelToolOptions.Controls.Clear();
+                case 2:
+                    // regua
 
-                TrackBar trackBarZoom = new TrackBar
-                {
-                    Location = new Point(11, 11),
-                    Minimum = 1,
-                    Value = 1,
-                    Name = "trackBarZoom",
-                    Size = new Size(338, 45)
-                };
+                    break;
 
-                panelToolOptions.Controls.Add(trackBarZoom);
+                case 3:
+                    generateControlDrawingOption();
+                    break;
 
-            } 
-            else
-            {
-                if (action == 4)
-                {
-                    drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                    numericUpDownDrawingSize.Value = textDrawingPreviousSize;
-                } else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
-                {
-                    textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-                    numericUpDownDrawingSize.Value = drawingPreviousSize;
-                }
+                case 4:
+                    generateControlDrawingOption();
+                    break;
+
+                case 5:
+                    generateControlDrawingOption();
+                    break;
+
+                case 6:
+                    generateControlDrawingOption();
+                    break;
+
+                case 7:
+                    generateControlDrawingOption();
+                    break;
+
+                case 8:
+                    trackBarZoom = new TrackBar
+                    {
+                        Location = new Point(11, 11),
+                        Minimum = 1,
+                        Value = 1,
+                        Name = "trackBarZoom",
+                        Size = new Size(338, 45)
+                    };
+
+                    panelToolOptions.Controls.Add(trackBarZoom);
+                    //panelToolOptions.Controls.SetChildIndex(trackBarZoom, 0);
+                    //panelToolOptions.Refresh();
+                    break;
             }
 
-            panelToolOptions.Visible = true;
+            //    if (action == 4)
+            //    {
+            //        drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+            //        numericUpDownDrawingSize.Value = textDrawingPreviousSize;
+            //    } 
+            //    else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
+            //    {
+            //        textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+            //        numericUpDownDrawingSize.Value = drawingPreviousSize;
+            //    }
+
+        }
+
+        private void generateControlDrawingOption()
+        {
+            int value;
+            if (action == 4)
+            {
+                value = textDrawingPreviousSize;
+            }
+            else
+            {
+                value = drawingPreviousSize;
+            }
+
+            numericUpDownDrawingSize = new NumericUpDown
+            {
+                Cursor = Cursors.Hand,
+                Font = new Font("Segoe UI", 9F),
+                Location = new Point(254, 19),
+                Maximum = 70,
+                Minimum = 5,
+                Name = "numericUpDownDrawingSize",
+                Size = new Size(75, 23),
+                Value = value,
+            };
+            numericUpDownDrawingSize.ValueChanged += numericUpDownDrawingSizeValueChanged;
+
+            buttonColorPicker = new Button
+            {
+                BackColor = Color.Red,
+                Cursor = Cursors.Hand,
+                FlatStyle = FlatStyle.Popup,
+                Location = new Point(74, 19),
+                Margin = new Padding(0),
+                Name = "buttonColorPicker",
+                Size = new Size(75, 21),
+                UseVisualStyleBackColor = false,
+            };
+            buttonColorPicker.FlatAppearance.BorderColor = Color.Black;
+            buttonColorPicker.Click += buttonColorPickerClick;
+
+            Label labelColor = new Label
+            {
+                Name = "labelColor",
+                Text = "Cor",
+                AutoSize = true,
+                Size = new Size(31, 19),
+                Location = new Point(38, 21),
+                Font = new Font("Segoe UI", 10F),
+            };
+
+            Label labelSize = new Label
+            {
+                Name = "labelSize",
+                Text = "Tamanho",
+                AutoSize = true,
+                Size = new Size(64, 19),
+                Location = new Point(182, 21),
+                Font = new Font("Segoe UI", 10F),
+            };
+
+            panelToolOptions.Controls.Add(numericUpDownDrawingSize);
+            panelToolOptions.Controls.Add(buttonColorPicker);
+            panelToolOptions.Controls.Add(labelColor);
+            panelToolOptions.Controls.Add(labelSize);
         }
 
         private string getTextToDraw()
@@ -399,13 +497,13 @@ namespace DMMDigital
 
         private void buttonExportClick(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes) 
+            if (result == DialogResult.Yes)
             {
                 File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
                 selectedFrame.Image = drawFrameImage(selectedFrame);
@@ -427,7 +525,7 @@ namespace DMMDigital
 
         private void buttonMoveClick(object sender, EventArgs e)
         {
-            panelToolOptions.Visible = false;
+            panelToolOptions.Controls.Clear();
             selectTool(sender);
             action = 1;
         }
@@ -437,11 +535,13 @@ namespace DMMDigital
             action = 8;
             loadToolOptions();
             selectTool(sender);
-            PictureBox pictureBoxMagnifier = new PictureBox
+
+            pictureBoxMagnifier = new PictureBox
             {
                 Location = new Point(812, 205),
                 Name = "pictureBoxMagnifier",
-                Size = new Size(200, 200)
+                Size = new Size(200, 200),
+                Image = new Bitmap(mainFrame.Width, mainFrame.Height)
             };
             panel2.Controls.Add(pictureBoxMagnifier);
             panel2.Controls.SetChildIndex(pictureBoxMagnifier, 0);
@@ -756,16 +856,22 @@ namespace DMMDigital
                 {
                     currentDrawing.finalPosition = e.Location;
                 }
-
-                if (action == 8)
-                {
-
-                }
-
-
-
                 mainFrame.Invalidate();
             }
+            if (action == 8)
+            {
+                int rectangleWidth = pictureBoxMagnifier.Width / trackBarZoom.Value;
+                int rectangleHeight = pictureBoxMagnifier.Height / trackBarZoom.Value;
+
+                Point rectanglePosition = new Point(e.X - rectangleWidth / 2, e.Y - rectangleHeight / 2);
+
+                Rectangle rectangle = new Rectangle(rectanglePosition, new Size(rectangleWidth, rectangleHeight));
+                Graphics graphics = Graphics.FromImage(pictureBoxMagnifier.Image);
+                graphics.Clear(Color.White);
+                graphics.DrawImage(mainFrame.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
+                pictureBoxMagnifier.Refresh();
+            }
+
         }
 
         private void mainFrameMouseUp(object sender, MouseEventArgs e)
@@ -800,7 +906,7 @@ namespace DMMDigital
         private void mainFramePaint(object sender, PaintEventArgs e)
         {
             drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics));
-            
+
             if (draw && currentDrawing != null && action != 1)
             {
                 currentDrawing.draw(e.Graphics);
