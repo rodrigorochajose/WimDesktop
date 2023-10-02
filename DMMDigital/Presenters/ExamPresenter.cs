@@ -66,7 +66,7 @@ namespace DMMDigital.Presenters
                                 MessageBox.Show("Cmd_ClearAcq Ack succeed.");
                                 break;
                             case SdkInterface.Cmd_StartAcq:
-                                examView.loadImageOnMainFrame();
+                                examView.loadImageOnMainPictureBox();
                                 break;
                             case SdkInterface.Cmd_StopAcq:
                                 MessageBox.Show("Cmd_StopAcq Ack succeed.");

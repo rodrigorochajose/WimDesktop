@@ -69,7 +69,7 @@ namespace DMMDigital
             this.buttonImport = new System.Windows.Forms.Button();
             this.sensorConnection = new System.Windows.Forms.PictureBox();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
-            this.mainFrame = new System.Windows.Forms.PictureBox();
+            this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel3.SuspendLayout();
@@ -77,7 +77,7 @@ namespace DMMDigital
             this.panel4.SuspendLayout();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -609,26 +609,25 @@ namespace DMMDigital
             // 
             this.dialogFileImage.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
             // 
-            // mainFrame
+            // mainPictureBox
             // 
-            this.mainFrame.BackColor = System.Drawing.SystemColors.ControlText;
-            this.mainFrame.Dock = System.Windows.Forms.DockStyle.Right;
-            this.mainFrame.Location = new System.Drawing.Point(0, 0);
-            this.mainFrame.Margin = new System.Windows.Forms.Padding(0);
-            this.mainFrame.Name = "mainFrame";
-            this.mainFrame.Size = new System.Drawing.Size(1012, 648);
-            this.mainFrame.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.mainFrame.TabIndex = 0;
-            this.mainFrame.TabStop = false;
-            this.mainFrame.Paint += new System.Windows.Forms.PaintEventHandler(this.mainFramePaint);
-            this.mainFrame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseDown);
-            this.mainFrame.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseMove);
-            this.mainFrame.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainFrameMouseUp);
+            this.mainPictureBox.BackColor = System.Drawing.SystemColors.ControlText;
+            this.mainPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.mainPictureBox.Name = "mainPictureBox";
+            this.mainPictureBox.Size = new System.Drawing.Size(1012, 648);
+            this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.mainPictureBox.TabIndex = 0;
+            this.mainPictureBox.TabStop = false;
+            this.mainPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPictureBoxPaint);
+            this.mainPictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mainPictureBoxMouseDown);
+            this.mainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPictureBoxMouseMove);
+            this.mainPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainPictureBoxMouseUp);
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.panel2.Controls.Add(this.mainFrame);
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlText;
+            this.panel2.Controls.Add(this.mainPictureBox);
             this.panel2.Location = new System.Drawing.Point(363, 50);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
@@ -661,7 +660,7 @@ namespace DMMDigital
             this.panel4.PerformLayout();
             this.panelTools.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainFrame)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -697,7 +696,7 @@ namespace DMMDigital
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonRestore;
-        private System.Windows.Forms.PictureBox mainFrame;
+        private System.Windows.Forms.PictureBox mainPictureBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Panel panelToolOptions;

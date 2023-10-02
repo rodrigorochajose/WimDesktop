@@ -12,7 +12,7 @@ namespace DMMDigital.Views
 
         event EventHandler eventGetExamPath;
 
-        void loadImageOnMainFrame();
+        void loadImageOnMainPictureBox();
         void deleteCurrentImageToReplace();
         
     }

@@ -115,7 +115,6 @@ namespace DMMDigital
 
         private void frameHandler()
         {
-
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
 
@@ -160,7 +159,7 @@ namespace DMMDigital
             {
                 using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
                 {
-                    mainFrame.Image = Image.FromStream(fs);
+                    mainPictureBox.Image = Image.FromStream(fs);
                 }
             }
         }
@@ -170,20 +169,43 @@ namespace DMMDigital
             DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
             if (res == DialogResult.No) { return; }
             selectedFrame.Image = null;
-            mainFrame.Image = null;
+            mainPictureBox.Image = null;
             File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
         }
 
-        public void loadImageOnMainFrame()
+        public void loadImageOnMainPictureBox()
         {
             using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image image = Image.FromStream(fs);
-                mainFrame.Image = image;
+                mainPictureBox.Image = image;
                 generateImageThumbnail(image.Clone() as Image);
+                resizeMainPictureBox();
                 frameHandler();
                 enableTools();
             }
+        }
+
+        public void resizeMainPictureBox()
+        {
+            Size rectangleSize;
+            if (mainPictureBox.Width < mainPictureBox.Height)
+            {
+                rectangleSize = new Size(
+                    mainPictureBox.Width,
+                    mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
+                );
+            }
+            else
+            {
+                rectangleSize = new Size(
+                    mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                    mainPictureBox.Height
+                );
+            }
+
+            mainPictureBox.Size = rectangleSize;
+            mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
         }
 
         private void enableTools()
@@ -412,7 +434,7 @@ namespace DMMDigital
             drawingHistory[drawingHistoryIndex].Remove(drawingToRemove);
 
             drawingHistoryHandler();
-            mainFrame.Invalidate();
+            mainPictureBox.Invalidate();
         }
 
         private void showDrawingHistory(IDrawing drawing)
@@ -448,7 +470,7 @@ namespace DMMDigital
                 Text = "testando"
             };
 
-            pictureBox.Image = drawing.generateDrawingImageAndThumb(mainFrame.Width, mainFrame.Height);
+            pictureBox.Image = drawing.generateDrawingImageAndThumb(mainPictureBox.Width, mainPictureBox.Height);
             button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
 
             panel.Controls.Add(button);
@@ -484,7 +506,7 @@ namespace DMMDigital
             if (result == DialogResult.OK)
             {
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-                mainFrame.Image = selectedImage;
+                mainPictureBox.Image = selectedImage;
 
                 generateImageThumbnail(selectedImage.Clone() as Image);
                 selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
@@ -493,6 +515,8 @@ namespace DMMDigital
 
                 enableTools();
             }
+
+            resizeMainPictureBox();
         }
 
         private void buttonExportClick(object sender, EventArgs e)
@@ -507,7 +531,7 @@ namespace DMMDigital
             {
                 File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
                 selectedFrame.Image = drawFrameImage(selectedFrame);
-                mainFrame.Image = null;
+                mainPictureBox.Image = null;
             }
         }
 
@@ -538,10 +562,10 @@ namespace DMMDigital
 
             pictureBoxMagnifier = new PictureBox
             {
-                Location = new Point(812, 205),
+                Location = new Point(762, 205),
                 Name = "pictureBoxMagnifier",
-                Size = new Size(200, 200),
-                Image = new Bitmap(mainFrame.Width, mainFrame.Height)
+                Size = new Size(250, 250),
+                Image = new Bitmap(mainPictureBox.Width, mainPictureBox.Height)
             };
             panel2.Controls.Add(pictureBoxMagnifier);
             panel2.Controls.SetChildIndex(pictureBoxMagnifier, 0);
@@ -558,7 +582,7 @@ namespace DMMDigital
             if (drawingHistoryIndex - 1 > -1)
             {
                 drawingHistoryIndex--;
-                mainFrame.Invalidate();
+                mainPictureBox.Invalidate();
                 drawingHistoryHandler();
             }
         }
@@ -568,7 +592,7 @@ namespace DMMDigital
             if (drawingHistoryIndex + 1 < drawingHistory.Count)
             {
                 drawingHistoryIndex++;
-                mainFrame.Invalidate();
+                mainPictureBox.Invalidate();
                 drawingHistoryHandler();
             }
         }
@@ -615,18 +639,18 @@ namespace DMMDigital
 
         private void buttonRotateLeftClick(object sender, EventArgs e)
         {
-            Image currentFrame = mainFrame.Image;
+            Image currentFrame = mainPictureBox.Image;
             currentFrame.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            mainFrame.Image = currentFrame;
+            mainPictureBox.Image = currentFrame;
             frames[indexFrame - 1].Image = currentFrame;
             selectedFrame.Refresh();
         }
 
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
-            Image currentFrame = mainFrame.Image;
+            Image currentFrame = mainPictureBox.Image;
             currentFrame.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            mainFrame.Image = currentFrame;
+            mainPictureBox.Image = currentFrame;
             frames[indexFrame - 1].Image = currentFrame;
             selectedFrame.Refresh();
         }
@@ -645,7 +669,7 @@ namespace DMMDigital
                 drawingHistoryIndex = 0;
                 action = 0;
                 flowLayoutPanel1.Controls.Clear();
-                mainFrame.Invalidate();
+                mainPictureBox.Invalidate();
             }
         }
 
@@ -663,7 +687,7 @@ namespace DMMDigital
             selectedFrame.notes = textBoxFrameNotes.Text;
         }
 
-        private void mainFrameMouseDown(object sender, MouseEventArgs e)
+        private void mainPictureBoxMouseDown(object sender, MouseEventArgs e)
         {
             clickPosition = e.Location;
             if (action != 0)
@@ -746,7 +770,7 @@ namespace DMMDigital
                             drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex]) { currentDrawing });
                             drawingHistoryIndex = drawingHistory.LastIndexOf(drawingHistory.Last());
 
-                            mainFrame.Invalidate();
+                            mainPictureBox.Invalidate();
                             drawingHistoryHandler();
                         }
 
@@ -819,7 +843,7 @@ namespace DMMDigital
             }
         }
 
-        private void mainFrameMouseMove(object sender, MouseEventArgs e)
+        private void mainPictureBoxMouseMove(object sender, MouseEventArgs e)
         {
             if (draw)
             {
@@ -856,25 +880,30 @@ namespace DMMDigital
                 {
                     currentDrawing.finalPosition = e.Location;
                 }
-                mainFrame.Invalidate();
+                mainPictureBox.Invalidate();
             }
             if (action == 8)
             {
                 int rectangleWidth = pictureBoxMagnifier.Width / trackBarZoom.Value;
                 int rectangleHeight = pictureBoxMagnifier.Height / trackBarZoom.Value;
 
-                Point rectanglePosition = new Point(e.X - rectangleWidth / 2, e.Y - rectangleHeight / 2);
+                PointF rectangleInitialPosition = new PointF(
+                (e.X * mainPictureBox.Image.Width / mainPictureBox.Width) - rectangleWidth / 2,
+                (e.Y * mainPictureBox.Image.Height / mainPictureBox.Height) - rectangleHeight / 2
+                );
 
-                Rectangle rectangle = new Rectangle(rectanglePosition, new Size(rectangleWidth, rectangleHeight));
+                RectangleF rectangle = new RectangleF(rectangleInitialPosition, new Size(rectangleWidth, rectangleHeight));
+
                 Graphics graphics = Graphics.FromImage(pictureBoxMagnifier.Image);
                 graphics.Clear(Color.White);
-                graphics.DrawImage(mainFrame.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
+                graphics.DrawImage(mainPictureBox.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
+
                 pictureBoxMagnifier.Refresh();
             }
 
         }
 
-        private void mainFrameMouseUp(object sender, MouseEventArgs e)
+        private void mainPictureBoxMouseUp(object sender, MouseEventArgs e)
         {
             if (action != 0)
             {
@@ -899,11 +928,11 @@ namespace DMMDigital
                 drawingHistoryHandler();
 
                 draw = false;
-                mainFrame.Invalidate();
+                mainPictureBox.Invalidate();
             }
         }
 
-        private void mainFramePaint(object sender, PaintEventArgs e)
+        private void mainPictureBoxPaint(object sender, PaintEventArgs e)
         {
             drawingHistory[drawingHistoryIndex].ForEach(d => d.draw(e.Graphics));
 
@@ -912,6 +941,5 @@ namespace DMMDigital
                 currentDrawing.draw(e.Graphics);
             }
         }
-
     }
 }
