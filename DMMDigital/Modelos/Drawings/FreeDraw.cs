@@ -20,10 +20,12 @@ namespace DMMDigital
 
         public void draw(Graphics g)
         {
-            Pen pen = new Pen (drawingColor, drawingSize);
-            pen.StartCap = LineCap.Round;
-            pen.EndCap = LineCap.Round;
-            pen.LineJoin = LineJoin.Round;
+            Pen pen = new Pen(drawingColor, drawingSize)
+            {
+                StartCap = LineCap.Round,
+                EndCap = LineCap.Round,
+                LineJoin = LineJoin.Round
+            };
 
             graphicsPath = new GraphicsPath();
             graphicsPath.AddLines(points.ToArray());

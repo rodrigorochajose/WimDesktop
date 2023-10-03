@@ -31,7 +31,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -100,6 +100,7 @@
     <Compile Include="Modelos\Annonations\DateTimeRangeAttribute.cs" />
     <Compile Include="Detector.cs" />
     <Compile Include="EventReceiver.cs" />
+    <Compile Include="Modelos\Drawings\Ruler.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
