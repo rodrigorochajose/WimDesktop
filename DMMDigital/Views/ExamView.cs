@@ -707,6 +707,13 @@ namespace DMMDigital
 
                             switch (currentDrawing)
                             {
+                                case Ruler rl:
+                                    selectedDrawingToMove = new FreeDraw
+                                    {
+                                        points = new List<Point>((currentDrawing as Ruler).points)
+                                    };
+
+                                    break;
                                 case Ellipse el:
                                     selectedDrawingToMove = new Ellipse();
 
@@ -765,10 +772,11 @@ namespace DMMDigital
                     case 2:
                         if (e.Button == MouseButtons.Right)
                         {
+                            Console.WriteLine((currentDrawing as Ruler).points);
                             currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                            mainPictureBox.Refresh();
                             rulerDrawed = false;
                             draw = false;
-                            Console.WriteLine(currentDrawing);
                         }
                         else 
                         {
@@ -797,6 +805,7 @@ namespace DMMDigital
                             else
                             {
                                 (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
+
                                 currentDrawing.initialPosition = currentDrawing.finalPosition;
                             }
                         }
