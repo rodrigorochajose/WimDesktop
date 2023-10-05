@@ -772,8 +772,16 @@ namespace DMMDigital
                     case 2:
                         if (e.Button == MouseButtons.Right)
                         {
-                            Console.WriteLine((currentDrawing as Ruler).points);
-                            currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                            if ((currentDrawing as Ruler).points.Count > 1)
+                            {
+                                currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                            } 
+                            else
+                            {
+                                drawingHistory.Remove(drawingHistory.Last());
+                                drawingHistoryIndex--;
+                                currentDrawing.finalPosition = currentDrawing.initialPosition;
+                            }
                             mainPictureBox.Refresh();
                             rulerDrawed = false;
                             draw = false;
@@ -789,10 +797,12 @@ namespace DMMDigital
                                     initialPosition = e.Location,
                                     finalPosition = e.Location,
                                     points = new List<Point>(),
+                                    lineLength = new List<float>(),
                                     drawingColor = drawingColor,
-                                    drawingSize = drawingSize
+                                    drawingSize = 3
                                 };
                                 (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
+                                (currentDrawing as Ruler).lineLength.Add(0);
 
                                 drawingHistory.Add(new List<IDrawing>(drawingHistory[drawingHistoryIndex])
                                 {
@@ -805,7 +815,7 @@ namespace DMMDigital
                             else
                             {
                                 (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
-
+                                (currentDrawing as Ruler).lineLength.Add(getRulerLength());
                                 currentDrawing.initialPosition = currentDrawing.finalPosition;
                             }
                         }
@@ -994,8 +1004,28 @@ namespace DMMDigital
             }
             else if (action == 2)
             {
+                int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
+                (currentDrawing as Ruler).lineLength[index] = getRulerLength();
+
                 currentDrawing.drawPreview(e.Graphics);
             }
+        }
+
+        private float getRulerLength()
+        {
+            // 30 is sensor Width and 20 height -> i'm going to get from database these values
+            float scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
+            float scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
+
+            float initialPXImage = currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float initialPYImage = currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+            float finalPXImage = currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float finalPYImage = currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+
+
+            float lengthInMM = (float)Math.Sqrt(Math.Pow((initialPXImage - finalPXImage) / scalingFactorSensorImageWidth, 2) + Math.Pow((initialPYImage - finalPYImage) / scalingFactorSensorImageHeight, 2));
+            return lengthInMM;
+            
         }
     }
 }
