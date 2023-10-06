@@ -413,6 +413,23 @@ namespace DMMDigital
             return textBox.Text;
         }
 
+        private float getRulerLength()
+        {
+            // 30 is sensor Width and 20 height -> i'm going to get from database these values
+            float scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
+            float scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
+
+            float initialPXImage = currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float initialPYImage = currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+            float finalPXImage = currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float finalPYImage = currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+
+
+            float lengthInMM = (float)Math.Sqrt(Math.Pow((initialPXImage - finalPXImage) / scalingFactorSensorImageWidth, 2) + Math.Pow((initialPYImage - finalPYImage) / scalingFactorSensorImageHeight, 2));
+            return lengthInMM;
+
+        }
+
         private void verifyHistoryToReset()
         {
             if (drawingHistoryIndex == 0)
@@ -522,7 +539,9 @@ namespace DMMDigital
 
         private void buttonExportClick(object sender, EventArgs e)
         {
-
+            IExportExamView exportView = new ExportExamView();
+            exportView.framesToExport = frames;
+            (exportView as Form).ShowDialog();
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
@@ -1009,23 +1028,6 @@ namespace DMMDigital
 
                 currentDrawing.drawPreview(e.Graphics);
             }
-        }
-
-        private float getRulerLength()
-        {
-            // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            float scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
-            float scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
-
-            float initialPXImage = currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float initialPYImage = currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-            float finalPXImage = currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float finalPYImage = currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-
-
-            float lengthInMM = (float)Math.Sqrt(Math.Pow((initialPXImage - finalPXImage) / scalingFactorSensorImageWidth, 2) + Math.Pow((initialPYImage - finalPYImage) / scalingFactorSensorImageHeight, 2));
-            return lengthInMM;
-            
         }
     }
 }
