@@ -19,7 +19,6 @@ namespace DMMDigital.Presenters
         private IExamRepository examRepository;
         private IConfigRepository configRepository = new ConfigRepository();
 
-
         int m_nId;
 
         public ExamPresenter(IExamView view,  IExamRepository repository)

@@ -15,6 +15,7 @@ namespace DMMDigital
 {
     public partial class ExamView : Form, IExamView
     {
+        public string sessionName { get; set; }
         public string patientName { get; set; }
         public string templateName { get; set; }
         public string examPath { get; set; }
@@ -45,8 +46,12 @@ namespace DMMDigital
             InitializeComponent();
             ActiveControl = label1;
 
+            this.sessionName = sessionName;
+            this.patientName = patient.name;
+            this.templateName = templateName;
+
             patientId = patient.id;
-            labelPatient.Text = patient.name;
+            labelPatient.Text = patientName;
             labelTemplate.Text = templateName;
 
             drawTemplate(templateFrames);
@@ -527,7 +532,7 @@ namespace DMMDigital
                 mainPictureBox.Image = selectedImage;
 
                 generateImageThumbnail(selectedImage.Clone() as Image);
-                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
+                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
 
                 frameHandler();
 
@@ -539,8 +544,12 @@ namespace DMMDigital
 
         private void buttonExportClick(object sender, EventArgs e)
         {
-            IExportExamView exportView = new ExportExamView();
-            exportView.framesToExport = frames;
+            IExportExamView exportView = new ExportExamView
+            {
+                pathImages = examPath,
+                framesToExport = frames,
+                sessionName = sessionName
+            };
             (exportView as Form).ShowDialog();
         }
 
