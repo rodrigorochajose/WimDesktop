@@ -161,13 +161,15 @@ namespace DMMDigital
             selectedFrame.Refresh();
             indexFrame = selectedFrame.order - 1;
 
-            if (selectedFrame.photoTook == true)
-            {
-                using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
-                {
-                    mainPictureBox.Image = Image.FromStream(fs);
-                }
-            }
+            //if (selectedFrame.photoTook == true)
+            //{
+            //    using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            //    {
+            //        mainPictureBox.Image = Image.FromStream(fs);
+            //    }
+            //}
+            mainPictureBox.Image = selectedFrame.Image;
+            
         }
 
         public void deleteCurrentImageToReplace()
@@ -194,24 +196,27 @@ namespace DMMDigital
 
         public void resizeMainPictureBox()
         {
-            Size rectangleSize;
-            if (mainPictureBox.Width < mainPictureBox.Height)
+            mainPictureBox.Invoke((MethodInvoker)(() =>
             {
-                rectangleSize = new Size(
-                    mainPictureBox.Width,
-                    mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
-                );
-            }
-            else
-            {
-                rectangleSize = new Size(
-                    mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                    mainPictureBox.Height
-                );
-            }
+                Size rectangleSize;
+                if (mainPictureBox.Width < mainPictureBox.Height)
+                {
+                    rectangleSize = new Size(
+                        mainPictureBox.Width,
+                        mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
+                    );
+                }
+                else
+                {
+                    rectangleSize = new Size(
+                        mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                        mainPictureBox.Height
+                    );
+                }
 
-            mainPictureBox.Size = rectangleSize;
-            mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
+                mainPictureBox.Size = rectangleSize;
+                mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
+            }));
         }
 
         private void enableTools()
@@ -567,6 +572,12 @@ namespace DMMDigital
         private void buttonCompareClick(object sender, EventArgs e)
         {
             selectTool(sender);
+
+            IChooseFramesToCompare compareFrames = new ChooseFramesToCompare
+            {
+                framesToSelect = frames,
+            };
+            (compareFrames as Form).ShowDialog();
         }
 
         private void buttonSelectClick(object sender, EventArgs e)
