@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,9 @@ namespace DMMDigital.Modelos
         [Column("SESSION_NAME")]
         [DisplayName("Nome da Sessão")]
         public string sessionName { get; set; }
+
+        [Column("CREATED_AT")]
+        public DateTime createdAt { get; set; }
 
     }
 }

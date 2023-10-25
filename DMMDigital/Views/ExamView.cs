@@ -25,6 +25,7 @@ namespace DMMDigital
 
         int patientId, counterDrawings = 0, indexFrame = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
+        List<ImageFrame> originalImagesFrames = new List<ImageFrame>();
         NumericUpDown numericUpDownDrawingSize = null;
         Button buttonColorPicker = null;
         PictureBox pictureBoxMagnifier = null;
@@ -119,10 +120,16 @@ namespace DMMDigital
             return image;
         }
 
-        private void frameHandler()
+        private void frameHandler(Image image)
         {
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
+
+            originalImagesFrames.Add(new ImageFrame(selectedFrame.order, image));
+
+            Image imageClone = image.Clone() as Image;
+            selectedFrame.photoTook = true;
+            selectedFrame.Image = imageClone.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
 
             selectedFrame.Tag = Color.Black;
             selectedFrame.Invoke((MethodInvoker)(() => selectedFrame.Refresh()));
@@ -187,9 +194,8 @@ namespace DMMDigital
             {
                 Image image = Image.FromStream(fs);
                 mainPictureBox.Image = image;
-                generateImageThumbnail(image.Clone() as Image);
+                frameHandler(image);
                 resizeMainPictureBox();
-                frameHandler();
                 enableTools();
             }
         }
@@ -514,12 +520,6 @@ namespace DMMDigital
             drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistory(d));
         }
 
-        private void generateImageThumbnail(Image currentImage)
-        {
-            selectedFrame.photoTook = true;
-            selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-        }
-
         private void buttonImportClick(object sender, EventArgs e)
         {
             DialogResult result;
@@ -533,13 +533,18 @@ namespace DMMDigital
             result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
+                int indexFrameToRemove = originalImagesFrames.FindIndex(item => item.frame == selectedFrame.order);
+                if (indexFrameToRemove > -1)
+                {
+                    originalImagesFrames.RemoveAt(indexFrameToRemove);
+                }
+
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
                 mainPictureBox.Image = selectedImage;
 
-                generateImageThumbnail(selectedImage.Clone() as Image);
                 selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
 
-                frameHandler();
+                frameHandler(selectedImage);
 
                 enableTools();
             }
@@ -566,6 +571,8 @@ namespace DMMDigital
                 File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
                 selectedFrame.Image = drawFrameImage(selectedFrame);
                 mainPictureBox.Image = null;
+                int indexFrameToRemove = originalImagesFrames.FindIndex(item => item.frame == selectedFrame.order);
+                originalImagesFrames.RemoveAt(indexFrameToRemove);
             }
         }
 
@@ -576,6 +583,7 @@ namespace DMMDigital
             IChooseFramesToCompare compareFrames = new ChooseFramesToCompare
             {
                 framesToSelect = frames,
+                originalImagesFrames = originalImagesFrames
             };
             (compareFrames as Form).ShowDialog();
         }
