@@ -14,7 +14,8 @@ namespace DMMDigital.Views
         string patientRecommendation { get; set; }
         string patientObservation { get; set; }
         string sessionName { get; set; }
-        string selectedFrameName { get; }
+        int selectedTemplateId { get; }
+        string selectedTemplateName { get; }
         List<TemplateFrameModel> templateFrames { get; }
 
         event EventHandler eventAddNewTemplate;

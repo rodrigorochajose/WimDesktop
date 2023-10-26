@@ -29,12 +29,13 @@ namespace DMMDigital.Presenters
 
         private void showExamForm(object sender, EventArgs e)
         {
+
             PatientModel patient = new PatientModel
             {
                 id = chooseTemplateExamView.patientId,
                 name = chooseTemplateExamView.patientName,
             };
-            new ExamPresenter(new ExamView(patient, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedFrameName, chooseTemplateExamView.sessionName), new ExamRepository());
+            new ExamPresenter(new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName), new ExamRepository());
 
         }
 

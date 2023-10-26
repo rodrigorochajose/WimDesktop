@@ -7,7 +7,7 @@ namespace DMMDigital._Repositories
 {
     public class ConfigRepository : IConfigRepository
     {
-        Contexto<ConfigModel> context = new Contexto<ConfigModel>();
+        Context<ConfigModel> context = new Context<ConfigModel>();
 
         public string add(ConfigModel config)
         {

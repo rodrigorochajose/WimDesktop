@@ -16,14 +16,20 @@ namespace DMMDigital
     public partial class ExamView : Form, IExamView
     {
         public string sessionName { get; set; }
-        public string patientName { get; set; }
-        public string templateName { get; set; }
+        public int patientId { get; set; }
+        public int templateId { get; set; }
         public string examPath { get; set; }
         public Frame selectedFrame { get; set; }
 
+        public event EventHandler eventSaveExam;
         public event EventHandler eventGetExamPath;
 
-        int patientId, counterDrawings = 0, indexFrame = 0, action = 0, drawingHistoryIndex = 0, textDrawingPreviousSize = 26, drawingPreviousSize = 5;
+        int counterDrawings = 0;
+        int indexFrame = 0;
+        int action = 0;
+        int drawingHistoryIndex = 0;
+        int textDrawingPreviousSize = 26;
+        int drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
         List<ImageFrame> originalImagesFrames = new List<ImageFrame>();
         NumericUpDown numericUpDownDrawingSize = null;
@@ -42,26 +48,29 @@ namespace DMMDigital
         bool draw = false;
         bool rulerDrawed = false;
 
-        public ExamView(PatientModel patient, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
+        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
         {
             InitializeComponent();
+
+            Load += delegate { eventSaveExam?.Invoke(this, EventArgs.Empty); };
+
             ActiveControl = label1;
 
             this.sessionName = sessionName;
-            this.patientName = patient.name;
-            this.templateName = templateName;
 
             patientId = patient.id;
-            labelPatient.Text = patientName;
+            this.templateId = templateId;
+            labelPatient.Text = patient.name;
             labelTemplate.Text = templateName;
 
             drawTemplate(templateFrames);
-            Load += delegate
-            {
-                eventGetExamPath?.Invoke(this, EventArgs.Empty);
-                DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
-                examPath = di.FullName;
-            };
+        }
+
+        private void examViewLoad(object sender, EventArgs e)
+        {
+            eventGetExamPath?.Invoke(this, EventArgs.Empty);
+            DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
+            examPath = di.FullName;
         }
 
         private void drawTemplate(List<TemplateFrameModel> templateFrames)

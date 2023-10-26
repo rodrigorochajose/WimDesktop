@@ -8,7 +8,7 @@ namespace DMMDigital._Repositories
 {
     public class TemplateRepository : ITemplateRepository
     {
-        Contexto<TemplateModel> context = new Contexto<TemplateModel>();
+        Context<TemplateModel> context = new Context<TemplateModel>();
 
         public int add(TemplateModel template)
         {

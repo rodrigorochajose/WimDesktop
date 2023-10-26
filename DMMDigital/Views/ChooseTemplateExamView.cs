@@ -24,7 +24,7 @@ namespace DMMDigital.Forms
 
             buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
 
-            buttonCancelAction.Click += delegate { this.Close(); };
+            buttonCancelAction.Click += delegate { Close(); };
 
             comboBoxTemplate.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
         }
@@ -67,7 +67,12 @@ namespace DMMDigital.Forms
             set { textBoxSessionName.Text = value; }
         }
 
-        public string selectedFrameName
+        public int selectedTemplateId 
+        {
+            get { return int.Parse(comboBoxTemplate.SelectedValue.ToString()); }
+        }
+
+        public string selectedTemplateName
         { 
             get { return comboBoxTemplate.Text; } 
         }

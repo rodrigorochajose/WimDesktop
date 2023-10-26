@@ -8,7 +8,7 @@ namespace DMMDigital._Repositories
 {
     public class TemplateFrameRepository : ITemplateFrameRepository
     {
-        Contexto<TemplateFrameModel> context = new Contexto<TemplateFrameModel>();
+        Context<TemplateFrameModel> context = new Context<TemplateFrameModel>();
 
         public string add(int templateId, IList<Frame> framesList)
         {

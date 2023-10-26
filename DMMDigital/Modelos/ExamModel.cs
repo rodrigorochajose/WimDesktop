@@ -13,6 +13,9 @@ namespace DMMDigital.Modelos
         [Column("ID")]
         public int id { get; set; }
 
+        [Column("PATIENT_ID")]
+        public int patientId { get; set; }
+
         [Column("TEMPLATE_ID")]
         public int templateId { get; set; }
 

@@ -3,31 +3,57 @@ using DMMDigital.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
     public class ExamRepository : IExamRepository
     {
+        Context<ExamModel> context = new Context<ExamModel>();
+
         public void add(ExamModel exam)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                context.tabela.Add(exam);
+                context.SaveChanges();
 
-        public void delete(int id)
-        {
-            throw new NotImplementedException();
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
-
         public void edit(ExamModel exam)
         {
-            throw new NotImplementedException();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        public IEnumerable<PatientModel> selectExamsByPatient(int patientId)
+        public string delete(int examId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                context.tabela.Remove(context.tabela.Single(e => e.id == examId));
+                context.SaveChanges();
+                return "Exame deletado com sucesso !";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
+        public IEnumerable<ExamModel> selectExamsByPatient(int patientId)
+        {
+            return context.tabela.Where(e => e.patientId == patientId);
         }
     }
 }

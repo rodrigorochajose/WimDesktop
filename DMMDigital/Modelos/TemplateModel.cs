@@ -14,7 +14,5 @@ namespace DMMDigital.Modelos
 
         [Column("NAME")]
         public string name { get; set; }
-
-        
     }
 }

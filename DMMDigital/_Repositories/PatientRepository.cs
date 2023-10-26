@@ -1,18 +1,14 @@
-﻿using DMMDigital.Forms;
-using DMMDigital.Modelos;
+﻿using DMMDigital.Modelos;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DMMDigital._Repositories
 {
     public class PatientRepository : IPatientRepository
     {
-        Contexto<PatientModel> context = new Contexto<PatientModel>();
+        Context<PatientModel> context = new Context<PatientModel>();
 
         public string add(PatientModel patient)
         {

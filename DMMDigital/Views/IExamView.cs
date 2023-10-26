@@ -5,11 +5,13 @@ namespace DMMDigital.Views
 {
     public interface IExamView
     {
-        string patientName { get; set; }
-        string templateName { get; set; }
+        string sessionName { get; set; }
+        int patientId { get; set; }
+        int templateId { get; set; }
         string examPath { get; set; }
         Frame selectedFrame { get; set; }
 
+        event EventHandler eventSaveExam;
         event EventHandler eventGetExamPath;
 
         void loadImageOnMainPictureBox();

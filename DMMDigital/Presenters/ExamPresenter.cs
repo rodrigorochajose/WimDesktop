@@ -1,5 +1,6 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface;
+using DMMDigital.Modelos;
 using DMMDigital.Views;
 using iDetector;
 using System;
@@ -26,6 +27,7 @@ namespace DMMDigital.Presenters
             examView = view;
             examRepository = repository;
 
+            examView.eventSaveExam += saveExam;
             examView.eventGetExamPath += getExamPath;
 
             m_nId = Detector.CreateDetector(this);
@@ -33,6 +35,26 @@ namespace DMMDigital.Presenters
             d?.Connect();
 
             (examView as Form).ShowDialog();
+        }
+
+        private void saveExam(object sender, EventArgs e)
+        {
+            try
+            {
+                ExamModel exam = new ExamModel
+                {
+                    patientId = examView.patientId,
+                    templateId = examView.templateId,
+                    sessionName = examView.sessionName,
+                    createdAt = DateTime.Now
+                };
+            
+                examRepository.add(exam);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void getExamPath(object sender, EventArgs e)
