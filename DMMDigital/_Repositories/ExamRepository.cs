@@ -11,17 +11,18 @@ namespace DMMDigital._Repositories
     {
         Context<ExamModel> context = new Context<ExamModel>();
 
-        public void add(ExamModel exam)
+        public int add(ExamModel exam)
         {
             try
             {
                 context.tabela.Add(exam);
                 context.SaveChanges();
-
+                return context.tabela.OrderByDescending(e => e.id).First().id;
             } 
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return -1;
             }
         }
         public void edit(ExamModel exam)

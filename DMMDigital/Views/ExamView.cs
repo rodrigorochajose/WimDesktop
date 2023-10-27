@@ -10,11 +10,13 @@ using System.Windows.Forms;
 using DMMDigital.Views;
 using Emgu.CV.OCR;
 using DMMDigital.Modelos.Drawings;
+using System.Globalization;
 
 namespace DMMDigital
 {
     public partial class ExamView : Form, IExamView
     {
+        public int examId { get; set; }
         public string sessionName { get; set; }
         public int patientId { get; set; }
         public int templateId { get; set; }
@@ -31,6 +33,10 @@ namespace DMMDigital
         int textDrawingPreviousSize = 26;
         int drawingPreviousSize = 5;
         List<Frame> frames = new List<Frame>();
+
+        List<ExamImageModel> examImages = new List<ExamImageModel>();
+
+        // talvez não precise dessa lista abaixo
         List<ImageFrame> originalImagesFrames = new List<ImageFrame>();
         NumericUpDown numericUpDownDrawingSize = null;
         Button buttonColorPicker = null;
@@ -71,6 +77,8 @@ namespace DMMDigital
             eventGetExamPath?.Invoke(this, EventArgs.Empty);
             DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
             examPath = di.FullName;
+
+            Console.WriteLine(examId);
         }
 
         private void drawTemplate(List<TemplateFrameModel> templateFrames)
@@ -134,7 +142,27 @@ namespace DMMDigital
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
 
+            // talvez excluir
             originalImagesFrames.Add(new ImageFrame(selectedFrame.order, image));
+
+
+            DateTime imageDate;
+            if (selectedFrame.datePhotoTook != null)
+            {
+                imageDate = DateTime.ParseExact(selectedFrame.datePhotoTook, "dd-MM-yyyy hh:mm", CultureInfo.InvariantCulture);
+            } else
+            {
+                imageDate = DateTime.Now;
+            }
+
+            examImages.Add(new ExamImageModel
+            {
+                examId = examId,
+                frameId = selectedFrame.order,
+                file = selectedFrame.order + "-original.png",
+                notes = selectedFrame.notes,
+                createdAt = imageDate
+            });
 
             Image imageClone = image.Clone() as Image;
             selectedFrame.photoTook = true;
@@ -188,13 +216,14 @@ namespace DMMDigital
             
         }
 
-        public void deleteCurrentImageToReplace()
+        public bool dialogOverrideCurrentImage()
         {
             DialogResult res = MessageBox.Show("Confirma sobreescrever a imagem atual ?", "Sobrescrever Imagem", MessageBoxButtons.YesNo);
-            if (res == DialogResult.No) { return; }
-            selectedFrame.Image = null;
-            mainPictureBox.Image = null;
-            File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
+            if (res == DialogResult.No) 
+            { 
+                return false; 
+            }
+            return true;
         }
 
         public void loadImageOnMainPictureBox()
@@ -206,6 +235,7 @@ namespace DMMDigital
                 frameHandler(image);
                 resizeMainPictureBox();
                 enableTools();
+                saveExamChangesOnDatabase();
             }
         }
 
@@ -527,6 +557,7 @@ namespace DMMDigital
         {
             flowLayoutPanel1.Controls.Clear();
             drawingHistory[drawingHistoryIndex].ForEach(d => showDrawingHistory(d));
+            saveExamChangesOnDatabase();
         }
 
         private void buttonImportClick(object sender, EventArgs e)
@@ -559,6 +590,7 @@ namespace DMMDigital
             }
 
             resizeMainPictureBox();
+            saveExamChangesOnDatabase();
         }
 
         private void buttonExportClick(object sender, EventArgs e)
@@ -574,14 +606,14 @@ namespace DMMDigital
 
         private void buttonDeleteClick(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
+            if (dialogOverrideCurrentImage())
             {
                 File.Delete(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"));
                 selectedFrame.Image = drawFrameImage(selectedFrame);
                 mainPictureBox.Image = null;
                 int indexFrameToRemove = originalImagesFrames.FindIndex(item => item.frame == selectedFrame.order);
                 originalImagesFrames.RemoveAt(indexFrameToRemove);
+                saveExamChangesOnDatabase();
             }
         }
 
@@ -657,6 +689,7 @@ namespace DMMDigital
         private void buttonFilterClick(object sender, EventArgs e)
         {
             selectTool(sender);
+            // add function > saveExamChangesOnDatabase();
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
@@ -721,12 +754,13 @@ namespace DMMDigital
                 clickPosition = new Point();
                 drawingInitialPosition = new Point();
                 drawingFinalPosition = new Point();
-                currentDrawing = new Ellipse();
+                currentDrawing = new Ellipse(); 
                 selectedDrawingToMove = new Ellipse();
                 drawingHistoryIndex = 0;
                 action = 0;
                 flowLayoutPanel1.Controls.Clear();
                 mainPictureBox.Invalidate();
+                saveExamChangesOnDatabase();
             }
         }
 
@@ -1065,6 +1099,20 @@ namespace DMMDigital
 
                 currentDrawing.drawPreview(e.Graphics);
             }
+        }
+
+        private void saveExamChangesOnDatabase()
+        {
+            if (!timer1.Enabled)
+            {
+                timer1.Enabled = true;
+            }
+        }
+
+        private void timerTick(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            MessageBox.Show("vai salvar");
         }
     }
 }

@@ -5,7 +5,7 @@ namespace DMMDigital.Interface
 {
     public interface IExamRepository
     {
-        void add(ExamModel exam);
+        int add(ExamModel exam);
         void edit(ExamModel exam);
         string delete(int examId);
         IEnumerable<ExamModel> selectExamsByPatient(int patientId);

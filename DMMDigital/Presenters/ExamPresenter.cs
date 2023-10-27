@@ -49,7 +49,7 @@ namespace DMMDigital.Presenters
                     createdAt = DateTime.Now
                 };
             
-                examRepository.add(exam);
+                examView.examId = examRepository.add(exam);
             }
             catch (Exception ex)
             {
@@ -188,23 +188,28 @@ namespace DMMDigital.Presenters
                     break;
                 case SdkInterface.Evt_Image:
                     {
-                        if (examView.selectedFrame.photoTook == true)
+                        bool getImage = true;
+                        if (examView.selectedFrame.photoTook)
                         {
-                            examView.deleteCurrentImageToReplace();
+                            getImage = examView.dialogOverrideCurrentImage();
                         }
-                        IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
-                        int imageWidth = image.nWidth;
-                        int imageHeight = image.nHeight;
-                        short[] imageData = new short[imageWidth * imageHeight];
-                        Marshal.Copy(image.pData, imageData, 0, imageData.Length);
-                        for (int counter = 0; counter < imageData.Length; counter++)
+
+                        if (getImage)
                         {
-                            if (imageData[counter] > 0)
+                            IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
+                            int imageWidth = image.nWidth;
+                            int imageHeight = image.nHeight;
+                            short[] imageData = new short[imageWidth * imageHeight];
+                            Marshal.Copy(image.pData, imageData, 0, imageData.Length);
+                            for (int counter = 0; counter < imageData.Length; counter++)
                             {
-                                imageData[counter] = (short)(short.MaxValue - imageData[counter]);
+                                if (imageData[counter] > 0)
+                                {
+                                    imageData[counter] = (short)(short.MaxValue - imageData[counter]);
+                                }
                             }
+                            ConvertToBitmap(imageData, imageWidth, imageHeight);
                         }
-                        ConvertToBitmap(imageData, imageWidth, imageHeight);
                     }
                     break;
                 case SdkInterface.Evt_Prev_Image:

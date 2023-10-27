@@ -5,6 +5,7 @@ namespace DMMDigital.Views
 {
     public interface IExamView
     {
+        int examId { get; set; }
         string sessionName { get; set; }
         int patientId { get; set; }
         int templateId { get; set; }
@@ -15,7 +16,7 @@ namespace DMMDigital.Views
         event EventHandler eventGetExamPath;
 
         void loadImageOnMainPictureBox();
-        void deleteCurrentImageToReplace();
+        bool dialogOverrideCurrentImage();
         
     }
 }
