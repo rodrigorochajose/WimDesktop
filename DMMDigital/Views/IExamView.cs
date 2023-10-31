@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DMMDigital.Modelos;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace DMMDigital.Views
@@ -11,8 +13,10 @@ namespace DMMDigital.Views
         int templateId { get; set; }
         string examPath { get; set; }
         Frame selectedFrame { get; set; }
+        List<ExamImageModel> examImages { get; set; }
 
         event EventHandler eventSaveExam;
+        event EventHandler eventExamImageSaveChanges;
         event EventHandler eventGetExamPath;
 
         void loadImageOnMainPictureBox();

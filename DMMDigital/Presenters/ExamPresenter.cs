@@ -18,6 +18,7 @@ namespace DMMDigital.Presenters
     {
         private IExamView examView;
         private IExamRepository examRepository;
+        private IExamImageRepository examImageRepository = new ExamImageRepository();
         private IConfigRepository configRepository = new ConfigRepository();
 
         int m_nId;
@@ -28,6 +29,7 @@ namespace DMMDigital.Presenters
             examRepository = repository;
 
             examView.eventSaveExam += saveExam;
+            examView.eventExamImageSaveChanges += saveExamImage;
             examView.eventGetExamPath += getExamPath;
 
             m_nId = Detector.CreateDetector(this);
@@ -50,6 +52,18 @@ namespace DMMDigital.Presenters
                 };
             
                 examView.examId = examRepository.add(exam);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void saveExamImage(object sender, EventArgs e)
+        {
+            try
+            {
+                examImageRepository.save(examView.examImages);
             }
             catch (Exception ex)
             {
@@ -189,7 +203,7 @@ namespace DMMDigital.Presenters
                 case SdkInterface.Evt_Image:
                     {
                         bool getImage = true;
-                        if (examView.selectedFrame.photoTook)
+                        if (examView.selectedFrame.originalImage != null)
                         {
                             getImage = examView.dialogOverrideCurrentImage();
                         }
@@ -224,9 +238,6 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                examView.selectedFrame.photoTook = true;
-                examView.selectedFrame.datePhotoTook = DateTime.Now.ToString();
-
                 Bitmap pic = new Bitmap(widht, height, System.Drawing.Imaging.PixelFormat.Format16bppGrayScale);
 
                 Rectangle dimension = new Rectangle(0, 0, pic.Width, pic.Height);
@@ -254,7 +265,6 @@ namespace DMMDigital.Presenters
                 SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-radiografia.png"));
 
                 pic.Dispose();
-
             }
             catch (Exception ex)
             {
@@ -264,7 +274,6 @@ namespace DMMDigital.Presenters
 
         private void SaveBmp(Bitmap bmp, string path)
         {
-
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
             BitmapData bitmapData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);

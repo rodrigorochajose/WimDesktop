@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital
@@ -7,7 +8,7 @@ namespace DMMDigital
     {
         public int order { get ; set; }
         public string orientation { get; set; }
-        public bool photoTook { get; set; }
+        public Image originalImage { get; set; }
         public string datePhotoTook { get; set; }
         public string notes { get; set; }
         

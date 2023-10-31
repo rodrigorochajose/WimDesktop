@@ -14,7 +14,7 @@ namespace DMMDigital.Interface
 
         void drawPreview(Graphics g);
         void draw(Graphics g);
-        Image generateDrawingImageAndThumb(int width, int height);
+        Image generateDrawingImageAndThumb(string path, int width, int height);
 
     }
 }
