@@ -24,38 +24,36 @@ namespace DMMDigital
         public List<ExamImageModel> examImages { get; set; }
 
         public event EventHandler eventSaveExam;
-        public event EventHandler eventExamImageSaveChanges;
         public event EventHandler eventGetExamPath;
+        public event EventHandler eventExamImageSaveChanges;
 
-        int counterDrawings = 0;
-        int indexFrame = 0;
         int action = 0;
-        int selectedDrawingHistoryIndex = 0;
-        int textDrawingPreviousSize = 26;
-        int drawingPreviousSize = 5;
-        List<Frame> frames = new List<Frame>();
-
-        NumericUpDown numericUpDownDrawingSize = null;
-        Button buttonColorPicker = null;
-        PictureBox pictureBoxMagnifier = null;
-        TrackBar trackBarZoom = null;
-
+        int indexFrame = 0;
         float drawingSize = 5;
-        Color drawingColor = Color.Red;
+        int counterDrawings = 0;
+        int drawingPreviousSize = 5;
+        int textDrawingPreviousSize = 26;
+        int indexSelectedDrawingHistory = 0;
 
-
-        FrameDrawingHistory f;
-        int index;
-
-        List<FrameDrawingHistory> frameDrawingHistories = new List<FrameDrawingHistory>();
-        List<List<IDrawing>> selectedDrawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
-        List<Point> pointsDifferenceFreeDrawing = new List<Point>();
-        Point clickPosition = new Point();
-        Point drawingInitialPosition = new Point();
-        Point drawingFinalPosition = new Point();
-        IDrawing currentDrawing, selectedDrawingToMove;
         bool draw = false;
         bool rulerDrawed = false;
+
+        Color drawingColor = Color.Red;
+        TrackBar trackBarZoom = null;
+        Button buttonColorPicker = null;
+        PictureBox pictureBoxMagnifier = null;
+        NumericUpDown numericUpDownDrawingSize = null;
+
+        List<Frame> frames = new List<Frame>();
+        List<Point> pointsDifferenceFreeDrawing = new List<Point>();
+        List<List<IDrawing>> selectedDrawingHistory = new List<List<IDrawing>>();
+        List<FrameDrawingHistory> frameDrawingHistories = new List<FrameDrawingHistory>();
+        
+        IDrawing currentDrawing;
+        IDrawing selectedDrawingToMove;
+        Point clickPosition = new Point();
+        Point drawingFinalPosition = new Point();
+        Point drawingInitialPosition = new Point();
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
         {
@@ -118,15 +116,13 @@ namespace DMMDigital
                 newFrame.Paint += framePaint;
 
                 frames.Add(newFrame);
-                frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>>(), ""));
+                frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { new List<IDrawing>() }, ""));
                 panelTemplate.Controls.Add(newFrame);
             }
 
-            frames[0].Tag = Color.LimeGreen;
-            selectedFrame = frames[0];
-            index = 0;
-            f = frameDrawingHistories.ElementAt(index);
-            f.drawingHistory.Add(new List<IDrawing>());
+            frames[indexFrame].Tag = Color.LimeGreen;
+            selectedFrame = frames[indexFrame];
+            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
         }
 
         // passar pro presenter?
@@ -173,13 +169,15 @@ namespace DMMDigital
 
 
             indexFrame++;
+            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
             selectedFrame.Invoke((MethodInvoker)(() => {
                 selectedFrame = frames[indexFrame];
                 selectedFrame.Tag = Color.LimeGreen;
                 selectedFrame.Refresh(); 
             }));
-            selectedDrawingHistory = frameDrawingHistories.First(fdh => fdh.frameId == selectedFrame.order).drawingHistory;
+            selectedDrawingHistoryHandler();
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -202,16 +200,16 @@ namespace DMMDigital
             selectedFrame.Refresh();
 
             selectedFrame = (Frame)sender;
+
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
             selectedFrame.Tag = Color.LimeGreen;
 
             selectedFrame.Refresh();
             indexFrame = selectedFrame.order - 1;
-
-            index = frameDrawingHistories.FindIndex(fdh => fdh.frameId == selectedFrame.order);
-            f = frameDrawingHistories.ElementAt(index);
-
+            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+            indexSelectedDrawingHistory = indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
 
             mainPictureBox.Image = selectedFrame.originalImage;
             mainPictureBox.Refresh();
@@ -488,7 +486,7 @@ namespace DMMDigital
 
         private void verifyHistoryToReset()
         {
-            if (selectedDrawingHistoryIndex == 0)
+            if (indexSelectedDrawingHistory == 0)
             {
                 selectedDrawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
             }
@@ -501,11 +499,11 @@ namespace DMMDigital
 
         private void deleteDrawingOnHistory(int drawingId)
         {
-            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[selectedDrawingHistoryIndex]));
-            selectedDrawingHistoryIndex = selectedDrawingHistory.LastIndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory]));
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
-            IDrawing drawingToRemove = selectedDrawingHistory[selectedDrawingHistoryIndex].Where(drawing => drawing.id == drawingId).First();
-            selectedDrawingHistory[selectedDrawingHistoryIndex].Remove(drawingToRemove);
+            IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Where(drawing => drawing.id == drawingId).First();
+            selectedDrawingHistory[indexSelectedDrawingHistory].Remove(drawingToRemove);
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
@@ -557,7 +555,7 @@ namespace DMMDigital
         private void selectedDrawingHistoryHandler()
         {
             flowLayoutPanel1.Controls.Clear();
-            selectedDrawingHistory[selectedDrawingHistoryIndex].ForEach(d => showDrawingHistory(d));
+            selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => showDrawingHistory(d));
             saveExamChangesOnDatabase();
         }
 
@@ -627,8 +625,7 @@ namespace DMMDigital
         }
 
         private void buttonSelectClick(object sender, EventArgs e)
-        {
-            Console.WriteLine("" + frameDrawingHistories + selectedDrawingHistory);
+        {   
             panelToolOptions.Visible = false;
             selectTool(sender);
             action = 0;
@@ -666,9 +663,9 @@ namespace DMMDigital
 
         private void buttonUndoClick(object sender, EventArgs e)
         {
-            if (selectedDrawingHistoryIndex - 1 > -1)
+            if (indexSelectedDrawingHistory - 1 > -1)
             {
-                selectedDrawingHistoryIndex--;
+                indexSelectedDrawingHistory--;
                 mainPictureBox.Invalidate();
                 selectedDrawingHistoryHandler();
             }
@@ -676,9 +673,9 @@ namespace DMMDigital
 
         private void buttonRedoClick(object sender, EventArgs e)
         {
-            if (selectedDrawingHistoryIndex + 1 < selectedDrawingHistory.Count)
+            if (indexSelectedDrawingHistory + 1 < selectedDrawingHistory.Count)
             {
-                selectedDrawingHistoryIndex++;
+                indexSelectedDrawingHistory++;
                 mainPictureBox.Invalidate();
                 selectedDrawingHistoryHandler();
             }
@@ -754,7 +751,7 @@ namespace DMMDigital
                 drawingFinalPosition = new Point();
                 currentDrawing = new Ellipse(); 
                 selectedDrawingToMove = new Ellipse();
-                selectedDrawingHistoryIndex = 0;
+                indexSelectedDrawingHistory = 0;
                 action = 0;
                 flowLayoutPanel1.Controls.Clear();
                 mainPictureBox.Invalidate();
@@ -787,7 +784,7 @@ namespace DMMDigital
                 switch (action)
                 {
                     case 1:
-                        currentDrawing = selectedDrawingHistory[selectedDrawingHistoryIndex].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, new Pen(Color.Red, 5)));
+                        currentDrawing = selectedDrawingHistory[indexSelectedDrawingHistory].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, new Pen(Color.Red, 5)));
                         if (currentDrawing != null)
                         {
                             drawingInitialPosition = currentDrawing.initialPosition;
@@ -848,12 +845,12 @@ namespace DMMDigital
                             selectedDrawingToMove.initialPosition = new Point(currentDrawing.initialPosition.X, currentDrawing.initialPosition.Y);
                             selectedDrawingToMove.finalPosition = new Point(currentDrawing.finalPosition.X, currentDrawing.finalPosition.Y);
 
-                            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[selectedDrawingHistoryIndex])
+                            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
                             {
                                 selectedDrawingToMove
                             });
-                            selectedDrawingHistoryIndex = selectedDrawingHistory.LastIndexOf(selectedDrawingHistory.Last());
-                            selectedDrawingHistory[selectedDrawingHistoryIndex].Remove(currentDrawing);
+                            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                            selectedDrawingHistory[indexSelectedDrawingHistory].Remove(currentDrawing);
                         }
                         break;
 
@@ -867,7 +864,7 @@ namespace DMMDigital
                             else
                             {
                                 selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
-                                selectedDrawingHistoryIndex--;
+                                indexSelectedDrawingHistory--;
                                 currentDrawing.finalPosition = currentDrawing.initialPosition;
                             }
                             mainPictureBox.Refresh();
@@ -892,11 +889,11 @@ namespace DMMDigital
                                 (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
                                 (currentDrawing as Ruler).lineLength.Add(0);
 
-                                selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[selectedDrawingHistoryIndex])
+                                selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
                                 {
                                     currentDrawing
                                 });
-                                selectedDrawingHistoryIndex = selectedDrawingHistory.LastIndexOf(selectedDrawingHistory.Last());
+                                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
                                 rulerDrawed = true;
                             }
@@ -944,8 +941,11 @@ namespace DMMDigital
                                 drawingSize = drawingSize
                             };
 
-                            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[selectedDrawingHistoryIndex]) { currentDrawing });
-                            selectedDrawingHistoryIndex = selectedDrawingHistory.LastIndexOf(selectedDrawingHistory.Last());
+                            selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
+                            {
+                                currentDrawing
+                            });
+                            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
                             mainPictureBox.Invalidate();
                             selectedDrawingHistoryHandler();
@@ -1058,9 +1058,9 @@ namespace DMMDigital
         {
             if (action != 0)
             {
-                if (action != 1 && action != 2)
+                if (action > 2)
                 {
-                    verifyHistoryToReset();
+                    //verifyHistoryToReset();
                     
                     if (action == 3)
                     {
@@ -1070,22 +1070,22 @@ namespace DMMDigital
                         }
                     }
 
-                    f.drawingHistory.Add(new List<IDrawing>(f.drawingHistory[selectedDrawingHistoryIndex]){
-                            currentDrawing
+                    selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
+                    {
+                        currentDrawing
                     });
-                    selectedDrawingHistoryIndex = f.drawingHistory.LastIndexOf(selectedDrawingHistory.Last());
+                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                     draw = false;
                     mainPictureBox.Invalidate();
                 }
                 selectedDrawingToMove = null;
-                //selectedDrawingHistoryHandler();
+                selectedDrawingHistoryHandler();
             }
         }
 
         private void mainPictureBoxPaint(object sender, PaintEventArgs e)
         {
-            if (f.drawingHistory.Count > 0)
-            f.drawingHistory.Last().ForEach(d => d.draw(e.Graphics));
+            selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
 
             if (draw && currentDrawing != null && action != 1 && action != 2)
             {
