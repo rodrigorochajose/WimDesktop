@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DMMDigital._Repositories;
 using DMMDigital.Forms;
+using DMMDigital.Interface;
 using DMMDigital.Modelos;
 using DMMDigital.Views;
 
@@ -11,25 +13,39 @@ namespace DMMDigital.Presenters
     public class PatientPresenter
     {
         private IPatientView patientView;
-        private IPatientRepository repository;
+        private IPatientRepository patientRepository;
         private PatientModel selectedPatient;
-        private BindingSource pacientesBindingSource;
+        private BindingSource patientBindingSource;
         private IEnumerable<PatientModel> patientList;
+
+        private IExamRepository examRepository = new ExamRepository();
+        private IEnumerable<ExamModel> examList;
+        private BindingSource examBindingSource;
 
         public PatientPresenter(IPatientView view, IPatientRepository repository)
         {
-            pacientesBindingSource = new BindingSource();
+            patientBindingSource = new BindingSource();
+            examBindingSource = new BindingSource();
+
             patientView = view;
-            this.repository = repository;
+            patientRepository = repository;
 
             patientView.eventSearchPatient += searchPatient;
             patientView.eventShowAddPatientForm += showAddPatientForm;
             patientView.eventShowEditPatientForm += showEditPatientForm;
             patientView.eventDeletePatient += deletePatient;
 
-            patientView.setPatientList(pacientesBindingSource);
+            patientView.eventShowFormNewExam += newExam;
+            patientView.eventGetPatientExams += getExamByPatient;
+            patientView.eventOpenExam += openExam;
+            patientView.eventDeleteExam += deleteExam;
+            patientView.eventExportExam += exportExam;
 
-            carregarTodosPacientes();
+            patientView.setPatientList(patientBindingSource);
+            patientView.setExamList(examBindingSource);
+
+            getPatients();
+            getExamByPatient(this, EventArgs.Empty);
 
             (patientView as Form).ShowDialog();
         }
@@ -39,12 +55,12 @@ namespace DMMDigital.Presenters
             bool emptyValue = string.IsNullOrWhiteSpace(patientView.searchedValue);
             if (emptyValue == false)
             {
-                patientList = repository.getPatientsByName(patientView.searchedValue);
+                patientList = patientRepository.getPatientsByName(patientView.searchedValue);
             } else
             {
-                patientList = repository.getAllPatients();
+                patientList = patientRepository.getAllPatients();
             }
-            pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
@@ -52,7 +68,7 @@ namespace DMMDigital.Presenters
             IManipulatePatientView manipulatePatientView = new ManipulatePatientView("add");
             manipulatePatientView.eventAddNewPatient += addNewPatient;
             (manipulatePatientView as Form).ShowDialog();
-            carregarTodosPacientes();
+            getPatients();
         }
 
         private void showEditPatientForm(object sender, EventArgs e)
@@ -60,7 +76,7 @@ namespace DMMDigital.Presenters
             IManipulatePatientView manipulatePatientView = new ManipulatePatientView("edit");
             manipulatePatientView.eventSaveEditedPatient += saveEditedPatient;
 
-            selectedPatient = repository.getPatientById(patientView.selectedPatientId);
+            selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
             manipulatePatientView.patientId = selectedPatient.id;
             manipulatePatientView.patientName = selectedPatient.name;
             manipulatePatientView.patientBirthDate = selectedPatient.birthDate;
@@ -69,7 +85,7 @@ namespace DMMDigital.Presenters
             manipulatePatientView.patientObservation = selectedPatient.observation;
             (manipulatePatientView as Form).ShowDialog();
 
-            carregarTodosPacientes();
+            getPatients();
         }
 
         private void deletePatient(object sender, EventArgs e)
@@ -77,8 +93,8 @@ namespace DMMDigital.Presenters
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
-                MessageBox.Show(repository.delete(patientView.selectedPatientId));
-                carregarTodosPacientes();
+                MessageBox.Show(patientRepository.delete(patientView.selectedPatientId));
+                getPatients();
             }
         }
 
@@ -94,7 +110,7 @@ namespace DMMDigital.Presenters
                 selectedPatient.observation = (sender as ManipulatePatientView).patientObservation;
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
-                MessageBox.Show(repository.edit(selectedPatient));
+                MessageBox.Show(patientRepository.edit(selectedPatient));
                 (sender as ManipulatePatientView).Close();
             }
             catch (Exception ex)
@@ -117,7 +133,7 @@ namespace DMMDigital.Presenters
                 };
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
-                MessageBox.Show(repository.add(selectedPatient));
+                MessageBox.Show(patientRepository.add(selectedPatient));
                 (sender as ManipulatePatientView).Close();
             } 
             catch (Exception ex)
@@ -126,11 +142,56 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void carregarTodosPacientes()
+        private void getPatients()
         {
-            patientList = repository.getAllPatients();
-            pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
-            patientView.manipulateDataGridView();
+            patientList = patientRepository.getAllPatients();
+            patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
+            patientView.selectedPatientId = patientList.First().id;
+            patientView.manipulatePatientDataGridView();
+        }
+
+        private void newExam(object sender, EventArgs e)
+        {
+            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+
+            PatientModel selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
+            chooseTemplateView.patientId = selectedPatient.id;
+            chooseTemplateView.patientName = selectedPatient.name;
+            chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
+            chooseTemplateView.patientPhone = selectedPatient.phone;
+            chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
+            chooseTemplateView.patientObservation = selectedPatient.observation;
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository());
+        }
+
+        private void getExamByPatient(object sender, EventArgs e)
+        {
+            examList = examRepository.getPatientExams(patientView.selectedPatientId);
+            if (examList.Count() > 0)
+            {
+                examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
+                patientView.manipulateExamDataGridView();
+            }
+            else if (examBindingSource.DataSource != null)
+            {
+                examBindingSource.DataSource = null;
+            }
+        }
+
+        private void openExam(object sender, EventArgs e)
+        {
+            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true);
+        }
+
+        private void deleteExam(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exportExam(object sender, EventArgs e)
+        {
+
         }
     }
 }

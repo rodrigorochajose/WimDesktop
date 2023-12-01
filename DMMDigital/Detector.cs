@@ -1,9 +1,6 @@
 ﻿using iDetector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DMMDigital
 {
@@ -40,12 +37,11 @@ namespace DMMDigital
 
         }
 
-
         public static int CreateDetector(EventReceiver r)
         {
             Detector d = new Detector();
 
-            int nResult = SdkInterface.Create("C:\\IRay\\IRayIntraoral_x86\\work_dir\\Pluto0002X", d.handler, ref d.m_nDetectorID);
+            int nResult = SdkInterface.Create(@"C:\IRay\IRayIntraoral_x86\work_dir\Pluto0002X", d.handler, ref d.m_nDetectorID);
 
             if (nResult == SdkInterface.Err_OK)
             {

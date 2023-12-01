@@ -13,11 +13,16 @@ namespace DMMDigital.Modelos
         [Column("ID")]
         public int id { get; set; }
 
+        public virtual PatientModel patient { get; set; }
+
         [Column("PATIENT_ID")]
         public int patientId { get; set; }
 
+
         [Column("TEMPLATE_ID")]
         public int templateId { get; set; }
+
+        public virtual TemplateModel template { get; set; }
 
         [Column("SESSION_NAME")]
         [DisplayName("Nome da Sessão")]

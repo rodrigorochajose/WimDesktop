@@ -11,6 +11,7 @@ namespace DMMDigital.Views
     {
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
+        int selectedExamId { get; set; }
 
         // Eventos
         event EventHandler eventSearchPatient;
@@ -19,6 +20,7 @@ namespace DMMDigital.Views
         event EventHandler eventDeletePatient;
 
         event EventHandler eventShowFormNewExam;
+        event EventHandler eventGetPatientExams;
         event EventHandler eventOpenExam;
         event EventHandler eventDeleteExam;
         event EventHandler eventExportExam;
@@ -26,8 +28,10 @@ namespace DMMDigital.Views
 
         // Metodos
         void setPatientList(BindingSource patientList);
+        void setExamList(BindingSource examList);
 
-        void manipulateDataGridView();
+        void manipulatePatientDataGridView();
+        void manipulateExamDataGridView();
 
     }
 }

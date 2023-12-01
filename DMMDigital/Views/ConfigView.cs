@@ -6,6 +6,21 @@ namespace DMMDigital.Forms
 {
     public partial class ConfigView : Form, IConfigView
     {
+        public string imagePath 
+        {
+            get { return textBoxPath.Text; }
+            set { textBoxPath.Text = value; } 
+        }
+
+        public string sensorPath
+        {
+            get { return textBoxSensor.Text; }
+            set { textBoxSensor.Text = value; }
+        }
+
+        public event EventHandler loadConfigs;
+        public event EventHandler saveConfigs;
+
         public ConfigView()
         {
             InitializeComponent();
@@ -14,25 +29,24 @@ namespace DMMDigital.Forms
 
         private void associateEvents()
         {
-            this.Load += delegate { loadImagePath?.Invoke(this, EventArgs.Empty); };
+            Load += delegate { 
+                loadConfigs?.Invoke(this, EventArgs.Empty);
+
+            };
 
             textBoxPath.Click += delegate 
             {
-                this.folderBrowserDialog1.ShowDialog();
-                this.imagePath = folderBrowserDialog1.SelectedPath;
+                folderBrowserDialog1.ShowDialog();
+                imagePath = folderBrowserDialog1.SelectedPath;
             };
 
-            buttonSave.Click += delegate { saveImagePath?.Invoke(this, EventArgs.Empty); };
+            textBoxSensor.Click += delegate
+            {
+                folderBrowserDialog1.ShowDialog();
+                sensorPath = folderBrowserDialog1.SelectedPath;
+            };
+
+            buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
         }
-
-        public string imagePath 
-        {
-            get { return textBoxPath.Text; }
-            set { textBoxPath.Text = value; } 
-        }
-
-        public event EventHandler loadImagePath;
-        public event EventHandler saveImagePath;
-
     }
 }

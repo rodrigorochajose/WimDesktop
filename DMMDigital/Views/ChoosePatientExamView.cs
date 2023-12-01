@@ -22,7 +22,7 @@ namespace DMMDigital.Forms
             buttonNewPatient.Click += delegate { eventShowAddPatientView?.Invoke(this, EventArgs.Empty); };
             dataGridViewPatient.CellClick += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
             buttonSelectPatient.Click += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
-            buttonCancelAction.Click += delegate { this.Close(); };
+            buttonCancelAction.Click += delegate { Close(); };
         }
 
         public string searchedValue 
@@ -33,7 +33,7 @@ namespace DMMDigital.Forms
         public int selectedPatientId 
         {
             get { return int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString()); } 
-            set { this.selectedPatientId = value; }
+            set { selectedPatientId = value; }
         }
 
         public event EventHandler eventSearchPatient;

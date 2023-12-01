@@ -15,24 +15,30 @@ namespace DMMDigital.Presenters
         public ConfigPresenter(IConfigView view, IConfigRepository repository) {
             configView = view;
             configRepository = repository;
-            configView.saveImagePath += saveImagePath;
-            configView.loadImagePath += loadImagePath;
+            configView.saveConfigs += saveConfigs;
+            configView.loadConfigs += loadConfigs;
 
             (configView as Form).ShowDialog();
         }
 
-        private void loadImagePath(object sender, EventArgs e)
+        private void loadConfigs(object sender, EventArgs e)
         {
-            configView.imagePath = configRepository.getAllConfig().examPath;
+            ConfigModel config = configRepository.getAllConfig();
+
+            configView.imagePath = config.examPath;
+            configView.sensorPath = config.sensorPath;
         }
 
-        private void saveImagePath(object sender, EventArgs e)
+        private void saveConfigs(object sender, EventArgs e)
         {
             try
             {
-                ConfigModel selectedConfig = configRepository.getAllConfig();
-                selectedConfig.examPath = configView.imagePath;
-                MessageBox.Show(configRepository.edit(selectedConfig));
+                ConfigModel config = new ConfigModel
+                {
+                    examPath = configView.imagePath,
+                    sensorPath = configView.sensorPath,
+                };
+                MessageBox.Show(configRepository.save(config));
                 (sender as ConfigView).Close();
             }
             catch (Exception ex)

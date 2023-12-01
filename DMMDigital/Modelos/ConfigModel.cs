@@ -11,5 +11,8 @@ namespace DMMDigital.Modelos
 
         [Column("EXAM_PATH")]
         public string examPath { get; set; }
+
+        [Column("SENSOR_PATH")]
+        public string sensorPath { get; set; }
     }
 }

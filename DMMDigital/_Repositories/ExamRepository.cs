@@ -2,6 +2,7 @@
 using DMMDigital.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 
@@ -9,15 +10,15 @@ namespace DMMDigital._Repositories
 {
     public class ExamRepository : IExamRepository
     {
-        Context<ExamModel> context = new Context<ExamModel>();
+        Context context = new Context();
 
         public int add(ExamModel exam)
         {
             try
             {
-                context.tabela.Add(exam);
+                context.exam.Add(exam);
                 context.SaveChanges();
-                return context.tabela.OrderByDescending(e => e.id).First().id;
+                return context.exam.OrderByDescending(e => e.id).First().id;
             } 
             catch (Exception ex)
             {
@@ -25,11 +26,12 @@ namespace DMMDigital._Repositories
                 return -1;
             }
         }
+
         public void edit(ExamModel exam)
         {
             try
             {
-                context.SaveChanges();
+                context.SaveChanges(); 
             }
             catch (Exception ex)
             {
@@ -41,7 +43,7 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                context.tabela.Remove(context.tabela.Single(e => e.id == examId));
+                context.exam.Remove(context.exam.Single(e => e.id == examId));
                 context.SaveChanges();
                 return "Exame deletado com sucesso !";
             }
@@ -51,10 +53,14 @@ namespace DMMDigital._Repositories
             }
         }
 
-
-        public IEnumerable<ExamModel> selectExamsByPatient(int patientId)
+        public IEnumerable<ExamModel> getPatientExams(int patientId)
         {
-            return context.tabela.Where(e => e.patientId == patientId);
+            return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).ToList();
+        }
+
+        public ExamModel getExam(int examId)
+        {
+            return context.exam.Where(e => e.id == examId).Include(e => e.patient).Include(e => e.template).First();
         }
     }
 }

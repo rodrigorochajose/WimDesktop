@@ -8,13 +8,13 @@ namespace DMMDigital._Repositories
 {
     public class PatientRepository : IPatientRepository
     {
-        Context<PatientModel> context = new Context<PatientModel>();
+        Context context = new Context();
 
         public string add(PatientModel patient)
         {
             try
             {
-                context.tabela.Add(patient);
+                context.patient.Add(patient);
                 context.SaveChanges();
 
                 Directory.CreateDirectory(@"C:\Users\USER\.novowimdesktop\img\Paciente-" + patient.id);
@@ -42,7 +42,7 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                context.tabela.Remove(context.tabela.Single(p => p.id == patientId));
+                context.patient.Remove(context.patient.Single(p => p.id == patientId));
                 context.SaveChanges();
                 return "Paciente Removido com sucesso !";
             } catch (Exception ex)
@@ -52,17 +52,17 @@ namespace DMMDigital._Repositories
         }
         public IEnumerable<PatientModel> getAllPatients()
         {
-            return context.tabela;
+            return context.patient;
         }
 
         public PatientModel getPatientById(int patientId)
         {
-            return context.tabela.Single(p => p.id == patientId);
+            return context.patient.Single(p => p.id == patientId);
         }
 
         public IEnumerable<PatientModel> getPatientsByName(string value)
         {
-            return context.tabela.Where(p => p.name.ToLower().Contains(value.ToLower()));
+            return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower()));
         }
        
     }

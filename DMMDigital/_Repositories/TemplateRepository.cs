@@ -8,11 +8,11 @@ namespace DMMDigital._Repositories
 {
     public class TemplateRepository : ITemplateRepository
     {
-        Context<TemplateModel> context = new Context<TemplateModel>();
+        Context context = new Context();
 
         public int add(TemplateModel template)
         {
-            context.tabela.Add(template);
+            context.template.Add(template);
             context.SaveChanges();
             return template.id;
         }
@@ -24,7 +24,7 @@ namespace DMMDigital._Repositories
 
         public List<TemplateModel> getAllTemplates()
         {
-            return context.tabela.OrderBy(template => template.id).ToList();
+            return context.template.OrderBy(template => template.id).ToList();
         }
     }
 }

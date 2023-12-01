@@ -5,6 +5,62 @@ namespace DMMDigital.Views
 {
     public partial class PatientView : Form, IPatientView
     {
+
+        public string searchedValue 
+        {
+            get { return textBoxSearchPatient.Text; }
+            set { textBoxSearchPatient.Text = value; }
+        }
+        public int selectedPatientId { get; set; }
+        public int selectedExamId { get; set; }
+
+        public event EventHandler eventSearchPatient;
+        public event EventHandler eventShowAddPatientForm;
+        public event EventHandler eventShowEditPatientForm;
+        public event EventHandler eventDeletePatient;
+        
+        public event EventHandler eventShowFormNewExam;
+        public event EventHandler eventGetPatientExams;
+        public event EventHandler eventOpenExam;
+        public event EventHandler eventDeleteExam;
+        public event EventHandler eventExportExam;
+
+        public void setPatientList(BindingSource patientList)
+        {
+            dataGridViewPatient.DataSource = patientList;
+        }
+
+        public void setExamList(BindingSource examList)
+        {
+            dataGridViewExam.DataSource = examList;
+        }
+
+        public void manipulatePatientDataGridView()
+        {
+            dataGridViewPatient.Columns["id"].Visible = false;
+            edit.Frozen = true;
+            edit.Image = Properties.Resources.icon_32x32_pencil2;
+            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            delete.Frozen = true;
+            delete.Image = Properties.Resources.icon_32x32_delete;
+            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+        }
+
+        public void manipulateExamDataGridView()
+        {
+            dataGridViewExam.Columns["id"].Visible = false;
+            dataGridViewExam.Columns["templateID"].Visible = false;
+
+            dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
+            dataGridViewExam.Columns[2].Width = 195;
+
+            dataGridViewExam.Columns[3].HeaderText = "Data de Nascimento";
+            dataGridViewExam.Columns[3].Width = 130;
+
+            dataGridViewExam.Columns[4].HeaderText = "Template";
+            dataGridViewExam.Columns[4].Width = 185;
+        }
+
         public PatientView()
         {
             InitializeComponent();
@@ -35,52 +91,46 @@ namespace DMMDigital.Views
                 }
             };
 
+            dataGridViewExam.SelectionChanged += (s, e) =>
+            {
+                if (dataGridViewExam.SelectedCells.Count > 0)
+                {
+                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                    selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
+                }
+            };
+
             buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
 
             buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
 
             buttonNewExam.Click += delegate { eventShowFormNewExam?.Invoke(this, EventArgs.Empty); };
 
-            buttonOpenExam.Click += delegate { eventOpenExam?.Invoke(this, EventArgs.Empty); };
+            buttonOpenExam.Click += delegate {
+                if (selectedExamId == 0)
+                {
+                    MessageBox.Show("Nenhum Exame foi selecionado!");
+                } 
+                else
+                {
+                    eventOpenExam?.Invoke(this, EventArgs.Empty); 
+                }
+            };
 
             buttonDeleteExam.Click += delegate { eventDeleteExam?.Invoke(this, EventArgs.Empty); };
 
             buttonExportExam.Click += delegate { eventExportExam?.Invoke(this, EventArgs.Empty); };
-
         }
 
-        public string searchedValue 
+        private void patientViewLoad(object sender, EventArgs e)
         {
-            get { return textBoxSearchPatient.Text; }
-            set { textBoxSearchPatient.Text = value; }
+
+            dataGridViewPatient.CurrentCellChanged += (s, ev) =>
+            {
+                selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString());
+                eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
+            };
+
         }
-        public int selectedPatientId { get; set; }
-
-        public event EventHandler eventSearchPatient;
-        public event EventHandler eventShowAddPatientForm;
-        public event EventHandler eventShowEditPatientForm;
-        public event EventHandler eventDeletePatient;
-        
-        public event EventHandler eventShowFormNewExam;
-        public event EventHandler eventOpenExam;
-        public event EventHandler eventDeleteExam;
-        public event EventHandler eventExportExam;
-
-        public void setPatientList(BindingSource patientList)
-        {
-            dataGridViewPatient.DataSource = patientList;
-        }
-
-        public void manipulateDataGridView()
-        {
-            dataGridViewPatient.Columns["id"].Visible = false;
-            edit.Frozen = true;
-            edit.Image = Properties.Resources.icon_32x32_pencil2;
-            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            delete.Frozen = true;
-            delete.Image = Properties.Resources.icon_32x32_delete;
-            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-        }
-
     }
 }

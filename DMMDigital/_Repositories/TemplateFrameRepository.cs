@@ -2,13 +2,14 @@
 using DMMDigital.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace DMMDigital._Repositories
 {
     public class TemplateFrameRepository : ITemplateFrameRepository
     {
-        Context<TemplateFrameModel> context = new Context<TemplateFrameModel>();
+        Context context = new Context();
 
         public string add(int templateId, IList<Frame> framesList)
         {
@@ -16,7 +17,7 @@ namespace DMMDigital._Repositories
             {
                 foreach (Frame frame in framesList)
                 {
-                    context.tabela.Add(new TemplateFrameModel
+                    context.templateFrame.Add(new TemplateFrameModel
                     {
                         templateId = templateId,
                         locationX = frame.Location.X,
@@ -36,7 +37,12 @@ namespace DMMDigital._Repositories
 
         public List<TemplateFrameModel> getAllTemplateFrame()
         {
-            return context.tabela.ToList();
+            return context.templateFrame.ToList();
+        }
+
+        public List<TemplateFrameModel> getTemplateFrame(int templateId)
+        {
+            return context.templateFrame.Where(t => t.templateId == templateId).ToList();
         }
     }
 }

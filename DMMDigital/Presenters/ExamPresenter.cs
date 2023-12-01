@@ -4,9 +4,11 @@ using DMMDigital.Modelos;
 using DMMDigital.Views;
 using iDetector;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -19,6 +21,8 @@ namespace DMMDigital.Presenters
         private IExamView examView;
         private IExamRepository examRepository;
         private IExamImageRepository examImageRepository = new ExamImageRepository();
+        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private IConfigRepository configRepository = new ConfigRepository();
 
         int m_nId;
@@ -29,14 +33,61 @@ namespace DMMDigital.Presenters
             examRepository = repository;
 
             examView.eventSaveExam += saveExam;
-            examView.eventExamImageSaveChanges += saveExamImage;
+            examView.eventSaveExamImage += saveExamImage;
+            examView.eventSaveExamImageDrawing += saveExamImageDrawing;
             examView.eventGetExamPath += getExamPath;
 
+            initializeExam();
+        }
+
+        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam)
+        {
+            examView = view;
+            examRepository = repository;
+
+            examView.eventSaveExamImage += saveExamImage;
+            examView.eventSaveExamImageDrawing += saveExamImageDrawing;
+            loadFullExam();
+
+            initializeExam();
+        }
+
+        public void initializeExam()
+        {
             m_nId = Detector.CreateDetector(this);
             Detector d = Detector.DetectorList[m_nId];
             d?.Connect();
 
             (examView as Form).ShowDialog();
+            Detector.DestroyDetector(m_nId);
+        }
+
+        private void loadFullExam()
+        {
+            try
+            {
+                ExamModel exam = examRepository.getExam(examView.examId);
+                examView.examId = exam.id;
+                examView.patientId = exam.patientId;
+                examView.sessionName = exam.sessionName;
+                getExamPath(this, EventArgs.Empty);
+
+                examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
+
+                examView.examPath = examView.examPath + $"\\Paciente-{examView.patientId}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
+                examView.templateId = exam.templateId;
+                examView.templateFrames = new List<TemplateFrameModel>();
+                examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
+                examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
+
+                List<ExamImageDrawingModel> examImageDrawing = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+                examView.examImageDrawings = examImageDrawing;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao carregar exame - {ex.Message}");
+            }
         }
 
         private void saveExam(object sender, EventArgs e)
@@ -55,7 +106,7 @@ namespace DMMDigital.Presenters
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"Exam - {ex.Message}");
             }
         }
 
@@ -67,7 +118,19 @@ namespace DMMDigital.Presenters
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show($"ExamImage - {ex.Message}");
+            }
+        }
+
+        private void saveExamImageDrawing(object sender, EventArgs e)
+        {
+            try
+            {
+               examImageDrawingRepository.save(examView.examImageDrawings);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"ExamImageDrawing - {ex.Message}");
             }
         }
 

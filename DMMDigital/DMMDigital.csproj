@@ -40,6 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +61,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -69,6 +72,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -97,7 +101,7 @@
     <Compile Include="FrameDrawingHistory.cs" />
     <Compile Include="ImageFrame.cs" />
     <Compile Include="Interface\IConfigRepository.cs" />
-    <Compile Include="Interface\IExamImageDrawing.cs" />
+    <Compile Include="Interface\IExamImageDrawingRepository.cs" />
     <Compile Include="Interface\IExamImageRepository.cs" />
     <Compile Include="Interface\IExamRepository.cs" />
     <Compile Include="Interface\ITemplateLayoutRepository.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="Modelos\Annonations\DateTimeRangeAttribute.cs" />
     <Compile Include="Detector.cs" />
     <Compile Include="EventReceiver.cs" />
+    <Compile Include="Modelos\Drawings\ImageDrawed.cs" />
     <Compile Include="Modelos\Drawings\Ruler.cs" />
     <Compile Include="Modelos\ExamImageDrawingModel.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
@@ -141,6 +146,12 @@
     <Compile Include="Views\ExportExamView.Designer.cs">
       <DependentUpon>ExportExamView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FilterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FilterView.Designer.cs">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IChooseFramesToCompare.cs" />
     <Compile Include="Views\IChooseTemplateExamView.cs" />
     <Compile Include="Views\IConfigView.cs" />
@@ -148,6 +159,7 @@
     <Compile Include="Views\IDialogGenerateTemplateView.cs" />
     <Compile Include="Views\IExamView.cs" />
     <Compile Include="Views\IExportExamView.cs" />
+    <Compile Include="Views\IFilterView.cs" />
     <Compile Include="Views\IManipulateTemplateView.cs" />
     <Compile Include="Views\ManipulatePatientView.cs">
       <SubType>Form</SubType>
@@ -229,6 +241,7 @@
       <DependentUpon>PatientView.cs</DependentUpon>
     </Compile>
     <Compile Include="_Repositories\ConfigRepository.cs" />
+    <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
     <Compile Include="_Repositories\ExamImageRepository.cs" />
     <Compile Include="_Repositories\ExamRepository.cs" />
     <Compile Include="_Repositories\PatientRepository.cs" />
@@ -245,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExportExamView.resx">
       <DependentUpon>ExportExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FilterView.resx">
+      <DependentUpon>FilterView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManipulatePatientView.resx">
       <DependentUpon>ManipulatePatientView.cs</DependentUpon>

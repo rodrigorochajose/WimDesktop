@@ -1,24 +1,19 @@
 ﻿using DMMDigital.Interface;
 using DMMDigital.Modelos;
 using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
-
 namespace DMMDigital._Repositories
 {
     public class ConfigRepository : IConfigRepository
     {
-        Context<ConfigModel> context = new Context<ConfigModel>();
+        Context context = new Context();
 
-        public string add(ConfigModel config)
+        public string save(ConfigModel config)
         {
-            throw new NotImplementedException();
-        }
-
-        public string edit(ConfigModel config)
-        {
-            Console.WriteLine(config);
             try
             {
+                context.config.AddOrUpdate(config);
                 context.SaveChanges();
                 return "Configuração Salva !";
             } 
@@ -30,12 +25,19 @@ namespace DMMDigital._Repositories
 
         public ConfigModel getAllConfig()
         {
-            return context.tabela.First();
+            try
+            {
+                return context.config.First();
+            }
+            catch
+            {
+                return new ConfigModel();
+            }
         }
 
         public string getExamPath()
         {
-            return context.tabela.First().examPath.ToString();
+            return context.config.First().examPath.ToString();
         }
     }
 }
