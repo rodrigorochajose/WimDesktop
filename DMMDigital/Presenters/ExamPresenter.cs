@@ -58,7 +58,9 @@ namespace DMMDigital.Presenters
             Detector d = Detector.DetectorList[m_nId];
             d?.Connect();
 
-            (examView as Form).ShowDialog();
+            new ExamContainerView(examView as ExamView);
+
+            //(examView as Form).ShowDialog();
             Detector.DestroyDetector(m_nId);
         }
 

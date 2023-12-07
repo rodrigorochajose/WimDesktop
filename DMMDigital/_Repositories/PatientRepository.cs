@@ -25,7 +25,8 @@ namespace DMMDigital._Repositories
                 return ex.Message;
             }
         }
-        public string edit(PatientModel paciente)
+
+        public string edit()
         {
             try
             {

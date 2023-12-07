@@ -9,7 +9,7 @@ namespace DMMDigital.Interface
 {
     public interface IConfigRepository
     {
-        string save(ConfigModel config);
+        string save();
         ConfigModel getAllConfig();
         string getExamPath();
     }

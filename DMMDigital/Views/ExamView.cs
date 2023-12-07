@@ -63,7 +63,6 @@ namespace DMMDigital
         {
             InitializeComponent();
 
-
             ActiveControl = label1;
 
             this.sessionName = sessionName;

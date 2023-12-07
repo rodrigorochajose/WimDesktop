@@ -110,7 +110,7 @@ namespace DMMDigital.Presenters
                 selectedPatient.observation = (sender as ManipulatePatientView).patientObservation;
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
-                MessageBox.Show(patientRepository.edit(selectedPatient));
+                MessageBox.Show(patientRepository.edit());
                 (sender as ManipulatePatientView).Close();
             }
             catch (Exception ex)

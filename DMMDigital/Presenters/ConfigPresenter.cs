@@ -9,6 +9,7 @@ namespace DMMDigital.Presenters
 {
     public class ConfigPresenter
     {
+        private ConfigModel currentConfig;
         private IConfigView configView;
         private IConfigRepository configRepository;
         
@@ -23,22 +24,19 @@ namespace DMMDigital.Presenters
 
         private void loadConfigs(object sender, EventArgs e)
         {
-            ConfigModel config = configRepository.getAllConfig();
+           currentConfig = configRepository.getAllConfig();
 
-            configView.imagePath = config.examPath;
-            configView.sensorPath = config.sensorPath;
+            configView.imagePath = currentConfig.examPath;
+            configView.sensorPath = currentConfig.sensorPath;
         }
 
         private void saveConfigs(object sender, EventArgs e)
         {
             try
             {
-                ConfigModel config = new ConfigModel
-                {
-                    examPath = configView.imagePath,
-                    sensorPath = configView.sensorPath,
-                };
-                MessageBox.Show(configRepository.save(config));
+                currentConfig.examPath = configView.imagePath;
+                currentConfig.sensorPath = configView.sensorPath;
+                MessageBox.Show(configRepository.save());
                 (sender as ConfigView).Close();
             }
             catch (Exception ex)

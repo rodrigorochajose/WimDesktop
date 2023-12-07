@@ -124,10 +124,9 @@ namespace DMMDigital.Views
 
         private void patientViewLoad(object sender, EventArgs e)
         {
-
             dataGridViewPatient.CurrentCellChanged += (s, ev) =>
             {
-                selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString());
+                selectedPatientId = int.Parse(dataGridViewPatient.Rows[0].Cells["id"].Value.ToString());
                 eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
             };
 

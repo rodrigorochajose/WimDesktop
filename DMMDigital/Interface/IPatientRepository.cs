@@ -5,7 +5,7 @@ namespace DMMDigital.Modelos
     public interface IPatientRepository
     {
         string add(PatientModel paciente);
-        string edit(PatientModel paciente);
+        string edit();
         string delete(int patientId);
         IEnumerable<PatientModel> getAllPatients();
         PatientModel getPatientById(int id);

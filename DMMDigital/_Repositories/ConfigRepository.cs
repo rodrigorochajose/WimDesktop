@@ -1,7 +1,6 @@
 ﻿using DMMDigital.Interface;
 using DMMDigital.Modelos;
 using System;
-using System.Data.Entity.Migrations;
 using System.Linq;
 namespace DMMDigital._Repositories
 {
@@ -9,11 +8,10 @@ namespace DMMDigital._Repositories
     {
         Context context = new Context();
 
-        public string save(ConfigModel config)
+        public string save()
         {
             try
             {
-                context.config.AddOrUpdate(config);
                 context.SaveChanges();
                 return "Configuração Salva !";
             } 
