@@ -35,6 +35,9 @@ namespace DMMDigital.Presenters
                 id = chooseTemplateExamView.patientId,
                 name = chooseTemplateExamView.patientName,
             };
+
+            (chooseTemplateExamView as Form).Close();
+
             new ExamPresenter(new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName), new ExamRepository());
 
         }

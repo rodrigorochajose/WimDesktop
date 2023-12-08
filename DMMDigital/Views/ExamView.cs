@@ -149,21 +149,23 @@ namespace DMMDigital
 
                 frames.Add(newFrame);
 
-
-                List<IDrawing> frameDrawings = new List<IDrawing>();
-
-                foreach(ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
+                if (examImageDrawings.Count != 0)
                 {
-                    frameDrawings.Add(new ImageDrawed
+                    List<IDrawing> frameDrawings = new List<IDrawing>();
+
+                    foreach(ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
                     {
-                        id = int.Parse(drawing.file.Substring(4, 1)),
-                        img = Image.FromFile(Path.Combine(examPath, drawing.file)),
-                    });
+                        frameDrawings.Add(new ImageDrawed
+                        {
+                            id = int.Parse(drawing.file.Substring(4, 1)),
+                            img = Image.FromFile(Path.Combine(examPath, drawing.file)),
+                        });
+                    }
+
+                    frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { frameDrawings }));
+
+                    panelTemplate.Controls.Add(newFrame);
                 }
-
-                frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { frameDrawings }));
-
-                panelTemplate.Controls.Add(newFrame);
             }
 
             frames[indexFrame].Tag = Color.LimeGreen;
