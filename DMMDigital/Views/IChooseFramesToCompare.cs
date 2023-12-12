@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
+using DMMDigital.Components;
 
 namespace DMMDigital.Views
 {
@@ -7,6 +7,5 @@ namespace DMMDigital.Views
     {
         List<Frame> framesToSelect { get; set; }
         List<Frame> selectedFrames { get; set; }
-
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using DMMDigital.Models;
+using System.Collections.Generic;
 
-namespace DMMDigital.Modelos
+namespace DMMDigital.Interface
 {
     public interface IPatientRepository
     {

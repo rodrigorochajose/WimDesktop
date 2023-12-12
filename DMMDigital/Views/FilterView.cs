@@ -1,14 +1,12 @@
 ﻿using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV;
-using Emgu.CV.Cuda;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Threading.Tasks;
-using ImageProcessor.Processors;
+using System.Runtime.InteropServices;
+using Emgu.CV.Util;
 
 namespace DMMDigital.Views
 {
@@ -17,83 +15,148 @@ namespace DMMDigital.Views
         public Bitmap originalImage { get; set; }
         public Bitmap editedImage { get; set; }
 
-        public FilterView()
+        public FilterView(Bitmap image)
         {
             InitializeComponent();
-        }
+            MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
 
-        private void FilterViewLoad(object sender, EventArgs e)
-        {
-            originalImage = new Bitmap(@"C:\Users\USER\.novowimdesktop\img\3-original.png");
-            editedImage = originalImage;
-            pictureBoxOriginalImage.Image = originalImage;
-            pictureBoxNewImage.Image = editedImage;
+            originalImage = image;
+            editedImage = image;
+            pictureBoxOriginalImage.Image = image;
+            pictureBoxEditedImage.Image = image;
         }
 
         private void applyFilters()
         {
-            if (trackBarBrightness.Value != 0 || trackBarContrast.Value != 0)
+            Bitmap image = (Bitmap)originalImage.Clone();
+
+            if (trackBarBrightness.Value != 0)
             {
-                adjustBrightnessAndContrast();
+                image = adjustBrightnessAndContrast(image, trackBarBrightness.Value / 4, 0);
+            }
+
+            if (trackBarContrast.Value != 0)
+            {
+                image = adjustBrightnessAndContrast(image, 0, trackBarContrast.Value);
             }
 
             if (trackBarReveal.Value != 0)
             {
-                adjustReveal();
+                image = adjustReveal(image);
             }
 
             if (trackBarSmartSharpen.Value != 0)
             {
-                adjustSmartSharpen();
+                image = adjustSmartSharpen(image);
             }
 
             if (trackBarSmartRadius.Value != 0)
             {
-                adjustSmartRadius();
+                image = adjustBrightnessAndContrast(image, 0, trackBarSmartRadius.Value);
             }
 
             if (checkBoxColorImage.Checked)
             {
-
+                image = colorImage(image, 0, 62, 158);
             }
 
             if (checkBoxPositiveNegative.Checked)
             {
-                invertColors();
+                image = invertColors(image);
             }
 
+            editedImage = image;
+            pictureBoxEditedImage.Image = editedImage;
         }
 
-        private void adjustBrightnessAndContrast()
+        private Bitmap adjustBrightnessAndContrast(Bitmap image, int brightnessParam, int contrastParam)
         {
-            float brightnessScale = 1 + (float)(trackBarBrightness.Value / 100.0);
-            float contrastScale = (float)Math.Pow((100.0 + trackBarContrast.Value) / 100.0, 2);
+            //float brightnessScale = 1 + (float)(trackBarBrightness.Value / 100.0);
+            //float contrastScale = (float)Math.Pow((100.0 + trackBarContrast.Value) / 100.0, 2);
 
-            ImageAttributes attributes = new ImageAttributes();
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+            //ImageAttributes attributes = new ImageAttributes();
+            //ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+            //{
+            //    new float[] {contrastScale, 0, 0, 0, 0},
+            //    new float[] {0, contrastScale, 0, 0, 0},
+            //    new float[] {0, 0, contrastScale, 0, 0},
+            //    new float[] {0, 0, 0, 1, 0},
+            //    new float[] {-0.5f * (contrastScale - 1), -0.5f * (contrastScale - 1), -0.5f * (contrastScale - 1), 0, 1}
+            //});
+
+            //colorMatrix.Matrix00 *= brightnessScale;
+            //colorMatrix.Matrix11 *= brightnessScale;
+            //colorMatrix.Matrix22 *= brightnessScale;
+
+            //attributes.SetColorMatrix(colorMatrix);
+
+            //using (Graphics g = Graphics.FromImage(image))
+            //{
+            //    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, attributes);
+            //}
+
+            //return image;
+
+            Mat editedImage = image.ToMat();
+
+            if (brightnessParam == 0 && contrastParam == 0)
             {
-                new float[] {contrastScale, 0, 0, 0, 0},
-                new float[] {0, contrastScale, 0, 0, 0},
-                new float[] {0, 0, contrastScale, 0, 0},
-                new float[] {0, 0, 0, 1, 0},
-                new float[] {-0.5f * (contrastScale - 1), -0.5f * (contrastScale - 1), -0.5f * (contrastScale - 1), 0, 1}
-            });
-
-            colorMatrix.Matrix00 *= brightnessScale;
-            colorMatrix.Matrix11 *= brightnessScale;
-            colorMatrix.Matrix22 *= brightnessScale;
-
-            attributes.SetColorMatrix(colorMatrix);
-
-            using (Graphics g = Graphics.FromImage(editedImage))
-            {
-                g.DrawImage(editedImage, new Rectangle(0, 0, editedImage.Width, editedImage.Height), 0, 0, editedImage.Width, editedImage.Height, GraphicsUnit.Pixel, attributes);
+                return (Bitmap)image.Clone();
             }
 
-            pictureBoxNewImage.Image = editedImage;
+            double brightnessValue = brightnessParam / 10.0;
+            double pow = (brightnessValue > 0) ? 1.0 / (brightnessValue + 1) : -brightnessValue + 1;
+            double normalize = Math.Pow(255, pow - 1);
+
+            double contrastValue = contrastParam * 2.55;
+            double contrastFactor = (259.0 * (contrastValue + 255)) / (255.0 * (259 - contrastValue));
+
+            byte[] lookup = new byte[256];
+            for (int i = 0; i < lookup.Length; i++)
+            {
+                double lookupValue = i; 
+                lookupValue = (contrastFactor * (Math.Pow(lookupValue, pow) / normalize - 128) + 128);
+                lookup[i] = (byte)(lookupValue < 0 ? 0 : (lookupValue > 255 ? 255 : lookupValue));
+            }
+
+            Mat dest = new Mat();
+            CvInvoke.CvtColor(editedImage, dest, ColorConversion.Bgr2Bgra);
+
+            byte[] destData = new byte[dest.Rows * dest.Cols * dest.NumberOfChannels];
+            Marshal.Copy(dest.DataPointer, destData, 0, destData.Length);
+
+            for (int i = 0; i < destData.Length; i += dest.NumberOfChannels)
+            {
+                byte a = destData[i + 3];
+                byte r = destData[i + 2];
+                byte g = destData[i + 1];
+                byte b = destData[i];
+
+                if (a == 0)
+                {
+                    Array.Clear(destData, i, dest.NumberOfChannels);
+                }
+                else
+                {
+                    r = lookup[r];
+                    g = lookup[g];
+                    b = lookup[b];
+
+                    destData[i] = b;
+                    destData[i + 1] = g;
+                    destData[i + 2] = r;
+                }
+            }
+
+            dest = new Mat(dest.Rows, dest.Cols, dest.Depth, dest.NumberOfChannels);
+            Marshal.Copy(destData, 0, dest.DataPointer, destData.Length);
+
+            Bitmap destBitmap = dest.ToImage<Bgra, byte>().ToBitmap();
+
+            return destBitmap;
         }
 
-        private void adjustReveal()
+        private Bitmap adjustReveal(Bitmap image)
         {
             //Mat grayImage = new Mat();
             //CvInvoke.CvtColor(inputImage, grayImage, ColorConversion.Bgr2Gray);
@@ -105,12 +168,13 @@ namespace DMMDigital.Views
             //CvInvoke.AddWeighted(grayImage, 2.0, blurredImage, -1.0, 0, unsharpMask);
             //CvInvoke.CvtColor(unsharpMask, resultImage, ColorConversion.Gray2Bgr);
 
-            CvInvoke.DetailEnhance(editedImage.ToMat(), editedImage.ToMat(), trackBarReveal.Value);
+            Mat editedImage = image.ToMat();
+            CvInvoke.DetailEnhance(image.ToMat(), editedImage, trackBarReveal.Value);
 
-            pictureBoxNewImage.Image = editedImage;
+            return editedImage.ToBitmap();
         }
 
-        private void adjustSmartSharpen()
+        private Bitmap adjustSmartSharpen(Bitmap image)
         {
             //Mat image = new Mat();
             //CvInvoke.CvtColor(originalImage.ToImage<Bgr, byte>(), image, ColorConversion.Bgr2Bgra);
@@ -136,10 +200,8 @@ namespace DMMDigital.Views
 
             //pictureBoxNewImage.Image = sharpenedImage.ToBitmap();
 
-            Mat inputImage = editedImage.ToMat().Clone();
-
             Mat grayImage = new Mat();
-            CvInvoke.CvtColor(inputImage, grayImage, ColorConversion.Bgr2Gray);
+            CvInvoke.CvtColor(image.ToMat(), grayImage, ColorConversion.Bgr2Gray);
 
             Mat blurredImage = new Mat();
             CvInvoke.GaussianBlur(grayImage, blurredImage, new Size(0, 0), trackBarSmartSharpen.Value + 1);
@@ -147,70 +209,83 @@ namespace DMMDigital.Views
             Mat unsharpMask = new Mat();
             CvInvoke.AddWeighted(grayImage, 2.0, blurredImage, -1.0, 0, unsharpMask);
 
-            editedImage = unsharpMask.ToBitmap();
-            pictureBoxNewImage.Image = unsharpMask.ToBitmap();
+            return unsharpMask.ToBitmap();
             
         }
 
-        private void adjustSmartRadius()
+        public Bitmap colorImage(Bitmap srcBitmap, float redThreshold, float greenThreshold, float blueThreshold)
         {
-            // Convert the original image to a Mat
-            Mat image = new Mat();
-            CvInvoke.CvtColor(originalImage.ToImage<Bgr, byte>(), image, ColorConversion.Bgr2Bgra);
+            Image<Bgr, byte> bgrImage = srcBitmap.ToImage<Bgr, byte>();
 
-            // Ensure the strength is within a reasonable range
-            int strength = trackBarSmartRadius.Value;
-            strength = Math.Max(1, strength); // Minimum kernel size is 1
-            strength = (strength % 2 == 0) ? strength + 1 : strength; // Make it odd
+            VectorOfMat bgrChannels = new VectorOfMat();
+            CvInvoke.Split(bgrImage, bgrChannels);
 
-            // Apply Gaussian blur to create a blurred version
-            Mat blurredImage = new Mat();
-            CvInvoke.GaussianBlur(image, blurredImage, new Size(strength, strength), 0);
+            Mat redLookup = createLookupTable(redThreshold);
+            Mat greenLookup = createLookupTable(greenThreshold);
+            Mat blueLookup = createLookupTable(blueThreshold);
 
-            // Calculate the difference between the original and blurred images
-            Mat sharpenedImage = new Mat();
-            CvInvoke.AddWeighted(image, 1.5, blurredImage, -0.5, 0, sharpenedImage);
+            CvInvoke.LUT(bgrChannels[2], redLookup, bgrChannels[2]);
+            CvInvoke.LUT(bgrChannels[1], greenLookup, bgrChannels[1]);
+            CvInvoke.LUT(bgrChannels[0], blueLookup, bgrChannels[0]);
 
-            // Display intermediate results (for debugging)
-            pictureBoxOriginalImage.Image = image.ToBitmap();
-            pictureBoxNewImage.Image = blurredImage.ToBitmap(); // Display blurred image
-                                                                // pictureBoxNewImage.Image = sharpenedImage.ToBitmap(); // Display difference image
+            Mat destImage = new Mat();
+            CvInvoke.Merge(bgrChannels, destImage);
 
-            // Display the result in the PictureBox
-            pictureBoxNewImage.Image = sharpenedImage.ToBitmap();
+            return destImage.ToBitmap();
         }
 
-        private void invertColors()
+        private Mat createLookupTable(float threshold)
         {
-            Bitmap invertedBitmap = new Bitmap(editedImage.Width, editedImage.Height);
+            Mat lookup = new Mat(1, 256, DepthType.Cv8U, 1);
 
-            BitmapData originalData = editedImage.LockBits(new Rectangle(0, 0, editedImage.Width, editedImage.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-            BitmapData invertedData = invertedBitmap.LockBits(new Rectangle(0, 0, invertedBitmap.Width, invertedBitmap.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            float m1 = 255.0f / threshold;
+            float m2 = 255.0f / (255.0f - threshold);
 
-            unsafe
+            byte[] lookupData = new byte[256];
+
+            for (int i = 0; i < 256; i++)
             {
-                byte* originalPtr = (byte*)originalData.Scan0;
-                byte* invertedPtr = (byte*)invertedData.Scan0;
-
-                int pixelCount = editedImage.Width * editedImage.Height;
-
-                for (int i = 0; i < pixelCount; i++)
-                {
-                    // Invert each color channel
-                    invertedPtr[0] = (byte)(255 - originalPtr[0]); // Blue
-                    invertedPtr[1] = (byte)(255 - originalPtr[1]); // Green
-                    invertedPtr[2] = (byte)(255 - originalPtr[2]); // Red
-                    invertedPtr[3] = originalPtr[3]; // Alpha
-
-                    originalPtr += 4;
-                    invertedPtr += 4;
-                }
+                float lookupValue = (i > threshold) ? 255 - m2 * (i - threshold) : 255 - m1 * (threshold - i);
+                lookupData[i] = (byte)Math.Max(0, Math.Min(255, lookupValue));
             }
 
-            editedImage.UnlockBits(originalData);
+            lookup.SetTo(lookupData);
+
+            return lookup;
+        }
+
+        private Bitmap invertColors(Bitmap image)
+        {
+            BitmapData originalData = image.LockBits(
+                new Rectangle(0, 0, image.Width, image.Height),
+                ImageLockMode.ReadOnly,
+                PixelFormat.Format32bppArgb
+            );
+
+            int byteCount = Math.Abs(originalData.Stride) * image.Height;
+            byte[] pixels = new byte[byteCount];
+            Marshal.Copy(originalData.Scan0, pixels, 0, byteCount);
+
+            for (int i = 0; i < byteCount; i += 4)
+            {
+                pixels[i] = (byte)(255 - pixels[i]);         
+                pixels[i + 1] = (byte)(255 - pixels[i + 1]); 
+                pixels[i + 2] = (byte)(255 - pixels[i + 2]); 
+            }
+
+            Bitmap invertedBitmap = new Bitmap(image.Width, image.Height);
+            BitmapData invertedData = invertedBitmap.LockBits(
+                new Rectangle(0, 0, image.Width, image.Height),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format32bppArgb
+            );
+
+            Marshal.Copy(pixels, 0, invertedData.Scan0, byteCount);
+
+            image.UnlockBits(originalData);
             invertedBitmap.UnlockBits(invertedData);
 
-            pictureBoxNewImage.Image = invertedBitmap;
+            return invertedBitmap;
         }
 
         private void trackBarBrightnessMouseCaptureChanged(object sender, EventArgs e)
@@ -221,7 +296,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownBrightnessValueChanged(object sender, EventArgs e)
         {
-            //trackBarBrightness.Value = (int)numericUpDownBrightness.Value;
+            trackBarBrightness.Value = (int)numericUpDownBrightness.Value;
         }
 
         private void trackBarContrastMouseCaptureChanged(object sender, EventArgs e)
@@ -232,7 +307,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownContrastValueChanged(object sender, EventArgs e)
         {
-            //trackBarContrast.Value = (int)numericUpDownContrast.Value;
+            trackBarContrast.Value = (int)numericUpDownContrast.Value;
         }
 
         private void trackBarRevealMouseCaptureChanged(object sender, EventArgs e)
@@ -243,7 +318,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownRevealValueChanged(object sender, EventArgs e)
         {
-            //trackBarReveal.Value = (int)numericUpDownReveal.Value;
+            trackBarReveal.Value = (int)numericUpDownReveal.Value;
         }
 
         private void trackBarSmartSharpenMouseCaptureChanged(object sender, EventArgs e)
@@ -254,7 +329,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownSmartSharpenValueChanged(object sender, EventArgs e)
         {
-            //trackBarSmartSharpen.Value = (int)numericUpDownSmartSharpen.Value;
+            trackBarSmartSharpen.Value = (int)numericUpDownSmartSharpen.Value;
         }
 
         private void trackBarSmartRadiusMouseCaptureChanged(object sender, EventArgs e)
@@ -265,7 +340,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownSmartRadiusValueChanged(object sender, EventArgs e)
         {
-            //trackBarSmartRadius.Value = (int)numericUpDownSmartRadius.Value;
+            trackBarSmartRadius.Value = (int)numericUpDownSmartRadius.Value;
         }
 
         private void checkBoxColorImageCheckedChanged(object sender, EventArgs e)
@@ -280,17 +355,29 @@ namespace DMMDigital.Views
 
         private void buttonRestoreImageClick(object sender, EventArgs e)
         {
-
+            trackBarBrightness.Value = 0;
+            numericUpDownBrightness.Value = 0;
+            trackBarContrast.Value = 0;
+            numericUpDownContrast.Value = 0;
+            trackBarReveal.Value = 0;
+            numericUpDownReveal.Value = 0;
+            trackBarSmartSharpen.Value = 0;
+            numericUpDownSmartSharpen.Value = 0;
+            trackBarSmartRadius.Value = 0;
+            numericUpDownSmartRadius.Value = 0;
+            checkBoxColorImage.Checked = false;
+            checkBoxPositiveNegative.Checked = false;
         }
 
         private void buttonApplyChangesClick(object sender, EventArgs e)
         {
-
+            originalImage = editedImage;
+            Close();
         }
 
         private void buttonBackClick(object sender, EventArgs e)
         {
-
+            Close();
         }
     }
 }

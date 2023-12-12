@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace DMMDigital.Forms
+namespace DMMDigital.Views
 {
     public partial class ConfigView : Form, IConfigView
     {

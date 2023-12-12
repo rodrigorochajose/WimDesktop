@@ -26,7 +26,7 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                int templateId = templateRepository.add(new Modelos.TemplateModel { name = manipulateTemplateView.templateName });
+                int templateId = templateRepository.add(new Models.TemplateModel { name = manipulateTemplateView.templateName });
                 MessageBox.Show(templateFrameRepository.add(templateId, manipulateTemplateView.framesList));
                 (manipulateTemplateView as Form).Close();
             }

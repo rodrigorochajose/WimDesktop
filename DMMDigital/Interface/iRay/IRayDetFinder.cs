@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace iDetector
+namespace DMMDigital.Interface.iRay
 {
     public enum Enm_CommChannel
     {

@@ -1,4 +1,4 @@
-﻿namespace DMMDigital.Forms
+﻿namespace DMMDigital.Views
 {
     partial class ConfigView
     {

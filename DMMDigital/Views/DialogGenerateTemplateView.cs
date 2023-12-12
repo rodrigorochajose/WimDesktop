@@ -1,9 +1,8 @@
-﻿using DMMDigital.Views;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 
-namespace DMMDigital
+namespace DMMDigital.Views
 {
     public partial class DialogGenerateTemplateView : Form, IDialogGenerateTemplateView
     {

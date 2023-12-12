@@ -10,7 +10,7 @@
 * Copyright (C) 2009, 2015, iRay Technology (Shanghai) Ltd.
 *
 */
-namespace iDetector
+namespace DMMDigital.Interface.iRay
 {
 	public partial class SdkInterface
 	{

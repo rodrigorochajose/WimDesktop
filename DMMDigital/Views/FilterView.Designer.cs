@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterView));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBoxNewImage = new System.Windows.Forms.PictureBox();
+            this.pictureBoxEditedImage = new System.Windows.Forms.PictureBox();
             this.buttonBack = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.trackBarBrightness = new System.Windows.Forms.TrackBar();
@@ -57,7 +58,7 @@
             this.checkBoxColorImage = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxNewImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).BeginInit();
@@ -81,7 +82,7 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBoxOriginalImage, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBoxNewImage, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxEditedImage, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(277, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -124,23 +125,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Imagem Original";
             // 
-            // pictureBoxNewImage
+            // pictureBoxEditedImage
             // 
-            this.pictureBoxNewImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxNewImage.Location = new System.Drawing.Point(549, 23);
-            this.pictureBoxNewImage.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.pictureBoxNewImage.Name = "pictureBoxNewImage";
-            this.pictureBoxNewImage.Size = new System.Drawing.Size(541, 666);
-            this.pictureBoxNewImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxNewImage.TabIndex = 24;
-            this.pictureBoxNewImage.TabStop = false;
+            this.pictureBoxEditedImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxEditedImage.Location = new System.Drawing.Point(549, 23);
+            this.pictureBoxEditedImage.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.pictureBoxEditedImage.Name = "pictureBoxEditedImage";
+            this.pictureBoxEditedImage.Size = new System.Drawing.Size(541, 666);
+            this.pictureBoxEditedImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxEditedImage.TabIndex = 24;
+            this.pictureBoxEditedImage.TabStop = false;
             // 
             // buttonBack
             // 
             this.buttonBack.Image = global::DMMDigital.Properties.Resources.left_arrow;
             this.buttonBack.Location = new System.Drawing.Point(12, 12);
             this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(46, 27);
+            this.buttonBack.Size = new System.Drawing.Size(46, 35);
             this.buttonBack.TabIndex = 1;
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBackClick);
@@ -149,7 +150,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 62);
+            this.label3.Location = new System.Drawing.Point(15, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 15);
             this.label3.TabIndex = 2;
@@ -157,7 +158,7 @@
             // 
             // trackBarBrightness
             // 
-            this.trackBarBrightness.Location = new System.Drawing.Point(28, 93);
+            this.trackBarBrightness.Location = new System.Drawing.Point(28, 107);
             this.trackBarBrightness.Maximum = 100;
             this.trackBarBrightness.Minimum = -100;
             this.trackBarBrightness.Name = "trackBarBrightness";
@@ -168,7 +169,7 @@
             // numericUpDownBrightness
             // 
             this.numericUpDownBrightness.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownBrightness.Location = new System.Drawing.Point(209, 98);
+            this.numericUpDownBrightness.Location = new System.Drawing.Point(209, 112);
             this.numericUpDownBrightness.Minimum = new decimal(new int[] {
             100,
             0,
@@ -182,7 +183,7 @@
             // numericUpDownContrast
             // 
             this.numericUpDownContrast.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownContrast.Location = new System.Drawing.Point(209, 181);
+            this.numericUpDownContrast.Location = new System.Drawing.Point(209, 195);
             this.numericUpDownContrast.Minimum = new decimal(new int[] {
             100,
             0,
@@ -195,7 +196,7 @@
             // 
             // trackBarContrast
             // 
-            this.trackBarContrast.Location = new System.Drawing.Point(28, 176);
+            this.trackBarContrast.Location = new System.Drawing.Point(28, 190);
             this.trackBarContrast.Maximum = 100;
             this.trackBarContrast.Minimum = -100;
             this.trackBarContrast.Name = "trackBarContrast";
@@ -207,7 +208,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 145);
+            this.label4.Location = new System.Drawing.Point(15, 159);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 15);
             this.label4.TabIndex = 5;
@@ -216,7 +217,7 @@
             // numericUpDownReveal
             // 
             this.numericUpDownReveal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownReveal.Location = new System.Drawing.Point(209, 264);
+            this.numericUpDownReveal.Location = new System.Drawing.Point(209, 278);
             this.numericUpDownReveal.Maximum = new decimal(new int[] {
             15,
             0,
@@ -229,7 +230,7 @@
             // 
             // trackBarReveal
             // 
-            this.trackBarReveal.Location = new System.Drawing.Point(28, 259);
+            this.trackBarReveal.Location = new System.Drawing.Point(28, 273);
             this.trackBarReveal.Maximum = 15;
             this.trackBarReveal.Name = "trackBarReveal";
             this.trackBarReveal.Size = new System.Drawing.Size(175, 45);
@@ -240,7 +241,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(15, 228);
+            this.label5.Location = new System.Drawing.Point(15, 242);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 15);
             this.label5.TabIndex = 8;
@@ -249,7 +250,7 @@
             // numericUpDownSmartSharpen
             // 
             this.numericUpDownSmartSharpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownSmartSharpen.Location = new System.Drawing.Point(209, 347);
+            this.numericUpDownSmartSharpen.Location = new System.Drawing.Point(209, 361);
             this.numericUpDownSmartSharpen.Name = "numericUpDownSmartSharpen";
             this.numericUpDownSmartSharpen.Size = new System.Drawing.Size(57, 23);
             this.numericUpDownSmartSharpen.TabIndex = 13;
@@ -257,7 +258,7 @@
             // 
             // trackBarSmartSharpen
             // 
-            this.trackBarSmartSharpen.Location = new System.Drawing.Point(28, 342);
+            this.trackBarSmartSharpen.Location = new System.Drawing.Point(28, 356);
             this.trackBarSmartSharpen.Maximum = 100;
             this.trackBarSmartSharpen.Name = "trackBarSmartSharpen";
             this.trackBarSmartSharpen.Size = new System.Drawing.Size(175, 45);
@@ -268,7 +269,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(15, 311);
+            this.label6.Location = new System.Drawing.Point(15, 325);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 15);
             this.label6.TabIndex = 11;
@@ -277,7 +278,7 @@
             // numericUpDownSmartRadius
             // 
             this.numericUpDownSmartRadius.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownSmartRadius.Location = new System.Drawing.Point(209, 430);
+            this.numericUpDownSmartRadius.Location = new System.Drawing.Point(209, 444);
             this.numericUpDownSmartRadius.Maximum = new decimal(new int[] {
             15,
             0,
@@ -290,7 +291,7 @@
             // 
             // trackBarSmartRadius
             // 
-            this.trackBarSmartRadius.Location = new System.Drawing.Point(28, 425);
+            this.trackBarSmartRadius.Location = new System.Drawing.Point(28, 439);
             this.trackBarSmartRadius.Maximum = 15;
             this.trackBarSmartRadius.Name = "trackBarSmartRadius";
             this.trackBarSmartRadius.Size = new System.Drawing.Size(175, 45);
@@ -301,7 +302,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(15, 394);
+            this.label7.Location = new System.Drawing.Point(15, 408);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(83, 15);
             this.label7.TabIndex = 14;
@@ -311,7 +312,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(15, 533);
+            this.label8.Location = new System.Drawing.Point(15, 487);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(110, 15);
             this.label8.TabIndex = 17;
@@ -321,7 +322,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(15, 486);
+            this.label9.Location = new System.Drawing.Point(15, 538);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 15);
             this.label9.TabIndex = 19;
@@ -329,7 +330,7 @@
             // 
             // buttonRestoreImage
             // 
-            this.buttonRestoreImage.Location = new System.Drawing.Point(18, 596);
+            this.buttonRestoreImage.Location = new System.Drawing.Point(28, 596);
             this.buttonRestoreImage.Name = "buttonRestoreImage";
             this.buttonRestoreImage.Size = new System.Drawing.Size(80, 51);
             this.buttonRestoreImage.TabIndex = 21;
@@ -339,7 +340,7 @@
             // 
             // buttonApplyChanges
             // 
-            this.buttonApplyChanges.Location = new System.Drawing.Point(186, 596);
+            this.buttonApplyChanges.Location = new System.Drawing.Point(159, 596);
             this.buttonApplyChanges.Name = "buttonApplyChanges";
             this.buttonApplyChanges.Size = new System.Drawing.Size(80, 51);
             this.buttonApplyChanges.TabIndex = 22;
@@ -350,7 +351,7 @@
             // checkBoxPositiveNegative
             // 
             this.checkBoxPositiveNegative.AutoSize = true;
-            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(224, 534);
+            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(224, 488);
             this.checkBoxPositiveNegative.Name = "checkBoxPositiveNegative";
             this.checkBoxPositiveNegative.Size = new System.Drawing.Size(15, 14);
             this.checkBoxPositiveNegative.TabIndex = 23;
@@ -360,7 +361,7 @@
             // checkBoxColorImage
             // 
             this.checkBoxColorImage.AutoSize = true;
-            this.checkBoxColorImage.Location = new System.Drawing.Point(224, 487);
+            this.checkBoxColorImage.Location = new System.Drawing.Point(224, 539);
             this.checkBoxColorImage.Name = "checkBoxColorImage";
             this.checkBoxColorImage.Size = new System.Drawing.Size(15, 14);
             this.checkBoxColorImage.TabIndex = 24;
@@ -396,15 +397,16 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FilterView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FilterView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FilterViewLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxNewImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).EndInit();
@@ -442,7 +444,7 @@
         private System.Windows.Forms.TrackBar trackBarSmartRadius;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBoxOriginalImage;
-        private System.Windows.Forms.PictureBox pictureBoxNewImage;
+        private System.Windows.Forms.PictureBox pictureBoxEditedImage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button buttonRestoreImage;

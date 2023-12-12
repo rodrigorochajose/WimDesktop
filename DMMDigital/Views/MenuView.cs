@@ -1,10 +1,7 @@
-﻿using DMMDigital.Forms;
-using DMMDigital.Modelos;
-using DMMDigital.Views;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
-namespace DMMDigital
+namespace DMMDigital.Views
 {
     public partial class MenuView : Form, IMenuView
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -8,10 +7,10 @@ namespace DMMDigital.Views
     {
         ExamView exam;
 
-        public ExamContainerView(ExamView examview)
+        public ExamContainerView(ExamView examView)
         {
             InitializeComponent();
-            exam = examview;
+            exam = examView;
             Show();
         }
 

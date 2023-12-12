@@ -1,5 +1,5 @@
 ﻿using DMMDigital.Interface;
-using DMMDigital.Modelos;
+using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;

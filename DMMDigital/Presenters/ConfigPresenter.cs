@@ -1,6 +1,5 @@
-﻿using DMMDigital.Forms;
-using DMMDigital.Interface;
-using DMMDigital.Modelos;
+﻿using DMMDigital.Interface;
+using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
 using System.Windows.Forms;

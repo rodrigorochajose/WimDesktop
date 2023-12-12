@@ -1,4 +1,4 @@
-﻿namespace DMMDigital
+﻿namespace DMMDigital.Views
 {
     partial class MenuView
     {

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using DMMDigital.Views;
+using DMMDigital.Components;
 
-namespace DMMDigital
+namespace DMMDigital.Views
 {
     public partial class ManipulateTemplateView : Form, IManipulateTemplateView
     {

@@ -1,5 +1,5 @@
 ﻿using DMMDigital.Interface;
-using DMMDigital.Modelos;
+using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,10 +9,11 @@ using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Views;
 using Emgu.CV.OCR;
-using DMMDigital.Modelos.Drawings;
+using DMMDigital.Models.Drawings;
 using System.Threading;
+using DMMDigital.Components;
 
-namespace DMMDigital
+namespace DMMDigital.Views
 {
     public partial class ExamView : Form, IExamView
     {
@@ -90,6 +91,11 @@ namespace DMMDigital
             Load += delegate
             {
                 drawTemplate();
+
+                if (examImages != null)
+                {
+                    enableTools();
+                }
             };
         }
 
@@ -122,7 +128,7 @@ namespace DMMDigital
                     Height = height,
                     BackColor = Color.Black,
                     order = frame.order,
-                    Name = "filme" + frame.order,
+                    Name = "filme" + frame.id,
                     orientation = frame.orientation,
                     Tag = Color.Black,
                     Location = new Point(frame.locationX / 2, frame.locationY / 2),
@@ -162,7 +168,7 @@ namespace DMMDigital
                         });
                     }
 
-                    frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { frameDrawings }));
+                    frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
 
                     panelTemplate.Controls.Add(newFrame);
                 }
@@ -758,6 +764,10 @@ namespace DMMDigital
         private void buttonFilterClick(object sender, EventArgs e)
         {
             selectTool(sender);
+
+            IFilterView filterView = new FilterView((Bitmap)selectedFrame.originalImage);
+            (filterView as Form).ShowDialog();
+
             // add function > saveExamChangesOnDatabase();
         }
 

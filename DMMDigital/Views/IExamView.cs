@@ -1,7 +1,7 @@
-﻿using DMMDigital.Modelos;
+﻿using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using DMMDigital.Components;
 
 namespace DMMDigital.Views
 {

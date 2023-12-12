@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DMMDigital.Components;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+
 namespace DMMDigital.Views
 {
     public partial class ChooseFramesToCompare : Form, IChooseFramesToCompare

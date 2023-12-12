@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital._Repositories;
-using DMMDigital.Forms;
 using DMMDigital.Interface;
-using DMMDigital.Modelos;
+using DMMDigital.Models;
 using DMMDigital.Views;
 
 namespace DMMDigital.Presenters

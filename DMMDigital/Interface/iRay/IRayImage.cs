@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace iDetector
+namespace DMMDigital.Interface.iRay
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct IRayImage

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace iDetector
+namespace DMMDigital.Interface.iRay
 {
     public partial class SdkInterface
     {

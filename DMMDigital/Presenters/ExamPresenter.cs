@@ -1,8 +1,8 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface;
-using DMMDigital.Modelos;
+using DMMDigital.Interface.iRay;
+using DMMDigital.Models;
 using DMMDigital.Views;
-using iDetector;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

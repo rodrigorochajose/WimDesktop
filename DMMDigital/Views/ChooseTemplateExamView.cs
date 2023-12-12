@@ -1,12 +1,11 @@
-﻿using DMMDigital.Modelos;
-using DMMDigital.Views;
+﻿using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DMMDigital.Forms
+namespace DMMDigital.Views
 {
     public partial class ChooseTemplateExamView : Form, IChooseTemplateExamView
     {
