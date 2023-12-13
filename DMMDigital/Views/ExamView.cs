@@ -74,7 +74,7 @@ namespace DMMDigital.Views
 
             examImages = new List<ExamImageModel>();
 
-            Load += delegate { 
+            Load += delegate {
                 eventSaveExam?.Invoke(this, EventArgs.Empty); 
                 eventGetExamPath?.Invoke(this, EventArgs.Empty);
                 DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
@@ -155,7 +155,7 @@ namespace DMMDigital.Views
 
                 frames.Add(newFrame);
 
-                if (examImageDrawings.Count != 0)
+                if (examImageDrawings != null)
                 {
                     List<IDrawing> frameDrawings = new List<IDrawing>();
 
@@ -170,13 +170,14 @@ namespace DMMDigital.Views
 
                     frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
 
-                    panelTemplate.Controls.Add(newFrame);
+                    selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
                 }
+
+                panelTemplate.Controls.Add(newFrame);
             }
 
             frames[indexFrame].Tag = Color.LimeGreen;
             selectedFrame = frames[indexFrame];
-            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
             mainPictureBox.Image = selectedFrame.originalImage;
             labelImageDate.Text = selectedFrame.datePhotoTook;
             textBoxFrameNotes.Text = selectedFrame.notes;
@@ -243,20 +244,22 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-
             indexFrame++;
             if (indexFrame < frames.Count())
             {
-                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-
                 selectedFrame.Invoke((MethodInvoker)(() =>
                 {
                     selectedFrame = frames[indexFrame];
                     selectedFrame.Tag = Color.LimeGreen;
                     selectedFrame.Refresh();
                 }));
-                selectedDrawingHistoryHandler();
+
+                if (selectedDrawingHistory.Count >= indexFrame)
+                {
+                    selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                    selectedDrawingHistoryHandler();
+                }
             }
         }
 
@@ -768,7 +771,19 @@ namespace DMMDigital.Views
             IFilterView filterView = new FilterView((Bitmap)selectedFrame.originalImage);
             (filterView as Form).ShowDialog();
 
-            // add function > saveExamChangesOnDatabase();
+            using (Image image = filterView.originalImage)
+            {
+                image.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+                selectedFrame.Invoke((MethodInvoker)(() =>
+                {   
+                    selectedFrame.originalImage = image;
+                    selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                    selectedFrame.Refresh();
+                }));
+                mainPictureBox.Image = image;
+            }
+
+            saveExamChangesOnDatabase();
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
@@ -1169,7 +1184,10 @@ namespace DMMDigital.Views
 
         private void mainPictureBoxPaint(object sender, PaintEventArgs e)
         {
-            selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
+            if (selectedDrawingHistory.Count > 0)
+            {
+                selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
+            }
 
             if (draw && currentDrawing != null && action != 1 && action != 2)
             {
@@ -1207,6 +1225,11 @@ namespace DMMDigital.Views
             }
             eventSaveExamImage?.Invoke(this, EventArgs.Empty);
             getDrawingsToSaveOnDatabase();
+        }
+
+        private void examViewFormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.OpenForms.Cast<Form>().First().Show();
         }
     }
 }

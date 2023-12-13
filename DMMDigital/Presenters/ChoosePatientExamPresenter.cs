@@ -68,7 +68,12 @@ namespace DMMDigital.Presenters
             chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
             chooseTemplateView.patientObservation = selectedPatient.observation;
 
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository());
+            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            {
+                form.Hide();
+            }
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), false);
         }
 
         private void addNewPatient(object sender, EventArgs e)

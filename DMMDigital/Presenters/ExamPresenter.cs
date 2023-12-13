@@ -151,8 +151,8 @@ namespace DMMDigital.Presenters
                         switch (nParam1)
                         {
                             case SdkInterface.Cmd_Connect:
-                                //sensorConnection.Image = Properties.Resources.icon_32x32_green;
-                                MessageBox.Show("Conectado");
+                                //examView.iconSensorConnection = Properties.Resources.icon_32x32_green;
+                                //MessageBox.Show("Conectado");
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");
@@ -212,7 +212,7 @@ namespace DMMDigital.Presenters
                                         MessageBox.Show("Image Chanel isn't ok!");
                                         break;
                                     case SdkInterface.Err_CommDeviceNotFound:
-                                        MessageBox.Show("Cannot find device!");
+                                        //examView.iconSensorConnection = Properties.Resources.icon_32x32_red;
                                         break;
                                     case SdkInterface.Err_CommDeviceOccupied:
                                         MessageBox.Show("Device is beeing occupied!");

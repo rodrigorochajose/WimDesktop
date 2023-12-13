@@ -58,7 +58,7 @@ namespace DMMDigital.Views
             dataGridViewExam.Columns[3].Width = 130;
 
             dataGridViewExam.Columns[4].HeaderText = "Template";
-            dataGridViewExam.Columns[4].Width = 185;
+            dataGridViewExam.Columns[4].Width = 195;
         }
 
         public PatientView()

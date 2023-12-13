@@ -17,9 +17,8 @@ namespace DMMDigital.Views
         private void examContainerViewLoad(object sender, EventArgs e)
         {
             addFormIntoPage(tabPage1, exam);
-            Refresh();
-            Show();
         }
+
         private void addFormIntoPage(TabPage tabPage, ExamView examview)
         {
             examview.TopLevel = false;
