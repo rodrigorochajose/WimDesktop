@@ -65,6 +65,7 @@
             this.buttonNewExam.TabIndex = 0;
             this.buttonNewExam.Text = "Novo Exame";
             this.buttonNewExam.UseVisualStyleBackColor = true;
+            this.buttonNewExam.Click += new System.EventHandler(this.buttonNewExamClick);
             // 
             // tabControl1
             // 
@@ -98,7 +99,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.examContainerViewLoad);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.examContainerViewFormClosed);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);

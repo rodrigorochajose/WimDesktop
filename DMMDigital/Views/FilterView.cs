@@ -28,7 +28,7 @@ namespace DMMDigital.Views
 
         private void applyFilters()
         {
-            Bitmap image = (Bitmap)originalImage.Clone();
+            Bitmap image = new Bitmap(originalImage);
 
             if (trackBarBrightness.Value != 0)
             {
@@ -62,7 +62,7 @@ namespace DMMDigital.Views
 
             if (checkBoxPositiveNegative.Checked)
             {
-                image = invertColors(image);
+                image = invertColors(image.Clone() as Bitmap);
             }
 
             editedImage = image;

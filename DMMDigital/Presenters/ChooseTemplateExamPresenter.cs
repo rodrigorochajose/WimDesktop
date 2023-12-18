@@ -14,7 +14,9 @@ namespace DMMDigital.Presenters
         private ITemplateRepository templateRepository;
         private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository, bool calledFromPatientView)
+        private string openingMode = "add";
+
+        public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository, string calledFromView)
         {
             chooseTemplateExamView = view;
             templateRepository = repository;
@@ -29,26 +31,30 @@ namespace DMMDigital.Presenters
 
             (chooseTemplateExamView as Form).FormClosed += delegate
             {
-                if (calledFromPatientView)
+                if (calledFromView != "examView")
                 {
-                    foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+                    openingMode = "open";
+                    if (calledFromView == "patientView")
                     {
-                        if (form.Text != "WIM Desktop")
+                        foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
                         {
-                            form.Close();
-                        }
-                        else
+                            if (form.Text != "WIM Desktop")
+                            {
+                                form.Close();
+                            }
+                            else
+                            {
+                                form.Show();
+                            }
+                        };
+                    }
+                    else
+                    {
+                        foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
                         {
                             form.Show();
-                        }
-                    };
-                }
-                else
-                {
-                    foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
-                    {
-                        form.Show();
-                    };
+                        };
+                    }
                 }
             };
         }
@@ -61,7 +67,13 @@ namespace DMMDigital.Presenters
                 name = chooseTemplateExamView.patientName,
             };
 
-            new ExamPresenter(new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName), new ExamRepository());
+            (chooseTemplateExamView as Form).Hide();
+            (chooseTemplateExamView as Form).Close();
+            Application.OpenForms.Cast<Form>().First().Hide();
+
+            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName);
+
+            new ExamPresenter(examView, new ExamRepository(), false, openingMode);
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

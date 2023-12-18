@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
+using MoreLinq;
 
 namespace DMMDigital._Repositories
 {
@@ -17,6 +18,13 @@ namespace DMMDigital._Repositories
             try
             {
                 List<ExamImageModel> currentList = getExamImages(examImages[0].examId).ToList();
+
+                List<ExamImageModel> imagesToRemove = currentList.ExceptBy(examImages, item => item.file).ToList();
+                
+                foreach(ExamImageModel item in imagesToRemove)
+                {
+                    context.examImage.Remove(item);
+                }
 
                 foreach (ExamImageModel item in examImages)
                 {

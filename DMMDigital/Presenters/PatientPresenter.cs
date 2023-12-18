@@ -46,7 +46,7 @@ namespace DMMDigital.Presenters
             getPatients();
             getExamByPatient(this, EventArgs.Empty);
 
-            (patientView as Form).ShowDialog();
+            (patientView as Form).Show();
         }
 
         private void searchPatient(object sender, EventArgs e)
@@ -166,7 +166,7 @@ namespace DMMDigital.Presenters
                 form.Hide();
             }
 
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), true);
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "patientView");
         }
 
         private void getExamByPatient(object sender, EventArgs e)
@@ -185,7 +185,10 @@ namespace DMMDigital.Presenters
 
         private void openExam(object sender, EventArgs e)
         {
-            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true);
+            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true, "open");
+            Application.OpenForms.Cast<Form>().First().Hide();
+            (patientView as Form).Hide();
+            (patientView as Form).Close();
         }
 
         private void deleteExam(object sender, EventArgs e)

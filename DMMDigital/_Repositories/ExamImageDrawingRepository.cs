@@ -16,16 +16,18 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                List<ExamImageDrawingModel> currentList = getExamImageDrawings(examImageDrawing[0].examId).ToList();
+                if (examImageDrawing.Count > 0) { 
+                    List<ExamImageDrawingModel> currentList = getExamImageDrawings(examImageDrawing[0].examId).ToList();
 
-                foreach (ExamImageDrawingModel item in examImageDrawing)
-                {
-                    if (currentList.Find(e => e.file == item.file) == null)
+                    foreach (ExamImageDrawingModel item in examImageDrawing)
                     {
-                        context.examImageDrawing.AddOrUpdate(item);
+                        if (currentList.Find(e => e.file == item.file) == null)
+                        {
+                            context.examImageDrawing.AddOrUpdate(item);
+                        }
                     }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
             catch (Exception ex)
             {

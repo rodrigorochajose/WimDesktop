@@ -26,28 +26,23 @@ namespace DMMDigital.Presenters
         private IConfigRepository configRepository = new ConfigRepository();
 
         int m_nId;
+        string openingMode;
 
-        public ExamPresenter(IExamView view,  IExamRepository repository)
+        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string openingMode)
         {
             examView = view;
             examRepository = repository;
+            this.openingMode = openingMode;
 
             examView.eventSaveExam += saveExam;
             examView.eventSaveExamImage += saveExamImage;
             examView.eventSaveExamImageDrawing += saveExamImageDrawing;
             examView.eventGetExamPath += getExamPath;
 
-            initializeExam();
-        }
-
-        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam)
-        {
-            examView = view;
-            examRepository = repository;
-
-            examView.eventSaveExamImage += saveExamImage;
-            examView.eventSaveExamImageDrawing += saveExamImageDrawing;
-            loadFullExam();
+            if (openingExam)
+            {
+                loadFullExam();
+            }
 
             initializeExam();
         }
@@ -58,9 +53,16 @@ namespace DMMDigital.Presenters
             Detector d = Detector.DetectorList[m_nId];
             d?.Connect();
 
-            new ExamContainerView(examView as ExamView);
+            if (openingMode == "open")
+            {
+                new ExamContainerPresenter(new ExamContainerView(examView as ExamView));
+            }
+            else
+            {
+                Form examContainerView = Application.OpenForms.Cast<Form>().Where(f => f.Text == "Exame").First();
+                (examContainerView as ExamContainerView).addNewPage(examView as ExamView);
+            }
 
-            //(examView as Form).ShowDialog();
             Detector.DestroyDetector(m_nId);
         }
 
@@ -81,9 +83,7 @@ namespace DMMDigital.Presenters
                 examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
-
-                List<ExamImageDrawingModel> examImageDrawing = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
-                examView.examImageDrawings = examImageDrawing;
+                examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
 
             }
             catch (Exception ex)

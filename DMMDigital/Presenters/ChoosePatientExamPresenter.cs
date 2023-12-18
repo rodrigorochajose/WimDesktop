@@ -73,7 +73,7 @@ namespace DMMDigital.Presenters
                 form.Hide();
             }
 
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), false);
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "choosePatientView");
         }
 
         private void addNewPatient(object sender, EventArgs e)

@@ -15,6 +15,8 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             associateEvents();
+
+            ActiveControl = textBoxSessionName;
         }
 
         private void associateEvents()

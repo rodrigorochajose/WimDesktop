@@ -1,52 +1,76 @@
-﻿using System;
+﻿using DMMDigital._Repositories;
+using DMMDigital.Models;
+using DMMDigital.Presenters;
+using System;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class ExamContainerView : Form
+    public partial class ExamContainerView : Form, IExamContainerView
     {
         ExamView exam;
+        public int patientId { get; set; }
+        public PatientModel patient { get; set; }
+
+        public event EventHandler eventGetPatient;
 
         public ExamContainerView(ExamView examView)
         {
             InitializeComponent();
             exam = examView;
-            Show();
-        }
-
-        private void examContainerViewLoad(object sender, EventArgs e)
-        {
+            tabPage1.Text = exam.sessionName;
+            patientId = exam.patientId;
             addFormIntoPage(tabPage1, exam);
         }
 
-        private void addFormIntoPage(TabPage tabPage, ExamView examview)
-        {
-            examview.TopLevel = false;
-            examview.FormBorderStyle = FormBorderStyle.None;
-            examview.AutoScaleMode = AutoScaleMode.Dpi;
 
-            tabPage.Controls.Add(examview);
-            examview.Dock = DockStyle.Fill;
-            examview.Show();
-            Refresh();
+        public void addNewPage(ExamView examView)
+        {
+            TabPage newTabPage = new TabPage
+            {
+                Name = $"tabPage{tabControl1.TabCount + 1}",
+                Size = new Size(1362, 653),
+                Text = examView.sessionName,
+            };
+
+            tabControl1.Controls.Add(newTabPage);
+
+            addFormIntoPage(newTabPage, examView);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void addFormIntoPage(TabPage tabPage, ExamView examView)
         {
-            //TabPage newTabPage = new TabPage
-            //{
-            //    Name = $"tabPage{tabControl1.TabCount + 1}",
-            //    Size = new Size(1362, 653),
-            //    Text = $"tabPage{tabControl1.TabCount + 1}",
-            //};
+            examView.TopLevel = false;
+            examView.FormBorderStyle = FormBorderStyle.None;
+            examView.AutoScaleMode = AutoScaleMode.Dpi;
 
-            //tabControl1.Controls.Add(newTabPage);
-
-            //addFormIntoPage(newTabPage);
-
-            //Refresh();
+            tabPage.Controls.Add(examView);
+            examView.Dock = DockStyle.Fill;
+            Show();
+            examView.Show();
         }
-        
+
+        private void buttonNewExamClick(object sender, EventArgs e)
+        {
+            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            eventGetPatient?.Invoke(this, e);
+
+            chooseTemplateView.patientId = patient.id;
+            chooseTemplateView.patientName = patient.name;
+            chooseTemplateView.patientBirthDate = patient.birthDate;
+            chooseTemplateView.patientPhone = patient.phone;
+            chooseTemplateView.patientRecommendation = patient.recommendation;
+            chooseTemplateView.patientObservation = patient.observation;
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
+        }
+
+        private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.OpenForms.Cast<Form>().First().Show();
+        }
 
     }
 }
