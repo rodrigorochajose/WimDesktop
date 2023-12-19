@@ -56,6 +56,7 @@
             this.buttonOpenExam.TabIndex = 1;
             this.buttonOpenExam.Text = "Abrir Exame";
             this.buttonOpenExam.UseVisualStyleBackColor = true;
+            this.buttonOpenExam.Click += new System.EventHandler(this.buttonOpenExamClick);
             // 
             // buttonNewExam
             // 

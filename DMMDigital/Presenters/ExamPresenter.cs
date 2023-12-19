@@ -25,14 +25,14 @@ namespace DMMDigital.Presenters
         private IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private IConfigRepository configRepository = new ConfigRepository();
 
-        int m_nId;
-        string openingMode;
+        private int m_nId;
+        private string examOpeningMode;
 
-        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string openingMode)
+        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
         {
             examView = view;
             examRepository = repository;
-            this.openingMode = openingMode;
+            this.examOpeningMode = examOpeningMode;
 
             examView.eventSaveExam += saveExam;
             examView.eventSaveExamImage += saveExamImage;
@@ -53,14 +53,18 @@ namespace DMMDigital.Presenters
             Detector d = Detector.DetectorList[m_nId];
             d?.Connect();
 
-            if (openingMode == "open")
+            if (examOpeningMode == "newContainer")
             {
                 new ExamContainerPresenter(new ExamContainerView(examView as ExamView));
             }
             else
             {
                 Form examContainerView = Application.OpenForms.Cast<Form>().Where(f => f.Text == "Exame").First();
-                (examContainerView as ExamContainerView).addNewPage(examView as ExamView);
+
+                if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.examId))
+                {
+                    (examContainerView as ExamContainerView).addNewPage(examView);
+                }
             }
 
             Detector.DestroyDetector(m_nId);

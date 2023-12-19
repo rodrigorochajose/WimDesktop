@@ -144,8 +144,8 @@ namespace DMMDigital.Views
                     {
                         Image image = Image.FromStream(fs);
                     
-                        newFrame.originalImage = image.Clone() as Image;
-                        newFrame.Image = (image.Clone() as Image).GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
+                        newFrame.originalImage = new Bitmap(image);
+                        newFrame.Image = image.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
                         newFrame.notes = selectedExamImage.notes;
                         newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
@@ -1240,6 +1240,12 @@ namespace DMMDigital.Views
             }
             eventSaveExamImage?.Invoke(this, EventArgs.Empty);
             getDrawingsToSaveOnDatabase();
+        }
+
+        public void examViewClosing(object sender, FormClosingEventArgs e)
+        {
+            timer1.Enabled = true;
+            timerTick(this, EventArgs.Empty);
         }
     }
 }

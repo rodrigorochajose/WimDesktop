@@ -14,7 +14,7 @@ namespace DMMDigital.Presenters
         private ITemplateRepository templateRepository;
         private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        private string openingMode = "add";
+        private string examOpeningMode = "newPage";
 
         public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository, string calledFromView)
         {
@@ -33,7 +33,7 @@ namespace DMMDigital.Presenters
             {
                 if (calledFromView != "examView")
                 {
-                    openingMode = "open";
+                    examOpeningMode = "newContainer";
                     if (calledFromView == "patientView")
                     {
                         foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
@@ -67,13 +67,12 @@ namespace DMMDigital.Presenters
                 name = chooseTemplateExamView.patientName,
             };
 
-            (chooseTemplateExamView as Form).Hide();
+            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName);
             (chooseTemplateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 
-            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName);
 
-            new ExamPresenter(examView, new ExamRepository(), false, openingMode);
+            new ExamPresenter(examView, new ExamRepository(), false, examOpeningMode);
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

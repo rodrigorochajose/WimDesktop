@@ -21,7 +21,9 @@ namespace DMMDigital.Presenters
         private IEnumerable<ExamModel> examList;
         private BindingSource examBindingSource;
 
-        public PatientPresenter(IPatientView view, IPatientRepository repository)
+        private string examOpeningMode;
+
+        public PatientPresenter(IPatientView view, IPatientRepository repository, string examOpeningMode)
         {
             patientBindingSource = new BindingSource();
             examBindingSource = new BindingSource();
@@ -47,6 +49,7 @@ namespace DMMDigital.Presenters
             getExamByPatient(this, EventArgs.Empty);
 
             (patientView as Form).Show();
+            this.examOpeningMode = examOpeningMode;
         }
 
         private void searchPatient(object sender, EventArgs e)
@@ -185,7 +188,7 @@ namespace DMMDigital.Presenters
 
         private void openExam(object sender, EventArgs e)
         {
-            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true, "open");
+            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
             (patientView as Form).Hide();
             (patientView as Form).Close();

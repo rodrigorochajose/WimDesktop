@@ -2,6 +2,7 @@
 using DMMDigital.Models;
 using DMMDigital.Presenters;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,23 +11,29 @@ namespace DMMDigital.Views
 {
     public partial class ExamContainerView : Form, IExamContainerView
     {
-        ExamView exam;
+        IExamView exam;
         public int patientId { get; set; }
         public PatientModel patient { get; set; }
+        public List<int> openExamsId { get; set; }
 
         public event EventHandler eventGetPatient;
 
-        public ExamContainerView(ExamView examView)
+        public ExamContainerView(IExamView examView)
         {
             InitializeComponent();
             exam = examView;
+
+            openExamsId = new List<int>
+            {
+                exam.examId
+            };
+
             tabPage1.Text = exam.sessionName;
             patientId = exam.patientId;
             addFormIntoPage(tabPage1, exam);
         }
 
-
-        public void addNewPage(ExamView examView)
+        public void addNewPage(IExamView examView)
         {
             TabPage newTabPage = new TabPage
             {
@@ -40,16 +47,16 @@ namespace DMMDigital.Views
             addFormIntoPage(newTabPage, examView);
         }
 
-        private void addFormIntoPage(TabPage tabPage, ExamView examView)
+        private void addFormIntoPage(TabPage tabPage, IExamView examView)
         {
-            examView.TopLevel = false;
-            examView.FormBorderStyle = FormBorderStyle.None;
-            examView.AutoScaleMode = AutoScaleMode.Dpi;
+            (examView as Form).TopLevel = false;
+            (examView as Form).FormBorderStyle = FormBorderStyle.None;
+            (examView as Form).AutoScaleMode = AutoScaleMode.Dpi;
 
-            tabPage.Controls.Add(examView);
-            examView.Dock = DockStyle.Fill;
+            tabPage.Controls.Add((examView as Form));
+            (examView as Form).Dock = DockStyle.Fill;
             Show();
-            examView.Show();
+            (examView as Form).Show();
         }
 
         private void buttonNewExamClick(object sender, EventArgs e)
@@ -65,6 +72,11 @@ namespace DMMDigital.Views
             chooseTemplateView.patientObservation = patient.observation;
 
             new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
+        }
+
+        private void buttonOpenExamClick(object sender, EventArgs e)
+        {
+            new PatientPresenter(new PatientView(), new PatientRepository(), "newPage");
         }
 
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
