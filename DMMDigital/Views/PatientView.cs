@@ -52,13 +52,13 @@ namespace DMMDigital.Views
             dataGridViewExam.Columns["templateID"].Visible = false;
 
             dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
-            dataGridViewExam.Columns[2].Width = 197;
+            dataGridViewExam.Columns[2].Width = 195;
 
             dataGridViewExam.Columns[3].HeaderText = "Data de Nascimento";
             dataGridViewExam.Columns[3].Width = 130;
 
             dataGridViewExam.Columns[4].HeaderText = "Template";
-            dataGridViewExam.Columns[4].Width = 197;
+            dataGridViewExam.Columns[4].Width = 195;
         }
 
         public PatientView()
@@ -126,10 +126,9 @@ namespace DMMDigital.Views
         {
             dataGridViewPatient.CurrentCellChanged += (s, ev) =>
             {
-                selectedPatientId = int.Parse(dataGridViewPatient.Rows[0].Cells["id"].Value.ToString());
+                selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
                 eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
             };
-
         }
     }
 }

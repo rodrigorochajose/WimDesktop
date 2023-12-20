@@ -50,9 +50,9 @@
             this.buttonNewExam = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.dataGridViewExam = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.session = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.template = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonSearchPatient = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxSearchPatient = new System.Windows.Forms.TextBox();
@@ -236,9 +236,9 @@
             this.dataGridViewExam.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewExam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewExam.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
+            this.session,
+            this.date,
+            this.template});
             this.dataGridViewExam.EnableHeadersVisualStyles = false;
             this.dataGridViewExam.GridColor = System.Drawing.Color.Silver;
             this.dataGridViewExam.Location = new System.Drawing.Point(701, 116);
@@ -262,35 +262,35 @@
             this.dataGridViewExam.Size = new System.Drawing.Size(524, 370);
             this.dataGridViewExam.TabIndex = 38;
             // 
-            // dataGridViewTextBoxColumn4
+            // session
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "sessionName";
-            this.dataGridViewTextBoxColumn4.Frozen = true;
-            this.dataGridViewTextBoxColumn4.HeaderText = "Nome da Sessão";
-            this.dataGridViewTextBoxColumn4.Name = "session";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn4.Width = 197;
+            this.session.DataPropertyName = "sessionName";
+            this.session.Frozen = true;
+            this.session.HeaderText = "Nome da Sessão";
+            this.session.Name = "session";
+            this.session.ReadOnly = true;
+            this.session.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.session.Width = 197;
             // 
-            // dataGridViewTextBoxColumn5
+            // date
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "createdAt";
-            this.dataGridViewTextBoxColumn5.Frozen = true;
-            this.dataGridViewTextBoxColumn5.HeaderText = "Data do Exame";
-            this.dataGridViewTextBoxColumn5.Name = "date";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn5.Width = 130;
+            this.date.DataPropertyName = "createdAt";
+            this.date.Frozen = true;
+            this.date.HeaderText = "Data do Exame";
+            this.date.Name = "date";
+            this.date.ReadOnly = true;
+            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.date.Width = 130;
             // 
-            // dataGridViewTextBoxColumn6
+            // template
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn6.Frozen = true;
-            this.dataGridViewTextBoxColumn6.HeaderText = "Template";
-            this.dataGridViewTextBoxColumn6.Name = "template";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn6.Width = 197;
+            this.template.DataPropertyName = "name";
+            this.template.Frozen = true;
+            this.template.HeaderText = "Template";
+            this.template.Name = "template";
+            this.template.ReadOnly = true;
+            this.template.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.template.Width = 197;
             // 
             // buttonSearchPatient
             // 
@@ -372,5 +372,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn session;
+        private System.Windows.Forms.DataGridViewTextBoxColumn date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn template;
     }
 }

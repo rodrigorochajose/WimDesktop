@@ -61,7 +61,12 @@ namespace DMMDigital.Presenters
             {
                 Form examContainerView = Application.OpenForms.Cast<Form>().Where(f => f.Text == "Exame").First();
 
-                if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.examId))
+                if ((examContainerView as ExamContainerView).patientId != examView.patientId)
+                {
+                    examContainerView.Close();
+                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView));
+                }
+                else if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.examId))
                 {
                     (examContainerView as ExamContainerView).addNewPage(examView);
                 }
