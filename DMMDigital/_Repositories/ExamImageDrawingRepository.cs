@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Windows;
 
 namespace DMMDigital._Repositories
 {
     public class ExamImageDrawingRepository : IExamImageDrawingRepository
     {
-        Context context = new Context();
+        private readonly Context context = new Context();
 
         public void save(List<ExamImageDrawingModel> examImageDrawing)
         {

@@ -6,7 +6,7 @@ namespace DMMDigital._Repositories
 {
     public class ConfigRepository : IConfigRepository
     {
-        Context context = new Context();
+        private readonly Context context = new Context();
 
         public string save()
         {
@@ -35,7 +35,7 @@ namespace DMMDigital._Repositories
 
         public string getExamPath()
         {
-            return context.config.First().examPath.ToString();
+            return context.config.First().examPath;
         }
     }
 }

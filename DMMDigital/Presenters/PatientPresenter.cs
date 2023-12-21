@@ -11,17 +11,17 @@ namespace DMMDigital.Presenters
 {
     public class PatientPresenter
     {
-        private IPatientView patientView;
-        private IPatientRepository patientRepository;
+        private readonly IPatientView patientView;
+        private readonly IPatientRepository patientRepository;
         private PatientModel selectedPatient;
-        private BindingSource patientBindingSource;
+        private readonly BindingSource patientBindingSource;
         private IEnumerable<PatientModel> patientList;
 
-        private IExamRepository examRepository = new ExamRepository();
+        private readonly IExamRepository examRepository = new ExamRepository();
         private IEnumerable<ExamModel> examList;
-        private BindingSource examBindingSource;
+        private readonly BindingSource examBindingSource;
 
-        private string examOpeningMode;
+        private readonly string examOpeningMode;
 
         public PatientPresenter(IPatientView view, IPatientRepository repository, string examOpeningMode)
         {
@@ -55,13 +55,7 @@ namespace DMMDigital.Presenters
         private void searchPatient(object sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(patientView.searchedValue);
-            if (emptyValue == false)
-            {
-                patientList = patientRepository.getPatientsByName(patientView.searchedValue);
-            } else
-            {
-                patientList = patientRepository.getAllPatients();
-            }
+            patientList = emptyValue == false ? patientRepository.getPatientsByName(patientView.searchedValue) : patientRepository.getAllPatients();
             patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
         }
 
@@ -175,7 +169,7 @@ namespace DMMDigital.Presenters
         private void getExamByPatient(object sender, EventArgs e)
         {
             examList = examRepository.getPatientExams(patientView.selectedPatientId);
-            if (examList.Count() > 0)
+            if (examList.Any())
             {
                 examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
                 patientView.manipulateExamDataGridView();

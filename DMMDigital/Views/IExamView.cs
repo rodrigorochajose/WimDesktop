@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using DMMDigital.Components;
-using System.Drawing;
 
 namespace DMMDigital.Views
 {

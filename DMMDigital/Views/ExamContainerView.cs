@@ -11,7 +11,6 @@ namespace DMMDigital.Views
 {
     public partial class ExamContainerView : Form, IExamContainerView
     {
-        IExamView exam;
         public int patientId { get; set; }
         public PatientModel patient { get; set; }
         public List<int> openExamsId { get; set; }
@@ -21,7 +20,7 @@ namespace DMMDigital.Views
         public ExamContainerView(IExamView examView)
         {
             InitializeComponent();
-            exam = examView;
+            IExamView exam = examView;
 
             openExamsId = new List<int>
             {

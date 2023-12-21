@@ -11,7 +11,7 @@ namespace DMMDigital._Repositories
 {
     public class ExamImageRepository : IExamImageRepository
     {
-        Context context = new Context();
+        private readonly Context context = new Context();
 
         public void save(List<ExamImageModel> examImages)
         {

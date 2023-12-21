@@ -126,8 +126,11 @@ namespace DMMDigital.Views
         {
             dataGridViewPatient.CurrentCellChanged += (s, ev) =>
             {
-                selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
-                eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
+                if (dataGridViewPatient.SelectedRows.Count > 0)
+                {
+                    selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
+                    eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
+                }
             };
         }
     }

@@ -10,7 +10,7 @@ namespace DMMDigital._Repositories
 {
     public class ExamRepository : IExamRepository
     {
-        Context context = new Context();
+        private readonly Context context = new Context();
 
         public int add(ExamModel exam)
         {

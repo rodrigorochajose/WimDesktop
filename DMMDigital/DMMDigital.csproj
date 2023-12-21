@@ -79,28 +79,16 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Messaging" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\FrameDrawingHistory.cs" />
-    <Compile Include="Models\ImageFrame.cs" />
     <Compile Include="Interface\IConfigRepository.cs" />
     <Compile Include="Interface\IExamImageDrawingRepository.cs" />
     <Compile Include="Interface\IExamImageRepository.cs" />
@@ -332,9 +320,6 @@
     <None Include="Resources\icon-32x32-red.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\banner-principal.f36394371.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon-32x32-autotake.png" />
   </ItemGroup>
   <ItemGroup>
@@ -365,12 +350,6 @@
     <PackageReference Include="Emgu.CV.runtime.windows">
       <Version>4.7.0.5276</Version>
     </PackageReference>
-    <PackageReference Include="Emgu.CV.runtime.windows.cuda">
-      <Version>4.4.0.4099</Version>
-    </PackageReference>
-    <PackageReference Include="Emgu.CV.UI">
-      <Version>4.7.0.5276</Version>
-    </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
     </PackageReference>
@@ -379,9 +358,6 @@
     </PackageReference>
     <PackageReference Include="FirebirdSql.Data.FirebirdClient">
       <Version>9.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="ImageProcessor">
-      <Version>2.9.1</Version>
     </PackageReference>
     <PackageReference Include="morelinq">
       <Version>4.1.0</Version>
@@ -440,9 +416,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon-32x32-ruler.png" />

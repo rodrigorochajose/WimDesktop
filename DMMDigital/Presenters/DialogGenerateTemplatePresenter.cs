@@ -1,5 +1,4 @@
 ﻿using DMMDigital._Repositories;
-using DMMDigital.Interface;
 using DMMDigital.Views;
 using System;
 using System.Windows.Forms;
@@ -8,7 +7,7 @@ namespace DMMDigital.Presenters
 {
     public class DialogGenerateTemplatePresenter
     {
-        private IDialogGenerateTemplateView dialogGenerateTemplateView;
+        private readonly IDialogGenerateTemplateView dialogGenerateTemplateView;
 
         public DialogGenerateTemplatePresenter(IDialogGenerateTemplateView view)
         {

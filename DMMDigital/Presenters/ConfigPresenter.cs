@@ -9,8 +9,8 @@ namespace DMMDigital.Presenters
     public class ConfigPresenter
     {
         private ConfigModel currentConfig;
-        private IConfigView configView;
-        private IConfigRepository configRepository;
+        private readonly IConfigView configView;
+        private readonly IConfigRepository configRepository;
         
         public ConfigPresenter(IConfigView view, IConfigRepository repository) {
             configView = view;

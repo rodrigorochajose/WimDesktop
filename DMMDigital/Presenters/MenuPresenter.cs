@@ -5,7 +5,7 @@ namespace DMMDigital.Presenters
 {
     public class MenuPresenter
     {
-        private IMenuView menuView;
+        private readonly IMenuView menuView;
         
         public MenuPresenter(IMenuView view)
         {

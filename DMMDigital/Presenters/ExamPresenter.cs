@@ -18,15 +18,15 @@ namespace DMMDigital.Presenters
 {
     public class ExamPresenter : EventReceiver
     {
-        private IExamView examView;
-        private IExamRepository examRepository;
-        private IExamImageRepository examImageRepository = new ExamImageRepository();
-        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
-        private IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
-        private IConfigRepository configRepository = new ConfigRepository();
+        private readonly IExamView examView;
+        private readonly IExamRepository examRepository;
+        private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
+        private readonly IConfigRepository configRepository = new ConfigRepository();
 
+        private readonly string examOpeningMode;
         private int m_nId;
-        private string examOpeningMode;
 
         public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
         {
@@ -59,7 +59,7 @@ namespace DMMDigital.Presenters
             }
             else
             {
-                Form examContainerView = Application.OpenForms.Cast<Form>().Where(f => f.Text == "Exame").First();
+                Form examContainerView = Application.OpenForms.Cast<Form>().First(f => f.Text == "Exame");
 
                 if ((examContainerView as ExamContainerView).patientId != examView.patientId)
                 {

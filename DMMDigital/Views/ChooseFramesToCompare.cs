@@ -29,10 +29,10 @@ namespace DMMDigital.Views
 
         private void drawTemplate()
         {
-            int width, height;
-
             foreach (Frame frame in framesToSelect)
             {
+                int width;
+                int height;
                 if (frame.orientation.Contains("Vertical"))
                 {
                     height = 70;

@@ -11,8 +11,8 @@ namespace DMMDigital.Presenters
 {
     public class ChoosePatientExamPresenter
     {
-        private IChoosePatientExamView choosePatientExamView;
-        private IPatientRepository patientRepository;
+        private readonly IChoosePatientExamView choosePatientExamView;
+        private readonly IPatientRepository patientRepository;
         private BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
@@ -37,14 +37,7 @@ namespace DMMDigital.Presenters
         private void searchPatient(object sender, EventArgs e)
         {
             bool emptyValue = string.IsNullOrWhiteSpace(choosePatientExamView.searchedValue);
-            if (emptyValue == false)
-            {
-                patientList = patientRepository.getPatientsByName(choosePatientExamView.searchedValue);
-            }
-            else
-            {
-                patientList = patientRepository.getAllPatients();
-            }
+            patientList = emptyValue == false ? patientRepository.getPatientsByName(choosePatientExamView.searchedValue) : patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
         }
 

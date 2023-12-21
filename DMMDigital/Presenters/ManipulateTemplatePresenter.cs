@@ -8,9 +8,9 @@ namespace DMMDigital.Presenters
 {
     public class ManipulateTemplatePresenter
     {
-        private IManipulateTemplateView manipulateTemplateView;
-        private ITemplateRepository templateRepository;
-        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private readonly IManipulateTemplateView manipulateTemplateView;
+        private readonly ITemplateRepository templateRepository;
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
         public ManipulateTemplatePresenter(IManipulateTemplateView view, ITemplateRepository repository) 
         { 

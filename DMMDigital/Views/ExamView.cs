@@ -41,10 +41,10 @@ namespace DMMDigital.Views
         bool rulerDrawed = false;
 
         Color drawingColor = Color.Red;
-        TrackBar trackBarZoom = null;
-        Button buttonColorPicker = null;
-        PictureBox pictureBoxMagnifier = null;
-        NumericUpDown numericUpDownDrawingSize = null;
+        TrackBar trackBarZoom;
+        Button buttonColorPicker;
+        PictureBox pictureBoxMagnifier;
+        NumericUpDown numericUpDownDrawingSize;
 
         List<Frame> frames = new List<Frame>();
         List<Point> pointsDifferenceFreeDrawing = new List<Point>();
@@ -104,10 +104,10 @@ namespace DMMDigital.Views
 
         private void drawTemplate()
         {
-            int height, width;
-
             foreach (TemplateFrameModel frame in templateFrames)
             {
+                int height;
+                int width;
                 if (frame.orientation.Contains("Vertical"))
                 {
                     height = 35;
@@ -206,13 +206,13 @@ namespace DMMDigital.Views
             examImageDrawings = new List<ExamImageDrawingModel>();
             List<string> files = Directory.GetFiles(examPath).Where(f => !f.EndsWith("original.png")).ToList();
 
-            for (int counter = 0; counter < files.Count; counter++)
+            foreach (string file in files)
             {
                 examImageDrawings.Add(new ExamImageDrawingModel
                 {
                     examId = examId,
-                    examImageId = int.Parse(files[counter].Substring(examPath.Length + 2, 1)),
-                    file = files[counter].Substring(examPath.Length + 1)
+                    examImageId = int.Parse(file.Substring(examPath.Length + 2, 1)),
+                    file = file.Substring(examPath.Length + 1)
                 });
             }
 
@@ -368,7 +368,7 @@ namespace DMMDigital.Views
 
         private void selectTool(object sender)
         {
-            Button selectedButton = panelTools.Controls.OfType<Button>().Where(b => b.Tag != null && (string)b.Tag == "selected").FirstOrDefault();
+            Button selectedButton = panelTools.Controls.OfType<Button>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
             if (selectedButton != null)
             {
                 if (selectedButton.Name == "buttonZoom")
@@ -444,14 +444,7 @@ namespace DMMDigital.Views
         private void generateControlDrawingOption()
         {
             int value;
-            if (action == 4)
-            {
-                value = textDrawingPreviousSize;
-            }
-            else
-            {
-                value = drawingPreviousSize;
-            }
+            value = action == 4 ? textDrawingPreviousSize : drawingPreviousSize;
 
             numericUpDownDrawingSize = new NumericUpDown
             {
@@ -597,7 +590,7 @@ namespace DMMDigital.Views
             selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory]));
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
-            IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Where(drawing => drawing.id == drawingId).First();
+            IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Single(drawing => drawing.id == drawingId);
             selectedDrawingHistory[indexSelectedDrawingHistory].Remove(drawingToRemove);
 
             selectedDrawingHistoryHandler();
@@ -652,7 +645,7 @@ namespace DMMDigital.Views
             flowLayoutPanel1.Controls.Clear();
             if (selectedDrawingHistory.Count > 0)
             {
-                selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => showDrawingHistory(d));
+                selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(showDrawingHistory);
                 saveExamChangesOnDatabase();
             }
         }
@@ -906,29 +899,29 @@ namespace DMMDigital.Views
 
                             switch (currentDrawing)
                             {
-                                case Ruler rl:
+                                case Ruler _:
                                     selectedDrawingToMove = new FreeDraw
                                     {
                                         points = new List<Point>((currentDrawing as Ruler).points)
                                     };
 
                                     break;
-                                case Ellipse el:
+                                case Ellipse _:
                                     selectedDrawingToMove = new Ellipse();
 
                                     break;
-                                case RectangleDraw r:
+                                case RectangleDraw _:
                                     selectedDrawingToMove = new RectangleDraw();
 
                                     break;
-                                case Arrow a:
+                                case Arrow _:
                                     selectedDrawingToMove = new Arrow();
 
                                     break;
                                 case FreeDraw fd:
                                     selectedDrawingToMove = new FreeDraw
                                     {
-                                        points = new List<Point>((currentDrawing as FreeDraw).points)
+                                        points = new List<Point>(fd.points)
                                     };
 
                                     pointsDifferenceFreeDrawing = new List<Point>();
@@ -942,12 +935,12 @@ namespace DMMDigital.Views
                                     }
 
                                     break;
-                                case Text t:
+                                case Text textDrawing:
                                     selectedDrawingToMove = new Text
                                     {
-                                        text = (currentDrawing as Text).text,
-                                        font = (currentDrawing as Text).font,
-                                        brush = (currentDrawing as Text).brush,
+                                        text = textDrawing.text,
+                                        font = textDrawing.font,
+                                        brush = textDrawing.brush,
                                     };
 
                                     break;

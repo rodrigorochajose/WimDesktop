@@ -38,15 +38,15 @@ namespace DMMDigital.Views
 
             if (compareMode.Contains("Multipla"))
             {
-                for (int counter = 0; counter < selectedImages.Count; counter++)
+                foreach (Image img in selectedImages)
                 {
-                    if (selectedImages[counter].Width > selectedImages[counter].Height)
+                    if (img.Width > img.Height)
                     {
-                        horizontalImages.Add(selectedImages[counter]);
+                        horizontalImages.Add(img);
                     }
                     else
                     {
-                        verticalImages.Add(selectedImages[counter]);
+                        verticalImages.Add(img);
                     }
                 }
 

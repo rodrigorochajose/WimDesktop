@@ -9,7 +9,7 @@ namespace DMMDigital._Repositories
 {
     public class PatientRepository : IPatientRepository
     {
-        Context context = new Context();
+        private readonly Context context = new Context();
 
         public string add(PatientModel patient)
         {

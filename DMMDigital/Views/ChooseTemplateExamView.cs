@@ -108,10 +108,10 @@ namespace DMMDigital.Views
 
             List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == templateId).ToList();
 
-            int height, width;
-
             foreach (TemplateFrameModel tl in framesToShow)
             {
+                int height;
+                int width;
                 if (tl.orientation.Contains("Vertical"))
                 {
                     height = 35;
@@ -145,12 +145,10 @@ namespace DMMDigital.Views
         {
             List<PictureBox> framesOnPanel = panel3.Controls.Cast<PictureBox>().ToList();
 
-            if (framesOnPanel != null)
+            if (!framesOnPanel.Any()) return;
+            foreach (PictureBox pb in framesOnPanel)
             {
-                foreach (PictureBox pb in framesOnPanel)
-                {
-                    panel3.Controls.Remove(pb);
-                }
+                panel3.Controls.Remove(pb);
             }
         }
     }

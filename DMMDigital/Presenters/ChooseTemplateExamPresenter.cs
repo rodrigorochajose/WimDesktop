@@ -10,9 +10,9 @@ namespace DMMDigital.Presenters
 {
     public class ChooseTemplateExamPresenter
     {
-        private IChooseTemplateExamView chooseTemplateExamView;
-        private ITemplateRepository templateRepository;
-        private ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private readonly IChooseTemplateExamView chooseTemplateExamView;
+        private readonly ITemplateRepository templateRepository;
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
         private string examOpeningMode = "newPage";
 
