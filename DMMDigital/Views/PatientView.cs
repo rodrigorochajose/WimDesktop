@@ -104,22 +104,34 @@ namespace DMMDigital.Views
 
             buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
 
-            buttonNewExam.Click += delegate { eventShowFormNewExam?.Invoke(this, EventArgs.Empty); };
+            buttonNewExam.Click += delegate {
+                if (selectedPatientId == 0)
+                {
+                    MessageBox.Show("Nenhum Paciente foi selecionado!");
+                    return;
+                }
+                eventShowFormNewExam?.Invoke(this, EventArgs.Empty); 
+            };
 
             buttonOpenExam.Click += delegate {
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show("Nenhum Exame foi selecionado!");
+                    return;
                 } 
-                else
-                {
-                    eventOpenExam?.Invoke(this, EventArgs.Empty); 
-                }
+                eventOpenExam?.Invoke(this, EventArgs.Empty); 
             };
 
             buttonDeleteExam.Click += delegate { eventDeleteExam?.Invoke(this, EventArgs.Empty); };
 
-            buttonExportExam.Click += delegate { eventExportExam?.Invoke(this, EventArgs.Empty); };
+            buttonExportExam.Click += delegate {
+                if (selectedExamId == 0)
+                {
+                    MessageBox.Show("Nenhum Exame foi selecionado!");
+                    return;
+                }
+                eventExportExam?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         private void patientViewLoad(object sender, EventArgs e)

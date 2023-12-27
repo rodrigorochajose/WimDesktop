@@ -20,7 +20,14 @@ namespace DMMDigital.Views
             };
             buttonNewPatient.Click += delegate { eventShowAddPatientView?.Invoke(this, EventArgs.Empty); };
             dataGridViewPatient.CellClick += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
-            buttonSelectPatient.Click += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
+            buttonSelectPatient.Click += delegate {
+                if (selectedPatientId == 0)
+                {
+                    MessageBox.Show("Não há nenhum paciente selecionado!");
+                    return; 
+                }
+                eventSelectPatient?.Invoke(this, EventArgs.Empty); 
+            };
             buttonCancelAction.Click += delegate { Close(); };
         }
 
@@ -31,7 +38,7 @@ namespace DMMDigital.Views
         }
         public int selectedPatientId 
         {
-            get { return int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString()); } 
+            get { return dataGridViewPatient.CurrentRow?.Cells["id"].Value != null ? int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString()) : 0; } 
             set { selectedPatientId = value; }
         }
 

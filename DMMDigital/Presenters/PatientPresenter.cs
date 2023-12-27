@@ -141,9 +141,13 @@ namespace DMMDigital.Presenters
         private void getPatients()
         {
             patientList = patientRepository.getAllPatients();
-            patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
-            patientView.selectedPatientId = patientList.First().id;
-            patientView.manipulatePatientDataGridView();
+
+            if (patientList.Any())
+            {
+                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
+                patientView.selectedPatientId = patientList.First().id;
+                patientView.manipulatePatientDataGridView();
+            }
         }
 
         private void newExam(object sender, EventArgs e)
