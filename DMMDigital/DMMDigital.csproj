@@ -291,7 +291,6 @@
     <EmbeddedResource Include="Views\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="FpdSys.lic" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -306,7 +305,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="SignalProc.lic" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -448,35 +446,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon-32x32-cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Algorithm.dll" />
-    <Content Include="CaliDynamic.dll" />
-    <Content Include="CaliE4W.dll" />
-    <Content Include="CaliImpl.dll" />
-    <Content Include="ConnGigEVision.dll" />
-    <Content Include="ConnSGDMA.dll" />
-    <Content Include="ConnUDPE50.dll" />
-    <Content Include="ConnUdpTcp.dll" />
-    <Content Include="ConnUdpTcpE51.dll" />
-    <Content Include="ConnUdpTcpE52.dll" />
-    <Content Include="ConnUSBfifo.dll" />
-    <Content Include="DetectorProxy.dll" />
-    <Content Include="DetectorService.exe" />
-    <Content Include="DetFinder.dll" />
-    <Content Include="E4.dll" />
-    <Content Include="E45N.dll" />
-    <Content Include="E45W.dll" />
-    <Content Include="E4N.dll" />
-    <Content Include="E4S.dll" />
-    <Content Include="E4W.dll" />
-    <Content Include="FpdSys.dll" />
-    <Content Include="fpd_boost.dll" />
-    <Content Include="fpd_yall.dll" />
-    <Content Include="FTPService.dll" />
-    <Content Include="SGDMA_Library.dll" />
-    <Content Include="SignalProcessing.dll" />
-    <Content Include="Syncbox.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

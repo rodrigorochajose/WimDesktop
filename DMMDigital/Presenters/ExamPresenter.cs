@@ -72,7 +72,7 @@ namespace DMMDigital.Presenters
                 }
             }
 
-            Detector.DestroyDetector(m_nId);
+            //Detector.DestroyDetector(m_nId);
         }
 
         private void loadFullExam()

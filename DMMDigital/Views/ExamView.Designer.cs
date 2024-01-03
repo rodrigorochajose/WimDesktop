@@ -127,7 +127,7 @@ namespace DMMDigital.Views
             this.textBoxFrameNotes.Location = new System.Drawing.Point(11, 294);
             this.textBoxFrameNotes.Multiline = true;
             this.textBoxFrameNotes.Name = "textBoxFrameNotes";
-            this.textBoxFrameNotes.Size = new System.Drawing.Size(330, 54);
+            this.textBoxFrameNotes.Size = new System.Drawing.Size(330, 43);
             this.textBoxFrameNotes.TabIndex = 0;
             this.textBoxFrameNotes.TextChanged += new System.EventHandler(this.textBoxFrameNotesTextChanged);
             // 
@@ -157,9 +157,9 @@ namespace DMMDigital.Views
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 474);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 465);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 174);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 183);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -167,7 +167,7 @@ namespace DMMDigital.Views
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(0, 444);
+            this.panel1.Location = new System.Drawing.Point(0, 435);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 29);
             this.panel1.TabIndex = 6;
@@ -187,7 +187,7 @@ namespace DMMDigital.Views
             // 
             this.panel4.BackColor = System.Drawing.Color.Gainsboro;
             this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(0, 356);
+            this.panel4.Location = new System.Drawing.Point(0, 347);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(363, 29);
             this.panel4.TabIndex = 0;
@@ -196,7 +196,7 @@ namespace DMMDigital.Views
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label3.Location = new System.Drawing.Point(12, 4);
+            this.label3.Location = new System.Drawing.Point(12, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(167, 21);
             this.label3.TabIndex = 5;
@@ -205,7 +205,7 @@ namespace DMMDigital.Views
             // panelToolOptions
             // 
             this.panelToolOptions.BackColor = System.Drawing.Color.White;
-            this.panelToolOptions.Location = new System.Drawing.Point(0, 385);
+            this.panelToolOptions.Location = new System.Drawing.Point(0, 376);
             this.panelToolOptions.Name = "panelToolOptions";
             this.panelToolOptions.Size = new System.Drawing.Size(363, 58);
             this.panelToolOptions.TabIndex = 4;

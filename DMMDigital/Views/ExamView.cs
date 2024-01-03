@@ -33,11 +33,11 @@ namespace DMMDigital.Views
         int indexFrame = 0;
         float drawingSize = 5;
         int counterDrawings = 0;
-        int drawingPreviousSize = 5;
         int textDrawingPreviousSize = 26;
         int indexSelectedDrawingHistory = 0;
 
         bool draw = false;
+        bool multiRuler = false;
         bool rulerDrawed = false;
 
         Color drawingColor = Color.Red;
@@ -179,8 +179,8 @@ namespace DMMDigital.Views
                 panelTemplate.Controls.Add(newFrame);
             }
 
-            frames[indexFrame].Tag = Color.LimeGreen;
-            selectedFrame = frames[indexFrame];
+            selectedFrame = frames.First();
+            selectedFrame.Tag = Color.LimeGreen;
             if (selectedFrame.originalImage != null)
             {
                 mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
@@ -388,8 +388,65 @@ namespace DMMDigital.Views
             switch (action)
             {
                 case 2:
-                    // regua
+                    Label labelColor = new Label
+                    {
+                        Name = "labelRulerColor",
+                        Text = "Cor",
+                        AutoSize = true,
+                        Size = new Size(31, 19),
+                        Location = new Point(7, 18),
+                        Font = new Font("Segoe UI", 10F),
+                    };
 
+                    buttonColorPicker = new Button
+                    {
+                        BackColor = drawingColor,
+                        Cursor = Cursors.Hand,
+                        FlatStyle = FlatStyle.Popup,
+                        Location = new Point(41, 18),
+                        Margin = new Padding(0),
+                        Name = "buttonColorPicker",
+                        Size = new Size(58, 23),
+                        UseVisualStyleBackColor = false,
+                    };
+                    buttonColorPicker.FlatAppearance.BorderColor = Color.Black;
+                    buttonColorPicker.Click += buttonColorPickerClick;
+
+                    Button buttonResetCalibration = new Button
+                    {
+                        Location = new Point(121, 6),
+                        Name = "buttonResetCalibration",
+                        Size = new Size(102, 23),
+                        Text = "Padrão do Sensor",
+                        UseVisualStyleBackColor = false,
+                    };
+                    buttonResetCalibration.Click += buttonResetCalibrationClick;
+
+                    Button buttonSetCalibration = new Button
+                    {
+                        Location = new Point(121, 31),
+                        Name = "button3",
+                        Size = new Size(102, 23),
+                        Text = "Recalibrar",
+                        UseVisualStyleBackColor = false,
+                    };
+                    buttonSetCalibration.Click += buttonSetCalibrationClick;
+
+                    CheckBox checkBoxMultiRuler = new CheckBox
+                    {
+                        Font = new Font("Segoe UI", 9F),
+                        Location = new Point(238, 22),
+                        Name = "checkBoxMultiRuler",
+                        Size = new Size(119, 19),
+                        Text = "Medição Multipla",
+                    };
+                    checkBoxMultiRuler.CheckedChanged += checkBoxMultiRulerCheckedChange;
+
+                    panelToolOptions.Controls.Add(labelColor);
+                    panelToolOptions.Controls.Add(buttonColorPicker);
+                    panelToolOptions.Controls.Add(buttonResetCalibration);
+                    panelToolOptions.Controls.Add(buttonSetCalibration);
+                    panelToolOptions.Controls.Add(checkBoxMultiRuler);
                     break;
 
                 case 3:
@@ -427,24 +484,12 @@ namespace DMMDigital.Views
                     //panelToolOptions.Refresh();
                     break;
             }
-
-            //    if (action == 4)
-            //    {
-            //        drawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-            //        numericUpDownDrawingSize.Value = textDrawingPreviousSize;
-            //    } 
-            //    else if ((string)buttonText.Tag == "selected") // verify if the "last" selected tool was DrawText tool
-            //    {
-            //        textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
-            //        numericUpDownDrawingSize.Value = drawingPreviousSize;
-            //    }
-
         }
 
         private void generateControlDrawingOption()
         {
             int value;
-            value = action == 4 ? textDrawingPreviousSize : drawingPreviousSize;
+            value = action == 4 ? textDrawingPreviousSize : (int)drawingSize;
 
             numericUpDownDrawingSize = new NumericUpDown
             {
@@ -461,7 +506,7 @@ namespace DMMDigital.Views
 
             buttonColorPicker = new Button
             {
-                BackColor = Color.Red,
+                BackColor = drawingColor,
                 Cursor = Cursors.Hand,
                 FlatStyle = FlatStyle.Popup,
                 Location = new Point(74, 19),
@@ -569,7 +614,6 @@ namespace DMMDigital.Views
 
             float lengthInMM = (float)Math.Sqrt(Math.Pow((initialPXImage - finalPXImage) / scalingFactorSensorImageWidth, 2) + Math.Pow((initialPYImage - finalPYImage) / scalingFactorSensorImageHeight, 2));
             return lengthInMM;
-
         }
 
         private void verifyHistoryToReset()
@@ -582,6 +626,11 @@ namespace DMMDigital.Views
 
         private void numericUpDownDrawingSizeValueChanged(object sender, EventArgs e)
         {
+            if (action == 4)
+            {
+                textDrawingPreviousSize = (int)numericUpDownDrawingSize.Value;
+                return;
+            }
             drawingSize = (int)numericUpDownDrawingSize.Value;
         }
 
@@ -627,8 +676,29 @@ namespace DMMDigital.Views
                 Name = $"labelDrawing{drawing.id}",
                 Size = new Size(150, 20),
                 Location = new Point(125, 23),
-                Text = "testando"
+                Text = $"{drawing.GetType()}-{drawing.id}",
             };
+
+            if (drawing is Ellipse)
+            {
+                label.Text = $"Circulo-{drawing.id}";
+            } 
+            else if (drawing is RectangleDraw)
+            {
+                label.Text = $"Retangulo-{drawing.id}";
+            } 
+            else if (drawing is Arrow)
+            {
+                label.Text = $"Seta-{drawing.id}";
+            } 
+            else if (drawing is Text)
+            {
+                label.Text = $"Texto{drawing.id}";
+            } 
+            else
+            {
+                label.Text = $"DesenhoLivre{drawing.id}";
+            }
 
             pictureBox.Image = drawing.generateDrawingImageAndThumb(selectedFrame.order, examPath, mainPictureBox.Width, mainPictureBox.Height);
             button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
@@ -742,14 +812,16 @@ namespace DMMDigital.Views
                 Size = new Size(250, 250),
                 Image = new Bitmap(mainPictureBox.Width, mainPictureBox.Height)
             };
+
             panel2.Controls.Add(pictureBoxMagnifier);
             panel2.Controls.SetChildIndex(pictureBoxMagnifier, 0);
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
         {
-            selectTool(sender);
             action = 2;
+            loadToolOptions();
+            selectTool(sender);
         }
 
         private void buttonUndoClick(object sender, EventArgs e)
@@ -875,6 +947,28 @@ namespace DMMDigital.Views
             }
         }
 
+        private void buttonResetCalibrationClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSetCalibrationClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxMultiRulerCheckedChange(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Checked)
+            {
+                multiRuler = true;
+            }
+            else
+            {
+                multiRuler = false;
+            }
+        }
+
         private void textBoxFrameNotesTextChanged(object sender, EventArgs e)
         {
             selectedFrame.notes = textBoxFrameNotes.Text;
@@ -962,57 +1056,76 @@ namespace DMMDigital.Views
                         break;
 
                     case 2:
-                        if (e.Button == MouseButtons.Right)
+                        if (multiRuler)
                         {
-                            if ((currentDrawing as Ruler).points.Count > 1)
+                            if (e.Button == MouseButtons.Right)
                             {
-                                currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                                if ((currentDrawing as Ruler).points.Count > 1)
+                                {
+                                    currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                                }
+                                else
+                                {
+                                    selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
+                                    indexSelectedDrawingHistory--;
+                                    currentDrawing.finalPosition = currentDrawing.initialPosition;
+                                }
+                                mainPictureBox.Refresh();
+                                rulerDrawed = false;
+                                draw = false;
                             }
                             else
                             {
-                                selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
-                                indexSelectedDrawingHistory--;
-                                currentDrawing.finalPosition = currentDrawing.initialPosition;
+                                if (!rulerDrawed)
+                                {
+                                    currentDrawing = new Ruler
+                                    {
+                                        id = counterDrawings,
+                                        graphicsPath = new GraphicsPath(),
+                                        initialPosition = e.Location,
+                                        finalPosition = e.Location,
+                                        points = new List<Point>(),
+                                        lineLength = new List<float>(),
+                                        drawingColor = drawingColor,
+                                        drawingSize = 3
+                                    };
+                                    (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
+                                    (currentDrawing as Ruler).lineLength.Add(0);
+
+                                    selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
+                                    {
+                                        currentDrawing
+                                    });
+                                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+
+                                    rulerDrawed = true;
+                                }
+                                else
+                                {
+                                    (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
+                                    (currentDrawing as Ruler).lineLength.Add(getRulerLength());
+                                    currentDrawing.initialPosition = currentDrawing.finalPosition;
+                                }
                             }
-                            mainPictureBox.Refresh();
-                            rulerDrawed = false;
-                            draw = false;
                         }
                         else
                         {
-                            if (!rulerDrawed)
+                            currentDrawing = new Ruler
                             {
-                                currentDrawing = new Ruler
-                                {
-                                    id = counterDrawings,
-                                    graphicsPath = new GraphicsPath(),
-                                    initialPosition = e.Location,
-                                    finalPosition = e.Location,
-                                    points = new List<Point>(),
-                                    lineLength = new List<float>(),
-                                    drawingColor = drawingColor,
-                                    drawingSize = 3
-                                };
-                                (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
-                                (currentDrawing as Ruler).lineLength.Add(0);
-
-                                selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
-                                {
-                                    currentDrawing
-                                });
-                                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-
-                                rulerDrawed = true;
-                            }
-                            else
-                            {
-                                (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
-                                (currentDrawing as Ruler).lineLength.Add(getRulerLength());
-                                currentDrawing.initialPosition = currentDrawing.finalPosition;
-                            }
+                                id = counterDrawings,
+                                graphicsPath = new GraphicsPath(),
+                                initialPosition = e.Location,
+                                finalPosition = e.Location,
+                                points = new List<Point>(),
+                                lineLength = new List<float>(),
+                                drawingColor = drawingColor,
+                                drawingSize = 3
+                            };
+                            (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
+                            (currentDrawing as Ruler).lineLength.Add(0);
                         }
 
-                        break;
+                    break;
 
                     case 3:
                         currentDrawing = new FreeDraw
@@ -1147,7 +1260,7 @@ namespace DMMDigital.Views
 
                 PointF rectangleInitialPosition = new PointF(
                 (e.X * mainPictureBox.Image.Width / mainPictureBox.Width) - rectangleWidth / 2,
-                (e.Y * mainPictureBox.Image.Height / mainPictureBox.Height) - rectangleHeight / 2
+                (e.Y * (mainPictureBox.Image.Height + 10) / mainPictureBox.Height) - rectangleHeight / 2
                 );
 
                 RectangleF rectangle = new RectangleF(rectangleInitialPosition, new Size(rectangleWidth, rectangleHeight));
@@ -1165,11 +1278,19 @@ namespace DMMDigital.Views
         {
             if (action != 0)
             {
-                if (action > 2)
+                if (action > 1)
                 {
                     //verifyHistoryToReset();
-
-                    if (action == 3)
+                    if (action == 2)
+                    {
+                        if (multiRuler)
+                        {
+                            return;
+                        }
+                        (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
+                        (currentDrawing as Ruler).lineLength.Add(getRulerLength());
+                    }
+                    else if (action == 3)
                     {
                         if ((currentDrawing as FreeDraw).points.Count == 1)
                         {
