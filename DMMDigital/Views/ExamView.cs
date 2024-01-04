@@ -1125,7 +1125,7 @@ namespace DMMDigital.Views
                             (currentDrawing as Ruler).lineLength.Add(0);
                         }
 
-                        break;
+                    break;
 
                     case 3:
                         currentDrawing = new FreeDraw
