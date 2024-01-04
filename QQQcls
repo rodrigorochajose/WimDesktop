@@ -1,0 +1,24 @@
+[33m55ea0e8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Inicio da implementação da ferramenta de medição
+[33mae67a33[m Finalizado desenvolvimento da ferramenta lupa
+[33m7bf7ecf[m Continuidade ao desenvolvimento, foi implementado mas há ajustes a serem feitos
+[33m31cd49b[m Inicio desenvolvimento ferramenta lupa (não dei commit ontem pois estava fazendo testes)
+[33m1f86576[m Feito Miniatura da Imagem nos Frames e Informações da Imagem
+[33mbb30d48[m Corrigido bug ao desenhar texto
+[33m465e69c[m Inicio de corrução de bug do histórico quando se desenha um texto
+[33m88055b0[m Finalização desenvolvimento histórico de desenhos
+[33m0a02d5e[m Inicio desenvolvimento do histórico de desenhos (visualização)
+[33m61c8e44[m Finalização Opções da Ferramenta e estilização
+[33m8a2e221[m Alterações nas opções de ferramenta
+[33mbebc9b4[m Continuidade as opções das ferramentas e estilização dos botões de ferramentas
+[33mdf0c810[m Correção histórico de posicionamento dos desenhos e inicio das opções das ferramentas
+[33m2b2990b[m Correção ExamView
+[33mb7d7498[m Inicio de correção de bugs
+[33m24dcece[m Finalizado Refatoração/Reorganização
+[33m1bd058b[m Refatorado até o chooseTemplateView
+[33md28a236[m Mais correções
+[33mae6a274[m Refatoração
+[33m671bec2[m Refatoração Pattern MVP
+[33mee9e7ba[m Novos ajustes 11/08
+[33m5e2070c[m Mudanças 11/08
+[33mbdc7b0a[m Adicionar arquivos de projeto.
+[33m1e19dd5[m Adicione .gitattributes e .gitignore.

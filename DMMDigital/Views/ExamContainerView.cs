@@ -52,7 +52,7 @@ namespace DMMDigital.Views
             (examView as Form).FormBorderStyle = FormBorderStyle.None;
             (examView as Form).AutoScaleMode = AutoScaleMode.Dpi;
 
-            tabPage.Controls.Add((examView as Form));
+            tabPage.Controls.Add(examView as Form);
             (examView as Form).Dock = DockStyle.Fill;
             Show();
             (examView as Form).Show();
