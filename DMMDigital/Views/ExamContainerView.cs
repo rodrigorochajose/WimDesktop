@@ -16,6 +16,7 @@ namespace DMMDigital.Views
         public List<int> openExamsId { get; set; }
 
         public event EventHandler eventGetPatient;
+        public event EventHandler eventDestroyDetector;
 
         public ExamContainerView(IExamView examView)
         {
@@ -81,6 +82,7 @@ namespace DMMDigital.Views
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.OpenForms.Cast<Form>().First().Show();
+            eventDestroyDetector?.Invoke(this, e);
         }
 
     }

@@ -36,9 +36,14 @@ namespace DMMDigital.Views
         int textDrawingPreviousSize = 26;
         int indexSelectedDrawingHistory = 0;
 
+        double graus = 0;
+        double scalingFactorSensorImageWidth = 0;
+        double scalingFactorSensorImageHeight = 0;
+
         bool draw = false;
         bool multiRuler = false;
         bool rulerDrawed = false;
+        bool recalibrate = false;
 
         Color drawingColor = Color.Red;
         TrackBar trackBarZoom;
@@ -164,11 +169,14 @@ namespace DMMDigital.Views
 
                     foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
                     {
-                        frameDrawings.Add(new ImageDrawed
+                        using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
                         {
-                            id = int.Parse(drawing.file.Substring(4, 1)),
-                            img = Image.FromFile(Path.Combine(examPath, drawing.file)),
-                        });
+                            frameDrawings.Add(new ImageDrawed
+                            {
+                                id = int.Parse(drawing.file.Substring(4, 1)),
+                                img = new Bitmap(img),
+                            });
+                        }
                     }
 
                     frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
@@ -184,6 +192,7 @@ namespace DMMDigital.Views
             if (selectedFrame.originalImage != null)
             {
                 mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
+                resizeMainPictureBox();
             }
 
             labelImageDate.Text = selectedFrame.datePhotoTook;
@@ -307,7 +316,7 @@ namespace DMMDigital.Views
             selectedDrawingHistoryHandler();
 
             mainPictureBox.Image = selectedFrame.originalImage;
-            mainPictureBox.Refresh();
+            resizeMainPictureBox();
         }
 
         public bool dialogOverrideCurrentImage()
@@ -322,12 +331,12 @@ namespace DMMDigital.Views
 
         public void loadImageOnMainPictureBox()
         {
-            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-radiografia.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image image = Image.FromStream(fs);
                 mainPictureBox.Image = image;
                 frameHandler(image);
-                //resizeMainPictureBox();
+                resizeMainPictureBox();
                 enableTools();
                 saveExamChangesOnDatabase();
             }
@@ -335,27 +344,35 @@ namespace DMMDigital.Views
 
         public void resizeMainPictureBox()
         {
-            mainPictureBox.Invoke((MethodInvoker)(() =>
+            if (mainPictureBox.Image != null)
             {
-                Size rectangleSize;
-                if (mainPictureBox.Width < mainPictureBox.Height)
+                mainPictureBox.Invoke((MethodInvoker)(() =>
                 {
-                    rectangleSize = new Size(
-                        mainPictureBox.Width,
-                        mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
-                    );
-                }
-                else
-                {
-                    rectangleSize = new Size(
-                        mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                        mainPictureBox.Height
-                    );
-                }
+                    Size rectangleSize;
+                    if (selectedFrame.orientation.Contains("Horizontal"))
+                    {
+                        rectangleSize = new Size(
+                            mainPictureBox.Width,
+                            mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
+                        );
+                    }
+                    else
+                    {
+                        rectangleSize = new Size(
+                            mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                            mainPictureBox.Height
+                        );
+                    }
 
-                mainPictureBox.Size = rectangleSize;
-                mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
-            }));
+                    if (rectangleSize.Width != mainPictureBox.Size.Width && rectangleSize.Height != mainPictureBox.Size.Height)
+                    {
+                        mainPictureBox.Size = rectangleSize;
+                        mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
+                    }
+
+                }));
+                mainPictureBox.Refresh();
+            }
         }
 
         private void enableTools()
@@ -603,16 +620,13 @@ namespace DMMDigital.Views
         private float getRulerLength()
         {
             // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            float scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
-            float scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
+            scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
+            scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
 
-            float initialPXImage = currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float initialPYImage = currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-            float finalPXImage = currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float finalPYImage = currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+            float width = (currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width) - (currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
+            float height = (currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width) - (currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
 
-
-            float lengthInMM = (float)Math.Sqrt(Math.Pow((initialPXImage - finalPXImage) / scalingFactorSensorImageWidth, 2) + Math.Pow((initialPYImage - finalPYImage) / scalingFactorSensorImageHeight, 2));
+            float lengthInMM = (float)Math.Sqrt(Math.Pow(width / scalingFactorSensorImageWidth, 2) + Math.Pow(height / scalingFactorSensorImageHeight, 2));
             return lengthInMM;
         }
 
@@ -634,13 +648,15 @@ namespace DMMDigital.Views
             drawingSize = (int)numericUpDownDrawingSize.Value;
         }
 
-        private void deleteDrawingOnHistory(int drawingId)
+        private void deleteDrawingOnHistory(IDrawing drawing)
         {
             selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory]));
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
-            IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Single(drawing => drawing.id == drawingId);
+            IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Single(d => d.id == drawing.id);
             selectedDrawingHistory[indexSelectedDrawingHistory].Remove(drawingToRemove);
+
+            File.Delete(Path.Combine(examPath, $"F{selectedFrame.order}-D{drawing.id}.png"));
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
@@ -695,13 +711,17 @@ namespace DMMDigital.Views
             {
                 label.Text = $"Texto{drawing.id}";
             }
-            else
+            else if (drawing is Ruler)
             {
-                label.Text = $"DesenhoLivre{drawing.id}";
+                label.Text = $"Régua-{drawing.id}";
+            }
+            else 
+            {
+                label.Text = $"DesenhoLivre-{drawing.id}";
             }
 
             pictureBox.Image = drawing.generateDrawingImageAndThumb(selectedFrame.order, examPath, mainPictureBox.Width, mainPictureBox.Height);
-            button.Click += delegate { deleteDrawingOnHistory(drawing.id); };
+            button.Click += delegate { deleteDrawingOnHistory(drawing); };
 
             panel.Controls.Add(button);
             panel.Controls.Add(pictureBox);
@@ -741,9 +761,9 @@ namespace DMMDigital.Views
                 frameHandler(selectedImage);
 
                 enableTools();
-            }
 
-            //resizeMainPictureBox();
+                resizeMainPictureBox();
+            }
             saveExamChangesOnDatabase();
         }
 
@@ -862,8 +882,6 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
             mainPictureBox.Image = image;
-
-            saveExamChangesOnDatabase();
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
@@ -954,7 +972,7 @@ namespace DMMDigital.Views
 
         private void buttonSetCalibrationClick(object sender, EventArgs e)
         {
-
+            recalibrate = true;
         }
 
         private void checkBoxMultiRulerCheckedChange(object sender, EventArgs e)
@@ -1070,9 +1088,10 @@ namespace DMMDigital.Views
                                     indexSelectedDrawingHistory--;
                                     currentDrawing.finalPosition = currentDrawing.initialPosition;
                                 }
-                                mainPictureBox.Refresh();
                                 rulerDrawed = false;
                                 draw = false;
+                                selectedDrawingHistoryHandler();
+                                mainPictureBox.Refresh();
                             }
                             else
                             {
@@ -1087,8 +1106,10 @@ namespace DMMDigital.Views
                                         points = new List<Point>(),
                                         lineLength = new List<float>(),
                                         drawingColor = drawingColor,
-                                        drawingSize = 3
+                                        drawingSize = 3,
+                                        multiple = true
                                     };
+
                                     (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
                                     (currentDrawing as Ruler).lineLength.Add(0);
 
@@ -1119,7 +1140,8 @@ namespace DMMDigital.Views
                                 points = new List<Point>(),
                                 lineLength = new List<float>(),
                                 drawingColor = drawingColor,
-                                drawingSize = 3
+                                drawingSize = 3,
+                                multiple = false
                             };
                             (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
                             (currentDrawing as Ruler).lineLength.Add(0);
@@ -1253,6 +1275,7 @@ namespace DMMDigital.Views
                 }
                 mainPictureBox.Invalidate();
             }
+
             if (action == 8)
             {
                 int rectangleWidth = pictureBoxMagnifier.Width / trackBarZoom.Value;
@@ -1287,8 +1310,26 @@ namespace DMMDigital.Views
                         {
                             return;
                         }
+
+                        if (recalibrate)
+                        {
+                            using (Form dialogRecalibrateRuler = new DialogRecalibrateRuler())
+                            {
+                                var result = dialogRecalibrateRuler.ShowDialog();
+                                if (result == DialogResult.OK)
+                                {
+                                    int catetoAdjacente = currentDrawing.finalPosition.X - currentDrawing.initialPosition.X;
+
+                                    double angulo = Math.Atan2(currentDrawing.finalPosition.Y - currentDrawing.initialPosition.Y, catetoAdjacente);
+                                    graus = angulo * (180.0 / Math.PI);
+
+                                    recalibrateRuler((dialogRecalibrateRuler as DialogRecalibrateRuler).rulerValue);
+
+                                }
+                                recalibrate = false;
+                            }
+                        }
                         (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
-                        (currentDrawing as Ruler).lineLength.Add(getRulerLength());
                     }
                     else if (action == 3)
                     {
@@ -1311,6 +1352,12 @@ namespace DMMDigital.Views
             }
         }
 
+        private void recalibrateRuler(double rulerValue)
+        {
+            scalingFactorSensorImageWidth = Math.Cos(graus) * rulerValue;
+            scalingFactorSensorImageHeight = Math.Sin(graus) * rulerValue;
+        }
+
         private void mainPictureBoxPaint(object sender, PaintEventArgs e)
         {
             if (selectedDrawingHistory.Count > 0)
@@ -1318,16 +1365,19 @@ namespace DMMDigital.Views
                 selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
             }
 
-            if (draw && currentDrawing != null && action != 1 && action != 2)
+            if (draw && currentDrawing != null)
             {
-                currentDrawing.draw(e.Graphics);
-            }
-            else if (draw && action == 2)
-            {
-                int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
-                (currentDrawing as Ruler).lineLength[index] = getRulerLength();
+                if (action > 2)
+                {
+                    currentDrawing.draw(e.Graphics);
+                }
+                else if (action == 2)
+                {
+                    int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
+                    (currentDrawing as Ruler).lineLength[index] = getRulerLength();
 
-                currentDrawing.drawPreview(e.Graphics);
+                    currentDrawing.drawPreview(e.Graphics);
+                }
             }
         }
 

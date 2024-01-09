@@ -96,8 +96,11 @@ namespace DMMDigital.Views
         public void setTemplateFrameList(List<TemplateFrameModel> templateFrameList)
         {
             this.templateFrameList = templateFrameList;
-            comboBoxTemplate.SelectedItem = comboBoxTemplate.Items[0];
-            showTemplateOnPanel();
+            if (comboBoxTemplate.Items.Count > 0)
+            {
+                comboBoxTemplate.SelectedItem = comboBoxTemplate.Items[0];
+                showTemplateOnPanel();
+            }
         }
 
         private void showTemplateOnPanel()

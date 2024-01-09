@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -16,5 +17,6 @@ namespace DMMDigital.Views
         public event EventHandler showPatientView;
         public event EventHandler showNewExamView;
         public event EventHandler showConfigView;
+
     }
 }

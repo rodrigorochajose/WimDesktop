@@ -5,10 +5,11 @@ using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Linq;
 using System.IO;
+using System.Reflection;
 
 namespace DMMDigital.Models.Drawings
 {
-    internal class Ruler : IDrawing
+    public class Ruler : IDrawing
     {
         public int id { get; set; }
         public Point initialPosition { get; set; }
@@ -16,10 +17,19 @@ namespace DMMDigital.Models.Drawings
         public GraphicsPath graphicsPath { get; set; }
         public Color drawingColor { get; set; }
         public float drawingSize { get; set; }
-
         public List<Point> points { get; set; }
-
         public List<float> lineLength { get; set; }
+        public bool multiple { get; set; }
+
+        public void drawTotalLength(Graphics g)
+        {
+            g.DrawString(
+                    lineLength.Sum().ToString("0.00") + "mm",
+                    new Font("Arial", 14, FontStyle.Bold),
+                    new SolidBrush(Color.Blue),
+                    new Point(finalPosition.X + 10, finalPosition.Y)
+                );
+        }
 
         public void drawPreview(Graphics g)
         {
@@ -29,16 +39,12 @@ namespace DMMDigital.Models.Drawings
             };
             g.DrawLine(pen, initialPosition, finalPosition);
 
-
-            if (lineLength.Last() > 0)
-            {
-                g.DrawString(
-                    lineLength.Last().ToString("0.0"),
-                    new Font("Arial", 13),
-                    new SolidBrush(Color.White),
-                    initialPosition
-                );
-            }
+            g.DrawString(
+                lineLength.Sum().ToString("0.0"),
+                new Font("Arial", 13),
+                new SolidBrush(Color.Yellow),
+                initialPosition
+            );
         }
 
         public void draw(Graphics g)
@@ -53,21 +59,37 @@ namespace DMMDigital.Models.Drawings
 
             graphicsPath.AddLines(points.ToArray());
 
-            for (int counter = 0; counter < points.Count - 1; counter++)
+            if (multiple)
             {
-                g.DrawLine(pen, points[counter], points[counter + 1]);
+                for (int counter = 0; counter < points.Count - 1; counter++)
+                {
+                    g.DrawLine(pen, points[counter], points[counter + 1]);
 
+                    g.DrawString(
+                        lineLength[counter].ToString("0.00"),
+                        new Font("Arial", 13),
+                        new SolidBrush(Color.White),
+                        new Point(
+                            ((points[counter + 1].X - points[counter].X) / 2) + points[counter].X,
+                            ((points[counter + 1].Y - points[counter].Y) / 2) + points[counter].Y
+                        )
+                    );
+                }
+                drawTotalLength(g);
+            }
+            else
+            {
+                g.DrawLine(pen, initialPosition, finalPosition);
                 g.DrawString(
-                    lineLength[counter].ToString("0.0"),
-                    new Font("Arial", 13),
-                    new SolidBrush(Color.White),
+                    lineLength.Sum().ToString("0.00"), 
+                    new Font("Arial", 13), 
+                    new SolidBrush(Color.Purple), 
                     new Point(
-                        ((points[counter + 1].X - points[counter].X) / 2) + points[counter].X,
-                        ((points[counter + 1].Y - points[counter].Y) / 2) + points[counter].Y
+                        ((finalPosition.X - initialPosition.X) / 2) + initialPosition.X,
+                        ((finalPosition.Y - initialPosition.Y) / 2) + initialPosition.Y
                     )
                 );
             }
-            
         }
 
         public Image generateDrawingImageAndThumb(int frameId, string path, int width, int height)

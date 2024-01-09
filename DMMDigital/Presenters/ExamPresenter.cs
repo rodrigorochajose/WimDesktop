@@ -55,7 +55,7 @@ namespace DMMDigital.Presenters
 
             if (examOpeningMode == "newContainer")
             {
-                new ExamContainerPresenter(new ExamContainerView(examView as ExamView));
+                new ExamContainerPresenter(new ExamContainerView(examView as ExamView), m_nId);
             }
             else
             {
@@ -64,15 +64,13 @@ namespace DMMDigital.Presenters
                 if ((examContainerView as ExamContainerView).patientId != examView.patientId)
                 {
                     examContainerView.Close();
-                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView));
+                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView), m_nId);
                 }
                 else if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.examId))
                 {
                     (examContainerView as ExamContainerView).addNewPage(examView);
                 }
             }
-
-            //Detector.DestroyDetector(m_nId);
         }
 
         private void loadFullExam()
@@ -336,7 +334,7 @@ namespace DMMDigital.Presenters
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-radiografia.png"));
+                SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-original.png"));
 
                 pic.Dispose();
             }

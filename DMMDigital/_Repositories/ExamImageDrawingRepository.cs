@@ -1,8 +1,8 @@
 ﻿using DMMDigital.Interface;
 using DMMDigital.Models;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace DMMDigital._Repositories
@@ -18,11 +18,18 @@ namespace DMMDigital._Repositories
                 if (examImageDrawing.Count > 0) { 
                     List<ExamImageDrawingModel> currentList = getExamImageDrawings(examImageDrawing[0].examId).ToList();
 
+                    List<ExamImageDrawingModel> drawingsToDelete = currentList.ExceptBy(examImageDrawing, drawing => drawing.file).ToList();
+
+                    foreach (ExamImageDrawingModel drawing in drawingsToDelete)
+                    {
+                        context.examImageDrawing.Remove(drawing);
+                    }
+                         
                     foreach (ExamImageDrawingModel item in examImageDrawing)
                     {
                         if (currentList.Find(e => e.file == item.file) == null)
                         {
-                            context.examImageDrawing.AddOrUpdate(item);
+                            context.examImageDrawing.Add(item);
                         }
                     }
                     context.SaveChanges();

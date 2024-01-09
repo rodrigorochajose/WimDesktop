@@ -81,6 +81,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -130,6 +131,12 @@
     <Compile Include="Interface\IPatientRepository.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
     <Compile Include="Presenters\ConfigPresenter.cs" />
+    <Compile Include="Views\DialogRecalibrateRuler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogRecalibrateRuler.Designer.cs">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExportExamView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogRecalibrateRuler.resx">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExportExamView.resx">
       <DependentUpon>ExportExamView.cs</DependentUpon>

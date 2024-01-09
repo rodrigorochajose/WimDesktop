@@ -11,6 +11,7 @@ namespace DMMDigital.Views
         List<int> openExamsId { get; set; }
 
         event EventHandler eventGetPatient;
+        event EventHandler eventDestroyDetector;
 
         void addNewPage(IExamView examView);
     }
