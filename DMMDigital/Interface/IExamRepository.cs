@@ -7,7 +7,7 @@ namespace DMMDigital.Interface
     {
         int add(ExamModel exam);
         void edit(ExamModel exam);
-        string delete(int examId);
+        OperationStatus delete(int examId);
         IEnumerable<ExamModel> getPatientExams(int patientId);
         ExamModel getExam (int examId);
     }

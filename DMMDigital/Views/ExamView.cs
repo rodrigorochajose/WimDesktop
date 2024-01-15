@@ -264,22 +264,25 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-            if (indexFrame < frames.Count())
-            {
-                indexFrame++;
-                selectedFrame.Invoke((MethodInvoker)(() =>
-                {
-                    selectedFrame = frames[indexFrame];
-                    selectedFrame.Tag = Color.LimeGreen;
-                    selectedFrame.Refresh();
-                }));
+            indexFrame++;
 
-                if (selectedDrawingHistory.Count >= indexFrame)
-                {
-                    selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-                    selectedDrawingHistoryHandler();
-                }
+            if (indexFrame == frames.Count())
+            {
+                indexFrame--;
+            }
+
+            selectedFrame.Invoke((MethodInvoker)(() =>
+            {
+                selectedFrame = frames[indexFrame];
+                selectedFrame.Tag = Color.LimeGreen;
+                selectedFrame.Refresh();
+            }));
+
+            if (selectedDrawingHistory.Count >= indexFrame)
+            {
+                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                selectedDrawingHistoryHandler();
             }
         }
 

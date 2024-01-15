@@ -21,7 +21,7 @@ namespace DMMDigital.Models
 
         private int m_nDetectorID;
         private SdkInterface.SdkCallbackHandler handler;
-        private List<EventReceiver> m_receivers = new List<EventReceiver>();
+        private List<IEventReceiver> m_receivers = new List<IEventReceiver>();
 
         public static Dictionary<int, Detector> DetectorList = new Dictionary<int, Detector>();
 
@@ -29,7 +29,7 @@ namespace DMMDigital.Models
             IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
         {
             m_receivers.ForEach(
-                delegate (EventReceiver receiver)
+                delegate (IEventReceiver receiver)
                 {
                     receiver.SdkCallbackHandler(nDetectorID, nEventID, nEventLevel, pszMsg, nParam1, nParam2, nPtrParamLen, pParam);
                 }
@@ -37,7 +37,7 @@ namespace DMMDigital.Models
 
         }
 
-        public static int CreateDetector(EventReceiver r, string workdirPath)
+        public static int CreateDetector(IEventReceiver r, string workdirPath)
         {
             Detector d = new Detector();
 
@@ -189,7 +189,7 @@ namespace DMMDigital.Models
             return Invoke(SdkInterface.Cmd_SetCaliSubset, strSubDir);
         }
 
-        public void RegisterHandler(EventReceiver r)
+        public void RegisterHandler(IEventReceiver r)
         {
             if (r != null && !m_receivers.Contains(r))
             {
@@ -199,7 +199,7 @@ namespace DMMDigital.Models
             return;
         }
 
-        public void UnRegisterHandler(EventReceiver r)
+        public void UnRegisterHandler(IEventReceiver r)
         {
             m_receivers.Remove(r);
             return;

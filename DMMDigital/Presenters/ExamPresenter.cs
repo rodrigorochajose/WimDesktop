@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 
 namespace DMMDigital.Presenters
 {
-    public class ExamPresenter : EventReceiver
+    public class ExamPresenter : IEventReceiver
     {
         private readonly IExamView examView;
         private readonly IExamRepository examRepository;
@@ -155,7 +155,7 @@ namespace DMMDigital.Presenters
             examView.examPath = configRepository.getExamPath();
         }
 
-        void EventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
+        void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
                        IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
         {
             switch (nEventID)
@@ -227,6 +227,7 @@ namespace DMMDigital.Presenters
                                         break;
                                     case SdkInterface.Err_CommDeviceNotFound:
                                         //examView.iconSensorConnection = Properties.Resources.icon_32x32_red;
+                                        MessageBox.Show("Sensor não localizado!");
                                         break;
                                     case SdkInterface.Err_CommDeviceOccupied:
                                         MessageBox.Show("Device is beeing occupied!");
@@ -347,7 +348,7 @@ namespace DMMDigital.Presenters
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                MessageBox.Show(ex.Message);
             }
         }
 

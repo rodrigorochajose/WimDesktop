@@ -40,7 +40,35 @@ namespace DMMDigital._Repositories
                 throw ex;
             }
         }
-        
+
+        public OperationStatus delete(int examId)
+        {
+            try
+            {
+                foreach (ExamImageDrawingModel examImageDrawing in context.examImageDrawing.Where(e => e.examId == examId))
+                {
+                    context.examImageDrawing.Remove(examImageDrawing);
+                }
+
+                context.SaveChanges();
+                return new OperationStatus
+                {
+                    code = 1,
+                    status = "Sucess",
+                    message = "Desenhos deletados !"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationStatus
+                {
+                    code = -1,
+                    status = "Error",
+                    message = "Erro ao deletar desenhos: " + ex.Message
+                };
+            }
+        }
+
         public IEnumerable<ExamImageDrawingModel> getExamImageDrawings(int examId)
         {
             return context.examImageDrawing.Where(e => e.examId == examId);

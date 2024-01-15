@@ -39,17 +39,28 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public string delete(int examId)
+        public OperationStatus delete(int examId)
         {
             try
             {
                 context.exam.Remove(context.exam.Single(e => e.id == examId));
                 context.SaveChanges();
-                return "Exame deletado com sucesso !";
+
+                return new OperationStatus
+                {
+                    code = 1,
+                    status = "Sucess",
+                    message = "Exame deletado!"
+                };
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return new OperationStatus
+                {
+                    code = -1,
+                    status = "Error",
+                    message = "Erro ao deletar exame : " + ex.Message
+                };
             }
         }
 

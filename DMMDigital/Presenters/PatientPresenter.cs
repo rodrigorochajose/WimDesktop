@@ -18,6 +18,8 @@ namespace DMMDigital.Presenters
         private IEnumerable<PatientModel> patientList;
 
         private readonly IExamRepository examRepository = new ExamRepository();
+        private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
+        private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private IEnumerable<ExamModel> examList;
         private readonly BindingSource examBindingSource;
 
@@ -194,7 +196,32 @@ namespace DMMDigital.Presenters
 
         private void deleteExam(object sender, EventArgs e)
         {
+            OperationStatus examImageDrawingStatus = examImageDrawingRepository.delete(patientView.selectedExamId);
 
+            if (examImageDrawingStatus.code == -1)
+            {
+                MessageBox.Show(examImageDrawingStatus.message);
+                return;
+            }
+
+            OperationStatus examImageStatus = examImageRepository.delete(patientView.selectedExamId);
+
+            if (examImageStatus.code == -1)
+            {
+                MessageBox.Show(examImageStatus.message);
+                return;
+            }
+
+            OperationStatus examStatus = examRepository.delete(patientView.selectedExamId);
+                    
+            if (examStatus.code == -1)
+            {
+                MessageBox.Show(examStatus.message);
+                return;
+            }
+
+            MessageBox.Show(examStatus.message);
+            getExamByPatient(this, EventArgs.Empty);
         }
 
         private void exportExam(object sender, EventArgs e)

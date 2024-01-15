@@ -41,6 +41,34 @@ namespace DMMDigital._Repositories
             }
         }
 
+        public OperationStatus delete(int examId)
+        {
+            try
+            {
+                foreach (ExamImageModel examImage in context.examImage.Where(e => e.examId == examId))
+                {
+                    context.examImage.Remove(examImage);
+                }
+
+                context.SaveChanges();
+                return new OperationStatus
+                {
+                    code = 1,
+                    status = "Sucess",
+                    message = "Imagens deletadas!"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationStatus
+                {
+                    code = -1,
+                    status = "Error",
+                    message = "Erro ao deletar imagens: " + ex.Message
+                };
+            }
+        }
+
         public IEnumerable<ExamImageModel> getExamImages(int examId)
         {
             return context.examImage.Where(e => e.examId == examId);

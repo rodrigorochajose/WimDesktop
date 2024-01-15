@@ -94,6 +94,8 @@ namespace DMMDigital.Views
             // 
             // panel3
             // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.labelImageDate);
             this.panel3.Controls.Add(this.textBoxFrameNotes);
@@ -254,6 +256,8 @@ namespace DMMDigital.Views
             // 
             // panelTools
             // 
+            this.panelTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTools.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTools.Controls.Add(this.buttonArrow);
             this.panelTools.Controls.Add(this.buttonMove);
@@ -613,6 +617,9 @@ namespace DMMDigital.Views
             // 
             // mainPictureBox
             // 
+            this.mainPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPictureBox.BackColor = System.Drawing.SystemColors.ControlText;
             this.mainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
@@ -628,6 +635,9 @@ namespace DMMDigital.Views
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.SystemColors.ControlText;
             this.panel2.Controls.Add(this.mainPictureBox);
             this.panel2.Location = new System.Drawing.Point(363, 50);

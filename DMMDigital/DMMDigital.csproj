@@ -99,10 +99,11 @@
     <Compile Include="Interface\ITemplateRepository.cs" />
     <Compile Include="Models\Annotations\DateTimeRangeAttribute.cs" />
     <Compile Include="Models\Detector.cs" />
-    <Compile Include="Models\EventReceiver.cs" />
+    <Compile Include="Interface\iRay\IEventReceiver.cs" />
     <Compile Include="Models\Drawings\ImageDrawed.cs" />
     <Compile Include="Models\Drawings\Ruler.cs" />
     <Compile Include="Models\ExamImageDrawingModel.cs" />
+    <Compile Include="Models\OperationStatus.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
