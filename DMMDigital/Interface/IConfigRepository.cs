@@ -7,5 +7,6 @@ namespace DMMDigital.Interface
         string save();
         ConfigModel getAllConfig();
         string getExamPath();
+        string getWorkdirPath();
     }
 }

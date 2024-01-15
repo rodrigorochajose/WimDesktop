@@ -23,6 +23,10 @@ namespace DMMDigital.Presenters
 
         private void destroyDetector(object sender, EventArgs e)
         {
+            Detector d = Detector.DetectorList[detectorId];
+            if (d == null) return;
+
+            d.Disconnect();
             Detector.DestroyDetector(detectorId);
         }
 

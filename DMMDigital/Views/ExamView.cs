@@ -36,13 +36,12 @@ namespace DMMDigital.Views
         int textDrawingPreviousSize = 26;
         int indexSelectedDrawingHistory = 0;
 
-        double graus = 0;
-        double scalingFactorSensorImageWidth = 0;
-        double scalingFactorSensorImageHeight = 0;
+        double scalingFactorSensorImage = 0;
 
         bool draw = false;
         bool multiRuler = false;
         bool rulerDrawed = false;
+        bool calibrated = false;
         bool recalibrate = false;
 
         Color drawingColor = Color.Red;
@@ -97,6 +96,11 @@ namespace DMMDigital.Views
                 if (examImages != null)
                 {
                     enableTools();
+                }
+
+                if (examImageDrawings != null)
+                {
+                    selectedDrawingHistoryHandler();
                 }
             };
         }
@@ -260,9 +264,9 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-            indexFrame++;
             if (indexFrame < frames.Count())
             {
+                indexFrame++;
                 selectedFrame.Invoke((MethodInvoker)(() =>
                 {
                     selectedFrame = frames[indexFrame];
@@ -371,7 +375,6 @@ namespace DMMDigital.Views
                     }
 
                 }));
-                mainPictureBox.Refresh();
             }
         }
 
@@ -620,14 +623,28 @@ namespace DMMDigital.Views
         private float getRulerLength()
         {
             // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            scalingFactorSensorImageWidth = mainPictureBox.Image.Width / 20;
-            scalingFactorSensorImageHeight = mainPictureBox.Image.Height / 30;
+            double scalingFactorWidth = mainPictureBox.Image.Width / 20;
+            double scalingFactorHeight = mainPictureBox.Image.Height / 30;
 
-            float width = (currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width) - (currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
-            float height = (currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width) - (currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
+            float initialX = (currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width);
+            float initialY = (currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
+            float finalX = (currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width);
+            float finalY = (currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
 
-            float lengthInMM = (float)Math.Sqrt(Math.Pow(width / scalingFactorSensorImageWidth, 2) + Math.Pow(height / scalingFactorSensorImageHeight, 2));
-            return lengthInMM;
+            float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
+
+            if (calibrated)
+            {
+                lenghtInMilimeters *= (float)scalingFactorSensorImage;
+            }
+
+            return lenghtInMilimeters;
+        }
+
+        private void recalibrateRuler(double rulerValue)
+        {
+            scalingFactorSensorImage = rulerValue / (currentDrawing as Ruler).lineLength.First();
+            calibrated = true;
         }
 
         private void verifyHistoryToReset()
@@ -807,7 +824,7 @@ namespace DMMDigital.Views
 
         private void buttonSelectClick(object sender, EventArgs e)
         {
-            panelToolOptions.Visible = false;
+            panelToolOptions.Controls.Clear();
             selectTool(sender);
             action = 0;
         }
@@ -967,7 +984,8 @@ namespace DMMDigital.Views
 
         private void buttonResetCalibrationClick(object sender, EventArgs e)
         {
-
+            scalingFactorSensorImage = 0;
+            calibrated = false;
         }
 
         private void buttonSetCalibrationClick(object sender, EventArgs e)
@@ -1106,7 +1124,7 @@ namespace DMMDigital.Views
                                         points = new List<Point>(),
                                         lineLength = new List<float>(),
                                         drawingColor = drawingColor,
-                                        drawingSize = 3,
+                                        drawingSize = 2,
                                         multiple = true
                                     };
 
@@ -1140,7 +1158,7 @@ namespace DMMDigital.Views
                                 points = new List<Point>(),
                                 lineLength = new List<float>(),
                                 drawingColor = drawingColor,
-                                drawingSize = 3,
+                                drawingSize = 2,
                                 multiple = false
                             };
                             (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
@@ -1177,10 +1195,10 @@ namespace DMMDigital.Views
                                 graphicsPath = new GraphicsPath(),
                                 initialPosition = clickPosition,
                                 text = textToDraw,
-                                font = new Font("Arial", drawingSize),
+                                font = new Font("Arial", textDrawingPreviousSize),
                                 brush = new SolidBrush(drawingColor),
                                 drawingColor = drawingColor,
-                                drawingSize = drawingSize
+                                drawingSize = textDrawingPreviousSize
                             };
 
                             selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
@@ -1318,13 +1336,11 @@ namespace DMMDigital.Views
                                 var result = dialogRecalibrateRuler.ShowDialog();
                                 if (result == DialogResult.OK)
                                 {
-                                    int catetoAdjacente = currentDrawing.finalPosition.X - currentDrawing.initialPosition.X;
-
-                                    double angulo = Math.Atan2(currentDrawing.finalPosition.Y - currentDrawing.initialPosition.Y, catetoAdjacente);
-                                    graus = angulo * (180.0 / Math.PI);
-
                                     recalibrateRuler((dialogRecalibrateRuler as DialogRecalibrateRuler).rulerValue);
-
+                                    (currentDrawing as Ruler).lineLength = new List<float>
+                                    {
+                                        getRulerLength()
+                                    };
                                 }
                                 recalibrate = false;
                             }
@@ -1350,12 +1366,6 @@ namespace DMMDigital.Views
                 selectedDrawingToMove = null;
                 selectedDrawingHistoryHandler();
             }
-        }
-
-        private void recalibrateRuler(double rulerValue)
-        {
-            scalingFactorSensorImageWidth = Math.Cos(graus) * rulerValue;
-            scalingFactorSensorImageHeight = Math.Sin(graus) * rulerValue;
         }
 
         private void mainPictureBoxPaint(object sender, PaintEventArgs e)

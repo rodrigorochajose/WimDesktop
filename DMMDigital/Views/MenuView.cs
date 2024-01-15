@@ -12,6 +12,8 @@ namespace DMMDigital.Views
             buttonNewExam.Click += delegate { showNewExamView?.Invoke(this, EventArgs.Empty); };
             buttonPatient.Click += delegate { showPatientView?.Invoke(this, EventArgs.Empty); };
             buttonConfig.Click += delegate { showConfigView?.Invoke(this, EventArgs.Empty); };
+
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
         }
 
         public event EventHandler showPatientView;

@@ -71,7 +71,6 @@ namespace DMMDigital.Presenters
             (chooseTemplateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 
-
             new ExamPresenter(examView, new ExamRepository(), false, examOpeningMode);
         }
 

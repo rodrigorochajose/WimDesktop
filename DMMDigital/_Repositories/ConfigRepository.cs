@@ -37,5 +37,10 @@ namespace DMMDigital._Repositories
         {
             return context.config.First().examPath;
         }
+
+        public string getWorkdirPath()
+        {
+            return context.config.First().sensorPath;
+        }
     }
 }

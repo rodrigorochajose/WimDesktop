@@ -37,11 +37,11 @@ namespace DMMDigital.Models
 
         }
 
-        public static int CreateDetector(EventReceiver r)
+        public static int CreateDetector(EventReceiver r, string workdirPath)
         {
             Detector d = new Detector();
 
-            int nResult = SdkInterface.Create(@"C:\IRay\IRayIntraoral_x86\work_dir\Pluto0002X", d.handler, ref d.m_nDetectorID);
+            int nResult = SdkInterface.Create(workdirPath, d.handler, ref d.m_nDetectorID);
 
             if (nResult == SdkInterface.Err_OK)
             {

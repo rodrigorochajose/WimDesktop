@@ -49,12 +49,19 @@ namespace DMMDigital.Presenters
 
         public void initializeExam()
         {
-            m_nId = Detector.CreateDetector(this);
-            Detector d = Detector.DetectorList[m_nId];
-            d?.Connect();
-
             if (examOpeningMode == "newContainer")
             {
+                try
+                {
+                    m_nId = Detector.CreateDetector(this, configRepository.getWorkdirPath());
+                    Detector d = Detector.DetectorList[m_nId];
+                    d?.Connect();
+                }
+                catch
+                {
+                    MessageBox.Show("Não foi possível conectar o sensor, verifique se o apontamento está correto.");
+                }
+
                 new ExamContainerPresenter(new ExamContainerView(examView as ExamView), m_nId);
             }
             else

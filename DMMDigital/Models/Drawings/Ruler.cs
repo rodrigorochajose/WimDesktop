@@ -26,7 +26,7 @@ namespace DMMDigital.Models.Drawings
             g.DrawString(
                     lineLength.Sum().ToString("0.00") + "mm",
                     new Font("Arial", 14, FontStyle.Bold),
-                    new SolidBrush(Color.Blue),
+                    new SolidBrush(drawingColor),
                     new Point(finalPosition.X + 10, finalPosition.Y)
                 );
         }
@@ -40,9 +40,9 @@ namespace DMMDigital.Models.Drawings
             g.DrawLine(pen, initialPosition, finalPosition);
 
             g.DrawString(
-                lineLength.Sum().ToString("0.0"),
+                lineLength.Last().ToString("0.0"),
                 new Font("Arial", 13),
-                new SolidBrush(Color.Yellow),
+                new SolidBrush(drawingColor),
                 initialPosition
             );
         }
@@ -68,7 +68,7 @@ namespace DMMDigital.Models.Drawings
                     g.DrawString(
                         lineLength[counter].ToString("0.00"),
                         new Font("Arial", 13),
-                        new SolidBrush(Color.White),
+                        new SolidBrush(drawingColor),
                         new Point(
                             ((points[counter + 1].X - points[counter].X) / 2) + points[counter].X,
                             ((points[counter + 1].Y - points[counter].Y) / 2) + points[counter].Y
@@ -83,7 +83,7 @@ namespace DMMDigital.Models.Drawings
                 g.DrawString(
                     lineLength.Sum().ToString("0.00"), 
                     new Font("Arial", 13), 
-                    new SolidBrush(Color.Purple), 
+                    new SolidBrush(drawingColor), 
                     new Point(
                         ((finalPosition.X - initialPosition.X) / 2) + initialPosition.X,
                         ((finalPosition.Y - initialPosition.Y) / 2) + initialPosition.Y
