@@ -15,7 +15,7 @@ namespace DMMDigital.Presenters
 
             dialogGenerateTemplateView.eventShowManipulateTemplateView += showManipulateTemplateView;
 
-            (dialogGenerateTemplateView as Form).Show();
+            (dialogGenerateTemplateView as Form).ShowDialog();
         }
 
         private void showManipulateTemplateView(object sender, EventArgs e)

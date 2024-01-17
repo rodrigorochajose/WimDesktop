@@ -78,6 +78,7 @@ namespace DMMDigital.Presenters
         {
             new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
             chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
+            chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital._Repositories;
@@ -20,6 +21,7 @@ namespace DMMDigital.Presenters
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
+        private readonly IConfigRepository configRepository = new ConfigRepository();
         private IEnumerable<ExamModel> examList;
         private readonly BindingSource examBindingSource;
 
@@ -213,11 +215,18 @@ namespace DMMDigital.Presenters
             }
 
             OperationStatus examStatus = examRepository.delete(patientView.selectedExamId);
-                    
+
             if (examStatus.code == -1)
             {
                 MessageBox.Show(examStatus.message);
                 return;
+            }
+
+            string fullPath = configRepository.getExamPath() + patientView.selectedExamPath;
+
+            if (Directory.Exists(fullPath))
+            {
+                Directory.Delete(fullPath);
             }
 
             MessageBox.Show(examStatus.message);

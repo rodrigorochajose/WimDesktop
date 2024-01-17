@@ -190,7 +190,7 @@ namespace DMMDigital.Presenters
                                 MessageBox.Show("Cmd_ForceSingleAcq Ack succeed.");
                                 break;
                             case SdkInterface.Cmd_Disconnect:
-                                MessageBox.Show("Cmd_Disconnect Ack succeed.");
+                                //MessageBox.Show("Cmd_Disconnect Ack succeed.");
                                 break;
                             case SdkInterface.Cmd_ReadTemperature:
                                 MessageBox.Show("Cmd_ReadTemperature Ack Succeed.");
@@ -227,7 +227,7 @@ namespace DMMDigital.Presenters
                                         break;
                                     case SdkInterface.Err_CommDeviceNotFound:
                                         //examView.iconSensorConnection = Properties.Resources.icon_32x32_red;
-                                        MessageBox.Show("Sensor não localizado!");
+                                        //MessageBox.Show("Sensor não localizado!");
                                         break;
                                     case SdkInterface.Err_CommDeviceOccupied:
                                         MessageBox.Show("Device is beeing occupied!");
@@ -254,7 +254,7 @@ namespace DMMDigital.Presenters
                             MessageBox.Show("Cmd_StopAcq Ack failed.");
                             break;
                         case SdkInterface.Cmd_Disconnect:
-                            MessageBox.Show("Cmd_Disconnect Ack failed.");
+                            //MessageBox.Show("Cmd_Disconnect Ack failed.");
                             break;
                         case SdkInterface.Cmd_ReadTemperature:
                             MessageBox.Show("Cmd_ReadTemperature Ack failed.");

@@ -13,6 +13,7 @@ namespace DMMDigital.Views
         }
         public int selectedPatientId { get; set; }
         public int selectedExamId { get; set; }
+        public string selectedExamPath { get; set; }
 
         public event EventHandler eventSearchPatient;
         public event EventHandler eventShowAddPatientForm;
@@ -91,15 +92,6 @@ namespace DMMDigital.Views
                 }
             };
 
-            dataGridViewExam.SelectionChanged += (s, e) =>
-            {
-                if (dataGridViewExam.SelectedCells.Count > 0)
-                {
-                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
-                    selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
-                }
-            };
-
             buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
 
             buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
@@ -114,6 +106,10 @@ namespace DMMDigital.Views
             };
 
             buttonOpenExam.Click += delegate {
+                
+                int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
+
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show("Nenhum Exame foi selecionado!");
@@ -122,9 +118,26 @@ namespace DMMDigital.Views
                 eventOpenExam?.Invoke(this, EventArgs.Empty); 
             };
 
-            buttonDeleteExam.Click += delegate { eventDeleteExam?.Invoke(this, EventArgs.Empty); };
+            buttonDeleteExam.Click += delegate {
+                DialogResult res = MessageBox.Show("Confirma excluir o exame selecionado?", "Excluir Exame", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                {
+                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+
+                    selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
+                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
+                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString());
+
+                    selectedExamPath = "\\Paciente-" + selectedPatientId + "\\" + selectedExamSessionName + "_" + selectedExamDate.ToString("dd-MM-yyyy");
+                    eventDeleteExam?.Invoke(this, EventArgs.Empty); 
+                }
+            };
 
             buttonExportExam.Click += delegate {
+
+                int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
+
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show("Nenhum Exame foi selecionado!");

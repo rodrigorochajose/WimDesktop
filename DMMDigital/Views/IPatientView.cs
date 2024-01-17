@@ -8,6 +8,7 @@ namespace DMMDigital.Views
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
         int selectedExamId { get; set; }
+        string selectedExamPath { get; set; }
 
         // Eventos
         event EventHandler eventSearchPatient;

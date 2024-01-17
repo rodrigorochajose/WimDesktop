@@ -57,6 +57,7 @@ namespace DMMDigital.Views
 
         IDrawing currentDrawing;
         IDrawing selectedDrawingToMove;
+        Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
         Point drawingFinalPosition = new Point();
         Point drawingInitialPosition = new Point();
@@ -65,6 +66,7 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
+            mainPictureBoxOriginalSize = mainPictureBox.Size;
             ActiveControl = label1;
 
             this.sessionName = sessionName;
@@ -91,14 +93,16 @@ namespace DMMDigital.Views
 
             Load += delegate
             {
+                mainPictureBoxOriginalSize = mainPictureBox.Size;
+
                 drawTemplate();
 
-                if (examImages != null)
+                if (examImages.Any())
                 {
                     enableTools();
                 }
 
-                if (examImageDrawings != null)
+                if (examImageDrawings.Any())
                 {
                     selectedDrawingHistoryHandler();
                 }
@@ -167,26 +171,21 @@ namespace DMMDigital.Views
 
                 frames.Add(newFrame);
 
-                if (examImageDrawings != null)
+                List<IDrawing> frameDrawings = new List<IDrawing>();
+                foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
                 {
-                    List<IDrawing> frameDrawings = new List<IDrawing>();
-
-                    foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
+                    using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
                     {
-                        using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
+                        frameDrawings.Add(new ImageDrawed
                         {
-                            frameDrawings.Add(new ImageDrawed
-                            {
-                                id = int.Parse(drawing.file.Substring(4, 1)),
-                                img = new Bitmap(img),
-                            });
-                        }
+                            id = int.Parse(drawing.file.Substring(4, 1)),
+                            img = new Bitmap(img),
+                        });
                     }
-
-                    frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
-
-                    selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
                 }
+
+                frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
+                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
 
                 panelTemplate.Controls.Add(newFrame);
             }
@@ -317,7 +316,7 @@ namespace DMMDigital.Views
             if (frameDrawingHistories.Count > 0)
             {
                 selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                indexSelectedDrawingHistory = indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
             }
 
             selectedDrawingHistoryHandler();
@@ -359,24 +358,20 @@ namespace DMMDigital.Views
                     if (selectedFrame.orientation.Contains("Horizontal"))
                     {
                         rectangleSize = new Size(
-                            mainPictureBox.Width,
-                            mainPictureBox.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
+                            mainPictureBoxOriginalSize.Width,
+                            mainPictureBoxOriginalSize.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
                         );
                     }
                     else
                     {
                         rectangleSize = new Size(
-                            mainPictureBox.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                            mainPictureBox.Height
+                            mainPictureBoxOriginalSize.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                            mainPictureBoxOriginalSize.Height
                         );
                     }
 
-                    if (rectangleSize.Width != mainPictureBox.Size.Width && rectangleSize.Height != mainPictureBox.Size.Height)
-                    {
-                        mainPictureBox.Size = rectangleSize;
-                        mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
-                    }
-
+                    mainPictureBox.Size = rectangleSize;
+                    mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
                 }));
             }
         }
@@ -775,14 +770,13 @@ namespace DMMDigital.Views
             {
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
                 mainPictureBox.Image = selectedImage;
+                resizeMainPictureBox();
 
                 selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
 
                 frameHandler(selectedImage);
 
                 enableTools();
-
-                resizeMainPictureBox();
             }
             saveExamChangesOnDatabase();
         }
