@@ -49,26 +49,34 @@ namespace DMMDigital.Views
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTools = new System.Windows.Forms.Panel();
-            this.buttonArrow = new System.Windows.Forms.Button();
-            this.buttonMove = new System.Windows.Forms.Button();
-            this.buttonRestore = new System.Windows.Forms.Button();
-            this.buttonRotateRight = new System.Windows.Forms.Button();
-            this.buttonRotateLeft = new System.Windows.Forms.Button();
-            this.buttonRectangle = new System.Windows.Forms.Button();
-            this.buttonEllipse = new System.Windows.Forms.Button();
-            this.buttonText = new System.Windows.Forms.Button();
-            this.buttonFreeDraw = new System.Windows.Forms.Button();
-            this.buttonFilter = new System.Windows.Forms.Button();
-            this.buttonRedo = new System.Windows.Forms.Button();
-            this.buttonUndo = new System.Windows.Forms.Button();
-            this.buttonRuler = new System.Windows.Forms.Button();
-            this.buttonZoom = new System.Windows.Forms.Button();
-            this.buttonSelect = new System.Windows.Forms.Button();
-            this.buttonCompare = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
-            this.buttonExport = new System.Windows.Forms.Button();
-            this.buttonImport = new System.Windows.Forms.Button();
-            this.sensorConnection = new System.Windows.Forms.PictureBox();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.buttonOpenExam = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonNewExam = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.detectorConnection = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonImport = new System.Windows.Forms.ToolStripButton();
+            this.buttonExport = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonDeleteImage = new System.Windows.Forms.ToolStripButton();
+            this.buttonCompareFrame = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonSelect = new System.Windows.Forms.ToolStripButton();
+            this.buttonMoveDrawing = new System.Windows.Forms.ToolStripButton();
+            this.buttonMagnifier = new System.Windows.Forms.ToolStripButton();
+            this.buttonRuler = new System.Windows.Forms.ToolStripButton();
+            this.buttonUndo = new System.Windows.Forms.ToolStripButton();
+            this.buttonRedo = new System.Windows.Forms.ToolStripButton();
+            this.buttonFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonFreeDraw = new System.Windows.Forms.ToolStripButton();
+            this.buttonText = new System.Windows.Forms.ToolStripButton();
+            this.buttonArrow = new System.Windows.Forms.ToolStripButton();
+            this.buttonRectangle = new System.Windows.Forms.ToolStripButton();
+            this.buttonEllipse = new System.Windows.Forms.ToolStripButton();
+            this.buttonRotateLeft = new System.Windows.Forms.ToolStripButton();
+            this.buttonRotateRight = new System.Windows.Forms.ToolStripButton();
+            this.buttonRestoreExam = new System.Windows.Forms.ToolStripButton();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -78,7 +86,7 @@ namespace DMMDigital.Views
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelTools.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).BeginInit();
+            this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -112,7 +120,7 @@ namespace DMMDigital.Views
             this.panel3.Controls.Add(this.panelTemplate);
             this.panel3.Location = new System.Drawing.Point(0, 50);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(363, 648);
+            this.panel3.Size = new System.Drawing.Size(363, 619);
             this.panel3.TabIndex = 0;
             // 
             // labelImageDate
@@ -158,10 +166,11 @@ namespace DMMDigital.Views
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 465);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 463);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 183);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(363, 156);
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
@@ -169,7 +178,7 @@ namespace DMMDigital.Views
             // 
             this.panel1.BackColor = System.Drawing.Color.Gainsboro;
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(0, 435);
+            this.panel1.Location = new System.Drawing.Point(0, 434);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 29);
             this.panel1.TabIndex = 6;
@@ -256,360 +265,375 @@ namespace DMMDigital.Views
             // 
             // panelTools
             // 
-            this.panelTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTools.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTools.Controls.Add(this.buttonArrow);
-            this.panelTools.Controls.Add(this.buttonMove);
-            this.panelTools.Controls.Add(this.buttonRestore);
-            this.panelTools.Controls.Add(this.buttonRotateRight);
-            this.panelTools.Controls.Add(this.buttonRotateLeft);
-            this.panelTools.Controls.Add(this.buttonRectangle);
-            this.panelTools.Controls.Add(this.buttonEllipse);
-            this.panelTools.Controls.Add(this.buttonText);
-            this.panelTools.Controls.Add(this.buttonFreeDraw);
-            this.panelTools.Controls.Add(this.buttonFilter);
-            this.panelTools.Controls.Add(this.buttonRedo);
-            this.panelTools.Controls.Add(this.buttonUndo);
-            this.panelTools.Controls.Add(this.buttonRuler);
-            this.panelTools.Controls.Add(this.buttonZoom);
-            this.panelTools.Controls.Add(this.buttonSelect);
-            this.panelTools.Controls.Add(this.buttonCompare);
-            this.panelTools.Controls.Add(this.buttonDelete);
-            this.panelTools.Controls.Add(this.buttonExport);
-            this.panelTools.Controls.Add(this.buttonImport);
-            this.panelTools.Controls.Add(this.sensorConnection);
+            this.panelTools.Controls.Add(this.toolStrip);
             this.panelTools.Location = new System.Drawing.Point(0, 0);
             this.panelTools.Name = "panelTools";
             this.panelTools.Size = new System.Drawing.Size(1375, 50);
             this.panelTools.TabIndex = 5;
             // 
+            // toolStrip
+            // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton,
+            this.toolStripSeparator1,
+            this.detectorConnection,
+            this.toolStripSeparator2,
+            this.buttonImport,
+            this.buttonExport,
+            this.toolStripSeparator3,
+            this.buttonDeleteImage,
+            this.buttonCompareFrame,
+            this.toolStripSeparator4,
+            this.buttonSelect,
+            this.buttonMoveDrawing,
+            this.buttonMagnifier,
+            this.buttonRuler,
+            this.buttonUndo,
+            this.buttonRedo,
+            this.buttonFilter,
+            this.buttonFreeDraw,
+            this.buttonText,
+            this.buttonArrow,
+            this.buttonRectangle,
+            this.buttonEllipse,
+            this.buttonRotateLeft,
+            this.buttonRotateRight,
+            this.buttonRestoreExam});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip.Size = new System.Drawing.Size(1375, 50);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip";
+            // 
+            // toolStripDropDownButton
+            // 
+            this.toolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonOpenExam,
+            this.buttonNewExam});
+            this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
+            this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.toolStripDropDownButton.Name = "toolStripDropDownButton";
+            this.toolStripDropDownButton.Size = new System.Drawing.Size(59, 47);
+            this.toolStripDropDownButton.Text = "Exame";
+            // 
+            // buttonOpenExam
+            // 
+            this.buttonOpenExam.Name = "buttonOpenExam";
+            this.buttonOpenExam.Size = new System.Drawing.Size(150, 22);
+            this.buttonOpenExam.Text = "Abrir Exame";
+            this.buttonOpenExam.Click += new System.EventHandler(this.buttonOpenExamClick);
+            // 
+            // buttonNewExam
+            // 
+            this.buttonNewExam.Name = "buttonNewExam";
+            this.buttonNewExam.Size = new System.Drawing.Size(150, 22);
+            this.buttonNewExam.Text = "Novo Exame";
+            this.buttonNewExam.Click += new System.EventHandler(this.buttonNewExamClick);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+            // 
+            // detectorConnection
+            // 
+            this.detectorConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.detectorConnection.Image = global::DMMDigital.Properties.Resources.icon_32x32_red;
+            this.detectorConnection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.detectorConnection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.detectorConnection.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.detectorConnection.Name = "detectorConnection";
+            this.detectorConnection.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.detectorConnection.Size = new System.Drawing.Size(50, 48);
+            this.detectorConnection.Text = "detectorConnection";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 50);
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
+            this.buttonImport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonImport.Size = new System.Drawing.Size(50, 48);
+            this.buttonImport.Text = "buttonImport";
+            this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonExport.Enabled = false;
+            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
+            this.buttonExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonExport.Size = new System.Drawing.Size(50, 48);
+            this.buttonExport.Text = "buttonExport";
+            this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 50);
+            // 
+            // buttonDeleteImage
+            // 
+            this.buttonDeleteImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonDeleteImage.Enabled = false;
+            this.buttonDeleteImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
+            this.buttonDeleteImage.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonDeleteImage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonDeleteImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonDeleteImage.Name = "buttonDeleteImage";
+            this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonDeleteImage.Size = new System.Drawing.Size(50, 48);
+            this.buttonDeleteImage.Text = "buttonDeleteImage";
+            this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteClick);
+            // 
+            // buttonCompareFrame
+            // 
+            this.buttonCompareFrame.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonCompareFrame.Enabled = false;
+            this.buttonCompareFrame.Image = global::DMMDigital.Properties.Resources.icon_32x32_compare;
+            this.buttonCompareFrame.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonCompareFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCompareFrame.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonCompareFrame.Name = "buttonCompareFrame";
+            this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonCompareFrame.Size = new System.Drawing.Size(50, 48);
+            this.buttonCompareFrame.Text = "buttonCompareFrame";
+            this.buttonCompareFrame.Click += new System.EventHandler(this.buttonCompareFrameClick);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 50);
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonSelect.Enabled = false;
+            this.buttonSelect.Image = global::DMMDigital.Properties.Resources.icon_32x32_cursor;
+            this.buttonSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSelect.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonSelect.Size = new System.Drawing.Size(50, 48);
+            this.buttonSelect.Text = "buttonSelect";
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
+            // 
+            // buttonMoveDrawing
+            // 
+            this.buttonMoveDrawing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonMoveDrawing.Enabled = false;
+            this.buttonMoveDrawing.Image = global::DMMDigital.Properties.Resources.move;
+            this.buttonMoveDrawing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonMoveDrawing.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonMoveDrawing.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonMoveDrawing.Name = "buttonMoveDrawing";
+            this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonMoveDrawing.Size = new System.Drawing.Size(50, 48);
+            this.buttonMoveDrawing.Text = "buttonMoveDrawing";
+            this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
+            // 
+            // buttonMagnifier
+            // 
+            this.buttonMagnifier.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonMagnifier.Enabled = false;
+            this.buttonMagnifier.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
+            this.buttonMagnifier.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonMagnifier.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonMagnifier.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonMagnifier.Name = "buttonMagnifier";
+            this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonMagnifier.Size = new System.Drawing.Size(50, 48);
+            this.buttonMagnifier.Text = "buttonMagnifier";
+            this.buttonMagnifier.Click += new System.EventHandler(this.buttonMagnifierClick);
+            // 
+            // buttonRuler
+            // 
+            this.buttonRuler.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRuler.Enabled = false;
+            this.buttonRuler.Image = global::DMMDigital.Properties.Resources.icon_32x32_ruler;
+            this.buttonRuler.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRuler.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRuler.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRuler.Name = "buttonRuler";
+            this.buttonRuler.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRuler.Size = new System.Drawing.Size(50, 48);
+            this.buttonRuler.Text = "buttonRuler";
+            this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
+            // 
+            // buttonUndo
+            // 
+            this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonUndo.Enabled = false;
+            this.buttonUndo.Image = global::DMMDigital.Properties.Resources.icon_32x32_undo;
+            this.buttonUndo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonUndo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonUndo.Size = new System.Drawing.Size(50, 48);
+            this.buttonUndo.Text = "buttonUndo";
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
+            // 
+            // buttonRedo
+            // 
+            this.buttonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRedo.Enabled = false;
+            this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
+            this.buttonRedo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRedo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRedo.Name = "buttonRedo";
+            this.buttonRedo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRedo.Size = new System.Drawing.Size(50, 48);
+            this.buttonRedo.Text = "buttonRedo";
+            this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
+            // 
+            // buttonFilter
+            // 
+            this.buttonFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFilter.Enabled = false;
+            this.buttonFilter.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
+            this.buttonFilter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFilter.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonFilter.Name = "buttonFilter";
+            this.buttonFilter.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonFilter.Size = new System.Drawing.Size(50, 48);
+            this.buttonFilter.Text = "buttonFilter";
+            this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
+            // 
+            // buttonFreeDraw
+            // 
+            this.buttonFreeDraw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFreeDraw.Enabled = false;
+            this.buttonFreeDraw.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil2;
+            this.buttonFreeDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFreeDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFreeDraw.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonFreeDraw.Name = "buttonFreeDraw";
+            this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonFreeDraw.Size = new System.Drawing.Size(50, 48);
+            this.buttonFreeDraw.Text = "buttonFreeDraw";
+            this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
+            // 
+            // buttonText
+            // 
+            this.buttonText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonText.Enabled = false;
+            this.buttonText.Image = global::DMMDigital.Properties.Resources.icon_32x32_text;
+            this.buttonText.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonText.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonText.Name = "buttonText";
+            this.buttonText.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonText.Size = new System.Drawing.Size(50, 48);
+            this.buttonText.Text = "buttonText";
+            this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
+            // 
             // buttonArrow
             // 
-            this.buttonArrow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonArrow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonArrow.Enabled = false;
-            this.buttonArrow.FlatAppearance.BorderSize = 0;
-            this.buttonArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonArrow.Image = global::DMMDigital.Properties.Resources.arrow;
-            this.buttonArrow.Location = new System.Drawing.Point(882, 3);
-            this.buttonArrow.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonArrow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonArrow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonArrow.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonArrow.Name = "buttonArrow";
-            this.buttonArrow.Size = new System.Drawing.Size(50, 45);
-            this.buttonArrow.TabIndex = 23;
-            this.buttonArrow.Tag = "selectable";
-            this.buttonArrow.UseVisualStyleBackColor = true;
+            this.buttonArrow.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonArrow.Size = new System.Drawing.Size(50, 48);
+            this.buttonArrow.Text = "buttonArrow";
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
-            // 
-            // buttonMove
-            // 
-            this.buttonMove.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMove.Enabled = false;
-            this.buttonMove.FlatAppearance.BorderSize = 0;
-            this.buttonMove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMove.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonMove.Image = global::DMMDigital.Properties.Resources.move;
-            this.buttonMove.Location = new System.Drawing.Point(420, 3);
-            this.buttonMove.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonMove.Name = "buttonMove";
-            this.buttonMove.Size = new System.Drawing.Size(50, 45);
-            this.buttonMove.TabIndex = 22;
-            this.buttonMove.Tag = "selectable";
-            this.buttonMove.UseVisualStyleBackColor = true;
-            this.buttonMove.Click += new System.EventHandler(this.buttonMoveClick);
-            // 
-            // buttonRestore
-            // 
-            this.buttonRestore.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRestore.Enabled = false;
-            this.buttonRestore.FlatAppearance.BorderSize = 0;
-            this.buttonRestore.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRestore.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
-            this.buttonRestore.Location = new System.Drawing.Point(1162, 3);
-            this.buttonRestore.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRestore.Name = "buttonRestore";
-            this.buttonRestore.Size = new System.Drawing.Size(50, 45);
-            this.buttonRestore.TabIndex = 21;
-            this.buttonRestore.Tag = "";
-            this.buttonRestore.UseVisualStyleBackColor = true;
-            this.buttonRestore.Click += new System.EventHandler(this.buttonRestoreClick);
-            // 
-            // buttonRotateRight
-            // 
-            this.buttonRotateRight.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRotateRight.Enabled = false;
-            this.buttonRotateRight.FlatAppearance.BorderSize = 0;
-            this.buttonRotateRight.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonRotateRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
-            this.buttonRotateRight.Location = new System.Drawing.Point(1108, 3);
-            this.buttonRotateRight.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRotateRight.Name = "buttonRotateRight";
-            this.buttonRotateRight.Size = new System.Drawing.Size(50, 45);
-            this.buttonRotateRight.TabIndex = 20;
-            this.buttonRotateRight.Tag = "";
-            this.buttonRotateRight.UseVisualStyleBackColor = true;
-            this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
-            // 
-            // buttonRotateLeft
-            // 
-            this.buttonRotateLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRotateLeft.Enabled = false;
-            this.buttonRotateLeft.FlatAppearance.BorderSize = 0;
-            this.buttonRotateLeft.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonRotateLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
-            this.buttonRotateLeft.Location = new System.Drawing.Point(1054, 3);
-            this.buttonRotateLeft.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRotateLeft.Name = "buttonRotateLeft";
-            this.buttonRotateLeft.Size = new System.Drawing.Size(50, 45);
-            this.buttonRotateLeft.TabIndex = 19;
-            this.buttonRotateLeft.Tag = "";
-            this.buttonRotateLeft.UseVisualStyleBackColor = true;
-            this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
             // buttonRectangle
             // 
-            this.buttonRectangle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonRectangle.Enabled = false;
-            this.buttonRectangle.FlatAppearance.BorderSize = 0;
-            this.buttonRectangle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRectangle.Image = global::DMMDigital.Properties.Resources.icon_32x32_rectangle;
-            this.buttonRectangle.Location = new System.Drawing.Point(990, 3);
-            this.buttonRectangle.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonRectangle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRectangle.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRectangle.Name = "buttonRectangle";
-            this.buttonRectangle.Size = new System.Drawing.Size(50, 45);
-            this.buttonRectangle.TabIndex = 18;
-            this.buttonRectangle.Tag = "selectable";
-            this.buttonRectangle.UseVisualStyleBackColor = true;
+            this.buttonRectangle.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRectangle.Size = new System.Drawing.Size(50, 48);
+            this.buttonRectangle.Text = "buttonRectangle";
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
             // 
             // buttonEllipse
             // 
-            this.buttonEllipse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonEllipse.Enabled = false;
-            this.buttonEllipse.FlatAppearance.BorderSize = 0;
-            this.buttonEllipse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEllipse.Image = global::DMMDigital.Properties.Resources.icon_32x32_circle;
-            this.buttonEllipse.Location = new System.Drawing.Point(936, 3);
-            this.buttonEllipse.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonEllipse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonEllipse.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonEllipse.Name = "buttonEllipse";
-            this.buttonEllipse.Size = new System.Drawing.Size(50, 45);
-            this.buttonEllipse.TabIndex = 17;
-            this.buttonEllipse.Tag = "selectable";
-            this.buttonEllipse.UseVisualStyleBackColor = true;
+            this.buttonEllipse.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonEllipse.Size = new System.Drawing.Size(50, 48);
+            this.buttonEllipse.Text = "buttonEllipse";
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
             // 
-            // buttonText
+            // buttonRotateLeft
             // 
-            this.buttonText.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonText.Enabled = false;
-            this.buttonText.FlatAppearance.BorderSize = 0;
-            this.buttonText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonText.Image = global::DMMDigital.Properties.Resources.icon_32x32_text;
-            this.buttonText.Location = new System.Drawing.Point(828, 3);
-            this.buttonText.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonText.Name = "buttonText";
-            this.buttonText.Size = new System.Drawing.Size(50, 45);
-            this.buttonText.TabIndex = 16;
-            this.buttonText.Tag = "selectable";
-            this.buttonText.UseVisualStyleBackColor = true;
-            this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
+            this.buttonRotateLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRotateLeft.Enabled = false;
+            this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
+            this.buttonRotateLeft.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRotateLeft.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRotateLeft.Name = "buttonRotateLeft";
+            this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRotateLeft.Size = new System.Drawing.Size(50, 48);
+            this.buttonRotateLeft.Text = "buttonRotateLeft";
+            this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
-            // buttonFreeDraw
+            // buttonRotateRight
             // 
-            this.buttonFreeDraw.AutoEllipsis = true;
-            this.buttonFreeDraw.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonFreeDraw.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonFreeDraw.Enabled = false;
-            this.buttonFreeDraw.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.buttonFreeDraw.FlatAppearance.BorderSize = 0;
-            this.buttonFreeDraw.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFreeDraw.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil2;
-            this.buttonFreeDraw.Location = new System.Drawing.Point(774, 3);
-            this.buttonFreeDraw.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonFreeDraw.Name = "buttonFreeDraw";
-            this.buttonFreeDraw.Size = new System.Drawing.Size(50, 45);
-            this.buttonFreeDraw.TabIndex = 15;
-            this.buttonFreeDraw.Tag = "selectable";
-            this.buttonFreeDraw.UseVisualStyleBackColor = false;
-            this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
+            this.buttonRotateRight.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRotateRight.Enabled = false;
+            this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
+            this.buttonRotateRight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRotateRight.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRotateRight.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRotateRight.Name = "buttonRotateRight";
+            this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRotateRight.Size = new System.Drawing.Size(50, 48);
+            this.buttonRotateRight.Text = "buttonRotateRight";
+            this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
-            // buttonFilter
+            // buttonRestoreExam
             // 
-            this.buttonFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonFilter.Enabled = false;
-            this.buttonFilter.FlatAppearance.BorderSize = 0;
-            this.buttonFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFilter.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
-            this.buttonFilter.Location = new System.Drawing.Point(710, 3);
-            this.buttonFilter.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Size = new System.Drawing.Size(50, 45);
-            this.buttonFilter.TabIndex = 14;
-            this.buttonFilter.Tag = "selectable";
-            this.buttonFilter.UseVisualStyleBackColor = true;
-            this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
-            // 
-            // buttonRedo
-            // 
-            this.buttonRedo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRedo.Enabled = false;
-            this.buttonRedo.FlatAppearance.BorderSize = 0;
-            this.buttonRedo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonRedo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
-            this.buttonRedo.Location = new System.Drawing.Point(646, 3);
-            this.buttonRedo.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRedo.Name = "buttonRedo";
-            this.buttonRedo.Size = new System.Drawing.Size(50, 45);
-            this.buttonRedo.TabIndex = 13;
-            this.buttonRedo.Tag = "";
-            this.buttonRedo.UseVisualStyleBackColor = true;
-            this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonUndo.Enabled = false;
-            this.buttonUndo.FlatAppearance.BorderSize = 0;
-            this.buttonUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonUndo.Image = global::DMMDigital.Properties.Resources.icon_32x32_undo;
-            this.buttonUndo.Location = new System.Drawing.Point(592, 3);
-            this.buttonUndo.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Size = new System.Drawing.Size(50, 45);
-            this.buttonUndo.TabIndex = 12;
-            this.buttonUndo.Tag = "";
-            this.buttonUndo.UseVisualStyleBackColor = true;
-            this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
-            // 
-            // buttonRuler
-            // 
-            this.buttonRuler.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRuler.Enabled = false;
-            this.buttonRuler.FlatAppearance.BorderSize = 0;
-            this.buttonRuler.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRuler.Image = global::DMMDigital.Properties.Resources.icon_32x32_ruler;
-            this.buttonRuler.Location = new System.Drawing.Point(528, 3);
-            this.buttonRuler.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonRuler.Name = "buttonRuler";
-            this.buttonRuler.Size = new System.Drawing.Size(50, 45);
-            this.buttonRuler.TabIndex = 11;
-            this.buttonRuler.Tag = "selectable";
-            this.buttonRuler.UseVisualStyleBackColor = true;
-            this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
-            // 
-            // buttonZoom
-            // 
-            this.buttonZoom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonZoom.Enabled = false;
-            this.buttonZoom.FlatAppearance.BorderSize = 0;
-            this.buttonZoom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZoom.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
-            this.buttonZoom.Location = new System.Drawing.Point(474, 3);
-            this.buttonZoom.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonZoom.Name = "buttonZoom";
-            this.buttonZoom.Size = new System.Drawing.Size(50, 45);
-            this.buttonZoom.TabIndex = 10;
-            this.buttonZoom.Tag = "selectable";
-            this.buttonZoom.UseVisualStyleBackColor = true;
-            this.buttonZoom.Click += new System.EventHandler(this.buttonZoomClick);
-            // 
-            // buttonSelect
-            // 
-            this.buttonSelect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSelect.Enabled = false;
-            this.buttonSelect.FlatAppearance.BorderSize = 0;
-            this.buttonSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelect.Image = global::DMMDigital.Properties.Resources.icon_32x32_cursor;
-            this.buttonSelect.Location = new System.Drawing.Point(366, 3);
-            this.buttonSelect.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(50, 45);
-            this.buttonSelect.TabIndex = 9;
-            this.buttonSelect.Tag = "selectable";
-            this.buttonSelect.UseVisualStyleBackColor = true;
-            this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
-            // 
-            // buttonCompare
-            // 
-            this.buttonCompare.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonCompare.Enabled = false;
-            this.buttonCompare.FlatAppearance.BorderSize = 0;
-            this.buttonCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCompare.Image = global::DMMDigital.Properties.Resources.icon_32x32_compare;
-            this.buttonCompare.Location = new System.Drawing.Point(302, 3);
-            this.buttonCompare.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonCompare.Name = "buttonCompare";
-            this.buttonCompare.Size = new System.Drawing.Size(50, 45);
-            this.buttonCompare.TabIndex = 8;
-            this.buttonCompare.Tag = "selectable";
-            this.buttonCompare.UseVisualStyleBackColor = true;
-            this.buttonCompare.Click += new System.EventHandler(this.buttonCompareClick);
-            // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonDelete.Enabled = false;
-            this.buttonDelete.FlatAppearance.BorderSize = 0;
-            this.buttonDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDelete.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
-            this.buttonDelete.Location = new System.Drawing.Point(238, 3);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(50, 45);
-            this.buttonDelete.TabIndex = 7;
-            this.buttonDelete.Tag = "";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDeleteClick);
-            // 
-            // buttonExport
-            // 
-            this.buttonExport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonExport.Enabled = false;
-            this.buttonExport.FlatAppearance.BorderSize = 0;
-            this.buttonExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
-            this.buttonExport.Location = new System.Drawing.Point(174, 2);
-            this.buttonExport.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(50, 45);
-            this.buttonExport.TabIndex = 6;
-            this.buttonExport.Tag = "";
-            this.buttonExport.UseVisualStyleBackColor = true;
-            this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
-            // 
-            // buttonImport
-            // 
-            this.buttonImport.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonImport.FlatAppearance.BorderSize = 0;
-            this.buttonImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.buttonImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
-            this.buttonImport.Location = new System.Drawing.Point(120, 2);
-            this.buttonImport.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(50, 45);
-            this.buttonImport.TabIndex = 5;
-            this.buttonImport.Tag = "";
-            this.buttonImport.UseVisualStyleBackColor = true;
-            this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
-            // 
-            // sensorConnection
-            // 
-            this.sensorConnection.Image = global::DMMDigital.Properties.Resources.icon_32x32_red;
-            this.sensorConnection.InitialImage = ((System.Drawing.Image)(resources.GetObject("sensorConnection.InitialImage")));
-            this.sensorConnection.Location = new System.Drawing.Point(0, 0);
-            this.sensorConnection.Margin = new System.Windows.Forms.Padding(0);
-            this.sensorConnection.Name = "sensorConnection";
-            this.sensorConnection.Size = new System.Drawing.Size(64, 50);
-            this.sensorConnection.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.sensorConnection.TabIndex = 4;
-            this.sensorConnection.TabStop = false;
+            this.buttonRestoreExam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRestoreExam.Enabled = false;
+            this.buttonRestoreExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
+            this.buttonRestoreExam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRestoreExam.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRestoreExam.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRestoreExam.Name = "buttonRestoreExam";
+            this.buttonRestoreExam.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRestoreExam.Size = new System.Drawing.Size(50, 48);
+            this.buttonRestoreExam.Text = "buttonRestoreExam";
+            this.buttonRestoreExam.Click += new System.EventHandler(this.buttonRestoreExamClick);
             // 
             // dialogFileImage
             // 
@@ -624,7 +648,7 @@ namespace DMMDigital.Views
             this.mainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.mainPictureBox.Name = "mainPictureBox";
-            this.mainPictureBox.Size = new System.Drawing.Size(1012, 648);
+            this.mainPictureBox.Size = new System.Drawing.Size(1012, 619);
             this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mainPictureBox.TabIndex = 0;
             this.mainPictureBox.TabStop = false;
@@ -643,7 +667,7 @@ namespace DMMDigital.Views
             this.panel2.Location = new System.Drawing.Point(363, 50);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1012, 648);
+            this.panel2.Size = new System.Drawing.Size(1012, 619);
             this.panel2.TabIndex = 1;
             // 
             // colorDialog1
@@ -660,10 +684,11 @@ namespace DMMDigital.Views
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1375, 699);
+            this.ClientSize = new System.Drawing.Size(1375, 668);
             this.Controls.Add(this.panelTools);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -677,7 +702,9 @@ namespace DMMDigital.Views
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panelTools.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.sensorConnection)).EndInit();
+            this.panelTools.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -692,28 +719,8 @@ namespace DMMDigital.Views
         private System.Windows.Forms.Label labelTemplate;
         private System.Windows.Forms.Label labelPatient;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox sensorConnection;
         private System.Windows.Forms.Panel panelTools;
-        private System.Windows.Forms.Button buttonImport;
-        private System.Windows.Forms.Button buttonExport;
-        private System.Windows.Forms.Button buttonRotateRight;
-        private System.Windows.Forms.Button buttonRotateLeft;
-        private System.Windows.Forms.Button buttonRectangle;
-        private System.Windows.Forms.Button buttonEllipse;
-        private System.Windows.Forms.Button buttonText;
-        private System.Windows.Forms.Button buttonFreeDraw;
-        private System.Windows.Forms.Button buttonFilter;
-        private System.Windows.Forms.Button buttonRedo;
-        private System.Windows.Forms.Button buttonUndo;
-        private System.Windows.Forms.Button buttonRuler;
-        private System.Windows.Forms.Button buttonZoom;
-        private System.Windows.Forms.Button buttonSelect;
-        private System.Windows.Forms.Button buttonCompare;
-        private System.Windows.Forms.Button buttonMove;
-        private System.Windows.Forms.Button buttonArrow;
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
-        private System.Windows.Forms.Button buttonDelete;
-        private System.Windows.Forms.Button buttonRestore;
         private System.Windows.Forms.PictureBox mainPictureBox;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ColorDialog colorDialog1;
@@ -728,5 +735,33 @@ namespace DMMDigital.Views
         private TextBox textBoxFrameNotes;
         private Label labelImageDate;
         private Timer timer1;
+        private ToolStrip toolStrip;
+        private ToolStripDropDownButton toolStripDropDownButton;
+        private ToolStripMenuItem buttonOpenExam;
+        private ToolStripMenuItem buttonNewExam;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton detectorConnection;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton buttonExport;
+        private ToolStripButton buttonImport;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripButton buttonDeleteImage;
+        private ToolStripButton buttonCompareFrame;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripButton buttonSelect;
+        private ToolStripButton buttonMoveDrawing;
+        private ToolStripButton buttonMagnifier;
+        private ToolStripButton buttonRuler;
+        private ToolStripButton buttonUndo;
+        private ToolStripButton buttonRedo;
+        private ToolStripButton buttonFilter;
+        private ToolStripButton buttonFreeDraw;
+        private ToolStripButton buttonText;
+        private ToolStripButton buttonArrow;
+        private ToolStripButton buttonEllipse;
+        private ToolStripButton buttonRectangle;
+        private ToolStripButton buttonRotateLeft;
+        private ToolStripButton buttonRotateRight;
+        private ToolStripButton buttonRestoreExam;
     }
 }

@@ -9,6 +9,8 @@ using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Models.Drawings;
 using DMMDigital.Components;
+using DMMDigital._Repositories;
+using DMMDigital.Presenters;
 
 namespace DMMDigital.Views
 {
@@ -16,18 +18,20 @@ namespace DMMDigital.Views
     {
         public int examId { get; set; }
         public string sessionName { get; set; }
-        public int patientId { get; set; }
+        public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
         public Frame selectedFrame { get; set; }
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        public bool detectorConnected { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventGetExamPath;
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
+        public event EventHandler eventGetPatient;
 
         int action = 0;
         int indexFrame = 0;
@@ -70,7 +74,7 @@ namespace DMMDigital.Views
             ActiveControl = label1;
 
             this.sessionName = sessionName;
-            patientId = patient.id;
+            this.patient = patient;
             this.templateId = templateId;
             setLabelPatientTemplate(patient.name, templateName);
             this.templateFrames = templateFrames;
@@ -80,16 +84,20 @@ namespace DMMDigital.Views
             Load += delegate {
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
                 eventGetExamPath?.Invoke(this, EventArgs.Empty);
-                DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patientId + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
+                DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patient.id + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
                 examPath = di.FullName;
                 drawTemplate();
             };
         }
 
-        public ExamView(int examId)
+        public ExamView(int examId, int patientId)
         {
             InitializeComponent();
             this.examId = examId;
+            this.patient = new PatientModel
+            {
+                id = patientId
+            };
 
             Load += delegate
             {
@@ -105,6 +113,11 @@ namespace DMMDigital.Views
                 if (examImageDrawings.Any())
                 {
                     selectedDrawingHistoryHandler();
+                }
+
+                if (detectorConnected)
+                {
+                    detectorConnection.Image = Properties.Resources.icon_32x32_green;
                 }
             };
         }
@@ -172,15 +185,18 @@ namespace DMMDigital.Views
                 frames.Add(newFrame);
 
                 List<IDrawing> frameDrawings = new List<IDrawing>();
-                foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
+                if (examImageDrawings != null)
                 {
-                    using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
+                    foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
                     {
-                        frameDrawings.Add(new ImageDrawed
+                        using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
                         {
-                            id = int.Parse(drawing.file.Substring(4, 1)),
-                            img = new Bitmap(img),
-                        });
+                            frameDrawings.Add(new ImageDrawed
+                            {
+                                id = int.Parse(drawing.file.Substring(4, 1)),
+                                img = new Bitmap(img),
+                            });
+                        }
                     }
                 }
 
@@ -378,15 +394,18 @@ namespace DMMDigital.Views
 
         private void enableTools()
         {
-            foreach (Button tool in panelTools.Controls.OfType<Button>())
+            if (examImages.Any())
             {
-                tool.Invoke((MethodInvoker)(() => tool.Enabled = true));
+                foreach (ToolStripButton tool in toolStrip.Items.OfType<ToolStripButton>())
+                {
+                    tool.Enabled = true;
+                }
             }
         }
 
         private void selectTool(object sender)
         {
-            Button selectedButton = panelTools.Controls.OfType<Button>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
+            ToolStripButton selectedButton = toolStrip.Controls.OfType<ToolStripButton>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
             if (selectedButton != null)
             {
                 if (selectedButton.Name == "buttonZoom")
@@ -755,6 +774,26 @@ namespace DMMDigital.Views
             }
         }
 
+        private void buttonNewExamClick(object sender, EventArgs e)
+        {
+            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            eventGetPatient?.Invoke(this, e);
+
+            chooseTemplateView.patientId = patient.id;
+            chooseTemplateView.patientName = patient.name;
+            chooseTemplateView.patientBirthDate = patient.birthDate;
+            chooseTemplateView.patientPhone = patient.phone;
+            chooseTemplateView.patientRecommendation = patient.recommendation;
+            chooseTemplateView.patientObservation = patient.observation;
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
+        }
+
+        private void buttonOpenExamClick(object sender, EventArgs e)
+        {
+            new PatientPresenter(new PatientView(), new PatientRepository(), "newPage");
+        }
+
         private void buttonImportClick(object sender, EventArgs e)
         {
             if (selectedFrame.originalImage != null)
@@ -808,7 +847,7 @@ namespace DMMDigital.Views
             saveExamChangesOnDatabase();
         }
 
-        private void buttonCompareClick(object sender, EventArgs e)
+        private void buttonCompareFrameClick(object sender, EventArgs e)
         {
             selectTool(sender);
 
@@ -826,14 +865,14 @@ namespace DMMDigital.Views
             action = 0;
         }
 
-        private void buttonMoveClick(object sender, EventArgs e)
+        private void buttonMoveDrawingClick(object sender, EventArgs e)
         {
             panelToolOptions.Controls.Clear();
             selectTool(sender);
             action = 1;
         }
 
-        private void buttonZoomClick(object sender, EventArgs e)
+        private void buttonMagnifierClick(object sender, EventArgs e)
         {
             action = 8;
             loadToolOptions();
@@ -951,7 +990,7 @@ namespace DMMDigital.Views
             selectedFrame.Refresh();
         }
 
-        private void buttonRestoreClick(object sender, EventArgs e)
+        private void buttonRestoreExamClick(object sender, EventArgs e)
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {

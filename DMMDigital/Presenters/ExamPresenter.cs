@@ -24,6 +24,7 @@ namespace DMMDigital.Presenters
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly IPatientRepository patientRepository = new PatientRepository();
 
         private readonly string examOpeningMode;
         private int m_nId;
@@ -38,6 +39,7 @@ namespace DMMDigital.Presenters
             examView.eventSaveExamImage += saveExamImage;
             examView.eventSaveExamImageDrawing += saveExamImageDrawing;
             examView.eventGetExamPath += getExamPath;
+            examView.eventGetPatient += getPatient;
 
             if (openingExam)
             {
@@ -62,16 +64,16 @@ namespace DMMDigital.Presenters
                     MessageBox.Show("Não foi possível conectar o sensor, verifique se o apontamento está correto.");
                 }
 
-                new ExamContainerPresenter(new ExamContainerView(examView as ExamView), m_nId);
+                new ExamContainerPresenter(new ExamContainerView(examView as ExamView), examView.patient.id, m_nId);
             }
             else
             {
                 Form examContainerView = Application.OpenForms.Cast<Form>().First(f => f.Text == "Exame");
 
-                if ((examContainerView as ExamContainerView).patientId != examView.patientId)
+                if ((examContainerView as ExamContainerView).patientId != examView.patient.id)
                 {
                     examContainerView.Close();
-                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView), m_nId);
+                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView), examView.patient.id, m_nId);
                 }
                 else if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.examId))
                 {
@@ -86,13 +88,13 @@ namespace DMMDigital.Presenters
             {
                 ExamModel exam = examRepository.getExam(examView.examId);
                 examView.examId = exam.id;
-                examView.patientId = exam.patientId;
+                examView.patient.id = exam.patientId;
                 examView.sessionName = exam.sessionName;
                 getExamPath(this, EventArgs.Empty);
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath = examView.examPath + $"\\Paciente-{examView.patientId}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
+                examView.examPath = examView.examPath + $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
                 examView.templateId = exam.templateId;
                 examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
@@ -112,7 +114,7 @@ namespace DMMDigital.Presenters
             {
                 ExamModel exam = new ExamModel
                 {
-                    patientId = examView.patientId,
+                    patientId = examView.patient.id,
                     templateId = examView.templateId,
                     sessionName = examView.sessionName,
                     createdAt = DateTime.Now
@@ -155,6 +157,11 @@ namespace DMMDigital.Presenters
             examView.examPath = configRepository.getExamPath();
         }
 
+        private void getPatient(object sender, EventArgs e)
+        {
+            examView.patient = patientRepository.getPatientById(examView.patient.id);
+        }
+
         void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
                        IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
         {
@@ -165,8 +172,7 @@ namespace DMMDigital.Presenters
                         switch (nParam1)
                         {
                             case SdkInterface.Cmd_Connect:
-                                //examView.iconSensorConnection = Properties.Resources.icon_32x32_green;
-                                //MessageBox.Show("Conectado");
+                                examView.detectorConnected = true;
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");

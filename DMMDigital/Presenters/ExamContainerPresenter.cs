@@ -10,13 +10,12 @@ namespace DMMDigital.Presenters
     {
         private int detectorId = 0;
         private readonly IExamContainerView examContainerView;
-        private readonly IPatientRepository patientRepository = new PatientRepository();
 
-        public ExamContainerPresenter(IExamContainerView view, int detectorId)
+        public ExamContainerPresenter(IExamContainerView view, int patientId, int detectorId)
         {
             examContainerView = view;
+            view.patientId = patientId;
 
-            examContainerView.eventGetPatient += getPatient;
             examContainerView.eventDestroyDetector += destroyDetector;
             this.detectorId = detectorId;
         }
@@ -28,11 +27,6 @@ namespace DMMDigital.Presenters
 
             d.Disconnect();
             Detector.DestroyDetector(detectorId);
-        }
-
-        private void getPatient(object sender, EventArgs e)
-        {
-            examContainerView.patient = patientRepository.getPatientById(examContainerView.patientId);
         }
     }
 }

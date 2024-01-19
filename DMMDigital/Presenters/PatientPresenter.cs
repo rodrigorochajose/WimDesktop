@@ -190,7 +190,7 @@ namespace DMMDigital.Presenters
 
         private void openExam(object sender, EventArgs e)
         {
-            new ExamPresenter(new ExamView(patientView.selectedExamId), new ExamRepository(), true, examOpeningMode);
+            new ExamPresenter(new ExamView(patientView.selectedExamId, patientView.selectedPatientId), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
             (patientView as Form).Hide();
             (patientView as Form).Close();

@@ -9,18 +9,20 @@ namespace DMMDigital.Views
     {
         int examId { get; set; }
         string sessionName { get; set; }
-        int patientId { get; set; }
+        PatientModel patient { get; set; }
         int templateId { get; set; }
         string examPath { get; set; }
         Frame selectedFrame { get; set; }
         List<ExamImageModel> examImages { get; set; }
         List<TemplateFrameModel> templateFrames { get; set; }
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        bool detectorConnected { get; set; }
 
         event EventHandler eventGetExamPath;
         event EventHandler eventSaveExam;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
+        event EventHandler eventGetPatient;
 
         void loadImageOnMainPictureBox();
         bool dialogOverrideCurrentImage();
