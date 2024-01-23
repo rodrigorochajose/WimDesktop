@@ -226,7 +226,7 @@ namespace DMMDigital.Presenters
 
             if (Directory.Exists(fullPath))
             {
-                Directory.Delete(fullPath);
+                Directory.Delete(fullPath, true);
             }
 
             MessageBox.Show(examStatus.message);

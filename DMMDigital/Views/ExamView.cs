@@ -87,6 +87,11 @@ namespace DMMDigital.Views
                 DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patient.id + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
                 examPath = di.FullName;
                 drawTemplate();
+
+                if (detectorConnected)
+                {
+                    detectorConnection.Image = Properties.Resources.icon_32x32_green;
+                }
             };
         }
 
@@ -94,7 +99,7 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             this.examId = examId;
-            this.patient = new PatientModel
+            patient = new PatientModel
             {
                 id = patientId
             };
@@ -256,9 +261,6 @@ namespace DMMDigital.Views
                 examImages.RemoveAll(i => i.frameId == selectedFrame.order);
             }
 
-            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
-            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
-
             examImages.Add(new ExamImageModel
             {
                 examId = examId,
@@ -270,6 +272,9 @@ namespace DMMDigital.Views
 
             selectedFrame.datePhotoTook = createdAt.ToString();
 
+            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
+            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
+
             selectedFrame.originalImage = image.Clone() as Image;
 
             selectedFrame.Tag = Color.Black;
@@ -280,25 +285,24 @@ namespace DMMDigital.Views
             }));
 
             indexFrame++;
-
             if (indexFrame == frames.Count())
             {
                 indexFrame--;
+                selectFrame();
             }
 
-            selectedFrame.Invoke((MethodInvoker)(() =>
-            {
-                selectedFrame = frames[indexFrame];
-                selectedFrame.Tag = Color.LimeGreen;
-                selectedFrame.Refresh();
-            }));
+            frames[indexFrame].Tag = Color.LimeGreen;
+            frames[indexFrame].Refresh();
+        }
 
-            if (selectedDrawingHistory.Count >= indexFrame)
-            {
-                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-                selectedDrawingHistoryHandler();
-            }
+        private void selectFrame()
+        {
+            selectedFrame = frames[indexFrame];
+
+            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
+            
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -353,6 +357,7 @@ namespace DMMDigital.Views
 
         public void loadImageOnMainPictureBox()
         {
+            selectFrame();
             using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image image = Image.FromStream(fs);
@@ -375,7 +380,7 @@ namespace DMMDigital.Views
                     {
                         rectangleSize = new Size(
                             mainPictureBoxOriginalSize.Width,
-                            mainPictureBoxOriginalSize.Width * mainPictureBox.Image.Height / mainPictureBox.Image.Width
+                            mainPictureBoxOriginalSize.Height
                         );
                     }
                     else
@@ -405,7 +410,7 @@ namespace DMMDigital.Views
 
         private void selectTool(object sender)
         {
-            ToolStripButton selectedButton = toolStrip.Controls.OfType<ToolStripButton>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
+            ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
             if (selectedButton != null)
             {
                 if (selectedButton.Name == "buttonZoom")
@@ -414,9 +419,9 @@ namespace DMMDigital.Views
                 }
                 selectedButton.BackColor = Color.WhiteSmoke;
                 selectedButton.Tag = "selectable";
-            }
-            (sender as Control).BackColor = Color.LightGray;
-            (sender as Control).Tag = "selected";
+            } 
+            (sender as ToolStripButton).BackColor = Color.LightGray;
+            (sender as ToolStripButton).Tag = "selected";
         }
 
         private void loadToolOptions()
@@ -796,7 +801,7 @@ namespace DMMDigital.Views
 
         private void buttonImportClick(object sender, EventArgs e)
         {
-            if (selectedFrame.originalImage != null)
+            if (frames[indexFrame].originalImage != null)
             {
                 if (dialogOverrideCurrentImage() == false)
                 {
@@ -807,12 +812,12 @@ namespace DMMDigital.Views
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
+                selectFrame();
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
                 mainPictureBox.Image = selectedImage;
                 resizeMainPictureBox();
 
                 selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
-
                 frameHandler(selectedImage);
 
                 enableTools();
@@ -837,14 +842,33 @@ namespace DMMDigital.Views
             {
                 DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) { return; }
-            }
 
-            File.Delete(Path.Combine(examPath, selectedFrame.order + "-original.png"));
-            examImages.RemoveAll(i => i.frameId == selectedFrame.order);
-            selectedFrame.Image = drawFrameImage(selectedFrame);
-            selectedFrame.originalImage = null;
-            mainPictureBox.Image = null;
-            saveExamChangesOnDatabase();
+                File.Delete(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+
+                DirectoryInfo directory = new DirectoryInfo(examPath);
+                List<FileInfo> frameDrawings = directory.GetFiles().Where(f => f.Name.Contains($"F{selectedFrame.order}-")).ToList();
+                foreach (FileInfo file in frameDrawings)
+                {
+                    file.Delete();
+                }
+
+                selectedDrawingHistory = new List<List<IDrawing>>{ new List<IDrawing>() };
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                flowLayoutPanel1.Controls.Clear();
+
+                examImages.RemoveAll(i => i.frameId == selectedFrame.order);
+
+                selectedFrame.Image = drawFrameImage(selectedFrame);
+                selectedFrame.originalImage = null;
+                selectedFrame.datePhotoTook = "";
+                selectedFrame.notes = "";
+
+                labelImageDate.Text = selectedFrame.datePhotoTook;
+                textBoxFrameNotes.Text = selectedFrame.notes;
+
+                mainPictureBox.Image = null;
+                saveExamChangesOnDatabase();
+            }
         }
 
         private void buttonCompareFrameClick(object sender, EventArgs e)
@@ -994,15 +1018,30 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                selectedDrawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
-                pointsDifferenceFreeDrawing = new List<Point>();
+
+                action = 0;
+                indexSelectedDrawingHistory = 0;
+
                 clickPosition = new Point();
                 drawingInitialPosition = new Point();
                 drawingFinalPosition = new Point();
+                mainPictureBoxOriginalSize = new Size();
                 currentDrawing = new Ellipse();
                 selectedDrawingToMove = new Ellipse();
-                indexSelectedDrawingHistory = 0;
-                action = 0;
+
+                frames = new List<Frame>();
+                pointsDifferenceFreeDrawing = new List<Point>();
+                examImages = new List<ExamImageModel>();
+                examImageDrawings = new List<ExamImageDrawingModel>();
+                frameDrawingHistories = new List<FrameDrawingHistory>();
+                selectedDrawingHistory = new List<List<IDrawing>>() { new List<IDrawing>() };
+
+                DirectoryInfo directory = new DirectoryInfo(examPath);
+                foreach (FileInfo file in directory.GetFiles())
+                {
+                    file.Delete();
+                }
+
                 flowLayoutPanel1.Controls.Clear();
                 mainPictureBox.Invalidate();
                 saveExamChangesOnDatabase();

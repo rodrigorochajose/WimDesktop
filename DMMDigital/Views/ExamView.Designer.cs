@@ -354,6 +354,7 @@ namespace DMMDigital.Views
             this.detectorConnection.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.detectorConnection.Size = new System.Drawing.Size(50, 48);
             this.detectorConnection.Text = "detectorConnection";
+            this.detectorConnection.ToolTipText = "Sensor não localizado";
             // 
             // toolStripSeparator2
             // 
@@ -371,6 +372,7 @@ namespace DMMDigital.Views
             this.buttonImport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonImport.Size = new System.Drawing.Size(50, 48);
             this.buttonImport.Text = "buttonImport";
+            this.buttonImport.ToolTipText = "Importar Imagem";
             this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
             // 
             // buttonExport
@@ -385,6 +387,7 @@ namespace DMMDigital.Views
             this.buttonExport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonExport.Size = new System.Drawing.Size(50, 48);
             this.buttonExport.Text = "buttonExport";
+            this.buttonExport.ToolTipText = "Exportar Exame";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
             // 
             // toolStripSeparator3
@@ -404,6 +407,7 @@ namespace DMMDigital.Views
             this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonDeleteImage.Size = new System.Drawing.Size(50, 48);
             this.buttonDeleteImage.Text = "buttonDeleteImage";
+            this.buttonDeleteImage.ToolTipText = "Excluir Imagem";
             this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteClick);
             // 
             // buttonCompareFrame
@@ -418,6 +422,7 @@ namespace DMMDigital.Views
             this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonCompareFrame.Size = new System.Drawing.Size(50, 48);
             this.buttonCompareFrame.Text = "buttonCompareFrame";
+            this.buttonCompareFrame.ToolTipText = "Comparar Imagens";
             this.buttonCompareFrame.Click += new System.EventHandler(this.buttonCompareFrameClick);
             // 
             // toolStripSeparator4
@@ -437,6 +442,7 @@ namespace DMMDigital.Views
             this.buttonSelect.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonSelect.Size = new System.Drawing.Size(50, 48);
             this.buttonSelect.Text = "buttonSelect";
+            this.buttonSelect.ToolTipText = "Selecionar";
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
             // 
             // buttonMoveDrawing
@@ -451,6 +457,7 @@ namespace DMMDigital.Views
             this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonMoveDrawing.Size = new System.Drawing.Size(50, 48);
             this.buttonMoveDrawing.Text = "buttonMoveDrawing";
+            this.buttonMoveDrawing.ToolTipText = "Mover";
             this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
             // 
             // buttonMagnifier
@@ -465,6 +472,7 @@ namespace DMMDigital.Views
             this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonMagnifier.Size = new System.Drawing.Size(50, 48);
             this.buttonMagnifier.Text = "buttonMagnifier";
+            this.buttonMagnifier.ToolTipText = "Lupa";
             this.buttonMagnifier.Click += new System.EventHandler(this.buttonMagnifierClick);
             // 
             // buttonRuler
@@ -479,6 +487,7 @@ namespace DMMDigital.Views
             this.buttonRuler.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRuler.Size = new System.Drawing.Size(50, 48);
             this.buttonRuler.Text = "buttonRuler";
+            this.buttonRuler.ToolTipText = "Régua";
             this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
             // 
             // buttonUndo
@@ -493,6 +502,7 @@ namespace DMMDigital.Views
             this.buttonUndo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonUndo.Size = new System.Drawing.Size(50, 48);
             this.buttonUndo.Text = "buttonUndo";
+            this.buttonUndo.ToolTipText = "Desfazer";
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
             // buttonRedo
@@ -507,6 +517,7 @@ namespace DMMDigital.Views
             this.buttonRedo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRedo.Size = new System.Drawing.Size(50, 48);
             this.buttonRedo.Text = "buttonRedo";
+            this.buttonRedo.ToolTipText = "Refazer";
             this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
             // 
             // buttonFilter
@@ -521,6 +532,7 @@ namespace DMMDigital.Views
             this.buttonFilter.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonFilter.Size = new System.Drawing.Size(50, 48);
             this.buttonFilter.Text = "buttonFilter";
+            this.buttonFilter.ToolTipText = "Filtro";
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
             // 
             // buttonFreeDraw
@@ -535,6 +547,7 @@ namespace DMMDigital.Views
             this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonFreeDraw.Size = new System.Drawing.Size(50, 48);
             this.buttonFreeDraw.Text = "buttonFreeDraw";
+            this.buttonFreeDraw.ToolTipText = "Desenho Livre";
             this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
             // 
             // buttonText
@@ -549,6 +562,7 @@ namespace DMMDigital.Views
             this.buttonText.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonText.Size = new System.Drawing.Size(50, 48);
             this.buttonText.Text = "buttonText";
+            this.buttonText.ToolTipText = "Texto";
             this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
             // 
             // buttonArrow
@@ -563,6 +577,7 @@ namespace DMMDigital.Views
             this.buttonArrow.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonArrow.Size = new System.Drawing.Size(50, 48);
             this.buttonArrow.Text = "buttonArrow";
+            this.buttonArrow.ToolTipText = "Seta";
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
             // 
             // buttonRectangle
@@ -577,6 +592,7 @@ namespace DMMDigital.Views
             this.buttonRectangle.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRectangle.Size = new System.Drawing.Size(50, 48);
             this.buttonRectangle.Text = "buttonRectangle";
+            this.buttonRectangle.ToolTipText = "Retângulo";
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
             // 
             // buttonEllipse
@@ -591,6 +607,7 @@ namespace DMMDigital.Views
             this.buttonEllipse.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonEllipse.Size = new System.Drawing.Size(50, 48);
             this.buttonEllipse.Text = "buttonEllipse";
+            this.buttonEllipse.ToolTipText = "Círculo";
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
             // 
             // buttonRotateLeft
@@ -605,6 +622,7 @@ namespace DMMDigital.Views
             this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRotateLeft.Size = new System.Drawing.Size(50, 48);
             this.buttonRotateLeft.Text = "buttonRotateLeft";
+            this.buttonRotateLeft.ToolTipText = "Girar à Esquerda";
             this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
             // buttonRotateRight
@@ -619,6 +637,7 @@ namespace DMMDigital.Views
             this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRotateRight.Size = new System.Drawing.Size(50, 48);
             this.buttonRotateRight.Text = "buttonRotateRight";
+            this.buttonRotateRight.ToolTipText = "Girar à Direita";
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
             // buttonRestoreExam
@@ -633,6 +652,7 @@ namespace DMMDigital.Views
             this.buttonRestoreExam.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRestoreExam.Size = new System.Drawing.Size(50, 48);
             this.buttonRestoreExam.Text = "buttonRestoreExam";
+            this.buttonRestoreExam.ToolTipText = "Restaurar Exame";
             this.buttonRestoreExam.Click += new System.EventHandler(this.buttonRestoreExamClick);
             // 
             // dialogFileImage
@@ -648,7 +668,7 @@ namespace DMMDigital.Views
             this.mainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.mainPictureBox.Name = "mainPictureBox";
-            this.mainPictureBox.Size = new System.Drawing.Size(1012, 619);
+            this.mainPictureBox.Size = new System.Drawing.Size(1012, 617);
             this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mainPictureBox.TabIndex = 0;
             this.mainPictureBox.TabStop = false;
