@@ -110,6 +110,7 @@
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
     <Compile Include="Presenters\ManipulateTemplatePresenter.cs" />
+    <Compile Include="Presenters\TemplatePresenter.cs" />
     <Compile Include="Views\ChooseFramesToCompare.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +162,7 @@
     <Compile Include="Views\IExportExamView.cs" />
     <Compile Include="Views\IFilterView.cs" />
     <Compile Include="Views\IManipulateTemplateView.cs" />
+    <Compile Include="Views\ITemplateView.cs" />
     <Compile Include="Views\ManipulatePatientView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +248,12 @@
     <Compile Include="Views\PatientView.Designer.cs">
       <DependentUpon>PatientView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TemplateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateView.Designer.cs">
+      <DependentUpon>TemplateView.cs</DependentUpon>
+    </Compile>
     <Compile Include="_Repositories\ConfigRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
     <Compile Include="_Repositories\ExamImageRepository.cs" />
@@ -302,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateView.resx">
+      <DependentUpon>TemplateView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -458,6 +469,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon-32x32-cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-templateIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

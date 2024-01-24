@@ -52,6 +52,7 @@ namespace DMMDigital._Repositories
                 return ex.Message;
             }
         }
+
         public IEnumerable<PatientModel> getAllPatients()
         {
             return context.patient;

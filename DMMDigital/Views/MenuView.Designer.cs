@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.buttonNewExam = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPatient = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -45,6 +46,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonNewExam,
             this.buttonPatient,
+            this.buttonTemplate,
             this.buttonConfig});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -72,6 +74,15 @@
             this.buttonPatient.Name = "buttonPatient";
             this.buttonPatient.Size = new System.Drawing.Size(127, 36);
             this.buttonPatient.Text = "Pacientes";
+            // 
+            // buttonTemplate
+            // 
+            this.buttonTemplate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_templateIcon;
+            this.buttonTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonTemplate.Name = "buttonTemplate";
+            this.buttonTemplate.Size = new System.Drawing.Size(125, 36);
+            this.buttonTemplate.Text = "Template";
             // 
             // buttonConfig
             // 
@@ -114,5 +125,6 @@
         private System.Windows.Forms.ToolStripMenuItem buttonPatient;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem buttonConfig;
+        private System.Windows.Forms.ToolStripMenuItem buttonTemplate;
     }
 }

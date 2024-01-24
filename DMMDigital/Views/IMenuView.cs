@@ -6,6 +6,7 @@ namespace DMMDigital.Views
     {
         event EventHandler showPatientView;
         event EventHandler showNewExamView;
+        event EventHandler showTemplateView;
         event EventHandler showConfigView;
     }
 }

@@ -7,6 +7,7 @@ namespace DMMDigital.Interface
     {
         int add(TemplateModel template);
         string edit(TemplateModel template);
+        string delete(int templateId);
         List<TemplateModel> getAllTemplates();
     }
 }

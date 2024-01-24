@@ -12,6 +12,7 @@ namespace DMMDigital.Presenters
             menuView = view;
             menuView.showConfigView += delegate { new ConfigPresenter(new ConfigView(), new ConfigRepository()); };
             menuView.showPatientView += delegate { new PatientPresenter(new PatientView(), new PatientRepository(), "newContainer"); };
+            menuView.showTemplateView += delegate { new TemplatePresenter(new TemplateView()); };
             menuView.showNewExamView += delegate { new ChoosePatientExamPresenter(new ChoosePatientExamView(), new PatientRepository()); };
         }
     }

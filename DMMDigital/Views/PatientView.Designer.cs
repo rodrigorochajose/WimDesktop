@@ -63,6 +63,7 @@
             // buttonNewPatient
             // 
             this.buttonNewPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNewPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewPatient.Location = new System.Drawing.Point(573, 66);
             this.buttonNewPatient.Name = "buttonNewPatient";
             this.buttonNewPatient.Size = new System.Drawing.Size(82, 26);
@@ -295,6 +296,7 @@
             // buttonSearchPatient
             // 
             this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonSearchPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearchPatient.Location = new System.Drawing.Point(342, 65);
             this.buttonSearchPatient.Name = "buttonSearchPatient";
             this.buttonSearchPatient.Size = new System.Drawing.Size(58, 26);

@@ -5,7 +5,6 @@ namespace DMMDigital.Views
 {
     public partial class PatientView : Form, IPatientView
     {
-
         public string searchedValue 
         {
             get { return textBoxSearchPatient.Text; }
@@ -36,7 +35,7 @@ namespace DMMDigital.Views
             dataGridViewExam.DataSource = examList;
         }
 
-        public void manipulatePatientDataGridView()
+        public void patientDataGridViewHandler()
         {
             dataGridViewPatient.Columns["id"].Visible = false;
             edit.Frozen = true;
@@ -47,7 +46,7 @@ namespace DMMDigital.Views
             delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
         }
 
-        public void manipulateExamDataGridView()
+        public void examDataGridViewHandler()
         {
             dataGridViewExam.Columns["id"].Visible = false;
             dataGridViewExam.Columns["templateID"].Visible = false;

@@ -39,6 +39,8 @@ namespace DMMDigital.Views
             tabControl.Controls.Add(newTabPage);
 
             addFormIntoPage(newTabPage, examView);
+
+            tabControl.SelectedTab = newTabPage;
         }
 
         private void addFormIntoPage(TabPage tabPage, IExamView examView)
@@ -52,10 +54,20 @@ namespace DMMDigital.Views
             (examView as Form).Show();
         }
 
+        private void examContainerViewFormClosing(object sender, FormClosingEventArgs e)
+        {
+            List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
+            foreach (ExamView exam in openedExams)
+            {
+                exam.Close();
+            }
+        }
+
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.OpenForms.Cast<Form>().First().Show();
             eventDestroyDetector?.Invoke(this, e);
         }
+
     }
 }

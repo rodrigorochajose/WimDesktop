@@ -1472,7 +1472,7 @@ namespace DMMDigital.Views
             {
                 timer1.Enabled = true;
             }
-        }
+        } 
 
         private void timerTick(object sender, EventArgs e)
         {

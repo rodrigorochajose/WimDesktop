@@ -125,7 +125,6 @@ namespace DMMDigital.Views
 
         private void buttonExportExamClick(object sender, EventArgs e)
         {
-
             if (!checkBoxExportOriginalImage.Checked && !checkBoxExportEditedImage.Checked)
             {
                 MessageBox.Show("Selecione como deseja exportar a imagem!");
@@ -155,7 +154,7 @@ namespace DMMDigital.Views
                 Directory.CreateDirectory(Path.Combine(pathToExport, sessionName));
 
                 foreach (string file in files)
-                {     
+                {
                     File.Copy(file, Path.Combine(Path.Combine(pathToExport, sessionName), Path.GetFileName(file)));
                 }
 

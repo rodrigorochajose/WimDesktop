@@ -1,6 +1,4 @@
-﻿using DMMDigital._Repositories;
-using DMMDigital.Interface;
-using DMMDigital.Models;
+﻿using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
 

@@ -19,7 +19,29 @@ namespace DMMDigital._Repositories
 
         public string edit(TemplateModel template)
         {
-            throw new NotImplementedException();
+            try
+            {
+                context.SaveChanges();
+                return "Template editado com sucesso !";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string delete(int templateId)
+        {
+            try
+            {
+                context.template.Remove(context.template.Single(p => p.id == templateId));
+                context.SaveChanges();
+                return "Template Removido com sucesso !";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         public List<TemplateModel> getAllTemplates()

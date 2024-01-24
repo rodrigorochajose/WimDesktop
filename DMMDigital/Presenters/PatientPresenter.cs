@@ -150,7 +150,7 @@ namespace DMMDigital.Presenters
             {
                 patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
                 patientView.selectedPatientId = patientList.First().id;
-                patientView.manipulatePatientDataGridView();
+                patientView.patientDataGridViewHandler();
             }
         }
 
@@ -180,7 +180,7 @@ namespace DMMDigital.Presenters
             if (examList.Any())
             {
                 examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
-                patientView.manipulateExamDataGridView();
+                patientView.examDataGridViewHandler();
             }
             else if (examBindingSource.DataSource != null)
             {

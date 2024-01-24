@@ -27,8 +27,8 @@ namespace DMMDigital.Views
         void setPatientList(BindingSource patientList);
         void setExamList(BindingSource examList);
 
-        void manipulatePatientDataGridView();
-        void manipulateExamDataGridView();
+        void patientDataGridViewHandler();
+        void examDataGridViewHandler();
 
     }
 }
