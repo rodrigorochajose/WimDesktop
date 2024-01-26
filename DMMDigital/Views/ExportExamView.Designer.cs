@@ -36,10 +36,9 @@
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.checkBoxExportEditedImage = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBoxZip = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.checkBoxExportOriginalImage = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonExportExam = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.comboBoxFormat = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -106,7 +106,7 @@
             this.checkBoxClearSelection.TabIndex = 27;
             this.checkBoxClearSelection.Text = "Limpar Seleção";
             this.checkBoxClearSelection.UseVisualStyleBackColor = true;
-            this.checkBoxClearSelection.MouseCaptureChanged += new System.EventHandler(this.checkBoxClearSelection_MouseCaptureChanged);
+            this.checkBoxClearSelection.MouseCaptureChanged += new System.EventHandler(this.checkBoxClearSelectionMouseCaptureChanged);
             // 
             // checkBoxSelectAll
             // 
@@ -118,13 +118,13 @@
             this.checkBoxSelectAll.TabIndex = 26;
             this.checkBoxSelectAll.Text = "Selecionar Tudo";
             this.checkBoxSelectAll.UseVisualStyleBackColor = true;
-            this.checkBoxSelectAll.MouseCaptureChanged += new System.EventHandler(this.checkBoxSelectAll_MouseCaptureChanged);
+            this.checkBoxSelectAll.MouseCaptureChanged += new System.EventHandler(this.checkBoxSelectAllMouseCaptureChanged);
             // 
             // checkBoxExportEditedImage
             // 
             this.checkBoxExportEditedImage.AutoSize = true;
             this.checkBoxExportEditedImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxExportEditedImage.Location = new System.Drawing.Point(297, 478);
+            this.checkBoxExportEditedImage.Location = new System.Drawing.Point(297, 429);
             this.checkBoxExportEditedImage.Name = "checkBoxExportEditedImage";
             this.checkBoxExportEditedImage.Size = new System.Drawing.Size(112, 19);
             this.checkBoxExportEditedImage.TabIndex = 25;
@@ -134,10 +134,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.groupBox1.Controls.Add(this.checkBoxZip);
-            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.comboBoxFormat);
             this.groupBox1.Controls.Add(this.checkBoxExportOriginalImage);
             this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(16, 400);
@@ -147,34 +147,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opções";
             // 
-            // checkBoxZip
-            // 
-            this.checkBoxZip.AutoSize = true;
-            this.checkBoxZip.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxZip.Location = new System.Drawing.Point(129, 36);
-            this.checkBoxZip.Name = "checkBoxZip";
-            this.checkBoxZip.Size = new System.Drawing.Size(169, 19);
-            this.checkBoxZip.TabIndex = 23;
-            this.checkBoxZip.Text = "Arquivo Compactado (.zip)";
-            this.checkBoxZip.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(44, 33);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 17);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Formato :";
-            // 
             // checkBoxExportOriginalImage
             // 
             this.checkBoxExportOriginalImage.AutoSize = true;
             this.checkBoxExportOriginalImage.Checked = true;
             this.checkBoxExportOriginalImage.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxExportOriginalImage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxExportOriginalImage.Location = new System.Drawing.Point(130, 78);
+            this.checkBoxExportOriginalImage.Location = new System.Drawing.Point(130, 29);
             this.checkBoxExportOriginalImage.Name = "checkBoxExportOriginalImage";
             this.checkBoxExportOriginalImage.Size = new System.Drawing.Size(115, 19);
             this.checkBoxExportOriginalImage.TabIndex = 24;
@@ -185,11 +164,21 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(44, 77);
+            this.label7.Location = new System.Drawing.Point(44, 28);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 17);
             this.label7.TabIndex = 17;
             this.label7.Text = "Exportar :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(46, 71);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 17);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Formato :";
             // 
             // label3
             // 
@@ -277,6 +266,20 @@
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // comboBoxFormat
+            // 
+            this.comboBoxFormat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFormat.FormattingEnabled = true;
+            this.comboBoxFormat.Items.AddRange(new object[] {
+            "JPEG",
+            "PNG",
+            "TIFF",
+            "DICOM"});
+            this.comboBoxFormat.Location = new System.Drawing.Point(132, 68);
+            this.comboBoxFormat.Name = "comboBoxFormat";
+            this.comboBoxFormat.Size = new System.Drawing.Size(113, 23);
+            this.comboBoxFormat.TabIndex = 25;
+            // 
             // ExportExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,7 +325,7 @@
         private System.Windows.Forms.CheckBox checkBoxClearSelection;
         private System.Windows.Forms.CheckBox checkBoxSelectAll;
         private System.Windows.Forms.CheckBox checkBoxExportEditedImage;
-        private System.Windows.Forms.CheckBox checkBoxZip;
         private System.Windows.Forms.CheckBox checkBoxExportOriginalImage;
+        private System.Windows.Forms.ComboBox comboBoxFormat;
     }
 }

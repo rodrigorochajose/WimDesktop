@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace DMMDigital.Views
         public ExportExamView()
         {
             InitializeComponent();
+
+            comboBoxFormat.SelectedIndex = 0;
 
             buttonCancel.Click += delegate { Close(); };
         }
@@ -95,7 +98,7 @@ namespace DMMDigital.Views
             textBox1.Text = folderBrowserDialog1.SelectedPath;
         }
 
-        private void checkBoxSelectAll_MouseCaptureChanged(object sender, EventArgs e)
+        private void checkBoxSelectAllMouseCaptureChanged(object sender, EventArgs e)
         {
             if (checkBoxClearSelection.Checked)
             {
@@ -108,7 +111,7 @@ namespace DMMDigital.Views
             }
         }
 
-        private void checkBoxClearSelection_MouseCaptureChanged(object sender, EventArgs e)
+        private void checkBoxClearSelectionMouseCaptureChanged(object sender, EventArgs e)
         {
             if (checkBoxSelectAll.Checked)
             {
@@ -134,12 +137,14 @@ namespace DMMDigital.Views
                 List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
 
                 List<string> files = new List<string>();
+                List<string> newFiles = new List<string>();
 
                 if (checkBoxExportOriginalImage.Checked)
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
                         files.Add(Path.Combine(pathImages, $"{cb.Tag}-original.png"));
+                        newFiles.Add($"{cb.Tag}-original");
                     }
                 }
 
@@ -148,20 +153,38 @@ namespace DMMDigital.Views
                     foreach (CheckBox cb in checkBoxes)
                     {
                         files.Add(Path.Combine(pathImages, $"{cb.Tag}-edited.png"));
+                        newFiles.Add($"{cb.Tag}-edited");
                     }
                 }
 
-                Directory.CreateDirectory(Path.Combine(pathToExport, sessionName));
-
-                foreach (string file in files)
+                ImageFormat format = ImageFormat.Bmp;
+                string extension = "bmp";
+                switch (comboBoxFormat.SelectedItem)
                 {
-                    File.Copy(file, Path.Combine(Path.Combine(pathToExport, sessionName), Path.GetFileName(file)));
+                    case "TIFF":
+                        format = ImageFormat.Tiff;
+                        extension = ".tiff";
+                        break;
+                    case "JPEG":
+                        format = ImageFormat.Jpeg;
+                        extension = ".jpeg";
+                        break;
+                    case "PNG":
+                        format = ImageFormat.Png;
+                        extension = ".png";
+                        break;
+                    case "DICOM":
+                        // implementar lógica DICOM
+                        break;
                 }
 
-                if (checkBoxZip.Checked)
+                string path = Path.Combine(pathToExport, sessionName);
+                Directory.CreateDirectory(path);
+
+                for (int counter = 0; counter < files.Count; counter++) 
                 {
-                    ZipFile.CreateFromDirectory(Path.Combine(pathToExport, sessionName), Path.Combine(pathToExport, $"{sessionName}.zip"));
-                    Directory.Delete(Path.Combine(pathToExport, sessionName), true);
+                    Bitmap img = new Bitmap(files[counter]);
+                    img.Save(Path.Combine(path, newFiles[counter] + extension), format);
                 }
 
                 MessageBox.Show("Exportado com sucesso!");
