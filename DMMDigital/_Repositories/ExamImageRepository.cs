@@ -17,23 +17,26 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                List<ExamImageModel> currentList = getExamImages(examImages[0].examId).ToList();
+                if (examImages.Any())
+                {
+                    List<ExamImageModel> currentList = getExamImages(examImages[0].examId).ToList();
 
-                List<ExamImageModel> imagesToRemove = currentList.ExceptBy(examImages, item => item.file).ToList();
+                    List<ExamImageModel> imagesToRemove = currentList.ExceptBy(examImages, item => item.file).ToList();
                 
-                foreach(ExamImageModel item in imagesToRemove)
-                {
-                    context.examImage.Remove(item);
-                }
-
-                foreach (ExamImageModel item in examImages)
-                {
-                    if (!currentList.Contains(item))
+                    foreach(ExamImageModel item in imagesToRemove)
                     {
-                        context.examImage.AddOrUpdate(item);
+                        context.examImage.Remove(item);
                     }
+
+                    foreach (ExamImageModel item in examImages)
+                    {
+                        if (!currentList.Contains(item))
+                        {
+                            context.examImage.AddOrUpdate(item);
+                        }
+                    }
+                    context.SaveChanges();
                 }
-                context.SaveChanges();
             }
             catch (Exception ex)
             {

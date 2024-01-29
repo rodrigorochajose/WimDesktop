@@ -34,6 +34,12 @@ namespace DMMDigital._Repositories
         {
             try
             {
+                if (context.exam.Any(e => e.templateId == templateId))
+                {
+                    return "Template não pode ser excluido pois existem exames que o utilizam.";
+                }
+
+                context.templateFrame.RemoveRange(context.templateFrame.Where(t => t.templateId == templateId));
                 context.template.Remove(context.template.Single(p => p.id == templateId));
                 context.SaveChanges();
                 return "Template Removido com sucesso !";

@@ -9,6 +9,7 @@ namespace DMMDigital.Views
         public int selectedTemplateId { get; set; }
 
         public event EventHandler eventGetTemplates;
+        public event EventHandler eventNewTemplate;
         public event EventHandler eventEditTemplate;
         public event EventHandler eventDeleteTemplate;
 
@@ -20,7 +21,10 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonNewTemplate.Click += delegate { new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView()); };
+            buttonNewTemplate.Click += delegate
+            {
+                eventNewTemplate?.Invoke(this, EventArgs.Empty);
+            };
 
             dataGridViewTemplate.CellContentClick += (s, e) =>
             {
@@ -53,11 +57,6 @@ namespace DMMDigital.Views
             delete.Frozen = true;
             delete.Image = Properties.Resources.icon_32x32_delete;
             delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-        }
-
-        public void buttonNewTemplateClick(object sender, EventArgs e)
-        {
-            new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
         }
     }
 }

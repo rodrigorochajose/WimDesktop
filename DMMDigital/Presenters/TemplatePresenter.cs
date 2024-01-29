@@ -22,6 +22,7 @@ namespace DMMDigital.Presenters
             templateBindingSource = new BindingSource();
             templateView = view;
 
+            templateView.eventNewTemplate += newTemplate;
             templateView.eventEditTemplate += editTemplate;
             templateView.eventDeleteTemplate += deleteTemplate;
 
@@ -30,6 +31,12 @@ namespace DMMDigital.Presenters
             getTemplates();
 
             (templateView as Form).ShowDialog();
+        }
+
+        private void newTemplate(object sender, EventArgs e)
+        {
+            new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
+            getTemplates();
         }
 
         private void deleteTemplate(object sender, EventArgs e)

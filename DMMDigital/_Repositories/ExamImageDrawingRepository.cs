@@ -15,7 +15,7 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                if (examImageDrawing.Count > 0) { 
+                if (examImageDrawing.Any()) { 
                     List<ExamImageDrawingModel> currentList = getExamImageDrawings(examImageDrawing[0].examId).ToList();
 
                     List<ExamImageDrawingModel> drawingsToDelete = currentList.ExceptBy(examImageDrawing, drawing => drawing.file).ToList();

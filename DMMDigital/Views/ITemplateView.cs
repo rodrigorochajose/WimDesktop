@@ -8,6 +8,7 @@ namespace DMMDigital.Views
         int selectedTemplateId { get; set; }
 
         event EventHandler eventGetTemplates;
+        event EventHandler eventNewTemplate;
         event EventHandler eventEditTemplate;
         event EventHandler eventDeleteTemplate;
 
