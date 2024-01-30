@@ -13,6 +13,7 @@ namespace DMMDigital.Presenters
     {
         private readonly ITemplateView templateView;
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly BindingSource templateBindingSource;
         private IEnumerable<TemplateModel> templateList;
 
@@ -22,8 +23,7 @@ namespace DMMDigital.Presenters
             templateBindingSource = new BindingSource();
             templateView = view;
 
-            templateView.eventNewTemplate += newTemplate;
-            templateView.eventEditTemplate += editTemplate;
+            templateView.showNewTemplateForm += showNewTemplateForm;
             templateView.eventDeleteTemplate += deleteTemplate;
 
             templateView.setTemplateList(templateBindingSource);
@@ -33,8 +33,9 @@ namespace DMMDigital.Presenters
             (templateView as Form).ShowDialog();
         }
 
-        private void newTemplate(object sender, EventArgs e)
+        private void showNewTemplateForm(object sender, EventArgs e)
         {
+            (templateView as Form).Close();
             new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
             getTemplates();
         }
@@ -49,17 +50,14 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void editTemplate(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void getTemplates()
         {
             templateList = templateRepository.getAllTemplates();
 
             if (templateList.Any())
             {
+                templateView.templateFrameList = templateFrameRepository.getAllTemplateFrame();
+
                 templateBindingSource.DataSource = templateList;
                 templateView.templateDataGridViewHandler();
             }

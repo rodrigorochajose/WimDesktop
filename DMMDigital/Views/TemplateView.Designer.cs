@@ -38,6 +38,7 @@
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panelTemplate = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +76,7 @@
             this.delete});
             this.dataGridViewTemplate.EnableHeadersVisualStyles = false;
             this.dataGridViewTemplate.GridColor = System.Drawing.Color.Silver;
-            this.dataGridViewTemplate.Location = new System.Drawing.Point(16, 84);
+            this.dataGridViewTemplate.Location = new System.Drawing.Point(21, 86);
             this.dataGridViewTemplate.MultiSelect = false;
             this.dataGridViewTemplate.Name = "dataGridViewTemplate";
             this.dataGridViewTemplate.ReadOnly = true;
@@ -126,17 +127,27 @@
             this.delete.ReadOnly = true;
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // panelTemplate
+            // 
+            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelTemplate.Location = new System.Drawing.Point(502, 147);
+            this.panelTemplate.Name = "panelTemplate";
+            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelTemplate.TabIndex = 46;
+            // 
             // TemplateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 463);
+            this.ClientSize = new System.Drawing.Size(877, 463);
+            this.Controls.Add(this.panelTemplate);
             this.Controls.Add(this.dataGridViewTemplate);
             this.Controls.Add(this.buttonNewTemplate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TemplateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Template";
+            this.Load += new System.EventHandler(this.templateViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).EndInit();
             this.ResumeLayout(false);
 
@@ -149,5 +160,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewImageColumn edit;
         private System.Windows.Forms.DataGridViewImageColumn delete;
+        private System.Windows.Forms.Panel panelTemplate;
     }
 }
