@@ -4,37 +4,8 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class ManipulatePatientView : Form, IManipulatePatientView
+    public partial class PatientHandlerView : Form, IPatientHandlerView
     {
-        private string action;
-
-        public ManipulatePatientView(string action)
-        {
-            InitializeComponent();
-            associateEvents();
-            if (action == "add")
-            {
-                this.action = action;
-                this.Text = "Cadastrar Paciente";
-                label1.Text = "Cadastrar Paciente";
-                label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
-            }
-        }
-        private void associateEvents()
-        {
-            buttonCancel.Click += delegate { Close(); };
-
-            buttonSave.Click += delegate
-            {
-                if (action == null)
-                {
-                    eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
-                } else
-                {
-                    eventAddNewPatient?.Invoke(this, EventArgs.Empty);
-                }
-            };
-        }
 
         public int patientId { get; set; }
 
@@ -70,5 +41,35 @@ namespace DMMDigital.Views
 
         public event EventHandler eventAddNewPatient;
         public event EventHandler eventSaveEditedPatient;
+
+        private string action;
+
+        public PatientHandlerView(string action)
+        {
+            InitializeComponent();
+            associateEvents();
+            if (action == "add")
+            {
+                this.action = action;
+                this.Text = "Cadastrar Paciente";
+                label1.Text = "Cadastrar Paciente";
+                label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
+            }
+        }
+        private void associateEvents()
+        {
+            buttonCancel.Click += delegate { Close(); };
+
+            buttonSave.Click += delegate
+            {
+                if (action == null)
+                {
+                    eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
+                } else
+                {
+                    eventAddNewPatient?.Invoke(this, EventArgs.Empty);
+                }
+            };
+        }
     }
 }

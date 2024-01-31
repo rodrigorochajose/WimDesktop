@@ -34,18 +34,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateView));
             this.buttonNewTemplate = new System.Windows.Forms.Button();
             this.dataGridViewTemplate = new System.Windows.Forms.DataGridView();
+            this.panelTemplate = new System.Windows.Forms.Panel();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edit = new System.Windows.Forms.DataGridViewImageColumn();
             this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panelTemplate = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonNewTemplate
             // 
             this.buttonNewTemplate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewTemplate.Location = new System.Drawing.Point(16, 34);
+            this.buttonNewTemplate.Location = new System.Drawing.Point(23, 23);
             this.buttonNewTemplate.Name = "buttonNewTemplate";
             this.buttonNewTemplate.Size = new System.Drawing.Size(112, 34);
             this.buttonNewTemplate.TabIndex = 1;
@@ -72,11 +71,10 @@
             this.dataGridViewTemplate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.name,
-            this.edit,
             this.delete});
             this.dataGridViewTemplate.EnableHeadersVisualStyles = false;
             this.dataGridViewTemplate.GridColor = System.Drawing.Color.Silver;
-            this.dataGridViewTemplate.Location = new System.Drawing.Point(21, 86);
+            this.dataGridViewTemplate.Location = new System.Drawing.Point(426, 23);
             this.dataGridViewTemplate.MultiSelect = false;
             this.dataGridViewTemplate.Name = "dataGridViewTemplate";
             this.dataGridViewTemplate.ReadOnly = true;
@@ -86,8 +84,16 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
             this.dataGridViewTemplate.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTemplate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTemplate.Size = new System.Drawing.Size(452, 350);
+            this.dataGridViewTemplate.Size = new System.Drawing.Size(352, 310);
             this.dataGridViewTemplate.TabIndex = 45;
+            // 
+            // panelTemplate
+            // 
+            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelTemplate.Location = new System.Drawing.Point(23, 108);
+            this.panelTemplate.Name = "panelTemplate";
+            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelTemplate.TabIndex = 46;
             // 
             // id
             // 
@@ -107,16 +113,6 @@
             this.name.ReadOnly = true;
             this.name.Width = 250;
             // 
-            // edit
-            // 
-            this.edit.Frozen = true;
-            this.edit.HeaderText = "Editar";
-            this.edit.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil2;
-            this.edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.edit.Name = "edit";
-            this.edit.ReadOnly = true;
-            this.edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
             // delete
             // 
             this.delete.Frozen = true;
@@ -127,22 +123,15 @@
             this.delete.ReadOnly = true;
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // panelTemplate
-            // 
-            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panelTemplate.Location = new System.Drawing.Point(502, 147);
-            this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
-            this.panelTemplate.TabIndex = 46;
-            // 
             // TemplateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 463);
-            this.Controls.Add(this.panelTemplate);
+            this.ClientSize = new System.Drawing.Size(800, 351);
             this.Controls.Add(this.dataGridViewTemplate);
+            this.Controls.Add(this.panelTemplate);
             this.Controls.Add(this.buttonNewTemplate);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TemplateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -156,10 +145,9 @@
         #endregion
         private System.Windows.Forms.Button buttonNewTemplate;
         private System.Windows.Forms.DataGridView dataGridViewTemplate;
+        private System.Windows.Forms.Panel panelTemplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewImageColumn edit;
         private System.Windows.Forms.DataGridViewImageColumn delete;
-        private System.Windows.Forms.Panel panelTemplate;
     }
 }

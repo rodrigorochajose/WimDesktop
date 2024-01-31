@@ -65,7 +65,7 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("add");
+            IPatientHandlerView manipulatePatientView = new PatientHandlerView("add");
             manipulatePatientView.eventAddNewPatient += addNewPatient;
             (manipulatePatientView as Form).ShowDialog();
             getPatients();
@@ -73,7 +73,7 @@ namespace DMMDigital.Presenters
 
         private void showEditPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("edit");
+            IPatientHandlerView manipulatePatientView = new PatientHandlerView("edit");
             manipulatePatientView.eventSaveEditedPatient += saveEditedPatient;
 
             selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
@@ -102,16 +102,16 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                selectedPatient.id = (sender as ManipulatePatientView).patientId;
-                selectedPatient.name = (sender as ManipulatePatientView).patientName;
-                selectedPatient.birthDate = (sender as ManipulatePatientView).patientBirthDate;
-                selectedPatient.phone = (sender as ManipulatePatientView).patientPhone;
-                selectedPatient.recommendation = (sender as ManipulatePatientView).patientRecommendation;
-                selectedPatient.observation = (sender as ManipulatePatientView).patientObservation;
+                selectedPatient.id = (sender as PatientHandlerView).patientId;
+                selectedPatient.name = (sender as PatientHandlerView).patientName;
+                selectedPatient.birthDate = (sender as PatientHandlerView).patientBirthDate;
+                selectedPatient.phone = (sender as PatientHandlerView).patientPhone;
+                selectedPatient.recommendation = (sender as PatientHandlerView).patientRecommendation;
+                selectedPatient.observation = (sender as PatientHandlerView).patientObservation;
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
                 MessageBox.Show(patientRepository.edit());
-                (sender as ManipulatePatientView).Close();
+                (sender as PatientHandlerView).Close();
             }
             catch (Exception ex)
             {
@@ -125,16 +125,16 @@ namespace DMMDigital.Presenters
             {
                 selectedPatient = new PatientModel
                 {
-                    name = (sender as ManipulatePatientView).patientName,
-                    birthDate = (sender as ManipulatePatientView).patientBirthDate,
-                    phone = (sender as ManipulatePatientView).patientPhone,
-                    recommendation = (sender as ManipulatePatientView).patientRecommendation,
-                    observation = (sender as ManipulatePatientView).patientObservation,
+                    name = (sender as PatientHandlerView).patientName,
+                    birthDate = (sender as PatientHandlerView).patientBirthDate,
+                    phone = (sender as PatientHandlerView).patientPhone,
+                    recommendation = (sender as PatientHandlerView).patientRecommendation,
+                    observation = (sender as PatientHandlerView).patientObservation,
                 };
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
                 MessageBox.Show(patientRepository.add(selectedPatient));
-                (sender as ManipulatePatientView).Close();
+                (sender as PatientHandlerView).Close();
             } 
             catch (Exception ex)
             {

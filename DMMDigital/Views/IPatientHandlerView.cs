@@ -2,7 +2,7 @@
 
 namespace DMMDigital.Views
 {
-    public interface IManipulatePatientView
+    public interface IPatientHandlerView
     {
         int patientId { get; set; }
         string patientName { get; set; }
@@ -13,6 +13,5 @@ namespace DMMDigital.Views
 
         event EventHandler eventAddNewPatient;
         event EventHandler eventSaveEditedPatient;
-
     }
 }

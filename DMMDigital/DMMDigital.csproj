@@ -109,7 +109,7 @@
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
-    <Compile Include="Presenters\ManipulateTemplatePresenter.cs" />
+    <Compile Include="Presenters\TemplateHandlerPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
     <Compile Include="Views\ChooseFramesToCompare.cs">
       <SubType>Form</SubType>
@@ -156,24 +156,24 @@
     <Compile Include="Views\IChooseTemplateExamView.cs" />
     <Compile Include="Views\IConfigView.cs" />
     <Compile Include="Views\IChoosePatientExamView.cs" />
-    <Compile Include="Views\IDialogGenerateTemplateView.cs" />
+    <Compile Include="Views\IDialogGenerateTemplate.cs" />
     <Compile Include="Views\IExamContainerView.cs" />
     <Compile Include="Views\IExamView.cs" />
     <Compile Include="Views\IExportExamView.cs" />
     <Compile Include="Views\IFilterView.cs" />
-    <Compile Include="Views\IManipulateTemplateView.cs" />
+    <Compile Include="Views\ITemplateHandlerView.cs" />
     <Compile Include="Views\ITemplateView.cs" />
-    <Compile Include="Views\ManipulatePatientView.cs">
+    <Compile Include="Views\PatientHandlerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ManipulatePatientView.Designer.cs">
-      <DependentUpon>ManipulatePatientView.cs</DependentUpon>
+    <Compile Include="Views\PatientHandlerView.Designer.cs">
+      <DependentUpon>PatientHandlerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DialogGenerateTemplateView.cs">
+    <Compile Include="Views\DialogGenerateTemplate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DialogGenerateTemplateView.Designer.cs">
-      <DependentUpon>DialogGenerateTemplateView.cs</DependentUpon>
+    <Compile Include="Views\DialogGenerateTemplate.Designer.cs">
+      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ExamView.cs">
       <SubType>Form</SubType>
@@ -181,11 +181,11 @@
     <Compile Include="Views\ExamView.Designer.cs">
       <DependentUpon>ExamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ManipulateTemplateView.cs">
+    <Compile Include="Views\TemplateHandlerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ManipulateTemplateView.Designer.cs">
-      <DependentUpon>ManipulateTemplateView.cs</DependentUpon>
+    <Compile Include="Views\TemplateHandlerView.Designer.cs">
+      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Frame.cs">
       <SubType>Component</SubType>
@@ -196,7 +196,7 @@
     <Compile Include="Views\ChoosePatientExamView.Designer.cs">
       <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IManipulatePatientView.cs" />
+    <Compile Include="Views\IPatientHandlerView.cs" />
     <Compile Include="Views\MenuView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,17 +279,17 @@
     <EmbeddedResource Include="Views\FilterView.resx">
       <DependentUpon>FilterView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ManipulatePatientView.resx">
-      <DependentUpon>ManipulatePatientView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PatientHandlerView.resx">
+      <DependentUpon>PatientHandlerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DialogGenerateTemplateView.resx">
-      <DependentUpon>DialogGenerateTemplateView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\DialogGenerateTemplate.resx">
+      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExamView.resx">
       <DependentUpon>ExamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ManipulateTemplateView.resx">
-      <DependentUpon>ManipulateTemplateView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateHandlerView.resx">
+      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.resx">
       <DependentUpon>MenuView.cs</DependentUpon>

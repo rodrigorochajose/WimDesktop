@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DMMDigital.Components;
+using DMMDigital.Models;
 
 namespace DMMDigital.Views
 {
-    public partial class ManipulateTemplateView : Form, IManipulateTemplateView
+    public partial class TemplateHandlerView : Form, ITemplateHandlerView
     {
+        public string templateName { get; set; }
+        public IList<Frame> framesList { get { return frames; } }
+
+        public event EventHandler eventSaveTemplate;
+
         int framesCounter = 0;
         Frame selectedFrame;
         List<Frame> frames = new List<Frame>();
 
-        public ManipulateTemplateView(string templateName, decimal rows, decimal columns, string orientation)
+        public TemplateHandlerView(string templateName, decimal rows, decimal columns, string orientation, List<TemplateFrameModel> templateFrames)
         {
             InitializeComponent();
+
+
+            Console.WriteLine(templateFrames);
 
             this.templateName = templateName;
             int height, width;
@@ -44,6 +53,7 @@ namespace DMMDigital.Views
             buttonRotateLeft.Click += delegate { rotateFrameLeft(); };
             buttonRotateRight.Click += delegate { rotateFrameRight(); };
         }
+
         private void createNewFrame(string orientation, int width, int height, int locationX, int locationY)
         {
             framesCounter++;
@@ -171,11 +181,6 @@ namespace DMMDigital.Views
                 drawImage(selectedFrame);
             }
         }
-
-        public string templateName { get; set; }
-        public IList<Frame> framesList { get { return frames; } }
-
-        public event EventHandler eventSaveTemplate;
     }
 }
 

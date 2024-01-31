@@ -55,7 +55,8 @@ namespace DMMDigital.Presenters
             {
                 try
                 {
-                    m_nId = Detector.CreateDetector(this, configRepository.getWorkdirPath());
+                    string path = configRepository.getWorkdirPath();
+                    m_nId = Detector.CreateDetector(this, path);
                     Detector d = Detector.DetectorList[m_nId];
                     d?.Connect();
                 }

@@ -76,7 +76,7 @@ namespace DMMDigital.Presenters
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
-            new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
+            new DialogGenerateTemplatePresenter(new DialogGenerateTemplate());
             chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
             chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }

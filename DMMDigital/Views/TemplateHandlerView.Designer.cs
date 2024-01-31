@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class ManipulateTemplateView
+    partial class TemplateHandlerView
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManipulateTemplateView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateHandlerView));
             this.buttonNewFrame = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxOrientation = new System.Windows.Forms.TextBox();

@@ -36,7 +36,7 @@ namespace DMMDigital.Presenters
         private void showNewTemplateForm(object sender, EventArgs e)
         {
             (templateView as Form).Close();
-            new DialogGenerateTemplatePresenter(new DialogGenerateTemplateView());
+            new DialogGenerateTemplatePresenter(new DialogGenerateTemplate());
             getTemplates();
         }
 

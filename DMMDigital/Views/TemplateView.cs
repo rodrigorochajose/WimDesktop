@@ -63,9 +63,6 @@ namespace DMMDigital.Views
         public void templateDataGridViewHandler()
         {
             dataGridViewTemplate.Columns["id"].Visible = false;
-            edit.Frozen = true;
-            edit.Image = Properties.Resources.icon_32x32_pencil2;
-            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
             delete.Frozen = true;
             delete.Image = Properties.Resources.icon_32x32_delete;
             delete.ImageLayout = DataGridViewImageCellLayout.Zoom;

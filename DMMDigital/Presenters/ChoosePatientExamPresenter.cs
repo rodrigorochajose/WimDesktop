@@ -43,7 +43,7 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IManipulatePatientView manipulatePatientView = new ManipulatePatientView("add");
+            IPatientHandlerView manipulatePatientView = new PatientHandlerView("add");
             manipulatePatientView.eventAddNewPatient += addNewPatient;
             (manipulatePatientView as Form).ShowDialog();
             carregarTodosPacientes();
@@ -75,17 +75,17 @@ namespace DMMDigital.Presenters
             {
                 PatientModel newPatient = new PatientModel
                 {
-                    id = (sender as ManipulatePatientView).patientId,
-                    name = (sender as ManipulatePatientView).patientName,
-                    birthDate = (sender as ManipulatePatientView).patientBirthDate,
-                    phone = (sender as ManipulatePatientView).patientPhone,
-                    recommendation = (sender as ManipulatePatientView).patientRecommendation,
-                    observation = (sender as ManipulatePatientView).patientObservation,
+                    id = (sender as PatientHandlerView).patientId,
+                    name = (sender as PatientHandlerView).patientName,
+                    birthDate = (sender as PatientHandlerView).patientBirthDate,
+                    phone = (sender as PatientHandlerView).patientPhone,
+                    recommendation = (sender as PatientHandlerView).patientRecommendation,
+                    observation = (sender as PatientHandlerView).patientObservation,
                 };
 
                 new Common.ModelDataValidation().Validate(newPatient);
                 MessageBox.Show(patientRepository.add(newPatient));
-                (sender as ManipulatePatientView).Close();
+                (sender as PatientHandlerView).Close();
             }
             catch (Exception ex)
             {

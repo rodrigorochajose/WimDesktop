@@ -1,4 +1,5 @@
 ﻿using DMMDigital._Repositories;
+using DMMDigital.Interface;
 using DMMDigital.Views;
 using System;
 using System.Windows.Forms;
@@ -7,32 +8,39 @@ namespace DMMDigital.Presenters
 {
     public class DialogGenerateTemplatePresenter
     {
-        private readonly IDialogGenerateTemplateView dialogGenerateTemplateView;
+        private readonly IDialogGenerateTemplate dialogGenerateTemplate;
 
-        public DialogGenerateTemplatePresenter(IDialogGenerateTemplateView view)
+        private readonly ITemplateRepository templateRepository = new TemplateRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+
+        public DialogGenerateTemplatePresenter(IDialogGenerateTemplate view)
         {
-            dialogGenerateTemplateView = view;
+            dialogGenerateTemplate = view;
 
-            dialogGenerateTemplateView.eventShowManipulateTemplateView += showManipulateTemplateView;
+            dialogGenerateTemplate.eventShowTemplateHandlerView += showTemplateHandlerView;
 
-            (dialogGenerateTemplateView as Form).ShowDialog();
+            dialogGenerateTemplate.setTemplateList(templateRepository.getAllTemplates());
+            dialogGenerateTemplate.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
+
+            (dialogGenerateTemplate as Form).ShowDialog();
         }
 
-        private void showManipulateTemplateView(object sender, EventArgs e)
+        private void showTemplateHandlerView(object sender, EventArgs e)
         {
             try
             {
-                new Common.ModelDataValidation().Validate(dialogGenerateTemplateView);
+                new Common.ModelDataValidation().Validate(dialogGenerateTemplate);
 
-                ManipulateTemplateView manipulateTemplateView = new ManipulateTemplateView(
-                    dialogGenerateTemplateView.templateName, 
-                    dialogGenerateTemplateView.rows, 
-                    dialogGenerateTemplateView.columns, 
-                    dialogGenerateTemplateView.orientation
+                TemplateHandlerView templateHandlerView = new TemplateHandlerView(
+                    dialogGenerateTemplate.templateName, 
+                    dialogGenerateTemplate.rows, 
+                    dialogGenerateTemplate.columns, 
+                    dialogGenerateTemplate.orientation,
+                    dialogGenerateTemplate.templateFrames
                 );
 
-                (dialogGenerateTemplateView as Form).Close();
-                new ManipulateTemplatePresenter(manipulateTemplateView, new TemplateRepository());
+                (dialogGenerateTemplate as Form).Close();
+                new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
                 
             } 
             catch (Exception ex)
