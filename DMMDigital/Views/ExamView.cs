@@ -288,11 +288,16 @@ namespace DMMDigital.Views
             if (indexFrame == frames.Count())
             {
                 indexFrame--;
-                selectFrame();
             }
+            selectFrame();
 
-            frames[indexFrame].Tag = Color.LimeGreen;
-            frames[indexFrame].Refresh();
+            Frame nextFrameToGetImage = frames[indexFrame];
+
+            nextFrameToGetImage.Invoke((MethodInvoker)(() =>
+            {
+                frames[indexFrame].Tag = Color.LimeGreen;
+                frames[indexFrame].Refresh();
+            }));
         }
 
         private void selectFrame()
@@ -302,7 +307,6 @@ namespace DMMDigital.Views
             selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
             selectedDrawingHistoryHandler();
-            
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -403,7 +407,7 @@ namespace DMMDigital.Views
             {
                 foreach (ToolStripButton tool in toolStrip.Items.OfType<ToolStripButton>())
                 {
-                    tool.Enabled = true;
+                    Invoke((MethodInvoker)(() => tool.Enabled = true));
                 }
             }
         }
@@ -998,19 +1002,21 @@ namespace DMMDigital.Views
 
         private void buttonRotateLeftClick(object sender, EventArgs e)
         {
-            Image currentFrame = mainPictureBox.Image;
-            currentFrame.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            mainPictureBox.Image = currentFrame;
-            frames[indexFrame - 1].Image = currentFrame;
+            Image currentImage = mainPictureBox.Image;
+            currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
+            currentImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+            mainPictureBox.Image = currentImage;
+            selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
         }
 
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
-            Image currentFrame = mainPictureBox.Image;
-            currentFrame.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            mainPictureBox.Image = currentFrame;
-            frames[indexFrame - 1].Image = currentFrame;
+            Image currentImage = mainPictureBox.Image;
+            currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            currentImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+            mainPictureBox.Image = currentImage;
+            selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
         }
 

@@ -661,14 +661,12 @@ namespace DMMDigital.Views
             // 
             // mainPictureBox
             // 
-            this.mainPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPictureBox.BackColor = System.Drawing.SystemColors.ControlText;
+            this.mainPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPictureBox.Location = new System.Drawing.Point(0, 0);
             this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.mainPictureBox.Name = "mainPictureBox";
-            this.mainPictureBox.Size = new System.Drawing.Size(1012, 617);
+            this.mainPictureBox.Size = new System.Drawing.Size(1012, 619);
             this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mainPictureBox.TabIndex = 0;
             this.mainPictureBox.TabStop = false;

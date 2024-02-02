@@ -7,10 +7,12 @@ namespace DMMDigital.Views
     public interface IDialogGenerateTemplate
     {
         string templateName { get; set; }
-        List<TemplateFrameModel> templateFrames { get; set; }
+        bool generateByTemplate { get; set; }
         int rows { get; set; }
         int columns { get; set; }
         string orientation { get; set; }
+        List<TemplateFrameModel> templateFrames { get; set; }
+        int selectedTemplateId { get; set; }
 
         event EventHandler eventShowTemplateHandlerView;
 

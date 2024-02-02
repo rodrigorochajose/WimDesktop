@@ -10,13 +10,17 @@ namespace DMMDigital.Views
 {
     public partial class DialogGenerateTemplate : Form, IDialogGenerateTemplate
     {
-        public List<TemplateFrameModel> templateFrames { get; set; }
-
         [Required(ErrorMessage = "Nome do Template é obrigatório.")]
         public string templateName 
         { 
             get { return textBoxTemplateName.Text; } 
             set { textBoxTemplateName.Text = value; } 
+        }
+
+        public bool generateByTemplate
+        { 
+            get { return checkBoxGenerateMode.Checked; }
+            set { checkBoxGenerateMode.Checked = value; }
         }
 
         public int rows
@@ -35,6 +39,14 @@ namespace DMMDigital.Views
         { 
             get { return listBoxOrientation.Text; }
             set { listBoxOrientation.Text = value; } 
+        }
+
+        public List<TemplateFrameModel> templateFrames { get; set; }
+
+        public int selectedTemplateId
+        {
+            get { return int.Parse(comboBoxTemplate.SelectedValue.ToString()); }
+            set { comboBoxTemplate.SelectedValue = value; }
         }
 
         public event EventHandler eventShowTemplateHandlerView;

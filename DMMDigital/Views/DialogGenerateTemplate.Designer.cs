@@ -198,10 +198,11 @@
             // 
             // comboBoxTemplate
             // 
+            this.comboBoxTemplate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxTemplate.FormattingEnabled = true;
-            this.comboBoxTemplate.Location = new System.Drawing.Point(70, 21);
+            this.comboBoxTemplate.Location = new System.Drawing.Point(75, 20);
             this.comboBoxTemplate.Name = "comboBoxTemplate";
-            this.comboBoxTemplate.Size = new System.Drawing.Size(204, 21);
+            this.comboBoxTemplate.Size = new System.Drawing.Size(204, 23);
             this.comboBoxTemplate.TabIndex = 16;
             // 
             // label5

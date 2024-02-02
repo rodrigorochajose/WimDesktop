@@ -14,19 +14,17 @@ namespace DMMDigital.Views
 
         public event EventHandler eventSaveTemplate;
 
-        int framesCounter = 0;
-        Frame selectedFrame;
-        List<Frame> frames = new List<Frame>();
+        private int framesCounter = 0;
+        private Frame selectedFrame;
+        private List<Frame> frames = new List<Frame>();
 
-        public TemplateHandlerView(string templateName, decimal rows, decimal columns, string orientation, List<TemplateFrameModel> templateFrames)
+        public TemplateHandlerView(string templateName, decimal rows, decimal columns, string orientation)
         {
             InitializeComponent();
 
-
-            Console.WriteLine(templateFrames);
-
             this.templateName = templateName;
-            int height, width;
+            int height;
+            int width;
 
             if (orientation.Contains("Vertical"))
             {
@@ -47,7 +45,45 @@ namespace DMMDigital.Views
                 }
             }
 
-            buttonNewFrame.Click += delegate { createNewFrame(orientation, width, height, 0, 0); };
+            associateEvents();
+        }
+
+        public TemplateHandlerView(string templateName, List<TemplateFrameModel> templateFrames)
+        {
+            InitializeComponent();
+            this.templateName = templateName;
+
+            foreach (TemplateFrameModel templateFrame in templateFrames)
+            {
+                int height;
+                int width;
+
+                if (templateFrame.orientation.Contains("Vertical"))
+                {
+                    height = 70;
+                    width = 50;
+                }
+                else
+                {
+                    height = 50;
+                    width = 70;
+                }
+
+                createNewFrame(
+                    templateFrame.orientation,
+                    width,
+                    height,
+                    templateFrame.locationX,
+                    templateFrame.locationY
+                );
+            }
+
+            associateEvents();
+        }
+
+        private void associateEvents()
+        {
+            buttonNewFrame.Click += delegate { createNewFrame("Vertical Cima", 50, 70, 0, 0); };
             buttonDeleteFrame.Click += delegate { deleteFrame(); };
             buttonSaveTemplate.Click += delegate { eventSaveTemplate?.Invoke(this, EventArgs.Empty); };
             buttonRotateLeft.Click += delegate { rotateFrameLeft(); };

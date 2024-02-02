@@ -1,7 +1,10 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface;
+using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
@@ -31,16 +34,30 @@ namespace DMMDigital.Presenters
             {
                 new Common.ModelDataValidation().Validate(dialogGenerateTemplate);
 
-                TemplateHandlerView templateHandlerView = new TemplateHandlerView(
-                    dialogGenerateTemplate.templateName, 
-                    dialogGenerateTemplate.rows, 
-                    dialogGenerateTemplate.columns, 
-                    dialogGenerateTemplate.orientation,
-                    dialogGenerateTemplate.templateFrames
-                );
+                if (dialogGenerateTemplate.generateByTemplate)
+                {
+                    List<TemplateFrameModel> selectedFrames = dialogGenerateTemplate.templateFrames.Where(t => t.templateId == dialogGenerateTemplate.selectedTemplateId).ToList();
 
-                (dialogGenerateTemplate as Form).Close();
-                new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
+                    TemplateHandlerView templateHandlerView = new TemplateHandlerView(
+                        dialogGenerateTemplate.templateName,
+                        selectedFrames
+                    );
+
+                    (dialogGenerateTemplate as Form).Close();
+                    new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
+                }
+                else
+                {
+                    TemplateHandlerView templateHandlerView = new TemplateHandlerView(
+                        dialogGenerateTemplate.templateName,
+                        dialogGenerateTemplate.rows,
+                        dialogGenerateTemplate.columns,
+                        dialogGenerateTemplate.orientation
+                    );
+
+                    (dialogGenerateTemplate as Form).Close();
+                    new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
+                }
                 
             } 
             catch (Exception ex)

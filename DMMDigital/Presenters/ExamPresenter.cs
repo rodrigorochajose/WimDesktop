@@ -173,6 +173,7 @@ namespace DMMDigital.Presenters
                         switch (nParam1)
                         {
                             case SdkInterface.Cmd_Connect:
+                                //MessageBox.Show("Sensor Conectado");
                                 examView.detectorConnected = true;
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
@@ -188,7 +189,7 @@ namespace DMMDigital.Presenters
                                 MessageBox.Show("Cmd_ClearAcq Ack succeed.");
                                 break;
                             case SdkInterface.Cmd_StartAcq:
-                                examView.loadImageOnMainPictureBox();
+                                //MessageBox.Show("Começando captura....");
                                 break;
                             case SdkInterface.Cmd_StopAcq:
                                 MessageBox.Show("Cmd_StopAcq Ack succeed.");
@@ -234,7 +235,7 @@ namespace DMMDigital.Presenters
                                         break;
                                     case SdkInterface.Err_CommDeviceNotFound:
                                         //examView.iconSensorConnection = Properties.Resources.icon_32x32_red;
-                                        //MessageBox.Show("Sensor não localizado!");
+                                        MessageBox.Show("Sensor não localizado!");
                                         break;
                                     case SdkInterface.Err_CommDeviceOccupied:
                                         MessageBox.Show("Device is beeing occupied!");
@@ -261,7 +262,7 @@ namespace DMMDigital.Presenters
                             MessageBox.Show("Cmd_StopAcq Ack failed.");
                             break;
                         case SdkInterface.Cmd_Disconnect:
-                            //MessageBox.Show("Cmd_Disconnect Ack failed.");
+                            MessageBox.Show("Cmd_Disconnect Ack failed.");
                             break;
                         case SdkInterface.Cmd_ReadTemperature:
                             MessageBox.Show("Cmd_ReadTemperature Ack failed.");
@@ -381,6 +382,7 @@ namespace DMMDigital.Presenters
 
                 stream.Close();
             }
+            examView.loadImageOnMainPictureBox();
         }
 
         private static System.Windows.Media.PixelFormat ConvertBmpPixelFormat(System.Drawing.Imaging.PixelFormat pixelformat)
