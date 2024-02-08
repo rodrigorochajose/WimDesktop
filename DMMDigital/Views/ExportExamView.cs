@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Components;
+using DMMDigital.Models.Drawings;
 
 namespace DMMDigital.Views
 {
@@ -134,11 +134,17 @@ namespace DMMDigital.Views
             }
             else
             {
-                List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
+                string path = Path.Combine(pathToExport, sessionName);
+                Directory.CreateDirectory(path);
+
+                ImageFormat format = ImageFormat.Bmp;
+                string extension = ".bmp";
 
                 List<string> files = new List<string>();
                 List<string> newFiles = new List<string>();
 
+                List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
+                
                 if (checkBoxExportOriginalImage.Checked)
                 {
                     foreach (CheckBox cb in checkBoxes)
@@ -152,13 +158,19 @@ namespace DMMDigital.Views
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
-                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-edited.png"));
-                        newFiles.Add($"{cb.Tag}-edited");
+                        string imagePath = Path.Combine(pathImages, $"{cb.Tag}-edited.png");
+
+                        if (!File.Exists(imagePath))
+                        {
+                            generateEditedImage(cb.Tag.ToString(), pathImages);
+                        }
+
+                        files.Add(imagePath);
+                        newFiles.Add($"{cb.Tag}-edited.png");
                     }
                 }
 
-                ImageFormat format = ImageFormat.Bmp;
-                string extension = "bmp";
+
                 switch (comboBoxFormat.SelectedItem)
                 {
                     case "TIFF":
@@ -174,12 +186,18 @@ namespace DMMDigital.Views
                         extension = ".png";
                         break;
                     case "DICOM":
-                        // implementar lógica DICOM
-                        break;
-                }
+                        extension = ".dicom";
+                        for (int counter = 0; counter < files.Count; counter++)
+                        {
+                            var image = Aspose.Imaging.Image.Load(files[counter]);
+                            var exportOptions = new Aspose.Imaging.ImageOptions.DicomOptions();
 
-                string path = Path.Combine(pathToExport, sessionName);
-                Directory.CreateDirectory(path);
+                            image.Save(Path.Combine(path, newFiles[counter] + extension), exportOptions);
+                        }
+                        MessageBox.Show("Exportado com sucesso!");
+                        Close();
+                        return;
+                }
 
                 for (int counter = 0; counter < files.Count; counter++) 
                 {
@@ -191,6 +209,29 @@ namespace DMMDigital.Views
                 Close();
             }
         }
+
+        private void generateEditedImage(string frameId, string path)
+        {
+            Bitmap mainImage = new Bitmap(Path.Combine(path, $"{frameId}-original.png"));
+
+            List<string> imageDrawings = Directory.GetFiles(path).Where(f => f.Contains($"F{frameId}-")).ToList();
+
+            using (Graphics graphics = Graphics.FromImage(mainImage))
+            {
+                foreach (string drawing in imageDrawings)
+                {
+                    graphics.DrawImage(new Bitmap(drawing), 0, 0, mainImage.Width, mainImage.Height);
+                }
+            }
+
+            mainImage.Save(Path.Combine(path, $"{frameId}-edited.png"), ImageFormat.Png);
+        }
+
+            //Graphics g = Graphics.FromImage(mainPictureBox.Image);
+            //selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => g.DrawImage((d as ImageDrawed).img, 0, 0, mainPictureBox.Image.Width, mainPictureBox.Image.Height));
+
+
+            //mainPictureBox.Image.Save(@"C:\Users\USER\Desktop\img.tiff");
 
         private List<CheckBox> getAllFrameCheckBox()
         {

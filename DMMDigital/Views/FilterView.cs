@@ -62,7 +62,7 @@ namespace DMMDigital.Views
 
             if (checkBoxPositiveNegative.Checked)
             {
-                image = invertColors(image.Clone() as Bitmap);
+                image = invertColors(new Bitmap(image));
             }
 
             editedImage = image;

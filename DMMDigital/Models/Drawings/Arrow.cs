@@ -17,15 +17,20 @@ namespace DMMDigital.Models.Drawings
 
         public void drawPreview(Graphics g)
         {
-            Pen pen = new Pen(drawingColor, drawingSize);
-            pen.CustomEndCap = new AdjustableArrowCap(5, 5);
+            Pen pen = new Pen(drawingColor, drawingSize)
+            {
+                CustomEndCap = new AdjustableArrowCap(5, 5)
+            };
+
             g.DrawLine(pen, initialPosition, finalPosition);
         }
 
         public void draw(Graphics g)
         {
-            Pen pen = new Pen(drawingColor, drawingSize);
-            pen.CustomEndCap = new AdjustableArrowCap(5, 5);
+            Pen pen = new Pen(drawingColor, drawingSize)
+            {
+                CustomEndCap = new AdjustableArrowCap(5, 5)
+            };
 
             graphicsPath = new GraphicsPath();
             graphicsPath.AddLine(initialPosition, finalPosition);

@@ -11,6 +11,7 @@ using DMMDigital.Models.Drawings;
 using DMMDigital.Components;
 using DMMDigital._Repositories;
 using DMMDigital.Presenters;
+using Emgu.CV.Reg;
 
 namespace DMMDigital.Views
 {
@@ -237,7 +238,7 @@ namespace DMMDigital.Views
         private void getDrawingsToSaveOnDatabase()
         {
             examImageDrawings = new List<ExamImageDrawingModel>();
-            List<string> files = Directory.GetFiles(examPath).Where(f => !f.EndsWith("original.png")).ToList();
+            List<string> files = Directory.GetFiles(examPath).Where(f => !f.EndsWith("original.png") && !f.EndsWith("edited.png")).ToList();
 
             foreach (string file in files)
             {
@@ -380,20 +381,10 @@ namespace DMMDigital.Views
                 mainPictureBox.Invoke((MethodInvoker)(() =>
                 {
                     Size rectangleSize;
-                    if (selectedFrame.orientation.Contains("Horizontal"))
-                    {
-                        rectangleSize = new Size(
-                            mainPictureBoxOriginalSize.Width,
-                            mainPictureBoxOriginalSize.Height
-                        );
-                    }
-                    else
-                    {
-                        rectangleSize = new Size(
-                            mainPictureBoxOriginalSize.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                            mainPictureBoxOriginalSize.Height
-                        );
-                    }
+                    rectangleSize = new Size(
+                        mainPictureBoxOriginalSize.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                        mainPictureBoxOriginalSize.Height
+                    );
 
                     mainPictureBox.Size = rectangleSize;
                     mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
