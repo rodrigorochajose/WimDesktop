@@ -138,7 +138,7 @@
             // 
             // buttonBack
             // 
-            this.buttonBack.Image = global::DMMDigital.Properties.Resources.left_arrow;
+            this.buttonBack.Image = global::DMMDigital.Properties.Resources.icon_32x32_left_arrow;
             this.buttonBack.Location = new System.Drawing.Point(12, 12);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(46, 35);

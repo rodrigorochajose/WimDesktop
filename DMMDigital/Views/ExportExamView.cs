@@ -145,32 +145,6 @@ namespace DMMDigital.Views
 
                 List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
                 
-                if (checkBoxExportOriginalImage.Checked)
-                {
-                    foreach (CheckBox cb in checkBoxes)
-                    {
-                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-original.png"));
-                        newFiles.Add($"{cb.Tag}-original");
-                    }
-                }
-
-                if (checkBoxExportEditedImage.Checked)
-                {
-                    foreach (CheckBox cb in checkBoxes)
-                    {
-                        string imagePath = Path.Combine(pathImages, $"{cb.Tag}-edited.png");
-
-                        if (!File.Exists(imagePath))
-                        {
-                            generateEditedImage(cb.Tag.ToString(), pathImages);
-                        }
-
-                        files.Add(imagePath);
-                        newFiles.Add($"{cb.Tag}-edited.png");
-                    }
-                }
-
-
                 switch (comboBoxFormat.SelectedItem)
                 {
                     case "TIFF":
@@ -187,17 +161,48 @@ namespace DMMDigital.Views
                         break;
                     case "DICOM":
                         extension = ".dicom";
-                        for (int counter = 0; counter < files.Count; counter++)
-                        {
-                            var image = Aspose.Imaging.Image.Load(files[counter]);
-                            var exportOptions = new Aspose.Imaging.ImageOptions.DicomOptions();
-
-                            image.Save(Path.Combine(path, newFiles[counter] + extension), exportOptions);
-                        }
-                        MessageBox.Show("Exportado com sucesso!");
-                        Close();
-                        return;
+                        break;
+                        
                 }
+
+                if (checkBoxExportOriginalImage.Checked)
+                {
+                    foreach (CheckBox cb in checkBoxes)
+                    {
+                        string originalFileName = $"{cb.Tag}-original.png";
+                        files.Add(Path.Combine(pathImages, originalFileName));
+                        newFiles.Add(originalFileName);
+                    }
+                }
+
+                if (checkBoxExportEditedImage.Checked)
+                {
+                    foreach (CheckBox cb in checkBoxes)
+                    {
+                        generateEditedImage(cb.Tag.ToString(), pathImages, format, extension);
+
+                        string editedFileName = $"{cb.Tag}-edited{extension}";
+                        string imagePath = Path.Combine(pathImages, editedFileName);
+
+                        files.Add(imagePath);
+                        newFiles.Add(editedFileName);
+                    }
+                }
+
+                if (extension == ".dicom")
+                {
+                    for (int counter = 0; counter < files.Count; counter++)
+                    {
+                        var image = Aspose.Imaging.Image.Load(files[counter]);
+                        var exportOptions = new Aspose.Imaging.ImageOptions.DicomOptions();
+
+                        image.Save(Path.Combine(path, newFiles[counter] + extension), exportOptions);
+                    }
+                    MessageBox.Show("Exportado com sucesso!");
+                    Close();
+                    return;
+                }
+
 
                 for (int counter = 0; counter < files.Count; counter++) 
                 {
@@ -210,9 +215,12 @@ namespace DMMDigital.Views
             }
         }
 
-        private void generateEditedImage(string frameId, string path)
+        private void generateEditedImage(string frameId, string path, ImageFormat format, string extension)
         {
-            Bitmap mainImage = new Bitmap(Path.Combine(path, $"{frameId}-original.png"));
+            string originalFileName = $"{frameId}-original.png";
+            string editedFileName = $"{frameId}-edited{extension}";
+
+            Bitmap mainImage = new Bitmap(Path.Combine(path, originalFileName));
 
             List<string> imageDrawings = Directory.GetFiles(path).Where(f => f.Contains($"F{frameId}-")).ToList();
 
@@ -224,14 +232,8 @@ namespace DMMDigital.Views
                 }
             }
 
-            mainImage.Save(Path.Combine(path, $"{frameId}-edited.png"), ImageFormat.Png);
+            mainImage.Save(Path.Combine(path, editedFileName), format);
         }
-
-            //Graphics g = Graphics.FromImage(mainPictureBox.Image);
-            //selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => g.DrawImage((d as ImageDrawed).img, 0, 0, mainPictureBox.Image.Width, mainPictureBox.Image.Height));
-
-
-            //mainPictureBox.Image.Save(@"C:\Users\USER\Desktop\img.tiff");
 
         private List<CheckBox> getAllFrameCheckBox()
         {

@@ -67,7 +67,7 @@
             this.buttonBack.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonBack.FlatAppearance.BorderSize = 0;
             this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBack.Image = global::DMMDigital.Properties.Resources.left_arrow;
+            this.buttonBack.Image = global::DMMDigital.Properties.Resources.icon_32x32_left_arrow;
             this.buttonBack.Location = new System.Drawing.Point(0, 0);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(42, 41);

@@ -39,7 +39,7 @@ namespace DMMDigital.Views
         {
             dataGridViewPatient.Columns["id"].Visible = false;
             edit.Frozen = true;
-            edit.Image = Properties.Resources.icon_32x32_pencil2;
+            edit.Image = Properties.Resources.icon_32x32_pencil;
             edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
             delete.Frozen = true;
             delete.Image = Properties.Resources.icon_32x32_delete;

@@ -111,6 +111,11 @@
     <Compile Include="Presenters\ExamPresenter.cs" />
     <Compile Include="Presenters\TemplateHandlerPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChooseFramesToCompare.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,11 +323,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -438,12 +438,6 @@
     <None Include="Resources\icon-32x32-text.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\move.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon-32x32-ruler.png" />
   </ItemGroup>
   <ItemGroup>
@@ -468,13 +462,7 @@
     <None Include="Resources\icon-16x16-trash.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\left-arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon-32x32-cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon-32x32-templateIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

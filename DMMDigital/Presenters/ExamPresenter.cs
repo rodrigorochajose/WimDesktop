@@ -234,8 +234,7 @@ namespace DMMDigital.Presenters
                                         MessageBox.Show("Image Chanel isn't ok!");
                                         break;
                                     case SdkInterface.Err_CommDeviceNotFound:
-                                        //examView.iconSensorConnection = Properties.Resources.icon_32x32_red;
-                                        MessageBox.Show("Sensor não localizado!");
+                                        //MessageBox.Show("Sensor não localizado!");
                                         break;
                                     case SdkInterface.Err_CommDeviceOccupied:
                                         MessageBox.Show("Device is beeing occupied!");

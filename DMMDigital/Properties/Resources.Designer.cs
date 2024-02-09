@@ -63,16 +63,6 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap arrow {
-            get {
-                object obj = ResourceManager.GetObject("arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap banner_principal_f3639437 {
             get {
                 object obj = ResourceManager.GetObject("banner_principal_f3639437", resourceCulture);
@@ -85,7 +75,17 @@ namespace DMMDigital.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap icon_16x16_trash {
             get {
-                object obj = ResourceManager.GetObject("icon-16x16-trash", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_16x16_trash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_arrow {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -105,7 +105,7 @@ namespace DMMDigital.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_cancel {
             get {
-                object obj = ResourceManager.GetObject("icon-32x32-cancel", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_32x32_cancel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,6 +193,26 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_left_arrow {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_left_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_move {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_move", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_patients {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_patients", resourceCulture);
@@ -203,9 +223,9 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_32x32_pencil2 {
+        internal static System.Drawing.Bitmap icon_32x32_pencil {
             get {
-                object obj = ResourceManager.GetObject("icon_32x32_pencil2", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_32x32_pencil", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +323,9 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_32x32_templateIcon {
+        internal static System.Drawing.Bitmap icon_32x32_template {
             get {
-                object obj = ResourceManager.GetObject("icon-32x32-templateIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_32x32_template", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -337,26 +357,6 @@ namespace DMMDigital.Properties {
             get {
                 object obj = ResourceManager.GetObject("icon_96x96_transparent", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap left_arrow {
-            get {
-                object obj = ResourceManager.GetObject("left-arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap move {
-            get {
-                object obj = ResourceManager.GetObject("move", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

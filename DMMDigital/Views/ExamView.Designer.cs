@@ -449,7 +449,7 @@ namespace DMMDigital.Views
             // 
             this.buttonMoveDrawing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonMoveDrawing.Enabled = false;
-            this.buttonMoveDrawing.Image = global::DMMDigital.Properties.Resources.move;
+            this.buttonMoveDrawing.Image = global::DMMDigital.Properties.Resources.icon_32x32_move;
             this.buttonMoveDrawing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonMoveDrawing.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonMoveDrawing.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -539,7 +539,7 @@ namespace DMMDigital.Views
             // 
             this.buttonFreeDraw.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonFreeDraw.Enabled = false;
-            this.buttonFreeDraw.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil2;
+            this.buttonFreeDraw.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
             this.buttonFreeDraw.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonFreeDraw.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonFreeDraw.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -569,7 +569,7 @@ namespace DMMDigital.Views
             // 
             this.buttonArrow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonArrow.Enabled = false;
-            this.buttonArrow.Image = global::DMMDigital.Properties.Resources.arrow;
+            this.buttonArrow.Image = global::DMMDigital.Properties.Resources.icon_32x32_arrow;
             this.buttonArrow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonArrow.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonArrow.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);

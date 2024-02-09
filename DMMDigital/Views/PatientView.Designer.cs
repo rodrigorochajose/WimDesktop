@@ -150,7 +150,7 @@
             // 
             this.edit.Frozen = true;
             this.edit.HeaderText = "Editar";
-            this.edit.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil2;
+            this.edit.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
             this.edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.edit.Name = "edit";
             this.edit.ReadOnly = true;

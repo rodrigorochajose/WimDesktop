@@ -78,7 +78,7 @@
             // buttonTemplate
             // 
             this.buttonTemplate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_templateIcon;
+            this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_template;
             this.buttonTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonTemplate.Name = "buttonTemplate";
             this.buttonTemplate.Size = new System.Drawing.Size(125, 36);
