@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -55,10 +56,14 @@ namespace DMMDigital.Presenters
             {
                 try
                 {
-                    string path = configRepository.getWorkdirPath();
-                    m_nId = Detector.CreateDetector(this, path);
-                    Detector d = Detector.DetectorList[m_nId];
-                    d?.Connect();
+                    string path = getSensorPath();
+
+                    if (path.Any())
+                    {
+                        m_nId = Detector.CreateDetector(this, path);
+                        Detector d = Detector.DetectorList[m_nId];
+                        d?.Connect();
+                    }
                 }
                 catch
                 {
@@ -161,6 +166,42 @@ namespace DMMDigital.Presenters
         private void getPatient(object sender, EventArgs e)
         {
             examView.patient = patientRepository.getPatientById(examView.patient.id);
+        }
+
+        private string getSensorPath()
+        {
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
+            {
+                ManagementObject sensorUsbDevice = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
+
+                if (sensorUsbDevice != null)
+                {
+                    string deviceConnectionString = sensorUsbDevice.ToString();
+                    int startIndex = deviceConnectionString.IndexOf("IRAY");
+
+                    if (startIndex != -1)
+                    {
+                        string extractedString = deviceConnectionString.Substring(startIndex);
+
+                        string[] parts = extractedString.Split('\\');
+
+                        string desiredSubstring = parts.FirstOrDefault(s => s.StartsWith("IRAY"));
+
+                        desiredSubstring = desiredSubstring.TrimEnd('"');
+
+                        string[] directories = Directory.GetDirectories("C:\\IRay\\IRayIntraoral_x86\\work_dir");
+
+                        foreach (string directory in directories)
+                        {
+                            if (directory.ToUpper().Contains(desiredSubstring))
+                            {
+                                return directory;
+                            }
+                        }
+                    }
+                }
+                return "";
+            }
         }
 
         void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,

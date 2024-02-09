@@ -238,7 +238,7 @@ namespace DMMDigital.Views
         private void getDrawingsToSaveOnDatabase()
         {
             examImageDrawings = new List<ExamImageDrawingModel>();
-            List<string> files = Directory.GetFiles(examPath).Where(f => !f.EndsWith("original.png") && !f.EndsWith("edited.png")).ToList();
+            List<string> files = Directory.GetFiles(examPath).Where(f => !f.Contains("original") && !f.Contains("edited")).ToList();
 
             foreach (string file in files)
             {
