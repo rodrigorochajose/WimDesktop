@@ -2,6 +2,7 @@
 using DMMDigital.Interface;
 using DMMDigital.Interface.iRay;
 using DMMDigital.Models;
+using DMMDigital.Models.Drawings;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
@@ -172,31 +173,52 @@ namespace DMMDigital.Presenters
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
             {
-                ManagementObject sensorUsbDevice = searcher.Get().Cast<ManagementObject>().FirstOrDefault();
+                List<ManagementObject> sensorUsbDevices = searcher.Get().Cast<ManagementObject>().ToList();
+                List<string> availableSensors = new List<string>();
 
-                if (sensorUsbDevice != null)
+                if (sensorUsbDevices.Any())
                 {
-                    string deviceConnectionString = sensorUsbDevice.ToString();
-                    int startIndex = deviceConnectionString.IndexOf("IRAY");
-
-                    if (startIndex != -1)
+                    foreach (ManagementObject sensorUsbDevice in sensorUsbDevices)
                     {
-                        string extractedString = deviceConnectionString.Substring(startIndex);
+                        string deviceConnectionString = sensorUsbDevice.ToString();
 
-                        string[] parts = extractedString.Split('\\');
+                        int startIndex = deviceConnectionString.IndexOf("IRAY");
 
-                        string desiredSubstring = parts.FirstOrDefault(s => s.StartsWith("IRAY"));
-
-                        desiredSubstring = desiredSubstring.TrimEnd('"');
-
-                        string[] directories = Directory.GetDirectories("C:\\IRay\\IRayIntraoral_x86\\work_dir");
-
-                        foreach (string directory in directories)
+                        if (startIndex != -1)
                         {
-                            if (directory.ToUpper().Contains(desiredSubstring))
-                            {
-                                return directory;
-                            }
+                            string extractedString = deviceConnectionString.Substring(startIndex);
+
+                            string[] parts = extractedString.Split('\\');
+
+                            string desiredSubstring = parts.FirstOrDefault(s => s.StartsWith("IRAY"));
+
+                            desiredSubstring = desiredSubstring.TrimEnd('"');
+
+                            availableSensors.Add(desiredSubstring);
+                        }
+                    }
+                    string selectedSensor = "";
+
+                    if (availableSensors.Count > 1)
+                    {
+                        using (Form dialogChooseSensor = new DialogChooseSensor(availableSensors))
+                        {
+                            dialogChooseSensor.ShowDialog();
+                            selectedSensor = (dialogChooseSensor as DialogChooseSensor).selectedSensor;
+                        }
+                    } 
+                    else
+                    {
+                        selectedSensor = availableSensors.First();
+                    }
+
+                    string[] directories = Directory.GetDirectories("C:\\IRay\\IRayIntraoral_x86\\work_dir");
+
+                    foreach (string directory in directories)
+                    {
+                        if (directory.ToUpper().Contains(selectedSensor))
+                        {
+                            return directory;
                         }
                     }
                 }

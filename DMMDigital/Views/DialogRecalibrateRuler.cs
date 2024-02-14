@@ -7,9 +7,11 @@ namespace DMMDigital.Views
     {
         public double rulerValue;
 
-        public DialogRecalibrateRuler()
+        public DialogRecalibrateRuler(float lineLength)
         {
             InitializeComponent();
+
+            label.Text = $"Digite o valor de {lineLength:0.00} pixels em milímetros";
         }
 
         private void buttonConfirmClick(object sender, EventArgs e)

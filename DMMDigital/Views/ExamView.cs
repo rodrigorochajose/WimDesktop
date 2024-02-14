@@ -1403,7 +1403,7 @@ namespace DMMDigital.Views
 
                         if (recalibrate)
                         {
-                            using (Form dialogRecalibrateRuler = new DialogRecalibrateRuler())
+                            using (Form dialogRecalibrateRuler = new DialogRecalibrateRuler((currentDrawing as Ruler).lineLength.Last()))
                             {
                                 var result = dialogRecalibrateRuler.ShowDialog();
                                 if (result == DialogResult.OK)
