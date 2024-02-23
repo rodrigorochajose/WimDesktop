@@ -101,7 +101,7 @@ namespace DMMDigital.Presenters
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath = examView.examPath + $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
+                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
                 examView.templateId = exam.templateId;
                 examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
@@ -173,20 +173,17 @@ namespace DMMDigital.Presenters
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
             {
-                List<ManagementObject> sensorUsbDevices = searcher.Get().Cast<ManagementObject>().ToList();
-                List<string> availableSensors = new List<string>();
+                List<string> sensorUsbDevices = searcher.Get().Cast<string>().ToList();
 
                 if (sensorUsbDevices.Any())
                 {
-                    foreach (ManagementObject sensorUsbDevice in sensorUsbDevices)
+                    foreach (string sensorUsbDevice in sensorUsbDevices)
                     {
-                        string deviceConnectionString = sensorUsbDevice.ToString();
-
-                        int startIndex = deviceConnectionString.IndexOf("IRAY");
+                        int startIndex = sensorUsbDevice.IndexOf("IRAY");
 
                         if (startIndex != -1)
                         {
-                            string extractedString = deviceConnectionString.Substring(startIndex);
+                            string extractedString = sensorUsbDevice.Substring(startIndex);
 
                             string[] parts = extractedString.Split('\\');
 
@@ -194,22 +191,19 @@ namespace DMMDigital.Presenters
 
                             desiredSubstring = desiredSubstring.TrimEnd('"');
 
-                            availableSensors.Add(desiredSubstring);
+                            sensorUsbDevices.Add(desiredSubstring);
+                            sensorUsbDevices.Remove(sensorUsbDevice);
                         }
                     }
-                    string selectedSensor = "";
+                    string selectedSensor = sensorUsbDevices.First();
 
-                    if (availableSensors.Count > 1)
+                    if (sensorUsbDevices.Count > 1)
                     {
-                        using (Form dialogChooseSensor = new DialogChooseSensor(availableSensors))
+                        using (Form dialogChooseSensor = new DialogChooseSensor(sensorUsbDevices))
                         {
                             dialogChooseSensor.ShowDialog();
                             selectedSensor = (dialogChooseSensor as DialogChooseSensor).selectedSensor;
                         }
-                    } 
-                    else
-                    {
-                        selectedSensor = availableSensors.First();
                     }
 
                     string[] directories = Directory.GetDirectories("C:\\IRay\\IRayIntraoral_x86\\work_dir");

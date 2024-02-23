@@ -51,7 +51,7 @@ namespace DMMDigital.Views
             if (action == "add")
             {
                 this.action = action;
-                this.Text = "Cadastrar Paciente";
+                Text = "Cadastrar Paciente";
                 label1.Text = "Cadastrar Paciente";
                 label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
             }
@@ -65,7 +65,8 @@ namespace DMMDigital.Views
                 if (action == null)
                 {
                     eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
-                } else
+                } 
+                else
                 {
                     eventAddNewPatient?.Invoke(this, EventArgs.Empty);
                 }

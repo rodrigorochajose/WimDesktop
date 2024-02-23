@@ -5,8 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Aspose.Imaging.ImageOptions;
 using DMMDigital.Components;
-using DMMDigital.Models.Drawings;
 
 namespace DMMDigital.Views
 {
@@ -134,14 +134,13 @@ namespace DMMDigital.Views
             }
             else
             {
-                string path = Path.Combine(pathToExport, sessionName);
+                string path = Path.Combine(pathToExport, $"Exam_{sessionName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
                 Directory.CreateDirectory(path);
 
                 ImageFormat format = ImageFormat.Bmp;
                 string extension = ".bmp";
 
                 List<string> files = new List<string>();
-                List<string> newFiles = new List<string>();
 
                 List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
                 
@@ -169,9 +168,7 @@ namespace DMMDigital.Views
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
-                        string originalFileName = $"{cb.Tag}-original.png";
-                        files.Add(Path.Combine(pathImages, originalFileName));
-                        newFiles.Add(originalFileName);
+                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-original.png"));
                     }
                 }
 
@@ -180,34 +177,34 @@ namespace DMMDigital.Views
                     foreach (CheckBox cb in checkBoxes)
                     {
                         generateEditedImage(cb.Tag.ToString(), pathImages, format, extension);
-
-                        string editedFileName = $"{cb.Tag}-edited{extension}";
-                        string imagePath = Path.Combine(pathImages, editedFileName);
-
-                        files.Add(imagePath);
-                        newFiles.Add(editedFileName);
+                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-edited{extension}"));
                     }
                 }
 
                 if (extension == ".dicom")
                 {
-                    for (int counter = 0; counter < files.Count; counter++)
+                    foreach (string file in files)
                     {
-                        var image = Aspose.Imaging.Image.Load(files[counter]);
-                        var exportOptions = new Aspose.Imaging.ImageOptions.DicomOptions();
+                        Bitmap bmp = new Bitmap(file);
 
-                        image.Save(Path.Combine(path, newFiles[counter] + extension), exportOptions);
+                        using (MemoryStream stream = new MemoryStream())
+                        {
+                            bmp.Save(stream, ImageFormat.Bmp);
+                            stream.Position = 0;
+                            Aspose.Imaging.Image imageAspose = Aspose.Imaging.Image.Load(stream);
+                            DicomOptions exportOptions = new DicomOptions();
+                            imageAspose.Save(Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"), exportOptions);
+                        }
                     }
-                    MessageBox.Show("Exportado com sucesso!");
-                    Close();
-                    return;
-                }
-
-
-                for (int counter = 0; counter < files.Count; counter++) 
+                } 
+                else
                 {
-                    Bitmap img = new Bitmap(files[counter]);
-                    img.Save(Path.Combine(path, newFiles[counter] + extension), format);
+                    foreach (string file in files)
+                    {
+                        Bitmap imageToExport = new Bitmap(file);
+                        string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(file), extension);
+                        imageToExport.Save(Path.Combine(path, fileName));
+                    }
                 }
 
                 MessageBox.Show("Exportado com sucesso!");

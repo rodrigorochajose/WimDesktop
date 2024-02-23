@@ -80,7 +80,7 @@ namespace DMMDigital.Views
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -687,10 +687,10 @@ namespace DMMDigital.Views
             this.panel2.Size = new System.Drawing.Size(1012, 619);
             this.panel2.TabIndex = 1;
             // 
-            // colorDialog1
+            // colorDialog
             // 
-            this.colorDialog1.AnyColor = true;
-            this.colorDialog1.FullOpen = true;
+            this.colorDialog.AnyColor = true;
+            this.colorDialog.FullOpen = true;
             // 
             // timer1
             // 
@@ -740,7 +740,7 @@ namespace DMMDigital.Views
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.PictureBox mainPictureBox;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Panel panelToolOptions;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;

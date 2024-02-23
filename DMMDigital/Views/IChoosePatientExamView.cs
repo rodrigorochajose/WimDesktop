@@ -15,6 +15,6 @@ namespace DMMDigital.Views
 
         // Methods
         void setPatientList(BindingSource patientList);
-        void manipulateDataGridView();
+        void dataGridViewHandler();
     }
 }

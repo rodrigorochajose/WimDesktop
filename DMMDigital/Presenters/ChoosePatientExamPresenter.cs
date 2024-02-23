@@ -43,9 +43,9 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IPatientHandlerView manipulatePatientView = new PatientHandlerView("add");
-            manipulatePatientView.eventAddNewPatient += addNewPatient;
-            (manipulatePatientView as Form).ShowDialog();
+            IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
+            patientHandlerView.eventAddNewPatient += addNewPatient;
+            (patientHandlerView as Form).ShowDialog();
             carregarTodosPacientes();
         }
 
@@ -97,7 +97,7 @@ namespace DMMDigital.Presenters
         {
             patientList = patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-            choosePatientExamView.manipulateDataGridView();
+            choosePatientExamView.dataGridViewHandler();
         }
     }
 }

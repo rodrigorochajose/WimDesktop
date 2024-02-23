@@ -2,6 +2,7 @@
 using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
@@ -23,10 +24,9 @@ namespace DMMDigital.Presenters
 
         private void loadConfigs(object sender, EventArgs e)
         {
-           currentConfig = configRepository.getAllConfig();
+            currentConfig = configRepository.getAllConfig();
 
             configView.imagePath = currentConfig.examPath;
-            configView.sensorPath = currentConfig.sensorPath;
         }
 
         private void saveConfigs(object sender, EventArgs e)
@@ -34,7 +34,11 @@ namespace DMMDigital.Presenters
             try
             {
                 currentConfig.examPath = configView.imagePath;
-                currentConfig.sensorPath = configView.sensorPath;
+                currentConfig.drawingColor = configView.drawingColor;
+                currentConfig.drawingSize = configView.drawingSize;
+                currentConfig.textColor = configView.textColor;
+                currentConfig.textSize = configView.textSize;
+                currentConfig.rulerColor = configView.rulerColor;
                 MessageBox.Show(configRepository.save());
                 (sender as ConfigView).Close();
             }

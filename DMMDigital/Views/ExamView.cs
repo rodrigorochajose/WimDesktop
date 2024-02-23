@@ -1047,9 +1047,9 @@ namespace DMMDigital.Views
 
         private void buttonColorPickerClick(object sender, EventArgs e)
         {
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                drawingColor = colorDialog1.Color;
+                drawingColor = colorDialog.Color;
                 buttonColorPicker.BackColor = drawingColor;
             }
         }

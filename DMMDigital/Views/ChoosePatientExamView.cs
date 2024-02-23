@@ -46,7 +46,7 @@ namespace DMMDigital.Views
         public event EventHandler eventShowAddPatientView;
         public event EventHandler eventSelectPatient;
 
-        public void manipulateDataGridView()
+        public void dataGridViewHandler()
         {
             dataGridViewPatient.Columns["id"].Visible = false;
         }

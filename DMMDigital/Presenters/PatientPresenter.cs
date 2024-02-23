@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital._Repositories;
+using DMMDigital.Components;
 using DMMDigital.Interface;
 using DMMDigital.Models;
 using DMMDigital.Views;
@@ -21,6 +23,7 @@ namespace DMMDigital.Presenters
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
         private IEnumerable<ExamModel> examList;
         private readonly BindingSource examBindingSource;
@@ -65,25 +68,25 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IPatientHandlerView manipulatePatientView = new PatientHandlerView("add");
-            manipulatePatientView.eventAddNewPatient += addNewPatient;
-            (manipulatePatientView as Form).ShowDialog();
+            IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
+            patientHandlerView.eventAddNewPatient += addNewPatient;
+            (patientHandlerView as Form).ShowDialog();
             getPatients();
         }
 
         private void showEditPatientForm(object sender, EventArgs e)
         {
-            IPatientHandlerView manipulatePatientView = new PatientHandlerView("edit");
-            manipulatePatientView.eventSaveEditedPatient += saveEditedPatient;
+            IPatientHandlerView patientHandlerView = new PatientHandlerView("edit");
+            patientHandlerView.eventSaveEditedPatient += saveEditedPatient;
 
             selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
-            manipulatePatientView.patientId = selectedPatient.id;
-            manipulatePatientView.patientName = selectedPatient.name;
-            manipulatePatientView.patientBirthDate = selectedPatient.birthDate;
-            manipulatePatientView.patientPhone = selectedPatient.phone;
-            manipulatePatientView.patientRecommendation = selectedPatient.recommendation;
-            manipulatePatientView.patientObservation = selectedPatient.observation;
-            (manipulatePatientView as Form).ShowDialog();
+            patientHandlerView.patientId = selectedPatient.id;
+            patientHandlerView.patientName = selectedPatient.name;
+            patientHandlerView.patientBirthDate = selectedPatient.birthDate;
+            patientHandlerView.patientPhone = selectedPatient.phone;
+            patientHandlerView.patientRecommendation = selectedPatient.recommendation;
+            patientHandlerView.patientObservation = selectedPatient.observation;
+            (patientHandlerView as Form).ShowDialog();
 
             getPatients();
         }
@@ -198,29 +201,15 @@ namespace DMMDigital.Presenters
 
         private void deleteExam(object sender, EventArgs e)
         {
-            OperationStatus examImageDrawingStatus = examImageDrawingRepository.delete(patientView.selectedExamId);
-
-            if (examImageDrawingStatus.code == -1)
+            if (examImageRepository.getExamImages(patientView.selectedExamId).Any())
             {
-                MessageBox.Show(examImageDrawingStatus.message);
+                MessageBox.Show("Exame possui imagens, não será possível excluí-lo.");
                 return;
             }
 
-            OperationStatus examImageStatus = examImageRepository.delete(patientView.selectedExamId);
-
-            if (examImageStatus.code == -1)
-            {
-                MessageBox.Show(examImageStatus.message);
-                return;
-            }
-
-            OperationStatus examStatus = examRepository.delete(patientView.selectedExamId);
-
-            if (examStatus.code == -1)
-            {
-                MessageBox.Show(examStatus.message);
-                return;
-            }
+            examImageDrawingRepository.delete(patientView.selectedExamId);
+            examImageRepository.delete(patientView.selectedExamId);
+            examRepository.delete(patientView.selectedExamId);
 
             string fullPath = configRepository.getExamPath() + patientView.selectedExamPath;
 
@@ -229,13 +218,75 @@ namespace DMMDigital.Presenters
                 Directory.Delete(fullPath, true);
             }
 
-            MessageBox.Show(examStatus.message);
+            MessageBox.Show("Exame deletado com sucesso!");
             getExamByPatient(this, EventArgs.Empty);
         }
 
         private void exportExam(object sender, EventArgs e)
         {
+            ExamModel selectedExam = examRepository.getExam(patientView.selectedExamId);
 
+            string examPath = configRepository.getExamPath() + $"\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt.ToString("dd-MM-yyyy")}";
+
+            List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
+            List<ExamImageModel> examImages = examImageRepository.getExamImages(patientView.selectedExamId).ToList();
+
+            List<Frame> frames = new List<Frame>();
+
+            foreach (TemplateFrameModel frame in templateFrames)
+            {
+                int height;
+                int width;
+                if (frame.orientation.Contains("Vertical"))
+                {
+                    height = 35;
+                    width = 25;
+                }
+                else
+                {
+                    height = 25;
+                    width = 35;
+                }
+
+                Frame newFrame = new Frame
+                {
+                    Width = width,
+                    Height = height,
+                    BackColor = Color.Black,
+                    order = frame.order,
+                    Name = "filme" + frame.id,
+                    orientation = frame.orientation,
+                    Tag = Color.Black,
+                    Location = new Point(frame.locationX / 2, frame.locationY / 2),
+
+                };
+
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.frameId == newFrame.order);
+
+                if (selectedExamImage != null)
+                {
+                    using (FileStream fs = new FileStream(Path.Combine(examPath, selectedExamImage.file), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        Bitmap image = new Bitmap(Image.FromStream(fs));
+
+                        newFrame.originalImage = new Bitmap(image);
+                        newFrame.Image = image.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
+                        newFrame.notes = selectedExamImage.notes;
+                        newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
+
+                        image.Dispose();
+                    }
+                }
+                frames.Add(newFrame);
+            }
+
+            IExportExamView exportView = new ExportExamView
+            {
+                pathImages = examPath,
+                framesToExport = frames,
+                sessionName = selectedExam.sessionName
+            };
+            (exportView as Form).ShowDialog();
         }
     }
 }
