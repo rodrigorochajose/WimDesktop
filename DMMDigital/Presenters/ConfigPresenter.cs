@@ -27,6 +27,11 @@ namespace DMMDigital.Presenters
             currentConfig = configRepository.getAllConfig();
 
             configView.imagePath = currentConfig.examPath;
+            configView.drawingSize = currentConfig.drawingSize;
+            configView.drawingColor = currentConfig.drawingColor;
+            configView.textSize = currentConfig.textSize;
+            configView.textColor = currentConfig.textColor;
+            configView.rulerColor = currentConfig.rulerColor;
         }
 
         private void saveConfigs(object sender, EventArgs e)

@@ -14,8 +14,8 @@ namespace DMMDigital.Views
 
         public string drawingColor 
         {
-            get { return buttonDrawingColorPicker.BackColor.ToString(); } 
-            set { buttonDrawingColorPicker.BackColor = Color.FromName(value); } 
+            get { return buttonDrawingColorPicker.BackColor.ToArgb().ToString(); } 
+            set { buttonDrawingColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
         public int drawingSize
@@ -26,8 +26,8 @@ namespace DMMDigital.Views
 
         public string textColor 
         {
-            get { return buttonTextColorPicker.BackColor.ToString(); } 
-            set { buttonTextColorPicker.BackColor = Color.FromName(value); } 
+            get { return buttonTextColorPicker.BackColor.ToArgb().ToString(); } 
+            set { buttonTextColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
         public int textSize
@@ -38,8 +38,8 @@ namespace DMMDigital.Views
 
         public string rulerColor 
         {
-            get { return buttonRulerColorPicker.BackColor.ToString(); } 
-            set { buttonRulerColorPicker.BackColor = Color.FromName(value); } 
+            get { return buttonRulerColorPicker.BackColor.ToArgb().ToString(); } 
+            set { buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
         public event EventHandler loadConfigs;
@@ -70,7 +70,7 @@ namespace DMMDigital.Views
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                drawingColor = colorDialog.Color.ToString();
+                drawingColor = colorDialog.Color.ToArgb().ToString();
                 buttonDrawingColorPicker.BackColor = colorDialog.Color;
             }
         }
@@ -84,7 +84,7 @@ namespace DMMDigital.Views
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                textColor = colorDialog.Color.ToString();
+                textColor = colorDialog.Color.ToArgb().ToString();
                 buttonTextColorPicker.BackColor = colorDialog.Color;
             }
         }
@@ -98,7 +98,7 @@ namespace DMMDigital.Views
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
-                rulerColor = colorDialog.Color.ToString();
+                rulerColor = colorDialog.Color.ToArgb().ToString();
                 buttonRulerColorPicker.BackColor = colorDialog.Color;
             }
         }

@@ -18,7 +18,6 @@ namespace DMMDigital.Views
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
         bool detectorConnected { get; set; }
 
-        event EventHandler eventGetExamPath;
         event EventHandler eventSaveExam;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;

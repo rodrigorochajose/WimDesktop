@@ -167,11 +167,11 @@
     <Compile Include="Views\DialogChooseSensor.Designer.cs">
       <DependentUpon>DialogChooseSensor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Form1.cs">
+    <Compile Include="Views\PostProcessTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\PostProcessTest.Designer.cs">
+      <DependentUpon>PostProcessTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IChooseFramesToCompare.cs" />
     <Compile Include="Views\IChooseTemplateExamView.cs" />
@@ -303,8 +303,8 @@
     <EmbeddedResource Include="Views\DialogChooseSensor.resx">
       <DependentUpon>DialogChooseSensor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PostProcessTest.resx">
+      <DependentUpon>PostProcessTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientHandlerView.resx">
       <DependentUpon>PatientHandlerView.cs</DependentUpon>

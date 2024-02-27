@@ -2,7 +2,6 @@
 using DMMDigital.Interface;
 using DMMDigital.Interface.iRay;
 using DMMDigital.Models;
-using DMMDigital.Models.Drawings;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
@@ -12,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,7 +25,6 @@ namespace DMMDigital.Presenters
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
 
         private readonly string examOpeningMode;
@@ -40,7 +39,6 @@ namespace DMMDigital.Presenters
             examView.eventSaveExam += saveExam;
             examView.eventSaveExamImage += saveExamImage;
             examView.eventSaveExamImageDrawing += saveExamImageDrawing;
-            examView.eventGetExamPath += getExamPath;
             examView.eventGetPatient += getPatient;
 
             if (openingExam)
@@ -97,7 +95,6 @@ namespace DMMDigital.Presenters
                 examView.examId = exam.id;
                 examView.patient.id = exam.patientId;
                 examView.sessionName = exam.sessionName;
-                getExamPath(this, EventArgs.Empty);
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
@@ -107,7 +104,6 @@ namespace DMMDigital.Presenters
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
                 examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
-
             }
             catch (Exception ex)
             {
@@ -157,11 +153,6 @@ namespace DMMDigital.Presenters
             {
                 MessageBox.Show($"ExamImageDrawing - {ex.Message}");
             }
-        }
-
-        private void getExamPath(object sender, EventArgs e)
-        {
-            examView.examPath = configRepository.getExamPath();
         }
 
         private void getPatient(object sender, EventArgs e)

@@ -13,6 +13,7 @@ namespace DMMDigital.Presenters
         private readonly IChooseTemplateExamView chooseTemplateExamView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private readonly IConfigRepository configRepository = new ConfigRepository();
 
         private string examOpeningMode = "newPage";
 
@@ -67,7 +68,9 @@ namespace DMMDigital.Presenters
                 name = chooseTemplateExamView.patientName,
             };
 
-            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName);
+            ConfigModel config = configRepository.getAllConfig();
+
+            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName, config);
             (chooseTemplateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 
