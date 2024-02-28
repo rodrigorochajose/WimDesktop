@@ -9,6 +9,7 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             associateEvents();
+
         }
 
         private void associateEvents()
@@ -18,16 +19,32 @@ namespace DMMDigital.Views
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
-            buttonNewPatient.Click += delegate { eventShowAddPatientView?.Invoke(this, EventArgs.Empty); };
-            dataGridViewPatient.CellClick += delegate { eventSelectPatient?.Invoke(this, EventArgs.Empty); };
-            buttonSelectPatient.Click += delegate {
-                if (selectedPatientId == 0)
-                {
-                    MessageBox.Show("Não há nenhum paciente selecionado!");
-                    return; 
-                }
+
+            buttonNewPatient.Click += delegate 
+            { 
+                eventShowAddPatientView?.Invoke(this, EventArgs.Empty);
+
+                int indexLastPatient = dataGridViewPatient.Rows.Count - 1;
+                selectedPatientId = int.Parse(dataGridViewPatient.Rows[indexLastPatient].Cells["id"].Value.ToString());
+
+                eventSelectPatient?.Invoke(this, EventArgs.Empty);
+            };
+
+            dataGridViewPatient.SelectionChanged += delegate
+            {
+                selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString());
+            };
+
+            dataGridViewPatient.CellDoubleClick += delegate 
+            { 
                 eventSelectPatient?.Invoke(this, EventArgs.Empty); 
             };
+
+            buttonSelectPatient.Click += delegate 
+            {
+                eventSelectPatient?.Invoke(this, EventArgs.Empty); 
+            };
+
             buttonCancelAction.Click += delegate { Close(); };
         }
 
@@ -36,10 +53,13 @@ namespace DMMDigital.Views
             get { return textBoxSearchPatient.Text; }
             set { textBoxSearchPatient.Text = value; }
         }
+
+        private int _selectedPatientId;
+
         public int selectedPatientId 
         {
-            get { return dataGridViewPatient.CurrentRow?.Cells["id"].Value != null ? int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString()) : 0; } 
-            set { selectedPatientId = value; }
+            get { return _selectedPatientId; } 
+            set { _selectedPatientId = value; }
         }
 
         public event EventHandler eventSearchPatient;

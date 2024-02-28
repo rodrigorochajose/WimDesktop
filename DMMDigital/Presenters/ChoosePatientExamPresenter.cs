@@ -28,17 +28,15 @@ namespace DMMDigital.Presenters
 
             choosePatientExamView.setPatientList(pacientesBindingSource);
 
-            carregarTodosPacientes();
+            loadAllPatients();
 
             (choosePatientExamView as Form).ShowDialog();
         }
-
-
-        private void searchPatient(object sender, EventArgs e)
+        private void loadAllPatients()
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(choosePatientExamView.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(choosePatientExamView.searchedValue) : patientRepository.getAllPatients();
+            patientList = patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            choosePatientExamView.dataGridViewHandler();
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
@@ -46,27 +44,8 @@ namespace DMMDigital.Presenters
             IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
             patientHandlerView.eventAddNewPatient += addNewPatient;
             (patientHandlerView as Form).ShowDialog();
-            carregarTodosPacientes();
-        }
 
-        private void showSelectTemplateForm(object sender, EventArgs e)
-        {
-            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
-
-            PatientModel selectedPatient = patientRepository.getPatientById(choosePatientExamView.selectedPatientId);
-            chooseTemplateView.patientId = selectedPatient.id;
-            chooseTemplateView.patientName = selectedPatient.name;
-            chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
-            chooseTemplateView.patientPhone = selectedPatient.phone;
-            chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
-            chooseTemplateView.patientObservation = selectedPatient.observation;
-
-            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
-            {
-                form.Hide();
-            }
-
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "choosePatientView");
+            loadAllPatients();
         }
 
         private void addNewPatient(object sender, EventArgs e)
@@ -93,11 +72,31 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void carregarTodosPacientes()
+        private void searchPatient(object sender, EventArgs e)
         {
-            patientList = patientRepository.getAllPatients();
+            bool emptyValue = string.IsNullOrWhiteSpace(choosePatientExamView.searchedValue);
+            patientList = emptyValue == false ? patientRepository.getPatientsByName(choosePatientExamView.searchedValue) : patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-            choosePatientExamView.dataGridViewHandler();
+        }
+
+        private void showSelectTemplateForm(object sender, EventArgs e)
+        {
+            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            
+            PatientModel selectedPatient = patientRepository.getPatientById(choosePatientExamView.selectedPatientId);
+            chooseTemplateView.patientId = selectedPatient.id;
+            chooseTemplateView.patientName = selectedPatient.name;
+            chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
+            chooseTemplateView.patientPhone = selectedPatient.phone;
+            chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
+            chooseTemplateView.patientObservation = selectedPatient.observation;
+
+            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            {
+                form.Hide();
+            }
+
+            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "choosePatientView");
         }
     }
 }

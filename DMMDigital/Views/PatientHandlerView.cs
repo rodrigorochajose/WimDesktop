@@ -6,7 +6,6 @@ namespace DMMDigital.Views
 {
     public partial class PatientHandlerView : Form, IPatientHandlerView
     {
-
         public int patientId { get; set; }
 
         public string patientName

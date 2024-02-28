@@ -151,8 +151,8 @@ namespace DMMDigital.Presenters
 
             if (patientList.Any())
             {
-                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
                 patientView.selectedPatientId = patientList.First().id;
+                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
                 patientView.patientDataGridViewHandler();
             }
         }

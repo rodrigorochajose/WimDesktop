@@ -149,14 +149,42 @@ namespace DMMDigital.Views
 
         private void patientViewLoad(object sender, EventArgs e)
         {
+
+
+            // verificar qual melhor método e como selecionar primeiro paciente após excluir um 
+
+
+            //dataGridViewPatient.CurrentCellChanged += (s, ev) =>
+            //{
+            //    //if (dataGridViewPatient.SelectedRows.Count > 0)
+            //    //{
+            //    //    selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
+            //    //    eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
+            //    //}
+            //    Console.WriteLine("CurrentCellChanged");
+            //};
+
             dataGridViewPatient.CurrentCellChanged += (s, ev) =>
             {
+                //Console.WriteLine("CurrentCellChanged");
+            };
+
+            dataGridViewPatient.MouseCaptureChanged += (s, ev) =>
+            {
+                //Console.WriteLine("MouseCaptureChanged");
                 if (dataGridViewPatient.SelectedRows.Count > 0)
                 {
                     selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
                     eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
                 }
             };
+
+            dataGridViewPatient.SelectionChanged += (s, ev) =>
+            {
+                //Console.WriteLine("SelectionChanged");
+            };
+
+            
         }
     }
 }
