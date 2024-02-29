@@ -69,6 +69,26 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
+            Load += (sender, e) =>
+            {
+                dataGridViewPatient.SelectionChanged += (s, ev) =>
+                {
+                    if (dataGridViewPatient.SelectedRows.Count > 0)
+                    {
+                        selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
+                        eventGetPatientExams?.Invoke(this, EventArgs.Empty);
+                    }
+                };
+
+                dataGridViewExam.SelectionChanged += delegate
+                {
+                    if (dataGridViewExam.SelectedRows.Count > 0)
+                    {
+                        selectedExamId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["id"].Value.ToString());
+                    }
+                };
+            };
+
             textBoxSearchPatient.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
@@ -79,7 +99,6 @@ namespace DMMDigital.Views
             {
                 if (e.RowIndex != -1)
                 {
-                    selectedPatientId = int.Parse(dataGridViewPatient.Rows[e.RowIndex].Cells["id"].Value.ToString());
                     if (e.ColumnIndex == 0)
                     {
                         eventShowEditPatientForm?.Invoke(this, EventArgs.Empty);
@@ -87,6 +106,8 @@ namespace DMMDigital.Views
                     else if (e.ColumnIndex == 1)
                     {
                         eventDeletePatient?.Invoke(this, EventArgs.Empty);
+
+                        dataGridViewPatient.Rows[0].Selected = true;
                     }
                 }
             };
@@ -105,39 +126,25 @@ namespace DMMDigital.Views
             };
 
             buttonOpenExam.Click += delegate {
-                if (dataGridViewExam.SelectedCells.Count != 0)
+                if (selectedExamId == 0)
                 {
-                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
-                    selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
-
-                    if (selectedExamId == 0)
-                    {
-                        MessageBox.Show("Nenhum Exame foi selecionado!");
-                        return;
-                    } 
-                    eventOpenExam?.Invoke(this, EventArgs.Empty); 
-                }
+                    MessageBox.Show("Nenhum Exame foi selecionado!");
+                    return;
+                } 
+                eventOpenExam?.Invoke(this, EventArgs.Empty); 
             };
 
             buttonDeleteExam.Click += delegate {
-                if (dataGridViewExam.SelectedCells.Count != 0)
-                {
-                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
 
-                    selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
-                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
-                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString());
+                string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
+                DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString());
 
-                    selectedExamPath = "\\Paciente-" + selectedPatientId + "\\" + selectedExamSessionName + "_" + selectedExamDate.ToString("dd-MM-yyyy");
-                    eventDeleteExam?.Invoke(this, EventArgs.Empty);
-                }
+                selectedExamPath = "\\Paciente-" + selectedPatientId + "\\" + selectedExamSessionName + "_" + selectedExamDate.ToString("dd-MM-yyyy");
+                eventDeleteExam?.Invoke(this, EventArgs.Empty);
             };
 
             buttonExportExam.Click += delegate {
-
-                int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
-                selectedExamId = int.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[0].Value.ToString());
-
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show("Nenhum Exame foi selecionado!");
@@ -145,46 +152,6 @@ namespace DMMDigital.Views
                 }
                 eventExportExam?.Invoke(this, EventArgs.Empty);
             };
-        }
-
-        private void patientViewLoad(object sender, EventArgs e)
-        {
-
-
-            // verificar qual melhor método e como selecionar primeiro paciente após excluir um 
-
-
-            //dataGridViewPatient.CurrentCellChanged += (s, ev) =>
-            //{
-            //    //if (dataGridViewPatient.SelectedRows.Count > 0)
-            //    //{
-            //    //    selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
-            //    //    eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
-            //    //}
-            //    Console.WriteLine("CurrentCellChanged");
-            //};
-
-            dataGridViewPatient.CurrentCellChanged += (s, ev) =>
-            {
-                //Console.WriteLine("CurrentCellChanged");
-            };
-
-            dataGridViewPatient.MouseCaptureChanged += (s, ev) =>
-            {
-                //Console.WriteLine("MouseCaptureChanged");
-                if (dataGridViewPatient.SelectedRows.Count > 0)
-                {
-                    selectedPatientId = int.Parse(dataGridViewPatient.Rows[dataGridViewPatient.SelectedRows[0].Index].Cells["id"].Value.ToString());
-                    eventGetPatientExams?.Invoke(sender, EventArgs.Empty);
-                }
-            };
-
-            dataGridViewPatient.SelectionChanged += (s, ev) =>
-            {
-                //Console.WriteLine("SelectionChanged");
-            };
-
-            
         }
     }
 }

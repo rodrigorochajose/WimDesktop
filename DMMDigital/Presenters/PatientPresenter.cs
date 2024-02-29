@@ -93,6 +93,12 @@ namespace DMMDigital.Presenters
 
         private void deletePatient(object sender, EventArgs e)
         {
+            if (examRepository.getPatientExams(patientView.selectedPatientId).Any())
+            {
+                MessageBox.Show("Paciente possui exames, não será possível excluí-lo.");
+                return;
+            }
+
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
@@ -180,6 +186,7 @@ namespace DMMDigital.Presenters
         private void getExamByPatient(object sender, EventArgs e)
         {
             examList = examRepository.getPatientExams(patientView.selectedPatientId);
+            patientView.selectedExamId = examList.First().id;
             if (examList.Any())
             {
                 examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
@@ -227,10 +234,16 @@ namespace DMMDigital.Presenters
         {
             ExamModel selectedExam = examRepository.getExam(patientView.selectedExamId);
 
-            string examPath = configRepository.getExamPath() + $"\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt.ToString("dd-MM-yyyy")}";
-
             List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
             List<ExamImageModel> examImages = examImageRepository.getExamImages(patientView.selectedExamId).ToList();
+
+            if (!examImages.Any())
+            {
+                MessageBox.Show("Exame não possui nenhuma imagem para exportação");
+                return;
+            }
+
+            string examPath = $"{configRepository.getExamPath()}\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt:dd-MM-yyyy}";
 
             List<Frame> frames = new List<Frame>();
 

@@ -345,7 +345,6 @@
             this.Name = "PatientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pacientes";
-            this.Load += new System.EventHandler(this.patientViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).EndInit();
             this.ResumeLayout(false);
