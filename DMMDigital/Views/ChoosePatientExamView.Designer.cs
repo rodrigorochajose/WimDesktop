@@ -29,24 +29,26 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChoosePatientExamView));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSearchPatient = new System.Windows.Forms.TextBox();
-            this.dataGridViewPatient = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birthDate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonSelectPatient = new System.Windows.Forms.Button();
             this.buttonCancelAction = new System.Windows.Forms.Button();
             this.buttonNewPatient = new System.Windows.Forms.Button();
             this.buttonSearchPatient = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
+            this.phone1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.birthDate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewPatient = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +58,7 @@
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.label1.Location = new System.Drawing.Point(165, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(375, 26);
+            this.label1.Size = new System.Drawing.Size(368, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "Selecione um paciente para o Exame";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -67,7 +69,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(57, 97);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(56, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Buscar";
             // 
@@ -76,74 +78,8 @@
             this.textBoxSearchPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSearchPatient.Location = new System.Drawing.Point(61, 120);
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 26);
+            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 29);
             this.textBoxSearchPatient.TabIndex = 2;
-            // 
-            // dataGridViewPatient
-            // 
-            this.dataGridViewPatient.AllowUserToAddRows = false;
-            this.dataGridViewPatient.AllowUserToDeleteRows = false;
-            this.dataGridViewPatient.AllowUserToResizeColumns = false;
-            this.dataGridViewPatient.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.name,
-            this.birthDate1,
-            this.phone1});
-            this.dataGridViewPatient.EnableHeadersVisualStyles = false;
-            this.dataGridViewPatient.Location = new System.Drawing.Point(61, 172);
-            this.dataGridViewPatient.MultiSelect = false;
-            this.dataGridViewPatient.Name = "dataGridViewPatient";
-            this.dataGridViewPatient.ReadOnly = true;
-            this.dataGridViewPatient.RowHeadersVisible = false;
-            this.dataGridViewPatient.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPatient.Size = new System.Drawing.Size(526, 313);
-            this.dataGridViewPatient.TabIndex = 4;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.Frozen = true;
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.Frozen = true;
-            this.name.HeaderText = "Nome";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 250;
-            // 
-            // birthDate1
-            // 
-            this.birthDate1.DataPropertyName = "birthDate";
-            this.birthDate1.Frozen = true;
-            this.birthDate1.HeaderText = "Data de Nascimento";
-            this.birthDate1.Name = "birthDate1";
-            this.birthDate1.ReadOnly = true;
-            this.birthDate1.Width = 150;
-            // 
-            // phone1
-            // 
-            this.phone1.DataPropertyName = "phone";
-            this.phone1.Frozen = true;
-            this.phone1.HeaderText = "Telefone";
-            this.phone1.Name = "phone1";
-            this.phone1.ReadOnly = true;
-            this.phone1.Width = 125;
             // 
             // buttonSelectPatient
             // 
@@ -206,6 +142,78 @@
             this.panel1.Size = new System.Drawing.Size(665, 78);
             this.panel1.TabIndex = 49;
             // 
+            // phone1
+            // 
+            this.phone1.DataPropertyName = "phone";
+            this.phone1.Frozen = true;
+            this.phone1.HeaderText = "Telefone";
+            this.phone1.Name = "phone1";
+            this.phone1.ReadOnly = true;
+            this.phone1.Width = 125;
+            // 
+            // birthDate1
+            // 
+            this.birthDate1.DataPropertyName = "birthDate";
+            this.birthDate1.Frozen = true;
+            this.birthDate1.HeaderText = "Data de Nascimento";
+            this.birthDate1.Name = "birthDate1";
+            this.birthDate1.ReadOnly = true;
+            this.birthDate1.Width = 150;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.Frozen = true;
+            this.name.HeaderText = "Nome";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 250;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.Frozen = true;
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // dataGridViewPatient
+            // 
+            this.dataGridViewPatient.AllowUserToAddRows = false;
+            this.dataGridViewPatient.AllowUserToDeleteRows = false;
+            this.dataGridViewPatient.AllowUserToResizeColumns = false;
+            this.dataGridViewPatient.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dataGridViewPatient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.name,
+            this.birthDate1,
+            this.phone1});
+            this.dataGridViewPatient.EnableHeadersVisualStyles = false;
+            this.dataGridViewPatient.GridColor = System.Drawing.Color.Silver;
+            this.dataGridViewPatient.Location = new System.Drawing.Point(61, 172);
+            this.dataGridViewPatient.MultiSelect = false;
+            this.dataGridViewPatient.Name = "dataGridViewPatient";
+            this.dataGridViewPatient.ReadOnly = true;
+            this.dataGridViewPatient.RowHeadersVisible = false;
+            this.dataGridViewPatient.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPatient.Size = new System.Drawing.Size(526, 313);
+            this.dataGridViewPatient.TabIndex = 4;
+            // 
             // ChoosePatientExamView
             // 
             this.ClientSize = new System.Drawing.Size(665, 566);
@@ -217,14 +225,15 @@
             this.Controls.Add(this.dataGridViewPatient);
             this.Controls.Add(this.textBoxSearchPatient);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ChoosePatientExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecione um paciente";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,19 +244,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxSearchPatient;
-        private System.Windows.Forms.DataGridView dataGridViewPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn birthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.Button buttonSelectPatient;
         private System.Windows.Forms.Button buttonCancelAction;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birthDate1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone1;
         private System.Windows.Forms.Button buttonNewPatient;
         private System.Windows.Forms.Button buttonSearchPatient;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phone1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn birthDate1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridView dataGridViewPatient;
     }
 }

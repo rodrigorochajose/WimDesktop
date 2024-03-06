@@ -13,7 +13,7 @@ namespace DMMDigital.Presenters
     {
         private readonly IChoosePatientExamView choosePatientExamView;
         private readonly IPatientRepository patientRepository;
-        private BindingSource pacientesBindingSource;
+        private readonly BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
         public ChoosePatientExamPresenter(IChoosePatientExamView view, IPatientRepository repository)
@@ -32,11 +32,17 @@ namespace DMMDigital.Presenters
 
             (choosePatientExamView as Form).ShowDialog();
         }
+
         private void loadAllPatients()
         {
             patientList = patientRepository.getAllPatients();
-            pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-            choosePatientExamView.dataGridViewHandler();
+
+            if (patientList.Any())
+            {
+                choosePatientExamView.selectedPatientId = patientList.First().id;
+                pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+                choosePatientExamView.dataGridViewHandler();
+            }
         }
 
         private void showAddPatientForm(object sender, EventArgs e)

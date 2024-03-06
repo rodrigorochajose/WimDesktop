@@ -52,7 +52,7 @@ namespace DMMDigital.Presenters
             patientView.setPatientList(patientBindingSource);
             patientView.setExamList(examBindingSource);
 
-            getPatients();
+            loadAllPatients();
             getExamByPatient(this, EventArgs.Empty);
 
             (patientView as Form).Show();
@@ -71,7 +71,7 @@ namespace DMMDigital.Presenters
             IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
             patientHandlerView.eventAddNewPatient += addNewPatient;
             (patientHandlerView as Form).ShowDialog();
-            getPatients();
+            loadAllPatients();
         }
 
         private void showEditPatientForm(object sender, EventArgs e)
@@ -88,7 +88,7 @@ namespace DMMDigital.Presenters
             patientHandlerView.patientObservation = selectedPatient.observation;
             (patientHandlerView as Form).ShowDialog();
 
-            getPatients();
+            loadAllPatients();
         }
 
         private void deletePatient(object sender, EventArgs e)
@@ -103,7 +103,7 @@ namespace DMMDigital.Presenters
             if (DialogResult.Yes.Equals(confirmacao))
             {
                 MessageBox.Show(patientRepository.delete(patientView.selectedPatientId));
-                getPatients();
+                loadAllPatients();
             }
         }
 
@@ -151,7 +151,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void getPatients()
+        private void loadAllPatients()
         {
             patientList = patientRepository.getAllPatients();
 
@@ -186,9 +186,9 @@ namespace DMMDigital.Presenters
         private void getExamByPatient(object sender, EventArgs e)
         {
             examList = examRepository.getPatientExams(patientView.selectedPatientId);
-            patientView.selectedExamId = examList.First().id;
             if (examList.Any())
             {
+                patientView.selectedExamId = examList.First().id;
                 examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
                 patientView.examDataGridViewHandler();
             }

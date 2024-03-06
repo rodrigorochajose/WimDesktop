@@ -11,7 +11,6 @@ using DMMDigital.Models.Drawings;
 using DMMDigital.Components;
 using DMMDigital._Repositories;
 using DMMDigital.Presenters;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace DMMDigital.Views
@@ -196,6 +195,7 @@ namespace DMMDigital.Views
                     if (File.Exists(Path.Combine(examPath, filteredFile)))
                     {
                         img = new Bitmap(Path.Combine(examPath, filteredFile));
+                        newFrame.filteredImage = img;
                     }
 
                     newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
@@ -232,11 +232,16 @@ namespace DMMDigital.Views
 
             selectedFrame = frames.First();
             selectedFrame.Tag = Color.LimeGreen;
-            if (selectedFrame.originalImage != null)
+
+            if (selectedFrame.filteredImage != null)
+            {
+                mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
+            } 
+            else if (selectedFrame.originalImage != null)
             {
                 mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
-                resizeMainPictureBox();
             }
+            resizeMainPictureBox();
 
             labelImageDate.Text = selectedFrame.datePhotoTook;
             textBoxFrameNotes.Text = selectedFrame.notes;
@@ -300,7 +305,7 @@ namespace DMMDigital.Views
             }));
         }
 
-        private void selectFrame()
+        public void selectFrame()
         {
             selectedFrame = frames[indexFrame];
 
@@ -345,7 +350,18 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
 
-            mainPictureBox.Image = selectedFrame.originalImage;
+
+
+            if (selectedFrame.filteredImage != null)
+            {
+                mainPictureBox.Image = selectedFrame.filteredImage;
+            }
+            else if (selectedFrame.originalImage != null)
+            {
+                mainPictureBox.Image = selectedFrame.originalImage;
+            }
+
+            
             resizeMainPictureBox();
         }
 
@@ -834,7 +850,6 @@ namespace DMMDigital.Views
         {
             if (selectedFrame.originalImage != null)
             {
-
                 DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) { return; }
 
@@ -862,6 +877,7 @@ namespace DMMDigital.Views
 
                 selectedFrame.Image = drawFrameImage(selectedFrame);
                 selectedFrame.originalImage = null;
+                selectedFrame.filteredImage = null;
                 selectedFrame.datePhotoTook = "";
                 selectedFrame.notes = "";
 
@@ -947,7 +963,9 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.originalImage));
+            Image img = selectedFrame.filteredImage ?? selectedFrame.originalImage;
+
+            IFilterView filterView = new FilterView(new Bitmap(img));
             (filterView as Form).ShowDialog();
 
             Image image = filterView.originalImage;
@@ -956,6 +974,7 @@ namespace DMMDigital.Views
 
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
+                selectedFrame.filteredImage = image;
                 selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
                 selectedFrame.Refresh();
             }));
@@ -1001,7 +1020,16 @@ namespace DMMDigital.Views
         {
             Image currentImage = mainPictureBox.Image;
             currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
-            currentImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+
+            if (selectedFrame.filteredImage != null)
+            {
+                currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+            } 
+            else
+            {
+                currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
+            }
+
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
@@ -1011,7 +1039,16 @@ namespace DMMDigital.Views
         {
             Image currentImage = mainPictureBox.Image;
             currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            currentImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+
+            if (selectedFrame.filteredImage != null)
+            {
+                currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+            }
+            else
+            {
+                currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
+            }
+
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
@@ -1033,7 +1070,10 @@ namespace DMMDigital.Views
                     indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                     flowLayoutPanel1.Controls.Clear();
 
-                    if (File.Exists(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"))) {
+                    if (selectedFrame.filteredImage != null) {
+
+                        selectedFrame.filteredImage = null;
+
                         Image img = selectedFrame.originalImage;
                         mainPictureBox.Image = img;
 

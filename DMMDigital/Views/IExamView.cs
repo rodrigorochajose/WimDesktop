@@ -23,6 +23,7 @@ namespace DMMDigital.Views
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
 
+        void selectFrame();
         void loadImageOnMainPictureBox();
         bool dialogOverrideCurrentImage();
         void setLabelPatientTemplate(string patient, string template);

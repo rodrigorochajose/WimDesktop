@@ -62,6 +62,7 @@ namespace DMMDigital.Presenters
                         m_nId = Detector.CreateDetector(this, path);
                         Detector d = Detector.DetectorList[m_nId];
                         d?.Connect();
+                        examView.detectorConnected = true;
                     }
                 }
                 catch
@@ -162,14 +163,17 @@ namespace DMMDigital.Presenters
 
         private string getSensorPath()
         {
-            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
-            {
-                List<string> sensorUsbDevices = searcher.Get().Cast<string>().ToList();
+            using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'")) {
 
-                if (sensorUsbDevices.Any())
+                ManagementObjectCollection objectCollection = searcher.Get();
+
+                if (objectCollection.Count > 0)
                 {
-                    foreach (string sensorUsbDevice in sensorUsbDevices)
+                    List<string> sensorUsbDevices = new List<string>();
+
+                    foreach (ManagementObject obj in objectCollection)
                     {
+                        string sensorUsbDevice = obj.ToString();
                         int startIndex = sensorUsbDevice.IndexOf("IRAY");
 
                         if (startIndex != -1)
@@ -183,9 +187,9 @@ namespace DMMDigital.Presenters
                             desiredSubstring = desiredSubstring.TrimEnd('"');
 
                             sensorUsbDevices.Add(desiredSubstring);
-                            sensorUsbDevices.Remove(sensorUsbDevice);
                         }
                     }
+
                     string selectedSensor = sensorUsbDevices.First();
 
                     if (sensorUsbDevices.Count > 1)
@@ -222,7 +226,6 @@ namespace DMMDigital.Presenters
                         {
                             case SdkInterface.Cmd_Connect:
                                 //MessageBox.Show("Sensor Conectado");
-                                examView.detectorConnected = true;
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");
@@ -337,6 +340,7 @@ namespace DMMDigital.Presenters
                     break;
                 case SdkInterface.Evt_Image:
                     {
+                        examView.selectFrame();
                         bool getImage = true;
                         if (examView.selectedFrame.originalImage != null)
                         {
