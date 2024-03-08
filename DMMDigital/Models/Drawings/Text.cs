@@ -12,11 +12,11 @@ namespace DMMDigital.Models.Drawings
         public Point initialPosition { get; set; }
         public Point finalPosition { get; set; }
         public GraphicsPath graphicsPath { get; set; }
+        public Color drawingColor { get; set; }
+        public float drawingSize { get; set; }
         public string text { get; set; }
         public Font font { get; set; }
         public SolidBrush brush { get; set; }
-        public Color drawingColor { get; set; }
-        public float drawingSize { get; set; }
 
         public void drawPreview(Graphics g)
         {

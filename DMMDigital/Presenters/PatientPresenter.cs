@@ -201,7 +201,9 @@ namespace DMMDigital.Presenters
         private void openExam(object sender, EventArgs e)
         {
             ConfigModel config = configRepository.getAllConfig();
-            new ExamPresenter(new ExamView(patientView.selectedExamId, patientView.selectedPatientId, config), new ExamRepository(), true, examOpeningMode);
+
+            PatientModel selectedPatient = patientList.FirstOrDefault(p => p.id == patientView.selectedPatientId);
+            new ExamPresenter(new ExamView(patientView.selectedExamId, selectedPatient, config), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
             (patientView as Form).Hide();
             (patientView as Form).Close();
@@ -215,8 +217,8 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            examImageDrawingRepository.delete(patientView.selectedExamId);
-            examImageRepository.delete(patientView.selectedExamId);
+            examImageDrawingRepository.deleteAllExamImageDrawings(patientView.selectedExamId);
+            examImageRepository.deleteAllExamImages(patientView.selectedExamId);
             examRepository.delete(patientView.selectedExamId);
 
             string fullPath = configRepository.getExamPath() + patientView.selectedExamPath;
@@ -298,7 +300,7 @@ namespace DMMDigital.Presenters
             {
                 pathImages = examPath,
                 framesToExport = frames,
-                sessionName = selectedExam.sessionName
+                patientName = selectedExam.patient.name
             };
             (exportView as Form).ShowDialog();
         }

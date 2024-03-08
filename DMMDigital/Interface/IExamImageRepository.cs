@@ -5,8 +5,10 @@ namespace DMMDigital.Interface
 {
     public interface IExamImageRepository
     {
-        void save(List<ExamImageModel> examImages);
-        OperationStatus delete(int examId);
+        void save();
+        void addExamImage(ExamImageModel examImage);
+        void deleteRangeExamImages(List<ExamImageModel> examImagesToDelete);
+        OperationStatus deleteAllExamImages(int examId);
         IEnumerable<ExamImageModel> getExamImages(int examId);
     }
 }

@@ -3,6 +3,7 @@ using DMMDigital.Interface;
 using DMMDigital.Interface.iRay;
 using DMMDigital.Models;
 using DMMDigital.Views;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -136,7 +137,30 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                examImageRepository.save(examView.examImages);
+                List<ExamImageModel> examImagesToSave = examView.examImages;
+                List<ExamImageModel> currentExamImages = examImageRepository.getExamImages(examView.examId).ToList();
+
+                List<ExamImageModel> imagesToDelete = currentExamImages.ExceptBy(examImagesToSave, item => item.frameId).ToList();
+
+                if (imagesToDelete.Any())
+                {
+                    examImageRepository.deleteRangeExamImages(imagesToDelete);
+                }
+
+                foreach (ExamImageModel item in examImagesToSave)
+                {
+                    ExamImageModel existingExamImage = currentExamImages.Find(ei => ei.frameId == item.frameId);
+                    if (existingExamImage == null)
+                    {
+                        examImageRepository.addExamImage(item);
+                    }
+                    else
+                    {
+                        existingExamImage.notes = item.notes;
+                        existingExamImage.createdAt = item.createdAt;
+                        examImageRepository.save();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -148,7 +172,30 @@ namespace DMMDigital.Presenters
         {
             try
             {
-               examImageDrawingRepository.save(examView.examImageDrawings);
+                List<ExamImageDrawingModel> examImageDrawingsToSave = examView.examImageDrawings;
+                List<ExamImageDrawingModel> currentExamImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+
+                List <ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examImageDrawingsToSave, item => item.examId).ToList();
+
+                if (drawingsToDelete.Any())
+                {
+                    examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
+                }
+
+                foreach (ExamImageDrawingModel item in examImageDrawingsToSave)
+                {
+                    ExamImageDrawingModel existingExamImageDrawing = currentExamImageDrawings.Find(eid => eid.examImageId == item.examImageId);
+                    if (existingExamImageDrawing == null)
+                    {
+                        examImageDrawingRepository.addExamImageDrawing(item);
+                    }
+                    else
+                    {
+                        // implementar atualização de valores dos desenhos
+                        // save changes 
+                    }
+                }
+
             }
             catch (Exception ex)
             {

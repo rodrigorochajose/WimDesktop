@@ -12,7 +12,7 @@ namespace DMMDigital.Views
 {
     public partial class ExportExamView : Form, IExportExamView
     {
-        public string sessionName { get; set; }
+        public string patientName { get; set; }
         public string pathImages { get; set; }
         public string pathToExport { get; set; }
         public List<Frame> framesToExport { get; set; }
@@ -134,7 +134,7 @@ namespace DMMDigital.Views
             }
             else
             {
-                string path = Path.Combine(pathToExport, $"Exam_{sessionName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
+                string path = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
                 Directory.CreateDirectory(path);
 
                 ImageFormat format = ImageFormat.Bmp;

@@ -22,12 +22,12 @@ namespace DMMDigital.Views
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
+        event EventHandler eventSaveAndClose;
 
         void selectFrame();
         void loadImageOnMainPictureBox();
         bool dialogOverrideCurrentImage();
         void setLabelPatientTemplate(string patient, string template);
-
-
+        void timerTick(object sender, EventArgs e);
     }
 }

@@ -32,6 +32,7 @@ namespace DMMDigital.Views
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
         public event EventHandler eventGetPatient;
+        public event EventHandler eventSaveAndClose;
 
         int action = 0;
         int indexFrame = 0;
@@ -97,16 +98,13 @@ namespace DMMDigital.Views
             };
         }
 
-        public ExamView(int examId, int patientId, ConfigModel config)
+        public ExamView(int examId, PatientModel patient, ConfigModel config)
         {
             InitializeComponent();
             associateConfigs(config);
 
             this.examId = examId;
-            patient = new PatientModel
-            {
-                id = patientId
-            };
+            this.patient = patient;
 
             Load += delegate
             {
@@ -219,6 +217,7 @@ namespace DMMDigital.Views
                             {
                                 id = int.Parse(drawing.file.Substring(4, 1)),
                                 img = new Bitmap(img),
+                                graphicsPath = new GraphicsPath()
                             });
                         }
                     }
@@ -423,7 +422,7 @@ namespace DMMDigital.Views
             ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
             if (selectedButton != null)
             {
-                if (selectedButton.Name == "buttonZoom")
+                if (selectedButton.Name == "buttonMagnifier")
                 {
                     panel2.Controls.Remove(pictureBoxMagnifier);
                 }
@@ -709,6 +708,7 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
+            saveExamChangesOnDatabase();
         }
 
         private void showDrawingHistory(IDrawing drawing)
@@ -841,7 +841,7 @@ namespace DMMDigital.Views
             {
                 pathImages = examPath,
                 framesToExport = frames,
-                sessionName = sessionName
+                patientName = patient.name
             };
             (exportView as Form).ShowDialog();
         }
@@ -1530,42 +1530,50 @@ namespace DMMDigital.Views
             }
         } 
 
-        private void timerTick(object sender, EventArgs e)
+        public void timerTick(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-
-            foreach (ExamImageModel item in examImages)
+            if (timer1.Enabled)
             {
-                Frame frame = frames.FirstOrDefault(i => i.order == item.frameId);
-
-                if (frame != null)
+                foreach (ExamImageModel item in examImages)
                 {
-                    item.notes = frame.notes;
+                    Frame frame = frames.FirstOrDefault(i => i.order == item.frameId);
+
+                    if (frame != null)
+                    {
+                        item.notes = frame.notes;
+                    }
                 }
-            }
 
-            examImageDrawings = new List<ExamImageDrawingModel>();
+                examImageDrawings = new List<ExamImageDrawingModel>();
 
-            Regex fileRegex = new Regex(@"F\d+-D\d+");
-            List<string> files = Directory.GetFiles(examPath).Where(f => fileRegex.IsMatch(Path.GetFileName(f))).ToList();
+                Regex fileRegex = new Regex(@"F\d+-D\d+");
+                List<string> files = Directory.GetFiles(examPath).Where(f => fileRegex.IsMatch(Path.GetFileName(f))).ToList();
 
-            foreach (string file in files)
-            {
-                examImageDrawings.Add(new ExamImageDrawingModel
+                foreach (string file in files)
                 {
-                    examId = examId,
-                    examImageId = int.Parse(file.Substring(examPath.Length + 2, 1)),
-                    file = file.Substring(examPath.Length + 1)
-                });
-            }
+                    examImageDrawings.Add(new ExamImageDrawingModel
+                    {
+                        examId = examId,
+                        examImageId = int.Parse(file.Substring(examPath.Length + 2, 1)),
+                        file = file.Substring(examPath.Length + 1)
+                    });
+                }
 
-            eventSaveExamImage?.Invoke(this, EventArgs.Empty);
-            eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
+                eventSaveExamImage?.Invoke(this, EventArgs.Empty);
+                eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
+
+                timer1.Enabled = false;
+            }
         }
 
-        public void examViewClosing(object sender, FormClosingEventArgs e)
+        private void examViewFormClosing(object sender, FormClosingEventArgs e)
         {
-            timerTick(this, EventArgs.Empty);
+            e.Cancel = timer1.Enabled;
+
+            if (e.Cancel)
+            {
+                eventSaveAndClose?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

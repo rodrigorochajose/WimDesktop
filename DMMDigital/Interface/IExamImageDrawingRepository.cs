@@ -4,10 +4,11 @@ using System.Collections.Generic;
 namespace DMMDigital.Interface
 {
     public interface IExamImageDrawingRepository
-    {
-        void save(List<ExamImageDrawingModel> examImageDrawing);
-        OperationStatus delete(int examId);
-     
+    { 
+        void save();
+        void addExamImageDrawing(ExamImageDrawingModel examImageDrawing);
+        void deleteRangeExamImageDrawings(List<ExamImageDrawingModel> examImageDrawings);
+        OperationStatus deleteAllExamImageDrawings(int examId);
         IEnumerable<ExamImageDrawingModel> getExamImageDrawings(int examId);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using DMMDigital.Interface;
 using DMMDigital.Models;
-using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
@@ -11,37 +11,45 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public void save(List<ExamImageDrawingModel> examImageDrawing)
+        public void save()
         {
             try
             {
-                if (examImageDrawing.Any()) { 
-                    List<ExamImageDrawingModel> currentList = getExamImageDrawings(examImageDrawing[0].examId).ToList();
-
-                    List<ExamImageDrawingModel> drawingsToDelete = currentList.ExceptBy(examImageDrawing, drawing => drawing.file).ToList();
-
-                    foreach (ExamImageDrawingModel drawing in drawingsToDelete)
-                    {
-                        context.examImageDrawing.Remove(drawing);
-                    }
-                         
-                    foreach (ExamImageDrawingModel item in examImageDrawing)
-                    {
-                        if (currentList.Find(e => e.file == item.file) == null)
-                        {
-                            context.examImageDrawing.Add(item);
-                        }
-                    }
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
-                throw ex;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public OperationStatus delete(int examId)
+        public void addExamImageDrawing(ExamImageDrawingModel examImageDrawing)
+        {
+            try
+            {
+                context.examImageDrawing.Add(examImageDrawing);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void deleteRangeExamImageDrawings(List<ExamImageDrawingModel> examImageDrawings)
+        {
+            try
+            {
+                context.examImageDrawing.RemoveRange(examImageDrawings);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public OperationStatus deleteAllExamImageDrawings(int examId)
         {
             try
             {

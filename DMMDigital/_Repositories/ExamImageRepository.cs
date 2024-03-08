@@ -2,10 +2,8 @@
 using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
-using MoreLinq;
 
 namespace DMMDigital._Repositories
 {
@@ -13,30 +11,11 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public void save(List<ExamImageModel> examImages)
+        public void save() 
         {
             try
             {
-                if (examImages.Any())
-                {
-                    List<ExamImageModel> currentList = getExamImages(examImages[0].examId).ToList();
-
-                    List<ExamImageModel> imagesToRemove = currentList.ExceptBy(examImages, item => item.file).ToList();
-                
-                    foreach(ExamImageModel item in imagesToRemove)
-                    {
-                        context.examImage.Remove(item);
-                    }
-
-                    foreach (ExamImageModel item in examImages)
-                    {
-                        if (!currentList.Contains(item))
-                        {
-                            context.examImage.AddOrUpdate(item);
-                        }
-                    }
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -44,7 +23,33 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public OperationStatus delete(int examId)
+        public void addExamImage(ExamImageModel examImage)
+        {
+            try
+            {
+                context.examImage.Add(examImage);
+                context.SaveChanges();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void deleteRangeExamImages(List<ExamImageModel> examImages)
+        {
+            try
+            {
+                context.examImage.RemoveRange(examImages);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public OperationStatus deleteAllExamImages(int examId)
         {
             try
             {

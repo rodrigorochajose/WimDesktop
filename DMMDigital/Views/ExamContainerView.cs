@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -22,6 +23,8 @@ namespace DMMDigital.Views
             {
                 exam.examId
             };
+
+            exam.eventSaveAndClose += delegate { saveAndClose(this, EventArgs.Empty); };
 
             tabPage1.Text = exam.sessionName;
             addFormIntoPage(tabPage1, exam);
@@ -54,11 +57,12 @@ namespace DMMDigital.Views
             (examView as Form).Show();
         }
 
-        private void examContainerViewFormClosing(object sender, FormClosingEventArgs e)
+        private void saveAndClose(object sender, EventArgs e)
         {
             List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
             foreach (ExamView exam in openedExams)
             {
+                exam.timerTick(this, e);
                 exam.Close();
             }
         }
@@ -69,5 +73,9 @@ namespace DMMDigital.Views
             eventDestroyDetector?.Invoke(this, e);
         }
 
+        private void examContainerViewFormClosing(object sender, FormClosingEventArgs e)
+        {
+            saveAndClose(sender, EventArgs.Empty);
+        }
     }
 }
