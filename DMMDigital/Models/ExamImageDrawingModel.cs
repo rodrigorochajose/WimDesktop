@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
+using System.Windows.Documents;
 
 namespace DMMDigital.Models
 {
@@ -17,7 +20,19 @@ namespace DMMDigital.Models
         [Column("EXAM_IMAGE_ID")]
         public int examImageId { get; set; }
 
-        [Column("FILE")]
-        public string file { get; set; }
+        [Column("DRAWING_COLOR")]
+        public string drawingColor { get; set; }
+
+        [Column("DRAWING_SIZE")]
+        public int drawingSize { get; set; }
+
+        [Column("DRAWING_TYPE")]
+        public string drawingType { get; set; }
+
+        [Column("DRAWING_TEXT")]
+        public string drawingText { get; set; }
+
+        [NotMapped]
+        public List<Point> points { get; set; }
     }
 }

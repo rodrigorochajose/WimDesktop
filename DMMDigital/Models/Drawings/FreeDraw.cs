@@ -10,8 +10,7 @@ namespace DMMDigital.Models.Drawings
     public class FreeDraw : IDrawing
     {
         public int id { get; set; }
-        public Point initialPosition { get; set; }
-        public Point finalPosition { get; set; }
+        public int frameId { get; set; }
         public GraphicsPath graphicsPath { get; set; }
         public Color drawingColor { get; set; }
         public float drawingSize { get; set; }
@@ -39,7 +38,6 @@ namespace DMMDigital.Models.Drawings
             Bitmap bitmap = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(bitmap);
             draw(graphics);
-            bitmap.Save(Path.Combine(path, $"F{frameId}-D{id}.png"));
 
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;

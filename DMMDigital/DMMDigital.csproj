@@ -94,6 +94,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IExamImageDrawingPointsRepository.cs" />
+    <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IConfigRepository.cs" />
     <Compile Include="Interface\IExamImageDrawingRepository.cs" />
@@ -104,7 +106,6 @@
     <Compile Include="Models\Annotations\DateTimeRangeAttribute.cs" />
     <Compile Include="Models\Detector.cs" />
     <Compile Include="Interface\iRay\IEventReceiver.cs" />
-    <Compile Include="Models\Drawings\ImageDrawed.cs" />
     <Compile Include="Models\Drawings\Ruler.cs" />
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\OperationStatus.cs" />
@@ -276,6 +277,7 @@
       <DependentUpon>TemplateView.cs</DependentUpon>
     </Compile>
     <Compile Include="_Repositories\ConfigRepository.cs" />
+    <Compile Include="_Repositories\ExamImageDrawingPointsRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
     <Compile Include="_Repositories\ExamImageRepository.cs" />
     <Compile Include="_Repositories\ExamRepository.cs" />

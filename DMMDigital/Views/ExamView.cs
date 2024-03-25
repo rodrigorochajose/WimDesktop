@@ -11,7 +11,8 @@ using DMMDigital.Models.Drawings;
 using DMMDigital.Components;
 using DMMDigital._Repositories;
 using DMMDigital.Presenters;
-using System.Text.RegularExpressions;
+using MoreLinq;
+using System.Threading;
 
 namespace DMMDigital.Views
 {
@@ -26,6 +27,7 @@ namespace DMMDigital.Views
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        public List<ExamImageDrawingPointsModel> examImageDrawingPoints { get; set; }
         public bool detectorConnected { get; set; }
 
         public event EventHandler eventSaveExam;
@@ -66,8 +68,8 @@ namespace DMMDigital.Views
         IDrawing selectedDrawingToMove;
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
-        Point drawingFinalPosition = new Point();
-        Point drawingInitialPosition = new Point();
+
+        static object blocker = new object();
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
@@ -111,6 +113,7 @@ namespace DMMDigital.Views
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
                 drawTemplate();
+                loadExamDrawings();
 
                 if (examImages.Any())
                 {
@@ -179,7 +182,7 @@ namespace DMMDigital.Views
 
                 if (selectedExamImage == null)
                 {
-                    newFrame.Image = drawFrameImage(newFrame);
+                    newFrame.Image = drawFrameDefaultImage(newFrame);
                 }
                 else
                 {
@@ -204,28 +207,10 @@ namespace DMMDigital.Views
                 newFrame.DoubleClick += frameDoubleClick;
                 newFrame.Paint += framePaint;
 
-                frames.Add(newFrame);
-
-                List<IDrawing> frameDrawings = new List<IDrawing>();
-                if (examImageDrawings != null)
-                {
-                    foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(d => d.examImageId == newFrame.order))
-                    {
-                        using (Image img = Image.FromFile(Path.Combine(examPath, drawing.file)))
-                        {
-                            frameDrawings.Add(new ImageDrawed
-                            {
-                                id = int.Parse(drawing.file.Substring(4, 1)),
-                                img = new Bitmap(img),
-                                graphicsPath = new GraphicsPath()
-                            });
-                        }
-                    }
-                }
-
-                frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { frameDrawings }));
+                frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { new List<IDrawing>() }));
                 selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
 
+                frames.Add(newFrame);
                 panelTemplate.Controls.Add(newFrame);
             }
 
@@ -246,8 +231,7 @@ namespace DMMDigital.Views
             textBoxFrameNotes.Text = selectedFrame.notes;
         }
 
-        // passar pro presenter?
-        private Image drawFrameImage(Frame currentFrame)
+        private Image drawFrameDefaultImage(Frame currentFrame)
         {
             Bitmap image = new Bitmap(currentFrame.Width, currentFrame.Height);
             Graphics graphics = Graphics.FromImage(image);
@@ -255,6 +239,142 @@ namespace DMMDigital.Views
             graphics.DrawString(currentFrame.order.ToString(), font, Brushes.White, new Point(0, 0));
 
             return image;
+        }
+
+        private void loadExamDrawings()
+        {
+            if (examImageDrawings != null)
+            {
+                Dictionary<string, Func<ExamImageDrawingModel, IDrawing>> getDrawingModelByType = new Dictionary<string, Func<ExamImageDrawingModel, IDrawing>>
+                {
+                    {
+                        "Arrow",
+                        (drawing) => {
+                            return new Arrow
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
+                        }
+                    },
+                    {
+                        "Ellipse",
+                        (drawing) => {
+                            return new Ellipse
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
+                        }
+                    },
+                    {
+                        "RectangleDraw",
+                        (drawing) => {
+                            return new RectangleDraw
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
+                        }
+                    },
+                    {
+                        "FreeDraw",
+                        (drawing) => {
+                            return new FreeDraw
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                            };
+                        }
+                    },
+                    {
+                        "Text",
+                        (drawing) => {
+                            return new Text
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                                text = drawing.drawingText,
+                                font = new Font("Arial", drawing.drawingSize),
+                                brush = new SolidBrush(Color.FromArgb(int.Parse(drawing.drawingColor))),
+                            };
+                        }
+                    },
+                    {
+                        "Ruler",
+                        (drawing) =>
+                        {
+                            Ruler ruler = new Ruler
+                            {
+                                id = drawing.id,
+                                frameId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                                lineLength = new List<float>(),
+                                multiple = false,
+                            };
+
+                            if (ruler.points.Count > 2)
+                            {
+                                ruler.multiple = true;
+                            }
+
+
+                            for (int counter = 0; counter < ruler.points.Count - 1; counter++)
+                            {
+                                Point initialPoint = ruler.points[counter];
+                                Point finalPoint = ruler.points[counter + 1];
+
+                                float length = getRulerLength(initialPoint, finalPoint);
+                                ruler.lineLength.Add(length);
+                            }
+
+                            return ruler;
+                        }
+                    }
+                };
+
+                List<IDrawing> frameDrawings = new List<IDrawing>();
+                foreach (ExamImageDrawingModel examImageDrawing in examImageDrawings)
+                {
+                    frameDrawings.Add(getDrawingModelByType[examImageDrawing.drawingType].Invoke(examImageDrawing));
+                }
+
+                foreach (IDrawing drawing in frameDrawings)
+                {
+                    List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == drawing.frameId).drawingHistory;
+
+                    currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
+                    {
+                        drawing
+                    });
+                }
+
+                selectedDrawingHistory = frameDrawingHistories.FirstOrDefault().drawingHistory;
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            }
         }
 
         private void frameHandler(Image image)
@@ -289,11 +409,8 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-            indexFrame++;
-            if (indexFrame == frames.Count())
-            {
-                indexFrame--;
-            }
+
+            indexFrame = ++indexFrame == frames.Count() ? --indexFrame : indexFrame++;
 
             Frame nextFrameToGetImage = frames[indexFrame];
 
@@ -349,8 +466,6 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
 
-
-
             if (selectedFrame.filteredImage != null)
             {
                 mainPictureBox.Image = selectedFrame.filteredImage;
@@ -359,8 +474,11 @@ namespace DMMDigital.Views
             {
                 mainPictureBox.Image = selectedFrame.originalImage;
             }
+            else
+            {
+                mainPictureBox.Image = null;
+            }
 
-            
             resizeMainPictureBox();
         }
 
@@ -394,13 +512,10 @@ namespace DMMDigital.Views
             {
                 mainPictureBox.Invoke((MethodInvoker)(() =>
                 {
-                    Size rectangleSize;
-                    rectangleSize = new Size(
+                    mainPictureBox.Size = new Size(
                         mainPictureBoxOriginalSize.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
                         mainPictureBoxOriginalSize.Height
                     );
-
-                    mainPictureBox.Size = rectangleSize;
                     mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
                 }));
             }
@@ -651,25 +766,33 @@ namespace DMMDigital.Views
             return textBox.Text;
         }
 
-        private float getRulerLength()
+        private float getRulerLength(Point initialPoint, Point finalPoint)
         {
-            // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            double scalingFactorWidth = mainPictureBox.Image.Width / 20;
-            double scalingFactorHeight = mainPictureBox.Image.Height / 30;
-
-            float initialX = (currentDrawing.initialPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width);
-            float initialY = (currentDrawing.initialPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
-            float finalX = (currentDrawing.finalPosition.X * mainPictureBox.Image.Width / mainPictureBox.Width);
-            float finalY = (currentDrawing.finalPosition.Y * mainPictureBox.Image.Height / mainPictureBox.Height);
-
-            float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
-
-            if (calibrated)
+            /// verificar threads 
+           
+            lock (blocker)
             {
-                lenghtInMilimeters *= (float)scalingFactorSensorImage;
-            }
+                // 30 is sensor Width and 20 height -> i'm going to get from database these values
+                double scalingFactorWidth = mainPictureBox.Image.Width / 20;
+                double scalingFactorHeight = mainPictureBox.Image.Height / 30;
 
-            return lenghtInMilimeters;
+                float initialX = initialPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+                float initialY = initialPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+                float finalX = finalPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+                float finalY = finalPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+
+                float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
+
+                if (calibrated)
+                {
+                    lenghtInMilimeters *= (float)scalingFactorSensorImage;
+                }
+
+                //Console.WriteLine($"mainPictureBoxWidth: {mainPictureBox.Width} | mainPictureBoxHeight: {mainPictureBox.Height} | mainPictureBoxImageWidth: {mainPictureBox.Image.Width} | mainPictureBoxImageWidth: {mainPictureBox.Image.Width}");
+                //Console.WriteLine($"InitialP: {initialPoint} | FinalP: {finalPoint} -> initialX : {initialX} | initialY : {initialY} | finalX : {finalX} | finalY : {finalY} -> length: {lenghtInMilimeters}");
+
+                return lenghtInMilimeters;
+            }
         }
 
         private void recalibrateRuler(double rulerValue)
@@ -703,8 +826,6 @@ namespace DMMDigital.Views
 
             IDrawing drawingToRemove = selectedDrawingHistory[indexSelectedDrawingHistory].Single(d => d.id == drawing.id);
             selectedDrawingHistory[indexSelectedDrawingHistory].Remove(drawingToRemove);
-
-            File.Delete(Path.Combine(examPath, $"F{selectedFrame.order}-D{drawing.id}.png"));
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
@@ -746,27 +867,27 @@ namespace DMMDigital.Views
 
             if (drawing is Ellipse)
             {
-                label.Text = $"Circulo-{drawing.id}";
+                label.Text = "Circulo";
             }
             else if (drawing is RectangleDraw)
             {
-                label.Text = $"Retangulo-{drawing.id}";
+                label.Text = "Retangulo";
             }
             else if (drawing is Arrow)
             {
-                label.Text = $"Seta-{drawing.id}";
+                label.Text = "Seta";
             }
             else if (drawing is Text)
             {
-                label.Text = $"Texto{drawing.id}";
+                label.Text = "Texto";
             }
             else if (drawing is Ruler)
             {
-                label.Text = $"Régua-{drawing.id}";
+                label.Text = "Régua";
             }
             else 
             {
-                label.Text = $"DesenhoLivre-{drawing.id}";
+                label.Text = "DesenhoLivre";
             }
 
             pictureBox.Image = drawing.generateDrawingImageAndThumb(selectedFrame.order, examPath, mainPictureBox.Width, mainPictureBox.Height);
@@ -837,10 +958,36 @@ namespace DMMDigital.Views
 
         private void buttonExportClick(object sender, EventArgs e)
         {
+            for (int counter = 0; counter < frames.Count; counter++)
+            {
+                if (frames[counter].originalImage != null)
+                {
+                    if (frameDrawingHistories[counter].drawingHistory.Count > 1)
+                    {
+                        Image frameImage = frames[counter].originalImage;
+                        Bitmap imageToDraw = new Bitmap(frameImage, new Size(
+                            mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
+                            mainPictureBoxOriginalSize.Height
+                        ));
+
+                        Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
+
+                        foreach (IDrawing drawing in frameDrawingHistories[counter].drawingHistory.Last())
+                        {
+                            drawing.draw(graphicsToDraw);
+                        }
+
+                        Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
+
+                        editedImage.Save(Path.Combine(examPath, $"{frames[counter].order}-edited.png"));
+                    }
+                }
+            }
+
             IExportExamView exportView = new ExportExamView
             {
                 pathImages = examPath,
-                framesToExport = frames,
+                framesToExport = frames.Where(f => f.originalImage != null).ToList(),
                 patientName = patient.name
             };
             (exportView as Form).ShowDialog();
@@ -861,21 +1008,15 @@ namespace DMMDigital.Views
                     File.Delete(filteredImagePath);
                 }
 
-                foreach (ExamImageDrawingModel drawing in examImageDrawings.Where(f => f.examImageId == selectedFrame.order).ToList())
-                {
-                    File.Delete(Path.Combine(examPath, drawing.file));
-                    examImageDrawings.Remove(drawing);
-                }
-
                 frameDrawingHistories[indexFrame].drawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
 
                 selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                 flowLayoutPanel1.Controls.Clear();
 
-                examImages.RemoveAll(i => i.frameId == selectedFrame.order);
+                examImages.RemoveAll(ei => ei.frameId == selectedFrame.order);
 
-                selectedFrame.Image = drawFrameImage(selectedFrame);
+                selectedFrame.Image = drawFrameDefaultImage(selectedFrame);
                 selectedFrame.originalImage = null;
                 selectedFrame.filteredImage = null;
                 selectedFrame.datePhotoTook = "";
@@ -902,16 +1043,16 @@ namespace DMMDigital.Views
 
         private void buttonSelectClick(object sender, EventArgs e)
         {
-            panelToolOptions.Controls.Clear();
-            selectTool(sender);
             action = 0;
+            selectTool(sender);
+            panelToolOptions.Controls.Clear();
         }
 
         private void buttonMoveDrawingClick(object sender, EventArgs e)
         {
-            panelToolOptions.Controls.Clear();
-            selectTool(sender);
             action = 1;
+            selectTool(sender);
+            panelToolOptions.Controls.Clear();
         }
 
         private void buttonMagnifierClick(object sender, EventArgs e)
@@ -1060,11 +1201,7 @@ namespace DMMDigital.Views
             {
                 if (selectedFrame.originalImage != null)
                 {
-                    List<ExamImageDrawingModel> drawingsToRemove = examImageDrawings.Where(f => f.examImageId == selectedFrame.order).ToList();
-                    foreach (ExamImageDrawingModel drawing in drawingsToRemove)
-                    {
-                        File.Delete(Path.Combine(examPath, drawing.file));
-                    }
+                    examImages.RemoveAll(ei => ei.frameId == selectedFrame.order);
 
                     selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                     indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
@@ -1126,14 +1263,7 @@ namespace DMMDigital.Views
 
         private void checkBoxMultiRulerCheckedChange(object sender, EventArgs e)
         {
-            if ((sender as CheckBox).Checked)
-            {
-                multiRuler = true;
-            }
-            else
-            {
-                multiRuler = false;
-            }
+            multiRuler = (sender as CheckBox).Checked;
         }
 
         private void textBoxFrameNotesTextChanged(object sender, EventArgs e)
@@ -1155,44 +1285,29 @@ namespace DMMDigital.Views
                         currentDrawing = selectedDrawingHistory[indexSelectedDrawingHistory].FirstOrDefault(d => d.graphicsPath.IsOutlineVisible(clickPosition, new Pen(Color.Red, 5)));
                         if (currentDrawing != null)
                         {
-                            drawingInitialPosition = currentDrawing.initialPosition;
-                            drawingFinalPosition = currentDrawing.finalPosition;
-
                             switch (currentDrawing)
                             {
                                 case Ruler _:
-                                    selectedDrawingToMove = new FreeDraw
-                                    {
-                                        points = new List<Point>((currentDrawing as Ruler).points)
-                                    };
-
+                                    selectedDrawingToMove = new FreeDraw();
                                     break;
                                 case Ellipse _:
                                     selectedDrawingToMove = new Ellipse();
-
                                     break;
                                 case RectangleDraw _:
                                     selectedDrawingToMove = new RectangleDraw();
-
                                     break;
                                 case Arrow _:
                                     selectedDrawingToMove = new Arrow();
-
                                     break;
                                 case FreeDraw fd:
-                                    selectedDrawingToMove = new FreeDraw
-                                    {
-                                        points = new List<Point>(fd.points)
-                                    };
+                                    selectedDrawingToMove = new FreeDraw();
 
                                     pointsDifferenceFreeDrawing = new List<Point>();
+                                    List<Point> pointsSelectedDrawing = currentDrawing.points;
 
-                                    drawingInitialPosition = (selectedDrawingToMove as FreeDraw).points.First();
-                                    List<Point> pointsSelectedDrawing = (selectedDrawingToMove as FreeDraw).points;
-
-                                    for (int counter = 1; counter <= (selectedDrawingToMove as FreeDraw).points.Count - 1; counter++)
+                                    foreach (Point p in pointsSelectedDrawing.Skip(1))
                                     {
-                                        pointsDifferenceFreeDrawing.Add(new Point(pointsSelectedDrawing[counter].X - drawingInitialPosition.X, pointsSelectedDrawing[counter].Y - drawingInitialPosition.Y));
+                                        pointsDifferenceFreeDrawing.Add(new Point(p.X - currentDrawing.points.First().X, p.Y - currentDrawing.points.First().Y));
                                     }
 
                                     break;
@@ -1206,12 +1321,13 @@ namespace DMMDigital.Views
 
                                     break;
                             }
+
                             selectedDrawingToMove.id = currentDrawing.id;
+                            selectedDrawingToMove.frameId = currentDrawing.frameId;
                             selectedDrawingToMove.graphicsPath = currentDrawing.graphicsPath;
                             selectedDrawingToMove.drawingColor = currentDrawing.drawingColor;
                             selectedDrawingToMove.drawingSize = currentDrawing.drawingSize;
-                            selectedDrawingToMove.initialPosition = new Point(currentDrawing.initialPosition.X, currentDrawing.initialPosition.Y);
-                            selectedDrawingToMove.finalPosition = new Point(currentDrawing.finalPosition.X, currentDrawing.finalPosition.Y);
+                            selectedDrawingToMove.points = new List<Point>(currentDrawing.points);
 
                             selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
                             {
@@ -1227,16 +1343,16 @@ namespace DMMDigital.Views
                         {
                             if (e.Button == MouseButtons.Right)
                             {
-                                if ((currentDrawing as Ruler).points.Count > 1)
+                                if (currentDrawing.points.Count > 1)
                                 {
-                                    currentDrawing.finalPosition = (currentDrawing as Ruler).points.Last();
+                                    (currentDrawing as Ruler).lineLength.Remove((currentDrawing as Ruler).lineLength.Last());
                                 }
                                 else
                                 {
                                     selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
                                     indexSelectedDrawingHistory--;
-                                    currentDrawing.finalPosition = currentDrawing.initialPosition;
                                 }
+
                                 rulerDrawed = false;
                                 draw = false;
                                 selectedDrawingHistoryHandler();
@@ -1249,18 +1365,15 @@ namespace DMMDigital.Views
                                     currentDrawing = new Ruler
                                     {
                                         id = counterDrawings,
+                                        frameId = selectedFrame.order,
                                         graphicsPath = new GraphicsPath(),
-                                        initialPosition = e.Location,
-                                        finalPosition = e.Location,
-                                        points = new List<Point>(),
-                                        lineLength = new List<float>(),
                                         drawingColor = rulerColor,
                                         drawingSize = 2,
-                                        multiple = true
+                                        points = new List<Point> { clickPosition },
+                                        previewPoint = clickPosition,
+                                        lineLength = new List<float> { 0 },
+                                        multiple = true,
                                     };
-
-                                    (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
-                                    (currentDrawing as Ruler).lineLength.Add(0);
 
                                     selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
                                     {
@@ -1272,9 +1385,19 @@ namespace DMMDigital.Views
                                 }
                                 else
                                 {
-                                    (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
-                                    (currentDrawing as Ruler).lineLength.Add(getRulerLength());
-                                    currentDrawing.initialPosition = currentDrawing.finalPosition;
+                                    currentDrawing.points.Add((currentDrawing as Ruler).previewPoint);
+                                    float currentLineLength = 0;
+
+                                    Thread thread = new Thread(() =>
+                                    {
+                                        currentLineLength = getRulerLength(currentDrawing.points.Last(), (currentDrawing as Ruler).previewPoint);
+                                    });
+
+                                    thread.Start();
+                                    thread.Join();
+
+                                    (currentDrawing as Ruler).lineLength.Add(currentLineLength);
+
                                 }
                             }
                         }
@@ -1283,17 +1406,15 @@ namespace DMMDigital.Views
                             currentDrawing = new Ruler
                             {
                                 id = counterDrawings,
+                                frameId = selectedFrame.order,
                                 graphicsPath = new GraphicsPath(),
-                                initialPosition = e.Location,
-                                finalPosition = e.Location,
-                                points = new List<Point>(),
-                                lineLength = new List<float>(),
                                 drawingColor = rulerColor,
                                 drawingSize = 2,
+                                points = new List<Point> { clickPosition, clickPosition },
+                                previewPoint = clickPosition,
+                                lineLength = new List<float> { 0 },
                                 multiple = false
                             };
-                            (currentDrawing as Ruler).points.Add(currentDrawing.initialPosition);
-                            (currentDrawing as Ruler).lineLength.Add(0);
                         }
 
                     break;
@@ -1302,13 +1423,12 @@ namespace DMMDigital.Views
                         currentDrawing = new FreeDraw
                         {
                             id = counterDrawings,
+                            frameId = selectedFrame.order,
                             graphicsPath = new GraphicsPath(),
-                            points = new List<Point>(),
+                            points = new List<Point> { clickPosition },
                             drawingColor = drawingColor,
                             drawingSize = drawingSize
                         };
-
-                        (currentDrawing as FreeDraw).points.Add(e.Location);
 
                         break;
 
@@ -1323,13 +1443,14 @@ namespace DMMDigital.Views
                             currentDrawing = new Text
                             {
                                 id = counterDrawings,
+                                frameId = selectedFrame.order,
                                 graphicsPath = new GraphicsPath(),
-                                initialPosition = clickPosition,
                                 text = textToDraw,
                                 font = new Font("Arial", textDrawingPreviousSize),
                                 brush = new SolidBrush(textColor),
                                 drawingColor = textColor,
-                                drawingSize = textDrawingPreviousSize
+                                drawingSize = textDrawingPreviousSize,
+                                points = new List<Point> { clickPosition }
                             };
 
                             selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
@@ -1347,11 +1468,11 @@ namespace DMMDigital.Views
                         currentDrawing = new Arrow
                         {
                             id = counterDrawings,
+                            frameId = selectedFrame.order,
                             graphicsPath = new GraphicsPath(),
-                            initialPosition = clickPosition,
-                            finalPosition = clickPosition,
                             drawingColor = drawingColor,
-                            drawingSize = drawingSize
+                            drawingSize = drawingSize,
+                            points = new List<Point> { clickPosition, clickPosition }
                         };
 
                         break;
@@ -1360,11 +1481,11 @@ namespace DMMDigital.Views
                         currentDrawing = new Ellipse
                         {
                             id = counterDrawings,
+                            frameId = selectedFrame.order,
                             graphicsPath = new GraphicsPath(),
-                            initialPosition = clickPosition,
-                            finalPosition = clickPosition,
                             drawingColor = drawingColor,
-                            drawingSize = drawingSize
+                            drawingSize = drawingSize,
+                            points = new List<Point> { clickPosition, clickPosition }
                         };
 
                         break;
@@ -1373,11 +1494,11 @@ namespace DMMDigital.Views
                         currentDrawing = new RectangleDraw
                         {
                             id = counterDrawings,
+                            frameId = selectedFrame.order,
                             graphicsPath = new GraphicsPath(),
-                            initialPosition = clickPosition,
-                            finalPosition = clickPosition,
                             drawingColor = drawingColor,
-                            drawingSize = drawingSize
+                            drawingSize = drawingSize,
+                            points = new List<Point> { clickPosition, clickPosition }
                         };
 
                         break;
@@ -1389,38 +1510,53 @@ namespace DMMDigital.Views
         {
             if (draw)
             {
-                if (action == 3)
+                if (action < 4)
                 {
-                    (currentDrawing as FreeDraw).points.Add(e.Location);
-                }
-                else if (action == 1)
-                {
-                    if (selectedDrawingToMove != null)
+                    if (action == 1)
                     {
-                        selectedDrawingToMove.initialPosition = new Point(e.X + drawingInitialPosition.X - clickPosition.X, e.Y + drawingInitialPosition.Y - clickPosition.Y);
-                        selectedDrawingToMove.finalPosition = new Point(e.X + drawingFinalPosition.X - clickPosition.X, e.Y + drawingFinalPosition.Y - clickPosition.Y);
-
-                        if (currentDrawing is FreeDraw)
+                        if (selectedDrawingToMove != null)
                         {
-                            int counter = 1;
-                            (selectedDrawingToMove as FreeDraw).points[0] = selectedDrawingToMove.initialPosition;
-                            Point firstPoint = (selectedDrawingToMove as FreeDraw).points[0];
+                            List<Point> drawingPointsToMove = selectedDrawingToMove.points;
 
-                            pointsDifferenceFreeDrawing.ForEach(differencePoint =>
+                            int indexFirstPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.First());
+                            int indexLastPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.Last());
+
+                            drawingPointsToMove[indexFirstPoint] = new Point(
+                                e.X + currentDrawing.points.First().X - clickPosition.X,
+                                e.Y + currentDrawing.points.First().Y - clickPosition.Y
+                            );
+                            drawingPointsToMove[indexLastPoint] = new Point(
+                                e.X + currentDrawing.points.Last().X - clickPosition.X,
+                                e.Y + currentDrawing.points.Last().Y - clickPosition.Y
+                            );
+
+                            if (currentDrawing is FreeDraw)
                             {
-                                (selectedDrawingToMove as FreeDraw).points[counter] = new Point(firstPoint.X + differencePoint.X, firstPoint.Y + differencePoint.Y);
+                                Point firstPoint = drawingPointsToMove.First();
 
-                                if (counter + 1 < (selectedDrawingToMove as FreeDraw).points.Count)
+                                for (int counterPoints = 1, counterDifference = 0; counterPoints < pointsDifferenceFreeDrawing.Count; counterPoints++, counterDifference++)
                                 {
-                                    counter++;
+                                    drawingPointsToMove[counterPoints] = new Point(
+                                        firstPoint.X + pointsDifferenceFreeDrawing[counterDifference].X,
+                                        firstPoint.Y + pointsDifferenceFreeDrawing[counterDifference].Y
+                                    );
                                 }
-                            });
+                            }
                         }
+                    }
+                    else if (action == 2)
+                    {
+                        (currentDrawing as Ruler).previewPoint = e.Location;
+                    }
+                    else if (action == 3)
+                    {
+                        currentDrawing.points.Add(e.Location);
                     }
                 }
                 else
                 {
-                    currentDrawing.finalPosition = e.Location;
+                    int indexLastPoint = currentDrawing.points.IndexOf(currentDrawing.points.Last());
+                    currentDrawing.points[indexLastPoint] = e.Location;
                 }
                 mainPictureBox.Invalidate();
             }
@@ -1443,65 +1579,66 @@ namespace DMMDigital.Views
 
                 pictureBoxMagnifier.Refresh();
             }
-
         }
 
         private void mainPictureBoxMouseUp(object sender, MouseEventArgs e)
         {
-            if (action != 0)
+            if (action > 1)
             {
-                if (action > 1)
+                //verifyHistoryToReset();
+                if (action == 2)
                 {
-                    //verifyHistoryToReset();
-                    if (action == 2)
+                    if (multiRuler)
                     {
-                        if (multiRuler)
-                        {
-                            return;
-                        }
+                        return;
+                    }
+                    
+                    int indexLastPoint = currentDrawing.points.IndexOf(currentDrawing.points.Last());
+                    currentDrawing.points[indexLastPoint] = e.Location;
 
-                        if (recalibrate)
+                    if (recalibrate)
+                    {
+                        using (Form dialogRecalibrateRuler = new DialogRecalibrateRuler((currentDrawing as Ruler).lineLength.Last()))
                         {
-                            using (Form dialogRecalibrateRuler = new DialogRecalibrateRuler((currentDrawing as Ruler).lineLength.Last()))
+                            var result = dialogRecalibrateRuler.ShowDialog();
+                            if (result == DialogResult.OK)
                             {
-                                var result = dialogRecalibrateRuler.ShowDialog();
-                                if (result == DialogResult.OK)
+                                recalibrateRuler((dialogRecalibrateRuler as DialogRecalibrateRuler).rulerValue);
+                                (currentDrawing as Ruler).lineLength = new List<float>
                                 {
-                                    recalibrateRuler((dialogRecalibrateRuler as DialogRecalibrateRuler).rulerValue);
-                                    (currentDrawing as Ruler).lineLength = new List<float>
-                                    {
-                                        getRulerLength()
-                                    };
-                                }
-                                recalibrate = false;
+                                    getRulerLength(currentDrawing.points.Last(),(currentDrawing as Ruler).previewPoint)
+                                };
                             }
-                        }
-                        (currentDrawing as Ruler).points.Add(currentDrawing.finalPosition);
-                    }
-                    else if (action == 3)
-                    {
-                        if ((currentDrawing as FreeDraw).points.Count == 1)
-                        {
-                            (currentDrawing as FreeDraw).points.Add(new Point(e.X + 1, e.Y + 1));
+                            recalibrate = false;
                         }
                     }
-
-                    selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
-                    {
-                        currentDrawing
-                    });
-                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-                    draw = false;
-                    mainPictureBox.Invalidate();
                 }
-                selectedDrawingToMove = null;
-                selectedDrawingHistoryHandler();
+                else if (action == 3)
+                {
+                    if (currentDrawing.points.Count == 1)
+                    {
+                        currentDrawing.points.Add(new Point(e.X + 1, e.Y + 1));
+                    }
+                }
+
+                selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
+                {
+                    currentDrawing
+                });
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                    
             }
+            selectedDrawingHistoryHandler();
+            mainPictureBox.Invalidate();
+
+            draw = false;
+            currentDrawing = null;
+            selectedDrawingToMove = null;
         }
 
         private void mainPictureBoxPaint(object sender, PaintEventArgs e)
         {
-            if (selectedDrawingHistory.Count > 0)
+            if (selectedDrawingHistory.Any())
             {
                 selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
             }
@@ -1514,8 +1651,16 @@ namespace DMMDigital.Views
                 }
                 else if (action == 2)
                 {
+                    float currentLineLength = 0;
                     int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
-                    (currentDrawing as Ruler).lineLength[index] = getRulerLength();
+
+                    Thread thread = new Thread(() => {
+                        currentLineLength = getRulerLength(currentDrawing.points.Last(), (currentDrawing as Ruler).previewPoint);
+                    });
+                    thread.Start();
+                    thread.Join();
+
+                    (currentDrawing as Ruler).lineLength[index] = currentLineLength;
 
                     currentDrawing.drawPreview(e.Graphics);
                 }
@@ -1544,25 +1689,52 @@ namespace DMMDigital.Views
                     }
                 }
 
-                examImageDrawings = new List<ExamImageDrawingModel>();
-
-                Regex fileRegex = new Regex(@"F\d+-D\d+");
-                List<string> files = Directory.GetFiles(examPath).Where(f => fileRegex.IsMatch(Path.GetFileName(f))).ToList();
-
-                foreach (string file in files)
-                {
-                    examImageDrawings.Add(new ExamImageDrawingModel
-                    {
-                        examId = examId,
-                        examImageId = int.Parse(file.Substring(examPath.Length + 2, 1)),
-                        file = file.Substring(examPath.Length + 1)
-                    });
-                }
+                getDrawingsToSave();
 
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
                 eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
 
                 timer1.Enabled = false;
+            }
+        }
+
+        public void getDrawingsToSave()
+        {
+            List<IDrawing> drawings = new List<IDrawing>();
+
+            foreach (FrameDrawingHistory fdh in frameDrawingHistories)
+            {
+                if (fdh.drawingHistory.Count > 1)
+                {
+                    drawings.AddRange(fdh.drawingHistory.Last());
+                }
+            }
+
+            if (drawings.Any())
+            {
+                examImageDrawings = new List<ExamImageDrawingModel>();
+                examImageDrawingPoints = new List<ExamImageDrawingPointsModel>();
+
+                foreach (IDrawing d in drawings)
+                {
+                    ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel
+                    {
+                        id = d.id,
+                        examId = examId,
+                        examImageId = d.frameId,
+                        drawingColor = d.drawingColor.ToArgb().ToString(),
+                        drawingSize = (int)d.drawingSize,
+                        drawingType = d.GetType().ToString().Split('.').Last(),
+                        points = d.points
+                    };
+
+                    if (d is Text)
+                    {
+                        drawingToSave.drawingText = (d as Text).text;
+                    }
+
+                    examImageDrawings.Add(drawingToSave);
+                }
             }
         }
 

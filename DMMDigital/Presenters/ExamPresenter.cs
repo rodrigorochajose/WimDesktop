@@ -5,6 +5,7 @@ using DMMDigital.Models;
 using DMMDigital.Views;
 using MoreLinq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -12,7 +13,6 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -26,6 +26,7 @@ namespace DMMDigital.Presenters
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
+        private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
 
         private readonly string examOpeningMode;
@@ -106,6 +107,19 @@ namespace DMMDigital.Presenters
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
                 examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+
+                List<ExamImageDrawingPointsModel> examImageDrawingPoints = examImageDrawingPointsRepository.getExamImageDrawingPoints(examView.examId).ToList();
+
+                foreach (ExamImageDrawingModel drawing in examView.examImageDrawings)
+                {
+                    drawing.points = new List<Point>();
+                    IEnumerable currentDrawingPoints = examImageDrawingPoints.Where(dp => dp.examId == drawing.examId && dp.examImageDrawingId == drawing.id);
+                    
+                    foreach (ExamImageDrawingPointsModel drawingPoints in currentDrawingPoints)
+                    {
+                        drawing.points.Add(new Point(drawingPoints.pointX, drawingPoints.pointY));
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -175,24 +189,46 @@ namespace DMMDigital.Presenters
                 List<ExamImageDrawingModel> examImageDrawingsToSave = examView.examImageDrawings;
                 List<ExamImageDrawingModel> currentExamImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
 
-                List <ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examImageDrawingsToSave, item => item.examId).ToList();
+                List<ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examImageDrawingsToSave, item => item.id).ToList();
 
                 if (drawingsToDelete.Any())
                 {
+                    List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
+                    examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
                     examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
                 }
 
                 foreach (ExamImageDrawingModel item in examImageDrawingsToSave)
                 {
-                    ExamImageDrawingModel existingExamImageDrawing = currentExamImageDrawings.Find(eid => eid.examImageId == item.examImageId);
+                    ExamImageDrawingModel existingExamImageDrawing = currentExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
                     if (existingExamImageDrawing == null)
                     {
                         examImageDrawingRepository.addExamImageDrawing(item);
+
+                        int drawingId = examImageDrawingRepository.getExamImageDrawings(examView.examId).Last().id;
+
+                        List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
+
+                        foreach (Point point in item.points)
+                        {
+                            pointsToSave.Add(new ExamImageDrawingPointsModel
+                            {
+                                examId = item.examId,
+                                examImageId = item.examImageId,
+                                examImageDrawingId = drawingId,
+                                pointX = point.X,
+                                pointY = point.Y
+                            });
+                        }
+
+                        examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
                     }
                     else
                     {
-                        // implementar atualização de valores dos desenhos
-                        // save changes 
+                        if (item.points != existingExamImageDrawing.points)
+                        {
+                            examImageDrawingPointsRepository.updatePoints(item.id, item.points);
+                        }
                     }
                 }
 

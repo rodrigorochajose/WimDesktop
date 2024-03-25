@@ -38,9 +38,7 @@ namespace DMMDigital.Views
 
         public void loadExamFrames()
         {
-            IEnumerable<Frame> framesToDraw = framesToExport.Where(f => f.originalImage != null);
-
-            foreach (Frame frame in framesToDraw)
+            foreach (Frame frame in framesToExport)
             {
                 Panel panel = new Panel {
                     Name = $"panelFrame{frame.order}",
@@ -81,7 +79,6 @@ namespace DMMDigital.Views
                     Checked = true,
                     Tag = frame.order
                 };
-
 
                 panel.Controls.Add(checkBox);
                 panel.Controls.Add(label);
@@ -176,8 +173,12 @@ namespace DMMDigital.Views
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
-                        generateEditedImage(cb.Tag.ToString(), pathImages, format, extension);
-                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-edited{extension}"));
+                        string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}-edited.png");
+                        
+                        if (File.Exists(currentImagePath))
+                        {
+                            files.Add(currentImagePath);
+                        }
                     }
                 }
 
@@ -210,26 +211,6 @@ namespace DMMDigital.Views
                 MessageBox.Show("Exportado com sucesso!");
                 Close();
             }
-        }
-
-        private void generateEditedImage(string frameId, string path, ImageFormat format, string extension)
-        {
-            string originalFileName = $"{frameId}-original.png";
-            string editedFileName = $"{frameId}-edited{extension}";
-
-            Bitmap mainImage = new Bitmap(Path.Combine(path, originalFileName));
-
-            List<string> imageDrawings = Directory.GetFiles(path).Where(f => f.Contains($"F{frameId}-")).ToList();
-
-            using (Graphics graphics = Graphics.FromImage(mainImage))
-            {
-                foreach (string drawing in imageDrawings)
-                {
-                    graphics.DrawImage(new Bitmap(drawing), 0, 0, mainImage.Width, mainImage.Height);
-                }
-            }
-
-            mainImage.Save(Path.Combine(path, editedFileName), format);
         }
 
         private List<CheckBox> getAllFrameCheckBox()

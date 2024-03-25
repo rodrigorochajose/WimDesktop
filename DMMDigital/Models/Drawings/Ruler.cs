@@ -5,19 +5,19 @@ using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Linq;
 using System.IO;
-using System.Reflection;
+using MoreLinq;
 
 namespace DMMDigital.Models.Drawings
 {
     public class Ruler : IDrawing
     {
         public int id { get; set; }
-        public Point initialPosition { get; set; }
-        public Point finalPosition { get; set; }
+        public int frameId { get; set; }
         public GraphicsPath graphicsPath { get; set; }
         public Color drawingColor { get; set; }
         public float drawingSize { get; set; }
         public List<Point> points { get; set; }
+        public Point previewPoint { get; set; }
         public List<float> lineLength { get; set; }
         public bool multiple { get; set; }
 
@@ -27,7 +27,7 @@ namespace DMMDigital.Models.Drawings
                     lineLength.Sum().ToString("0.00") + "mm",
                     new Font("Arial", 14, FontStyle.Bold),
                     new SolidBrush(drawingColor),
-                    new Point(finalPosition.X + 10, finalPosition.Y)
+                    new Point(points.Last().X + 10, points.Last().Y)
                 );
         }
 
@@ -37,13 +37,14 @@ namespace DMMDigital.Models.Drawings
             {
                 LineJoin = LineJoin.Bevel
             };
-            g.DrawLine(pen, initialPosition, finalPosition);
+
+            g.DrawLine(pen, points.Last(), previewPoint);
 
             g.DrawString(
                 lineLength.Last().ToString("0.0"),
                 new Font("Arial", 13),
                 new SolidBrush(drawingColor),
-                initialPosition
+                new Point(points.Last().X, points.Last().Y - 20)
             );
         }
 
@@ -57,6 +58,7 @@ namespace DMMDigital.Models.Drawings
                 LineJoin = LineJoin.Bevel
             };
 
+            graphicsPath = new GraphicsPath();
             graphicsPath.AddLines(points.ToArray());
 
             if (multiple)
@@ -79,14 +81,17 @@ namespace DMMDigital.Models.Drawings
             }
             else
             {
-                g.DrawLine(pen, initialPosition, finalPosition);
+                Point firstPoint = points.First();
+                Point lastPoint = points.Last();
+
+                g.DrawLine(pen, lastPoint, previewPoint);
                 g.DrawString(
                     lineLength.Sum().ToString("0.00"), 
                     new Font("Arial", 13), 
                     new SolidBrush(drawingColor), 
                     new Point(
-                        ((finalPosition.X - initialPosition.X) / 2) + initialPosition.X,
-                        ((finalPosition.Y - initialPosition.Y) / 2) + initialPosition.Y
+                        ((lastPoint.X - firstPoint.X) / 2) + firstPoint.X,
+                        ((lastPoint.Y - firstPoint.Y) / 2) + firstPoint.Y
                     )
                 );
             }
@@ -97,7 +102,6 @@ namespace DMMDigital.Models.Drawings
             Bitmap bitmap = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(bitmap);
             draw(graphics);
-            bitmap.Save(Path.Combine(path, $"F{frameId}-D{id}.png"));
 
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;

@@ -1,52 +1,57 @@
 ﻿using DMMDigital.Interface;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Linq;
 
 namespace DMMDigital.Models.Drawings
 {
     public class RectangleDraw : IDrawing
     {
         public int id { get; set; }
-        public Point initialPosition { get; set; }
-        public Point finalPosition { get; set; }
+        public int frameId { get; set; }
         public GraphicsPath graphicsPath { get; set; }
         public Color drawingColor { get; set; }
         public float drawingSize { get; set; }
+        public List<Point> points { get; set; }
 
-        private Rectangle setRectangle(Point initialPosition, Point finalPosition)
+        private Rectangle setRectangle()
         {
-            int pontoX = initialPosition.X;
-            int pontoY = initialPosition.Y;
-            int largura = finalPosition.X - initialPosition.X;
-            int altura = finalPosition.Y - initialPosition.Y;
+            int initialPointX = points.First().X;
+            int initialPointY = points.First().Y;
+            int finalPointX = points.Last().X;
+            int finalPointY = points.Last().Y;
 
+            int width = finalPointX - initialPointX;
+            int height = finalPointY - initialPointY;
 
-            if (largura < 0)
+            if (width < 0)
             {
-                pontoX = finalPosition.X;
-                largura = initialPosition.X - finalPosition.X;
+                initialPointX = points.Last().X;
+                width = points.First().X - points.Last().X;
             }
-            if (altura < 0)
+            if (height < 0)
             {
-                pontoY = finalPosition.Y;
-                altura = initialPosition.Y - finalPosition.Y;
+                initialPointY = points.Last().Y;
+                height = points.First().Y - points.Last().Y;
             }
 
-            return new Rectangle(pontoX, pontoY, largura, altura);
+            return new Rectangle(initialPointX, initialPointY, width, height);
         }
 
         public void drawPreview(Graphics g)
         {
-            g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle(initialPosition, finalPosition));
+            g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle());
         }
 
         public void draw(Graphics g)
         {
+            Rectangle rec = setRectangle();
             graphicsPath = new GraphicsPath();
-            graphicsPath.AddRectangle(setRectangle(initialPosition, finalPosition));
-            g.DrawRectangle(new Pen(drawingColor, drawingSize), setRectangle(initialPosition, finalPosition));
+            graphicsPath.AddRectangle(rec);
+            g.DrawRectangle(new Pen(drawingColor, drawingSize), rec);
         }
 
         public Image generateDrawingImageAndThumb(int frameId, string path, int width, int height)
@@ -54,7 +59,6 @@ namespace DMMDigital.Models.Drawings
             Bitmap bitmap = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(bitmap);
             draw(graphics);
-            bitmap.Save(Path.Combine(path, $"F{frameId}-D{id}.png"));
 
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;

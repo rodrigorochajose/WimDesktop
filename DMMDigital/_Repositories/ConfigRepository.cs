@@ -2,6 +2,7 @@
 using DMMDigital.Models;
 using System;
 using System.Linq;
+
 namespace DMMDigital._Repositories
 {
     public class ConfigRepository : IConfigRepository

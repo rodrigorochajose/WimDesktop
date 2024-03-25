@@ -16,6 +16,7 @@ namespace DMMDigital.Views
         List<ExamImageModel> examImages { get; set; }
         List<TemplateFrameModel> templateFrames { get; set; }
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        List<ExamImageDrawingPointsModel> examImageDrawingPoints { get; set; }
         bool detectorConnected { get; set; }
 
         event EventHandler eventSaveExam;
