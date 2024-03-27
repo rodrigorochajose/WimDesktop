@@ -186,10 +186,9 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                List<ExamImageDrawingModel> examImageDrawingsToSave = examView.examImageDrawings;
                 List<ExamImageDrawingModel> currentExamImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
 
-                List<ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examImageDrawingsToSave, item => item.id).ToList();
+                List<ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examView.examImageDrawings, item => item.id).ToList();
 
                 if (drawingsToDelete.Any())
                 {
@@ -198,7 +197,7 @@ namespace DMMDigital.Presenters
                     examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
                 }
 
-                foreach (ExamImageDrawingModel item in examImageDrawingsToSave)
+                foreach (ExamImageDrawingModel item in examView.examImageDrawings)
                 {
                     ExamImageDrawingModel existingExamImageDrawing = currentExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
                     if (existingExamImageDrawing == null)
@@ -231,7 +230,6 @@ namespace DMMDigital.Presenters
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {

@@ -60,7 +60,7 @@ namespace DMMDigital.Views
         NumericUpDown numericUpDownDrawingSize;
 
         List<Frame> frames = new List<Frame>();
-        List<Point> pointsDifferenceFreeDrawing = new List<Point>();
+        List<Point> differenceBetweenPoints = new List<Point>();
         List<List<IDrawing>> selectedDrawingHistory = new List<List<IDrawing>>();
         List<FrameDrawingHistory> frameDrawingHistories = new List<FrameDrawingHistory>();
 
@@ -68,8 +68,6 @@ namespace DMMDigital.Views
         IDrawing selectedDrawingToMove;
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
-
-        static object blocker = new object();
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
@@ -409,7 +407,6 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-
             indexFrame = ++indexFrame == frames.Count() ? --indexFrame : indexFrame++;
 
             Frame nextFrameToGetImage = frames[indexFrame];
@@ -646,8 +643,6 @@ namespace DMMDigital.Views
                     };
 
                     panelToolOptions.Controls.Add(trackBarZoom);
-                    //panelToolOptions.Controls.SetChildIndex(trackBarZoom, 0);
-                    //panelToolOptions.Refresh();
                     break;
             }
         }
@@ -729,7 +724,6 @@ namespace DMMDigital.Views
                 Width = size.Width - 10,
                 Font = new Font("Arial", 10, FontStyle.Regular)
             };
-            inputBox.Controls.Add(label);
 
             TextBox textBox = new TextBox
             {
@@ -737,7 +731,6 @@ namespace DMMDigital.Views
                 Location = new Point(5, label.Location.Y + 25),
                 Font = new Font("Arial", 10, FontStyle.Regular)
             };
-            inputBox.Controls.Add(textBox);
 
             Button okButton = new Button
             {
@@ -747,7 +740,6 @@ namespace DMMDigital.Views
                 Text = "&OK",
                 Location = new Point(size.Width - 80 - 80, size.Height - 25)
             };
-            inputBox.Controls.Add(okButton);
 
             Button cancelButton = new Button
             {
@@ -757,8 +749,8 @@ namespace DMMDigital.Views
                 Text = "&Cancel",
                 Location = new Point(size.Width - 80, size.Height - 25)
             };
-            inputBox.Controls.Add(cancelButton);
 
+            inputBox.Controls.AddRange(new Control[] { label, textBox, okButton, cancelButton });
             inputBox.AcceptButton = okButton;
             inputBox.CancelButton = cancelButton;
 
@@ -768,31 +760,23 @@ namespace DMMDigital.Views
 
         private float getRulerLength(Point initialPoint, Point finalPoint)
         {
-            /// verificar threads 
-           
-            lock (blocker)
+            // 30 is sensor Width and 20 height -> i'm going to get from database these values
+            double scalingFactorWidth = mainPictureBox.Image.Width / 20;
+            double scalingFactorHeight = mainPictureBox.Image.Height / 30;
+
+            float initialX = initialPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float initialY = initialPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+            float finalX = finalPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
+            float finalY = finalPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+
+            float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
+
+            if (calibrated)
             {
-                // 30 is sensor Width and 20 height -> i'm going to get from database these values
-                double scalingFactorWidth = mainPictureBox.Image.Width / 20;
-                double scalingFactorHeight = mainPictureBox.Image.Height / 30;
-
-                float initialX = initialPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-                float initialY = initialPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-                float finalX = finalPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-                float finalY = finalPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-
-                float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
-
-                if (calibrated)
-                {
-                    lenghtInMilimeters *= (float)scalingFactorSensorImage;
-                }
-
-                //Console.WriteLine($"mainPictureBoxWidth: {mainPictureBox.Width} | mainPictureBoxHeight: {mainPictureBox.Height} | mainPictureBoxImageWidth: {mainPictureBox.Image.Width} | mainPictureBoxImageWidth: {mainPictureBox.Image.Width}");
-                //Console.WriteLine($"InitialP: {initialPoint} | FinalP: {finalPoint} -> initialX : {initialX} | initialY : {initialY} | finalX : {finalX} | finalY : {finalY} -> length: {lenghtInMilimeters}");
-
-                return lenghtInMilimeters;
+                lenghtInMilimeters *= (float)scalingFactorSensorImage;
             }
+
+            return lenghtInMilimeters;
         }
 
         private void recalibrateRuler(double rulerValue)
@@ -865,29 +849,31 @@ namespace DMMDigital.Views
                 Text = $"{drawing.GetType()}-{drawing.id}",
             };
 
-            if (drawing is Ellipse)
+            switch (drawing)
             {
-                label.Text = "Circulo";
-            }
-            else if (drawing is RectangleDraw)
-            {
-                label.Text = "Retangulo";
-            }
-            else if (drawing is Arrow)
-            {
-                label.Text = "Seta";
-            }
-            else if (drawing is Text)
-            {
-                label.Text = "Texto";
-            }
-            else if (drawing is Ruler)
-            {
-                label.Text = "Régua";
-            }
-            else 
-            {
-                label.Text = "DesenhoLivre";
+                case Ellipse _:
+                    label.Text = "Circulo";
+                    break;
+
+                case RectangleDraw _:
+                    label.Text = "Retangulo";
+                    break;
+
+                case Arrow _:
+                    label.Text = "Seta";
+                    break;
+
+                case Ruler _:
+                    label.Text = "Régua";
+                    break;
+
+                case FreeDraw _:
+                    label.Text = "DesenhoLivre";
+                    break;
+
+                case Text _:
+                    label.Text = "Texto";
+                    break;
             }
 
             pictureBox.Image = drawing.generateDrawingImageAndThumb(selectedFrame.order, examPath, mainPictureBox.Width, mainPictureBox.Height);
@@ -1287,30 +1273,36 @@ namespace DMMDigital.Views
                         {
                             switch (currentDrawing)
                             {
-                                case Ruler _:
-                                    selectedDrawingToMove = new FreeDraw();
-                                    break;
                                 case Ellipse _:
                                     selectedDrawingToMove = new Ellipse();
                                     break;
+
                                 case RectangleDraw _:
                                     selectedDrawingToMove = new RectangleDraw();
                                     break;
+
                                 case Arrow _:
                                     selectedDrawingToMove = new Arrow();
                                     break;
+
+                                case Ruler _:
+                                    selectedDrawingToMove = new Ruler
+                                    {
+                                        lineLength = (currentDrawing as Ruler).lineLength,
+                                        multiple = (currentDrawing as Ruler).multiple
+                                    };
+
+                                    if ((selectedDrawingToMove as Ruler).multiple) {
+                                        getDifferenceBetweenPoints(currentDrawing.points);
+                                    }
+                                    break;
+
                                 case FreeDraw fd:
                                     selectedDrawingToMove = new FreeDraw();
-
-                                    pointsDifferenceFreeDrawing = new List<Point>();
-                                    List<Point> pointsSelectedDrawing = currentDrawing.points;
-
-                                    foreach (Point p in pointsSelectedDrawing.Skip(1))
-                                    {
-                                        pointsDifferenceFreeDrawing.Add(new Point(p.X - currentDrawing.points.First().X, p.Y - currentDrawing.points.First().Y));
-                                    }
+                                    getDifferenceBetweenPoints(currentDrawing.points);
 
                                     break;
+
                                 case Text textDrawing:
                                     selectedDrawingToMove = new Text
                                     {
@@ -1386,18 +1378,11 @@ namespace DMMDigital.Views
                                 else
                                 {
                                     currentDrawing.points.Add((currentDrawing as Ruler).previewPoint);
-                                    float currentLineLength = 0;
 
-                                    Thread thread = new Thread(() =>
-                                    {
-                                        currentLineLength = getRulerLength(currentDrawing.points.Last(), (currentDrawing as Ruler).previewPoint);
-                                    });
+                                    int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
+                                    (currentDrawing as Ruler).lineLength[index] = getRulerLength(currentDrawing.points.SkipLast(1).Last(), (currentDrawing as Ruler).points.Last());
 
-                                    thread.Start();
-                                    thread.Join();
-
-                                    (currentDrawing as Ruler).lineLength.Add(currentLineLength);
-
+                                    (currentDrawing as Ruler).lineLength.Add(0);
                                 }
                             }
                         }
@@ -1506,6 +1491,16 @@ namespace DMMDigital.Views
             }
         }
 
+        private void getDifferenceBetweenPoints(List<Point> points)
+        {
+            differenceBetweenPoints = new List<Point>();
+
+            foreach (Point p in points.Skip(1))
+            {
+                differenceBetweenPoints.Add(new Point(p.X - points.First().X, p.Y - points.First().Y));
+            }
+        }
+
         private void mainPictureBoxMouseMove(object sender, MouseEventArgs e)
         {
             if (draw)
@@ -1530,15 +1525,15 @@ namespace DMMDigital.Views
                                 e.Y + currentDrawing.points.Last().Y - clickPosition.Y
                             );
 
-                            if (currentDrawing is FreeDraw)
+                            if (currentDrawing is FreeDraw || (currentDrawing is Ruler ruler && ruler.multiple))
                             {
                                 Point firstPoint = drawingPointsToMove.First();
 
-                                for (int counterPoints = 1, counterDifference = 0; counterPoints < pointsDifferenceFreeDrawing.Count; counterPoints++, counterDifference++)
+                                for (int counterPoints = 1, counterDifference = 0; counterPoints < differenceBetweenPoints.Count; counterPoints++, counterDifference++)
                                 {
                                     drawingPointsToMove[counterPoints] = new Point(
-                                        firstPoint.X + pointsDifferenceFreeDrawing[counterDifference].X,
-                                        firstPoint.Y + pointsDifferenceFreeDrawing[counterDifference].Y
+                                        firstPoint.X + differenceBetweenPoints[counterDifference].X,
+                                        firstPoint.Y + differenceBetweenPoints[counterDifference].Y
                                     );
                                 }
                             }
@@ -1651,16 +1646,8 @@ namespace DMMDigital.Views
                 }
                 else if (action == 2)
                 {
-                    float currentLineLength = 0;
                     int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
-
-                    Thread thread = new Thread(() => {
-                        currentLineLength = getRulerLength(currentDrawing.points.Last(), (currentDrawing as Ruler).previewPoint);
-                    });
-                    thread.Start();
-                    thread.Join();
-
-                    (currentDrawing as Ruler).lineLength[index] = currentLineLength;
+                    (currentDrawing as Ruler).lineLength[index] = getRulerLength(currentDrawing.points.Last(), (currentDrawing as Ruler).previewPoint);
 
                     currentDrawing.drawPreview(e.Graphics);
                 }
@@ -1690,7 +1677,6 @@ namespace DMMDigital.Views
                 }
 
                 getDrawingsToSave();
-
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
                 eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
 
@@ -1700,6 +1686,8 @@ namespace DMMDigital.Views
 
         public void getDrawingsToSave()
         {
+            examImageDrawings = new List<ExamImageDrawingModel>();
+            examImageDrawingPoints = new List<ExamImageDrawingPointsModel>();
             List<IDrawing> drawings = new List<IDrawing>();
 
             foreach (FrameDrawingHistory fdh in frameDrawingHistories)
@@ -1712,9 +1700,6 @@ namespace DMMDigital.Views
 
             if (drawings.Any())
             {
-                examImageDrawings = new List<ExamImageDrawingModel>();
-                examImageDrawingPoints = new List<ExamImageDrawingPointsModel>();
-
                 foreach (IDrawing d in drawings)
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel

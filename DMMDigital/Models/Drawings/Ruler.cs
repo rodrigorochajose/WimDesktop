@@ -84,7 +84,7 @@ namespace DMMDigital.Models.Drawings
                 Point firstPoint = points.First();
                 Point lastPoint = points.Last();
 
-                g.DrawLine(pen, lastPoint, previewPoint);
+                g.DrawLine(pen, firstPoint, lastPoint);
                 g.DrawString(
                     lineLength.Sum().ToString("0.00"), 
                     new Font("Arial", 13), 
