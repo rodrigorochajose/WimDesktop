@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -36,7 +35,7 @@ namespace DMMDigital.Views
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
                 Size = new Size(1362, 653),
-                Text = examView.sessionName,
+                Text = examView.sessionName
             };
 
             tabControl.Controls.Add(newTabPage);
@@ -49,10 +48,9 @@ namespace DMMDigital.Views
         private void addFormIntoPage(TabPage tabPage, IExamView examView)
         {
             (examView as Form).TopLevel = false;
-            (examView as Form).AutoScaleMode = AutoScaleMode.Dpi;
+            (examView as Form).Dock = DockStyle.Fill;
 
             tabPage.Controls.Add(examView as Form);
-            (examView as Form).Dock = DockStyle.Fill;
             Show();
             (examView as Form).Show();
         }

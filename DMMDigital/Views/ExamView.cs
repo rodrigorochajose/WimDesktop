@@ -12,7 +12,6 @@ using DMMDigital.Components;
 using DMMDigital._Repositories;
 using DMMDigital.Presenters;
 using MoreLinq;
-using System.Threading;
 
 namespace DMMDigital.Views
 {
@@ -68,6 +67,8 @@ namespace DMMDigital.Views
         IDrawing selectedDrawingToMove;
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
+
+        double angle = 0;
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
@@ -129,7 +130,7 @@ namespace DMMDigital.Views
                 }
             };
         }
-        
+
         private void associateConfigs(ConfigModel config)
         {
             examPath = config.examPath;
@@ -218,7 +219,7 @@ namespace DMMDigital.Views
             if (selectedFrame.filteredImage != null)
             {
                 mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
-            } 
+            }
             else if (selectedFrame.originalImage != null)
             {
                 mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
@@ -540,7 +541,7 @@ namespace DMMDigital.Views
                 }
                 selectedButton.BackColor = Color.WhiteSmoke;
                 selectedButton.Tag = "selectable";
-            } 
+            }
             (sender as ToolStripButton).BackColor = Color.LightGray;
             (sender as ToolStripButton).Tag = "selected";
         }
@@ -990,7 +991,8 @@ namespace DMMDigital.Views
 
                 string filteredImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
 
-                if (File.Exists(filteredImagePath)) {
+                if (File.Exists(filteredImagePath))
+                {
                     File.Delete(filteredImagePath);
                 }
 
@@ -1151,7 +1153,7 @@ namespace DMMDigital.Views
             if (selectedFrame.filteredImage != null)
             {
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
-            } 
+            }
             else
             {
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
@@ -1160,10 +1162,14 @@ namespace DMMDigital.Views
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
+            //resizeMainPictureBox();
         }
 
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
+            Console.WriteLine($"mainPictureBox Size Before: ({mainPictureBox.Width},{mainPictureBox.Height})");
+            Console.WriteLine($"mainPictureBoxImage Size Before: ({mainPictureBox.Image.Width},{mainPictureBox.Image.Height})");
+
             Image currentImage = mainPictureBox.Image;
             currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
 
@@ -1179,6 +1185,33 @@ namespace DMMDigital.Views
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
+
+            mainPictureBox.Size = new Size(mainPictureBox.Height, mainPictureBox.Width);
+            mainPictureBox.Refresh();
+
+            Console.WriteLine($"mainPictureBox Size After: ({mainPictureBox.Width},{mainPictureBox.Height})");
+            Console.WriteLine($"mainPictureBoxImage Size After: ({mainPictureBox.Image.Width},{mainPictureBox.Image.Height})");
+            //resizeMainPictureBox();
+
+            //angle += 90;
+            //if (angle == 360)
+            //    angle = 0;
+
+            //var lastDrawing = selectedDrawingHistory[indexSelectedDrawingHistory].Last();
+            //lastDrawing.points[0] = RotatePoint(lastDrawing.points[0], new Point(mainPictureBox.Width / 2, mainPictureBox.Height / 2), angle);
+            //lastDrawing.points[1] = RotatePoint(lastDrawing.points[1], new Point(mainPictureBox.Width / 2, mainPictureBox.Height / 2), angle);
+        }
+
+        private Point RotatePoint(Point pointToRotate, Point centerPoint, double angleInDegrees)
+        {
+            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
+            double cosTheta = Math.Cos(angleInRadians);
+            double sinTheta = Math.Sin(angleInRadians);
+            return new Point
+            {
+                X = (int)(cosTheta * (pointToRotate.X - centerPoint.X) - sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
+                Y = (int)(sinTheta * (pointToRotate.X - centerPoint.X) + cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
+            };
         }
 
         private void buttonRestoreExamClick(object sender, EventArgs e)
@@ -1193,7 +1226,8 @@ namespace DMMDigital.Views
                     indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                     flowLayoutPanel1.Controls.Clear();
 
-                    if (selectedFrame.filteredImage != null) {
+                    if (selectedFrame.filteredImage != null)
+                    {
 
                         selectedFrame.filteredImage = null;
 
@@ -1224,11 +1258,11 @@ namespace DMMDigital.Views
                 if (action == 2)
                 {
                     rulerColor = colorDialog.Color;
-                } 
+                }
                 else if (action == 4)
                 {
                     textColor = colorDialog.Color;
-                } 
+                }
                 else
                 {
                     drawingColor = colorDialog.Color;
@@ -1292,7 +1326,8 @@ namespace DMMDigital.Views
                                         multiple = (currentDrawing as Ruler).multiple
                                     };
 
-                                    if ((selectedDrawingToMove as Ruler).multiple) {
+                                    if ((selectedDrawingToMove as Ruler).multiple)
+                                    {
                                         getDifferenceBetweenPoints(currentDrawing.points);
                                     }
                                     break;
@@ -1402,7 +1437,7 @@ namespace DMMDigital.Views
                             };
                         }
 
-                    break;
+                        break;
 
                     case 3:
                         currentDrawing = new FreeDraw
@@ -1587,7 +1622,7 @@ namespace DMMDigital.Views
                     {
                         return;
                     }
-                    
+
                     int indexLastPoint = currentDrawing.points.IndexOf(currentDrawing.points.Last());
                     currentDrawing.points[indexLastPoint] = e.Location;
 
@@ -1621,7 +1656,7 @@ namespace DMMDigital.Views
                     currentDrawing
                 });
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-                    
+
             }
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
@@ -1660,7 +1695,7 @@ namespace DMMDigital.Views
             {
                 timer1.Enabled = true;
             }
-        } 
+        }
 
         public void timerTick(object sender, EventArgs e)
         {
