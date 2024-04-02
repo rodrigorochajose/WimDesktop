@@ -34,7 +34,6 @@ namespace DMMDigital.Views
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
-                Size = new Size(1362, 653),
                 Text = examView.sessionName
             };
 

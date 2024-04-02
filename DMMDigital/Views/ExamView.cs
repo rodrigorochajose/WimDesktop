@@ -68,8 +68,6 @@ namespace DMMDigital.Views
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
 
-        double angle = 0;
-
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
             InitializeComponent();
@@ -224,6 +222,7 @@ namespace DMMDigital.Views
             {
                 mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
             }
+
             resizeMainPictureBox();
 
             labelImageDate.Text = selectedFrame.datePhotoTook;
@@ -508,14 +507,12 @@ namespace DMMDigital.Views
         {
             if (mainPictureBox.Image != null)
             {
-                mainPictureBox.Invoke((MethodInvoker)(() =>
-                {
-                    mainPictureBox.Size = new Size(
-                        mainPictureBoxOriginalSize.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                        mainPictureBoxOriginalSize.Height
-                    );
-                    mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
-                }));
+                mainPictureBox.Size = new Size(
+                    panel2.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                    panel2.Height
+                );
+
+                mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
             }
         }
 
@@ -890,7 +887,7 @@ namespace DMMDigital.Views
         private void selectedDrawingHistoryHandler()
         {
             flowLayoutPanel1.Controls.Clear();
-            if (selectedDrawingHistory.Count > 0)
+            if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
             {
                 selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(showDrawingHistory);
                 saveExamChangesOnDatabase();
@@ -1167,8 +1164,15 @@ namespace DMMDigital.Views
 
         private void buttonRotateRightClick(object sender, EventArgs e)
         {
-            Console.WriteLine($"mainPictureBox Size Before: ({mainPictureBox.Width},{mainPictureBox.Height})");
-            Console.WriteLine($"mainPictureBoxImage Size Before: ({mainPictureBox.Image.Width},{mainPictureBox.Image.Height})");
+            IDrawing lastDrawing = selectedDrawingHistory[indexSelectedDrawingHistory].Last();
+
+            PointF initialPoint = lastDrawing.points[0];
+            PointF finalPoint = lastDrawing.points[1];
+
+            SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
+
+            PointF initialDistance = new PointF((previousMainPictureBoxSize.Width / 2 - initialPoint.X) * -1, previousMainPictureBoxSize.Height / 2 - initialPoint.Y);
+            PointF finalDistance = new PointF((previousMainPictureBoxSize.Width / 2 - finalPoint.X) * -1, previousMainPictureBoxSize.Height / 2 - finalPoint.Y);
 
             Image currentImage = mainPictureBox.Image;
             currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
@@ -1186,32 +1190,18 @@ namespace DMMDigital.Views
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
 
-            mainPictureBox.Size = new Size(mainPictureBox.Height, mainPictureBox.Width);
+            resizeMainPictureBox();
+
+            PointF newInicialCenterDistance = new PointF(initialDistance.Y * mainPictureBox.Width / previousMainPictureBoxSize.Height, initialDistance.X * mainPictureBox.Height / previousMainPictureBoxSize.Width);
+            PointF newFinalCenterDistance = new PointF(finalDistance.Y * mainPictureBox.Width / previousMainPictureBoxSize.Height, finalDistance.X * mainPictureBox.Height / previousMainPictureBoxSize.Width);
+
+            PointF firstPoint = new PointF(mainPictureBox.Width / 2 + newInicialCenterDistance.X, mainPictureBox.Height / 2 + newInicialCenterDistance.Y);
+            PointF lastPoint = new PointF(mainPictureBox.Width / 2 + newFinalCenterDistance.X, mainPictureBox.Height / 2 + newFinalCenterDistance.Y);
+
+            lastDrawing.points[0] = Point.Round(firstPoint);
+            lastDrawing.points[1] = Point.Round(lastPoint);
+
             mainPictureBox.Refresh();
-
-            Console.WriteLine($"mainPictureBox Size After: ({mainPictureBox.Width},{mainPictureBox.Height})");
-            Console.WriteLine($"mainPictureBoxImage Size After: ({mainPictureBox.Image.Width},{mainPictureBox.Image.Height})");
-            //resizeMainPictureBox();
-
-            //angle += 90;
-            //if (angle == 360)
-            //    angle = 0;
-
-            //var lastDrawing = selectedDrawingHistory[indexSelectedDrawingHistory].Last();
-            //lastDrawing.points[0] = RotatePoint(lastDrawing.points[0], new Point(mainPictureBox.Width / 2, mainPictureBox.Height / 2), angle);
-            //lastDrawing.points[1] = RotatePoint(lastDrawing.points[1], new Point(mainPictureBox.Width / 2, mainPictureBox.Height / 2), angle);
-        }
-
-        private Point RotatePoint(Point pointToRotate, Point centerPoint, double angleInDegrees)
-        {
-            double angleInRadians = angleInDegrees * (Math.PI / 180.0);
-            double cosTheta = Math.Cos(angleInRadians);
-            double sinTheta = Math.Sin(angleInRadians);
-            return new Point
-            {
-                X = (int)(cosTheta * (pointToRotate.X - centerPoint.X) - sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X),
-                Y = (int)(sinTheta * (pointToRotate.X - centerPoint.X) + cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y)
-            };
         }
 
         private void buttonRestoreExamClick(object sender, EventArgs e)
@@ -1658,9 +1648,9 @@ namespace DMMDigital.Views
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
 
             }
+
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
-
             draw = false;
             currentDrawing = null;
             selectedDrawingToMove = null;
@@ -1766,6 +1756,11 @@ namespace DMMDigital.Views
             {
                 eventSaveAndClose?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private void examViewResize(object sender, EventArgs e)
+        {
+            resizeMainPictureBox();
         }
     }
 }
