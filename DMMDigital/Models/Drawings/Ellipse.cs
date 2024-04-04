@@ -43,5 +43,20 @@ namespace DMMDigital.Models.Drawings
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;
         }
+
+        public IDrawing deepCopy()
+        {
+            Ellipse ellipseCopy = new Ellipse
+            {
+                id = id,
+                frameId = frameId,
+                graphicsPath = graphicsPath,
+                drawingColor = drawingColor,
+                drawingSize = drawingSize,
+                points = points.Select(p => new Point(p.X, p.Y)).ToList()
+            };
+
+            return ellipseCopy;
+        }
     }
 }

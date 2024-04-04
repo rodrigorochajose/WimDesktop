@@ -101,29 +101,34 @@ namespace DMMDigital.Presenters
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt.ToString("dd-MM-yyyy")}";
+                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt:dd-MM-yyyy}";
                 examView.templateId = exam.templateId;
                 examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
                 examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+                associateDrawingsToPoint();
 
-                List<ExamImageDrawingPointsModel> examImageDrawingPoints = examImageDrawingPointsRepository.getExamImageDrawingPoints(examView.examId).ToList();
-
-                foreach (ExamImageDrawingModel drawing in examView.examImageDrawings)
-                {
-                    drawing.points = new List<Point>();
-                    IEnumerable currentDrawingPoints = examImageDrawingPoints.Where(dp => dp.examId == drawing.examId && dp.examImageDrawingId == drawing.id);
-                    
-                    foreach (ExamImageDrawingPointsModel drawingPoints in currentDrawingPoints)
-                    {
-                        drawing.points.Add(new Point(drawingPoints.pointX, drawingPoints.pointY));
-                    }
-                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar exame - {ex.Message}");
+            }
+        }
+
+        private void associateDrawingsToPoint()
+        {
+            List<ExamImageDrawingPointsModel> examImageDrawingPoints = examImageDrawingPointsRepository.getExamImageDrawingPoints(examView.examId).ToList();
+
+            foreach (ExamImageDrawingModel drawing in examView.examImageDrawings)
+            {
+                drawing.points = new List<Point>();
+                IEnumerable currentDrawingPoints = examImageDrawingPoints.Where(dp => dp.examId == drawing.examId && dp.examImageDrawingId == drawing.id);
+
+                foreach (ExamImageDrawingPointsModel drawingPoints in currentDrawingPoints)
+                {
+                    drawing.points.Add(new Point(drawingPoints.pointX, drawingPoints.pointY));
+                }
             }
         }
 
@@ -222,12 +227,9 @@ namespace DMMDigital.Presenters
 
                         examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
                     }
-                    else
+                    else if (item.points != existingExamImageDrawing.points)
                     {
-                        if (item.points != existingExamImageDrawing.points)
-                        {
-                            examImageDrawingPointsRepository.updatePoints(item.id, item.points);
-                        }
+                        examImageDrawingPointsRepository.updatePoints(item.id, item.points);
                     }
                 }
             }

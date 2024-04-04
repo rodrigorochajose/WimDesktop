@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
+using System.Linq;
 
 namespace DMMDigital.Models.Drawings
 {
@@ -41,6 +41,21 @@ namespace DMMDigital.Models.Drawings
 
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;
+        }
+
+        public IDrawing deepCopy()
+        {
+            FreeDraw freeDrawCopy = new FreeDraw
+            {
+                id = id,
+                frameId = frameId,
+                graphicsPath = graphicsPath,
+                drawingColor = drawingColor,
+                drawingSize = drawingSize,
+                points = points.Select(p => new Point(p.X, p.Y)).ToList()
+            };
+
+            return freeDrawCopy;
         }
     }
 }

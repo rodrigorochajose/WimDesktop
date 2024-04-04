@@ -10,6 +10,7 @@ namespace DMMDigital._Repositories
     public class ExamImageDrawingPointsRepository : IExamImageDrawingPointsRepository
     {
         private readonly Context context = new Context();
+
         public void save()
         {
             try

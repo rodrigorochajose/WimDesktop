@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
 using DMMDigital.Interface;
 using System.Linq;
 
@@ -48,6 +47,24 @@ namespace DMMDigital.Models.Drawings
 
             Image thumb = bitmap.GetThumbnailImage(50, 50, () => false, IntPtr.Zero);
             return thumb;
+        }
+
+        public IDrawing deepCopy()
+        {
+            Text textCopy = new Text
+            {
+                id = id,
+                frameId = frameId,
+                graphicsPath = graphicsPath,
+                drawingColor = drawingColor,
+                drawingSize = drawingSize,
+                points = points.Select(p => new Point(p.X, p.Y)).ToList(),
+                text = text,
+                font = font,
+                brush = brush
+            };
+
+            return textCopy;
         }
     }
 }

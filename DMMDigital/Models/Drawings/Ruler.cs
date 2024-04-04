@@ -107,5 +107,22 @@ namespace DMMDigital.Models.Drawings
             return thumb;
         }
 
+        public IDrawing deepCopy()
+        {
+            Ruler rulerCopy = new Ruler
+            {
+                id = id,
+                frameId = frameId,
+                graphicsPath = graphicsPath,
+                drawingColor = drawingColor,
+                drawingSize = drawingSize,
+                points = points.Select(p => new Point(p.X, p.Y)).ToList(),
+                previewPoint = previewPoint,
+                lineLength = lineLength,
+                multiple = multiple
+            };
+
+            return rulerCopy;
+        }
     }
 }
