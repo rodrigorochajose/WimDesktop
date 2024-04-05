@@ -64,6 +64,8 @@ namespace DMMDigital.Views
             };
 
             buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
+
+            buttonCancel.Click += delegate { Close(); };
         }
 
         private void buttonDrawingColorPickerClick(object sender, EventArgs e)

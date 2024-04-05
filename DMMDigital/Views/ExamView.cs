@@ -765,8 +765,8 @@ namespace DMMDigital.Views
         private float getRulerLength(Point initialPoint, Point finalPoint)
         {
             // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            double scalingFactorWidth = mainPictureBox.Image.Width / 20;
-            double scalingFactorHeight = mainPictureBox.Image.Height / 30;
+            double scalingFactorWidth = mainPictureBox.Image.Width / 26;
+            double scalingFactorHeight = mainPictureBox.Image.Height / 36;
 
             float initialX = initialPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
             float initialY = initialPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
