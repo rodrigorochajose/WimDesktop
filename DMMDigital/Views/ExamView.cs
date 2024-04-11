@@ -56,7 +56,9 @@ namespace DMMDigital.Views
         TrackBar trackBarZoom;
         Button buttonColorPicker;
         PictureBox pictureBoxMagnifier;
+        Panel panelContainerMagnifier;
         NumericUpDown numericUpDownDrawingSize;
+        Graphics magnifierGraphics;
 
         List<Frame> frames = new List<Frame>();
         List<Point> differenceBetweenPoints = new List<Point>();
@@ -67,7 +69,6 @@ namespace DMMDigital.Views
         IDrawing selectedDrawingToMove;
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
-
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
             InitializeComponent();
@@ -102,6 +103,8 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             associateConfigs(config);
+
+            this.DoubleBuffered = true;
 
             this.examId = examId;
             this.patient = patient;
@@ -514,11 +517,11 @@ namespace DMMDigital.Views
             if (mainPictureBox.Image != null)
             {
                 mainPictureBox.Size = new Size(
-                    panel2.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                    panel2.Height
+                    panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                    panelImage.Height
                 );
 
-                mainPictureBox.Location = new Point((panel2.Width - mainPictureBox.Width) / 2, 0);
+                mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
             }
         }
 
@@ -540,7 +543,7 @@ namespace DMMDigital.Views
             {
                 if (selectedButton.Name == "buttonMagnifier")
                 {
-                    panel2.Controls.Remove(pictureBoxMagnifier);
+                    panelImage.Controls.Remove(panelContainerMagnifier);
                 }
                 selectedButton.BackColor = Color.WhiteSmoke;
                 selectedButton.Tag = "selectable";
@@ -1055,16 +1058,39 @@ namespace DMMDigital.Views
             loadToolOptions();
             selectTool(sender);
 
-            pictureBoxMagnifier = new PictureBox
+            panelContainerMagnifier = new Panel
             {
-                Location = new Point(mainPictureBox.Location.X + mainPictureBox.Width, (panel2.Height - 250) / 2),
-                Name = "pictureBoxMagnifier",
-                Size = new Size(250, 250),
-                Image = new Bitmap(mainPictureBox.Width, mainPictureBox.Height)
+                BackColor = Color.DarkGray,
+                Location = new Point(0,0),
+                Name = "panelContainerMagnifier",
+                Size = new Size(252, 252),
+                Enabled = false
             };
 
-            panel2.Controls.Add(pictureBoxMagnifier);
-            panel2.Controls.SetChildIndex(pictureBoxMagnifier, 0);
+            pictureBoxMagnifier = new PictureBox
+            {
+                Location = new Point(1,1),
+                Name = "pictureBoxMagnifier",
+                Size = new Size(250, 250),
+                Image = new Bitmap(mainPictureBox.Width, mainPictureBox.Height),
+                Enabled = false
+            };
+
+            pictureBoxMagnifier.Paint += (s, ev) =>
+            {
+                ControlPaint.DrawBorder(ev.Graphics, new Rectangle(1, 1, pictureBoxMagnifier.Width - 2, pictureBoxMagnifier.Height - 2),
+                    Color.LightGray, 3, ButtonBorderStyle.Solid,
+                    Color.LightGray, 3, ButtonBorderStyle.Solid,
+                    Color.LightGray, 3, ButtonBorderStyle.Solid,
+                    Color.LightGray, 3, ButtonBorderStyle.Solid
+                );
+            };
+
+            magnifierGraphics = Graphics.FromImage(pictureBoxMagnifier.Image);
+
+            panelContainerMagnifier.Controls.Add(pictureBoxMagnifier);
+            panelImage.Controls.Add(panelContainerMagnifier);
+            panelImage.Controls.SetChildIndex(panelContainerMagnifier, 0);
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
@@ -1616,11 +1642,15 @@ namespace DMMDigital.Views
 
                 RectangleF rectangle = new RectangleF(rectangleInitialPosition, new Size(rectangleWidth, rectangleHeight));
 
-                Graphics graphics = Graphics.FromImage(pictureBoxMagnifier.Image);
-                graphics.Clear(Color.White);
-                graphics.DrawImage(mainPictureBox.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
+                magnifierGraphics.Clear(Color.White);
+                magnifierGraphics.DrawImage(mainPictureBox.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
 
                 pictureBoxMagnifier.Refresh();
+                
+                Point currentCursorPoint = panelImage.PointToClient(Cursor.Position);
+                panelContainerMagnifier.Location = new Point(currentCursorPoint.X - (panelContainerMagnifier.Width / 2), currentCursorPoint.Y - (panelContainerMagnifier.Height / 2));
+
+                mainPictureBox.Update();
             }
         }
 

@@ -33,15 +33,15 @@ namespace DMMDigital.Views
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelDetails = new System.Windows.Forms.Panel();
             this.labelImageDate = new System.Windows.Forms.Label();
             this.textBoxFrameNotes = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelAnnotation = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panelOptions = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panelToolOptions = new System.Windows.Forms.Panel();
             this.labelTemplate = new System.Windows.Forms.Label();
@@ -79,16 +79,16 @@ namespace DMMDigital.Views
             this.buttonRestoreExam = new System.Windows.Forms.ToolStripButton();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelImage = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panelDetails.SuspendLayout();
+            this.panelAnnotation.SuspendLayout();
+            this.panelOptions.SuspendLayout();
             this.panelTools.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panelImage.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTemplate
@@ -100,28 +100,28 @@ namespace DMMDigital.Views
             this.panelTemplate.Size = new System.Drawing.Size(363, 185);
             this.panelTemplate.TabIndex = 0;
             // 
-            // panel3
+            // panelDetails
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.labelImageDate);
-            this.panel3.Controls.Add(this.textBoxFrameNotes);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.flowLayoutPanel1);
-            this.panel3.Controls.Add(this.panel1);
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.panelToolOptions);
-            this.panel3.Controls.Add(this.labelTemplate);
-            this.panel3.Controls.Add(this.labelPatient);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.panelTemplate);
-            this.panel3.Location = new System.Drawing.Point(0, 50);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(363, 619);
-            this.panel3.TabIndex = 0;
+            this.panelDetails.BackColor = System.Drawing.Color.White;
+            this.panelDetails.Controls.Add(this.labelImageDate);
+            this.panelDetails.Controls.Add(this.textBoxFrameNotes);
+            this.panelDetails.Controls.Add(this.label6);
+            this.panelDetails.Controls.Add(this.label5);
+            this.panelDetails.Controls.Add(this.flowLayoutPanel1);
+            this.panelDetails.Controls.Add(this.panelAnnotation);
+            this.panelDetails.Controls.Add(this.panelOptions);
+            this.panelDetails.Controls.Add(this.panelToolOptions);
+            this.panelDetails.Controls.Add(this.labelTemplate);
+            this.panelDetails.Controls.Add(this.labelPatient);
+            this.panelDetails.Controls.Add(this.label2);
+            this.panelDetails.Controls.Add(this.label1);
+            this.panelDetails.Controls.Add(this.panelTemplate);
+            this.panelDetails.Location = new System.Drawing.Point(0, 50);
+            this.panelDetails.Name = "panelDetails";
+            this.panelDetails.Size = new System.Drawing.Size(363, 619);
+            this.panelDetails.TabIndex = 0;
             // 
             // labelImageDate
             // 
@@ -176,14 +176,14 @@ namespace DMMDigital.Views
             this.flowLayoutPanel1.TabIndex = 6;
             this.flowLayoutPanel1.WrapContents = false;
             // 
-            // panel1
+            // panelAnnotation
             // 
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Location = new System.Drawing.Point(0, 434);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(363, 29);
-            this.panel1.TabIndex = 6;
+            this.panelAnnotation.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelAnnotation.Controls.Add(this.label4);
+            this.panelAnnotation.Location = new System.Drawing.Point(0, 434);
+            this.panelAnnotation.Name = "panelAnnotation";
+            this.panelAnnotation.Size = new System.Drawing.Size(363, 29);
+            this.panelAnnotation.TabIndex = 6;
             // 
             // label4
             // 
@@ -196,14 +196,14 @@ namespace DMMDigital.Views
             this.label4.TabIndex = 5;
             this.label4.Text = "Anotações";
             // 
-            // panel4
+            // panelOptions
             // 
-            this.panel4.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(0, 347);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(363, 29);
-            this.panel4.TabIndex = 0;
+            this.panelOptions.BackColor = System.Drawing.Color.Gainsboro;
+            this.panelOptions.Controls.Add(this.label3);
+            this.panelOptions.Location = new System.Drawing.Point(0, 347);
+            this.panelOptions.Name = "panelOptions";
+            this.panelOptions.Size = new System.Drawing.Size(363, 29);
+            this.panelOptions.TabIndex = 0;
             // 
             // label3
             // 
@@ -678,18 +678,18 @@ namespace DMMDigital.Views
             this.mainPictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mainPictureBoxMouseMove);
             this.mainPictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.mainPictureBoxMouseUp);
             // 
-            // panel2
+            // panelImage
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Controls.Add(this.mainPictureBox);
-            this.panel2.Location = new System.Drawing.Point(363, 50);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1012, 619);
-            this.panel2.TabIndex = 1;
+            this.panelImage.BackColor = System.Drawing.Color.Black;
+            this.panelImage.Controls.Add(this.mainPictureBox);
+            this.panelImage.Location = new System.Drawing.Point(363, 50);
+            this.panelImage.Margin = new System.Windows.Forms.Padding(0);
+            this.panelImage.Name = "panelImage";
+            this.panelImage.Size = new System.Drawing.Size(1012, 619);
+            this.panelImage.TabIndex = 1;
             // 
             // colorDialog
             // 
@@ -707,26 +707,26 @@ namespace DMMDigital.Views
             this.BackColor = System.Drawing.SystemColors.ControlText;
             this.ClientSize = new System.Drawing.Size(1375, 668);
             this.Controls.Add(this.panelTools);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelDetails);
+            this.Controls.Add(this.panelImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExamView";
             this.Text = "Exame";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.examViewFormClosing);
             this.Resize += new System.EventHandler(this.examViewResize);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panelDetails.ResumeLayout(false);
+            this.panelDetails.PerformLayout();
+            this.panelAnnotation.ResumeLayout(false);
+            this.panelAnnotation.PerformLayout();
+            this.panelOptions.ResumeLayout(false);
+            this.panelOptions.PerformLayout();
             this.panelTools.ResumeLayout(false);
             this.panelTools.PerformLayout();
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPictureBox)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.panelImage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -734,7 +734,7 @@ namespace DMMDigital.Views
         #endregion
 
         private System.Windows.Forms.Panel panelTemplate;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelDetails;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelTemplate;
         private System.Windows.Forms.Label labelPatient;
@@ -742,12 +742,12 @@ namespace DMMDigital.Views
         private System.Windows.Forms.Panel panelTools;
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.PictureBox mainPictureBox;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelImage;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Panel panelToolOptions;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panelOptions;
         private System.Windows.Forms.Label label3;
-        private Panel panel1;
+        private Panel panelAnnotation;
         private Label label4;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label6;
