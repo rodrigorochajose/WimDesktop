@@ -69,6 +69,7 @@ namespace DMMDigital.Views
         IDrawing selectedDrawingToMove;
         Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
+
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
             InitializeComponent();
@@ -103,8 +104,6 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             associateConfigs(config);
-
-            this.DoubleBuffered = true;
 
             this.examId = examId;
             this.patient = patient;
@@ -196,15 +195,15 @@ namespace DMMDigital.Views
                     newFrame.notes = selectedExamImage.notes;
                     newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
-                    string filteredFile = $"{newFrame.order}-filtered.png";
+                    string editedFile = $"{newFrame.order}-edited.png";
 
-                    if (File.Exists(Path.Combine(examPath, filteredFile)))
+                    if (File.Exists(Path.Combine(examPath, editedFile)))
                     {
-                        using (var bmpTemp = new Bitmap(Path.Combine(examPath, filteredFile)))
+                        using (var bmpTemp = new Bitmap(Path.Combine(examPath, editedFile)))
                         {
                             img = new Bitmap(bmpTemp);
                         }
-                        newFrame.filteredImage = img;
+                        newFrame.editedImage = img;
                     }
 
                     newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
@@ -223,9 +222,9 @@ namespace DMMDigital.Views
             selectedFrame = frames.First();
             selectedFrame.Tag = Color.LimeGreen;
 
-            if (selectedFrame.filteredImage != null)
+            if (selectedFrame.editedImage != null)
             {
-                mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
+                mainPictureBox.Image = selectedFrame.editedImage.Clone() as Image;
             }
             else if (selectedFrame.originalImage != null)
             {
@@ -472,9 +471,9 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
 
-            if (selectedFrame.filteredImage != null)
+            if (selectedFrame.editedImage != null)
             {
-                mainPictureBox.Image = selectedFrame.filteredImage;
+                mainPictureBox.Image = selectedFrame.editedImage;
             }
             else if (selectedFrame.originalImage != null)
             {
@@ -952,9 +951,9 @@ namespace DMMDigital.Views
 
                         Image frameImage;
 
-                        if (frames[counter].filteredImage != null)
+                        if (frames[counter].editedImage != null)
                         {
-                            frameImage = frames[counter].filteredImage;
+                            frameImage = frames[counter].editedImage;
                         }
                         else
                         {
@@ -998,11 +997,11 @@ namespace DMMDigital.Views
 
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
 
-                string filteredImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
+                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
 
-                if (File.Exists(filteredImagePath))
+                if (File.Exists(editedImagePath))
                 {
-                    File.Delete(filteredImagePath);
+                    File.Delete(editedImagePath);
                 }
 
                 frameDrawingHistories[indexFrame].drawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
@@ -1015,7 +1014,7 @@ namespace DMMDigital.Views
 
                 selectedFrame.Image = drawFrameDefaultImage(selectedFrame);
                 selectedFrame.originalImage = null;
-                selectedFrame.filteredImage = null;
+                selectedFrame.editedImage = null;
                 selectedFrame.datePhotoTook = "";
                 selectedFrame.notes = "";
 
@@ -1058,14 +1057,14 @@ namespace DMMDigital.Views
             loadToolOptions();
             selectTool(sender);
 
-            panelContainerMagnifier = new Panel
-            {
-                BackColor = Color.DarkGray,
-                Location = new Point(0,0),
-                Name = "panelContainerMagnifier",
-                Size = new Size(252, 252),
-                Enabled = false
-            };
+            //panelContainerMagnifier = new Panel
+            //{
+            //    BackColor = Color.DarkGray,
+            //    Location = new Point(0,0),
+            //    Name = "panelContainerMagnifier",
+            //    Size = new Size(252, 252),
+            //    Enabled = false
+            //};
 
             pictureBoxMagnifier = new PictureBox
             {
@@ -1088,9 +1087,9 @@ namespace DMMDigital.Views
 
             magnifierGraphics = Graphics.FromImage(pictureBoxMagnifier.Image);
 
-            panelContainerMagnifier.Controls.Add(pictureBoxMagnifier);
-            panelImage.Controls.Add(panelContainerMagnifier);
-            panelImage.Controls.SetChildIndex(panelContainerMagnifier, 0);
+            //panelContainerMagnifier.Controls.Add(pictureBoxMagnifier);
+            panelImage.Controls.Add(pictureBoxMagnifier);
+            panelImage.Controls.SetChildIndex(pictureBoxMagnifier, 0);
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
@@ -1124,18 +1123,18 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            Image img = selectedFrame.filteredImage ?? selectedFrame.originalImage;
+            Image img = selectedFrame.editedImage ?? selectedFrame.originalImage;
 
             IFilterView filterView = new FilterView(new Bitmap(img));
             (filterView as Form).ShowDialog();
 
             Image image = filterView.originalImage;
 
-            image.Save(Path.Combine(examPath, selectedFrame.order + "-filtered.png"));
+            image.Save(Path.Combine(examPath, selectedFrame.order + "-edited.png"));
 
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
-                selectedFrame.filteredImage = image;
+                selectedFrame.editedImage = image;
                 selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
                 selectedFrame.Refresh();
             }));
@@ -1206,7 +1205,7 @@ namespace DMMDigital.Views
                 currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
             }
 
-            if (selectedFrame.filteredImage != null)
+            if (selectedFrame.editedImage != null)
             {
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
             }
@@ -1259,9 +1258,9 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (selectedFrame.filteredImage != null)
+                if (selectedFrame.editedImage != null)
                 {
-                    selectedFrame.filteredImage = null;
+                    selectedFrame.editedImage = null;
 
                     Image img = selectedFrame.originalImage;
                     mainPictureBox.Image = img;
@@ -1648,7 +1647,7 @@ namespace DMMDigital.Views
                 pictureBoxMagnifier.Refresh();
                 
                 Point currentCursorPoint = panelImage.PointToClient(Cursor.Position);
-                panelContainerMagnifier.Location = new Point(currentCursorPoint.X - (panelContainerMagnifier.Width / 2), currentCursorPoint.Y - (panelContainerMagnifier.Height / 2));
+                pictureBoxMagnifier.Location = new Point(currentCursorPoint.X - (pictureBoxMagnifier.Width / 2), currentCursorPoint.Y - (pictureBoxMagnifier.Height / 2));
 
                 mainPictureBox.Update();
             }
