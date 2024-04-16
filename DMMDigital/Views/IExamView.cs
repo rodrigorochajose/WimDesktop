@@ -25,10 +25,9 @@ namespace DMMDigital.Views
         event EventHandler eventGetPatient;
         event EventHandler eventSaveAndClose;
 
-        void selectFrame();
+        void selectFrame(Frame frameToSelected = null);
         void loadImageOnMainPictureBox();
         bool dialogOverrideCurrentImage();
         void setLabelPatientTemplate(string patient, string template);
-        void timerTick(object sender, EventArgs e);
     }
 }

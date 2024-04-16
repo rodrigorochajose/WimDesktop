@@ -5,7 +5,7 @@ namespace DMMDigital.Models.Annotations
 {
     public class DateTimeRangeAttribute : ValidationAttribute
     {
-        private readonly DateTime _minDate = new DateTime(1990, 01, 01);
+        private readonly DateTime _minDate = new DateTime(1910, 01, 01);
         private readonly DateTime _maxDate = DateTime.Now;
 
         public override bool IsValid(object value)

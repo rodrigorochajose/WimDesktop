@@ -7,8 +7,9 @@ namespace DMMDigital.Interface
     {
         void save();
         void addExamImage(ExamImageModel examImage);
-        void deleteRangeExamImages(List<ExamImageModel> examImagesToDelete);
+        void deleteExamImage(ExamImageModel examImageToDelete);
         OperationStatus deleteAllExamImages(int examId);
         IEnumerable<ExamImageModel> getExamImages(int examId);
+        ExamImageModel getExamImageById(int frameId);
     }
 }

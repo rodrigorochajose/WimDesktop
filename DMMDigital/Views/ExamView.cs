@@ -175,7 +175,6 @@ namespace DMMDigital.Views
                     orientation = frame.orientation,
                     Tag = Color.Black,
                     Location = new Point(frame.locationX / 2, frame.locationY / 2),
-
                 };
 
                 ExamImageModel selectedExamImage = examImages.FirstOrDefault(e => e.frameId == newFrame.order);
@@ -385,6 +384,8 @@ namespace DMMDigital.Views
 
         private void frameHandler(Image image)
         {
+            selectFrame();
+
             DateTime createdAt = DateTime.Now;
 
             if (selectedFrame.originalImage != null)
@@ -426,13 +427,27 @@ namespace DMMDigital.Views
             }));
         }
 
-        public void selectFrame()
+        public void selectFrame(Frame frameToSelect = null)
         {
-            selectedFrame = frames[indexFrame];
+            checkChangesAndSave();
 
-            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+            if (frameToSelect == null)
+            {
+                frameToSelect = frames[indexFrame];
+            }
+
+            selectedFrame = frameToSelect;
+
+            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
+            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
+            selectedFrame.Tag = Color.LimeGreen;
+
+            panelTemplate.Refresh();
+
+            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.order).drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
             selectedDrawingHistoryHandler();
+            
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -450,26 +465,10 @@ namespace DMMDigital.Views
 
         private void frameDoubleClick(object sender, EventArgs e)
         {
-            selectedFrame = frames.Find(t => (Color)t.Tag == Color.LimeGreen);
-            selectedFrame.Tag = Color.Black;
-            selectedFrame.Refresh();
+            frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
 
-            selectedFrame = (Frame)sender;
-
-            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
-            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
-            selectedFrame.Tag = Color.LimeGreen;
-
-            selectedFrame.Refresh();
+            selectFrame((Frame)sender);
             indexFrame = selectedFrame.order - 1;
-
-            if (frameDrawingHistories.Count > 0)
-            {
-                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-            }
-
-            selectedDrawingHistoryHandler();
 
             if (selectedFrame.editedImage != null)
             {
@@ -499,15 +498,14 @@ namespace DMMDigital.Views
 
         public void loadImageOnMainPictureBox()
         {
-            selectFrame();
             using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 Image image = Image.FromStream(fs);
-                mainPictureBox.Image = image;
                 frameHandler(image);
+
+                mainPictureBox.Image = image;
                 resizeMainPictureBox();
                 enableTools();
-                saveExamChangesOnDatabase();
             }
         }
 
@@ -811,7 +809,6 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
-            saveExamChangesOnDatabase();
         }
 
         private void showDrawingHistory(IDrawing drawing)
@@ -890,7 +887,6 @@ namespace DMMDigital.Views
             if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
             {
                 selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(showDrawingHistory);
-                saveExamChangesOnDatabase();
             }
         }
 
@@ -927,17 +923,15 @@ namespace DMMDigital.Views
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
-                selectFrame();
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-                mainPictureBox.Image = selectedImage;
-                resizeMainPictureBox();
-
-                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
                 frameHandler(selectedImage);
+
+                mainPictureBox.Image = selectedImage;
+                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+                resizeMainPictureBox();
 
                 enableTools();
             }
-            saveExamChangesOnDatabase();
         }
 
         private void buttonExportClick(object sender, EventArgs e)
@@ -1022,7 +1016,6 @@ namespace DMMDigital.Views
                 textBoxFrameNotes.Text = selectedFrame.notes;
 
                 mainPictureBox.Image = null;
-                saveExamChangesOnDatabase();
             }
         }
 
@@ -1284,7 +1277,6 @@ namespace DMMDigital.Views
                 }
 
                 mainPictureBox.Refresh();
-                saveExamChangesOnDatabase();
             }
         }
 
@@ -1328,6 +1320,9 @@ namespace DMMDigital.Views
         private void textBoxFrameNotesTextChanged(object sender, EventArgs e)
         {
             selectedFrame.notes = textBoxFrameNotes.Text;
+
+            ExamImageModel selectedImage = examImages.Find(f => f.frameId == selectedFrame.order);
+            selectedImage.notes = selectedFrame.notes;
         }
 
         private void getDifferenceBetweenPoints(List<Point> points)
@@ -1734,34 +1729,11 @@ namespace DMMDigital.Views
             }
         }
 
-        private void saveExamChangesOnDatabase()
+        private void checkChangesAndSave()
         {
-            if (!timer1.Enabled)
-            {
-                timer1.Enabled = true;
-            }
-        }
-
-        public void timerTick(object sender, EventArgs e)
-        {
-            if (timer1.Enabled)
-            {
-                foreach (ExamImageModel item in examImages)
-                {
-                    Frame frame = frames.FirstOrDefault(i => i.order == item.frameId);
-
-                    if (frame != null)
-                    {
-                        item.notes = frame.notes;
-                    }
-                }
-
-                getDrawingsToSave();
-                eventSaveExamImage?.Invoke(this, EventArgs.Empty);
-                eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
-
-                timer1.Enabled = false;
-            }
+            eventSaveExamImage?.Invoke(this, EventArgs.Empty);
+            getDrawingsToSave();
+            eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
         }
 
         private List<IDrawing> getDrawings()
@@ -1841,12 +1813,7 @@ namespace DMMDigital.Views
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = timer1.Enabled;
-
-            if (e.Cancel)
-            {
-                eventSaveAndClose?.Invoke(this, EventArgs.Empty);
-            }
+            checkChangesAndSave();
         }
 
     }

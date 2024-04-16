@@ -156,29 +156,29 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                List<ExamImageModel> examImagesToSave = examView.examImages;
-                List<ExamImageModel> currentExamImages = examImageRepository.getExamImages(examView.examId).ToList();
+                int currentFrameId = examView.selectedFrame.order;
 
-                List<ExamImageModel> imagesToDelete = currentExamImages.ExceptBy(examImagesToSave, item => item.frameId).ToList();
+                ExamImageModel currentExamImage = examImageRepository.getExamImageById(currentFrameId);
+                ExamImageModel examImageToSave = examView.examImages.FirstOrDefault(ei => ei.frameId == currentFrameId);
 
-                if (imagesToDelete.Any())
+                if (examImageToSave == null && currentExamImage != null)
                 {
-                    examImageRepository.deleteRangeExamImages(imagesToDelete);
+                    examImageRepository.deleteExamImage(currentExamImage);
                 }
-
-                foreach (ExamImageModel item in examImagesToSave)
+                else if (examImageToSave != null && currentExamImage == null)
                 {
-                    ExamImageModel existingExamImage = currentExamImages.Find(ei => ei.frameId == item.frameId);
-                    if (existingExamImage == null)
+                    examImageRepository.addExamImage(examImageToSave);
+                }
+                else if (examImageToSave != null && currentExamImage != null)
+                {
+                    if (currentExamImage.Equals(examImageToSave))
                     {
-                        examImageRepository.addExamImage(item);
+                        return;
                     }
-                    else
-                    {
-                        existingExamImage.notes = item.notes;
-                        existingExamImage.createdAt = item.createdAt;
-                        examImageRepository.save();
-                    }
+
+                    currentExamImage.notes = examImageToSave.notes;
+                    currentExamImage.createdAt = examImageToSave.createdAt;
+                    examImageRepository.save();
                 }
             }
             catch (Exception ex)

@@ -36,11 +36,11 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public void deleteRangeExamImages(List<ExamImageModel> examImages)
+        public void deleteExamImage(ExamImageModel examImageToDelete)
         {
             try
             {
-                context.examImage.RemoveRange(examImages);
+                context.examImage.Remove(examImageToDelete);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -80,6 +80,11 @@ namespace DMMDigital._Repositories
         public IEnumerable<ExamImageModel> getExamImages(int examId)
         {
             return context.examImage.Where(e => e.examId == examId);
+        }
+
+        public ExamImageModel getExamImageById(int frameId)
+        {
+            return context.examImage.FirstOrDefault(e => e.frameId == frameId);
         }
     }
 }

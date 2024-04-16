@@ -30,7 +30,6 @@ namespace DMMDigital.Views
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panelDetails = new System.Windows.Forms.Panel();
@@ -81,7 +80,6 @@ namespace DMMDigital.Views
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panelImage = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelDetails.SuspendLayout();
             this.panelAnnotation.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -389,6 +387,7 @@ namespace DMMDigital.Views
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonExport.Size = new System.Drawing.Size(50, 40);
+            this.buttonExport.Tag = "stateChangeable";
             this.buttonExport.Text = "buttonExport";
             this.buttonExport.ToolTipText = "Exportar Exame";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
@@ -409,6 +408,7 @@ namespace DMMDigital.Views
             this.buttonDeleteImage.Name = "buttonDeleteImage";
             this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonDeleteImage.Size = new System.Drawing.Size(50, 40);
+            this.buttonDeleteImage.Tag = "stateChangeable";
             this.buttonDeleteImage.Text = "buttonDeleteImage";
             this.buttonDeleteImage.ToolTipText = "Excluir Imagem";
             this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteClick);
@@ -424,6 +424,7 @@ namespace DMMDigital.Views
             this.buttonCompareFrame.Name = "buttonCompareFrame";
             this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonCompareFrame.Size = new System.Drawing.Size(50, 40);
+            this.buttonCompareFrame.Tag = "stateChangeable";
             this.buttonCompareFrame.Text = "buttonCompareFrame";
             this.buttonCompareFrame.ToolTipText = "Comparar Imagens";
             this.buttonCompareFrame.Click += new System.EventHandler(this.buttonCompareFrameClick);
@@ -444,6 +445,7 @@ namespace DMMDigital.Views
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonSelect.Size = new System.Drawing.Size(50, 40);
+            this.buttonSelect.Tag = "stateChangeable";
             this.buttonSelect.Text = "buttonSelect";
             this.buttonSelect.ToolTipText = "Selecionar";
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
@@ -459,6 +461,7 @@ namespace DMMDigital.Views
             this.buttonMoveDrawing.Name = "buttonMoveDrawing";
             this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonMoveDrawing.Size = new System.Drawing.Size(50, 40);
+            this.buttonMoveDrawing.Tag = "stateChangeable";
             this.buttonMoveDrawing.Text = "buttonMoveDrawing";
             this.buttonMoveDrawing.ToolTipText = "Mover";
             this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
@@ -474,6 +477,7 @@ namespace DMMDigital.Views
             this.buttonMagnifier.Name = "buttonMagnifier";
             this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonMagnifier.Size = new System.Drawing.Size(50, 40);
+            this.buttonMagnifier.Tag = "stateChangeable";
             this.buttonMagnifier.Text = "buttonMagnifier";
             this.buttonMagnifier.ToolTipText = "Lupa";
             this.buttonMagnifier.Click += new System.EventHandler(this.buttonMagnifierClick);
@@ -489,6 +493,7 @@ namespace DMMDigital.Views
             this.buttonRuler.Name = "buttonRuler";
             this.buttonRuler.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRuler.Size = new System.Drawing.Size(50, 40);
+            this.buttonRuler.Tag = "stateChangeable";
             this.buttonRuler.Text = "buttonRuler";
             this.buttonRuler.ToolTipText = "Régua";
             this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
@@ -504,6 +509,7 @@ namespace DMMDigital.Views
             this.buttonUndo.Name = "buttonUndo";
             this.buttonUndo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonUndo.Size = new System.Drawing.Size(50, 40);
+            this.buttonUndo.Tag = "stateChangeable";
             this.buttonUndo.Text = "buttonUndo";
             this.buttonUndo.ToolTipText = "Desfazer";
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
@@ -519,6 +525,7 @@ namespace DMMDigital.Views
             this.buttonRedo.Name = "buttonRedo";
             this.buttonRedo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRedo.Size = new System.Drawing.Size(50, 40);
+            this.buttonRedo.Tag = "stateChangeable";
             this.buttonRedo.Text = "buttonRedo";
             this.buttonRedo.ToolTipText = "Refazer";
             this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
@@ -534,6 +541,7 @@ namespace DMMDigital.Views
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonFilter.Size = new System.Drawing.Size(50, 40);
+            this.buttonFilter.Tag = "stateChangeable";
             this.buttonFilter.Text = "buttonFilter";
             this.buttonFilter.ToolTipText = "Filtro";
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
@@ -549,6 +557,7 @@ namespace DMMDigital.Views
             this.buttonFreeDraw.Name = "buttonFreeDraw";
             this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonFreeDraw.Size = new System.Drawing.Size(50, 40);
+            this.buttonFreeDraw.Tag = "stateChangeable";
             this.buttonFreeDraw.Text = "buttonFreeDraw";
             this.buttonFreeDraw.ToolTipText = "Desenho Livre";
             this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
@@ -564,6 +573,7 @@ namespace DMMDigital.Views
             this.buttonText.Name = "buttonText";
             this.buttonText.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonText.Size = new System.Drawing.Size(50, 40);
+            this.buttonText.Tag = "stateChangeable";
             this.buttonText.Text = "buttonText";
             this.buttonText.ToolTipText = "Texto";
             this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
@@ -579,6 +589,7 @@ namespace DMMDigital.Views
             this.buttonArrow.Name = "buttonArrow";
             this.buttonArrow.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonArrow.Size = new System.Drawing.Size(50, 40);
+            this.buttonArrow.Tag = "stateChangeable";
             this.buttonArrow.Text = "buttonArrow";
             this.buttonArrow.ToolTipText = "Seta";
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
@@ -594,6 +605,7 @@ namespace DMMDigital.Views
             this.buttonRectangle.Name = "buttonRectangle";
             this.buttonRectangle.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRectangle.Size = new System.Drawing.Size(50, 40);
+            this.buttonRectangle.Tag = "stateChangeable";
             this.buttonRectangle.Text = "buttonRectangle";
             this.buttonRectangle.ToolTipText = "Retângulo";
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
@@ -609,6 +621,7 @@ namespace DMMDigital.Views
             this.buttonEllipse.Name = "buttonEllipse";
             this.buttonEllipse.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonEllipse.Size = new System.Drawing.Size(50, 40);
+            this.buttonEllipse.Tag = "stateChangeable";
             this.buttonEllipse.Text = "buttonEllipse";
             this.buttonEllipse.ToolTipText = "Círculo";
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
@@ -624,6 +637,7 @@ namespace DMMDigital.Views
             this.buttonRotateLeft.Name = "buttonRotateLeft";
             this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRotateLeft.Size = new System.Drawing.Size(50, 40);
+            this.buttonRotateLeft.Tag = "stateChangeable";
             this.buttonRotateLeft.Text = "buttonRotateLeft";
             this.buttonRotateLeft.ToolTipText = "Girar à Esquerda";
             this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
@@ -639,6 +653,7 @@ namespace DMMDigital.Views
             this.buttonRotateRight.Name = "buttonRotateRight";
             this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRotateRight.Size = new System.Drawing.Size(50, 40);
+            this.buttonRotateRight.Tag = "stateChangeable";
             this.buttonRotateRight.Text = "buttonRotateRight";
             this.buttonRotateRight.ToolTipText = "Girar à Direita";
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
@@ -654,6 +669,7 @@ namespace DMMDigital.Views
             this.buttonRestoreExam.Name = "buttonRestoreExam";
             this.buttonRestoreExam.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonRestoreExam.Size = new System.Drawing.Size(50, 40);
+            this.buttonRestoreExam.Tag = "stateChangeable";
             this.buttonRestoreExam.Text = "buttonRestoreExam";
             this.buttonRestoreExam.ToolTipText = "Restaurar Exame";
             this.buttonRestoreExam.Click += new System.EventHandler(this.buttonRestoreExamClick);
@@ -695,11 +711,6 @@ namespace DMMDigital.Views
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 60000;
-            this.timer1.Tick += new System.EventHandler(this.timerTick);
             // 
             // ExamView
             // 
@@ -754,7 +765,6 @@ namespace DMMDigital.Views
         private Label label5;
         private TextBox textBoxFrameNotes;
         private Label labelImageDate;
-        private Timer timer1;
         private ToolStrip toolStrip;
         private ToolStripDropDownButton toolStripDropDownButton;
         private ToolStripMenuItem buttonOpenExam;

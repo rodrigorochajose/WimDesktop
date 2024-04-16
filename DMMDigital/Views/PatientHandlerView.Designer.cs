@@ -84,7 +84,7 @@
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label7.Location = new System.Drawing.Point(86, 336);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 17);
+            this.label7.Size = new System.Drawing.Size(81, 19);
             this.label7.TabIndex = 24;
             this.label7.Text = "Observação";
             // 
@@ -94,7 +94,7 @@
             this.textBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRecommendation.Location = new System.Drawing.Point(89, 301);
             this.textBoxRecommendation.Name = "textBoxRecommendation";
-            this.textBoxRecommendation.Size = new System.Drawing.Size(263, 23);
+            this.textBoxRecommendation.Size = new System.Drawing.Size(263, 25);
             this.textBoxRecommendation.TabIndex = 23;
             // 
             // label6
@@ -104,7 +104,7 @@
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label6.Location = new System.Drawing.Point(86, 281);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 17);
+            this.label6.Size = new System.Drawing.Size(66, 19);
             this.label6.TabIndex = 22;
             this.label6.Text = "Indicação";
             // 
@@ -115,7 +115,7 @@
             this.textBoxPhone.Location = new System.Drawing.Point(89, 246);
             this.textBoxPhone.Mask = "(99) 99999-9999";
             this.textBoxPhone.Name = "textBoxPhone";
-            this.textBoxPhone.Size = new System.Drawing.Size(204, 23);
+            this.textBoxPhone.Size = new System.Drawing.Size(204, 25);
             this.textBoxPhone.TabIndex = 21;
             this.textBoxPhone.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
@@ -126,7 +126,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label5.Location = new System.Drawing.Point(86, 226);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 17);
+            this.label5.Size = new System.Drawing.Size(59, 19);
             this.label5.TabIndex = 20;
             this.label5.Text = "Telefone";
             // 
@@ -139,9 +139,9 @@
             this.textBoxBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.textBoxBirthDate.Location = new System.Drawing.Point(89, 193);
             this.textBoxBirthDate.Name = "textBoxBirthDate";
-            this.textBoxBirthDate.Size = new System.Drawing.Size(217, 23);
+            this.textBoxBirthDate.Size = new System.Drawing.Size(217, 25);
             this.textBoxBirthDate.TabIndex = 19;
-            this.textBoxBirthDate.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
+            this.textBoxBirthDate.Value = new System.DateTime(1910, 1, 1, 0, 0, 0, 0);
             // 
             // label4
             // 
@@ -150,7 +150,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label4.Location = new System.Drawing.Point(86, 171);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(136, 17);
+            this.label4.Size = new System.Drawing.Size(133, 19);
             this.label4.TabIndex = 18;
             this.label4.Text = "Data de Nascimento";
             // 
@@ -160,7 +160,7 @@
             this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxName.Location = new System.Drawing.Point(89, 136);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(263, 23);
+            this.textBoxName.Size = new System.Drawing.Size(263, 25);
             this.textBoxName.TabIndex = 17;
             // 
             // label3
@@ -170,7 +170,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(86, 116);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 17);
+            this.label3.Size = new System.Drawing.Size(46, 19);
             this.label3.TabIndex = 16;
             this.label3.Text = "Nome";
             // 
@@ -181,7 +181,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(101, 66);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(233, 20);
+            this.label2.Size = new System.Drawing.Size(224, 21);
             this.label2.TabIndex = 15;
             this.label2.Text = "Preencha os dados do paciente";
             // 
@@ -192,11 +192,11 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(128, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 29);
+            this.label1.Size = new System.Drawing.Size(184, 32);
             this.label1.TabIndex = 14;
             this.label1.Text = "Editar Paciente";
             // 
-            // ManipulatePatientView
+            // PatientHandlerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -217,7 +217,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "ManipulatePatientView";
+            this.Name = "PatientHandlerView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Editar Paciente";
             this.ResumeLayout(false);

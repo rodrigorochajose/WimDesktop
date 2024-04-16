@@ -59,7 +59,6 @@ namespace DMMDigital.Views
             List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
             foreach (ExamView exam in openedExams)
             {
-                exam.timerTick(this, e);
                 exam.Close();
             }
         }
