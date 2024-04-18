@@ -39,13 +39,13 @@ namespace DMMDigital.Presenters
                     {
                         foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
                         {
-                            if (form.Text != "WIM Desktop")
+                            if (form.Text.Contains("WIM Desktop"))
                             {
-                                form.Close();
+                                form.Show();
                             }
                             else
                             {
-                                form.Show();
+                                form.Close();
                             }
                         };
                     }

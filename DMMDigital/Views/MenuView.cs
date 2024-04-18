@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -20,5 +21,13 @@ namespace DMMDigital.Views
         public event EventHandler showNewExamView;
         public event EventHandler showTemplateView;
         public event EventHandler showConfigView;
+
+        private void menuViewLoad(object sender, EventArgs e)
+        {
+            string caminho = @"DMMDigital.exe";
+            DateTime data_hora = File.GetLastWriteTime(caminho);
+            string versao = "WIM Desktop - Versão " + data_hora.ToShortDateString() + " - " + data_hora.ToShortTimeString();
+            this.Text = versao;
+        }
     }
 }

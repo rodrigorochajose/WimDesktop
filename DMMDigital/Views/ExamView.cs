@@ -442,12 +442,11 @@ namespace DMMDigital.Views
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
             selectedFrame.Tag = Color.LimeGreen;
 
-            panelTemplate.Refresh();
+            panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
 
             selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.order).drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-            selectedDrawingHistoryHandler();
-            
+            selectedDrawingHistoryHandler();        
         }
 
         private void framePaint(object sender, PaintEventArgs e)
@@ -498,27 +497,31 @@ namespace DMMDigital.Views
 
         public void loadImageOnMainPictureBox()
         {
+            Image image;
             using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
-                Image image = Image.FromStream(fs);
-                frameHandler(image);
-
-                mainPictureBox.Image = image;
-                resizeMainPictureBox();
-                enableTools();
+                image = Image.FromStream(fs);
             }
+
+            frameHandler(image);
+            mainPictureBox.Image = image;
+            resizeMainPictureBox();
+            enableTools();
         }
 
         public void resizeMainPictureBox()
         {
             if (mainPictureBox.Image != null)
             {
-                mainPictureBox.Size = new Size(
-                    panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                    panelImage.Height
-                );
+                mainPictureBox.Invoke((MethodInvoker)(() =>
+                {
+                    mainPictureBox.Size = new Size(
+                        panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
+                        panelImage.Height
+                    );
 
-                mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
+                    mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
+                }));
             }
         }
 
@@ -1050,15 +1053,6 @@ namespace DMMDigital.Views
             loadToolOptions();
             selectTool(sender);
 
-            //panelContainerMagnifier = new Panel
-            //{
-            //    BackColor = Color.DarkGray,
-            //    Location = new Point(0,0),
-            //    Name = "panelContainerMagnifier",
-            //    Size = new Size(252, 252),
-            //    Enabled = false
-            //};
-
             pictureBoxMagnifier = new PictureBox
             {
                 Location = new Point(1,1),
@@ -1080,7 +1074,6 @@ namespace DMMDigital.Views
 
             magnifierGraphics = Graphics.FromImage(pictureBoxMagnifier.Image);
 
-            //panelContainerMagnifier.Controls.Add(pictureBoxMagnifier);
             panelImage.Controls.Add(pictureBoxMagnifier);
             panelImage.Controls.SetChildIndex(pictureBoxMagnifier, 0);
         }
@@ -1187,7 +1180,7 @@ namespace DMMDigital.Views
 
         private void rotateImage(string rotationDirection)
         {
-            Image currentImage = mainPictureBox.Image;
+            Bitmap currentImage = new Bitmap(mainPictureBox.Image);
 
             if (rotationDirection == "right")
             {

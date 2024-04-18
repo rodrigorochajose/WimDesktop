@@ -191,9 +191,13 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                List<ExamImageDrawingModel> currentExamImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+                int selectedFrameId = examView.selectedFrame.order;
 
-                List<ExamImageDrawingModel> drawingsToDelete = currentExamImageDrawings.ExceptBy(examView.examImageDrawings, item => item.id).ToList();
+                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
+
+                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(selectedFrameId).ToList();
+
+                List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
 
                 if (drawingsToDelete.Any())
                 {
@@ -202,14 +206,14 @@ namespace DMMDigital.Presenters
                     examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
                 }
 
-                foreach (ExamImageDrawingModel item in examView.examImageDrawings)
+                foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
                 {
-                    ExamImageDrawingModel existingExamImageDrawing = currentExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
+                    ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
                     if (existingExamImageDrawing == null)
                     {
                         examImageDrawingRepository.addExamImageDrawing(item);
 
-                        int drawingId = examImageDrawingRepository.getExamImageDrawings(examView.examId).Last().id;
+                        int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(selectedFrameId).Last().id;
 
                         List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
 

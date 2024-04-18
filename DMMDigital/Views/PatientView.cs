@@ -54,7 +54,7 @@ namespace DMMDigital.Views
             dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
             dataGridViewExam.Columns[2].Width = 195;
 
-            dataGridViewExam.Columns[3].HeaderText = "Data de Nascimento";
+            dataGridViewExam.Columns[3].HeaderText = "Data do Exame";
             dataGridViewExam.Columns[3].Width = 130;
 
             dataGridViewExam.Columns[4].HeaderText = "Template";
