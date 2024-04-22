@@ -36,6 +36,7 @@
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.checkBoxExportEditedImage = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxFormat = new System.Windows.Forms.ComboBox();
             this.checkBoxExportOriginalImage = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonExportExam = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.comboBoxFormat = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -146,6 +146,20 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opções";
+            // 
+            // comboBoxFormat
+            // 
+            this.comboBoxFormat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFormat.FormattingEnabled = true;
+            this.comboBoxFormat.Items.AddRange(new object[] {
+            "JPEG",
+            "PNG",
+            "TIFF",
+            "DICOM"});
+            this.comboBoxFormat.Location = new System.Drawing.Point(132, 68);
+            this.comboBoxFormat.Name = "comboBoxFormat";
+            this.comboBoxFormat.Size = new System.Drawing.Size(113, 23);
+            this.comboBoxFormat.TabIndex = 25;
             // 
             // checkBoxExportOriginalImage
             // 
@@ -266,20 +280,6 @@
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // comboBoxFormat
-            // 
-            this.comboBoxFormat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxFormat.FormattingEnabled = true;
-            this.comboBoxFormat.Items.AddRange(new object[] {
-            "JPEG",
-            "PNG",
-            "TIFF",
-            "DICOM"});
-            this.comboBoxFormat.Location = new System.Drawing.Point(132, 68);
-            this.comboBoxFormat.Name = "comboBoxFormat";
-            this.comboBoxFormat.Size = new System.Drawing.Size(113, 23);
-            this.comboBoxFormat.TabIndex = 25;
-            // 
             // ExportExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,6 +290,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ExportExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Exportar";

@@ -4,6 +4,7 @@ namespace DMMDigital.Views
 {
     public interface IConfigView
     {
+        string sensorPath { get; set; }
         string imagePath { get; set; }
         string drawingColor { get; set; }
         int drawingSize { get; set; }

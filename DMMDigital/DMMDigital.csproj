@@ -114,6 +114,7 @@
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
+    <Compile Include="Presenters\ExportExamPresenter.cs" />
     <Compile Include="Presenters\TemplateHandlerPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

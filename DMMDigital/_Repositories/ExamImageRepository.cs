@@ -82,9 +82,9 @@ namespace DMMDigital._Repositories
             return context.examImage.Where(e => e.examId == examId);
         }
 
-        public ExamImageModel getExamImageById(int frameId)
+        public ExamImageModel getExamImageById(int examId, int frameId)
         {
-            return context.examImage.FirstOrDefault(e => e.frameId == frameId);
+            return context.examImage.FirstOrDefault(e => e.examId == examId && e.frameId == frameId);
         }
     }
 }

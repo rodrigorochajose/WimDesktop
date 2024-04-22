@@ -36,48 +36,50 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDownTextSize = new System.Windows.Forms.NumericUpDown();
+            this.buttonRulerColorPicker = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDownDrawingSize = new System.Windows.Forms.NumericUpDown();
+            this.buttonTextColorPicker = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.buttonDrawingColorPicker = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buttonDrawingColorPicker = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDownDrawingSize = new System.Windows.Forms.NumericUpDown();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDownTextSize = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonTextColorPicker = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.buttonRulerColorPicker = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxSensorPath = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTextSize)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).BeginInit();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTextSize)).BeginInit();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelCaminho
             // 
             this.labelCaminho.AutoSize = true;
             this.labelCaminho.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.labelCaminho.Location = new System.Drawing.Point(3, 22);
+            this.labelCaminho.Location = new System.Drawing.Point(3, 133);
             this.labelCaminho.Name = "labelCaminho";
             this.labelCaminho.Size = new System.Drawing.Size(206, 19);
             this.labelCaminho.TabIndex = 0;
@@ -96,7 +98,7 @@
             // textBoxPath
             // 
             this.textBoxPath.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxPath.Location = new System.Drawing.Point(7, 54);
+            this.textBoxPath.Location = new System.Drawing.Point(7, 165);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(312, 25);
             this.textBoxPath.TabIndex = 2;
@@ -115,12 +117,14 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.textBoxSensorPath);
             this.tabPage1.Controls.Add(this.labelCaminho);
             this.tabPage1.Controls.Add(this.textBoxPath);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(362, 251);
+            this.tabPage1.Size = new System.Drawing.Size(362, 257);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -147,6 +151,187 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Anotações";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel5.Controls.Add(this.label8);
+            this.panel5.Location = new System.Drawing.Point(0, 162);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(362, 26);
+            this.panel5.TabIndex = 10;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.Location = new System.Drawing.Point(12, 3);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(61, 19);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Medição";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Location = new System.Drawing.Point(0, 78);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(362, 26);
+            this.panel3.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label5.Location = new System.Drawing.Point(12, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 19);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Texto";
+            // 
+            // numericUpDownTextSize
+            // 
+            this.numericUpDownTextSize.Location = new System.Drawing.Point(251, 121);
+            this.numericUpDownTextSize.Maximum = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.numericUpDownTextSize.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownTextSize.Name = "numericUpDownTextSize";
+            this.numericUpDownTextSize.Size = new System.Drawing.Size(75, 23);
+            this.numericUpDownTextSize.TabIndex = 9;
+            this.numericUpDownTextSize.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownTextSize.ValueChanged += new System.EventHandler(this.numericUpDownTextSizeValueChanged);
+            // 
+            // buttonRulerColorPicker
+            // 
+            this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonRulerColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonRulerColorPicker.Location = new System.Drawing.Point(59, 207);
+            this.buttonRulerColorPicker.Name = "buttonRulerColorPicker";
+            this.buttonRulerColorPicker.Size = new System.Drawing.Size(75, 23);
+            this.buttonRulerColorPicker.TabIndex = 7;
+            this.buttonRulerColorPicker.UseVisualStyleBackColor = false;
+            this.buttonRulerColorPicker.Click += new System.EventHandler(this.buttonRulerColorPickerClick);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel4.Controls.Add(this.label4);
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(362, 26);
+            this.panel4.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label4.Location = new System.Drawing.Point(12, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(155, 19);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Desenho Livre e Figuras";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(20, 211);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(26, 15);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Cor";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(184, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(56, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Tamanho";
+            // 
+            // numericUpDownDrawingSize
+            // 
+            this.numericUpDownDrawingSize.Location = new System.Drawing.Point(251, 43);
+            this.numericUpDownDrawingSize.Maximum = new decimal(new int[] {
+            70,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.Name = "numericUpDownDrawingSize";
+            this.numericUpDownDrawingSize.Size = new System.Drawing.Size(75, 23);
+            this.numericUpDownDrawingSize.TabIndex = 3;
+            this.numericUpDownDrawingSize.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.ValueChanged += new System.EventHandler(this.numericUpDownDrawingSizeValueChanged);
+            // 
+            // buttonTextColorPicker
+            // 
+            this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonTextColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonTextColorPicker.Location = new System.Drawing.Point(59, 119);
+            this.buttonTextColorPicker.Name = "buttonTextColorPicker";
+            this.buttonTextColorPicker.Size = new System.Drawing.Size(75, 23);
+            this.buttonTextColorPicker.TabIndex = 7;
+            this.buttonTextColorPicker.UseVisualStyleBackColor = false;
+            this.buttonTextColorPicker.Click += new System.EventHandler(this.buttonTextColorPickerClick);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(184, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Tamanho";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 123);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(26, 15);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Cor";
+            // 
+            // buttonDrawingColorPicker
+            // 
+            this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonDrawingColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonDrawingColorPicker.Location = new System.Drawing.Point(59, 41);
+            this.buttonDrawingColorPicker.Name = "buttonDrawingColorPicker";
+            this.buttonDrawingColorPicker.Size = new System.Drawing.Size(75, 23);
+            this.buttonDrawingColorPicker.TabIndex = 1;
+            this.buttonDrawingColorPicker.UseVisualStyleBackColor = false;
+            this.buttonDrawingColorPicker.Click += new System.EventHandler(this.buttonDrawingColorPickerClick);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Cor";
             // 
             // tableLayoutPanel1
             // 
@@ -222,191 +407,28 @@
             this.buttonCancel.Text = "Cancelar";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Cor";
-            // 
-            // buttonDrawingColorPicker
-            // 
-            this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonDrawingColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonDrawingColorPicker.Location = new System.Drawing.Point(59, 41);
-            this.buttonDrawingColorPicker.Name = "buttonDrawingColorPicker";
-            this.buttonDrawingColorPicker.Size = new System.Drawing.Size(75, 23);
-            this.buttonDrawingColorPicker.TabIndex = 1;
-            this.buttonDrawingColorPicker.UseVisualStyleBackColor = false;
-            this.buttonDrawingColorPicker.Click += new System.EventHandler(this.buttonDrawingColorPickerClick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(184, 45);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Tamanho";
-            // 
-            // numericUpDownDrawingSize
-            // 
-            this.numericUpDownDrawingSize.Location = new System.Drawing.Point(251, 43);
-            this.numericUpDownDrawingSize.Maximum = new decimal(new int[] {
-            70,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.Name = "numericUpDownDrawingSize";
-            this.numericUpDownDrawingSize.Size = new System.Drawing.Size(75, 23);
-            this.numericUpDownDrawingSize.TabIndex = 3;
-            this.numericUpDownDrawingSize.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownDrawingSize.ValueChanged += new System.EventHandler(this.numericUpDownDrawingSizeValueChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(362, 26);
-            this.panel4.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label4.Location = new System.Drawing.Point(12, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(155, 19);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Desenho Livre e Figuras";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Location = new System.Drawing.Point(0, 78);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(362, 26);
-            this.panel3.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label5.Location = new System.Drawing.Point(12, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 19);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Texto";
-            // 
-            // numericUpDownTextSize
-            // 
-            this.numericUpDownTextSize.Location = new System.Drawing.Point(251, 121);
-            this.numericUpDownTextSize.Maximum = new decimal(new int[] {
-            70,
-            0,
-            0,
-            0});
-            this.numericUpDownTextSize.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownTextSize.Name = "numericUpDownTextSize";
-            this.numericUpDownTextSize.Size = new System.Drawing.Size(75, 23);
-            this.numericUpDownTextSize.TabIndex = 9;
-            this.numericUpDownTextSize.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownTextSize.ValueChanged += new System.EventHandler(this.numericUpDownTextSizeValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(184, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 15);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Tamanho";
-            // 
-            // buttonTextColorPicker
-            // 
-            this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonTextColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonTextColorPicker.Location = new System.Drawing.Point(59, 119);
-            this.buttonTextColorPicker.Name = "buttonTextColorPicker";
-            this.buttonTextColorPicker.Size = new System.Drawing.Size(75, 23);
-            this.buttonTextColorPicker.TabIndex = 7;
-            this.buttonTextColorPicker.UseVisualStyleBackColor = false;
-            this.buttonTextColorPicker.Click += new System.EventHandler(this.buttonTextColorPickerClick);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(20, 123);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(26, 15);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Cor";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel5.Controls.Add(this.label8);
-            this.panel5.Location = new System.Drawing.Point(0, 162);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(362, 26);
-            this.panel5.TabIndex = 10;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.Location = new System.Drawing.Point(12, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 19);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Medição";
-            // 
-            // buttonRulerColorPicker
-            // 
-            this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonRulerColorPicker.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonRulerColorPicker.Location = new System.Drawing.Point(59, 207);
-            this.buttonRulerColorPicker.Name = "buttonRulerColorPicker";
-            this.buttonRulerColorPicker.Size = new System.Drawing.Size(75, 23);
-            this.buttonRulerColorPicker.TabIndex = 7;
-            this.buttonRulerColorPicker.UseVisualStyleBackColor = false;
-            this.buttonRulerColorPicker.Click += new System.EventHandler(this.buttonRulerColorPickerClick);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(20, 211);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(26, 15);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Cor";
-            // 
             // colorDialog
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.Location = new System.Drawing.Point(3, 33);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(215, 19);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Caminho apontamento do sensor";
+            // 
+            // textBoxSensorPath
+            // 
+            this.textBoxSensorPath.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxSensorPath.Location = new System.Drawing.Point(7, 65);
+            this.textBoxSensorPath.Name = "textBoxSensorPath";
+            this.textBoxSensorPath.Size = new System.Drawing.Size(312, 25);
+            this.textBoxSensorPath.TabIndex = 4;
             // 
             // ConfigView
             // 
@@ -426,19 +448,19 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTextSize)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDrawingSize)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTextSize)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -474,5 +496,7 @@
         private System.Windows.Forms.Button buttonTextColorPicker;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxSensorPath;
     }
 }

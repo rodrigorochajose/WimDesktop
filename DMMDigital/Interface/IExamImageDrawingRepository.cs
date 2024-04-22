@@ -10,6 +10,6 @@ namespace DMMDigital.Interface
         void deleteRangeExamImageDrawings(List<ExamImageDrawingModel> examImageDrawings);
         void deleteAllExamImageDrawings(int examId);
         IEnumerable<ExamImageDrawingModel> getExamImageDrawings(int examId);
-        IEnumerable<ExamImageDrawingModel> getExamImageDrawingsByExamImage(int examImageId);
+        IEnumerable<ExamImageDrawingModel> getExamImageDrawingsByExamImage(int examId, int examImageId);
     }
 }

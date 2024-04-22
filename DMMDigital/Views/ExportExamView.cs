@@ -7,6 +7,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Aspose.Imaging.ImageOptions;
 using DMMDigital.Components;
+using DMMDigital.Interface;
+using DMMDigital.Models;
 
 namespace DMMDigital.Views
 {
@@ -16,6 +18,7 @@ namespace DMMDigital.Views
         public string pathImages { get; set; }
         public string pathToExport { get; set; }
         public List<Frame> framesToExport { get; set; }
+        public List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
         public ExportExamView()
         {
@@ -179,6 +182,13 @@ namespace DMMDigital.Views
                         {
                             files.Add(currentImagePath);
                         }
+
+                        //if (!File.Exists(currentImagePath))
+                        //{
+                        //    generateEditedImage(path, (int)cb.Tag);
+                        //}
+
+                        //files.Add(currentImagePath);
                     }
                 }
 
@@ -221,6 +231,41 @@ namespace DMMDigital.Views
                 checkBoxes.Add(panel.Controls.OfType<CheckBox>().First());
             }
             return checkBoxes;
+        }
+
+        private void generateEditedImage(string path, int examImageId)
+        {
+            Console.WriteLine($"Exam Image ID = {examImageId}");
+
+
+            Frame selectedFrame = framesToExport.FirstOrDefault(f => f.order == examImageId);
+
+            Image image = selectedFrame.originalImage;
+
+            if (selectedFrame.filteredImage != null)
+            {
+                image = selectedFrame.filteredImage;
+            }
+
+            Bitmap imageToDraw = new Bitmap(image, new Size(
+                       619 * image.Width / image.Height,
+                       619
+                   ));
+
+            Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
+
+            List<ExamImageDrawingModel> selectedExamImageDrawings = examImageDrawings.Where(eid => eid.examImageId == examImageId).ToList();
+
+            foreach (IDrawing drawing in selectedExamImageDrawings)
+            {
+                drawing.draw(graphicsToDraw);
+            }
+
+            Bitmap editedImage = new Bitmap(imageToDraw, new Size(image.Width, image.Height));
+
+            editedImage.Save(Path.Combine(path, $"{examImageId}-edited.png"));
+
+
         }
     }
 }

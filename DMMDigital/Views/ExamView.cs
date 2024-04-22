@@ -26,7 +26,6 @@ namespace DMMDigital.Views
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
-        public List<ExamImageDrawingPointsModel> examImageDrawingPoints { get; set; }
         public bool detectorConnected { get; set; }
 
         public event EventHandler eventSaveExam;
@@ -50,13 +49,14 @@ namespace DMMDigital.Views
         bool calibrated = false;
         bool recalibrate = false;
 
+        bool examHasChanges = false;
+
         Color drawingColor = Color.Red;
         Color textColor = Color.Red;
         Color rulerColor = Color.Red;
         TrackBar trackBarZoom;
         Button buttonColorPicker;
         PictureBox pictureBoxMagnifier;
-        Panel panelContainerMagnifier;
         NumericUpDown numericUpDownDrawingSize;
         Graphics magnifierGraphics;
 
@@ -194,15 +194,15 @@ namespace DMMDigital.Views
                     newFrame.notes = selectedExamImage.notes;
                     newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
-                    string editedFile = $"{newFrame.order}-edited.png";
+                    string filteredFile = $"{newFrame.order}-filtered.png";
 
-                    if (File.Exists(Path.Combine(examPath, editedFile)))
+                    if (File.Exists(Path.Combine(examPath, filteredFile)))
                     {
-                        using (var bmpTemp = new Bitmap(Path.Combine(examPath, editedFile)))
+                        using (var bmpTemp = new Bitmap(Path.Combine(examPath, filteredFile)))
                         {
                             img = new Bitmap(bmpTemp);
                         }
-                        newFrame.editedImage = img;
+                        newFrame.filteredImage = img;
                     }
 
                     newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
@@ -221,9 +221,9 @@ namespace DMMDigital.Views
             selectedFrame = frames.First();
             selectedFrame.Tag = Color.LimeGreen;
 
-            if (selectedFrame.editedImage != null)
+            if (selectedFrame.filteredImage != null)
             {
-                mainPictureBox.Image = selectedFrame.editedImage.Clone() as Image;
+                mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
             }
             else if (selectedFrame.originalImage != null)
             {
@@ -346,13 +346,14 @@ namespace DMMDigital.Views
                                 ruler.multiple = true;
                             }
 
+                            Size imageSize = frames.First(ei => ei.order == drawing.examImageId).originalImage.Size;
 
                             for (int counter = 0; counter < ruler.points.Count - 1; counter++)
                             {
                                 Point initialPoint = ruler.points[counter];
                                 Point finalPoint = ruler.points[counter + 1];
 
-                                float length = getRulerLength(initialPoint, finalPoint);
+                                float length = getRulerLength(initialPoint, finalPoint, imageSize.Width, imageSize.Height);
                                 ruler.lineLength.Add(length);
                             }
 
@@ -469,9 +470,9 @@ namespace DMMDigital.Views
             selectFrame((Frame)sender);
             indexFrame = selectedFrame.order - 1;
 
-            if (selectedFrame.editedImage != null)
+            if (selectedFrame.filteredImage != null)
             {
-                mainPictureBox.Image = selectedFrame.editedImage;
+                mainPictureBox.Image = selectedFrame.filteredImage;
             }
             else if (selectedFrame.originalImage != null)
             {
@@ -507,6 +508,8 @@ namespace DMMDigital.Views
             mainPictureBox.Image = image;
             resizeMainPictureBox();
             enableTools();
+
+            examHasChanges = true;
         }
 
         public void resizeMainPictureBox()
@@ -521,6 +524,7 @@ namespace DMMDigital.Views
                     );
 
                     mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
+                    mainPictureBox.Refresh();
                 }));
             }
         }
@@ -543,7 +547,11 @@ namespace DMMDigital.Views
             {
                 if (selectedButton.Name == "buttonMagnifier")
                 {
-                    panelImage.Controls.Remove(panelContainerMagnifier);
+                    panelImage.Controls.Remove(pictureBoxMagnifier);
+                }
+                else if (selectedButton.Name == "buttonRuler")
+                {
+                    multiRuler = false;
                 }
                 selectedButton.BackColor = Color.WhiteSmoke;
                 selectedButton.Tag = "selectable";
@@ -765,16 +773,26 @@ namespace DMMDigital.Views
             return textBox.Text;
         }
 
-        private float getRulerLength(Point initialPoint, Point finalPoint)
+        private float getRulerLength(Point initialPoint, Point finalPoint, int width = 0, int height = 0)
         {
-            // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            double scalingFactorWidth = mainPictureBox.Image.Width / 26;
-            double scalingFactorHeight = mainPictureBox.Image.Height / 36;
+            if (width == 0)
+            {
+                width = mainPictureBox.Image.Width;
+            }
 
-            float initialX = initialPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float initialY = initialPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
-            float finalX = finalPoint.X * mainPictureBox.Image.Width / mainPictureBox.Width;
-            float finalY = finalPoint.Y * mainPictureBox.Image.Height / mainPictureBox.Height;
+            if (height == 0)
+            {
+                height = mainPictureBox.Image.Height;
+            }
+
+            // 30 is sensor Width and 20 height -> i'm going to get from database these values
+            double scalingFactorWidth = width / 26;
+            double scalingFactorHeight = height / 36;
+
+            float initialX = initialPoint.X * width / mainPictureBox.Width;
+            float initialY = initialPoint.Y * height / mainPictureBox.Height;
+            float finalX = finalPoint.X * width / mainPictureBox.Width;
+            float finalY = finalPoint.Y * height / mainPictureBox.Height;
 
             float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
 
@@ -812,6 +830,8 @@ namespace DMMDigital.Views
 
             selectedDrawingHistoryHandler();
             mainPictureBox.Invalidate();
+
+            examHasChanges = true;
         }
 
         private void showDrawingHistory(IDrawing drawing)
@@ -934,55 +954,58 @@ namespace DMMDigital.Views
                 resizeMainPictureBox();
 
                 enableTools();
+                examHasChanges = true;
             }
         }
 
         private void buttonExportClick(object sender, EventArgs e)
         {
-            for (int counter = 0; counter < frames.Count; counter++)
+            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).ToList();
+
+            if (!framesWithImages.Any())
             {
-                if (frames[counter].originalImage != null)
+                MessageBox.Show("Exame não possui nenhuma imagem para ser exportada.");
+                return;
+            }
+
+            for (int counter = 0; counter < framesWithImages.Count; counter++)
+            {
+                if (frameDrawingHistories[counter].drawingHistory.Count > 1)
                 {
-                    if (frameDrawingHistories[counter].drawingHistory.Count > 1)
+                    Image frameImage = framesWithImages[counter].originalImage;
+
+                    if (framesWithImages[counter].filteredImage != null)
                     {
-
-                        Image frameImage;
-
-                        if (frames[counter].editedImage != null)
-                        {
-                            frameImage = frames[counter].editedImage;
-                        }
-                        else
-                        {
-                            frameImage = frames[counter].originalImage;
-                        }
-
-                        Bitmap imageToDraw = new Bitmap(frameImage, new Size(
-                            mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
-                            mainPictureBoxOriginalSize.Height
-                        ));
-
-                        Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
-
-                        foreach (IDrawing drawing in frameDrawingHistories[counter].drawingHistory.Last())
-                        {
-                            drawing.draw(graphicsToDraw);
-                        }
-
-                        Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
-
-                        editedImage.Save(Path.Combine(examPath, $"{frames[counter].order}-edited.png"));
+                        frameImage = framesWithImages[counter].filteredImage;
                     }
+
+                    Bitmap imageToDraw = new Bitmap(frameImage, new Size(
+                        mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
+                        mainPictureBoxOriginalSize.Height
+                    ));
+
+                    Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
+
+                    foreach (IDrawing drawing in frameDrawingHistories[counter].drawingHistory.Last())
+                    {
+                        drawing.draw(graphicsToDraw);
+                    }
+
+                    Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
+
+                    editedImage.Save(Path.Combine(examPath, $"{framesWithImages[counter].order}-edited.png"));
                 }
             }
 
-            IExportExamView exportView = new ExportExamView
-            {
-                pathImages = examPath,
-                framesToExport = frames.Where(f => f.originalImage != null).ToList(),
-                patientName = patient.name
-            };
-            (exportView as Form).ShowDialog();
+            new ExportExamPresenter(
+                new ExportExamView
+                {
+                    pathImages = examPath,
+                    framesToExport = framesWithImages,
+                    patientName = patient.name
+                },
+                examId
+            );
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
@@ -994,7 +1017,14 @@ namespace DMMDigital.Views
 
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
 
-                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
+                string filteredImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
+
+                if (File.Exists(filteredImagePath))
+                {
+                    File.Delete(filteredImagePath);
+                }
+
+                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}-edited.png");
 
                 if (File.Exists(editedImagePath))
                 {
@@ -1011,6 +1041,7 @@ namespace DMMDigital.Views
 
                 selectedFrame.Image = drawFrameDefaultImage(selectedFrame);
                 selectedFrame.originalImage = null;
+                selectedFrame.filteredImage = null;
                 selectedFrame.editedImage = null;
                 selectedFrame.datePhotoTook = "";
                 selectedFrame.notes = "";
@@ -1019,6 +1050,8 @@ namespace DMMDigital.Views
                 textBoxFrameNotes.Text = selectedFrame.notes;
 
                 mainPictureBox.Image = null;
+
+                examHasChanges = true;
             }
         }
 
@@ -1109,18 +1142,18 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            Image img = selectedFrame.editedImage ?? selectedFrame.originalImage;
+            Image img = selectedFrame.filteredImage ?? selectedFrame.originalImage;
 
             IFilterView filterView = new FilterView(new Bitmap(img));
             (filterView as Form).ShowDialog();
 
             Image image = filterView.originalImage;
 
-            image.Save(Path.Combine(examPath, selectedFrame.order + "-edited.png"));
+            image.Save(Path.Combine(examPath, selectedFrame.order + "-filtered.png"));
 
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
-                selectedFrame.editedImage = image;
+                selectedFrame.filteredImage = image;
                 selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
                 selectedFrame.Refresh();
             }));
@@ -1168,6 +1201,8 @@ namespace DMMDigital.Views
             string rotationDirection = "left";
             rotateImage(rotationDirection);
             rotateDrawing(rotationDirection, previousMainPictureBoxSize);
+
+            examHasChanges = true;
         }
 
         private void buttonRotateRightClick(object sender, EventArgs e)
@@ -1176,6 +1211,8 @@ namespace DMMDigital.Views
             string rotationDirection = "right";
             rotateImage(rotationDirection);
             rotateDrawing(rotationDirection, previousMainPictureBoxSize);
+
+            examHasChanges = true;
         }
 
         private void rotateImage(string rotationDirection)
@@ -1191,7 +1228,7 @@ namespace DMMDigital.Views
                 currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
             }
 
-            if (selectedFrame.editedImage != null)
+            if (selectedFrame.filteredImage != null)
             {
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
             }
@@ -1244,9 +1281,9 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (selectedFrame.editedImage != null)
+                if (selectedFrame.filteredImage != null)
                 {
-                    selectedFrame.editedImage = null;
+                    selectedFrame.filteredImage = null;
 
                     Image img = selectedFrame.originalImage;
                     mainPictureBox.Image = img;
@@ -1267,6 +1304,10 @@ namespace DMMDigital.Views
                     frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
                     indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                     flowLayoutPanel1.Controls.Clear();
+
+                    examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
+
+                    examHasChanges = true;
                 }
 
                 mainPictureBox.Refresh();
@@ -1334,6 +1375,7 @@ namespace DMMDigital.Views
             if (action != 0 && action != 8)
             {
                 draw = true;
+                examHasChanges = true;
                 counterDrawings++;
 
                 switch (action)
@@ -1645,7 +1687,6 @@ namespace DMMDigital.Views
         {
             if (action > 1 && action < 8)
             {
-                //verifyHistoryToReset();
                 if (action == 2)
                 {
                     if (multiRuler)
@@ -1686,6 +1727,8 @@ namespace DMMDigital.Views
                     currentDrawing
                 });
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+
+                examHasChanges = true;
             }
 
             if (currentDrawing != null)
@@ -1724,35 +1767,28 @@ namespace DMMDigital.Views
 
         private void checkChangesAndSave()
         {
-            eventSaveExamImage?.Invoke(this, EventArgs.Empty);
-            getDrawingsToSave();
-            eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
-        }
-
-        private List<IDrawing> getDrawings()
-        {
-            List<IDrawing> drawings = new List<IDrawing>();
-
-            foreach (FrameDrawingHistory fdh in frameDrawingHistories)
+            if (examHasChanges)
             {
-                if (fdh.drawingHistory.Count > 1)
-                {
-                    drawings.AddRange(fdh.drawingHistory.Last());
-                }
-            }
+                eventSaveExamImage?.Invoke(this, EventArgs.Empty);
+                getDrawingsToSave();
 
-            return drawings;
+                if (examImageDrawings != null)
+                {
+                    eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
+                }
+
+                examHasChanges = false;
+            }
         }
 
         public void getDrawingsToSave()
         {
-            examImageDrawings = new List<ExamImageDrawingModel>();
-            examImageDrawingPoints = new List<ExamImageDrawingPointsModel>();
-
-            List<IDrawing> drawings = getDrawings();
+            List<IDrawing> drawings = selectedDrawingHistory[indexSelectedDrawingHistory];
 
             if (drawings.Any())
             {
+                examImageDrawings = new List<ExamImageDrawingModel>();
+
                 foreach (IDrawing d in drawings)
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel
@@ -1778,30 +1814,30 @@ namespace DMMDigital.Views
 
         private void examViewResize(object sender, EventArgs e)
         {
-            Size previousSize = mainPictureBox.Size;
+            //Size previousSize = mainPictureBox.Size;
             resizeMainPictureBox();
 
-            int widthDifference = Math.Abs(mainPictureBox.Width - previousSize.Width);
-            int heightDifference = Math.Abs(mainPictureBox.Height - previousSize.Height);
+            //int widthDifference = Math.Abs(mainPictureBox.Width - previousSize.Width);
+            //int heightDifference = Math.Abs(mainPictureBox.Height - previousSize.Height);
 
-            if (widthDifference > 0 && heightDifference > 0)
-            {
-                List<IDrawing> drawings = getDrawings();
+            //if (widthDifference > 0 && heightDifference > 0)
+            //{
+            //    List<IDrawing> drawings = getDrawings();
 
-                if (drawings.Any())
-                {
-                    float scaleX = (float)mainPictureBox.Width / previousSize.Width;
-                    float scaleY = (float)mainPictureBox.Height / previousSize.Height;
+            //    if (drawings.Any())
+            //    {
+            //        float scaleX = (float)mainPictureBox.Width / previousSize.Width;
+            //        float scaleY = (float)mainPictureBox.Height / previousSize.Height;
 
-                    foreach (IDrawing d in drawings)
-                    {
-                        for (int counter = 0; counter < d.points.Count; counter++)
-                        {
-                            d.points[counter] = Point.Round(new PointF(d.points[counter].X * scaleX, d.points[counter].Y * scaleY));
-                        }
-                    }
-                }
-            }
+            //        foreach (IDrawing d in drawings)
+            //        {
+            //            for (int counter = 0; counter < d.points.Count; counter++)
+            //            {
+            //                d.points[counter] = Point.Round(new PointF(d.points[counter].X * scaleX, d.points[counter].Y * scaleY));
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)

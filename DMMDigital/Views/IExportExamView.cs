@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DMMDigital.Components;
+using DMMDigital.Models;
 
 namespace DMMDigital.Views
 {
@@ -9,6 +11,6 @@ namespace DMMDigital.Views
         string pathImages { get; set; }
         string pathToExport { get; set; }
         List<Frame> framesToExport { get; set; }
-
+        List<ExamImageDrawingModel> examImageDrawings { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace DMMDigital.Presenters
         {
             currentConfig = configRepository.getAllConfig();
 
+            configView.sensorPath = currentConfig.sensorPath;
             configView.imagePath = currentConfig.examPath;
             configView.drawingSize = currentConfig.drawingSize;
             configView.drawingColor = currentConfig.drawingColor;
@@ -38,6 +39,7 @@ namespace DMMDigital.Presenters
         {
             try
             {
+                currentConfig.sensorPath = configView.sensorPath;
                 currentConfig.examPath = configView.imagePath;
                 currentConfig.drawingColor = configView.drawingColor;
                 currentConfig.drawingSize = configView.drawingSize;

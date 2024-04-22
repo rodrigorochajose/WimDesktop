@@ -64,12 +64,31 @@ namespace DMMDigital._Repositories
 
         public IEnumerable<ExamImageDrawingModel> getExamImageDrawings(int examId)
         {
-            return context.examImageDrawing.Where(e => e.examId == examId);
+            List<ExamImageDrawingModel> examImageDrawings = context.examImageDrawing.Where(e => e.examId == examId).ToList();
+
+            foreach (ExamImageDrawingModel drawing in examImageDrawings)
+            {
+                getDrawingPoints(examId, drawing);
+            }
+
+            return examImageDrawings;
         }
 
-        public IEnumerable<ExamImageDrawingModel> getExamImageDrawingsByExamImage(int examImageId)
+        public IEnumerable<ExamImageDrawingModel> getExamImageDrawingsByExamImage(int examId, int examImageId)
         {
-            return context.examImageDrawing.Where(e => e.examImageId == examImageId);
+            return context.examImageDrawing.Where(e => e.examId == examId && e.examImageId == examImageId);
+        }
+
+        private void getDrawingPoints(int examId, ExamImageDrawingModel drawing)
+        {
+            List<ExamImageDrawingPointsModel> drawingPoints = context.examImageDrawingPoints.Where(e => e.examId == examId && e.examImageDrawingId == drawing.id).ToList();
+
+            drawing.points = new List<System.Drawing.Point>();
+
+            foreach (ExamImageDrawingPointsModel point in drawingPoints)
+            {
+                drawing.points.Add(new System.Drawing.Point(point.pointX, point.pointY));
+            }
         }
     }
 }

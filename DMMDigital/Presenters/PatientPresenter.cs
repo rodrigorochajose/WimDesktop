@@ -251,58 +251,48 @@ namespace DMMDigital.Presenters
 
             foreach (TemplateFrameModel frame in templateFrames)
             {
-                int height;
-                int width;
-                if (frame.orientation.Contains("Vertical"))
-                {
-                    height = 35;
-                    width = 25;
-                }
-                else
-                {
-                    height = 25;
-                    width = 35;
-                }
-
-                Frame newFrame = new Frame
-                {
-                    Width = width,
-                    Height = height,
-                    BackColor = Color.Black,
-                    order = frame.order,
-                    Name = "filme" + frame.id,
-                    orientation = frame.orientation,
-                    Tag = Color.Black,
-                    Location = new Point(frame.locationX / 2, frame.locationY / 2),
-
-                };
-
-                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.frameId == newFrame.order);
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.frameId == frame.order);
 
                 if (selectedExamImage != null)
                 {
-                    using (FileStream fs = new FileStream(Path.Combine(examPath, selectedExamImage.file), FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    Frame newFrame = new Frame
+                    {
+                        BackColor = Color.Black,
+                        order = frame.order,
+                        Name = "filme" + frame.id,
+                        orientation = frame.orientation
+                    };
+
+                    string imagePath = Path.Combine(examPath, selectedExamImage.file);
+
+                    if (File.Exists(Path.Combine(examPath, $"{newFrame.order}-filtered.png")))
+                    {
+                        imagePath = Path.Combine(examPath, $"{newFrame.order}-filtered.png");
+                    }
+
+                    using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
                         Bitmap image = new Bitmap(Image.FromStream(fs));
+                        Bitmap thumb = new Bitmap(image, newFrame.Width, newFrame.Height);
 
                         newFrame.originalImage = new Bitmap(image);
-                        newFrame.Image = image.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
-                        newFrame.notes = selectedExamImage.notes;
-                        newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
-
+                        newFrame.Image = thumb;
                         image.Dispose();
                     }
+
+                    frames.Add(newFrame);
                 }
-                frames.Add(newFrame);
             }
 
-            IExportExamView exportView = new ExportExamView
-            {
-                pathImages = examPath,
-                framesToExport = frames,
-                patientName = selectedExam.patient.name
-            };
-            (exportView as Form).ShowDialog();
+            new ExportExamPresenter(
+                new ExportExamView
+                {
+                    pathImages = examPath,
+                    framesToExport = frames,
+                    patientName = selectedExam.patient.name
+                },
+                patientView.selectedExamId
+            );
         }
     }
 }

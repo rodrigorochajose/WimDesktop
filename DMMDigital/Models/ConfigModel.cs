@@ -9,6 +9,9 @@ namespace DMMDigital.Models
         [Column("ID")]
         public int id { get; set; }
 
+        [Column("SENSOR_PATH")]
+        public string sensorPath { get; set; }
+
         [Column("EXAM_PATH")]
         public string examPath { get; set; }
 

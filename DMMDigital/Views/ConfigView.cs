@@ -6,6 +6,12 @@ namespace DMMDigital.Views
 {
     public partial class ConfigView : Form, IConfigView
     {
+        public string sensorPath
+        {
+            get { return textBoxSensorPath.Text; }
+            set { textBoxSensorPath.Text = value; }
+        }
+
         public string imagePath 
         {
             get { return textBoxPath.Text; }
@@ -55,6 +61,12 @@ namespace DMMDigital.Views
         {
             Load += delegate { 
                 loadConfigs?.Invoke(this, EventArgs.Empty);
+            };
+
+            textBoxSensorPath.Click += delegate
+            {
+                folderBrowserDialog1.ShowDialog();
+                sensorPath = folderBrowserDialog1.SelectedPath;
             };
 
             textBoxPath.Click += delegate 

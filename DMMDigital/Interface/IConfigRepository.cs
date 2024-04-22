@@ -6,6 +6,7 @@ namespace DMMDigital.Interface
     {
         string save();
         ConfigModel getAllConfig();
+        string getSensorPath();
         string getExamPath();
     }
 }

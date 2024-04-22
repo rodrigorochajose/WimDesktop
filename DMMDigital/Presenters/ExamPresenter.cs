@@ -5,7 +5,6 @@ using DMMDigital.Models;
 using DMMDigital.Views;
 using MoreLinq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -28,6 +27,7 @@ namespace DMMDigital.Presenters
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly IConfigRepository configRepository = new ConfigRepository();
 
         private readonly string examOpeningMode;
         private int m_nId;
@@ -107,28 +107,10 @@ namespace DMMDigital.Presenters
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
                 examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
-                associateDrawingsToPoint();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar exame - {ex.Message}");
-            }
-        }
-
-        private void associateDrawingsToPoint()
-        {
-            List<ExamImageDrawingPointsModel> examImageDrawingPoints = examImageDrawingPointsRepository.getExamImageDrawingPoints(examView.examId).ToList();
-
-            foreach (ExamImageDrawingModel drawing in examView.examImageDrawings)
-            {
-                drawing.points = new List<Point>();
-                IEnumerable currentDrawingPoints = examImageDrawingPoints.Where(dp => dp.examId == drawing.examId && dp.examImageDrawingId == drawing.id);
-
-                foreach (ExamImageDrawingPointsModel drawingPoints in currentDrawingPoints)
-                {
-                    drawing.points.Add(new Point(drawingPoints.pointX, drawingPoints.pointY));
-                }
             }
         }
 
@@ -158,7 +140,7 @@ namespace DMMDigital.Presenters
             {
                 int currentFrameId = examView.selectedFrame.order;
 
-                ExamImageModel currentExamImage = examImageRepository.getExamImageById(currentFrameId);
+                ExamImageModel currentExamImage = examImageRepository.getExamImageById(examView.examId, currentFrameId);
                 ExamImageModel examImageToSave = examView.examImages.FirstOrDefault(ei => ei.frameId == currentFrameId);
 
                 if (examImageToSave == null && currentExamImage != null)
@@ -191,49 +173,52 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                int selectedFrameId = examView.selectedFrame.order;
-
-                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
-
-                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(selectedFrameId).ToList();
-
-                List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
-
-                if (drawingsToDelete.Any())
+                if (examView.examImageDrawings.Any())
                 {
-                    List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
-                    examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
-                    examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
-                }
+                    int selectedFrameId = examView.selectedFrame.order;
 
-                foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
-                {
-                    ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
-                    if (existingExamImageDrawing == null)
+                    List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
+
+                    List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+
+                    List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
+
+                    if (drawingsToDelete.Any())
                     {
-                        examImageDrawingRepository.addExamImageDrawing(item);
-
-                        int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(selectedFrameId).Last().id;
-
-                        List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
-
-                        foreach (Point point in item.points)
-                        {
-                            pointsToSave.Add(new ExamImageDrawingPointsModel
-                            {
-                                examId = item.examId,
-                                examImageId = item.examImageId,
-                                examImageDrawingId = drawingId,
-                                pointX = point.X,
-                                pointY = point.Y
-                            });
-                        }
-
-                        examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
+                        List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
+                        examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
+                        examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
                     }
-                    else if (item.points != existingExamImageDrawing.points)
+
+                    foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
                     {
-                        examImageDrawingPointsRepository.updatePoints(item.id, item.points);
+                        ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
+                        if (existingExamImageDrawing == null)
+                        {
+                            examImageDrawingRepository.addExamImageDrawing(item);
+
+                            int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
+
+                            List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
+
+                            foreach (Point point in item.points)
+                            {
+                                pointsToSave.Add(new ExamImageDrawingPointsModel
+                                {
+                                    examId = item.examId,
+                                    examImageId = item.examImageId,
+                                    examImageDrawingId = drawingId,
+                                    pointX = point.X,
+                                    pointY = point.Y
+                                });
+                            }
+
+                            examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
+                        }
+                        else if (item.points != existingExamImageDrawing.points)
+                        {
+                            examImageDrawingPointsRepository.updatePoints(item.id, item.points);
+                        }
                     }
                 }
             }
@@ -288,7 +273,7 @@ namespace DMMDigital.Presenters
                         }
                     }
 
-                    string[] directories = Directory.GetDirectories("C:\\IRay\\IRayIntraoral_x86\\work_dir");
+                    string[] directories = Directory.GetDirectories(configRepository.getSensorPath());
 
                     foreach (string directory in directories)
                     {
