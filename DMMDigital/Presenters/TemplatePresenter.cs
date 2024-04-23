@@ -30,7 +30,7 @@ namespace DMMDigital.Presenters
 
             getTemplates();
 
-            (templateView as Form).ShowDialog();
+            (templateView as Form).Show();
         }
 
         private void showNewTemplateForm(object sender, EventArgs e)

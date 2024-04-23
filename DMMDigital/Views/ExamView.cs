@@ -1764,12 +1764,12 @@ namespace DMMDigital.Views
 
         public void getDrawingsToSave()
         {
+            examImageDrawings = new List<ExamImageDrawingModel>();
+            
             List<IDrawing> drawings = selectedDrawingHistory[indexSelectedDrawingHistory];
 
             if (drawings.Any())
             {
-                examImageDrawings = new List<ExamImageDrawingModel>();
-
                 foreach (IDrawing d in drawings)
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel

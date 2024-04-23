@@ -234,7 +234,7 @@ namespace DMMDigital.Views
             // labelPatient
             // 
             this.labelPatient.AutoSize = true;
-            this.labelPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.labelPatient.Location = new System.Drawing.Point(80, 9);
             this.labelPatient.Name = "labelPatient";
             this.labelPatient.Size = new System.Drawing.Size(109, 15);

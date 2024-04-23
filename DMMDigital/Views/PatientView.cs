@@ -25,48 +25,11 @@ namespace DMMDigital.Views
         public event EventHandler eventDeleteExam;
         public event EventHandler eventExportExam;
 
-        public void setPatientList(BindingSource patientList)
-        {
-            dataGridViewPatient.DataSource = patientList;
-        }
-
-        public void setExamList(BindingSource examList)
-        {
-            dataGridViewExam.DataSource = examList;
-        }
-
-        public void patientDataGridViewHandler()
-        {
-            dataGridViewPatient.Columns["id"].Visible = false;
-            edit.Frozen = true;
-            edit.Image = Properties.Resources.icon_32x32_pencil;
-            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            delete.Frozen = true;
-            delete.Image = Properties.Resources.icon_32x32_delete;
-            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-        }
-
-        public void examDataGridViewHandler()
-        {
-            dataGridViewExam.Columns["id"].Visible = false;
-            dataGridViewExam.Columns["templateID"].Visible = false;
-
-            dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
-            dataGridViewExam.Columns[2].Width = 195;
-
-            dataGridViewExam.Columns[3].HeaderText = "Data do Exame";
-            dataGridViewExam.Columns[3].Width = 130;
-
-            dataGridViewExam.Columns[4].HeaderText = "Template";
-            dataGridViewExam.Columns[4].Width = 195;
-        }
-
         public PatientView()
         {
             InitializeComponent();
             associateEvents();
         }
-
         private void associateEvents()
         {
             Load += (sender, e) =>
@@ -152,6 +115,42 @@ namespace DMMDigital.Views
                 }
                 eventExportExam?.Invoke(this, EventArgs.Empty);
             };
+        }
+
+        public void setPatientList(BindingSource patientList)
+        {
+            dataGridViewPatient.DataSource = patientList;
+        }
+
+        public void setExamList(BindingSource examList)
+        {
+            dataGridViewExam.DataSource = examList;
+        }
+
+        public void patientDataGridViewHandler()
+        {
+            dataGridViewPatient.Columns["id"].Visible = false;
+            edit.Frozen = true;
+            edit.Image = Properties.Resources.icon_32x32_pencil;
+            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            delete.Frozen = true;
+            delete.Image = Properties.Resources.icon_32x32_delete;
+            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+        }
+
+        public void examDataGridViewHandler()
+        {
+            dataGridViewExam.Columns["id"].Visible = false;
+            dataGridViewExam.Columns["templateID"].Visible = false;
+
+            dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
+            dataGridViewExam.Columns[2].Width = 195;
+
+            dataGridViewExam.Columns[3].HeaderText = "Data do Exame";
+            dataGridViewExam.Columns[3].Width = 130;
+
+            dataGridViewExam.Columns[4].HeaderText = "Template";
+            dataGridViewExam.Columns[4].Width = 195;
         }
     }
 }

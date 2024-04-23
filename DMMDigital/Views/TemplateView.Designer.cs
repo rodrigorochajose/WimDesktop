@@ -34,10 +34,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateView));
             this.buttonNewTemplate = new System.Windows.Forms.Button();
             this.dataGridViewTemplate = new System.Windows.Forms.DataGridView();
-            this.panelTemplate = new System.Windows.Forms.Panel();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panelTemplate = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,14 +87,6 @@
             this.dataGridViewTemplate.Size = new System.Drawing.Size(352, 310);
             this.dataGridViewTemplate.TabIndex = 45;
             // 
-            // panelTemplate
-            // 
-            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panelTemplate.Location = new System.Drawing.Point(23, 108);
-            this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
-            this.panelTemplate.TabIndex = 46;
-            // 
             // id
             // 
             this.id.DataPropertyName = "id";
@@ -123,6 +115,14 @@
             this.delete.ReadOnly = true;
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // panelTemplate
+            // 
+            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelTemplate.Location = new System.Drawing.Point(23, 108);
+            this.panelTemplate.Name = "panelTemplate";
+            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelTemplate.TabIndex = 46;
+            // 
             // TemplateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +133,7 @@
             this.Controls.Add(this.buttonNewTemplate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "TemplateView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Template";

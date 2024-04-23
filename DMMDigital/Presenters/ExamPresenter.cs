@@ -173,52 +173,49 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                if (examView.examImageDrawings.Any())
+                int selectedFrameId = examView.selectedFrame.order;
+
+                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
+
+                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+
+                List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
+
+                if (drawingsToDelete.Any())
                 {
-                    int selectedFrameId = examView.selectedFrame.order;
+                    List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
+                    examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
+                    examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
+                }
 
-                    List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
-
-                    List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
-
-                    List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
-
-                    if (drawingsToDelete.Any())
+                foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
+                {
+                    ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
+                    if (existingExamImageDrawing == null)
                     {
-                        List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
-                        examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
-                        examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
-                    }
+                        examImageDrawingRepository.addExamImageDrawing(item);
 
-                    foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
-                    {
-                        ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
-                        if (existingExamImageDrawing == null)
+                        int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
+
+                        List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
+
+                        foreach (Point point in item.points)
                         {
-                            examImageDrawingRepository.addExamImageDrawing(item);
-
-                            int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
-
-                            List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
-
-                            foreach (Point point in item.points)
+                            pointsToSave.Add(new ExamImageDrawingPointsModel
                             {
-                                pointsToSave.Add(new ExamImageDrawingPointsModel
-                                {
-                                    examId = item.examId,
-                                    examImageId = item.examImageId,
-                                    examImageDrawingId = drawingId,
-                                    pointX = point.X,
-                                    pointY = point.Y
-                                });
-                            }
+                                examId = item.examId,
+                                examImageId = item.examImageId,
+                                examImageDrawingId = drawingId,
+                                pointX = point.X,
+                                pointY = point.Y
+                            });
+                        }
 
-                            examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
-                        }
-                        else if (item.points != existingExamImageDrawing.points)
-                        {
-                            examImageDrawingPointsRepository.updatePoints(item.id, item.points);
-                        }
+                        examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
+                    }
+                    else if (item.points != existingExamImageDrawing.points)
+                    {
+                        examImageDrawingPointsRepository.updatePoints(item.id, item.points);
                     }
                 }
             }

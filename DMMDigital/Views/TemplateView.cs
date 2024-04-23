@@ -33,7 +33,7 @@ namespace DMMDigital.Views
             {
                 if (e.RowIndex != -1)
                 {
-                    if (e.ColumnIndex == 1)
+                    if (e.ColumnIndex == 0)
                     {
                         eventDeleteTemplate?.Invoke(this, EventArgs.Empty);
                     }
