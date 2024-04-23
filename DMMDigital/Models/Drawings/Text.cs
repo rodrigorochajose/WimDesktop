@@ -31,10 +31,10 @@ namespace DMMDigital.Models.Drawings
             float emSize = font.Size;
             StringFormat format = StringFormat.GenericDefault;
 
-            SizeF rectangleToDrawSize = g.MeasureString(text, font);
+            SizeF sizeToFitText = g.MeasureString(text, font);
 
             graphicsPath = new GraphicsPath();
-            graphicsPath.AddString(text, family, fontStyle, emSize, new RectangleF(points.First().X, points.First().Y, rectangleToDrawSize.Width, rectangleToDrawSize.Height), format);
+            graphicsPath.AddString(text, family, fontStyle, emSize, new RectangleF(points.First().X, points.First().Y, sizeToFitText.Width, sizeToFitText.Height), format);
 
             g.DrawString(text, font, brush, points.First());
         }

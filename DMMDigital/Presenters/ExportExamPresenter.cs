@@ -25,6 +25,5 @@ namespace DMMDigital.Presenters
         {
             exportExamView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examId).ToList();
         }
-
     }
 }

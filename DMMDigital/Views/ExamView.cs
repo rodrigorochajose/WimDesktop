@@ -770,7 +770,13 @@ namespace DMMDigital.Views
             inputBox.CancelButton = cancelButton;
 
             inputBox.ShowDialog();
-            return textBox.Text;
+
+            if (inputBox.DialogResult == DialogResult.OK)
+            {
+                return textBox.Text;
+            }
+
+            return "";
         }
 
         private float getRulerLength(Point initialPoint, Point finalPoint, int width = 0, int height = 0)
@@ -968,35 +974,6 @@ namespace DMMDigital.Views
                 return;
             }
 
-            for (int counter = 0; counter < framesWithImages.Count; counter++)
-            {
-                if (frameDrawingHistories[counter].drawingHistory.Count > 1)
-                {
-                    Image frameImage = framesWithImages[counter].originalImage;
-
-                    if (framesWithImages[counter].filteredImage != null)
-                    {
-                        frameImage = framesWithImages[counter].filteredImage;
-                    }
-
-                    Bitmap imageToDraw = new Bitmap(frameImage, new Size(
-                        mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
-                        mainPictureBoxOriginalSize.Height
-                    ));
-
-                    Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
-
-                    foreach (IDrawing drawing in frameDrawingHistories[counter].drawingHistory.Last())
-                    {
-                        drawing.draw(graphicsToDraw);
-                    }
-
-                    Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
-
-                    editedImage.Save(Path.Combine(examPath, $"{framesWithImages[counter].order}-edited.png"));
-                }
-            }
-
             new ExportExamPresenter(
                 new ExportExamView
                 {
@@ -1158,6 +1135,8 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
             mainPictureBox.Image = image;
+
+            examHasChanges = true;
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
@@ -1272,8 +1251,8 @@ namespace DMMDigital.Views
                 }
                 frameDrawings.Add(drawingCopy);
             }
-            selectedDrawingHistory[indexSelectedDrawingHistory] = frameDrawings;
 
+            selectedDrawingHistory[indexSelectedDrawingHistory] = frameDrawings;
             mainPictureBox.Refresh();
         }
 
@@ -1777,6 +1756,8 @@ namespace DMMDigital.Views
                     eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
                 }
 
+                generateEditedImage();
+
                 examHasChanges = false;
             }
         }
@@ -1843,6 +1824,35 @@ namespace DMMDigital.Views
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
         {
             checkChangesAndSave();
+        }
+
+        private void generateEditedImage()
+        {
+            if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
+            {
+                Image frameImage = selectedFrame.originalImage;
+
+                if (selectedFrame.filteredImage != null)
+                {
+                    frameImage = selectedFrame.filteredImage;
+                }
+
+                Bitmap imageToDraw = new Bitmap(frameImage, new Size(
+                    mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
+                    mainPictureBoxOriginalSize.Height
+                ));
+
+                Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
+
+                foreach (IDrawing drawing in selectedDrawingHistory[indexSelectedDrawingHistory])
+                {
+                    drawing.draw(graphicsToDraw);
+                }
+
+                Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
+
+                editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
+            }
         }
 
     }

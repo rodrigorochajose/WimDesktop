@@ -138,10 +138,11 @@
             this.textBoxBirthDate.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.textBoxBirthDate.Location = new System.Drawing.Point(89, 193);
+            this.textBoxBirthDate.MinDate = new System.DateTime(1910, 1, 1, 0, 0, 0, 0);
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             this.textBoxBirthDate.Size = new System.Drawing.Size(217, 25);
             this.textBoxBirthDate.TabIndex = 19;
-            this.textBoxBirthDate.Value = new System.DateTime(1910, 1, 1, 0, 0, 0, 0);
+            this.textBoxBirthDate.Value = new System.DateTime(1995, 1, 1, 0, 0, 0, 0);
             // 
             // label4
             // 
