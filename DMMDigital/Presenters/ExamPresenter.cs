@@ -186,6 +186,8 @@ namespace DMMDigital.Presenters
                     List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
                     examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
                     examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
+
+                    currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
                 }
 
                 foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)

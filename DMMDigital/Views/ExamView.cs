@@ -1102,6 +1102,8 @@ namespace DMMDigital.Views
                 indexSelectedDrawingHistory--;
                 mainPictureBox.Invalidate();
                 selectedDrawingHistoryHandler();
+
+                examHasChanges = true;
             }
         }
 
@@ -1112,6 +1114,8 @@ namespace DMMDigital.Views
                 indexSelectedDrawingHistory++;
                 mainPictureBox.Invalidate();
                 selectedDrawingHistoryHandler();
+
+                examHasChanges = true;
             }
         }
 
