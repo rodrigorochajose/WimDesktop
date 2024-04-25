@@ -6,7 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using DMMDigital._Repositories;
 using DMMDigital.Components;
-using DMMDigital.Interface;
+using DMMDigital.Interface.IRepository;
+using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
 

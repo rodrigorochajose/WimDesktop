@@ -1,4 +1,5 @@
-﻿using DMMDigital.Interface;
+﻿using DMMDigital.Interface.IView;
+using DMMDigital.Interface;
 using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace DMMDigital.Views
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
-        public bool detectorConnected { get; set; }
+        public SensorModel sensor { get; set; }
+        public bool sensorConnected { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventSaveExamImage;
@@ -93,9 +95,10 @@ namespace DMMDigital.Views
                 examPath = di.FullName;
                 drawTemplate();
 
-                if (detectorConnected)
+                if (sensorConnected)
                 {
-                    detectorConnection.Image = Properties.Resources.icon_32x32_green;
+                    componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
+                    componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
             };
         }
@@ -125,9 +128,10 @@ namespace DMMDigital.Views
                     selectedDrawingHistoryHandler();
                 }
 
-                if (detectorConnected)
+                if (sensorConnected)
                 {
-                    detectorConnection.Image = Properties.Resources.icon_32x32_green;
+                    componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
+                    componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
             };
         }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface ITemplateView
     {

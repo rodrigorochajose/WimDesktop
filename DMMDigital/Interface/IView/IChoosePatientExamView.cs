@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IChoosePatientExamView
     {
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
 
-        // Events
         event EventHandler eventSearchPatient;
         event EventHandler eventShowAddPatientView;
         event EventHandler eventSelectPatient;
 
-        // Methods
         void setPatientList(BindingSource patientList);
         void dataGridViewHandler();
     }

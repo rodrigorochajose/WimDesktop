@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IPatientView
     {
@@ -10,7 +10,6 @@ namespace DMMDigital.Views
         int selectedExamId { get; set; }
         string selectedExamPath { get; set; }
 
-        // Eventos
         event EventHandler eventSearchPatient;
         event EventHandler eventShowEditPatientForm;
         event EventHandler eventShowAddPatientForm;
@@ -22,8 +21,6 @@ namespace DMMDigital.Views
         event EventHandler eventDeleteExam;
         event EventHandler eventExportExam;
 
-
-        // Metodos
         void setPatientList(BindingSource patientList);
         void setExamList(BindingSource examList);
 

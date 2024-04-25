@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IChooseTemplateExamView
     {

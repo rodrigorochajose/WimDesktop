@@ -1,8 +1,8 @@
-﻿using DMMDigital.Interface;
+﻿using DMMDigital.Interface.IRepository;
+using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters

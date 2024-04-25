@@ -1,7 +1,7 @@
 ﻿using DMMDigital.Models;
 using System.Collections.Generic;
 
-namespace DMMDigital.Interface
+namespace DMMDigital.Interface.IRepository
 {
     public interface IExamImageRepository
     {

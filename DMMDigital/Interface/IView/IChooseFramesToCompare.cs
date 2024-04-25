@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DMMDigital.Components;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IChooseFramesToCompare
     {

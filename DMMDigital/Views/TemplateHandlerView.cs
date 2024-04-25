@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DMMDigital.Components;
 using DMMDigital.Models;
+using DMMDigital.Interface.IView;
 
 namespace DMMDigital.Views
 {

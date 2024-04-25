@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace DMMDigital.Interface
+namespace DMMDigital.Interface.IRepository
 {
     public interface IExamImageDrawingPointsRepository
     {

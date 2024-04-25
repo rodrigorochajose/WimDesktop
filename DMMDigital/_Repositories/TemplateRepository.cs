@@ -1,4 +1,4 @@
-﻿using DMMDigital.Interface;
+﻿using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
 using System;
 using System.Collections.Generic;

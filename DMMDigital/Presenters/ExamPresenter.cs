@@ -1,6 +1,7 @@
 ﻿using DMMDigital._Repositories;
-using DMMDigital.Interface;
 using DMMDigital.Interface.iRay;
+using DMMDigital.Interface.IRepository;
+using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
 using MoreLinq;
@@ -12,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -28,6 +30,7 @@ namespace DMMDigital.Presenters
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISensorRepository sensorRepository = new SensorRepository();
 
         private readonly string examOpeningMode;
         private int m_nId;
@@ -64,7 +67,10 @@ namespace DMMDigital.Presenters
                         m_nId = Detector.CreateDetector(this, path);
                         Detector d = Detector.DetectorList[m_nId];
                         d?.Connect();
-                        examView.detectorConnected = true;
+                        examView.sensorConnected = true;
+
+                        string sensorName = Regex.Match(path, "Pluto.*?(?=_)").ToString().ToUpper();
+                        examView.sensor = sensorRepository.getSensorByName(sensorName);
                     }
                 }
                 catch
@@ -242,7 +248,7 @@ namespace DMMDigital.Presenters
                 {
                     List<string> sensorUsbDevices = new List<string>();
 
-                    foreach (ManagementObject obj in objectCollection)
+                    foreach (ManagementObject obj in objectCollection.Cast<ManagementObject>())
                     {
                         string sensorUsbDevice = obj.ToString();
                         int startIndex = sensorUsbDevice.IndexOf("IRAY");

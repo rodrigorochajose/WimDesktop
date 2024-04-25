@@ -94,21 +94,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IExamImageDrawingPointsRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
+    <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
-    <Compile Include="Interface\IConfigRepository.cs" />
-    <Compile Include="Interface\IExamImageDrawingRepository.cs" />
-    <Compile Include="Interface\IExamImageRepository.cs" />
-    <Compile Include="Interface\IExamRepository.cs" />
-    <Compile Include="Interface\ITemplateLayoutRepository.cs" />
-    <Compile Include="Interface\ITemplateRepository.cs" />
+    <Compile Include="Interface\IRepository\IConfigRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageDrawingRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamRepository.cs" />
+    <Compile Include="Interface\IRepository\ITemplateLayoutRepository.cs" />
+    <Compile Include="Interface\IRepository\ITemplateRepository.cs" />
     <Compile Include="Models\Annotations\DateTimeRangeAttribute.cs" />
     <Compile Include="Models\Detector.cs" />
     <Compile Include="Interface\iRay\IEventReceiver.cs" />
     <Compile Include="Models\Drawings\Ruler.cs" />
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\OperationStatus.cs" />
+    <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
@@ -142,7 +144,7 @@
     </Compile>
     <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\ExamImageModel.cs" />
-    <Compile Include="Interface\IPatientRepository.cs" />
+    <Compile Include="Interface\IRepository\IPatientRepository.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
     <Compile Include="Presenters\ConfigPresenter.cs" />
     <Compile Include="Views\DialogRecalibrateRuler.cs">
@@ -175,17 +177,17 @@
     <Compile Include="Views\PostProcessTest.Designer.cs">
       <DependentUpon>PostProcessTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IChooseFramesToCompare.cs" />
-    <Compile Include="Views\IChooseTemplateExamView.cs" />
-    <Compile Include="Views\IConfigView.cs" />
-    <Compile Include="Views\IChoosePatientExamView.cs" />
-    <Compile Include="Views\IDialogGenerateTemplate.cs" />
-    <Compile Include="Views\IExamContainerView.cs" />
-    <Compile Include="Views\IExamView.cs" />
-    <Compile Include="Views\IExportExamView.cs" />
-    <Compile Include="Views\IFilterView.cs" />
-    <Compile Include="Views\ITemplateHandlerView.cs" />
-    <Compile Include="Views\ITemplateView.cs" />
+    <Compile Include="Interface\IView\IChooseFramesToCompare.cs" />
+    <Compile Include="Interface\IView\IChooseTemplateExamView.cs" />
+    <Compile Include="Interface\IView\IConfigView.cs" />
+    <Compile Include="Interface\IView\IChoosePatientExamView.cs" />
+    <Compile Include="Interface\IView\IDialogGenerateTemplate.cs" />
+    <Compile Include="Interface\IView\IExamContainerView.cs" />
+    <Compile Include="Interface\IView\IExamView.cs" />
+    <Compile Include="Interface\IView\IExportExamView.cs" />
+    <Compile Include="Interface\IView\IFilterView.cs" />
+    <Compile Include="Interface\IView\ITemplateHandlerView.cs" />
+    <Compile Include="Interface\IView\ITemplateView.cs" />
     <Compile Include="Views\PatientHandlerView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,7 +221,7 @@
     <Compile Include="Views\ChoosePatientExamView.Designer.cs">
       <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IPatientHandlerView.cs" />
+    <Compile Include="Interface\IView\IPatientHandlerView.cs" />
     <Compile Include="Views\MenuView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,8 +259,8 @@
     <Compile Include="Presenters\PatientPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\IMenuView.cs" />
-    <Compile Include="Views\IPatientView.cs" />
+    <Compile Include="Interface\IView\IMenuView.cs" />
+    <Compile Include="Interface\IView\IPatientView.cs" />
     <Compile Include="Views\ExamContainerView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +285,7 @@
     <Compile Include="_Repositories\ExamImageRepository.cs" />
     <Compile Include="_Repositories\ExamRepository.cs" />
     <Compile Include="_Repositories\PatientRepository.cs" />
+    <Compile Include="_Repositories\SensorRepository.cs" />
     <Compile Include="_Repositories\TemplateFrameRepository.cs" />
     <Compile Include="_Repositories\TemplateRepository.cs" />
     <EmbeddedResource Include="Views\ChooseFramesToCompare.resx">
@@ -492,5 +495,6 @@
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

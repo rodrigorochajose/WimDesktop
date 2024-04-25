@@ -1,5 +1,5 @@
-﻿using DMMDigital.Models;
-using DMMDigital.Views;
+﻿using DMMDigital.Interface.IView;
+using DMMDigital.Models;
 using System;
 
 namespace DMMDigital.Presenters

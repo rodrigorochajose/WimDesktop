@@ -1,6 +1,6 @@
 ﻿using DMMDigital.Models;
 
-namespace DMMDigital.Interface
+namespace DMMDigital.Interface.IRepository
 {
     public interface IConfigRepository
     {

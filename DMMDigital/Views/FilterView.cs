@@ -1,4 +1,5 @@
-﻿using Emgu.CV.CvEnum;
+﻿using DMMDigital.Interface.IView;
+using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 using Emgu.CV;
 using System;

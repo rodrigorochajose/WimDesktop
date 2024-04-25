@@ -1,6 +1,7 @@
 ﻿using DMMDigital.Views;
 using DMMDigital._Repositories;
-using DMMDigital.Interface;
+using DMMDigital.Interface.IRepository;
+using DMMDigital.Interface.IView;
 
 namespace DMMDigital.Presenters
 {

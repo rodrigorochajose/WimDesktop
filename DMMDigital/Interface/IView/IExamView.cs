@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using DMMDigital.Components;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IExamView
     {
@@ -16,7 +16,8 @@ namespace DMMDigital.Views
         List<ExamImageModel> examImages { get; set; }
         List<TemplateFrameModel> templateFrames { get; set; }
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
-        bool detectorConnected { get; set; }
+        SensorModel sensor { get; set; }
+        bool sensorConnected { get; set; }
 
         event EventHandler eventSaveExam;
         event EventHandler eventSaveExamImage;

@@ -1,9 +1,9 @@
-﻿using DMMDigital.Interface;
-using DMMDigital.Models;
+﻿using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using DMMDigital.Components;
+using DMMDigital.Interface.IRepository;
 
 namespace DMMDigital._Repositories
 {

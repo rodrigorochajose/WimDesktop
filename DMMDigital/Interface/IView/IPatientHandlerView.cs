@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IPatientHandlerView
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DMMDigital.Interface.IView;
 
 namespace DMMDigital.Views
 {

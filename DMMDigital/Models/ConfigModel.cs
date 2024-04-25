@@ -5,7 +5,6 @@ namespace DMMDigital.Models
     [Table("CONFIG")]
     public class ConfigModel
     {
-
         [Column("ID")]
         public int id { get; set; }
 

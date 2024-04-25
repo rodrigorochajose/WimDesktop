@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DMMDigital.Components;
 using DMMDigital.Models;
 
-namespace DMMDigital.Views
+namespace DMMDigital.Interface.IView
 {
     public interface IExportExamView
     {
