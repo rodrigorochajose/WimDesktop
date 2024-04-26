@@ -43,7 +43,9 @@ namespace DMMDigital.Views
         int textDrawingPreviousSize = 26;
         int indexSelectedDrawingHistory = 0;
 
-        double scalingFactorSensorImage = 0;
+        double sensorScalingFactorWidth = 0;
+        double sensorScalingFactorHeight = 0;
+        double sensorModifiedScalingFactor = 0;
 
         bool draw = false;
         bool multiRuler = false;
@@ -132,6 +134,7 @@ namespace DMMDigital.Views
                 {
                     componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
+                    getRulerFactor();
                 }
             };
         }
@@ -350,14 +353,12 @@ namespace DMMDigital.Views
                                 ruler.multiple = true;
                             }
 
-                            Size imageSize = frames.First(ei => ei.order == drawing.examImageId).originalImage.Size;
-
                             for (int counter = 0; counter < ruler.points.Count - 1; counter++)
                             {
                                 Point initialPoint = ruler.points[counter];
                                 Point finalPoint = ruler.points[counter + 1];
 
-                                float length = getRulerLength(initialPoint, finalPoint, imageSize.Width, imageSize.Height);
+                                float length = getRulerLength(initialPoint, finalPoint);
                                 ruler.lineLength.Add(length);
                             }
 
@@ -783,32 +784,37 @@ namespace DMMDigital.Views
             return "";
         }
 
-        private float getRulerLength(Point initialPoint, Point finalPoint, int width = 0, int height = 0)
+        private void getRulerFactor()
         {
-            if (width == 0)
+            if (selectedFrame.originalImage != null)
             {
-                width = mainPictureBox.Image.Width;
+                Size imageRealSize = selectedFrame.originalImage.Size;
+                
+                if (selectedFrame.orientation.Contains("Vertical"))
+                {
+                    sensorScalingFactorWidth = imageRealSize.Width / sensor.width;
+                    sensorScalingFactorHeight = imageRealSize.Height / sensor.height;
+                } 
+                else
+                {
+                    sensorScalingFactorWidth = imageRealSize.Height / sensor.height;
+                    sensorScalingFactorHeight = imageRealSize.Width / sensor.width;
+                }
             }
+        }
 
-            if (height == 0)
-            {
-                height = mainPictureBox.Image.Height;
-            }
+        private float getRulerLength(Point initialPoint, Point finalPoint)
+        {
+            float initialX = initialPoint.X * selectedFrame.originalImage.Width / mainPictureBox.Width;
+            float initialY = initialPoint.Y * selectedFrame.originalImage.Height / mainPictureBox.Height;
+            float finalX = finalPoint.X * selectedFrame.originalImage.Width / mainPictureBox.Width;
+            float finalY = finalPoint.Y * selectedFrame.originalImage.Height / mainPictureBox.Height;
 
-            // 30 is sensor Width and 20 height -> i'm going to get from database these values
-            double scalingFactorWidth = width / 26;
-            double scalingFactorHeight = height / 36;
-
-            float initialX = initialPoint.X * width / mainPictureBox.Width;
-            float initialY = initialPoint.Y * height / mainPictureBox.Height;
-            float finalX = finalPoint.X * width / mainPictureBox.Width;
-            float finalY = finalPoint.Y * height / mainPictureBox.Height;
-
-            float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / scalingFactorWidth, 2) + Math.Pow((initialY - finalY) / scalingFactorHeight, 2));
+            float lenghtInMilimeters = (float)Math.Sqrt(Math.Pow((initialX - finalX) / sensorScalingFactorWidth, 2) + Math.Pow((initialY - finalY) / sensorScalingFactorHeight, 2));
 
             if (calibrated)
             {
-                lenghtInMilimeters *= (float)scalingFactorSensorImage;
+                lenghtInMilimeters *= (float)sensorModifiedScalingFactor;
             }
 
             return lenghtInMilimeters;
@@ -816,7 +822,7 @@ namespace DMMDigital.Views
 
         private void recalibrateRuler(double rulerValue)
         {
-            scalingFactorSensorImage = rulerValue / (currentDrawing as Ruler).lineLength.First();
+            sensorModifiedScalingFactor = rulerValue / (currentDrawing as Ruler).lineLength.First();
             calibrated = true;
         }
 
@@ -1097,6 +1103,7 @@ namespace DMMDigital.Views
             action = 2;
             loadToolOptions();
             selectTool(sender);
+            getRulerFactor();
         }
 
         private void buttonUndoClick(object sender, EventArgs e)
@@ -1224,6 +1231,8 @@ namespace DMMDigital.Views
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
             }
 
+            getRulerFactor();
+
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
             selectedFrame.Refresh();
@@ -1324,7 +1333,7 @@ namespace DMMDigital.Views
 
         private void buttonResetCalibrationClick(object sender, EventArgs e)
         {
-            scalingFactorSensorImage = 0;
+            sensorModifiedScalingFactor = 0;
             calibrated = false;
         }
 
