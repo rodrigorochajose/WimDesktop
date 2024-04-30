@@ -76,7 +76,7 @@ namespace DMMDigital.Presenters
                     }
                     else
                     {
-                        examView.sensor = sensors.First();
+                        examView.sensor = sensors.Last();
                     }
                 }
                 catch
