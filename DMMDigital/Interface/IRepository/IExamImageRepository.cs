@@ -7,8 +7,7 @@ namespace DMMDigital.Interface.IRepository
     {
         void save();
         void addExamImage(ExamImageModel examImage);
-        void deleteExamImage(ExamImageModel examImageToDelete);
-        OperationStatus deleteAllExamImages(int examId);
+        void deleteExamImage(ExamImageModel examImages);
         IEnumerable<ExamImageModel> getExamImages(int examId);
         ExamImageModel getExamImageById(int examId, int frameId);
     }

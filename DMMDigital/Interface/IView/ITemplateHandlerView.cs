@@ -7,7 +7,7 @@ namespace DMMDigital.Interface.IView
     public interface ITemplateHandlerView
     {
         string templateName { get; set; }
-        IList<Frame> framesList { get; }
+        List<Frame> framesList { get; }
 
         event EventHandler eventSaveTemplate;
     }

@@ -134,7 +134,6 @@ namespace DMMDigital.Views
                 {
                     componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
-                    getRulerFactor();
                 }
             };
         }
@@ -344,22 +343,13 @@ namespace DMMDigital.Views
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
                                 points = drawing.points,
-                                lineLength = new List<float>(),
+                                lineLength = drawing.lineLength,
                                 multiple = false,
                             };
 
                             if (ruler.points.Count > 2)
                             {
                                 ruler.multiple = true;
-                            }
-
-                            for (int counter = 0; counter < ruler.points.Count - 1; counter++)
-                            {
-                                Point initialPoint = ruler.points[counter];
-                                Point finalPoint = ruler.points[counter + 1];
-
-                                float length = getRulerLength(initialPoint, finalPoint);
-                                ruler.lineLength.Add(length);
                             }
 
                             return ruler;
@@ -797,14 +787,16 @@ namespace DMMDigital.Views
                 } 
                 else
                 {
-                    sensorScalingFactorWidth = imageRealSize.Height / sensor.height;
-                    sensorScalingFactorHeight = imageRealSize.Width / sensor.width;
+                    sensorScalingFactorWidth = imageRealSize.Width / sensor.height;
+                    sensorScalingFactorHeight = imageRealSize.Height / sensor.width;
                 }
             }
         }
 
         private float getRulerLength(Point initialPoint, Point finalPoint)
         {
+            getRulerFactor();
+
             float initialX = initialPoint.X * selectedFrame.originalImage.Width / mainPictureBox.Width;
             float initialY = initialPoint.Y * selectedFrame.originalImage.Height / mainPictureBox.Height;
             float finalX = finalPoint.X * selectedFrame.originalImage.Width / mainPictureBox.Width;
@@ -1103,7 +1095,6 @@ namespace DMMDigital.Views
             action = 2;
             loadToolOptions();
             selectTool(sender);
-            getRulerFactor();
         }
 
         private void buttonUndoClick(object sender, EventArgs e)
@@ -1230,8 +1221,6 @@ namespace DMMDigital.Views
             {
                 currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
             }
-
-            getRulerFactor();
 
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = currentImage.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
@@ -1712,7 +1701,7 @@ namespace DMMDigital.Views
                 }
                 else if (action == 3)
                 {
-                    if (currentDrawing.points.Count == 1)
+                    if (currentDrawing.points.Any())
                     {
                         currentDrawing.points.Add(new Point(e.X + 1, e.Y + 1));
                     }
@@ -1803,6 +1792,10 @@ namespace DMMDigital.Views
                     if (d is Text)
                     {
                         drawingToSave.drawingText = (d as Text).text;
+                    }
+                    else if (d is Ruler)
+                    {
+                        drawingToSave.lineLength = (d as Ruler).lineLength;
                     }
 
                     examImageDrawings.Add(drawingToSave);

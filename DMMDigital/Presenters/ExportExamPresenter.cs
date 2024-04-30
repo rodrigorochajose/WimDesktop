@@ -23,7 +23,7 @@ namespace DMMDigital.Presenters
 
         private void getImageDrawings(int examId)
         {
-            exportExamView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examId).ToList();
+            exportExamView.examImageDrawings = examImageDrawingRepository.getDrawings(examId).ToList();
         }
     }
 }

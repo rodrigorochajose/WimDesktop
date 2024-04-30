@@ -11,7 +11,7 @@ namespace DMMDigital.Views
     public partial class TemplateHandlerView : Form, ITemplateHandlerView
     {
         public string templateName { get; set; }
-        public IList<Frame> framesList { get { return frames; } }
+        public List<Frame> framesList { get { return frames; } }
 
         public event EventHandler eventSaveTemplate;
 

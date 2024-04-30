@@ -10,6 +10,7 @@ namespace DMMDigital.Models
 
         public DbSet<ConfigModel> config { get; set; }
         public DbSet<SensorModel> sensor { get; set; }
+        public DbSet<RulerLengthModel> rulerLength { get; set; }
         public DbSet<ExamImageDrawingPointsModel> examImageDrawingPoints { get; set; }
         public DbSet<ExamImageDrawingModel> examImageDrawing { get; set; }
         public DbSet<ExamImageModel> examImage { get; set; }

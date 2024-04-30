@@ -11,10 +11,11 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public void save()
+        public void addDrawingPoints(List<ExamImageDrawingPointsModel> drawingPoints)
         {
             try
             {
+                context.examImageDrawingPoints.AddRange(drawingPoints);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -23,28 +24,15 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public void addExamImageDrawingPoints(List<ExamImageDrawingPointsModel> pointsToSave)
+        public void updateDrawingPoints(int drawingId, List<System.Drawing.Point> drawingPoints)
         {
             try
             {
-                context.examImageDrawingPoints.AddRange(pointsToSave);
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public void updatePoints(int drawingId, List<System.Drawing.Point> points)
-        {
-            try
-            {
-                List<ExamImageDrawingPointsModel> currentPoints = getExamImageDrawingPointsByDrawingId(drawingId).ToList();
+                List<ExamImageDrawingPointsModel> currentPoints = getPointsByDrawing(drawingId).ToList();
                 for (int counter = 0; counter < currentPoints.Count; counter++)
                 {
-                    currentPoints[counter].pointX = points[counter].X;
-                    currentPoints[counter].pointY = points[counter].Y;
+                    currentPoints[counter].pointX = drawingPoints[counter].X;
+                    currentPoints[counter].pointY = drawingPoints[counter].Y;
                 }
                 context.SaveChanges();
             }
@@ -54,14 +42,13 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public void deleteExamImageDrawingPointsByDrawings(List<int> drawingsIdToDelete)
+        public void deleteRangeDrawingPoints(List<int> drawingsId)
         {
             try
             {
-                foreach (int drawingId in drawingsIdToDelete)
-                {
-                    context.examImageDrawingPoints.RemoveRange(getExamImageDrawingPointsByDrawingId(drawingId));
-                }
+                IEnumerable<ExamImageDrawingPointsModel> drawingPointsToDelete = drawingsId.SelectMany(drawingId => getPointsByDrawing(drawingId));
+
+                context.examImageDrawingPoints.RemoveRange(drawingPointsToDelete);
 
                 context.SaveChanges();
             }
@@ -71,32 +58,14 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public void deleteExamImageDrawingPoints(int examId)
-        {
-            try
-            {
-                context.examImageDrawingPoints.RemoveRange(getExamImageDrawingPoints(examId));
-                context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        public IEnumerable<ExamImageDrawingPointsModel> getExamImageDrawingPoints(int examId)
-        {
-            return context.examImageDrawingPoints.Where(e => e.examId == examId);
-        }
-
-        public IEnumerable<ExamImageDrawingPointsModel> getExamImageDrawingPointsByExamImage(int examId, int examImageId)
-        {
-            return context.examImageDrawingPoints.Where(e => e.examId == examId && e.examImageId == examImageId);
-        }
-
-        private IEnumerable<ExamImageDrawingPointsModel> getExamImageDrawingPointsByDrawingId(int drawingId)
+        private IEnumerable<ExamImageDrawingPointsModel> getPointsByDrawing(int drawingId)
         {
             return context.examImageDrawingPoints.Where(e => e.examImageDrawingId == drawingId);
+        }
+
+        public List<System.Drawing.Point> getExamImageDrawingPointsByDrawing(int drawingId)
+        {
+            return context.examImageDrawingPoints.Where(d => d.examImageDrawingId == drawingId).ToList().Select(dp => new System.Drawing.Point(dp.pointX, dp.pointY)).ToList();
         }
     }
 }

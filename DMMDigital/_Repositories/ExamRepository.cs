@@ -12,26 +12,25 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public int add(ExamModel exam)
+        public void addExam(ExamModel exam)
         {
             try
             {
                 context.exam.Add(exam);
                 context.SaveChanges();
-                return context.exam.OrderByDescending(e => e.id).First().id;
             } 
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return -1;
             }
         }
 
-        public void edit(ExamModel exam)
+        public void deleteExam(int examId)
         {
             try
             {
-                context.SaveChanges(); 
+                context.exam.Remove(getExam(examId));
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -39,39 +38,19 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public OperationStatus delete(int examId)
+        public int getExamId(ExamModel exam)
         {
-            try
-            {
-                context.exam.Remove(context.exam.Single(e => e.id == examId));
-                context.SaveChanges();
-
-                return new OperationStatus
-                {
-                    code = 1,
-                    status = "Sucess",
-                    message = "Exame deletado!"
-                };
-            }
-            catch (Exception ex)
-            {
-                return new OperationStatus
-                {
-                    code = -1,
-                    status = "Error",
-                    message = "Erro ao deletar exame : " + ex.Message
-                };
-            }
-        }
-
-        public IEnumerable<ExamModel> getPatientExams(int patientId)
-        {
-            return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).ToList();
+            return context.exam.OrderByDescending(e => e.id).First().id;
         }
 
         public ExamModel getExam(int examId)
         {
             return context.exam.Where(e => e.id == examId).Include(e => e.patient).Include(e => e.template).First();
+        }
+
+        public IEnumerable<ExamModel> getPatientExams(int patientId)
+        {
+            return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).ToList();
         }
     }
 }

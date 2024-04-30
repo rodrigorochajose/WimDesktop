@@ -5,9 +5,9 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface ITemplateRepository
     {
-        int add(TemplateModel template);
-        string edit(TemplateModel template);
-        string delete(int templateId);
+        void addTemplate(TemplateModel template);
+        void delete(int templateId);
         List<TemplateModel> getAllTemplates();
+        int getLastTemplateId();
     }
 }

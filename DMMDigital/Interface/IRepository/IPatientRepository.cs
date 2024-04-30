@@ -5,11 +5,11 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface IPatientRepository
     {
-        string add(PatientModel paciente);
-        string edit();
-        string delete(int patientId);
+        void addPatient(PatientModel patient);
+        void editPatient();
+        void deletePatient(int patientId);
         IEnumerable<PatientModel> getAllPatients();
-        PatientModel getPatientById(int id);
+        PatientModel getPatientById(int patientid);
         IEnumerable<PatientModel> getPatientsByName(string value);
     }
 }

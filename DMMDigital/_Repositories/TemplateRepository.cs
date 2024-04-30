@@ -3,6 +3,7 @@ using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
@@ -10,49 +11,49 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public int add(TemplateModel template)
-        {
-            context.template.Add(template);
-            context.SaveChanges();
-            return template.id;
-        }
-
-        public string edit(TemplateModel template)
+        public void addTemplate(TemplateModel template)
         {
             try
             {
+                context.template.Add(template);
                 context.SaveChanges();
-                return "Template editado com sucesso !";
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public string delete(int templateId)
+        public void delete(int templateId)
         {
             try
             {
                 if (context.exam.Any(e => e.templateId == templateId))
                 {
-                    return "Template não pode ser excluido pois existem exames que o utilizam.";
+                    MessageBox.Show("Template não pode ser excluido pois existem exames que o utilizam.");
+                    return;
                 }
 
                 context.templateFrame.RemoveRange(context.templateFrame.Where(t => t.templateId == templateId));
                 context.template.Remove(context.template.Single(p => p.id == templateId));
                 context.SaveChanges();
-                return "Template Removido com sucesso !";
+
+                MessageBox.Show("Template Removido com sucesso !");
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 
         public List<TemplateModel> getAllTemplates()
         {
             return context.template.OrderBy(template => template.id).ToList();
+        }
+
+        public int getLastTemplateId()
+        {
+            return context.template.OrderByDescending(t => t.id).First().id;
         }
     }
 }

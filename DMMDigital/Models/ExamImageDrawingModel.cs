@@ -34,5 +34,8 @@ namespace DMMDigital.Models
 
         [NotMapped]
         public List<Point> points { get; set; }
+
+        [NotMapped]
+        public List<float> lineLength { get; set; }
     }
 }

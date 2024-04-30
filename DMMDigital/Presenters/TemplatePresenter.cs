@@ -36,8 +36,9 @@ namespace DMMDigital.Presenters
 
         private void showNewTemplateForm(object sender, EventArgs e)
         {
-            (templateView as Form).Close();
+            (templateView as Form).Hide();
             new DialogGenerateTemplatePresenter(new DialogGenerateTemplate());
+            (templateView as Form).Show();
             getTemplates();
         }
 
@@ -46,7 +47,7 @@ namespace DMMDigital.Presenters
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
-                MessageBox.Show(templateRepository.delete(templateView.selectedTemplateId));
+                templateRepository.delete(templateView.selectedTemplateId);
                 getTemplates();
             }
         }

@@ -6,12 +6,9 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface IExamImageDrawingPointsRepository
     {
-        void save();
-        void addExamImageDrawingPoints(List<ExamImageDrawingPointsModel> pointsToSave);
-        void updatePoints(int drawingId, List<Point> points);
-        void deleteExamImageDrawingPointsByDrawings(List<int> drawingsIdToDelete);
-        void deleteExamImageDrawingPoints(int examId);
-        IEnumerable<ExamImageDrawingPointsModel> getExamImageDrawingPoints(int examId);
-        IEnumerable<ExamImageDrawingPointsModel> getExamImageDrawingPointsByExamImage(int examId, int examImageId);
+        void addDrawingPoints(List<ExamImageDrawingPointsModel> drawingPoints);
+        void updateDrawingPoints(int drawingId, List<Point> drawingPoints);
+        void deleteRangeDrawingPoints(List<int> drawingsId);
+        List<Point> getExamImageDrawingPointsByDrawing(int drawingId);
     }
 }

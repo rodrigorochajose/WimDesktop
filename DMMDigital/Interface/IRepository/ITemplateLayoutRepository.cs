@@ -6,7 +6,7 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface ITemplateFrameRepository
     {
-        string add(int templateId, IList<Frame> framesList);
+        void addTemplateFrame(int templateId, List<Frame> frames);
 
         List<TemplateFrameModel> getAllTemplateFrame();
 

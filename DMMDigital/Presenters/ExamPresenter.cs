@@ -28,6 +28,7 @@ namespace DMMDigital.Presenters
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
+        private readonly IRulerLengthRepository rulerLengthRepository = new RulerLengthRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
@@ -61,6 +62,7 @@ namespace DMMDigital.Presenters
                 try
                 {
                     string path = getSensorPath();
+                    List<SensorModel> sensors = sensorRepository.getAllSensors();
 
                     if (path.Any())
                     {
@@ -70,7 +72,11 @@ namespace DMMDigital.Presenters
                         examView.sensorConnected = true;
 
                         string sensorName = Regex.Match(path, "Pluto.*?(?=_)").ToString().ToUpper();
-                        examView.sensor = sensorRepository.getSensorByName(sensorName);
+                        examView.sensor = sensors.FirstOrDefault(s => s.name == sensorName);
+                    }
+                    else
+                    {
+                        examView.sensor = sensors.First();
                     }
                 }
                 catch
@@ -112,11 +118,35 @@ namespace DMMDigital.Presenters
                 examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
-                examView.examImageDrawings = examImageDrawingRepository.getExamImageDrawings(examView.examId).ToList();
+                examView.examImageDrawings = examImageDrawingRepository.getDrawings(examView.examId).ToList();
+
+                getExamImageDrawingPoints();
+                getRulerLineLengths();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao carregar exame - {ex.Message}");
+            }
+        }
+
+        private void getRulerLineLengths()
+        {
+            List<ExamImageDrawingModel> rulerDrawings = examView.examImageDrawings.Where(d => d.drawingType == "Ruler").ToList();
+
+            if (rulerDrawings.Any())
+            {
+                foreach (ExamImageDrawingModel drawing in rulerDrawings)
+                {
+                    drawing.lineLength = rulerLengthRepository.getRulerLengthByDrawing(drawing.id);
+                }
+            }
+        }
+
+        private void getExamImageDrawingPoints()
+        {
+            foreach (ExamImageDrawingModel drawing in examView.examImageDrawings)
+            {
+                drawing.points = examImageDrawingPointsRepository.getExamImageDrawingPointsByDrawing(drawing.id);
             }
         }
 
@@ -132,7 +162,8 @@ namespace DMMDigital.Presenters
                     createdAt = DateTime.Now
                 };
             
-                examView.examId = examRepository.add(exam);
+                examRepository.addExam(exam);
+                examView.examId = examRepository.getExamId(exam);
             }
             catch (Exception ex)
             {
@@ -183,17 +214,18 @@ namespace DMMDigital.Presenters
 
                 List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
 
-                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
 
                 List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
 
                 if (drawingsToDelete.Any())
                 {
                     List<int> drawingsIdToDelete = drawingsToDelete.Select(d => d.id).ToList();
-                    examImageDrawingPointsRepository.deleteExamImageDrawingPointsByDrawings(drawingsIdToDelete);
-                    examImageDrawingRepository.deleteRangeExamImageDrawings(drawingsToDelete);
+                    rulerLengthRepository.deleteRangeRulerLength(drawingsIdToDelete);
+                    examImageDrawingPointsRepository.deleteRangeDrawingPoints(drawingsIdToDelete);
+                    examImageDrawingRepository.deleteRangeDrawing(drawingsToDelete);
 
-                    currentFrameExamImageDrawings = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+                    currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
                 }
 
                 foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
@@ -201,9 +233,9 @@ namespace DMMDigital.Presenters
                     ExamImageDrawingModel existingExamImageDrawing = currentFrameExamImageDrawings.FirstOrDefault(eid => eid.id == item.id);
                     if (existingExamImageDrawing == null)
                     {
-                        examImageDrawingRepository.addExamImageDrawing(item);
+                        examImageDrawingRepository.addDrawing(item);
 
-                        int drawingId  = examImageDrawingRepository.getExamImageDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
+                        int drawingId  = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
 
                         List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
 
@@ -219,11 +251,27 @@ namespace DMMDigital.Presenters
                             });
                         }
 
-                        examImageDrawingPointsRepository.addExamImageDrawingPoints(pointsToSave);
+                        examImageDrawingPointsRepository.addDrawingPoints(pointsToSave);
+
+                        if (item.lineLength != null)
+                        {
+                            List<RulerLengthModel> rulerLengths = new List<RulerLengthModel>();
+
+                            foreach (float length in item.lineLength)
+                            {
+                                rulerLengths.Add(new RulerLengthModel
+                                {
+                                    examImageDrawingId = drawingId,
+                                    lineLength = length,
+                                });
+                            }
+
+                            rulerLengthRepository.addRulerLength(rulerLengths);
+                        }
                     }
                     else if (item.points != existingExamImageDrawing.points)
                     {
-                        examImageDrawingPointsRepository.updatePoints(item.id, item.points);
+                        examImageDrawingPointsRepository.updateDrawingPoints(item.id, item.points);
                     }
                 }
             }

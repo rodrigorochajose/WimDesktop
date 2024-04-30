@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
+    <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Models\Drawings\Ruler.cs" />
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\OperationStatus.cs" />
+    <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
@@ -285,6 +287,7 @@
     <Compile Include="_Repositories\ExamImageRepository.cs" />
     <Compile Include="_Repositories\ExamRepository.cs" />
     <Compile Include="_Repositories\PatientRepository.cs" />
+    <Compile Include="_Repositories\RulerLengthRepository.cs" />
     <Compile Include="_Repositories\SensorRepository.cs" />
     <Compile Include="_Repositories\TemplateFrameRepository.cs" />
     <Compile Include="_Repositories\TemplateRepository.cs" />

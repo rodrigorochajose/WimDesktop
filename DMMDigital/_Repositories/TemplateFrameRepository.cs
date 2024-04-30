@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DMMDigital.Components;
 using DMMDigital.Interface.IRepository;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
@@ -11,11 +12,11 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public string add(int templateId, IList<Frame> framesList)
+        public void addTemplateFrame(int templateId, List<Frame> frames)
         {
             try
             {
-                foreach (Frame frame in framesList)
+                foreach (Frame frame in frames)
                 {
                     context.templateFrame.Add(new TemplateFrameModel
                     {
@@ -27,11 +28,12 @@ namespace DMMDigital._Repositories
                     });
                 }
                 context.SaveChanges();
-                return "Template cadastrado com sucesso!";
+
+                MessageBox.Show("Template cadastrado com sucesso!");
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 

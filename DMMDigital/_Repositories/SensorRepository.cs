@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DMMDigital._Repositories
@@ -8,9 +9,9 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public SensorModel getSensorByName(string name)
+        public List<SensorModel> getAllSensors()
         {
-            return context.sensor.First(s => s.name == name);
+            return context.sensor.ToList();
         }
     }
 }

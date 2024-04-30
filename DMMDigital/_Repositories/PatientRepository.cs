@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
@@ -11,7 +12,7 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public string add(PatientModel patient)
+        public void addPatient(PatientModel patient)
         {
             try
             {
@@ -19,37 +20,40 @@ namespace DMMDigital._Repositories
                 context.SaveChanges();
 
                 Directory.CreateDirectory(@"C:\Users\USER\.novowimdesktop\img\Paciente-" + patient.id);
-                return "Paciente cadastrado com sucesso !";
+
+                MessageBox.Show("Paciente cadastrado com sucesso !");
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public string edit()
+        public void editPatient()
         {
             try
             {
                 context.SaveChanges();
-                return "Paciente editado com sucesso !";
+                MessageBox.Show("As informações do paciente foram editadas com sucesso !");
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public string delete(int patientId)
+        public void deletePatient(int patientId)
         {
             try
             {
-                context.patient.Remove(context.patient.Single(p => p.id == patientId));
+                context.patient.Remove(getPatientById(patientId));
                 context.SaveChanges();
-                return "Paciente Removido com sucesso !";
-            } catch (Exception ex)
+
+                MessageBox.Show("Paciente deletado com sucesso !");
+            } 
+            catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
         }
 

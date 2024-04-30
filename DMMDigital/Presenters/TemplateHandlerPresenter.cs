@@ -26,8 +26,11 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                int templateId = templateRepository.add(new Models.TemplateModel { name = templateHandlerView.templateName });
-                MessageBox.Show(templateFrameRepository.add(templateId, templateHandlerView.framesList));
+                templateRepository.addTemplate(new Models.TemplateModel { name = templateHandlerView.templateName });
+
+                int templateId = templateRepository.getLastTemplateId();
+
+                templateFrameRepository.addTemplateFrame(templateId, templateHandlerView.framesList);
                 (templateHandlerView as Form).Close();
             }
             catch (Exception ex)

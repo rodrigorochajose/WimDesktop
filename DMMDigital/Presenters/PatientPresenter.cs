@@ -103,7 +103,7 @@ namespace DMMDigital.Presenters
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
-                MessageBox.Show(patientRepository.delete(patientView.selectedPatientId));
+                patientRepository.deletePatient(patientView.selectedPatientId);
                 loadAllPatients();
             }
         }
@@ -120,7 +120,7 @@ namespace DMMDigital.Presenters
                 selectedPatient.observation = (sender as PatientHandlerView).patientObservation;
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
-                MessageBox.Show(patientRepository.edit());
+                patientRepository.editPatient();
                 (sender as PatientHandlerView).Close();
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace DMMDigital.Presenters
                 };
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
-                MessageBox.Show(patientRepository.add(selectedPatient));
+                patientRepository.addPatient(selectedPatient);
                 (sender as PatientHandlerView).Close();
             } 
             catch (Exception ex)
@@ -218,11 +218,9 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            examImageDrawingRepository.deleteAllExamImageDrawings(patientView.selectedExamId);
-            examImageRepository.deleteAllExamImages(patientView.selectedExamId);
-            examRepository.delete(patientView.selectedExamId);
+            examRepository.deleteExam(patientView.selectedExamId);
 
-            string fullPath = configRepository.getExamPath() + patientView.selectedExamPath;
+            string fullPath = Path.Combine(configRepository.getExamPath(), patientView.selectedExamPath);
 
             if (Directory.Exists(fullPath))
             {

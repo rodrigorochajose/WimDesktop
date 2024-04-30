@@ -5,11 +5,10 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface IExamImageDrawingRepository
     { 
-        void save();
-        void addExamImageDrawing(ExamImageDrawingModel examImageDrawing);
-        void deleteRangeExamImageDrawings(List<ExamImageDrawingModel> examImageDrawings);
-        void deleteAllExamImageDrawings(int examId);
-        IEnumerable<ExamImageDrawingModel> getExamImageDrawings(int examId);
-        IEnumerable<ExamImageDrawingModel> getExamImageDrawingsByExamImage(int examId, int examImageId);
+        void addDrawing(ExamImageDrawingModel drawing);
+        void deleteRangeDrawing(List<ExamImageDrawingModel> drawings);
+        void deleteAllDrawings(int examId);
+        IEnumerable<ExamImageDrawingModel> getDrawings(int examId);
+        IEnumerable<ExamImageDrawingModel> getDrawingsByExamImage(int examId, int examImageId);
     }
 }

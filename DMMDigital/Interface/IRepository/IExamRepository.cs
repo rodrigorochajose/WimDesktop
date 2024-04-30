@@ -5,10 +5,10 @@ namespace DMMDigital.Interface.IRepository
 {
     public interface IExamRepository
     {
-        int add(ExamModel exam);
-        void edit(ExamModel exam);
-        OperationStatus delete(int examId);
-        IEnumerable<ExamModel> getPatientExams(int patientId);
+        void addExam(ExamModel exam);
+        void deleteExam(int examId);
+        int getExamId(ExamModel exam);
         ExamModel getExam (int examId);
+        IEnumerable<ExamModel> getPatientExams(int patientId);
     }
 }

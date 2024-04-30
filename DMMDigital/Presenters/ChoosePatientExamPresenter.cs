@@ -70,7 +70,7 @@ namespace DMMDigital.Presenters
                 };
 
                 new Common.ModelDataValidation().Validate(newPatient);
-                MessageBox.Show(patientRepository.add(newPatient));
+                patientRepository.addPatient(newPatient);
                 (sender as PatientHandlerView).Close();
             }
             catch (Exception ex)
