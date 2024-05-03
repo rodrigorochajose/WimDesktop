@@ -52,7 +52,6 @@ namespace DMMDigital.Views
         bool rulerDrawed = false;
         bool calibrated = false;
         bool recalibrate = false;
-
         bool examHasChanges = false;
 
         Color drawingColor = Color.Red;
@@ -71,7 +70,6 @@ namespace DMMDigital.Views
 
         IDrawing currentDrawing;
         IDrawing selectedDrawingToMove;
-        Size mainPictureBoxOriginalSize = new Size();
         Point clickPosition = new Point();
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
@@ -79,7 +77,6 @@ namespace DMMDigital.Views
             InitializeComponent();
             associateConfigs(config);
 
-            mainPictureBoxOriginalSize = mainPictureBox.Size;
             ActiveControl = label1;
 
             this.sessionName = sessionName;
@@ -115,8 +112,6 @@ namespace DMMDigital.Views
 
             Load += delegate
             {
-                mainPictureBoxOriginalSize = mainPictureBox.Size;
-
                 drawTemplate();
                 loadExamDrawings();
 
@@ -965,7 +960,7 @@ namespace DMMDigital.Views
                 examHasChanges = true;
             }
         }
-
+         
         private void buttonExportClick(object sender, EventArgs e)
         {
             List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).ToList();
@@ -1786,8 +1781,9 @@ namespace DMMDigital.Views
                         drawingColor = d.drawingColor.ToArgb().ToString(),
                         drawingSize = (int)d.drawingSize,
                         drawingType = d.GetType().ToString().Split('.').Last(),
-                        points = d.points
                     };
+
+                    drawingToSave.points = getCalibratedDrawingPoints(d.points);
 
                     if (d is Text)
                     {
@@ -1805,30 +1801,23 @@ namespace DMMDigital.Views
 
         private void examViewResize(object sender, EventArgs e)
         {
-            //Size previousSize = mainPictureBox.Size;
+            Size previousSize = mainPictureBox.Size;
             resizeMainPictureBox();
 
-            //int widthDifference = Math.Abs(mainPictureBox.Width - previousSize.Width);
-            //int heightDifference = Math.Abs(mainPictureBox.Height - previousSize.Height);
+            if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
+            {
+                float scaleX = (float)mainPictureBox.Width / previousSize.Width;
+                float scaleY = (float)mainPictureBox.Height / previousSize.Height;
 
-            //if (widthDifference > 0 && heightDifference > 0)
-            //{
-            //    List<IDrawing> drawings = getDrawings();
-
-            //    if (drawings.Any())
-            //    {
-            //        float scaleX = (float)mainPictureBox.Width / previousSize.Width;
-            //        float scaleY = (float)mainPictureBox.Height / previousSize.Height;
-
-            //        foreach (IDrawing d in drawings)
-            //        {
-            //            for (int counter = 0; counter < d.points.Count; counter++)
-            //            {
-            //                d.points[counter] = Point.Round(new PointF(d.points[counter].X * scaleX, d.points[counter].Y * scaleY));
-            //            }
-            //        }
-            //    }
-            //}
+                foreach (IDrawing d in selectedDrawingHistory[indexSelectedDrawingHistory])
+                {
+                    for (int counter = 0; counter < d.points.Count; counter++)
+                    {
+                        d.points[counter] = Point.Round(new PointF(d.points[counter].X * scaleX, d.points[counter].Y * scaleY));
+                    }
+                }
+            }
+            mainPictureBox.Refresh();
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -1848,8 +1837,8 @@ namespace DMMDigital.Views
                 }
 
                 Bitmap imageToDraw = new Bitmap(frameImage, new Size(
-                    mainPictureBoxOriginalSize.Height * frameImage.Width / frameImage.Height,
-                    mainPictureBoxOriginalSize.Height
+                    mainPictureBox.Height * frameImage.Width / frameImage.Height,
+                    mainPictureBox.Height
                 ));
 
                 Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
@@ -1864,6 +1853,32 @@ namespace DMMDigital.Views
                 editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
             }
         }
+        
+        private List<Point> getCalibratedDrawingPoints (List<Point> drawingPoints)
+        {
+            Size sizeToCompare = new Size();
 
+            if (mainPictureBox.Height > mainPictureBox.Width)
+            {
+                sizeToCompare = new Size(447, 619);
+            }
+            else if (mainPictureBox.Width > mainPictureBox.Height)
+            {
+                sizeToCompare = new Size(858, 620);
+            }
+
+            if (sizeToCompare != mainPictureBox.Size)
+            {
+                float scaleX = (float)sizeToCompare.Width / mainPictureBox.Width;
+                float scaleY = (float)sizeToCompare.Height / mainPictureBox.Height;
+
+                for (int counter = 0; counter < drawingPoints.Count; counter++)
+                {
+                    drawingPoints[counter] = Point.Round(new PointF(drawingPoints[counter].X * scaleX, drawingPoints[counter].Y * scaleY));
+                }
+            }
+
+            return drawingPoints;
+        }
     }
 }
