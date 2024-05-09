@@ -38,7 +38,5 @@ namespace DMMDigital.Models
         [Column("OBSERVATION")]
         [DisplayName("Observação")]
         public string observation { get; set; }
-
-
     }
 }

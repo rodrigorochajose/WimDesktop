@@ -110,7 +110,6 @@
     <Compile Include="Interface\iRay\IEventReceiver.cs" />
     <Compile Include="Models\Drawings\Ruler.cs" />
     <Compile Include="Models\ExamImageDrawingModel.cs" />
-    <Compile Include="Models\OperationStatus.cs" />
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />

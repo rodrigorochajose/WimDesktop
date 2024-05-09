@@ -12,5 +12,6 @@ namespace DMMDigital.Components
         public Image editedImage { get; set; }
         public string datePhotoTook { get; set; }
         public string notes { get; set; }
+        public bool resize { get; set; }
     }
 }

@@ -115,7 +115,6 @@ namespace DMMDigital.Presenters
 
                 examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt:dd-MM-yyyy}";
                 examView.templateId = exam.templateId;
-                examView.templateFrames = new List<TemplateFrameModel>();
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
                 examView.examImageDrawings = examImageDrawingRepository.getDrawings(examView.examId).ToList();

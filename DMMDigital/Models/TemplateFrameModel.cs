@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Documents;
 
 namespace DMMDigital.Models
 {
@@ -26,7 +27,5 @@ namespace DMMDigital.Models
 
         [Column("ORIENTATION")]
         public string orientation { get; set; }
-
-
     }
 }
