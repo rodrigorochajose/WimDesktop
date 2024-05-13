@@ -525,7 +525,8 @@ namespace DMMDigital.Presenters
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic, Path.Combine(examView.examPath, examView.selectedFrame.order + "-original.png"));
+                SaveBmp(pic, Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-original.png"));
+                SaveBmp(pic, Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-filtered.png"));
 
                 pic.Dispose();
             }

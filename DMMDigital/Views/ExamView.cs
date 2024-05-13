@@ -71,8 +71,8 @@ namespace DMMDigital.Views
         IDrawing currentDrawing;
         IDrawing selectedDrawingToMove;
         Point clickPosition = new Point();
+        Size mainPictureBoxOriginalSize = new Size();
         Size mainPictureBoxPreviousSize = new Size();
-        Size mainPictureBoxInstanciateSize = new Size();
 
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
@@ -102,7 +102,7 @@ namespace DMMDigital.Views
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
             };
-            mainPictureBoxInstanciateSize = mainPictureBox.Size;
+            mainPictureBoxOriginalSize = mainPictureBox.Size;
         }
 
         public ExamView(int examId, PatientModel patient, ConfigModel config)
@@ -134,7 +134,7 @@ namespace DMMDigital.Views
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
             };
-            mainPictureBoxInstanciateSize = mainPictureBox.Size;
+            mainPictureBoxOriginalSize = mainPictureBox.Size;
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -202,6 +202,7 @@ namespace DMMDigital.Views
                         img = new Bitmap(bmpTemp);
                     }
                     newFrame.originalImage = img;
+                    newFrame.filteredImage = img;
                     newFrame.notes = selectedExamImage.notes;
                     newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
@@ -398,7 +399,7 @@ namespace DMMDigital.Views
             {
                 examId = examId,
                 frameId = selectedFrame.order,
-                file = selectedFrame.order + "-original.png",
+                file = $"{selectedFrame.order}-original.png",
                 notes = selectedFrame.notes,
                 createdAt = createdAt
             });
@@ -408,7 +409,8 @@ namespace DMMDigital.Views
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
 
-            selectedFrame.originalImage = image.Clone() as Image;
+            selectedFrame.originalImage = new Bitmap(image);
+            selectedFrame.filteredImage = new Bitmap(image);
 
             selectedFrame.Tag = Color.Black;
             selectedFrame.Invoke((MethodInvoker)(() =>
@@ -469,19 +471,8 @@ namespace DMMDigital.Views
 
             selectFrame((Frame)sender);
             indexFrame = selectedFrame.order - 1;
-
-            if (selectedFrame.filteredImage != null)
-            {
-                mainPictureBox.Image = selectedFrame.filteredImage;
-            }
-            else if (selectedFrame.originalImage != null)
-            {
-                mainPictureBox.Image = selectedFrame.originalImage;
-            }
-            else
-            {
-                mainPictureBox.Image = null;
-            }
+            
+            mainPictureBox.Image = selectedFrame.filteredImage;
 
             resizeMainPictureBox();
 
@@ -507,7 +498,7 @@ namespace DMMDigital.Views
         public void loadImageOnMainPictureBox()
         {
             Image image;
-            using (FileStream fs = File.Open(Path.Combine(examPath, selectedFrame.order + "-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (FileStream fs = File.Open(Path.Combine(examPath, $"{selectedFrame.order}-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 image = Image.FromStream(fs);
             }
@@ -971,7 +962,8 @@ namespace DMMDigital.Views
                 frameHandler(selectedImage);
 
                 mainPictureBox.Image = selectedImage;
-                selectedImage.Save(Path.Combine(examPath, selectedFrame.order + "-original.png"));
+                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
+                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
                 resizeMainPictureBox();
 
                 enableTools();
@@ -988,6 +980,8 @@ namespace DMMDigital.Views
                 MessageBox.Show("Exame não possui nenhuma imagem para ser exportada.");
                 return;
             }
+
+            generateEditedImage();
 
             new ExportExamPresenter(
                 new ExportExamView
@@ -1008,13 +1002,7 @@ namespace DMMDigital.Views
                 if (result == DialogResult.No) { return; }
 
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
-
-                string filteredImagePath = Path.Combine(examPath, $"{selectedFrame.order}-filtered.png");
-
-                if (File.Exists(filteredImagePath))
-                {
-                    File.Delete(filteredImagePath);
-                }
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
                 string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}-edited.png");
 
@@ -1138,14 +1126,12 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            Image img = selectedFrame.filteredImage ?? selectedFrame.originalImage;
-
-            IFilterView filterView = new FilterView(new Bitmap(img));
+            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.originalImage));
             (filterView as Form).ShowDialog();
 
             Image image = filterView.originalImage;
 
-            image.Save(Path.Combine(examPath, selectedFrame.order + "-filtered.png"));
+            image.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
@@ -1215,26 +1201,19 @@ namespace DMMDigital.Views
 
         private void rotateImage(string rotationDirection)
         {
-            RotateFlipType rotateMode;
+            Bitmap currentImage = new Bitmap(mainPictureBox.Image);
 
             if (rotationDirection == "right")
             {
-                rotateMode = RotateFlipType.Rotate90FlipNone;
+                currentImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
             }
             else
             {
-                rotateMode = RotateFlipType.Rotate270FlipNone;
+                currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
             }
 
-            Image currentImage = mainPictureBox.Image;
-
-            currentImage.RotateFlip(rotateMode);
-
-            if (selectedFrame.filteredImage != null)
-            {
-                selectedFrame.filteredImage = currentImage;
-                currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
-            }
+            selectedFrame.filteredImage = currentImage;
+            currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = new Bitmap(currentImage).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
@@ -1280,25 +1259,23 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (selectedFrame.filteredImage != null)
+
+                selectedFrame.filteredImage = null;
+
+                Image img = selectedFrame.originalImage;
+                mainPictureBox.Image = img;
+
+                selectedFrame.Invoke((MethodInvoker)(() =>
                 {
-                    selectedFrame.filteredImage = null;
+                    selectedFrame.Image = new Bitmap(img).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                    selectedFrame.Refresh();
+                }));
 
-                    Image img = selectedFrame.originalImage;
-                    mainPictureBox.Image = img;
-
-                    selectedFrame.Invoke((MethodInvoker)(() =>
-                    {
-                        selectedFrame.Image = new Bitmap(img).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-                        selectedFrame.Refresh();
-                    }));
-
-                    File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
-                }
-
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
                 if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
                 {
+                    File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
                     selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                     frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
                     indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
@@ -1848,12 +1825,7 @@ namespace DMMDigital.Views
         {
             if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
             {
-                Image frameImage = selectedFrame.originalImage;
-
-                if (selectedFrame.filteredImage != null)
-                {
-                    frameImage = selectedFrame.filteredImage;
-                }
+                Image frameImage = selectedFrame.filteredImage;
 
                 Bitmap imageToDraw = new Bitmap(frameImage, new Size(
                     mainPictureBox.Height * frameImage.Width / frameImage.Height,
@@ -1869,8 +1841,8 @@ namespace DMMDigital.Views
 
                 Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
 
-                selectedFrame.editedImage = editedImage;
                 editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
+                selectedFrame.editedImage = editedImage;
             }
         }
 
@@ -1886,14 +1858,14 @@ namespace DMMDigital.Views
                 {
                     if (mainPictureBoxPreviousSize.Height == 0)
                     {
-                        mainPictureBoxPreviousSize = mainPictureBoxInstanciateSize;
+                        mainPictureBoxPreviousSize = mainPictureBoxOriginalSize;
                         return;
                     }
 
                     frames.ForEach(f => f.resize = !f.resize);
-
-                    resizeDrawings();
                 }
+
+                resizeDrawings();
             }
         }
 
