@@ -379,7 +379,6 @@ namespace DMMDigital.Views
             // buttonExport
             // 
             this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonExport.Enabled = false;
             this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
             this.buttonExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonExport.ImageTransparentColor = System.Drawing.Color.Magenta;

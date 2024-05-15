@@ -118,11 +118,6 @@ namespace DMMDigital.Views
                 drawTemplate();
                 loadExamDrawings();
 
-                if (examImages.Any())
-                {
-                    enableTools();
-                }
-
                 if (examImageDrawings.Any())
                 {
                     selectedDrawingHistoryHandler();
@@ -236,10 +231,7 @@ namespace DMMDigital.Views
             if (selectedFrame.filteredImage != null)
             {
                 mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
-            }
-            else if (selectedFrame.originalImage != null)
-            {
-                mainPictureBox.Image = selectedFrame.originalImage.Clone() as Image;
+                provideTools(true);
             }
 
             resizeMainPictureBox();
@@ -419,11 +411,35 @@ namespace DMMDigital.Views
                 selectedFrame.Refresh();
             }));
 
-            indexFrame = ++indexFrame == frames.Count() ? --indexFrame : indexFrame++;
+            setNextFrame();
+        }
 
-            Frame nextFrameToGetImage = frames[indexFrame];
+        private void setNextFrame()
+        {
+            int nextIndex = indexFrame + 1;
 
-            nextFrameToGetImage.Invoke((MethodInvoker)(() =>
+            if (nextIndex < frames.Count)
+            {
+                for (; nextIndex < frames.Count; nextIndex++)
+                {
+                    if (frames[nextIndex].originalImage == null)
+                    {
+                        indexFrame = nextIndex;
+                        nextIndex = frames.Count;
+                    }
+                }
+            }
+            else
+            {
+                Frame nextFrame = frames.FirstOrDefault(f => f.originalImage == null);
+                
+                if (nextFrame != null)
+                {
+                    indexFrame = frames.IndexOf(nextFrame);
+                }
+            }
+
+            Invoke((MethodInvoker)(() =>
             {
                 frames[indexFrame].Tag = Color.LimeGreen;
                 frames[indexFrame].Refresh();
@@ -440,6 +456,15 @@ namespace DMMDigital.Views
             }
 
             selectedFrame = frameToSelect;
+
+            if (selectedFrame.originalImage != null)
+            {
+                provideTools(true);
+            } 
+            else
+            {
+                provideTools(false);
+            }
 
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
@@ -506,7 +531,7 @@ namespace DMMDigital.Views
             frameHandler(image);
             mainPictureBox.Image = image;
             resizeMainPictureBox();
-            enableTools();
+            provideTools(true);
 
             examHasChanges = true;
         }
@@ -528,15 +553,11 @@ namespace DMMDigital.Views
             }
         }
 
-        private void enableTools()
+        private void provideTools(bool state)
         {
-            if (examImages.Any())
-            {
-                foreach (ToolStripButton tool in toolStrip.Items.OfType<ToolStripButton>())
-                {
-                    Invoke((MethodInvoker)(() => tool.Enabled = true));
-                }
-            }
+            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(3);
+
+            Invoke((MethodInvoker)(() => tools.ForEach(i => i.Enabled = state)));
         }
 
         private void selectTool(object sender)
@@ -547,6 +568,7 @@ namespace DMMDigital.Views
                 if (selectedButton.Name == "buttonMagnifier")
                 {
                     panelImage.Controls.Remove(pictureBoxMagnifier);
+                    mainPictureBox.Cursor = Cursors.Default;
                 }
                 else if (selectedButton.Name == "buttonRuler")
                 {
@@ -953,7 +975,10 @@ namespace DMMDigital.Views
                 {
                     return;
                 }
+                restoreFrameDrawings();
             }
+
+            selectTool(buttonSelect);
 
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
@@ -966,7 +991,7 @@ namespace DMMDigital.Views
                 selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
                 resizeMainPictureBox();
 
-                enableTools();
+                provideTools(true);
                 examHasChanges = true;
             }
         }
@@ -1001,6 +1026,8 @@ namespace DMMDigital.Views
                 DialogResult result = MessageBox.Show("Deseja excluir a imagem atual ?", "Excluir Imagem", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) { return; }
 
+                selectTool(buttonSelect);
+
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
@@ -1030,6 +1057,8 @@ namespace DMMDigital.Views
                 textBoxFrameNotes.Text = selectedFrame.notes;
 
                 mainPictureBox.Image = null;
+
+                provideTools(false);
 
                 examHasChanges = true;
             }
@@ -1089,6 +1118,8 @@ namespace DMMDigital.Views
 
             panelImage.Controls.Add(pictureBoxMagnifier);
             panelImage.Controls.SetChildIndex(pictureBoxMagnifier, 0);
+
+            mainPictureBox.Cursor = Cursors.Cross;
         }
 
         private void buttonRulerClick(object sender, EventArgs e)
@@ -1259,7 +1290,6 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-
                 selectedFrame.filteredImage = null;
 
                 Image img = selectedFrame.originalImage;
@@ -1273,20 +1303,24 @@ namespace DMMDigital.Views
 
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
 
-                if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
-                {
-                    File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
-                    selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
-                    frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
-                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-                    flowLayoutPanel1.Controls.Clear();
-
-                    examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
-
-                    examHasChanges = true;
-                }
+                restoreFrameDrawings();
+                examHasChanges = true;
 
                 mainPictureBox.Refresh();
+            }
+        }
+
+        private void restoreFrameDrawings()
+        {
+            if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
+            {
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
+                selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
+                frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                flowLayoutPanel1.Controls.Clear();
+
+                examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
             }
         }
 
