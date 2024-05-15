@@ -525,8 +525,7 @@ namespace DMMDigital.Presenters
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic, Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-original.png"));
-                SaveBmp(pic, Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-filtered.png"));
+                SaveBmp(pic);
 
                 pic.Dispose();
             }
@@ -536,7 +535,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void SaveBmp(Bitmap bmp, string path)
+        private void SaveBmp(Bitmap bmp)
         {
             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
@@ -548,7 +547,7 @@ namespace DMMDigital.Presenters
 
             bmp.UnlockBits(bitmapData);
 
-            using (FileStream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (FileStream stream = new FileStream(Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-original.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 TiffBitmapEncoder encoder = new TiffBitmapEncoder();
 
@@ -558,6 +557,18 @@ namespace DMMDigital.Presenters
 
                 stream.Close();
             }
+
+            using (FileStream stream = new FileStream(Path.Combine(examView.examPath, $"{examView.selectedFrame.order}-filtered.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
+            {
+                TiffBitmapEncoder encoder = new TiffBitmapEncoder();
+
+                encoder.Frames.Add(BitmapFrame.Create(source));
+
+                encoder.Save(stream);
+
+                stream.Close();
+            }
+
             examView.loadImageOnMainPictureBox();
         }
 
