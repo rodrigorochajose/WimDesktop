@@ -107,20 +107,9 @@ namespace DMMDigital.Views
             };
 
             newFrame.MouseDown += selectFrame;
-            newFrame.Paint += paintFrameBorder;
-            newFrame = drawImage(newFrame);
             panel2.Controls.Add(newFrame);
             frames.Add(newFrame);
             ControlExtension.Draggable(newFrame, true);
-        }
-
-        private Frame drawImage(Frame frame)
-        {
-            Bitmap image = new Bitmap(frame.Width, frame.Height);
-            Graphics graphics = Graphics.FromImage(image);
-            graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", 20, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
-            frame.Image = image;
-            return frame;
         }
 
         private void selectFrame(object sender, EventArgs e)
@@ -137,19 +126,6 @@ namespace DMMDigital.Views
             textBoxOrientation.Text = selectedFrame.orientation;
             selectedFrame.Tag = Color.LimeGreen;
             selectedFrame.Invalidate();
-        }
-
-        private void paintFrameBorder(object sender, PaintEventArgs e)
-        {
-            Frame frame = sender as Frame;
-            if ((Color)frame.Tag == Color.Black) 
-            { 
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
-            } 
-            else
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid);
-            }
         }
 
         private void deleteFrame()
@@ -186,7 +162,7 @@ namespace DMMDigital.Views
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
                 textBoxOrientation.Text = selectedFrame.orientation;
-                drawImage(selectedFrame);
+                selectedFrame.Refresh();
             }
         }
 
@@ -215,7 +191,7 @@ namespace DMMDigital.Views
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
                 textBoxOrientation.Text = selectedFrame.orientation;
-                drawImage(selectedFrame);
+                selectedFrame.Refresh();
             }
         }
     }

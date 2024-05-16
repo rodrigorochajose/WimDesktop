@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Interface.IView;
+using DMMDigital.Components;
 
 namespace DMMDigital.Views
 {
@@ -80,11 +81,11 @@ namespace DMMDigital.Views
 
             List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == selectedTemplateId).ToList();
 
-            foreach (TemplateFrameModel tl in framesToShow)
+            foreach (TemplateFrameModel frame in framesToShow)
             {
                 int height;
                 int width;
-                if (tl.orientation.Contains("Vertical"))
+                if (frame.orientation.Contains("Vertical"))
                 {
                     height = 35;
                     width = 25;
@@ -95,19 +96,20 @@ namespace DMMDigital.Views
                     width = 35;
                 }
 
-                PictureBox newFrame = new PictureBox
+                Frame newFrame = new Frame
                 {
                     Width = width,
                     Height = height,
                     BackColor = Color.Black,
+                    orientation = frame.orientation,
+                    order = frame.order
                 };
 
 
                 Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
                 Graphics graphics = Graphics.FromImage(image);
-                graphics.DrawString(tl.order.ToString(), new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
                 newFrame.Image = image;
-                newFrame.Location = new Point(tl.locationX / 2, tl.locationY / 2);
+                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
 
                 panelTemplate.Controls.Add(newFrame);
             }
@@ -115,10 +117,10 @@ namespace DMMDigital.Views
 
         private void clearTemplatePanel()
         {
-            List<PictureBox> framesOnPanel = panelTemplate.Controls.Cast<PictureBox>().ToList();
+            List<Frame> framesOnPanel = panelTemplate.Controls.Cast<Frame>().ToList();
 
             if (!framesOnPanel.Any()) return;
-            foreach (PictureBox pb in framesOnPanel)
+            foreach (Frame pb in framesOnPanel)
             {
                 panelTemplate.Controls.Remove(pb);
             }

@@ -185,11 +185,7 @@ namespace DMMDigital.Views
 
                 ExamImageModel selectedExamImage = examImages.FirstOrDefault(e => e.frameId == newFrame.order);
 
-                if (selectedExamImage == null)
-                {
-                    newFrame.Image = drawFrameDefaultImage(newFrame);
-                }
-                else
+                if (selectedExamImage != null)
                 {
                     Image img;
                     using (Bitmap bmpTemp = new Bitmap(Path.Combine(examPath, selectedExamImage.file)))
