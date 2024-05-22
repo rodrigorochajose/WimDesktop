@@ -32,7 +32,7 @@
             this.buttonInitializeExam = new System.Windows.Forms.Button();
             this.buttonCancelAction = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelShowTemplate = new System.Windows.Forms.Panel();
             this.buttonNewTemplate = new System.Windows.Forms.Button();
             this.comboBoxTemplate = new System.Windows.Forms.ComboBox();
             this.textBoxSessionName = new System.Windows.Forms.TextBox();
@@ -87,7 +87,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.panelShowTemplate);
             this.panel2.Controls.Add(this.buttonNewTemplate);
             this.panel2.Controls.Add(this.comboBoxTemplate);
             this.panel2.Controls.Add(this.textBoxSessionName);
@@ -98,13 +98,13 @@
             this.panel2.Size = new System.Drawing.Size(468, 406);
             this.panel2.TabIndex = 12;
             // 
-            // panel3
+            // panelShowTemplate
             // 
-            this.panel3.BackColor = System.Drawing.Color.Silver;
-            this.panel3.Location = new System.Drawing.Point(53, 151);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(350, 225);
-            this.panel3.TabIndex = 17;
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.Location = new System.Drawing.Point(53, 151);
+            this.panelShowTemplate.Name = "panelShowTemplate";
+            this.panelShowTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelShowTemplate.TabIndex = 17;
             // 
             // buttonNewTemplate
             // 
@@ -122,7 +122,7 @@
             this.comboBoxTemplate.FormattingEnabled = true;
             this.comboBoxTemplate.Location = new System.Drawing.Point(23, 102);
             this.comboBoxTemplate.Name = "comboBoxTemplate";
-            this.comboBoxTemplate.Size = new System.Drawing.Size(260, 24);
+            this.comboBoxTemplate.Size = new System.Drawing.Size(260, 25);
             this.comboBoxTemplate.TabIndex = 6;
             // 
             // textBoxSessionName
@@ -130,7 +130,7 @@
             this.textBoxSessionName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.textBoxSessionName.Location = new System.Drawing.Point(21, 38);
             this.textBoxSessionName.Name = "textBoxSessionName";
-            this.textBoxSessionName.Size = new System.Drawing.Size(262, 23);
+            this.textBoxSessionName.Size = new System.Drawing.Size(262, 25);
             this.textBoxSessionName.TabIndex = 5;
             // 
             // label8
@@ -139,7 +139,7 @@
             this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label8.Location = new System.Drawing.Point(19, 78);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 17);
+            this.label8.Size = new System.Drawing.Size(64, 19);
             this.label8.TabIndex = 4;
             this.label8.Text = "Template";
             // 
@@ -149,7 +149,7 @@
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label10.Location = new System.Drawing.Point(19, 15);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(200, 17);
+            this.label10.Size = new System.Drawing.Size(188, 19);
             this.label10.TabIndex = 2;
             this.label10.Text = "Nome da Sessão Radiográfica";
             // 
@@ -190,7 +190,7 @@
             this.textBoxRecommendation.Location = new System.Drawing.Point(22, 188);
             this.textBoxRecommendation.Name = "textBoxRecommendation";
             this.textBoxRecommendation.ReadOnly = true;
-            this.textBoxRecommendation.Size = new System.Drawing.Size(248, 23);
+            this.textBoxRecommendation.Size = new System.Drawing.Size(248, 25);
             this.textBoxRecommendation.TabIndex = 11;
             // 
             // textBoxName
@@ -200,7 +200,7 @@
             this.textBoxName.Location = new System.Drawing.Point(22, 44);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(248, 23);
+            this.textBoxName.Size = new System.Drawing.Size(248, 25);
             this.textBoxName.TabIndex = 10;
             // 
             // textBoxPhone
@@ -211,7 +211,7 @@
             this.textBoxPhone.Mask = "(99) 99999-9999";
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.ReadOnly = true;
-            this.textBoxPhone.Size = new System.Drawing.Size(137, 23);
+            this.textBoxPhone.Size = new System.Drawing.Size(137, 25);
             this.textBoxPhone.TabIndex = 9;
             // 
             // textBoxBirthDate
@@ -222,7 +222,7 @@
             this.textBoxBirthDate.Mask = "00/00/0000";
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             this.textBoxBirthDate.ReadOnly = true;
-            this.textBoxBirthDate.Size = new System.Drawing.Size(137, 23);
+            this.textBoxBirthDate.Size = new System.Drawing.Size(137, 25);
             this.textBoxBirthDate.TabIndex = 8;
             this.textBoxBirthDate.ValidatingType = typeof(System.DateTime);
             // 
@@ -232,7 +232,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label5.Location = new System.Drawing.Point(19, 216);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.Size = new System.Drawing.Size(87, 19);
             this.label5.TabIndex = 6;
             this.label5.Text = "Observações";
             // 
@@ -242,7 +242,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label4.Location = new System.Drawing.Point(19, 168);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 17);
+            this.label4.Size = new System.Drawing.Size(66, 19);
             this.label4.TabIndex = 5;
             this.label4.Text = "Indicação";
             // 
@@ -252,7 +252,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label3.Location = new System.Drawing.Point(19, 120);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(59, 19);
             this.label3.TabIndex = 4;
             this.label3.Text = "Telefone";
             // 
@@ -262,7 +262,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label2.Location = new System.Drawing.Point(19, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 17);
+            this.label2.Size = new System.Drawing.Size(133, 19);
             this.label2.TabIndex = 3;
             this.label2.Text = "Data de Nascimento";
             // 
@@ -272,7 +272,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.Location = new System.Drawing.Point(19, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 17);
+            this.label1.Size = new System.Drawing.Size(121, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Nome do Paciente";
             // 
@@ -282,7 +282,7 @@
             this.titulo.Font = new System.Drawing.Font("Segoe UI", 20F);
             this.titulo.Location = new System.Drawing.Point(388, 19);
             this.titulo.Name = "titulo";
-            this.titulo.Size = new System.Drawing.Size(168, 31);
+            this.titulo.Size = new System.Drawing.Size(166, 37);
             this.titulo.TabIndex = 10;
             this.titulo.Text = "Novo Exame";
             // 
@@ -292,7 +292,7 @@
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label6.Location = new System.Drawing.Point(37, 84);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 20);
+            this.label6.Size = new System.Drawing.Size(76, 21);
             this.label6.TabIndex = 15;
             this.label6.Text = "Paciente";
             // 
@@ -302,7 +302,7 @@
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label7.Location = new System.Drawing.Point(484, 84);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 20);
+            this.label7.Size = new System.Drawing.Size(99, 21);
             this.label7.TabIndex = 16;
             this.label7.Text = "Radiografia";
             // 
@@ -355,6 +355,6 @@
         private System.Windows.Forms.MaskedTextBox textBoxBirthDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelShowTemplate;
     }
 }

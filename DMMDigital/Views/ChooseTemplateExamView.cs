@@ -30,6 +30,11 @@ namespace DMMDigital.Views
             buttonCancelAction.Click += delegate { Close(); };
 
             comboBoxTemplate.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
+
+            panelShowTemplate.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
+            };
         }
 
         public int patientId { get; set; }
@@ -142,18 +147,18 @@ namespace DMMDigital.Views
                 newFrame.Image = image;
                 newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
 
-                panel3.Controls.Add(newFrame);
+                panelShowTemplate.Controls.Add(newFrame);
             }
         }
 
         private void clearTemplatePanel()
         {
-            List<Frame> framesOnPanel = panel3.Controls.Cast<Frame>().ToList();
+            List<Frame> framesOnPanel = panelShowTemplate.Controls.Cast<Frame>().ToList();
 
             if (!framesOnPanel.Any()) return;
             foreach (Frame pb in framesOnPanel)
             {
-                panel3.Controls.Remove(pb);
+                panelShowTemplate.Controls.Remove(pb);
             }
         }
     }

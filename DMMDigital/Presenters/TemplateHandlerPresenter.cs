@@ -1,7 +1,9 @@
 ﻿using DMMDigital._Repositories;
+using DMMDigital.Components;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
@@ -30,7 +32,7 @@ namespace DMMDigital.Presenters
 
                 int templateId = templateRepository.getLastTemplateId();
 
-                templateFrameRepository.addTemplateFrame(templateId, templateHandlerView.framesList);
+                templateFrameRepository.addTemplateFrame(templateId, templateHandlerView.framesList.Cast<Frame>().ToList());
                 (templateHandlerView as Form).Close();
             }
             catch (Exception ex)

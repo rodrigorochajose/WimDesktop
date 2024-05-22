@@ -37,14 +37,15 @@
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.panelTemplate = new System.Windows.Forms.Panel();
+            this.panelShowTemplate = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonNewTemplate
             // 
             this.buttonNewTemplate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewTemplate.Location = new System.Drawing.Point(23, 23);
+            this.buttonNewTemplate.Location = new System.Drawing.Point(647, 44);
             this.buttonNewTemplate.Name = "buttonNewTemplate";
             this.buttonNewTemplate.Size = new System.Drawing.Size(112, 34);
             this.buttonNewTemplate.TabIndex = 1;
@@ -74,7 +75,7 @@
             this.delete});
             this.dataGridViewTemplate.EnableHeadersVisualStyles = false;
             this.dataGridViewTemplate.GridColor = System.Drawing.Color.Silver;
-            this.dataGridViewTemplate.Location = new System.Drawing.Point(426, 23);
+            this.dataGridViewTemplate.Location = new System.Drawing.Point(12, 44);
             this.dataGridViewTemplate.MultiSelect = false;
             this.dataGridViewTemplate.Name = "dataGridViewTemplate";
             this.dataGridViewTemplate.ReadOnly = true;
@@ -84,7 +85,7 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
             this.dataGridViewTemplate.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTemplate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewTemplate.Size = new System.Drawing.Size(352, 310);
+            this.dataGridViewTemplate.Size = new System.Drawing.Size(352, 298);
             this.dataGridViewTemplate.TabIndex = 45;
             // 
             // id
@@ -115,21 +116,32 @@
             this.delete.ReadOnly = true;
             this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // panelTemplate
+            // panelShowTemplate
             // 
-            this.panelTemplate.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panelTemplate.Location = new System.Drawing.Point(23, 108);
-            this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Size = new System.Drawing.Size(350, 225);
-            this.panelTemplate.TabIndex = 46;
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.Location = new System.Drawing.Point(409, 117);
+            this.panelShowTemplate.Name = "panelShowTemplate";
+            this.panelShowTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelShowTemplate.TabIndex = 46;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 21);
+            this.label1.TabIndex = 47;
+            this.label1.Text = "Templates";
             // 
             // TemplateView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 351);
+            this.ClientSize = new System.Drawing.Size(800, 370);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridViewTemplate);
-            this.Controls.Add(this.panelTemplate);
+            this.Controls.Add(this.panelShowTemplate);
             this.Controls.Add(this.buttonNewTemplate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -140,15 +152,17 @@
             this.Load += new System.EventHandler(this.templateViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button buttonNewTemplate;
         private System.Windows.Forms.DataGridView dataGridViewTemplate;
-        private System.Windows.Forms.Panel panelTemplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewImageColumn delete;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelShowTemplate;
     }
 }

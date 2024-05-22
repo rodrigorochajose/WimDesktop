@@ -188,7 +188,7 @@ namespace DMMDigital.Views
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(12, 5);
+            this.label4.Location = new System.Drawing.Point(10, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 21);
             this.label4.TabIndex = 5;
@@ -207,7 +207,7 @@ namespace DMMDigital.Views
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.label3.Location = new System.Drawing.Point(12, 3);
+            this.label3.Location = new System.Drawing.Point(10, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(167, 21);
             this.label3.TabIndex = 5;

@@ -41,6 +41,11 @@ namespace DMMDigital.Views
                     }
                 }
             };
+
+            panelShowTemplate.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
+            };
         }
 
         private void templateViewLoad(object sender, EventArgs e)
@@ -111,18 +116,18 @@ namespace DMMDigital.Views
                 newFrame.Image = image;
                 newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
 
-                panelTemplate.Controls.Add(newFrame);
+                panelShowTemplate.Controls.Add(newFrame);
             }
         }
 
         private void clearTemplatePanel()
         {
-            List<Frame> framesOnPanel = panelTemplate.Controls.Cast<Frame>().ToList();
+            List<Frame> framesOnPanel = panelShowTemplate.Controls.Cast<Frame>().ToList();
 
             if (!framesOnPanel.Any()) return;
             foreach (Frame pb in framesOnPanel)
             {
-                panelTemplate.Controls.Remove(pb);
+                panelShowTemplate.Controls.Remove(pb);
             }
         }
     }

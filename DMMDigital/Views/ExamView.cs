@@ -212,7 +212,6 @@ namespace DMMDigital.Views
                 }
 
                 newFrame.DoubleClick += frameDoubleClick;
-                newFrame.Paint += framePaint;
 
                 frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { new List<IDrawing>() }));
                 selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
@@ -473,19 +472,6 @@ namespace DMMDigital.Views
             selectedDrawingHistoryHandler();
         }
 
-        private void framePaint(object sender, PaintEventArgs e)
-        {
-            Frame frame = (Frame)sender;
-            if ((Color)frame.Tag == Color.Black)
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
-            }
-            else
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
-            }
-        }
-
         private void frameDoubleClick(object sender, EventArgs e)
         {
             frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
@@ -635,7 +621,7 @@ namespace DMMDigital.Views
                         Size = new Size(119, 19),
                         Text = "Medição Multipla",
                     };
-                    checkBoxMultiRuler.CheckedChanged += checkBoxMultiRulerCheckedChange;
+                    checkBoxMultiRuler.CheckedChanged += checkBoxMultiRulerCheckedChanged;
 
                     panelToolOptions.Controls.Add(labelColor);
                     panelToolOptions.Controls.Add(buttonColorPicker);
@@ -802,7 +788,7 @@ namespace DMMDigital.Views
             {
                 Size imageRealSize = selectedFrame.originalImage.Size;
 
-                if (selectedFrame.orientation.Contains("Vertical"))
+                if (mainPictureBox.Width < mainPictureBox.Height)
                 {
                     sensorScalingFactorWidth = imageRealSize.Width / sensor.width;
                     sensorScalingFactorHeight = imageRealSize.Height / sensor.height;
@@ -1352,7 +1338,7 @@ namespace DMMDigital.Views
             recalibrate = true;
         }
 
-        private void checkBoxMultiRulerCheckedChange(object sender, EventArgs e)
+        private void checkBoxMultiRulerCheckedChanged(object sender, EventArgs e)
         {
             multiRuler = (sender as CheckBox).Checked;
         }
@@ -1784,7 +1770,6 @@ namespace DMMDigital.Views
                 }
 
                 generateEditedImage();
-
                 examHasChanges = false;
             }
         }

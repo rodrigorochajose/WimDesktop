@@ -94,6 +94,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\FrameTemplate.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />

@@ -59,20 +59,21 @@ namespace DMMDigital.Views
             associateEvents();
 
             listBoxOrientation.SelectedItem = listBoxOrientation.Items[0];
+            panelGenerateDefault.Location = new Point((panelGenerateTemplate.Width - panelGenerateDefault.Width) / 2, panelGenerateDefault.Location.Y);
+            panelGenerateByTemplate.Location = new Point((panelGenerateTemplate.Width - panelGenerateByTemplate.Width) / 2, panelGenerateByTemplate.Location.Y);
 
             ActiveControl = textBoxTemplateName;
         }
 
         private void associateEvents()
         {
-            panel2.Paint += (s, e) =>
-            {
-                e.Graphics.DrawLine(new Pen(Color.Gray), new Point(370, 20), new Point(370, 300));
-            };
-
             comboBoxTemplate.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
-
             buttonGenerateTemplate.Click += delegate { eventShowTemplateHandlerView?.Invoke(this, EventArgs.Empty); };
+
+            panelShowTemplate.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
+            };
         }
 
         public void setTemplateList(List<TemplateModel> templateList)
@@ -95,9 +96,7 @@ namespace DMMDigital.Views
         private void showTemplateOnPanel()
         {
             clearTemplatePanel();
-
             int templateId = int.Parse(comboBoxTemplate.SelectedValue.ToString());
-
             List<TemplateFrameModel> framesToShow = templateFrames.Where(tl => tl.templateId == templateId).ToList();
 
             foreach (TemplateFrameModel frame in framesToShow)
@@ -124,7 +123,6 @@ namespace DMMDigital.Views
                     order = frame.order
                 };
 
-
                 Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
                 Graphics graphics = Graphics.FromImage(image);
                 newFrame.Image = image;
@@ -138,7 +136,11 @@ namespace DMMDigital.Views
         {
             List<Frame> framesOnPanel = panelShowTemplate.Controls.Cast<Frame>().ToList();
 
-            if (!framesOnPanel.Any()) return;
+            if (!framesOnPanel.Any())
+            {
+                return;
+            }
+
             foreach (Frame pb in framesOnPanel)
             {
                 panelShowTemplate.Controls.Remove(pb);
@@ -147,22 +149,8 @@ namespace DMMDigital.Views
 
         private void checkBoxGenerateModeCheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxGenerateMode.Checked)
-            {
-                panelGenerateByTemplate.Enabled = true;
-                panelShowTemplate.Enabled = true;
-
-                panelGenerateDefault.Enabled = false;
-                listBoxOrientation.SelectedItem = null;
-            }
-            else
-            {
-                panelGenerateByTemplate.Enabled = false;
-                panelShowTemplate.Enabled = false;
-
-                panelGenerateDefault.Enabled = true;
-                listBoxOrientation.SelectedItem = listBoxOrientation.Items[0];
-            }
+            panelGenerateDefault.Visible = !checkBoxGenerateMode.Checked;
+            panelGenerateByTemplate.Visible = checkBoxGenerateMode.Checked;
         }
     }
 }
