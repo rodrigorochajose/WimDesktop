@@ -113,6 +113,16 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_change_sides {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_change_sides", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_circle {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_circle", resourceCulture);
@@ -126,6 +136,26 @@ namespace DMMDigital.Properties {
         internal static System.Drawing.Bitmap icon_32x32_compare {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_compare", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_compare_overlap {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_compare_overlap", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_compare_side_by_side {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_compare_side_by_side", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +296,16 @@ namespace DMMDigital.Properties {
         internal static System.Drawing.Bitmap icon_32x32_reset {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_reset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_right_arrow {
+            get {
+                object obj = ResourceManager.GetObject("icon-32x32-right-arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

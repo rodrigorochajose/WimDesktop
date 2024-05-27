@@ -675,7 +675,7 @@ namespace DMMDigital.Views
             // 
             // dialogFileImage
             // 
-            this.dialogFileImage.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+            this.dialogFileImage.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;";
             // 
             // mainPictureBox
             // 

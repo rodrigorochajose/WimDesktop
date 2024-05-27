@@ -23,7 +23,7 @@ namespace DMMDigital.Models.Drawings
         public void drawTotalLength(Graphics g)
         {
             g.DrawString(
-                    lineLength.Sum().ToString("0.00") + "mm",
+                    lineLength.Sum().ToString("0.00mm"),
                     new Font("Arial", 14, FontStyle.Bold),
                     new SolidBrush(drawingColor),
                     new Point(points.Last().X + 10, points.Last().Y)
@@ -40,7 +40,7 @@ namespace DMMDigital.Models.Drawings
             g.DrawLine(pen, points.Last(), previewPoint);
 
             g.DrawString(
-                lineLength.Last().ToString("0.0"),
+                lineLength.Last().ToString("0.0mm"),
                 new Font("Arial", 13),
                 new SolidBrush(drawingColor),
                 new Point(points.Last().X, points.Last().Y - 20)
@@ -67,7 +67,7 @@ namespace DMMDigital.Models.Drawings
                     g.DrawLine(pen, points[counter], points[counter + 1]);
 
                     g.DrawString(
-                        lineLength[counter].ToString("0.00"),
+                        lineLength[counter].ToString("0.00mm"),
                         new Font("Arial", 13),
                         new SolidBrush(drawingColor),
                         new Point(
@@ -85,7 +85,7 @@ namespace DMMDigital.Models.Drawings
 
                 g.DrawLine(pen, firstPoint, lastPoint);
                 g.DrawString(
-                    lineLength.Sum().ToString("0.00"), 
+                    lineLength.Sum().ToString("0.00mm"), 
                     new Font("Arial", 13), 
                     new SolidBrush(drawingColor), 
                     new Point(

@@ -499,6 +499,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\icon-32x32-right-arrow.png" />
+    <None Include="Resources\icon-32x32-compare-side-by-side.png" />
+    <None Include="Resources\icon-32x32-compare-overlap.png" />
+    <None Include="Resources\icon-32x32-change-sides.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

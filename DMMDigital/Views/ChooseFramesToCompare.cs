@@ -10,27 +10,25 @@ namespace DMMDigital.Views
 {
     public partial class ChooseFramesToCompare : Form, IChooseFramesToCompare
     {
-        public List<Frame> framesToSelect { get; set; }
+        public List<Frame> frames { get; set; }
         public List<Frame> selectedFrames { get; set; }
 
-        public ChooseFramesToCompare()
+        public ChooseFramesToCompare(List<Frame> frames)
         {
             InitializeComponent();
-        }
-
-        private void chooseFramesToCompareLoad(object sender, EventArgs e)
-        {
-            drawTemplate();
-            selectedFrames = new List<Frame>();
             ActiveControl = label1;
-            comboBox1.SelectedIndex = 0;
+
+            selectedFrames = new List<Frame>();
+            this.frames = frames;
+
+            drawTemplate();
 
             buttonCancel.Click += delegate { Close(); };
         }
 
         private void drawTemplate()
         {
-            foreach (Frame frame in framesToSelect)
+            foreach (Frame frame in frames)
             {
                 int width;
                 int height;
@@ -50,8 +48,9 @@ namespace DMMDigital.Views
                     Width = width,
                     Height = height,
                     BackColor = Color.Black,
-                    Tag = Color.Black,
-                    order = frame.order
+                    Tag = frame.Tag,
+                    order = frame.order,
+                    Location = new Point(frame.Location.X * 2, frame.Location.Y * 2)
                 };
 
                 if (frame.originalImage != null)
@@ -60,60 +59,43 @@ namespace DMMDigital.Views
                     Image cloneOriginalImage = frame.originalImage.Clone() as Image;
                     newFrame.Image = cloneOriginalImage.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
                 }
-                else
-                {
-                    Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
-                    Graphics graphics = Graphics.FromImage(image);
-                    graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", 10, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(1, 1));
-                    newFrame.Image = image;
-                }
-
-                newFrame.Location = new Point(frame.Location.X * 2, frame.Location.Y * 2);
 
                 newFrame.Click += selectFrame;
-                newFrame.Paint += paintFrameBorder;
 
-                panel2.Controls.Add(newFrame);
+                panelTemplate.Controls.Add(newFrame);
             }
+
+            selectedFrames.Add(frames.First(p => (Color)p.Tag == Color.LimeGreen));
         }
 
         private void selectFrame(object sender, EventArgs e)
         {
-            if ((Color)(sender as Frame).Tag == Color.LimeGreen)
+            Frame selectedFrame = (sender as Frame);
+
+            if ((Color)selectedFrame.Tag == Color.LimeGreen)
             {
-                (sender as Frame).Tag = Color.Black;
-                selectedFrames.Remove(sender as Frame);
+                selectedFrame.Tag = Color.Black;
+                selectedFrames.Remove(selectedFrames.First(f => f.order == selectedFrame.order));
             } 
             else
             {
-                (sender as Frame).Tag = Color.LimeGreen;
-                selectedFrames.Add(sender as Frame);
+                selectedFrame.Tag = Color.LimeGreen;
+                selectedFrames.Add(selectedFrame);
             }
-            (sender as Frame).Refresh();
-        }
-
-        private void paintFrameBorder(object sender, PaintEventArgs e)
-        {
-            Frame frame = sender as Frame;
-            
-            if ((Color)frame.Tag == Color.Black)
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
-            }
-            else
-            {
-                ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid, (Color)frame.Tag, 3, ButtonBorderStyle.Solid);
-            }
+            selectedFrame.Refresh();
         }
 
         private void buttonCompareClick(object sender, EventArgs e)
         {
             List<Image> selectedImages = selectedFrames.Select(f => f.originalImage).ToList();
 
-            CompareFrames form = new CompareFrames { 
-                selectedImages = selectedImages,
-                compareMode = comboBox1.SelectedItem.ToString()
-            };
+            if (selectedImages.Count < 2)
+            {
+                MessageBox.Show("Selecione mais de uma imagem para comparação.", "Comparação de Imagens");
+                return;
+            }
+
+            CompareFrames form = new CompareFrames(selectedImages);
 
             DialogResult result = form.ShowDialog();
             if (result == DialogResult.Cancel)

@@ -5,7 +5,7 @@ namespace DMMDigital.Interface.IView
 {
     public interface IChooseFramesToCompare
     {
-        List<Frame> framesToSelect { get; set; }
+        List<Frame> frames { get; set; }
         List<Frame> selectedFrames { get; set; }
     }
 }

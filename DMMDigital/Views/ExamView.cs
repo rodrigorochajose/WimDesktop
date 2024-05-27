@@ -1050,10 +1050,9 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            IChooseFramesToCompare compareFrames = new ChooseFramesToCompare
-            {
-                framesToSelect = frames
-            };
+            frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
+
+            IChooseFramesToCompare compareFrames = new ChooseFramesToCompare(frames);
             (compareFrames as Form).ShowDialog();
         }
 

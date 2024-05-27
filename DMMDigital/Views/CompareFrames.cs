@@ -1,18 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
     public partial class CompareFrames : Form
     {
-        public List<Image> selectedImages { get; set; }
-        public string compareMode { get; set; }
+        public List<Image> images { get; set; }
 
-        public CompareFrames()
+        private List<PictureBox> pictureBoxes = new List<PictureBox>();
+        private bool multi = false;
+
+        public CompareFrames(List<Image> images)
         {
             InitializeComponent();
+
+            this.images = images;
+
+            if (images.Count == 2)
+            {
+                panelTools.Visible = true;
+                return;
+            }
+
+            multi = true;
         }
 
         private void buttonCloseClick(object sender, EventArgs e)
@@ -25,20 +38,50 @@ namespace DMMDigital.Views
             DialogResult = DialogResult.Ignore;
             Close();
         }
+        
+        private void buttonOverlayClick(object sender, EventArgs e)
+        {
+            labelOpacity.Visible = !labelOpacity.Visible;
+            trackBarOpacity.Visible = !trackBarOpacity.Visible;
+        }
+
+        private void buttonChangeSidesClick(object sender, EventArgs e)
+        {
+            (pictureBoxes[0].Image, pictureBoxes[1].Image) = (pictureBoxes[1].Image, pictureBoxes[0].Image);
+        }
+
+        private void buttonRotateClick(object sender, EventArgs e)
+        {
+            PictureBox selectedPictureBox = pictureBoxes.First(p => p.BackColor == Color.LightGray);
+            Bitmap img = new Bitmap(selectedPictureBox.Image);
+            img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            selectedPictureBox.Image = img;
+        }
+
+        private void buttonImportImageClick(object sender, EventArgs e)
+        {
+            DialogResult result = dialogFileImage.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
+
+                pictureBoxes.First(p => p.BackColor == Color.LightGray).Image = selectedImage;
+            }
+        }
 
         private void compareFramesLoad(object sender, EventArgs e)
         {
-            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel.SuspendLayout();
 
-            tableLayoutPanel1.ColumnStyles.Clear();
-            tableLayoutPanel1.RowStyles.Clear();
+            tableLayoutPanel.ColumnStyles.Clear();
+            tableLayoutPanel.RowStyles.Clear();
 
             List<Image> horizontalImages = new List<Image>();
             List<Image> verticalImages = new List<Image>();
 
-            if (compareMode.Contains("Multipla"))
+            if (multi)
             {
-                foreach (Image img in selectedImages)
+                foreach (Image img in images)
                 {
                     if (img.Width > img.Height)
                     {
@@ -53,10 +96,10 @@ namespace DMMDigital.Views
                 int horizontalColumns = (int)Math.Ceiling((float)horizontalImages.Count / 3);
                 int verticalColumns = (int)Math.Ceiling((float)verticalImages.Count / 2);
 
-                tableLayoutPanel1.ColumnStyles.Clear();
-                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * horizontalColumns));
-                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * verticalColumns));
-                tableLayoutPanel1.ColumnCount = 2;
+                tableLayoutPanel.ColumnStyles.Clear();
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * horizontalColumns));
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * verticalColumns));
+                tableLayoutPanel.ColumnCount = 2;
 
 
                 if (horizontalColumns > 0)
@@ -70,7 +113,7 @@ namespace DMMDigital.Views
                         Margin = new Padding(0)
                     };
 
-                    tableLayoutPanel1.Controls.Add(tableHorizontalFrames, 0, 0);
+                    tableLayoutPanel.Controls.Add(tableHorizontalFrames, 0, 0);
 
                     for (int columnCounter = 0; columnCounter < horizontalColumns; columnCounter++)
                     {
@@ -104,6 +147,7 @@ namespace DMMDigital.Views
                                     SizeMode = PictureBoxSizeMode.Zoom,
                                     Dock = DockStyle.Fill,
                                 };
+                                pictureBoxes.Add(pb);
                                 pbInserted++;
 
                                 tableColumn.RowStyles.Add(new RowStyle(SizeType.Percent));
@@ -119,7 +163,6 @@ namespace DMMDigital.Views
                     }
                 }
 
-
                 if (verticalColumns > 0)
                 {
                     TableLayoutPanel tableVerticalFrames = new TableLayoutPanel
@@ -131,7 +174,7 @@ namespace DMMDigital.Views
                         Margin = new Padding(0)
                     };
 
-                    tableLayoutPanel1.Controls.Add(tableVerticalFrames, 1, 0);
+                    tableLayoutPanel.Controls.Add(tableVerticalFrames, 1, 0);
 
 
                     for (int columnCounter = 0; columnCounter < verticalColumns; columnCounter++)
@@ -165,6 +208,7 @@ namespace DMMDigital.Views
                                     SizeMode = PictureBoxSizeMode.Zoom,
                                     Dock = DockStyle.Fill,
                                 };
+                                pb.Click += delegate { selectFrame(pb); };
                                 pbInserted++;
 
                                 tableColumn.RowStyles.Add(new RowStyle(SizeType.Percent));
@@ -182,31 +226,32 @@ namespace DMMDigital.Views
             }
             else
             {
-                for (int counter = 0; counter < selectedImages.Count; counter++)
+                for (int counter = 0; counter < images.Count; counter++)
                 {
                     PictureBox pb = new PictureBox
                     {
-                        Image = selectedImages[counter],
+                        Image = images[counter],
                         SizeMode = PictureBoxSizeMode.Zoom,
-                        Dock = DockStyle.Fill
+                        Dock = DockStyle.Fill,
+                        Margin = new Padding(0)
                     };
 
-                    if (compareMode.Contains("Vertical"))
-                    {
-                        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, tableLayoutPanel1.Width / selectedImages.Count));
-                        tableLayoutPanel1.ColumnCount++;
-                        tableLayoutPanel1.Controls.Add(pb, counter, 0);
-                    }
-                    else
-                    {
-                        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, tableLayoutPanel1.Height / selectedImages.Count));
-                        tableLayoutPanel1.RowCount++;
-                        tableLayoutPanel1.Controls.Add(pb, 0, counter);
-                    }
+                    pb.Click += delegate { selectFrame(pb); };
+                    pictureBoxes.Add(pb);
 
+                    tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, tableLayoutPanel.Width / images.Count));
+                    tableLayoutPanel.ColumnCount++;
+                    tableLayoutPanel.Controls.Add(pb, counter, 0);
                 }
             }
-            tableLayoutPanel1.ResumeLayout();
+            tableLayoutPanel.ResumeLayout();
+            pictureBoxes[0].BackColor = Color.LightGray;
+        }
+
+        private void selectFrame(PictureBox pb)
+        {
+            pictureBoxes.ForEach(p => p.BackColor = Color.WhiteSmoke);
+            pb.BackColor = Color.LightGray;
         }
     }
 }
