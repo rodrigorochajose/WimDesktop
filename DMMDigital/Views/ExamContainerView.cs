@@ -18,12 +18,15 @@ namespace DMMDigital.Views
             InitializeComponent();
             IExamView exam = examView;
 
+            examView.eventCloseSingleExam += (s, e) =>
+            {
+                closePage(s, e);
+            };
+
             openExamsId = new List<int>
             {
                 exam.examId
             };
-
-            exam.eventSaveAndClose += delegate { saveAndClose(this, EventArgs.Empty); };
 
             tabPage1.Text = exam.sessionName;
             addFormIntoPage(tabPage1, exam);
@@ -37,7 +40,14 @@ namespace DMMDigital.Views
                 Text = examView.sessionName
             };
 
-            tabControl.Controls.Add(newTabPage);
+            examView.eventCloseSingleExam += (s, e) =>
+            {
+                closePage(s, e);
+            };
+
+            openExamsId.Add(examView.examId);
+
+            tabControl.TabPages.Add(newTabPage);
 
             addFormIntoPage(newTabPage, examView);
 
@@ -54,15 +64,6 @@ namespace DMMDigital.Views
             (examView as Form).Show();
         }
 
-        private void saveAndClose(object sender, EventArgs e)
-        {
-            List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
-            foreach (ExamView exam in openedExams)
-            {
-                exam.Close();
-            }
-        }
-
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.OpenForms.Cast<Form>().First().Show();
@@ -71,7 +72,31 @@ namespace DMMDigital.Views
 
         private void examContainerViewFormClosing(object sender, FormClosingEventArgs e)
         {
-            saveAndClose(sender, EventArgs.Empty);
+            List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
+
+            foreach (ExamView exam in openedExams)
+            {
+                exam.Close();
+            }
+        }
+
+        private void closePage(object sender, EventArgs e)
+        {
+            openExamsId.Remove((sender as ExamView).examId);
+
+            foreach (TabPage tp in tabControl.TabPages)
+            {
+                if (tp.Text == (sender as ExamView).sessionName)
+                {
+                    tabControl.TabPages.Remove(tp);
+                    (sender as Form).Close();
+                }
+            }
+
+            if (tabControl.TabPages.Count == 0)
+            {
+                Close();
+            }
         }
     }
 }

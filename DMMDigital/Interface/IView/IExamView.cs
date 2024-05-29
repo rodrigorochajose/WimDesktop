@@ -23,7 +23,8 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
-        event EventHandler eventSaveAndClose;
+        event EventHandler eventCloseSingleExam;
+
 
         void selectFrame(Frame frameToSelected = null);
         void loadImageOnMainPictureBox();

@@ -53,10 +53,11 @@ namespace DMMDigital.Views
                     Location = new Point(frame.Location.X * 2, frame.Location.Y * 2)
                 };
 
-                if (frame.originalImage != null)
+                if (frame.filteredImage != null)
                 {
                     newFrame.originalImage = frame.originalImage;
-                    Image cloneOriginalImage = frame.originalImage.Clone() as Image;
+                    newFrame.filteredImage = frame.filteredImage;
+                    Image cloneOriginalImage = frame.filteredImage.Clone() as Image;
                     newFrame.Image = cloneOriginalImage.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
                 }
 
@@ -70,6 +71,11 @@ namespace DMMDigital.Views
 
         private void selectFrame(object sender, EventArgs e)
         {
+            if ((sender as Frame).originalImage == null)
+            {
+                return;
+            }
+
             Frame selectedFrame = (sender as Frame);
 
             if ((Color)selectedFrame.Tag == Color.LimeGreen)
@@ -87,7 +93,19 @@ namespace DMMDigital.Views
 
         private void buttonCompareClick(object sender, EventArgs e)
         {
-            List<Image> selectedImages = selectedFrames.Select(f => f.originalImage).ToList();
+            List<Image> selectedImages = new List<Image>();
+
+            foreach (Frame frame in selectedFrames)
+            {
+                if (frame.filteredImage != null)
+                {
+                    selectedImages.Add(frame.filteredImage);
+                }
+                else
+                {
+                    selectedImages.Add(frame.originalImage);
+                }
+            }
 
             if (selectedImages.Count < 2)
             {

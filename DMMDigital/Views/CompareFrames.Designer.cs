@@ -120,10 +120,12 @@
             // 
             this.trackBarOpacity.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trackBarOpacity.Location = new System.Drawing.Point(998, 13);
+            this.trackBarOpacity.Maximum = 100;
             this.trackBarOpacity.Name = "trackBarOpacity";
             this.trackBarOpacity.Size = new System.Drawing.Size(192, 45);
             this.trackBarOpacity.TabIndex = 11;
             this.trackBarOpacity.Visible = false;
+            this.trackBarOpacity.Scroll += new System.EventHandler(this.trackBarOpacityScroll);
             // 
             // labelOpacity
             // 

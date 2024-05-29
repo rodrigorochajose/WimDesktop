@@ -99,6 +99,10 @@ namespace DMMDigital.Presenters
                 {
                     (examContainerView as ExamContainerView).addNewPage(examView);
                 }
+                else
+                {
+                    MessageBox.Show("Exame já está aberto!");
+                }
             }
         }
 

@@ -80,6 +80,7 @@ namespace DMMDigital.Views
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panelImage = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.buttonCloseExam = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDetails.SuspendLayout();
             this.panelAnnotation.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -317,7 +318,8 @@ namespace DMMDigital.Views
             this.toolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonOpenExam,
-            this.buttonNewExam});
+            this.buttonNewExam,
+            this.buttonCloseExam});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
             this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
@@ -328,14 +330,14 @@ namespace DMMDigital.Views
             // buttonOpenExam
             // 
             this.buttonOpenExam.Name = "buttonOpenExam";
-            this.buttonOpenExam.Size = new System.Drawing.Size(150, 22);
+            this.buttonOpenExam.Size = new System.Drawing.Size(180, 22);
             this.buttonOpenExam.Text = "Abrir Exame";
             this.buttonOpenExam.Click += new System.EventHandler(this.buttonOpenExamClick);
             // 
             // buttonNewExam
             // 
             this.buttonNewExam.Name = "buttonNewExam";
-            this.buttonNewExam.Size = new System.Drawing.Size(150, 22);
+            this.buttonNewExam.Size = new System.Drawing.Size(180, 22);
             this.buttonNewExam.Text = "Novo Exame";
             this.buttonNewExam.Click += new System.EventHandler(this.buttonNewExamClick);
             // 
@@ -711,6 +713,13 @@ namespace DMMDigital.Views
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
+            // buttonCloseExam
+            // 
+            this.buttonCloseExam.Name = "buttonCloseExam";
+            this.buttonCloseExam.Size = new System.Drawing.Size(180, 22);
+            this.buttonCloseExam.Text = "Fechar Exame";
+            this.buttonCloseExam.Click += new System.EventHandler(this.buttonCloseExamClick);
+            // 
             // ExamView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -792,5 +801,6 @@ namespace DMMDigital.Views
         private ToolStripButton buttonRotateLeft;
         private ToolStripButton buttonRotateRight;
         private ToolStripButton buttonRestoreExam;
+        private ToolStripMenuItem buttonCloseExam;
     }
 }
