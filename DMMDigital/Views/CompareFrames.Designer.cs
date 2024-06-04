@@ -143,7 +143,7 @@
             // 
             this.buttonImportImage.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonImportImage.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.buttonImportImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
+            this.buttonImportImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
             this.buttonImportImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonImportImage.Location = new System.Drawing.Point(411, 8);
             this.buttonImportImage.Name = "buttonImportImage";

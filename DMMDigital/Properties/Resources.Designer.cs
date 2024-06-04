@@ -73,9 +73,49 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_fit {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_fit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_original_size {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_original_size", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_16x16_trash {
             get {
                 object obj = ResourceManager.GetObject("icon_16x16_trash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_zoom_in {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_zoom_in", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_zoom_out {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_zoom_out", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

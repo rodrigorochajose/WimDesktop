@@ -69,7 +69,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold);
-            this.label1.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
+            this.label1.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label1.Location = new System.Drawing.Point(143, 17);
             this.label1.Name = "label1";

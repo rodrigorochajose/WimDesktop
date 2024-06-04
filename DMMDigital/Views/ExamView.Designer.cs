@@ -52,6 +52,7 @@ namespace DMMDigital.Views
             this.toolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.buttonOpenExam = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonNewExam = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonCloseExam = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.componentSensorStatus = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -76,11 +77,15 @@ namespace DMMDigital.Views
             this.buttonRotateLeft = new System.Windows.Forms.ToolStripButton();
             this.buttonRotateRight = new System.Windows.Forms.ToolStripButton();
             this.buttonRestoreExam = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonFitZoom = new System.Windows.Forms.ToolStripButton();
+            this.buttonZoomOut = new System.Windows.Forms.ToolStripButton();
+            this.buttonZoomSquare = new System.Windows.Forms.ToolStripButton();
+            this.buttonZoomIn = new System.Windows.Forms.ToolStripButton();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panelImage = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.buttonCloseExam = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDetails.SuspendLayout();
             this.panelAnnotation.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -276,9 +281,12 @@ namespace DMMDigital.Views
             // 
             // toolStrip
             // 
+            this.toolStrip.AllowMerge = false;
+            this.toolStrip.CanOverflow = false;
             this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStrip.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStrip.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
@@ -305,7 +313,12 @@ namespace DMMDigital.Views
             this.buttonEllipse,
             this.buttonRotateLeft,
             this.buttonRotateRight,
-            this.buttonRestoreExam});
+            this.buttonRestoreExam,
+            this.toolStripSeparator5,
+            this.buttonFitZoom,
+            this.buttonZoomOut,
+            this.buttonZoomSquare,
+            this.buttonZoomIn});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
@@ -322,7 +335,7 @@ namespace DMMDigital.Views
             this.buttonCloseExam});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
             this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton.Margin = new System.Windows.Forms.Padding(2, 1, 2, 2);
+            this.toolStripDropDownButton.Margin = new System.Windows.Forms.Padding(5, 1, 10, 2);
             this.toolStripDropDownButton.Name = "toolStripDropDownButton";
             this.toolStripDropDownButton.Size = new System.Drawing.Size(59, 39);
             this.toolStripDropDownButton.Text = "Exame";
@@ -330,16 +343,23 @@ namespace DMMDigital.Views
             // buttonOpenExam
             // 
             this.buttonOpenExam.Name = "buttonOpenExam";
-            this.buttonOpenExam.Size = new System.Drawing.Size(180, 22);
+            this.buttonOpenExam.Size = new System.Drawing.Size(156, 22);
             this.buttonOpenExam.Text = "Abrir Exame";
             this.buttonOpenExam.Click += new System.EventHandler(this.buttonOpenExamClick);
             // 
             // buttonNewExam
             // 
             this.buttonNewExam.Name = "buttonNewExam";
-            this.buttonNewExam.Size = new System.Drawing.Size(180, 22);
+            this.buttonNewExam.Size = new System.Drawing.Size(156, 22);
             this.buttonNewExam.Text = "Novo Exame";
             this.buttonNewExam.Click += new System.EventHandler(this.buttonNewExamClick);
+            // 
+            // buttonCloseExam
+            // 
+            this.buttonCloseExam.Name = "buttonCloseExam";
+            this.buttonCloseExam.Size = new System.Drawing.Size(156, 22);
+            this.buttonCloseExam.Text = "Fechar Exame";
+            this.buttonCloseExam.Click += new System.EventHandler(this.buttonCloseExamClick);
             // 
             // toolStripSeparator1
             // 
@@ -352,7 +372,7 @@ namespace DMMDigital.Views
             this.componentSensorStatus.Image = global::DMMDigital.Properties.Resources.icon_32x32_red;
             this.componentSensorStatus.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.componentSensorStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.componentSensorStatus.Margin = new System.Windows.Forms.Padding(0, 1, 0, 1);
+            this.componentSensorStatus.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.componentSensorStatus.Name = "componentSensorStatus";
             this.componentSensorStatus.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.componentSensorStatus.Size = new System.Drawing.Size(50, 40);
@@ -367,7 +387,7 @@ namespace DMMDigital.Views
             // buttonImport
             // 
             this.buttonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
+            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
             this.buttonImport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonImport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -381,7 +401,7 @@ namespace DMMDigital.Views
             // buttonExport
             // 
             this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
+            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
             this.buttonExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -675,6 +695,63 @@ namespace DMMDigital.Views
             this.buttonRestoreExam.ToolTipText = "Restaurar Exame";
             this.buttonRestoreExam.Click += new System.EventHandler(this.buttonRestoreExamClick);
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 42);
+            // 
+            // buttonFitZoom
+            // 
+            this.buttonFitZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFitZoom.Enabled = false;
+            this.buttonFitZoom.Image = global::DMMDigital.Properties.Resources.icon_16x16_fit;
+            this.buttonFitZoom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFitZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFitZoom.Margin = new System.Windows.Forms.Padding(25, 0, 0, 2);
+            this.buttonFitZoom.Name = "buttonFitZoom";
+            this.buttonFitZoom.Size = new System.Drawing.Size(23, 40);
+            this.buttonFitZoom.Text = "Encaixar Imagem";
+            this.buttonFitZoom.Click += new System.EventHandler(this.buttonFitZoomClick);
+            // 
+            // buttonZoomOut
+            // 
+            this.buttonZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonZoomOut.Enabled = false;
+            this.buttonZoomOut.Image = global::DMMDigital.Properties.Resources.icon_16x16_zoom_out;
+            this.buttonZoomOut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonZoomOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonZoomOut.Margin = new System.Windows.Forms.Padding(13, 0, 3, 2);
+            this.buttonZoomOut.Name = "buttonZoomOut";
+            this.buttonZoomOut.Size = new System.Drawing.Size(23, 40);
+            this.buttonZoomOut.Text = "Diminuir Zoom";
+            this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOutClick);
+            // 
+            // buttonZoomSquare
+            // 
+            this.buttonZoomSquare.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonZoomSquare.Enabled = false;
+            this.buttonZoomSquare.Image = global::DMMDigital.Properties.Resources.icon_16x16_original_size;
+            this.buttonZoomSquare.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonZoomSquare.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonZoomSquare.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
+            this.buttonZoomSquare.Name = "buttonZoomSquare";
+            this.buttonZoomSquare.Size = new System.Drawing.Size(23, 40);
+            this.buttonZoomSquare.Text = "Zoom 1:1";
+            this.buttonZoomSquare.Click += new System.EventHandler(this.buttonZoomSquareClick);
+            // 
+            // buttonZoomIn
+            // 
+            this.buttonZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonZoomIn.Enabled = false;
+            this.buttonZoomIn.Image = global::DMMDigital.Properties.Resources.icon_16x16_zoom_in;
+            this.buttonZoomIn.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonZoomIn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonZoomIn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.buttonZoomIn.Name = "buttonZoomIn";
+            this.buttonZoomIn.Size = new System.Drawing.Size(23, 39);
+            this.buttonZoomIn.Text = "Aumentar Zoom";
+            this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomInClick);
+            // 
             // dialogFileImage
             // 
             this.dialogFileImage.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.bmp;";
@@ -682,11 +759,11 @@ namespace DMMDigital.Views
             // mainPictureBox
             // 
             this.mainPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainPictureBox.BackColor = System.Drawing.SystemColors.ControlText;
+            this.mainPictureBox.BackColor = System.Drawing.Color.Black;
             this.mainPictureBox.Location = new System.Drawing.Point(265, 0);
             this.mainPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.mainPictureBox.Name = "mainPictureBox";
-            this.mainPictureBox.Size = new System.Drawing.Size(447, 619);
+            this.mainPictureBox.Size = new System.Drawing.Size(447, 620);
             this.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mainPictureBox.TabIndex = 0;
             this.mainPictureBox.TabStop = false;
@@ -712,13 +789,6 @@ namespace DMMDigital.Views
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
-            // 
-            // buttonCloseExam
-            // 
-            this.buttonCloseExam.Name = "buttonCloseExam";
-            this.buttonCloseExam.Size = new System.Drawing.Size(180, 22);
-            this.buttonCloseExam.Text = "Fechar Exame";
-            this.buttonCloseExam.Click += new System.EventHandler(this.buttonCloseExamClick);
             // 
             // ExamView
             // 
@@ -777,11 +847,12 @@ namespace DMMDigital.Views
         private ToolStripDropDownButton toolStripDropDownButton;
         private ToolStripMenuItem buttonOpenExam;
         private ToolStripMenuItem buttonNewExam;
+        private ToolStripMenuItem buttonCloseExam;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripButton componentSensorStatus;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripButton buttonExport;
         private ToolStripButton buttonImport;
+        private ToolStripButton buttonExport;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton buttonDeleteImage;
         private ToolStripButton buttonCompareFrame;
@@ -796,11 +867,15 @@ namespace DMMDigital.Views
         private ToolStripButton buttonFreeDraw;
         private ToolStripButton buttonText;
         private ToolStripButton buttonArrow;
-        private ToolStripButton buttonEllipse;
         private ToolStripButton buttonRectangle;
+        private ToolStripButton buttonEllipse;
         private ToolStripButton buttonRotateLeft;
         private ToolStripButton buttonRotateRight;
         private ToolStripButton buttonRestoreExam;
-        private ToolStripMenuItem buttonCloseExam;
+        private ToolStripButton buttonFitZoom;
+        private ToolStripButton buttonZoomOut;
+        private ToolStripButton buttonZoomSquare;
+        private ToolStripButton buttonZoomIn;
+        private ToolStripSeparator toolStripSeparator5;
     }
 }

@@ -37,7 +37,8 @@ namespace DMMDigital.Views
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
-                Text = examView.sessionName
+                Text = examView.sessionName,
+                Margin = new Padding(0)
             };
 
             examView.eventCloseSingleExam += (s, e) =>

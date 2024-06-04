@@ -1242,35 +1242,38 @@ namespace DMMDigital.Views
 
         private void rotateDrawing(string rotationDirection, SizeF previousMainPictureBoxSize)
         {
-            List<IDrawing> frameDrawings = new List<IDrawing>();
-
-            foreach (IDrawing drawing in selectedDrawingHistory[indexSelectedDrawingHistory])
+            for (int currentIndex = 0; currentIndex < selectedDrawingHistory.Count; currentIndex++)
             {
-                IDrawing drawingCopy = drawing.deepCopy();
-                List<PointF> points = drawingCopy.points.Select(p => new PointF(p.X, p.Y)).ToList();
+                List<IDrawing> frameDrawings = new List<IDrawing>();
 
-                for (int counter = 0; counter < points.Count; counter++)
+                foreach (IDrawing drawing in selectedDrawingHistory[currentIndex])
                 {
-                    PointF distance = new PointF(previousMainPictureBoxSize.Width / 2 - points[counter].X, previousMainPictureBoxSize.Height / 2 - points[counter].Y);
+                    IDrawing drawingCopy = drawing.deepCopy();
+                    List<PointF> points = drawingCopy.points.Select(p => new PointF(p.X, p.Y)).ToList();
 
-                    if (rotationDirection == "right")
+                    for (int counter = 0; counter < points.Count; counter++)
                     {
-                        distance.X *= -1;
-                    }
-                    else
-                    {
-                        distance.Y *= -1;
-                    }
+                        PointF distance = new PointF(previousMainPictureBoxSize.Width / 2 - points[counter].X, previousMainPictureBoxSize.Height / 2 - points[counter].Y);
 
-                    PointF newDistance = new PointF(distance.Y * mainPictureBox.Width / previousMainPictureBoxSize.Height, distance.X * mainPictureBox.Height / previousMainPictureBoxSize.Width);
+                        if (rotationDirection == "right")
+                        {
+                            distance.X *= -1;
+                        }
+                        else
+                        {
+                            distance.Y *= -1;
+                        }
 
-                    drawingCopy.points[counter] = Point.Round(new PointF(mainPictureBox.Width / 2 + newDistance.X, mainPictureBox.Height / 2 + newDistance.Y));
+                        PointF newDistance = new PointF(distance.Y * mainPictureBox.Width / previousMainPictureBoxSize.Height, distance.X * mainPictureBox.Height / previousMainPictureBoxSize.Width);
+
+                        drawingCopy.points[counter] = Point.Round(new PointF(mainPictureBox.Width / 2 + newDistance.X, mainPictureBox.Height / 2 + newDistance.Y));
+                    }
+                    frameDrawings.Add(drawingCopy);
                 }
-                frameDrawings.Add(drawingCopy);
-            }
 
-            selectedDrawingHistory[indexSelectedDrawingHistory] = frameDrawings;
-            mainPictureBox.Refresh();
+                selectedDrawingHistory[currentIndex] = frameDrawings;
+                mainPictureBox.Refresh();
+            }
         }
 
         private void buttonRestoreExamClick(object sender, EventArgs e)
@@ -1309,6 +1312,69 @@ namespace DMMDigital.Views
 
                 examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
             }
+        }
+
+        private void buttonFitZoomClick(object sender, EventArgs e)
+        {
+            mainPictureBoxPreviousSize = mainPictureBox.Size;
+
+            resizeMainPictureBox();
+
+            selectedFrame.resize = true;
+            resizeDrawings();
+
+            panelImage.AutoScroll = false;
+        }
+
+        private void buttonZoomOutClick(object sender, EventArgs e)
+        {
+            mainPictureBoxZoom(1 / 1.25f);
+
+            selectedFrame.resize = true;
+            resizeDrawings();
+        }
+
+        private void buttonZoomSquareClick(object sender, EventArgs e)
+        {
+            mainPictureBoxPreviousSize = mainPictureBox.Size;
+
+            int newWidth = (int)(mainPictureBoxOriginalSize.Width * 4.25f);
+            int newHeight = (int)(mainPictureBoxOriginalSize.Height * 4.25f);
+
+            mainPictureBox.Size = new Size(newWidth, newHeight);
+            panelImage.AutoScrollMinSize = mainPictureBox.Size;
+
+            mainPictureBox.Location = new Point(0, 0);
+
+            selectedFrame.resize = true;
+            resizeDrawings();
+        }
+
+        private void buttonZoomInClick(object sender, EventArgs e)
+        {
+            mainPictureBoxZoom(1.25f);
+
+            selectedFrame.resize = true;
+            resizeDrawings();
+        }
+
+        private void mainPictureBoxZoom(float factor)
+        {
+            mainPictureBoxPreviousSize = mainPictureBox.Size;
+
+            int newWidth = (int)(mainPictureBox.Width * factor);
+            int newHeight = (int)(mainPictureBox.Height * factor);
+
+            if (newWidth < 50 || newHeight < 50 || newWidth > selectedFrame.originalImage.Width * 10 || newHeight > selectedFrame.originalImage.Height * 10)
+            {
+                Console.WriteLine("return");
+                return;
+            }
+
+            mainPictureBox.Size = new Size(newWidth, newHeight);
+            panelImage.AutoScrollMinSize = mainPictureBox.Size;
+
+            mainPictureBox.Location = new Point(0, 0);
         }
 
         private void buttonColorPickerClick(object sender, EventArgs e)
