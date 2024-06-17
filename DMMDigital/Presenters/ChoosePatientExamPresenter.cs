@@ -12,26 +12,25 @@ namespace DMMDigital.Presenters
 {
     public class ChoosePatientExamPresenter
     {
-        private readonly IChoosePatientExamView choosePatientExamView;
+        public ChoosePatientExamView view { get; }
+
         private readonly IPatientRepository patientRepository;
         private readonly BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
-        public ChoosePatientExamPresenter(IChoosePatientExamView view, IPatientRepository repository)
+        public ChoosePatientExamPresenter(ChoosePatientExamView choosePatientExamView, IPatientRepository repository)
         {
             pacientesBindingSource = new BindingSource();
-            choosePatientExamView = view;
+            view = choosePatientExamView;
             patientRepository = repository;
 
-            choosePatientExamView.eventSearchPatient += searchPatient;
-            choosePatientExamView.eventShowAddPatientView += showAddPatientForm;
-            choosePatientExamView.eventSelectPatient += showSelectTemplateForm;
+            view.eventSearchPatient += searchPatient;
+            view.eventShowAddPatientView += showAddPatientForm;
+            view.eventSelectPatient += showSelectTemplateForm;
 
-            choosePatientExamView.setPatientList(pacientesBindingSource);
+            view.setPatientList(pacientesBindingSource);
 
             loadAllPatients();
-
-            (choosePatientExamView as Form).ShowDialog();
         }
 
         private void loadAllPatients()
@@ -40,9 +39,9 @@ namespace DMMDigital.Presenters
 
             if (patientList.Any())
             {
-                choosePatientExamView.selectedPatientId = patientList.First().id;
+                view.selectedPatientId = patientList.First().id;
                 pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-                choosePatientExamView.dataGridViewHandler();
+                view.dataGridViewHandler();
             }
         }
 
@@ -81,8 +80,8 @@ namespace DMMDigital.Presenters
 
         private void searchPatient(object sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(choosePatientExamView.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(choosePatientExamView.searchedValue) : patientRepository.getAllPatients();
+            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
+            patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
             pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
         }
 
@@ -90,7 +89,7 @@ namespace DMMDigital.Presenters
         {
             IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
             
-            PatientModel selectedPatient = patientRepository.getPatientById(choosePatientExamView.selectedPatientId);
+            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             chooseTemplateView.patientId = selectedPatient.id;
             chooseTemplateView.patientName = selectedPatient.name;
             chooseTemplateView.patientBirthDate = selectedPatient.birthDate;

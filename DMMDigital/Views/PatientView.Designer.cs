@@ -35,188 +35,76 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientView));
-            this.buttonNewPatient = new System.Windows.Forms.Button();
-            this.dataGridViewPatient = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edit = new System.Windows.Forms.DataGridViewImageColumn();
-            this.delete = new System.Windows.Forms.DataGridViewImageColumn();
-            this.buttonExportExam = new System.Windows.Forms.Button();
-            this.buttonDeleteExam = new System.Windows.Forms.Button();
-            this.buttonOpenExam = new System.Windows.Forms.Button();
-            this.buttonNewExam = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.dataGridViewExam = new System.Windows.Forms.DataGridView();
-            this.session = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.template = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonSearchPatient = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxSearchPatient = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.roundedPanel2 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.dataGridViewExam = new DMMDigital.Components.Rounded.RoundedDataGridView();
+            this.columnExamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTemplateId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSessionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnExamDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTemplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnDeleteExam = new System.Windows.Forms.DataGridViewImageColumn();
+            this.buttonExportExam = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonNewExam = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonOpenExam = new DMMDigital.Components.Rounded.RoundedButton();
+            this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
+            this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.columnPatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPatientBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPatientPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEditPatient = new System.Windows.Forms.DataGridViewImageColumn();
+            this.columnDeletePatient = new System.Windows.Forms.DataGridViewImageColumn();
+            this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
+            this.roundedPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonNewPatient
-            // 
-            this.buttonNewPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonNewPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNewPatient.Location = new System.Drawing.Point(573, 66);
-            this.buttonNewPatient.Name = "buttonNewPatient";
-            this.buttonNewPatient.Size = new System.Drawing.Size(82, 26);
-            this.buttonNewPatient.TabIndex = 45;
-            this.buttonNewPatient.Text = "Novo";
-            this.buttonNewPatient.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewPatient
-            // 
-            this.dataGridViewPatient.AllowUserToAddRows = false;
-            this.dataGridViewPatient.AllowUserToDeleteRows = false;
-            this.dataGridViewPatient.AllowUserToResizeColumns = false;
-            this.dataGridViewPatient.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dataGridViewPatient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.name,
-            this.birthDate,
-            this.phone,
-            this.edit,
-            this.delete});
-            this.dataGridViewPatient.EnableHeadersVisualStyles = false;
-            this.dataGridViewPatient.GridColor = System.Drawing.Color.Silver;
-            this.dataGridViewPatient.Location = new System.Drawing.Point(27, 116);
-            this.dataGridViewPatient.MultiSelect = false;
-            this.dataGridViewPatient.Name = "dataGridViewPatient";
-            this.dataGridViewPatient.ReadOnly = true;
-            this.dataGridViewPatient.RowHeadersVisible = false;
-            this.dataGridViewPatient.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewPatient.Size = new System.Drawing.Size(628, 370);
-            this.dataGridViewPatient.TabIndex = 44;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.Frozen = true;
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.Frozen = true;
-            this.name.HeaderText = "Nome";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 250;
-            // 
-            // birthDate
-            // 
-            this.birthDate.DataPropertyName = "birthDate";
-            this.birthDate.Frozen = true;
-            this.birthDate.HeaderText = "Data de Nascimento";
-            this.birthDate.Name = "birthDate";
-            this.birthDate.ReadOnly = true;
-            this.birthDate.Width = 150;
-            // 
-            // phone
-            // 
-            this.phone.DataPropertyName = "phone";
-            this.phone.Frozen = true;
-            this.phone.HeaderText = "Telefone";
-            this.phone.Name = "phone";
-            this.phone.ReadOnly = true;
-            this.phone.Width = 125;
-            // 
-            // edit
-            // 
-            this.edit.Frozen = true;
-            this.edit.HeaderText = "Editar";
-            this.edit.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
-            this.edit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.edit.Name = "edit";
-            this.edit.ReadOnly = true;
-            this.edit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.edit.Width = 50;
-            // 
-            // delete
-            // 
-            this.delete.Frozen = true;
-            this.delete.HeaderText = "Excluir";
-            this.delete.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
-            this.delete.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.delete.Width = 50;
-            // 
-            // buttonExportExam
-            // 
-            this.buttonExportExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonExportExam.Location = new System.Drawing.Point(1241, 244);
-            this.buttonExportExam.Name = "buttonExportExam";
-            this.buttonExportExam.Size = new System.Drawing.Size(81, 26);
-            this.buttonExportExam.TabIndex = 43;
-            this.buttonExportExam.Text = "Exportar";
-            this.buttonExportExam.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeleteExam
-            // 
-            this.buttonDeleteExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonDeleteExam.Location = new System.Drawing.Point(1241, 212);
-            this.buttonDeleteExam.Name = "buttonDeleteExam";
-            this.buttonDeleteExam.Size = new System.Drawing.Size(80, 26);
-            this.buttonDeleteExam.TabIndex = 42;
-            this.buttonDeleteExam.Text = "Excluir";
-            this.buttonDeleteExam.UseVisualStyleBackColor = true;
-            // 
-            // buttonOpenExam
-            // 
-            this.buttonOpenExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonOpenExam.Location = new System.Drawing.Point(1241, 180);
-            this.buttonOpenExam.Name = "buttonOpenExam";
-            this.buttonOpenExam.Size = new System.Drawing.Size(81, 26);
-            this.buttonOpenExam.TabIndex = 41;
-            this.buttonOpenExam.Text = "Abrir";
-            this.buttonOpenExam.UseVisualStyleBackColor = true;
-            // 
-            // buttonNewExam
-            // 
-            this.buttonNewExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonNewExam.Location = new System.Drawing.Point(1240, 148);
-            this.buttonNewExam.Name = "buttonNewExam";
-            this.buttonNewExam.Size = new System.Drawing.Size(81, 26);
-            this.buttonNewExam.TabIndex = 40;
-            this.buttonNewExam.Text = "Novo";
-            this.buttonNewExam.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(697, 81);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(727, 17);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(148, 21);
+            this.label11.Size = new System.Drawing.Size(206, 30);
             this.label11.TabIndex = 39;
-            this.label11.Text = "Exames do Paciente:";
+            this.label11.Text = "Exames do Paciente";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(25, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 30);
+            this.label1.TabIndex = 47;
+            this.label1.Text = "Pacientes";
+            // 
+            // roundedPanel2
+            // 
+            this.roundedPanel2.BackColor = System.Drawing.Color.White;
+            this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedPanel2.BorderWidth = 5F;
+            this.roundedPanel2.Controls.Add(this.dataGridViewExam);
+            this.roundedPanel2.Controls.Add(this.buttonExportExam);
+            this.roundedPanel2.Controls.Add(this.buttonNewExam);
+            this.roundedPanel2.Controls.Add(this.buttonOpenExam);
+            this.roundedPanel2.CornerRadius = 20;
+            this.roundedPanel2.Location = new System.Drawing.Point(715, 61);
+            this.roundedPanel2.Name = "roundedPanel2";
+            this.roundedPanel2.Size = new System.Drawing.Size(620, 520);
+            this.roundedPanel2.TabIndex = 46;
             // 
             // dataGridViewExam
             // 
@@ -224,156 +112,422 @@
             this.dataGridViewExam.AllowUserToDeleteRows = false;
             this.dataGridViewExam.AllowUserToResizeColumns = false;
             this.dataGridViewExam.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dataGridViewExam.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dataGridViewExam.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewExam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewExam.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewExam.BackgroundColor = System.Drawing.Color.Silver;
+            this.dataGridViewExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.dataGridViewExam.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewExam.BorderWidth = 5F;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewExam.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewExam.ColumnHeadersHeight = 30;
             this.dataGridViewExam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewExam.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.session,
-            this.date,
-            this.template});
+            this.columnExamId,
+            this.columnTemplateId,
+            this.columnSessionName,
+            this.columnExamDate,
+            this.columnTemplate,
+            this.columnDeleteExam});
+            this.dataGridViewExam.CornerRadius = 2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewExam.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewExam.EnableHeadersVisualStyles = false;
-            this.dataGridViewExam.GridColor = System.Drawing.Color.Silver;
-            this.dataGridViewExam.Location = new System.Drawing.Point(701, 116);
+            this.dataGridViewExam.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.dataGridViewExam.Location = new System.Drawing.Point(17, 100);
             this.dataGridViewExam.MultiSelect = false;
             this.dataGridViewExam.Name = "dataGridViewExam";
             this.dataGridViewExam.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewExam.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewExam.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewExam.RowHeadersVisible = false;
             this.dataGridViewExam.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            this.dataGridViewExam.RowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(144)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridViewExam.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewExam.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewExam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewExam.Size = new System.Drawing.Size(524, 370);
+            this.dataGridViewExam.Size = new System.Drawing.Size(587, 397);
             this.dataGridViewExam.TabIndex = 38;
             // 
-            // session
+            // columnExamId
             // 
-            this.session.DataPropertyName = "sessionName";
-            this.session.Frozen = true;
-            this.session.HeaderText = "Nome da Sessão";
-            this.session.Name = "session";
-            this.session.ReadOnly = true;
-            this.session.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.session.Width = 197;
+            this.columnExamId.DataPropertyName = "id";
+            this.columnExamId.Frozen = true;
+            this.columnExamId.HeaderText = "examId";
+            this.columnExamId.Name = "columnExamId";
+            this.columnExamId.ReadOnly = true;
+            this.columnExamId.Visible = false;
             // 
-            // date
+            // columnTemplateId
             // 
-            this.date.DataPropertyName = "createdAt";
-            this.date.Frozen = true;
-            this.date.HeaderText = "Data do Exame";
-            this.date.Name = "date";
-            this.date.ReadOnly = true;
-            this.date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.date.Width = 130;
+            this.columnTemplateId.DataPropertyName = "templateId";
+            this.columnTemplateId.Frozen = true;
+            this.columnTemplateId.HeaderText = "templateId";
+            this.columnTemplateId.Name = "columnTemplateId";
+            this.columnTemplateId.ReadOnly = true;
+            this.columnTemplateId.Visible = false;
             // 
-            // template
+            // columnSessionName
             // 
-            this.template.DataPropertyName = "name";
-            this.template.Frozen = true;
-            this.template.HeaderText = "Template";
-            this.template.Name = "template";
-            this.template.ReadOnly = true;
-            this.template.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.template.Width = 197;
+            this.columnSessionName.DataPropertyName = "sessionName";
+            this.columnSessionName.Frozen = true;
+            this.columnSessionName.HeaderText = "Nome da Sessão";
+            this.columnSessionName.Name = "columnSessionName";
+            this.columnSessionName.ReadOnly = true;
+            this.columnSessionName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnSessionName.Width = 197;
             // 
-            // buttonSearchPatient
+            // columnExamDate
             // 
-            this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonSearchPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchPatient.Location = new System.Drawing.Point(342, 65);
-            this.buttonSearchPatient.Name = "buttonSearchPatient";
-            this.buttonSearchPatient.Size = new System.Drawing.Size(58, 26);
-            this.buttonSearchPatient.TabIndex = 35;
-            this.buttonSearchPatient.Text = "Buscar";
-            this.buttonSearchPatient.UseVisualStyleBackColor = true;
+            this.columnExamDate.DataPropertyName = "createdAt";
+            this.columnExamDate.Frozen = true;
+            this.columnExamDate.HeaderText = "Data do Exame";
+            this.columnExamDate.Name = "columnExamDate";
+            this.columnExamDate.ReadOnly = true;
+            this.columnExamDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnExamDate.Width = 130;
             // 
-            // label9
+            // columnTemplate
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(23, 30);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(120, 21);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "Buscar Paciente:";
+            this.columnTemplate.DataPropertyName = "name";
+            this.columnTemplate.Frozen = true;
+            this.columnTemplate.HeaderText = "Template";
+            this.columnTemplate.Name = "columnTemplate";
+            this.columnTemplate.ReadOnly = true;
+            this.columnTemplate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnTemplate.Width = 197;
+            // 
+            // columnDeleteExam
+            // 
+            this.columnDeleteExam.Frozen = true;
+            this.columnDeleteExam.HeaderText = "Excluir";
+            this.columnDeleteExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
+            this.columnDeleteExam.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnDeleteExam.Name = "columnDeleteExam";
+            this.columnDeleteExam.ReadOnly = true;
+            this.columnDeleteExam.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnDeleteExam.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnDeleteExam.Width = 60;
+            // 
+            // buttonExportExam
+            // 
+            this.buttonExportExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonExportExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonExportExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonExportExam.BorderWidth = 5F;
+            this.buttonExportExam.CornerRadius = 5;
+            this.buttonExportExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExportExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonExportExam.ForeColor = System.Drawing.Color.White;
+            this.buttonExportExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonExportExam.Location = new System.Drawing.Point(467, 33);
+            this.buttonExportExam.Name = "buttonExportExam";
+            this.buttonExportExam.Size = new System.Drawing.Size(132, 42);
+            this.buttonExportExam.TabIndex = 43;
+            this.buttonExportExam.Text = "Exportar Exame";
+            this.buttonExportExam.UseVisualStyleBackColor = false;
+            // 
+            // buttonNewExam
+            // 
+            this.buttonNewExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNewExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewExam.BorderWidth = 5F;
+            this.buttonNewExam.CornerRadius = 5;
+            this.buttonNewExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonNewExam.ForeColor = System.Drawing.Color.White;
+            this.buttonNewExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonNewExam.Location = new System.Drawing.Point(17, 32);
+            this.buttonNewExam.Name = "buttonNewExam";
+            this.buttonNewExam.Size = new System.Drawing.Size(130, 42);
+            this.buttonNewExam.TabIndex = 40;
+            this.buttonNewExam.Text = "Novo Exame";
+            this.buttonNewExam.UseVisualStyleBackColor = false;
+            // 
+            // buttonOpenExam
+            // 
+            this.buttonOpenExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonOpenExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonOpenExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonOpenExam.BorderWidth = 5F;
+            this.buttonOpenExam.CornerRadius = 5;
+            this.buttonOpenExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpenExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonOpenExam.ForeColor = System.Drawing.Color.White;
+            this.buttonOpenExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOpenExam.Location = new System.Drawing.Point(245, 33);
+            this.buttonOpenExam.Name = "buttonOpenExam";
+            this.buttonOpenExam.Size = new System.Drawing.Size(129, 42);
+            this.buttonOpenExam.TabIndex = 41;
+            this.buttonOpenExam.Text = "Abrir Exame";
+            this.buttonOpenExam.UseVisualStyleBackColor = false;
+            // 
+            // roundedPanel1
+            // 
+            this.roundedPanel1.BackColor = System.Drawing.Color.White;
+            this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.Controls.Add(this.dataGridViewPatient);
+            this.roundedPanel1.Controls.Add(this.buttonNewPatient);
+            this.roundedPanel1.Controls.Add(this.textBoxSearchPatient);
+            this.roundedPanel1.Controls.Add(this.buttonSearchPatient);
+            this.roundedPanel1.CornerRadius = 20;
+            this.roundedPanel1.Location = new System.Drawing.Point(12, 61);
+            this.roundedPanel1.Name = "roundedPanel1";
+            this.roundedPanel1.Size = new System.Drawing.Size(686, 519);
+            this.roundedPanel1.TabIndex = 46;
+            // 
+            // dataGridViewPatient
+            // 
+            this.dataGridViewPatient.AllowUserToAddRows = false;
+            this.dataGridViewPatient.AllowUserToDeleteRows = false;
+            this.dataGridViewPatient.AllowUserToResizeColumns = false;
+            this.dataGridViewPatient.AllowUserToResizeRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            this.dataGridViewPatient.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewPatient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridViewPatient.BackgroundColor = System.Drawing.Color.Silver;
+            this.dataGridViewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.dataGridViewPatient.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewPatient.BorderWidth = 5F;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewPatient.ColumnHeadersHeight = 30;
+            this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnPatientId,
+            this.columnPatientName,
+            this.columnPatientBirthDate,
+            this.columnPatientPhone,
+            this.columnEditPatient,
+            this.columnDeletePatient});
+            this.dataGridViewPatient.CornerRadius = 2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ButtonFace;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPatient.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewPatient.EnableHeadersVisualStyles = false;
+            this.dataGridViewPatient.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.dataGridViewPatient.Location = new System.Drawing.Point(14, 99);
+            this.dataGridViewPatient.MultiSelect = false;
+            this.dataGridViewPatient.Name = "dataGridViewPatient";
+            this.dataGridViewPatient.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPatient.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewPatient.RowHeadersVisible = false;
+            this.dataGridViewPatient.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(144)))), ((int)(((byte)(153)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dataGridViewPatient.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPatient.Size = new System.Drawing.Size(651, 396);
+            this.dataGridViewPatient.TabIndex = 44;
+            // 
+            // buttonNewPatient
+            // 
+            this.buttonNewPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderWidth = 5F;
+            this.buttonNewPatient.CornerRadius = 5;
+            this.buttonNewPatient.FlatAppearance.BorderSize = 0;
+            this.buttonNewPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
+            this.buttonNewPatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonNewPatient.Location = new System.Drawing.Point(18, 32);
+            this.buttonNewPatient.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonNewPatient.Name = "buttonNewPatient";
+            this.buttonNewPatient.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonNewPatient.Size = new System.Drawing.Size(130, 42);
+            this.buttonNewPatient.TabIndex = 45;
+            this.buttonNewPatient.Text = "Novo Paciente";
+            this.buttonNewPatient.UseVisualStyleBackColor = false;
             // 
             // textBoxSearchPatient
             // 
             this.textBoxSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBoxSearchPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearchPatient.Location = new System.Drawing.Point(27, 63);
+            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSearchPatient.Location = new System.Drawing.Point(300, 32);
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 29);
+            this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(10);
+            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
+            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 42);
             this.textBoxSearchPatient.TabIndex = 36;
+            // 
+            // buttonSearchPatient
+            // 
+            this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderWidth = 5F;
+            this.buttonSearchPatient.CornerRadius = 5;
+            this.buttonSearchPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearchPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
+            this.buttonSearchPatient.Location = new System.Drawing.Point(615, 32);
+            this.buttonSearchPatient.Name = "buttonSearchPatient";
+            this.buttonSearchPatient.Size = new System.Drawing.Size(45, 42);
+            this.buttonSearchPatient.TabIndex = 35;
+            this.buttonSearchPatient.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            // 
+            // columnPatientId
+            // 
+            this.columnPatientId.DataPropertyName = "id";
+            this.columnPatientId.Frozen = true;
+            this.columnPatientId.HeaderText = "id";
+            this.columnPatientId.Name = "columnPatientId";
+            this.columnPatientId.ReadOnly = true;
+            this.columnPatientId.Visible = false;
+            // 
+            // columnPatientName
+            // 
+            this.columnPatientName.DataPropertyName = "name";
+            this.columnPatientName.Frozen = true;
+            this.columnPatientName.HeaderText = "Nome";
+            this.columnPatientName.Name = "columnPatientName";
+            this.columnPatientName.ReadOnly = true;
+            this.columnPatientName.Width = 235;
+            // 
+            // columnPatientBirthDate
+            // 
+            this.columnPatientBirthDate.DataPropertyName = "birthDate";
+            this.columnPatientBirthDate.Frozen = true;
+            this.columnPatientBirthDate.HeaderText = "Data de Nascimento";
+            this.columnPatientBirthDate.Name = "columnPatientBirthDate";
+            this.columnPatientBirthDate.ReadOnly = true;
+            this.columnPatientBirthDate.Width = 175;
+            // 
+            // columnPatientPhone
+            // 
+            this.columnPatientPhone.DataPropertyName = "phone";
+            this.columnPatientPhone.Frozen = true;
+            this.columnPatientPhone.HeaderText = "Telefone";
+            this.columnPatientPhone.Name = "columnPatientPhone";
+            this.columnPatientPhone.ReadOnly = true;
+            this.columnPatientPhone.Width = 125;
+            // 
+            // columnEditPatient
+            // 
+            this.columnEditPatient.Frozen = true;
+            this.columnEditPatient.HeaderText = "Editar";
+            this.columnEditPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
+            this.columnEditPatient.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnEditPatient.Name = "columnEditPatient";
+            this.columnEditPatient.ReadOnly = true;
+            this.columnEditPatient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnEditPatient.Width = 55;
+            // 
+            // columnDeletePatient
+            // 
+            this.columnDeletePatient.Frozen = true;
+            this.columnDeletePatient.HeaderText = "Excluir";
+            this.columnDeletePatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
+            this.columnDeletePatient.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnDeletePatient.Name = "columnDeletePatient";
+            this.columnDeletePatient.ReadOnly = true;
+            this.columnDeletePatient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.columnDeletePatient.Width = 58;
             // 
             // PatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1341, 537);
-            this.Controls.Add(this.buttonNewPatient);
-            this.Controls.Add(this.dataGridViewPatient);
-            this.Controls.Add(this.buttonExportExam);
-            this.Controls.Add(this.buttonDeleteExam);
-            this.Controls.Add(this.buttonOpenExam);
-            this.Controls.Add(this.buttonNewExam);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1344, 599);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.roundedPanel2);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.dataGridViewExam);
-            this.Controls.Add(this.buttonSearchPatient);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBoxSearchPatient);
+            this.Controls.Add(this.roundedPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PatientView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pacientes";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
+            this.roundedPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).EndInit();
+            this.roundedPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonNewPatient;
-        private System.Windows.Forms.DataGridView dataGridViewPatient;
-        private System.Windows.Forms.Button buttonExportExam;
-        private System.Windows.Forms.Button buttonDeleteExam;
-        private System.Windows.Forms.Button buttonOpenExam;
-        private System.Windows.Forms.Button buttonNewExam;
+        private Components.Rounded.RoundedButton buttonNewPatient;
+        private Components.Rounded.RoundedDataGridView dataGridViewPatient;
+        private Components.Rounded.RoundedButton buttonExportExam;
+        private Components.Rounded.RoundedButton buttonOpenExam;
+        private Components.Rounded.RoundedButton buttonNewExam;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DataGridView dataGridViewExam;
-        private System.Windows.Forms.Button buttonSearchPatient;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBoxSearchPatient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
-        private System.Windows.Forms.DataGridViewImageColumn edit;
-        private System.Windows.Forms.DataGridViewImageColumn delete;
+        private Components.Rounded.RoundedDataGridView dataGridViewExam;
+        private Components.Rounded.RoundedButton buttonSearchPatient;
+        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn session;
-        private System.Windows.Forms.DataGridViewTextBoxColumn date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn template;
+        private Components.Rounded.RoundedPanel roundedPanel1;
+        private Components.Rounded.RoundedPanel roundedPanel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnExamId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnTemplateId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnSessionName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnExamDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnTemplate;
+        private System.Windows.Forms.DataGridViewImageColumn columnDeleteExam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientBirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientPhone;
+        private System.Windows.Forms.DataGridViewImageColumn columnEditPatient;
+        private System.Windows.Forms.DataGridViewImageColumn columnDeletePatient;
     }
 }

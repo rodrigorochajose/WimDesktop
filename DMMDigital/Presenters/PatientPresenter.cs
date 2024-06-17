@@ -10,12 +10,14 @@ using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
+using MoreLinq.Extensions;
 
 namespace DMMDigital.Presenters
 {
     public class PatientPresenter
     {
-        private readonly IPatientView patientView;
+        public PatientView view { get; }
+
         private readonly IPatientRepository patientRepository;
         private PatientModel selectedPatient;
         private readonly BindingSource patientBindingSource;
@@ -31,40 +33,48 @@ namespace DMMDigital.Presenters
 
         private readonly string examOpeningMode;
 
-        public PatientPresenter(IPatientView view, IPatientRepository repository, string examOpeningMode)
+        public PatientPresenter(PatientView patientView, IPatientRepository repository, string examOpeningMode)
         {
             patientBindingSource = new BindingSource();
             examBindingSource = new BindingSource();
 
-            patientView = view;
+            view = patientView;
             patientRepository = repository;
 
-            patientView.eventSearchPatient += searchPatient;
-            patientView.eventShowAddPatientForm += showAddPatientForm;
-            patientView.eventShowEditPatientForm += showEditPatientForm;
-            patientView.eventDeletePatient += deletePatient;
+            view.eventSearchPatient += searchPatient;
+            view.eventShowAddPatientForm += showAddPatientForm;
+            view.eventShowEditPatientForm += showEditPatientForm;
+            view.eventDeletePatient += deletePatient;
 
-            patientView.eventShowFormNewExam += newExam;
-            patientView.eventGetPatientExams += getExamByPatient;
-            patientView.eventOpenExam += openExam;
-            patientView.eventDeleteExam += deleteExam;
-            patientView.eventExportExam += exportExam;
+            view.eventShowFormNewExam += newExam;
+            view.eventGetPatientExams += getExamByPatient;
+            view.eventOpenExam += openExam;
+            view.eventDeleteExam += deleteExam;
+            view.eventExportExam += exportExam;
 
-            patientView.setPatientList(patientBindingSource);
-            patientView.setExamList(examBindingSource);
+            view.setPatientList(patientBindingSource);
+            view.setExamList(examBindingSource);
 
             loadAllPatients();
             getExamByPatient(this, EventArgs.Empty);
-
-            (patientView as Form).Show();
             this.examOpeningMode = examOpeningMode;
         }
 
         private void searchPatient(object sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(patientView.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(patientView.searchedValue) : patientRepository.getAllPatients();
-            patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
+            patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
+
+            if (patientList.Any())
+            {
+                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            }
+            else
+            {
+                view.selectedPatientId = 0;
+                patientBindingSource.Clear();
+                examBindingSource.Clear();
+            }
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
@@ -80,7 +90,7 @@ namespace DMMDigital.Presenters
             IPatientHandlerView patientHandlerView = new PatientHandlerView("edit");
             patientHandlerView.eventSaveEditedPatient += saveEditedPatient;
 
-            selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
+            selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             patientHandlerView.patientId = selectedPatient.id;
             patientHandlerView.patientName = selectedPatient.name;
             patientHandlerView.patientBirthDate = selectedPatient.birthDate;
@@ -94,7 +104,7 @@ namespace DMMDigital.Presenters
 
         private void deletePatient(object sender, EventArgs e)
         {
-            if (examRepository.getPatientExams(patientView.selectedPatientId).Any())
+            if (examRepository.getPatientExams(view.selectedPatientId).Any())
             {
                 MessageBox.Show("Paciente possui exames, não será possível excluí-lo.");
                 return;
@@ -103,7 +113,7 @@ namespace DMMDigital.Presenters
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
-                patientRepository.deletePatient(patientView.selectedPatientId);
+                patientRepository.deletePatient(view.selectedPatientId);
                 loadAllPatients();
             }
         }
@@ -158,9 +168,8 @@ namespace DMMDigital.Presenters
 
             if (patientList.Any())
             {
-                patientView.selectedPatientId = patientList.First().id;
+                view.selectedPatientId = patientList.First().id;
                 patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone});
-                patientView.patientDataGridViewHandler();
             }
         }
 
@@ -168,7 +177,7 @@ namespace DMMDigital.Presenters
         {
             IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
 
-            PatientModel selectedPatient = patientRepository.getPatientById(patientView.selectedPatientId);
+            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             chooseTemplateView.patientId = selectedPatient.id;
             chooseTemplateView.patientName = selectedPatient.name;
             chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
@@ -186,16 +195,16 @@ namespace DMMDigital.Presenters
 
         private void getExamByPatient(object sender, EventArgs e)
         {
-            examList = examRepository.getPatientExams(patientView.selectedPatientId);
+            examList = examRepository.getPatientExams(view.selectedPatientId);
             if (examList.Any())
             {
-                patientView.selectedExamId = examList.First().id;
+                view.selectedExamId = examList.First().id;
                 examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name});
-                patientView.examDataGridViewHandler();
             }
-            else if (examBindingSource.DataSource != null)
+            else
             {
-                examBindingSource.DataSource = null;
+                view.selectedExamId = 0;
+                examBindingSource.Clear();
             }
         }
 
@@ -203,24 +212,24 @@ namespace DMMDigital.Presenters
         {
             ConfigModel config = configRepository.getAllConfig();
 
-            PatientModel selectedPatient = patientList.FirstOrDefault(p => p.id == patientView.selectedPatientId);
-            new ExamPresenter(new ExamView(patientView.selectedExamId, selectedPatient, config), new ExamRepository(), true, examOpeningMode);
+            PatientModel selectedPatient = patientList.FirstOrDefault(p => p.id == view.selectedPatientId);
+            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, config), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
-            (patientView as Form).Hide();
-            (patientView as Form).Close();
+            view.Hide();
+            view.Close();
         }
 
         private void deleteExam(object sender, EventArgs e)
         {
-            if (examImageRepository.getExamImages(patientView.selectedExamId).Any())
+            if (examImageRepository.getExamImages(view.selectedExamId).Any())
             {
                 MessageBox.Show("Exame possui imagens, não será possível excluí-lo.");
                 return;
             }
 
-            examRepository.deleteExam(patientView.selectedExamId);
+            examRepository.deleteExam(view.selectedExamId);
 
-            string fullPath = Path.Combine(configRepository.getExamPath(), patientView.selectedExamPath);
+            string fullPath = Path.Combine(configRepository.getExamPath(), view.selectedExamPath);
 
             if (Directory.Exists(fullPath))
             {
@@ -233,10 +242,10 @@ namespace DMMDigital.Presenters
 
         private void exportExam(object sender, EventArgs e)
         {
-            ExamModel selectedExam = examRepository.getExam(patientView.selectedExamId);
+            ExamModel selectedExam = examRepository.getExam(view.selectedExamId);
 
             List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
-            List<ExamImageModel> examImages = examImageRepository.getExamImages(patientView.selectedExamId).ToList();
+            List<ExamImageModel> examImages = examImageRepository.getExamImages(view.selectedExamId).ToList();
 
             if (!examImages.Any())
             {
@@ -290,7 +299,7 @@ namespace DMMDigital.Presenters
                     framesToExport = frames,
                     patientName = selectedExam.patient.name
                 },
-                patientView.selectedExamId
+                view.selectedExamId
             );
         }
     }

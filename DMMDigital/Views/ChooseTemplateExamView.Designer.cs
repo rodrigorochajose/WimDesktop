@@ -319,6 +319,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.titulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ChooseTemplateExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar Novo Exame";

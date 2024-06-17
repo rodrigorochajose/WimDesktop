@@ -97,6 +97,31 @@
     <Compile Include="Components\FrameTemplate.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Rounded\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedButton.Designer.cs">
+      <DependentUpon>RoundedButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedDataGridView.Designer.cs">
+      <DependentUpon>RoundedDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedPanel.Designer.cs">
+      <DependentUpon>RoundedPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedTextBox.Designer.cs">
+      <DependentUpon>RoundedTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManager.cs" />
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
@@ -499,6 +524,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\icon_32x32_open_exam.png" />
+    <None Include="Resources\icon-32x32-open-exam.png" />
+    <None Include="Resources\icon-32x32-xray-new.png" />
+    <None Include="Resources\icon-32x32-patients1.png" />
+    <None Include="Resources\icon_32x32_new_patient.png" />
     <None Include="Resources\icon-16x16-zoom-out.png" />
     <None Include="Resources\icon-16x16-zoom-in.png" />
     <None Include="Resources\icon-16x16-original-size.png" />

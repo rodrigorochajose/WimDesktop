@@ -97,14 +97,7 @@ namespace DMMDigital.Views
 
             foreach (Frame frame in selectedFrames)
             {
-                if (frame.filteredImage != null)
-                {
-                    selectedImages.Add(frame.filteredImage);
-                }
-                else
-                {
-                    selectedImages.Add(frame.originalImage);
-                }
+                selectedImages.Add(frame.filteredImage ?? frame.originalImage);
             }
 
             if (selectedImages.Count < 2)

@@ -1,5 +1,4 @@
 ﻿using DMMDigital.Interface.IRepository;
-using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
@@ -9,43 +8,43 @@ namespace DMMDigital.Presenters
 {
     public class ConfigPresenter
     {
+        public ConfigView view { get; }
+
         private ConfigModel currentConfig;
-        private readonly IConfigView configView;
         private readonly IConfigRepository configRepository;
         
-        public ConfigPresenter(IConfigView view, IConfigRepository repository) {
-            configView = view;
+        public ConfigPresenter(ConfigView configView, IConfigRepository repository) 
+        {
+            view = configView;
             configRepository = repository;
             configView.saveConfigs += saveConfigs;
             configView.loadConfigs += loadConfigs;
-
-            (configView as Form).ShowDialog();
         }
 
         private void loadConfigs(object sender, EventArgs e)
         {
             currentConfig = configRepository.getAllConfig();
 
-            configView.sensorPath = currentConfig.sensorPath;
-            configView.imagePath = currentConfig.examPath;
-            configView.drawingSize = currentConfig.drawingSize;
-            configView.drawingColor = currentConfig.drawingColor;
-            configView.textSize = currentConfig.textSize;
-            configView.textColor = currentConfig.textColor;
-            configView.rulerColor = currentConfig.rulerColor;
+            view.sensorPath = currentConfig.sensorPath;
+            view.imagePath = currentConfig.examPath;
+            view.drawingSize = currentConfig.drawingSize;
+            view.drawingColor = currentConfig.drawingColor;
+            view.textSize = currentConfig.textSize;
+            view.textColor = currentConfig.textColor;
+            view.rulerColor = currentConfig.rulerColor;
         }
 
         private void saveConfigs(object sender, EventArgs e)
         {
             try
             {
-                currentConfig.sensorPath = configView.sensorPath;
-                currentConfig.examPath = configView.imagePath;
-                currentConfig.drawingColor = configView.drawingColor;
-                currentConfig.drawingSize = configView.drawingSize;
-                currentConfig.textColor = configView.textColor;
-                currentConfig.textSize = configView.textSize;
-                currentConfig.rulerColor = configView.rulerColor;
+                currentConfig.sensorPath = view.sensorPath;
+                currentConfig.examPath = view.imagePath;
+                currentConfig.drawingColor = view.drawingColor;
+                currentConfig.drawingSize = view.drawingSize;
+                currentConfig.textColor = view.textColor;
+                currentConfig.textSize = view.textSize;
+                currentConfig.rulerColor = view.rulerColor;
                 MessageBox.Show(configRepository.save());
                 (sender as ConfigView).Close();
             }

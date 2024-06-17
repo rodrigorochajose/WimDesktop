@@ -59,7 +59,7 @@
             // buttonNewExam
             // 
             this.buttonNewExam.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonNewExam.Image = ((System.Drawing.Image)(resources.GetObject("buttonNewExam.Image")));
+            this.buttonNewExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_xray_new;
             this.buttonNewExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonNewExam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonNewExam.Name = "buttonNewExam";

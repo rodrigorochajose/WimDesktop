@@ -1,6 +1,5 @@
 ﻿using DMMDigital.Views;
 using DMMDigital._Repositories;
-using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using System.IO;
 using System;
@@ -15,10 +14,26 @@ namespace DMMDigital.Presenters
         public MenuPresenter(IMenuView view)
         {
             menuView = view;
-            menuView.showConfigView += delegate { new ConfigPresenter(new ConfigView(), new ConfigRepository()); };
-            menuView.showPatientView += delegate { new PatientPresenter(new PatientView(), new PatientRepository(), "newContainer"); };
-            menuView.showTemplateView += delegate { new TemplatePresenter(new TemplateView()); };
-            menuView.showNewExamView += delegate { new ChoosePatientExamPresenter(new ChoosePatientExamView(), new PatientRepository()); };
+
+            menuView.showConfigView += delegate 
+            {
+                FormManager.instance.showForm("configView", () => new ConfigPresenter(new ConfigView(), new ConfigRepository())); 
+            };
+
+            menuView.showPatientView += delegate 
+            {
+                FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView(), new PatientRepository(), "newContainer")); 
+            };
+
+            menuView.showTemplateView += delegate 
+            {
+                FormManager.instance.showForm("templateView", () => new TemplatePresenter(new TemplateView())); 
+            };
+
+            menuView.showNewExamView += delegate 
+            {
+                FormManager.instance.showForm("choosePatientExamView", () => new ChoosePatientExamPresenter(new ChoosePatientExamView(), new PatientRepository())); 
+            };
 
             generateDatabaseBackup();
         }

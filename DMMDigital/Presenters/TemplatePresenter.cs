@@ -1,6 +1,5 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface.IRepository;
-using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
@@ -12,33 +11,32 @@ namespace DMMDigital.Presenters
 {
     public class TemplatePresenter
     {
-        private readonly ITemplateView templateView;
+        public TemplateView view { get; }
+
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly BindingSource templateBindingSource;
         private IEnumerable<TemplateModel> templateList;
 
 
-        public TemplatePresenter(ITemplateView view)
+        public TemplatePresenter(TemplateView templateView)
         {
             templateBindingSource = new BindingSource();
-            templateView = view;
+            view = templateView;
 
-            templateView.showNewTemplateForm += showNewTemplateForm;
-            templateView.eventDeleteTemplate += deleteTemplate;
+            view.showNewTemplateForm += showNewTemplateForm;
+            view.eventDeleteTemplate += deleteTemplate;
 
-            templateView.setTemplateList(templateBindingSource);
+            view.setTemplateList(templateBindingSource);
 
             getTemplates();
-
-            (templateView as Form).Show();
         }
 
         private void showNewTemplateForm(object sender, EventArgs e)
         {
-            (templateView as Form).Hide();
+            view.Hide();
             new DialogGenerateTemplatePresenter(new DialogGenerateTemplate());
-            (templateView as Form).Show();
+            view.Show();
             getTemplates();
         }
 
@@ -47,7 +45,7 @@ namespace DMMDigital.Presenters
             DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(confirmacao))
             {
-                templateRepository.delete(templateView.selectedTemplateId);
+                templateRepository.delete(view.selectedTemplateId);
                 getTemplates();
             }
         }
@@ -58,10 +56,10 @@ namespace DMMDigital.Presenters
 
             if (templateList.Any())
             {
-                templateView.templateFrameList = templateFrameRepository.getAllTemplateFrame();
+                view.templateFrameList = templateFrameRepository.getAllTemplateFrame();
 
                 templateBindingSource.DataSource = templateList;
-                templateView.templateDataGridViewHandler();
+                view.templateDataGridViewHandler();
             }
         }
     }

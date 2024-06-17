@@ -31,6 +31,7 @@ namespace DMMDigital.Views
             InitializeComponent();
             associateEvents();
         }
+
         private void associateEvents()
         {
             Load += (sender, e) =>
@@ -39,7 +40,7 @@ namespace DMMDigital.Views
                 {
                     if (dataGridViewPatient.SelectedRows.Count > 0)
                     {
-                        selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString());
+                        selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["columnPatientId"].Value.ToString());
                         eventGetPatientExams?.Invoke(this, EventArgs.Empty);
                     }
                 };
@@ -48,12 +49,12 @@ namespace DMMDigital.Views
                 {
                     if (dataGridViewExam.SelectedRows.Count > 0)
                     {
-                        selectedExamId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["id"].Value.ToString());
+                        selectedExamId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["columnExamId"].Value.ToString());
                     }
                 };
             };
 
-            textBoxSearchPatient.KeyDown += (s, e) =>
+            textBoxSearchPatient.innerTextBox.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
@@ -73,6 +74,26 @@ namespace DMMDigital.Views
 
                         dataGridViewPatient.Rows[0].Selected = true;
                     }
+                }
+            };
+
+            dataGridViewExam.CellContentClick += (s, e) =>
+            {
+                if (e.RowIndex == 0 && e.ColumnIndex == 0)
+                {
+                    if(selectedExamId == 0)
+                    {
+                        MessageBox.Show("Nenhum Exame foi selecionado!");
+                        return;
+                    }
+
+                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+
+                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
+                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
+
+                    selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy}";
+                    eventDeleteExam?.Invoke(this, EventArgs.Empty);
                 }
             };
 
@@ -98,16 +119,6 @@ namespace DMMDigital.Views
                 eventOpenExam?.Invoke(this, EventArgs.Empty); 
             };
 
-            buttonDeleteExam.Click += delegate {
-                int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
-
-                string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
-                DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString());
-
-                selectedExamPath = "\\Paciente-" + selectedPatientId + "\\" + selectedExamSessionName + "_" + selectedExamDate.ToString("dd-MM-yyyy");
-                eventDeleteExam?.Invoke(this, EventArgs.Empty);
-            };
-
             buttonExportExam.Click += delegate {
                 if (selectedExamId == 0)
                 {
@@ -126,32 +137,6 @@ namespace DMMDigital.Views
         public void setExamList(BindingSource examList)
         {
             dataGridViewExam.DataSource = examList;
-        }
-
-        public void patientDataGridViewHandler()
-        {
-            dataGridViewPatient.Columns["id"].Visible = false;
-            edit.Frozen = true;
-            edit.Image = Properties.Resources.icon_32x32_pencil;
-            edit.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            delete.Frozen = true;
-            delete.Image = Properties.Resources.icon_32x32_delete;
-            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
-        }
-
-        public void examDataGridViewHandler()
-        {
-            dataGridViewExam.Columns["id"].Visible = false;
-            dataGridViewExam.Columns["templateID"].Visible = false;
-
-            dataGridViewExam.Columns[2].HeaderText = "Nome da Sessão";
-            dataGridViewExam.Columns[2].Width = 195;
-
-            dataGridViewExam.Columns[3].HeaderText = "Data do Exame";
-            dataGridViewExam.Columns[3].Width = 130;
-
-            dataGridViewExam.Columns[4].HeaderText = "Template";
-            dataGridViewExam.Columns[4].Width = 195;
         }
     }
 }

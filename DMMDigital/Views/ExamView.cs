@@ -444,13 +444,7 @@ namespace DMMDigital.Views
         public void selectFrame(Frame frameToSelect = null)
         {
             checkChangesAndSave();
-
-            if (frameToSelect == null)
-            {
-                frameToSelect = frames[indexFrame];
-            }
-
-            selectedFrame = frameToSelect;
+            selectedFrame = frameToSelect ?? frames[indexFrame];
 
             if (selectedFrame.originalImage != null)
             {
@@ -544,7 +538,7 @@ namespace DMMDigital.Views
 
         private void selectTool(object sender)
         {
-            ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => b.Tag != null && (string)b.Tag == "selected");
+            ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => (string)b.Tag == "selected");
             if (selectedButton != null)
             {
                 if (selectedButton.Name == "buttonMagnifier")
