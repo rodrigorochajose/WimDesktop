@@ -215,7 +215,6 @@ namespace DMMDigital.Presenters
             PatientModel selectedPatient = patientList.FirstOrDefault(p => p.id == view.selectedPatientId);
             new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, config), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
-            view.Hide();
             view.Close();
         }
 

@@ -940,7 +940,7 @@ namespace DMMDigital.Views
 
         private void buttonOpenExamClick(object sender, EventArgs e)
         {
-            new PatientPresenter(new PatientView(), new PatientRepository(), "newPage");
+            FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView(), new PatientRepository(), "newPage")); 
         }
 
         private void buttonCloseExamClick(object sender, EventArgs e)
