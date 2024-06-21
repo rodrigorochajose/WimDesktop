@@ -24,6 +24,7 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
         event EventHandler eventCloseSingleExam;
+        event EventHandler eventGetSensorInfo;
 
 
         void selectFrame(Frame frameToSelected = null);

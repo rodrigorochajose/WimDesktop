@@ -376,7 +376,7 @@ namespace DMMDigital.Views
             this.componentSensorStatus.Name = "componentSensorStatus";
             this.componentSensorStatus.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.componentSensorStatus.Size = new System.Drawing.Size(50, 40);
-            this.componentSensorStatus.Text = "detectorConnection";
+            this.componentSensorStatus.Text = "sensorConnection";
             this.componentSensorStatus.ToolTipText = "Sensor não localizado";
             // 
             // toolStripSeparator2
@@ -801,7 +801,7 @@ namespace DMMDigital.Views
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExamView";
-            this.Text = "Exame";
+            this.Text = "ExamScreen";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.examViewFormClosing);
             this.Resize += new System.EventHandler(this.examViewResize);
             this.panelDetails.ResumeLayout(false);

@@ -35,6 +35,7 @@ namespace DMMDigital.Views
         public event EventHandler eventSaveExamImageDrawing;
         public event EventHandler eventGetPatient;
         public event EventHandler eventCloseSingleExam;
+        public event EventHandler eventGetSensorInfo;
 
         int action = 0;
         int indexFrame = 0;

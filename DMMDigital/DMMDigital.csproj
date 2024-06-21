@@ -77,7 +77,8 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>icon-96x96-transparent.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -523,7 +524,6 @@
     <None Include="Resources\icon-32x32-cancel.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon-96x96-transparent.ico" />
     <None Include="Resources\icon_32x32_open_exam.png" />
     <None Include="Resources\icon-32x32-open-exam.png" />
     <None Include="Resources\icon-32x32-xray-new.png" />

@@ -10,26 +10,31 @@ namespace DMMDigital.Views
     {
         public int patientId { get; set; }
         public List<int> openExamsId { get; set; }
+        public ExamView selectedExamView { get; set; }
 
-        public event EventHandler eventDestroyDetector;
+        public event EventHandler eventDestroySensor;
+        public event EventHandler eventGetSensorInfo;
 
         public ExamContainerView(IExamView examView)
         {
+            openExamsId = new List<int>();
+            
+            selectedExamView = examView as ExamView;
+        }
+
+        public void initialize()
+        {
             InitializeComponent();
-            IExamView exam = examView;
+            addNewPage(selectedExamView);
+        }
 
-            examView.eventCloseSingleExam += (s, e) =>
+        private void examContainerViewLoad(object sender, EventArgs e)
+        {
+            tabControl.Selected += (s, ev) =>
             {
-                closePage(s, e);
+                Form examScreen = ev.TabPage.Controls.OfType<Form>().First();
+                selectedExamView = examScreen as ExamView;
             };
-
-            openExamsId = new List<int>
-            {
-                exam.examId
-            };
-
-            tabPage1.Text = exam.sessionName;
-            addFormIntoPage(tabPage1, exam);
         }
 
         public void addNewPage(IExamView examView)
@@ -46,29 +51,30 @@ namespace DMMDigital.Views
                 closePage(s, e);
             };
 
+            selectedExamView = examView as ExamView;
+            eventGetSensorInfo?.Invoke(this, EventArgs.Empty);
+
             openExamsId.Add(examView.examId);
+            addFormIntoPage(newTabPage, examView as Form);
 
             tabControl.TabPages.Add(newTabPage);
-
-            addFormIntoPage(newTabPage, examView);
-
             tabControl.SelectedTab = newTabPage;
         }
 
-        private void addFormIntoPage(TabPage tabPage, IExamView examView)
+        private void addFormIntoPage(TabPage tabPage, Form examView)
         {
-            (examView as Form).TopLevel = false;
-            (examView as Form).Dock = DockStyle.Fill;
+            examView.TopLevel = false;
+            examView.Dock = DockStyle.Fill;
 
-            tabPage.Controls.Add(examView as Form);
+            tabPage.Controls.Add(examView);
+            examView.Show();
             Show();
-            (examView as Form).Show();
         }
 
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.OpenForms.Cast<Form>().First().Show();
-            eventDestroyDetector?.Invoke(this, e);
+            eventDestroySensor?.Invoke(this, e);
         }
 
         private void examContainerViewFormClosing(object sender, FormClosingEventArgs e)
@@ -99,5 +105,6 @@ namespace DMMDigital.Views
                 Close();
             }
         }
+
     }
 }
