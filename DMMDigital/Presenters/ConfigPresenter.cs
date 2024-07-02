@@ -32,6 +32,9 @@ namespace DMMDigital.Presenters
             view.textSize = currentConfig.textSize;
             view.textColor = currentConfig.textColor;
             view.rulerColor = currentConfig.rulerColor;
+            view.gamma = currentConfig.gamma;
+            view.edge = currentConfig.edge;
+            view.noise = currentConfig.noise;
         }
 
         private void saveConfigs(object sender, EventArgs e)
@@ -45,6 +48,9 @@ namespace DMMDigital.Presenters
                 currentConfig.textColor = view.textColor;
                 currentConfig.textSize = view.textSize;
                 currentConfig.rulerColor = view.rulerColor;
+                currentConfig.gamma = view.gamma;
+                currentConfig.edge = view.edge;
+                currentConfig.noise = view.noise;
                 MessageBox.Show(configRepository.save());
                 (sender as ConfigView).Close();
             }

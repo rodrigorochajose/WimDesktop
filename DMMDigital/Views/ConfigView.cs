@@ -49,6 +49,10 @@ namespace DMMDigital.Views
             set { buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
+        public float gamma { get; set; }
+        public float edge { get; set; }
+        public float noise { get; set; }
+
         public event EventHandler loadConfigs;
         public event EventHandler saveConfigs;
 
@@ -115,6 +119,18 @@ namespace DMMDigital.Views
             {
                 rulerColor = colorDialog.Color.ToArgb().ToString();
                 buttonRulerColorPicker.BackColor = colorDialog.Color;
+            }
+        }
+
+        private void buttonConfigureFiltersClick(object sender, EventArgs e)
+        {
+            PostProcessConfig postProcessConfig = new PostProcessConfig(gamma, edge, noise);
+
+            if (postProcessConfig.ShowDialog() == DialogResult.OK)
+            {
+                gamma = postProcessConfig.gamma;
+                edge = postProcessConfig.edge;
+                noise = postProcessConfig.noise;
             }
         }
     }

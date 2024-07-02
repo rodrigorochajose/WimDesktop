@@ -16,6 +16,10 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Emgu.CV.OCR;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Presenters
 {
@@ -55,7 +59,7 @@ namespace DMMDigital.Presenters
                     d?.Connect();
 
                     string sensorName = Regex.Match(path, "Pluto.*?(?=_)").ToString().ToUpper();
-                    
+
                     examContainerView.selectedExamView.sensorConnected = true;
 
                     connectedSensor = sensors.FirstOrDefault(s => s.name == sensorName);
@@ -299,6 +303,8 @@ namespace DMMDigital.Presenters
                                 }
                             }
                             ConvertToBitmap(imageData, imageWidth, imageHeight);
+
+                            examContainerView.selectedExamView.loadImageOnMainPictureBox();
                         }
                     }
                     break;
@@ -341,6 +347,9 @@ namespace DMMDigital.Presenters
                 SaveBmp(pic);
 
                 pic.Dispose();
+
+                postProcess();
+
             }
             catch (Exception ex)
             {
@@ -362,7 +371,7 @@ namespace DMMDigital.Presenters
 
             using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
-                TiffBitmapEncoder encoder = new TiffBitmapEncoder();
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
 
                 encoder.Frames.Add(BitmapFrame.Create(source));
 
@@ -370,19 +379,6 @@ namespace DMMDigital.Presenters
 
                 stream.Close();
             }
-
-            using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-filtered.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
-            {
-                TiffBitmapEncoder encoder = new TiffBitmapEncoder();
-
-                encoder.Frames.Add(BitmapFrame.Create(source));
-
-                encoder.Save(stream);
-
-                stream.Close();
-            }
-
-            examContainerView.selectedExamView.loadImageOnMainPictureBox();
         }
 
         private static System.Windows.Media.PixelFormat ConvertBmpPixelFormat(System.Drawing.Imaging.PixelFormat pixelformat)
@@ -405,6 +401,24 @@ namespace DMMDigital.Presenters
             }
 
             return pixelFormats;
+        }
+
+        private void postProcess()
+        {
+            string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png");
+            string filteredImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-filtered.png");
+
+            using (Bitmap originalImage = new Bitmap(originalImagePath))
+            {
+                Bitmap bmp = PostProcessFilter.applyFilters(originalImage, configRepository.getFiltersValues());
+
+                bmp.Save(filteredImagePath);
+            }
+
+            using (Bitmap bmp = new Bitmap(filteredImagePath))
+            {
+                bmp.Save(originalImagePath);
+            }
         }
     }
 }

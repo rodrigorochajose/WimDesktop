@@ -125,6 +125,7 @@
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
+    <Compile Include="Interface\IView\IPostProcessConfig.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IRepository\IConfigRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
+    <Compile Include="PostProcessFilter.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
@@ -200,11 +202,11 @@
     <Compile Include="Views\DialogChooseSensor.Designer.cs">
       <DependentUpon>DialogChooseSensor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PostProcessTest.cs">
+    <Compile Include="Views\PostProcessConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PostProcessTest.Designer.cs">
-      <DependentUpon>PostProcessTest.cs</DependentUpon>
+    <Compile Include="Views\PostProcessConfig.Designer.cs">
+      <DependentUpon>PostProcessConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\IView\IChooseFramesToCompare.cs" />
     <Compile Include="Interface\IView\IChooseTemplateExamView.cs" />
@@ -339,8 +341,8 @@
     <EmbeddedResource Include="Views\DialogChooseSensor.resx">
       <DependentUpon>DialogChooseSensor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PostProcessTest.resx">
-      <DependentUpon>PostProcessTest.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PostProcessConfig.resx">
+      <DependentUpon>PostProcessConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientHandlerView.resx">
       <DependentUpon>PatientHandlerView.cs</DependentUpon>
@@ -539,6 +541,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\1-original.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

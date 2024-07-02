@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV.CvEnum;
+using System;
 
 namespace DMMDigital.Interface.IView
 {
@@ -11,6 +12,9 @@ namespace DMMDigital.Interface.IView
         string textColor { get; set; }
         int textSize { get; set; }
         string rulerColor { get; set; }
+        float gamma { get; set; }
+        float edge { get; set; }
+        float noise { get; set; }
 
         event EventHandler loadConfigs;
         event EventHandler saveConfigs;

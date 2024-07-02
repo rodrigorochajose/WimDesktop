@@ -8,5 +8,6 @@ namespace DMMDigital.Interface.IRepository
         ConfigModel getAllConfig();
         string getSensorPath();
         string getExamPath();
+        float[] getFiltersValues();
     }
 }

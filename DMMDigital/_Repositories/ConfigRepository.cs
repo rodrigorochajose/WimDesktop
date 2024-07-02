@@ -43,5 +43,11 @@ namespace DMMDigital._Repositories
         {
             return context.config.First().examPath;
         }
+
+        public float[] getFiltersValues()
+        {
+            ConfigModel config = context.config.First();
+            return new float[] { config.gamma, config.edge, config.noise };
+        }
     }
 }

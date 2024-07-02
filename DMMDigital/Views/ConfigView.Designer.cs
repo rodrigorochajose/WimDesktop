@@ -35,6 +35,8 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxSensorPath = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -59,8 +61,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxSensorPath = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonConfigureFilters = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -73,6 +76,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelCaminho
@@ -107,6 +111,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tabControl1.Location = new System.Drawing.Point(3, 86);
@@ -128,6 +133,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.Location = new System.Drawing.Point(3, 33);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(215, 19);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Caminho apontamento do sensor";
+            // 
+            // textBoxSensorPath
+            // 
+            this.textBoxSensorPath.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxSensorPath.Location = new System.Drawing.Point(7, 65);
+            this.textBoxSensorPath.Name = "textBoxSensorPath";
+            this.textBoxSensorPath.Size = new System.Drawing.Size(312, 25);
+            this.textBoxSensorPath.TabIndex = 4;
             // 
             // tabPage2
             // 
@@ -412,23 +435,37 @@
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
-            // label9
+            // tabPage3
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label9.Location = new System.Drawing.Point(3, 33);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(215, 19);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Caminho apontamento do sensor";
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.buttonConfigureFilters);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(362, 257);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Filtros";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // textBoxSensorPath
+            // buttonConfigureFilters
             // 
-            this.textBoxSensorPath.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxSensorPath.Location = new System.Drawing.Point(7, 65);
-            this.textBoxSensorPath.Name = "textBoxSensorPath";
-            this.textBoxSensorPath.Size = new System.Drawing.Size(312, 25);
-            this.textBoxSensorPath.TabIndex = 4;
+            this.buttonConfigureFilters.Location = new System.Drawing.Point(143, 125);
+            this.buttonConfigureFilters.Name = "buttonConfigureFilters";
+            this.buttonConfigureFilters.Size = new System.Drawing.Size(75, 36);
+            this.buttonConfigureFilters.TabIndex = 0;
+            this.buttonConfigureFilters.Text = "Configurar";
+            this.buttonConfigureFilters.UseVisualStyleBackColor = true;
+            this.buttonConfigureFilters.Click += new System.EventHandler(this.buttonConfigureFiltersClick);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label11.Location = new System.Drawing.Point(73, 91);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(230, 19);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Clique aqui para configurar os filtros";
             // 
             // ConfigView
             // 
@@ -461,6 +498,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -498,5 +537,8 @@
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxSensorPath;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button buttonConfigureFilters;
     }
 }

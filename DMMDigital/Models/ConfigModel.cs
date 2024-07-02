@@ -28,5 +28,14 @@ namespace DMMDigital.Models
 
         [Column("RULER_COLOR")]
         public string rulerColor { get; set; }
+
+        [Column("GAMMA")]
+        public float gamma { get; set; }
+
+        [Column("EDGE")]
+        public float edge { get; set; }
+
+        [Column("NOISE")]
+        public float noise { get; set; }
     }
 }
