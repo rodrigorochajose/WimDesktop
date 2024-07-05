@@ -32,8 +32,11 @@ namespace DMMDigital.Views
         {
             tabControl.Selected += (s, ev) =>
             {
-                Form examScreen = ev.TabPage.Controls.OfType<Form>().First();
-                selectedExamView = examScreen as ExamView;
+                if (ev.TabPage != null)
+                {
+                    Form examScreen = ev.TabPage.Controls.OfType<Form>().First();
+                    selectedExamView = examScreen as ExamView;
+                }
             };
         }
 
@@ -89,6 +92,12 @@ namespace DMMDigital.Views
 
         private void closePage(object sender, EventArgs e)
         {
+            if (tabControl.TabPages.Count == 1)
+            {
+                Close();
+                return;
+            }
+
             openExamsId.Remove((sender as ExamView).examId);
 
             foreach (TabPage tp in tabControl.TabPages)
@@ -97,12 +106,8 @@ namespace DMMDigital.Views
                 {
                     tabControl.TabPages.Remove(tp);
                     (sender as Form).Close();
+                    return;
                 }
-            }
-
-            if (tabControl.TabPages.Count == 0)
-            {
-                Close();
             }
         }
 
