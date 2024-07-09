@@ -32,7 +32,7 @@ namespace DMMDigital
         {
             Image<Gray, Byte> imagemGamma = new Image<Gray, Byte>(image.Size);
 
-            value = 1.0f / value;
+            value = 1.0f / (1.0f + value * 0.1f);
             for (int y = 0; y < image.Height; y++)
             {
                 for (int x = 0; x < image.Width; x++)

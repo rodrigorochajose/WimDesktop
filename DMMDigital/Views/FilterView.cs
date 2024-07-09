@@ -8,6 +8,8 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Emgu.CV.Util;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Input;
 
 namespace DMMDigital.Views
 {
@@ -51,11 +53,6 @@ namespace DMMDigital.Views
                 image = adjustSmartSharpen(image);
             }
 
-            if (trackBarSmartRadius.Value != 0)
-            {
-                image = adjustBrightnessAndContrast(image, 0, trackBarSmartRadius.Value);
-            }
-
             if (checkBoxColorImage.Checked)
             {
                 image = colorImage(image, 0, 62, 158);
@@ -65,6 +62,8 @@ namespace DMMDigital.Views
             {
                 image = invertColors(new Bitmap(image));
             }
+
+            image = PostProcessFilter.applyFilters(image, new float[] { trackBarGamma.Value, trackBarEdge.Value, trackBarNoise.Value});
 
             editedImage = image;
             pictureBoxEditedImage.Image = editedImage;
@@ -298,6 +297,7 @@ namespace DMMDigital.Views
         private void numericUpDownBrightnessValueChanged(object sender, EventArgs e)
         {
             trackBarBrightness.Value = (int)numericUpDownBrightness.Value;
+            applyFilters();
         }
 
         private void trackBarContrastMouseCaptureChanged(object sender, EventArgs e)
@@ -309,6 +309,7 @@ namespace DMMDigital.Views
         private void numericUpDownContrastValueChanged(object sender, EventArgs e)
         {
             trackBarContrast.Value = (int)numericUpDownContrast.Value;
+            applyFilters();
         }
 
         private void trackBarRevealMouseCaptureChanged(object sender, EventArgs e)
@@ -320,6 +321,7 @@ namespace DMMDigital.Views
         private void numericUpDownRevealValueChanged(object sender, EventArgs e)
         {
             trackBarReveal.Value = (int)numericUpDownReveal.Value;
+            applyFilters();
         }
 
         private void trackBarSmartSharpenMouseCaptureChanged(object sender, EventArgs e)
@@ -331,17 +333,7 @@ namespace DMMDigital.Views
         private void numericUpDownSmartSharpenValueChanged(object sender, EventArgs e)
         {
             trackBarSmartSharpen.Value = (int)numericUpDownSmartSharpen.Value;
-        }
-
-        private void trackBarSmartRadiusMouseCaptureChanged(object sender, EventArgs e)
-        {
-            numericUpDownSmartRadius.Value = trackBarSmartRadius.Value;
             applyFilters();
-        }
-
-        private void numericUpDownSmartRadiusValueChanged(object sender, EventArgs e)
-        {
-            trackBarSmartRadius.Value = (int)numericUpDownSmartRadius.Value;
         }
 
         private void checkBoxColorImageCheckedChanged(object sender, EventArgs e)
@@ -364,8 +356,12 @@ namespace DMMDigital.Views
             numericUpDownReveal.Value = 0;
             trackBarSmartSharpen.Value = 0;
             numericUpDownSmartSharpen.Value = 0;
-            trackBarSmartRadius.Value = 0;
-            numericUpDownSmartRadius.Value = 0;
+            trackBarGamma.Value = 0;
+            numericUpDownGamma.Value = 0;
+            trackBarEdge.Value = 0;
+            numericUpDownEdge.Value = 0;
+            trackBarNoise.Value = 0;
+            numericUpDownNoise.Value = 0;
             checkBoxColorImage.Checked = false;
             checkBoxPositiveNegative.Checked = false;
         }
@@ -379,6 +375,72 @@ namespace DMMDigital.Views
         private void buttonBackClick(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void trackBarGammaMouseCaptureChanged(object sender, EventArgs e)
+        {
+            numericUpDownGamma.Value = trackBarGamma.Value;
+            applyFilters();
+        }
+
+        private void numericUpDownGammaValueChanged(object sender, EventArgs e)
+        {
+            trackBarGamma.Value = (int)numericUpDownGamma.Value;
+            applyFilters();
+        }
+
+        private void trackBarEdgeMouseCaptureChanged(object sender, EventArgs e)
+        {
+            numericUpDownEdge.Value = trackBarEdge.Value;
+            applyFilters();
+        }
+
+        private void numericUpDownEdgeValueChanged(object sender, EventArgs e)
+        {
+            trackBarEdge.Value = (int)numericUpDownEdge.Value;
+            applyFilters();
+        }
+
+        private void trackBarNoiseMouseCaptureChanged(object sender, EventArgs e)
+        {
+            numericUpDownNoise.Value = trackBarNoise.Value;
+            applyFilters();
+        }
+
+        private void numericUpDownNoiseValueChanged(object sender, EventArgs e)
+        {
+            trackBarNoise.Value = (int)numericUpDownNoise.Value;
+            applyFilters();
+        }
+
+        private void trackBarNoiseValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarNoise_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarEdgeValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarEdge_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarGammaValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBarGamma_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
