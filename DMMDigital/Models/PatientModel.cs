@@ -1,5 +1,4 @@
-﻿using DMMDigital.Models.Annotations;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,8 +22,7 @@ namespace DMMDigital.Models
         [Column("BIRTH_DATE")]
         [DisplayName("Data de Nascimento")]
         [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
-        [Required(ErrorMessage = "Data de Nascimento é obrigatório!")]
-        [DateTimeRange(ErrorMessage = "Data de Nascimento fora do alcance permitido.")]
+        [Required(ErrorMessage = "Data de Nascimento é obrigatória!")]
         public DateTime birthDate { get; set; }
 
         [Column("PHONE")]

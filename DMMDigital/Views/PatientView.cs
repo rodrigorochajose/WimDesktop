@@ -97,6 +97,11 @@ namespace DMMDigital.Views
                 }
             };
 
+            dataGridViewExam.CellDoubleClick += (s, e) =>
+            {
+                eventOpenExam?.Invoke(this, EventArgs.Empty);
+            };
+
             buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
 
             buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };

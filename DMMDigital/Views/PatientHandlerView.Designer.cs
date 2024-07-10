@@ -37,12 +37,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxPhone = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBoxBirthDate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.maskedTextBoxBirthDate = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // buttonSave
@@ -130,20 +130,6 @@
             this.label5.TabIndex = 20;
             this.label5.Text = "Telefone";
             // 
-            // textBoxBirthDate
-            // 
-            this.textBoxBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBirthDate.CalendarFont = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxBirthDate.CustomFormat = "dd/MM/yyyy";
-            this.textBoxBirthDate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxBirthDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.textBoxBirthDate.Location = new System.Drawing.Point(89, 193);
-            this.textBoxBirthDate.MinDate = new System.DateTime(1910, 1, 1, 0, 0, 0, 0);
-            this.textBoxBirthDate.Name = "textBoxBirthDate";
-            this.textBoxBirthDate.Size = new System.Drawing.Size(217, 25);
-            this.textBoxBirthDate.TabIndex = 19;
-            this.textBoxBirthDate.Value = new System.DateTime(1995, 1, 1, 0, 0, 0, 0);
-            // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -197,11 +183,20 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Editar Paciente";
             // 
+            // maskedTextBoxBirthDate
+            // 
+            this.maskedTextBoxBirthDate.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.maskedTextBoxBirthDate.Location = new System.Drawing.Point(89, 193);
+            this.maskedTextBoxBirthDate.Name = "maskedTextBoxBirthDate";
+            this.maskedTextBoxBirthDate.Size = new System.Drawing.Size(139, 25);
+            this.maskedTextBoxBirthDate.TabIndex = 19;
+            // 
             // PatientHandlerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 513);
+            this.Controls.Add(this.maskedTextBoxBirthDate);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxObservation);
@@ -210,7 +205,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxPhone);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBoxBirthDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label3);
@@ -237,12 +231,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MaskedTextBox textBoxPhone;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker textBoxBirthDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxRecommendation;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxBirthDate;
     }
 }

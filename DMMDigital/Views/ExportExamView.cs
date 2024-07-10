@@ -6,9 +6,10 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Aspose.Imaging.ImageOptions;
 using DMMDigital.Components;
 using DMMDigital.Models;
+using FellowOakDicom.Imaging;
+using FellowOakDicom;
 
 namespace DMMDigital.Views
 {
@@ -171,6 +172,9 @@ namespace DMMDigital.Views
                     case "DICOM":
                         extension = ".dicom";
                         break;
+                    case "RAW":
+                        extension = ".raw";
+                        break;
                         
                 }
 
@@ -200,17 +204,17 @@ namespace DMMDigital.Views
                     foreach (string file in files)
                     {
                         Bitmap bmp = new Bitmap(file);
-
-                        using (MemoryStream stream = new MemoryStream())
-                        {
-                            bmp.Save(stream, ImageFormat.Bmp);
-                            stream.Position = 0;
-                            Aspose.Imaging.Image imageAspose = Aspose.Imaging.Image.Load(stream);
-                            DicomOptions exportOptions = new DicomOptions();
-                            imageAspose.Save(Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"), exportOptions);
-                        }
+                        getAndSaveDicomFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
                     }
-                } 
+                }
+                else if (extension == ".raw")
+                {
+                    foreach (string file in files)
+                    {
+                        Bitmap bmp = new Bitmap(file);
+                        getAndSaveRawFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
+                    }
+                }
                 else
                 {
                     foreach (string file in files)
@@ -226,5 +230,66 @@ namespace DMMDigital.Views
             }
         }
 
+        private void getAndSaveDicomFile(Bitmap bitmap, string path)
+        {
+            byte[] pixelData = ConvertBitmapToGrayscaleByteArray(bitmap);
+
+            var dataset = new DicomDataset
+            {
+                { DicomTag.PatientName, patientName },
+                { DicomTag.StudyInstanceUID, DicomUIDGenerator.GenerateDerivedFromUUID().UID },
+                { DicomTag.SeriesInstanceUID, DicomUIDGenerator.GenerateDerivedFromUUID().UID },
+                { DicomTag.SOPInstanceUID, DicomUIDGenerator.GenerateDerivedFromUUID().UID },
+                { DicomTag.SOPClassUID, DicomUID.SecondaryCaptureImageStorage },
+                { DicomTag.PhotometricInterpretation, PhotometricInterpretation.Monochrome2.Value },
+                { DicomTag.Rows, (ushort)bitmap.Height },
+                { DicomTag.Columns, (ushort)bitmap.Width },
+                { DicomTag.BitsAllocated, (ushort)8 },
+                { DicomTag.BitsStored, (ushort)8 },
+                { DicomTag.HighBit, (ushort)7 },
+                { DicomTag.PixelRepresentation, (ushort)0 },
+                { DicomTag.SamplesPerPixel, (ushort)1 }
+            };
+
+            dataset.AddOrUpdate(new DicomOtherByte(DicomTag.PixelData, pixelData));
+
+            DicomFile dicomFile = new DicomFile(dataset);
+            dicomFile.Save(path);
+        }
+
+        private void getAndSaveRawFile(Bitmap bitmap, string path)
+        {
+            byte[] pixelData = ConvertBitmapToGrayscaleByteArray(bitmap);
+
+            File.WriteAllBytes(path, pixelData);
+        }
+
+        private static byte[] ConvertBitmapToGrayscaleByteArray(Bitmap bitmap)
+        {
+            int width = bitmap.Width;
+            int height = bitmap.Height;
+            int bytesPerPixel = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
+            byte[] pixelData = new byte[width * height * bytesPerPixel];
+
+            BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+            try
+            {
+                IntPtr scan0 = bitmapData.Scan0;
+                int stride = bitmapData.Stride;
+
+                for (int y = 0; y < height; y++)
+                {
+                    IntPtr row = scan0 + (y * stride);
+                    System.Runtime.InteropServices.Marshal.Copy(row, pixelData, y * width * bytesPerPixel, width * bytesPerPixel);
+                }
+            }
+            finally
+            {
+                bitmap.UnlockBits(bitmapData);
+            }
+
+            return pixelData;
+        }
     }
 }

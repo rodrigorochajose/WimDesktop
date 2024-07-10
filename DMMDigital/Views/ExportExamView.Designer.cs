@@ -155,7 +155,8 @@
             "JPEG",
             "PNG",
             "TIFF",
-            "DICOM"});
+            "DICOM",
+            "RAW"});
             this.comboBoxFormat.Location = new System.Drawing.Point(132, 68);
             this.comboBoxFormat.Name = "comboBoxFormat";
             this.comboBoxFormat.Size = new System.Drawing.Size(113, 23);

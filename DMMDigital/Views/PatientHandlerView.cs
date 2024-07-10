@@ -17,8 +17,8 @@ namespace DMMDigital.Views
 
         public DateTime patientBirthDate
         {
-            get { return DateTime.Parse(textBoxBirthDate.Text); }
-            set { textBoxBirthDate.Text = value.ToString(); }
+            get { return DateTime.Parse(maskedTextBoxBirthDate.Text); }
+            set { maskedTextBoxBirthDate.Text = value.ToString(); }
         }
 
         public string patientPhone
@@ -47,7 +47,12 @@ namespace DMMDigital.Views
         public PatientHandlerView(string action)
         {
             InitializeComponent();
+
+            maskedTextBoxBirthDate.Mask = "00/00/0000";
+            maskedTextBoxBirthDate.ValidatingType = typeof(DateTime);
+
             associateEvents();
+
             if (action == "add")
             {
                 this.action = action;
@@ -69,6 +74,30 @@ namespace DMMDigital.Views
                 else
                 {
                     eventAddNewPatient?.Invoke(this, EventArgs.Empty);
+                }
+            };
+
+            maskedTextBoxBirthDate.KeyPress += (s, e) =>
+            {
+                if (char.IsDigit(e.KeyChar))
+                {
+                    MaskedTextBox mtb = s as MaskedTextBox;
+                    if (mtb != null)
+                    {
+                        int selectionStart = mtb.SelectionStart;
+                        if (selectionStart == 2 || selectionStart == 5)
+                        {
+                            mtb.SelectionStart = selectionStart + 1;
+                        }
+                    }
+                }
+            };
+
+            maskedTextBoxBirthDate.Click += (s, e) =>
+            {
+                if (s != null)
+                {
+                    (s as MaskedTextBox).SelectionStart = 0;
                 }
             };
         }

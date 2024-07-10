@@ -63,7 +63,7 @@ namespace DMMDigital.Views
                 image = invertColors(new Bitmap(image));
             }
 
-            image = PostProcessFilter.applyFilters(image, new float[] { trackBarGamma.Value, trackBarEdge.Value, trackBarNoise.Value});
+            //image = PostProcessFilter.applyFilters(image, new float[] { trackBarGamma.Value, trackBarEdge.Value, trackBarNoise.Value});
 
             editedImage = image;
             pictureBoxEditedImage.Image = editedImage;

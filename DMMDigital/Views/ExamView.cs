@@ -129,8 +129,41 @@ namespace DMMDigital.Views
                     componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
+
+                mainPictureBoxOriginalSize = mainPictureBox.Size;
+
+                selectInitialFrame();
             };
-            mainPictureBoxOriginalSize = mainPictureBox.Size;
+
+        }
+
+        private void selectInitialFrame()
+        {
+            Frame emptyFrame = frames.First(f => f.originalImage == null);
+
+            if (emptyFrame != null)
+            {
+                selectedFrame = emptyFrame;
+                indexFrame = frames.IndexOf(selectedFrame);
+                selectedFrame.Tag = Color.LimeGreen;
+            }
+            else
+            {
+                selectedFrame = frames.First();
+                selectedFrame.Tag = Color.LimeGreen;
+
+                if (selectedFrame.filteredImage != null)
+                {
+                    mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
+                    provideTools(true);
+                }
+
+                resizeMainPictureBox();
+
+                labelImageDate.Text = selectedFrame.datePhotoTook;
+                textBoxFrameNotes.Text = selectedFrame.notes;
+            }
+
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -220,20 +253,6 @@ namespace DMMDigital.Views
                 frames.Add(newFrame);
                 panelTemplate.Controls.Add(newFrame);
             }
-
-            selectedFrame = frames.First();
-            selectedFrame.Tag = Color.LimeGreen;
-
-            if (selectedFrame.filteredImage != null)
-            {
-                mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
-                provideTools(true);
-            }
-
-            resizeMainPictureBox();
-
-            labelImageDate.Text = selectedFrame.datePhotoTook;
-            textBoxFrameNotes.Text = selectedFrame.notes;
         }
 
         private Image drawFrameDefaultImage(Frame currentFrame)
