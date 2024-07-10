@@ -12,12 +12,12 @@ namespace DMMDigital.Interface.IView
         string textColor { get; set; }
         int textSize { get; set; }
         string rulerColor { get; set; }
-        float gamma { get; set; }
-        float edge { get; set; }
-        float noise { get; set; }
+        float brightness { get; set; }
+        float contrast { get; set; }
+        float reveal { get; set; }
+        float smartSharpen { get; set; }
 
         event EventHandler loadConfigs;
         event EventHandler saveConfigs;
-
     }
 }

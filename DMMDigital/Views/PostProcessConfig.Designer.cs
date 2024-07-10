@@ -35,9 +35,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonRestoreImage = new System.Windows.Forms.Button();
-            this.numericUpDownGamma = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownEdge = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownNoise = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownBrightness = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownContrast = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownReveal = new System.Windows.Forms.NumericUpDown();
             this.buttonApply = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -46,12 +46,15 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDownSmartSharpen = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilteredImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGamma)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEdge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNoise)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReveal)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSmartSharpen)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxOriginalImage
@@ -82,39 +85,39 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 107);
+            this.label1.Location = new System.Drawing.Point(37, 85);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Gamma";
+            this.label1.Text = "Brilho";
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(37, 162);
+            this.label2.Location = new System.Drawing.Point(37, 140);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 15);
+            this.label2.Size = new System.Drawing.Size(58, 15);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Edge";
+            this.label2.Text = "Contraste";
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 218);
+            this.label3.Location = new System.Drawing.Point(38, 196);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Noise";
+            this.label3.Text = "Revelar";
             // 
             // buttonRestoreImage
             // 
             this.buttonRestoreImage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonRestoreImage.Location = new System.Drawing.Point(82, 341);
+            this.buttonRestoreImage.Location = new System.Drawing.Point(82, 369);
             this.buttonRestoreImage.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonRestoreImage.Name = "buttonRestoreImage";
             this.buttonRestoreImage.Size = new System.Drawing.Size(66, 42);
@@ -123,45 +126,45 @@
             this.buttonRestoreImage.UseVisualStyleBackColor = true;
             this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
             // 
-            // numericUpDownGamma
+            // numericUpDownBrightness
             // 
-            this.numericUpDownGamma.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericUpDownGamma.DecimalPlaces = 2;
-            this.numericUpDownGamma.Location = new System.Drawing.Point(41, 126);
-            this.numericUpDownGamma.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.numericUpDownGamma.Name = "numericUpDownGamma";
-            this.numericUpDownGamma.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDownGamma.TabIndex = 10;
+            this.numericUpDownBrightness.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericUpDownBrightness.DecimalPlaces = 2;
+            this.numericUpDownBrightness.Location = new System.Drawing.Point(41, 104);
+            this.numericUpDownBrightness.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericUpDownBrightness.Name = "numericUpDownBrightness";
+            this.numericUpDownBrightness.Size = new System.Drawing.Size(85, 23);
+            this.numericUpDownBrightness.TabIndex = 10;
             // 
-            // numericUpDownEdge
+            // numericUpDownContrast
             // 
-            this.numericUpDownEdge.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericUpDownEdge.DecimalPlaces = 2;
-            this.numericUpDownEdge.Location = new System.Drawing.Point(41, 180);
-            this.numericUpDownEdge.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.numericUpDownEdge.Maximum = new decimal(new int[] {
+            this.numericUpDownContrast.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericUpDownContrast.DecimalPlaces = 2;
+            this.numericUpDownContrast.Location = new System.Drawing.Point(41, 158);
+            this.numericUpDownContrast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericUpDownContrast.Maximum = new decimal(new int[] {
             150,
             0,
             0,
             0});
-            this.numericUpDownEdge.Name = "numericUpDownEdge";
-            this.numericUpDownEdge.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDownEdge.TabIndex = 11;
+            this.numericUpDownContrast.Name = "numericUpDownContrast";
+            this.numericUpDownContrast.Size = new System.Drawing.Size(85, 23);
+            this.numericUpDownContrast.TabIndex = 11;
             // 
-            // numericUpDownNoise
+            // numericUpDownReveal
             // 
-            this.numericUpDownNoise.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericUpDownNoise.DecimalPlaces = 2;
-            this.numericUpDownNoise.Location = new System.Drawing.Point(41, 237);
-            this.numericUpDownNoise.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.numericUpDownNoise.Name = "numericUpDownNoise";
-            this.numericUpDownNoise.Size = new System.Drawing.Size(85, 23);
-            this.numericUpDownNoise.TabIndex = 12;
+            this.numericUpDownReveal.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericUpDownReveal.DecimalPlaces = 2;
+            this.numericUpDownReveal.Location = new System.Drawing.Point(41, 215);
+            this.numericUpDownReveal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericUpDownReveal.Name = "numericUpDownReveal";
+            this.numericUpDownReveal.Size = new System.Drawing.Size(85, 23);
+            this.numericUpDownReveal.TabIndex = 12;
             // 
             // buttonApply
             // 
             this.buttonApply.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonApply.Location = new System.Drawing.Point(34, 282);
+            this.buttonApply.Location = new System.Drawing.Point(34, 310);
             this.buttonApply.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonApply.Name = "buttonApply";
             this.buttonApply.Size = new System.Drawing.Size(88, 39);
@@ -189,14 +192,16 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.Controls.Add(this.numericUpDownSmartSharpen);
+            this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.buttonImport);
             this.panel3.Controls.Add(this.buttonRestoreValues);
             this.panel3.Controls.Add(this.buttonSave);
             this.panel3.Controls.Add(this.buttonRestoreImage);
-            this.panel3.Controls.Add(this.numericUpDownGamma);
+            this.panel3.Controls.Add(this.numericUpDownBrightness);
             this.panel3.Controls.Add(this.buttonApply);
-            this.panel3.Controls.Add(this.numericUpDownEdge);
-            this.panel3.Controls.Add(this.numericUpDownNoise);
+            this.panel3.Controls.Add(this.numericUpDownContrast);
+            this.panel3.Controls.Add(this.numericUpDownReveal);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label2);
@@ -210,7 +215,7 @@
             // buttonRestoreValues
             // 
             this.buttonRestoreValues.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.buttonRestoreValues.Location = new System.Drawing.Point(10, 341);
+            this.buttonRestoreValues.Location = new System.Drawing.Point(10, 369);
             this.buttonRestoreValues.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buttonRestoreValues.Name = "buttonRestoreValues";
             this.buttonRestoreValues.Size = new System.Drawing.Size(66, 42);
@@ -253,6 +258,27 @@
             this.label5.TabIndex = 19;
             this.label5.Text = "Imagem Editada";
             // 
+            // numericUpDownSmartSharpen
+            // 
+            this.numericUpDownSmartSharpen.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.numericUpDownSmartSharpen.DecimalPlaces = 2;
+            this.numericUpDownSmartSharpen.Location = new System.Drawing.Point(41, 271);
+            this.numericUpDownSmartSharpen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericUpDownSmartSharpen.Name = "numericUpDownSmartSharpen";
+            this.numericUpDownSmartSharpen.Size = new System.Drawing.Size(85, 23);
+            this.numericUpDownSmartSharpen.TabIndex = 17;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(38, 252);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Smart Shapen";
+            // 
             // PostProcessConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -274,11 +300,12 @@
             this.Text = "Configurar Filtros";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilteredImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGamma)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEdge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNoise)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReveal)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSmartSharpen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,9 +319,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonRestoreImage;
-        private System.Windows.Forms.NumericUpDown numericUpDownGamma;
-        private System.Windows.Forms.NumericUpDown numericUpDownEdge;
-        private System.Windows.Forms.NumericUpDown numericUpDownNoise;
+        private System.Windows.Forms.NumericUpDown numericUpDownBrightness;
+        private System.Windows.Forms.NumericUpDown numericUpDownContrast;
+        private System.Windows.Forms.NumericUpDown numericUpDownReveal;
         private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.Button buttonImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -303,5 +330,7 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDownSmartSharpen;
+        private System.Windows.Forms.Label label6;
     }
 }

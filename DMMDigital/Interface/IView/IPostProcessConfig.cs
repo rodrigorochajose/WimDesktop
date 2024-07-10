@@ -2,8 +2,9 @@
 {
     public interface IPostProcessConfig
     {
-        float gamma { get; set; }
-        float edge { get; set; }
-        float noise { get; set; }
+        float brightness { get; set; }
+        float contrast { get; set; }
+        float reveal { get; set; }
+        float smartSharpen { get; set; }
     }
 }

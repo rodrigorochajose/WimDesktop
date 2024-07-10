@@ -8,31 +8,38 @@ namespace DMMDigital.Views
 {
     public partial class PostProcessConfig : Form, IPostProcessConfig
     {
-        public float gamma 
+        public float brightness 
         {
-            get { return (float) numericUpDownGamma.Value; }
-            set { numericUpDownGamma.Value = (decimal) value; }
+            get { return (float) numericUpDownBrightness.Value; }
+            set { numericUpDownBrightness.Value = (decimal) value; }
         }
 
-        public float edge 
+        public float contrast 
         {
-            get { return (float)numericUpDownEdge.Value; }
-            set { numericUpDownEdge.Value = (decimal)value; }
+            get { return (float)numericUpDownContrast.Value; }
+            set { numericUpDownContrast.Value = (decimal)value; }
         }
 
-        public float noise 
+        public float reveal 
         {
-            get { return (float)numericUpDownNoise.Value; }
-            set { numericUpDownNoise.Value = (decimal)value; }
+            get { return (float)numericUpDownReveal.Value; }
+            set { numericUpDownReveal.Value = (decimal)value; }
         }
 
-        public PostProcessConfig(float gamma, float edge, float noise)
+        public float smartSharpen
+        {
+            get { return (float)numericUpDownSmartSharpen.Value; }
+            set { numericUpDownSmartSharpen.Value = (decimal)value; }
+        }
+
+        public PostProcessConfig(float brightness, float contrast, float reveal, float smartSharpen)
         {
             InitializeComponent();
 
-            this.gamma = gamma;
-            this.edge = edge;
-            this.noise = noise;
+            this.brightness = brightness;
+            this.contrast = contrast;
+            this.reveal = reveal;
+            this.smartSharpen = smartSharpen;
 
             pictureBoxOriginalImage.Image = Resources.imageConfigFilter;
             pictureBoxFilteredImage.Image = Resources.imageConfigFilter;
@@ -54,7 +61,9 @@ namespace DMMDigital.Views
         {
             Bitmap image = new Bitmap(pictureBoxOriginalImage.Image); 
 
-            image = PostProcessFilter.applyFilters(image, new float[] { gamma, edge, noise });
+            image = Filters.applyBrightnessAndContrast(image, brightness / 4, contrast);
+            image = Filters.applyReveal(image, reveal);
+            image = Filters.applySmartSharpen(image, smartSharpen);
 
             pictureBoxFilteredImage.Image = image;
             Refresh();
@@ -67,9 +76,9 @@ namespace DMMDigital.Views
 
         private void buttonRestoreValuesClick(object sender, EventArgs e)
         {
-            numericUpDownGamma.Value = 0;
-            numericUpDownEdge.Value = 0;
-            numericUpDownNoise.Value = 0;
+            numericUpDownBrightness.Value = 0;
+            numericUpDownContrast.Value = 0;
+            numericUpDownReveal.Value = 0;
         }
 
         private void buttonSaveClick(object sender, EventArgs e)

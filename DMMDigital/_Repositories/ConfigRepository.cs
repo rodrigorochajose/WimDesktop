@@ -47,7 +47,7 @@ namespace DMMDigital._Repositories
         public float[] getFiltersValues()
         {
             ConfigModel config = context.config.First();
-            return new float[] { config.gamma, config.edge, config.noise };
+            return new float[] { config.brightness, config.contrast, config.reveal, config.smartSharpen };
         }
     }
 }

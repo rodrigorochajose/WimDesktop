@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Interface.IView;
 using System;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -49,9 +50,10 @@ namespace DMMDigital.Views
             set { buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
-        public float gamma { get; set; }
-        public float edge { get; set; }
-        public float noise { get; set; }
+        public float brightness { get; set; }
+        public float contrast { get; set; }
+        public float reveal { get; set; }
+        public float smartSharpen { get; set; }
 
         public event EventHandler loadConfigs;
         public event EventHandler saveConfigs;
@@ -124,13 +126,14 @@ namespace DMMDigital.Views
 
         private void buttonConfigureFiltersClick(object sender, EventArgs e)
         {
-            PostProcessConfig postProcessConfig = new PostProcessConfig(gamma, edge, noise);
+            PostProcessConfig postProcessConfig = new PostProcessConfig(brightness, contrast, reveal, smartSharpen);
 
             if (postProcessConfig.ShowDialog() == DialogResult.OK)
             {
-                gamma = postProcessConfig.gamma;
-                edge = postProcessConfig.edge;
-                noise = postProcessConfig.noise;
+                brightness = postProcessConfig.brightness;
+                contrast = postProcessConfig.contrast;
+                reveal = postProcessConfig.reveal;
+                smartSharpen = postProcessConfig.smartSharpen;
             }
         }
     }

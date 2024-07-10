@@ -29,13 +29,16 @@ namespace DMMDigital.Models
         [Column("RULER_COLOR")]
         public string rulerColor { get; set; }
 
-        [Column("GAMMA")]
-        public float gamma { get; set; }
+        [Column("FILTER_BRIGHTNESS")]
+        public float brightness { get; set; }
 
-        [Column("EDGE")]
-        public float edge { get; set; }
+        [Column("FILTER_CONTRAST")]
+        public float contrast { get; set; }
 
-        [Column("NOISE")]
-        public float noise { get; set; }
+        [Column("FILTER_REVEAL")]
+        public float reveal { get; set; }
+
+        [Column("FILTER_SMART_SHARPEN")]
+        public float smartSharpen { get; set; }
     }
 }

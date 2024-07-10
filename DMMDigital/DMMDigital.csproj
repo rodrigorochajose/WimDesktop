@@ -140,7 +140,7 @@
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
-    <Compile Include="PostProcessFilter.cs" />
+    <Compile Include="Filters.cs" />
     <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
     <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
     <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />

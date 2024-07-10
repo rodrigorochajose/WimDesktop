@@ -410,7 +410,7 @@ namespace DMMDigital.Presenters
 
             using (Bitmap originalImage = new Bitmap(originalImagePath))
             {
-                Bitmap bmp = PostProcessFilter.applyFilters(originalImage, configRepository.getFiltersValues());
+                Bitmap bmp = Filters.applyPostProcessFilters(originalImage, configRepository.getFiltersValues());
 
                 bmp.Save(filteredImagePath);
             }

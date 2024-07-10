@@ -102,8 +102,11 @@ namespace DMMDigital.Views
                     componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
                     componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
+
+                mainPictureBoxOriginalSize = mainPictureBox.Size;
+                
+                selectInitialFrame();
             };
-            mainPictureBoxOriginalSize = mainPictureBox.Size;
         }
 
         public ExamView(int examId, PatientModel patient, ConfigModel config)
@@ -1294,9 +1297,8 @@ namespace DMMDigital.Views
         {
             if (MessageBox.Show("Tem certeza que deseja restaurar a imagem original ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                selectedFrame.filteredImage = null;
-
                 Image img = selectedFrame.originalImage;
+                selectedFrame.filteredImage = img;
                 mainPictureBox.Image = img;
 
                 selectedFrame.Invoke((MethodInvoker)(() =>

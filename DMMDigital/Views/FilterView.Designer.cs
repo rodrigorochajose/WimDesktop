@@ -291,7 +291,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 521);
+            this.label8.Location = new System.Drawing.Point(19, 526);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(110, 15);
             this.label8.TabIndex = 17;
@@ -301,7 +301,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(19, 557);
+            this.label9.Location = new System.Drawing.Point(19, 562);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 15);
             this.label9.TabIndex = 19;
@@ -309,9 +309,9 @@
             // 
             // buttonRestoreImage
             // 
-            this.buttonRestoreImage.Location = new System.Drawing.Point(24, 660);
+            this.buttonRestoreImage.Location = new System.Drawing.Point(27, 605);
             this.buttonRestoreImage.Name = "buttonRestoreImage";
-            this.buttonRestoreImage.Size = new System.Drawing.Size(80, 51);
+            this.buttonRestoreImage.Size = new System.Drawing.Size(80, 40);
             this.buttonRestoreImage.TabIndex = 21;
             this.buttonRestoreImage.Text = "Restaurar";
             this.buttonRestoreImage.UseVisualStyleBackColor = true;
@@ -319,9 +319,9 @@
             // 
             // buttonApplyChanges
             // 
-            this.buttonApplyChanges.Location = new System.Drawing.Point(165, 660);
+            this.buttonApplyChanges.Location = new System.Drawing.Point(163, 605);
             this.buttonApplyChanges.Name = "buttonApplyChanges";
-            this.buttonApplyChanges.Size = new System.Drawing.Size(80, 51);
+            this.buttonApplyChanges.Size = new System.Drawing.Size(80, 40);
             this.buttonApplyChanges.TabIndex = 22;
             this.buttonApplyChanges.Text = "Aplicar";
             this.buttonApplyChanges.UseVisualStyleBackColor = true;
@@ -330,7 +330,7 @@
             // checkBoxPositiveNegative
             // 
             this.checkBoxPositiveNegative.AutoSize = true;
-            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(228, 522);
+            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(228, 527);
             this.checkBoxPositiveNegative.Name = "checkBoxPositiveNegative";
             this.checkBoxPositiveNegative.Size = new System.Drawing.Size(15, 14);
             this.checkBoxPositiveNegative.TabIndex = 23;
@@ -340,7 +340,7 @@
             // checkBoxColorImage
             // 
             this.checkBoxColorImage.AutoSize = true;
-            this.checkBoxColorImage.Location = new System.Drawing.Point(228, 558);
+            this.checkBoxColorImage.Location = new System.Drawing.Point(228, 563);
             this.checkBoxColorImage.Name = "checkBoxColorImage";
             this.checkBoxColorImage.Size = new System.Drawing.Size(15, 14);
             this.checkBoxColorImage.TabIndex = 24;
@@ -353,7 +353,9 @@
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedPanel1.BorderWidth = 5F;
             this.roundedPanel1.Controls.Add(this.numericUpDownNoise);
+            this.roundedPanel1.Controls.Add(this.buttonApplyChanges);
             this.roundedPanel1.Controls.Add(this.trackBarNoise);
+            this.roundedPanel1.Controls.Add(this.buttonRestoreImage);
             this.roundedPanel1.Controls.Add(this.label12);
             this.roundedPanel1.Controls.Add(this.numericUpDownEdge);
             this.roundedPanel1.Controls.Add(this.trackBarEdge);
@@ -378,9 +380,9 @@
             this.roundedPanel1.Controls.Add(this.numericUpDownSmartSharpen);
             this.roundedPanel1.Controls.Add(this.trackBarSmartSharpen);
             this.roundedPanel1.CornerRadius = 20;
-            this.roundedPanel1.Location = new System.Drawing.Point(2, 57);
+            this.roundedPanel1.Location = new System.Drawing.Point(2, 53);
             this.roundedPanel1.Name = "roundedPanel1";
-            this.roundedPanel1.Size = new System.Drawing.Size(274, 589);
+            this.roundedPanel1.Size = new System.Drawing.Size(274, 665);
             this.roundedPanel1.TabIndex = 25;
             // 
             // numericUpDownNoise
@@ -507,8 +509,6 @@
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1370, 725);
             this.Controls.Add(this.roundedPanel1);
-            this.Controls.Add(this.buttonApplyChanges);
-            this.Controls.Add(this.buttonRestoreImage);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
