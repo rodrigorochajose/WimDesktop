@@ -40,9 +40,9 @@ namespace DMMDigital.Presenters
 
         public void generateDatabaseBackup()
         {
-            string backupDirectory = @"C:\\WimDesktopV2\\bkp\\";
+            string backupDirectory = @"C:\\WimDesktopDB\\bkp\\";
 
-            string currentDatabaseFilePath = @"C:\WimDesktopV2\db\WIMDESKTOPDB.FDB";
+            string currentDatabaseFilePath = @"C:\WimDesktopDB\db\WIMDESKTOPDB.FDB";
 
             string targetDirectoryPath = Path.Combine(backupDirectory, $"BKP_{DateTime.Now:dd-MM-yyyy-HH-m-ss}");
 
@@ -53,7 +53,7 @@ namespace DMMDigital.Presenters
 
             File.Copy(currentDatabaseFilePath, Path.Combine(targetDirectoryPath, "WIMDESKTOPDB.FDB"));
 
-            var directories = Directory.GetDirectories(@"C:\WimDesktopV2\bkp");
+            var directories = Directory.GetDirectories(@"C:\WimDesktopDB\bkp");
 
 
             if (directories.Length > 200)

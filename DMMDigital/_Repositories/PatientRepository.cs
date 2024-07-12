@@ -19,7 +19,7 @@ namespace DMMDigital._Repositories
                 context.patient.Add(patient);
                 context.SaveChanges();
 
-                Directory.CreateDirectory(@"C:\Users\USER\.novowimdesktop\img\Paciente-" + patient.id);
+                Directory.CreateDirectory(@"C:\WimDesktopDB\img\Paciente-" + patient.id);
 
                 MessageBox.Show("Paciente cadastrado com sucesso !");
             }

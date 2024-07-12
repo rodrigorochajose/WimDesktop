@@ -77,9 +77,9 @@ namespace DMMDigital.Views
                 }
             };
 
-            dataGridViewExam.CellContentClick += (s, e) =>
+            dataGridViewExam.CellClick += (s, e) =>
             {
-                if (e.RowIndex == 0 && e.ColumnIndex == 0)
+                if (e.RowIndex == 3 && e.ColumnIndex == 0)
                 {
                     if(selectedExamId == 0)
                     {
@@ -87,13 +87,17 @@ namespace DMMDigital.Views
                         return;
                     }
 
-                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                    DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir Exame", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (DialogResult.Yes.Equals(confirmacao))
+                    {
+                        int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
 
-                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[2].Value.ToString();
-                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
+                        string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString();
+                        DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
 
-                    selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy}";
-                    eventDeleteExam?.Invoke(this, EventArgs.Empty);
+                        selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy}";
+                        eventDeleteExam?.Invoke(this, EventArgs.Empty);
+                    }
                 }
             };
 

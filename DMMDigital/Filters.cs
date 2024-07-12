@@ -32,6 +32,7 @@ namespace DMMDigital
 
             return image;
         }
+
         public static Bitmap applyGamma(Bitmap img, float value)
         {
             Image<Gray, Byte> image = img.ToImage<Gray, Byte>();

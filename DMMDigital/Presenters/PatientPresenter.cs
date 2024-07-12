@@ -226,14 +226,14 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            examRepository.deleteExam(view.selectedExamId);
-
-            string fullPath = Path.Combine(configRepository.getExamPath(), view.selectedExamPath);
+            string fullPath = $"{configRepository.getExamPath()}{view.selectedExamPath}";
 
             if (Directory.Exists(fullPath))
             {
                 Directory.Delete(fullPath, true);
             }
+
+            examRepository.deleteExam(view.selectedExamId);
 
             MessageBox.Show("Exame deletado com sucesso!");
             getExamByPatient(this, EventArgs.Empty);

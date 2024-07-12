@@ -167,14 +167,13 @@ namespace DMMDigital.Views
             int horizontalColumns = (int)Math.Ceiling((float)horizontalImages.Count / 3);
             int verticalColumns = (int)Math.Ceiling((float)verticalImages.Count / 2);
 
-            tableLayoutPanel.ColumnStyles.Clear();
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * horizontalColumns));
-            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * verticalColumns));
-            tableLayoutPanel.ColumnCount = 2;
-
-
             if (horizontalColumns > 0)
             {
+                tableLayoutPanel.ColumnStyles.Clear();
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * horizontalColumns));
+                tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (100 / horizontalColumns + verticalColumns) * verticalColumns));
+                tableLayoutPanel.ColumnCount = 2;
+
                 TableLayoutPanel tableHorizontalFrames = new TableLayoutPanel
                 {
                     ColumnCount = horizontalColumns,

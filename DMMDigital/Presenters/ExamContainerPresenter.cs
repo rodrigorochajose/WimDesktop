@@ -16,10 +16,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using Emgu.CV.OCR;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using DMMDigital.Properties;
 
 namespace DMMDigital.Presenters
 {
@@ -57,6 +53,10 @@ namespace DMMDigital.Presenters
                     sensorId = Detector.CreateDetector(this, path);
                     Detector d = Detector.DetectorList[sensorId];
                     d?.Connect();
+
+                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_PostOffset);
+                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_Gain);
+                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_Defect);
 
                     string sensorName = Regex.Match(path, "Pluto.*?(?=_)").ToString().ToUpper();
 
