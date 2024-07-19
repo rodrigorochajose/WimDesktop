@@ -54,15 +54,15 @@
             this.buttonOpenExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
             this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
-            this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.columnPatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnEditPatient = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnDeletePatient = new System.Windows.Forms.DataGridViewImageColumn();
+            this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
             this.roundedPanel1.SuspendLayout();
@@ -368,55 +368,6 @@
             this.dataGridViewPatient.Size = new System.Drawing.Size(651, 396);
             this.dataGridViewPatient.TabIndex = 44;
             // 
-            // buttonNewPatient
-            // 
-            this.buttonNewPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewPatient.BorderWidth = 5F;
-            this.buttonNewPatient.CornerRadius = 5;
-            this.buttonNewPatient.FlatAppearance.BorderSize = 0;
-            this.buttonNewPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNewPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
-            this.buttonNewPatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewPatient.Location = new System.Drawing.Point(18, 32);
-            this.buttonNewPatient.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonNewPatient.Name = "buttonNewPatient";
-            this.buttonNewPatient.Padding = new System.Windows.Forms.Padding(2);
-            this.buttonNewPatient.Size = new System.Drawing.Size(130, 42);
-            this.buttonNewPatient.TabIndex = 45;
-            this.buttonNewPatient.Text = "Novo Paciente";
-            this.buttonNewPatient.UseVisualStyleBackColor = false;
-            // 
-            // textBoxSearchPatient
-            // 
-            this.textBoxSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSearchPatient.Location = new System.Drawing.Point(300, 32);
-            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(10);
-            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
-            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 42);
-            this.textBoxSearchPatient.TabIndex = 36;
-            // 
-            // buttonSearchPatient
-            // 
-            this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSearchPatient.BorderWidth = 5F;
-            this.buttonSearchPatient.CornerRadius = 5;
-            this.buttonSearchPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearchPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
-            this.buttonSearchPatient.Location = new System.Drawing.Point(615, 32);
-            this.buttonSearchPatient.Name = "buttonSearchPatient";
-            this.buttonSearchPatient.Size = new System.Drawing.Size(45, 42);
-            this.buttonSearchPatient.TabIndex = 35;
-            this.buttonSearchPatient.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonSearchPatient.UseVisualStyleBackColor = false;
-            // 
             // columnPatientId
             // 
             this.columnPatientId.DataPropertyName = "id";
@@ -475,6 +426,54 @@
             this.columnDeletePatient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.columnDeletePatient.Width = 58;
             // 
+            // buttonNewPatient
+            // 
+            this.buttonNewPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderWidth = 5F;
+            this.buttonNewPatient.CornerRadius = 5;
+            this.buttonNewPatient.FlatAppearance.BorderSize = 0;
+            this.buttonNewPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
+            this.buttonNewPatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonNewPatient.Location = new System.Drawing.Point(18, 32);
+            this.buttonNewPatient.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonNewPatient.Name = "buttonNewPatient";
+            this.buttonNewPatient.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonNewPatient.Size = new System.Drawing.Size(130, 42);
+            this.buttonNewPatient.TabIndex = 45;
+            this.buttonNewPatient.Text = "Novo Paciente";
+            this.buttonNewPatient.UseVisualStyleBackColor = false;
+            // 
+            // textBoxSearchPatient
+            // 
+            this.textBoxSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSearchPatient.Location = new System.Drawing.Point(300, 32);
+            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
+            this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(10);
+            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 42);
+            this.textBoxSearchPatient.TabIndex = 36;
+            // 
+            // buttonSearchPatient
+            // 
+            this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderWidth = 5F;
+            this.buttonSearchPatient.CornerRadius = 5;
+            this.buttonSearchPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearchPatient.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
+            this.buttonSearchPatient.Location = new System.Drawing.Point(615, 32);
+            this.buttonSearchPatient.Name = "buttonSearchPatient";
+            this.buttonSearchPatient.Size = new System.Drawing.Size(45, 42);
+            this.buttonSearchPatient.TabIndex = 35;
+            this.buttonSearchPatient.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            // 
             // PatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -511,9 +510,6 @@
         private Components.Rounded.RoundedDataGridView dataGridViewExam;
         private Components.Rounded.RoundedButton buttonSearchPatient;
         private Components.Rounded.RoundedTextBox textBoxSearchPatient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private Components.Rounded.RoundedPanel roundedPanel1;
         private Components.Rounded.RoundedPanel roundedPanel2;
         private System.Windows.Forms.Label label1;

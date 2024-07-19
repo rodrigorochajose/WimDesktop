@@ -22,6 +22,7 @@ namespace DMMDigital.Presenters
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IRulerLengthRepository rulerLengthRepository = new RulerLengthRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly string examOpeningMode;
 
         public ExamPresenter(ExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
@@ -80,7 +81,7 @@ namespace DMMDigital.Presenters
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt:dd-MM-yyyy}";
+                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt:dd-MM-yyyy-HH-m}";
                 examView.templateId = exam.templateId;
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();

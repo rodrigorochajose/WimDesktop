@@ -55,6 +55,12 @@
             this.buttonDrawingColorPicker = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonTwainSource = new System.Windows.Forms.Button();
+            this.comboBoxSensorModel = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBoxAcquireMode = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.buttonConfigureFilters = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -64,10 +70,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxAcquireMode = new System.Windows.Forms.ComboBox();
-            this.textBoxTwainSource = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -87,7 +89,7 @@
             // 
             this.labelCaminho.AutoSize = true;
             this.labelCaminho.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.labelCaminho.Location = new System.Drawing.Point(3, 80);
+            this.labelCaminho.Location = new System.Drawing.Point(3, 137);
             this.labelCaminho.Name = "labelCaminho";
             this.labelCaminho.Size = new System.Drawing.Size(206, 19);
             this.labelCaminho.TabIndex = 0;
@@ -106,7 +108,7 @@
             // textBoxPath
             // 
             this.textBoxPath.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxPath.Location = new System.Drawing.Point(7, 112);
+            this.textBoxPath.Location = new System.Drawing.Point(7, 169);
             this.textBoxPath.Name = "textBoxPath";
             this.textBoxPath.Size = new System.Drawing.Size(312, 25);
             this.textBoxPath.TabIndex = 2;
@@ -118,18 +120,14 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tabControl1.Location = new System.Drawing.Point(3, 84);
+            this.tabControl1.Location = new System.Drawing.Point(3, 90);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(392, 280);
+            this.tabControl1.Size = new System.Drawing.Size(380, 298);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBoxTwainSource);
-            this.tabPage1.Controls.Add(this.comboBoxAcquireMode);
-            this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.textBoxSensorPath);
             this.tabPage1.Controls.Add(this.labelCaminho);
@@ -137,7 +135,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(384, 252);
+            this.tabPage1.Size = new System.Drawing.Size(372, 270);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Geral";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -146,7 +144,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label9.Location = new System.Drawing.Point(3, 8);
+            this.label9.Location = new System.Drawing.Point(3, 43);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(215, 19);
             this.label9.TabIndex = 3;
@@ -155,7 +153,7 @@
             // textBoxSensorPath
             // 
             this.textBoxSensorPath.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxSensorPath.Location = new System.Drawing.Point(7, 40);
+            this.textBoxSensorPath.Location = new System.Drawing.Point(7, 75);
             this.textBoxSensorPath.Name = "textBoxSensorPath";
             this.textBoxSensorPath.Size = new System.Drawing.Size(312, 25);
             this.textBoxSensorPath.TabIndex = 4;
@@ -178,7 +176,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(384, 252);
+            this.tabPage2.Size = new System.Drawing.Size(372, 270);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Anotações";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -366,21 +364,88 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonTwainSource);
+            this.tabPage3.Controls.Add(this.comboBoxSensorModel);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.comboBoxAcquireMode);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.buttonConfigureFilters);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(384, 252);
+            this.tabPage3.Size = new System.Drawing.Size(372, 270);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Filtros";
+            this.tabPage3.Text = "Captura";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonTwainSource
+            // 
+            this.buttonTwainSource.Location = new System.Drawing.Point(204, 195);
+            this.buttonTwainSource.Name = "buttonTwainSource";
+            this.buttonTwainSource.Size = new System.Drawing.Size(102, 36);
+            this.buttonTwainSource.TabIndex = 16;
+            this.buttonTwainSource.Text = "Selecionar";
+            this.buttonTwainSource.UseVisualStyleBackColor = true;
+            this.buttonTwainSource.Click += new System.EventHandler(this.buttonTwainSourceClick);
+            // 
+            // comboBoxSensorModel
+            // 
+            this.comboBoxSensorModel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.comboBoxSensorModel.FormattingEnabled = true;
+            this.comboBoxSensorModel.Location = new System.Drawing.Point(14, 125);
+            this.comboBoxSensorModel.Name = "comboBoxSensorModel";
+            this.comboBoxSensorModel.Size = new System.Drawing.Size(150, 25);
+            this.comboBoxSensorModel.TabIndex = 15;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label14.Location = new System.Drawing.Point(10, 92);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(121, 19);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Modelo do Sensor";
+            // 
+            // comboBoxAcquireMode
+            // 
+            this.comboBoxAcquireMode.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.comboBoxAcquireMode.FormattingEnabled = true;
+            this.comboBoxAcquireMode.Items.AddRange(new object[] {
+            "TWAIN",
+            "Nativo"});
+            this.comboBoxAcquireMode.Location = new System.Drawing.Point(193, 125);
+            this.comboBoxAcquireMode.Name = "comboBoxAcquireMode";
+            this.comboBoxAcquireMode.Size = new System.Drawing.Size(162, 25);
+            this.comboBoxAcquireMode.TabIndex = 12;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label13.Location = new System.Drawing.Point(20, 204);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(150, 19);
+            this.label13.TabIndex = 11;
+            this.label13.Text = "Fonte de dados TWAIN";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.Location = new System.Drawing.Point(189, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(175, 19);
+            this.label12.TabIndex = 10;
+            this.label12.Text = "Modo de Acesso ao Sensor";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label11.Location = new System.Drawing.Point(73, 91);
+            this.label11.Location = new System.Drawing.Point(6, 26);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(230, 19);
             this.label11.TabIndex = 1;
@@ -388,7 +453,7 @@
             // 
             // buttonConfigureFilters
             // 
-            this.buttonConfigureFilters.Location = new System.Drawing.Point(143, 125);
+            this.buttonConfigureFilters.Location = new System.Drawing.Point(253, 17);
             this.buttonConfigureFilters.Name = "buttonConfigureFilters";
             this.buttonConfigureFilters.Size = new System.Drawing.Size(75, 36);
             this.buttonConfigureFilters.TabIndex = 0;
@@ -411,7 +476,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(398, 409);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(386, 435);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // panel2
@@ -422,7 +487,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(398, 81);
+            this.panel2.Size = new System.Drawing.Size(386, 87);
             this.panel2.TabIndex = 3;
             // 
             // pictureBox1
@@ -454,10 +519,10 @@
             this.panel1.Controls.Add(this.buttonCancel);
             this.panel1.Controls.Add(this.buttonSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 367);
+            this.panel1.Location = new System.Drawing.Point(0, 391);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(398, 42);
+            this.panel1.Size = new System.Drawing.Size(386, 44);
             this.panel1.TabIndex = 4;
             // 
             // buttonCancel
@@ -475,48 +540,11 @@
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label12.Location = new System.Drawing.Point(3, 169);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(175, 19);
-            this.label12.TabIndex = 5;
-            this.label12.Text = "Modo de Acesso ao Sensor";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label13.Location = new System.Drawing.Point(226, 169);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(150, 19);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Fonte de dados TWAIN";
-            // 
-            // comboBoxAcquireMode
-            // 
-            this.comboBoxAcquireMode.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.comboBoxAcquireMode.FormattingEnabled = true;
-            this.comboBoxAcquireMode.Location = new System.Drawing.Point(7, 202);
-            this.comboBoxAcquireMode.Name = "comboBoxAcquireMode";
-            this.comboBoxAcquireMode.Size = new System.Drawing.Size(162, 25);
-            this.comboBoxAcquireMode.TabIndex = 8;
-            // 
-            // textBoxTwainSource
-            // 
-            this.textBoxTwainSource.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxTwainSource.Location = new System.Drawing.Point(230, 202);
-            this.textBoxTwainSource.Name = "textBoxTwainSource";
-            this.textBoxTwainSource.Size = new System.Drawing.Size(146, 25);
-            this.textBoxTwainSource.TabIndex = 9;
-            // 
             // ConfigView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 409);
+            this.ClientSize = new System.Drawing.Size(386, 435);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -585,9 +613,11 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button buttonConfigureFilters;
+        private System.Windows.Forms.Button buttonTwainSource;
+        private System.Windows.Forms.ComboBox comboBoxSensorModel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboBoxAcquireMode;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox comboBoxAcquireMode;
-        private System.Windows.Forms.TextBox textBoxTwainSource;
     }
 }

@@ -10,7 +10,6 @@ namespace DMMDigital.Interface.IView
         List<TemplateFrameModel> templateFrameList { get; set; }
         int selectedTemplateId { get; set; }
 
-        event EventHandler eventGetTemplates;
         event EventHandler showNewTemplateForm;
         event EventHandler eventDeleteTemplate;
 

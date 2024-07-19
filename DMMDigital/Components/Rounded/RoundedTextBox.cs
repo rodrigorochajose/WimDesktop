@@ -8,36 +8,34 @@ namespace DMMDigital.Components.Rounded
     public partial class RoundedTextBox : UserControl
     {
         private TextBox textBox;
-        private string placeholderText;
-        private Color borderColor = Color.FromArgb(223, 242, 246);
+        private Color borderColor = Color.Black;
+        private int borderRadius = 15;
 
         public RoundedTextBox()
         {
+            InitializeComponent();
+
             textBox = new TextBox
             {
                 BorderStyle = BorderStyle.None,
-                Location = new Point(5, 8),
-                Width = Width - 10,
-                Height = Height - 10,
-                Size = new Size(200, 30),
-                BackColor = Color.FromArgb(223, 242, 246),
-                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
-                AutoSize = false
+                Location = new Point(10, 7),
+                Width = Width - 20,
+                Height = Height - 14,
+                BackColor = this.BackColor,
+                ForeColor = this.ForeColor,
+                Font = this.Font,
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
 
-            textBox.Enter += RemovePlaceholder;
-            textBox.Leave += ShowPlaceholder;
-
             Controls.Add(textBox);
-            Resize += new EventHandler(RoundedTextBox_Resize);
-
-            ShowPlaceholder(null, null);
+            Resize += RoundedTextBox_Resize;
         }
 
         private void RoundedTextBox_Resize(object sender, EventArgs e)
         {
-            textBox.Width = Width - 10;
-            textBox.Height = Height - 10;
+            textBox.Width = Width - 20;
+            textBox.Height = Height - 14;
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -48,81 +46,79 @@ namespace DMMDigital.Components.Rounded
 
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddArc(0, 0, 10, 10, 180, 90);
-                path.AddArc(Width - 11, 0, 10, 10, 270, 90);
-                path.AddArc(Width - 11, Height - 11, 10, 10, 0, 90);
-                path.AddArc(0, Height - 11, 10, 10, 90, 90);
+                path.AddArc(0, 0, borderRadius, borderRadius, 180, 90);
+                path.AddArc(Width - borderRadius, 0, borderRadius, borderRadius, 270, 90);
+                path.AddArc(Width - borderRadius, Height - borderRadius, borderRadius, borderRadius, 0, 90);
+                path.AddArc(0, Height - borderRadius, borderRadius, borderRadius, 90, 90);
                 path.CloseAllFigures();
 
-                using (SolidBrush brush = new SolidBrush(BackColor))
-                {
-                    e.Graphics.FillPath(brush, path);
-                }
-
-                using (Pen pen = new Pen(borderColor))
+                using (Pen pen = new Pen(borderColor, 2))
                 {
                     e.Graphics.DrawPath(pen, path);
                 }
             }
         }
 
-        private void RemovePlaceholder(object sender, EventArgs e)
-        {
-            if (textBox.Text == placeholderText)
-            {
-                textBox.Text = "";
-                textBox.ForeColor = ForeColor;
-            }
-        }
-
-        private void ShowPlaceholder(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
-            {
-                textBox.Text = placeholderText;
-                textBox.ForeColor = Color.Gray;
-            }
-        }
-
-        public TextBox innerTextBox
-        {
-            get { return textBox; }
-        }
-
-        public override string Text
-        {
-            get { return textBox.Text == placeholderText ? "" : textBox.Text; }
-            set { textBox.Text = value; ShowPlaceholder(null, null); }
-        }
-
         public new Color BackColor
         {
-            get { return textBox.BackColor; }
-            set { textBox.BackColor = value; }
+            get { return base.BackColor; }
+            set
+            {
+                base.BackColor = value;
+                textBox.BackColor = value;
+                Invalidate();
+            }
         }
 
         public new Color ForeColor
         {
-            get { return textBox.ForeColor; }
-            set { textBox.ForeColor = value; }
+            get { return base.ForeColor; }
+            set
+            {
+                base.ForeColor = value;
+                textBox.ForeColor = value;
+            }
         }
 
         public new Font Font
         {
-            get { return textBox.Font; }
-            set { textBox.Font = value; }
+            get { return base.Font; }
+            set
+            {
+                base.Font = value;
+                textBox.Font = value;
+            }
         }
 
         public Color BorderColor
         {
             get { return borderColor; }
-            set { borderColor = value; Invalidate(); }
+            set
+            {
+                borderColor = value;
+                Invalidate();
+            }
         }
 
-        public string PlaceholderText
+        public int BorderRadius
         {
-            get { return placeholderText; }
-            set { placeholderText = value; ShowPlaceholder(null, null); }
+            get { return borderRadius; }
+            set
+            {
+                borderRadius = value;
+                Invalidate();
+            }
+        }
+
+        public override string Text
+        {
+            get { return textBox.Text; }
+            set { textBox.Text = value; }
+        }
+
+        public TextBox innerTextBox
+        {
+            get { return textBox; }
         }
     }
 }

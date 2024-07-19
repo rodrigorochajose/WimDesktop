@@ -3,6 +3,10 @@ using System;
 using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Windows.Forms;
+using TwainDotNet.WinFroms;
+using TwainDotNet;
+using DMMDigital.Models;
+using System.Collections.Generic;
 
 namespace DMMDigital.Views
 {
@@ -14,10 +18,22 @@ namespace DMMDigital.Views
             set { textBoxSensorPath.Text = value; }
         }
 
-        public string imagePath 
+        public string examPath
         {
             get { return textBoxPath.Text; }
             set { textBoxPath.Text = value; } 
+        }
+
+        public string sensorModel 
+        {
+            get { return comboBoxSensorModel.SelectedValue.ToString(); }
+            set { comboBoxSensorModel.SelectedValue = value; } 
+        }
+
+        public string acquireMode
+        { 
+            get { return comboBoxAcquireMode.SelectedItem.ToString(); } 
+            set { comboBoxAcquireMode.SelectedItem = value; }
         }
 
         public string drawingColor 
@@ -66,7 +82,8 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            Load += delegate { 
+            Load += delegate 
+            { 
                 loadConfigs?.Invoke(this, EventArgs.Empty);
             };
 
@@ -79,12 +96,24 @@ namespace DMMDigital.Views
             textBoxPath.Click += delegate 
             {
                 folderBrowserDialog1.ShowDialog();
-                imagePath = folderBrowserDialog1.SelectedPath;
+                examPath = folderBrowserDialog1.SelectedPath;
             };
 
             buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
 
             buttonCancel.Click += delegate { Close(); };
+        }
+
+        public void setComboBoxSensorModel(List<SensorModel> sensorList)
+        {
+            comboBoxSensorModel.DataSource = sensorList;
+            comboBoxSensorModel.DisplayMember = "nickname";
+            comboBoxSensorModel.ValueMember = "name";
+        }
+
+        public void setAcquireMode()
+        {
+            comboBoxAcquireMode.DataSource = new List<string> { "TWAIN", "Nativo" };
         }
 
         private void buttonDrawingColorPickerClick(object sender, EventArgs e)
@@ -135,6 +164,13 @@ namespace DMMDigital.Views
                 reveal = postProcessConfig.reveal;
                 smartSharpen = postProcessConfig.smartSharpen;
             }
+        }
+
+        private void buttonTwainSourceClick(object sender, EventArgs e)
+        {
+            Twain twain = new Twain(new WinFormsWindowMessageHook(this));
+
+            twain.SelectSource();
         }
     }
 }

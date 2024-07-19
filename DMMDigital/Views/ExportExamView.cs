@@ -259,9 +259,23 @@ namespace DMMDigital.Views
 
         private void getAndSaveRawFile(Bitmap bitmap, string path)
         {
-            byte[] pixelData = ConvertBitmapToGrayscaleByteArray(bitmap);
+            using (Bitmap bmp = new Bitmap(bitmap))
+            {
+                // Definindo o formato do pixel como 32 bits por pixel (RGBA)
+                BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 
-            File.WriteAllBytes(path, pixelData);
+                int numBytes = bmpData.Stride * bmp.Height;
+                byte[] pixelData = new byte[numBytes];
+
+                // Copiando os dados de pixel para o array de bytes
+                System.Runtime.InteropServices.Marshal.Copy(bmpData.Scan0, pixelData, 0, numBytes);
+
+                // Desbloqueando os bits da imagem
+                bmp.UnlockBits(bmpData);
+
+                // Salvando os dados de pixel em um arquivo .raw
+                File.WriteAllBytes(path, pixelData);
+            }
         }
 
         private static byte[] ConvertBitmapToGrayscaleByteArray(Bitmap bitmap)

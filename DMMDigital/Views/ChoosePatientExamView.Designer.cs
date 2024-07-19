@@ -41,11 +41,11 @@
             this.buttonSearchPatient = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.phone1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birthDate1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewPatient = new System.Windows.Forms.DataGridView();
+            this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
@@ -142,42 +142,6 @@
             this.panel1.Size = new System.Drawing.Size(665, 78);
             this.panel1.TabIndex = 49;
             // 
-            // phone1
-            // 
-            this.phone1.DataPropertyName = "phone";
-            this.phone1.Frozen = true;
-            this.phone1.HeaderText = "Telefone";
-            this.phone1.Name = "phone1";
-            this.phone1.ReadOnly = true;
-            this.phone1.Width = 125;
-            // 
-            // birthDate1
-            // 
-            this.birthDate1.DataPropertyName = "birthDate";
-            this.birthDate1.Frozen = true;
-            this.birthDate1.HeaderText = "Data de Nascimento";
-            this.birthDate1.Name = "birthDate1";
-            this.birthDate1.ReadOnly = true;
-            this.birthDate1.Width = 150;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.Frozen = true;
-            this.name.HeaderText = "Nome";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 250;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.Frozen = true;
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
             // dataGridViewPatient
             // 
             this.dataGridViewPatient.AllowUserToAddRows = false;
@@ -195,10 +159,10 @@
             this.dataGridViewPatient.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewPatient.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.name,
-            this.birthDate1,
-            this.phone1});
+            this.columnId,
+            this.columnName,
+            this.columnBirthDate,
+            this.columnPhone});
             this.dataGridViewPatient.EnableHeadersVisualStyles = false;
             this.dataGridViewPatient.GridColor = System.Drawing.Color.Silver;
             this.dataGridViewPatient.Location = new System.Drawing.Point(61, 172);
@@ -213,6 +177,42 @@
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewPatient.Size = new System.Drawing.Size(526, 313);
             this.dataGridViewPatient.TabIndex = 4;
+            // 
+            // columnId
+            // 
+            this.columnId.DataPropertyName = "id";
+            this.columnId.Frozen = true;
+            this.columnId.HeaderText = "id";
+            this.columnId.Name = "columnId";
+            this.columnId.ReadOnly = true;
+            this.columnId.Visible = false;
+            // 
+            // columnName
+            // 
+            this.columnName.DataPropertyName = "name";
+            this.columnName.Frozen = true;
+            this.columnName.HeaderText = "Nome";
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
+            this.columnName.Width = 250;
+            // 
+            // columnBirthDate
+            // 
+            this.columnBirthDate.DataPropertyName = "birthDate";
+            this.columnBirthDate.Frozen = true;
+            this.columnBirthDate.HeaderText = "Data de Nascimento";
+            this.columnBirthDate.Name = "columnBirthDate";
+            this.columnBirthDate.ReadOnly = true;
+            this.columnBirthDate.Width = 150;
+            // 
+            // columnPhone
+            // 
+            this.columnPhone.DataPropertyName = "phone";
+            this.columnPhone.Frozen = true;
+            this.columnPhone.HeaderText = "Telefone";
+            this.columnPhone.Name = "columnPhone";
+            this.columnPhone.ReadOnly = true;
+            this.columnPhone.Width = 125;
             // 
             // ChoosePatientExamView
             // 
@@ -246,19 +246,16 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxSearchPatient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.Button buttonSelectPatient;
         private System.Windows.Forms.Button buttonCancelAction;
         private System.Windows.Forms.Button buttonNewPatient;
         private System.Windows.Forms.Button buttonSearchPatient;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phone1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birthDate1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridView dataGridViewPatient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnBirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPhone;
     }
 }

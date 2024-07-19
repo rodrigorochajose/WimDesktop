@@ -79,7 +79,7 @@ namespace DMMDigital.Views
 
             dataGridViewExam.CellClick += (s, e) =>
             {
-                if (e.RowIndex == 3 && e.ColumnIndex == 0)
+                if (e.ColumnIndex == 0)
                 {
                     if(selectedExamId == 0)
                     {

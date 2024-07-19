@@ -6,7 +6,9 @@ namespace DMMDigital.Interface.IView
     public interface IConfigView
     {
         string sensorPath { get; set; }
-        string imagePath { get; set; }
+        string examPath { get; set; }
+        string sensorModel { get; set; }
+        string acquireMode { get; set; }
         string drawingColor { get; set; }
         int drawingSize { get; set; }
         string textColor { get; set; }

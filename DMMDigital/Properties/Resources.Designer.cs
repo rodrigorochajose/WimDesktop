@@ -143,6 +143,16 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_capture {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_capture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_change_sides {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_change_sides", resourceCulture);
@@ -386,6 +396,16 @@ namespace DMMDigital.Properties {
         internal static System.Drawing.Bitmap icon_32x32_ruler {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_ruler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_scanner {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_scanner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -13,6 +13,7 @@ using DMMDigital.Components;
 using DMMDigital._Repositories;
 using DMMDigital.Presenters;
 using MoreLinq;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -29,13 +30,15 @@ namespace DMMDigital.Views
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
         public SensorModel sensor { get; set; }
         public bool sensorConnected { get; set; }
+        public string acquireMode { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
         public event EventHandler eventGetPatient;
         public event EventHandler eventCloseSingleExam;
-        public event EventHandler eventGetSensorInfo;
+        public event EventHandler eventChangeAcquireMode;
+        public event EventHandler eventAcquireTwain;
 
         int action = 0;
         int indexFrame = 0;
@@ -94,14 +97,8 @@ namespace DMMDigital.Views
             {
                 drawTemplate();
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
-                DirectoryInfo di = Directory.CreateDirectory(examPath + "\\Paciente-" + patient.id + "\\" + sessionName + "_" + DateTime.Now.ToString("dd-MM-yyyy"));
+                DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\Paciente-{patient.id}\\{sessionName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
                 examPath = di.FullName;
-
-                if (sensorConnected)
-                {
-                    componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
-                    componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
-                }
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
                 
@@ -125,12 +122,6 @@ namespace DMMDigital.Views
                 if (examImageDrawings.Any())
                 {
                     selectedDrawingHistoryHandler();
-                }
-
-                if (sensorConnected)
-                {
-                    componentSensorStatus.Image = Properties.Resources.icon_32x32_green;
-                    componentSensorStatus.ToolTipText = $"Conectado - {sensor.nickname}";
                 }
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
@@ -182,6 +173,14 @@ namespace DMMDigital.Views
             rulerColor = Color.FromArgb(int.Parse(config.rulerColor));
             textDrawingPreviousSize = config.textSize;
             drawingSize = config.drawingSize;
+            acquireMode = config.acquireMode;
+
+            if (acquireMode == "TWAIN")
+            {
+                eventChangeAcquireMode?.Invoke(this, EventArgs.Empty);
+                buttonAcquireMode.Image = Resources.icon_32x32_scanner;
+                buttonAcquireMode.ToolTipText = "Captura TWAIN";
+            }
         }
 
         public void setLabelPatientTemplate(string patient, string template)
@@ -220,6 +219,9 @@ namespace DMMDigital.Views
                     resize = false
                 };
 
+                newFrame.Click += frameClick;
+                newFrame.DoubleClick += frameDoubleClick;
+
                 ExamImageModel selectedExamImage = examImages.FirstOrDefault(e => e.frameId == newFrame.order);
 
                 if (selectedExamImage != null)
@@ -247,8 +249,6 @@ namespace DMMDigital.Views
 
                     newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
                 }
-
-                newFrame.DoubleClick += frameDoubleClick;
 
                 frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { new List<IDrawing>() }));
                 selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
@@ -489,7 +489,7 @@ namespace DMMDigital.Views
             selectedDrawingHistoryHandler();
         }
 
-        private void frameDoubleClick(object sender, EventArgs e)
+        private void frameClick(object sender, EventArgs e)
         {
             frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
 
@@ -506,6 +506,14 @@ namespace DMMDigital.Views
                 {
                     resizeDrawings();
                 }
+            }
+        }
+
+        private void frameDoubleClick(object sender, EventArgs e)
+        {
+            if (acquireMode == "TWAIN")
+            {
+                eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -946,6 +954,22 @@ namespace DMMDigital.Views
             }
         }
 
+        private void buttonAcquireModeClick(object sender, EventArgs e)
+        {
+            eventChangeAcquireMode?.Invoke(this, e);
+
+            if (acquireMode == "TWAIN")
+            {
+                buttonAcquireMode.Image = Resources.icon_32x32_scanner;
+                buttonAcquireMode.ToolTipText = "Captura TWAIN";
+            }
+            else
+            {
+                buttonAcquireMode.Image = Resources.icon_32x32_capture;
+                buttonAcquireMode.ToolTipText = "Captura Nativa";
+            }
+        }
+
         private void buttonNewExamClick(object sender, EventArgs e)
         {
             IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
@@ -1216,6 +1240,8 @@ namespace DMMDigital.Views
 
         private void buttonRotateLeftClick(object sender, EventArgs e)
         {
+            Console.WriteLine($"{mainPictureBox.Location.X} - {mainPictureBox.Location.Y}");
+
             SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
             string rotationDirection = "left";
             rotateImage(rotationDirection);

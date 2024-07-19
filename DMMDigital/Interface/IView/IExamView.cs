@@ -18,13 +18,15 @@ namespace DMMDigital.Interface.IView
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
         SensorModel sensor { get; set; }
         bool sensorConnected { get; set; }
+        string acquireMode { get; set; }
 
         event EventHandler eventSaveExam;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
         event EventHandler eventCloseSingleExam;
-        event EventHandler eventGetSensorInfo;
+        event EventHandler eventChangeAcquireMode;
+        event EventHandler eventAcquireTwain;
 
 
         void selectFrame(Frame frameToSelected = null);

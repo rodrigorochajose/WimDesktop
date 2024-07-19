@@ -37,11 +37,11 @@ namespace DMMDigital.Models
 
         }
 
-        public static int CreateDetector(IEventReceiver r, string workdirPath)
+        public static int CreateDetector(string strWorkDir, IEventReceiver r)
         {
             Detector d = new Detector();
 
-            int nResult = SdkInterface.Create(workdirPath, d.handler, ref d.m_nDetectorID);
+            int nResult = SdkInterface.Create(strWorkDir, d.handler, ref d.m_nDetectorID);
 
             if (nResult == SdkInterface.Err_OK)
             {

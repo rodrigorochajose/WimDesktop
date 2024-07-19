@@ -12,8 +12,10 @@ namespace DMMDigital.Views
         public List<int> openExamsId { get; set; }
         public ExamView selectedExamView { get; set; }
 
+        public event EventHandler eventConnectSensor;
         public event EventHandler eventDestroySensor;
         public event EventHandler eventGetSensorInfo;
+        public event EventHandler eventOpenTwain;
 
         public ExamContainerView(IExamView examView)
         {
@@ -42,16 +44,13 @@ namespace DMMDigital.Views
 
         public void addNewPage(IExamView examView)
         {
+            associateEvents(examView);
+
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
                 Text = examView.sessionName,
                 Margin = new Padding(0)
-            };
-
-            examView.eventCloseSingleExam += (s, e) =>
-            {
-                closePage(s, e);
             };
 
             selectedExamView = examView as ExamView;
@@ -62,6 +61,33 @@ namespace DMMDigital.Views
 
             tabControl.TabPages.Add(newTabPage);
             tabControl.SelectedTab = newTabPage;
+        }
+
+        private void associateEvents(IExamView examView)
+        {
+            examView.eventCloseSingleExam += (s, e) =>
+            {
+                closePage(s, e);
+            };
+
+            examView.eventChangeAcquireMode += (s, e) =>
+            {
+                if (examView.acquireMode == "TWAIN")
+                {
+                    eventConnectSensor?.Invoke(s, e);
+                    examView.acquireMode = "NATIVE";
+                }
+                else
+                {
+                    eventDestroySensor?.Invoke(this, e);
+                    examView.acquireMode = "TWAIN";
+                }
+            };
+
+            examView.eventAcquireTwain += (s, e) =>
+            {
+                eventOpenTwain(s, e);
+            };
         }
 
         private void addFormIntoPage(TabPage tabPage, Form examView)

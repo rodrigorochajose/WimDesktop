@@ -54,7 +54,7 @@ namespace DMMDigital.Views
             this.buttonNewExam = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonCloseExam = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.componentSensorStatus = new System.Windows.Forms.ToolStripButton();
+            this.buttonAcquireMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonExport = new System.Windows.Forms.ToolStripButton();
@@ -291,7 +291,7 @@ namespace DMMDigital.Views
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
             this.toolStripSeparator1,
-            this.componentSensorStatus,
+            this.buttonAcquireMode,
             this.toolStripSeparator2,
             this.buttonImport,
             this.buttonExport,
@@ -366,18 +366,19 @@ namespace DMMDigital.Views
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 42);
             // 
-            // componentSensorStatus
+            // buttonAcquireMode
             // 
-            this.componentSensorStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.componentSensorStatus.Image = global::DMMDigital.Properties.Resources.icon_32x32_red;
-            this.componentSensorStatus.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.componentSensorStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.componentSensorStatus.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.componentSensorStatus.Name = "componentSensorStatus";
-            this.componentSensorStatus.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.componentSensorStatus.Size = new System.Drawing.Size(50, 40);
-            this.componentSensorStatus.Text = "sensorConnection";
-            this.componentSensorStatus.ToolTipText = "Sensor não localizado";
+            this.buttonAcquireMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonAcquireMode.Image = global::DMMDigital.Properties.Resources.icon_32x32_capture;
+            this.buttonAcquireMode.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonAcquireMode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonAcquireMode.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.buttonAcquireMode.Name = "buttonAcquireMode";
+            this.buttonAcquireMode.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonAcquireMode.Size = new System.Drawing.Size(50, 40);
+            this.buttonAcquireMode.Text = "sensorConnection";
+            this.buttonAcquireMode.ToolTipText = "Captura Nativa";
+            this.buttonAcquireMode.Click += new System.EventHandler(this.buttonAcquireModeClick);
             // 
             // toolStripSeparator2
             // 
@@ -849,7 +850,7 @@ namespace DMMDigital.Views
         private ToolStripMenuItem buttonNewExam;
         private ToolStripMenuItem buttonCloseExam;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripButton componentSensorStatus;
+        private ToolStripButton buttonAcquireMode;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton buttonImport;
         private ToolStripButton buttonExport;

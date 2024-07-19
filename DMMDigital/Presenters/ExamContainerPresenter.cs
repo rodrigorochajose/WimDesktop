@@ -16,6 +16,13 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using TwainDotNet;
+using TwainDotNet.WinFroms;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.Formats.Tiff;
 
 namespace DMMDigital.Presenters
 {
@@ -24,6 +31,7 @@ namespace DMMDigital.Presenters
         private int sensorId = 0;
         private SensorModel connectedSensor = new SensorModel();
         private readonly ExamContainerView examContainerView;
+        private Twain twain;
 
         private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
@@ -33,32 +41,80 @@ namespace DMMDigital.Presenters
             examContainerView = view as ExamContainerView;
             view.patientId = patientId;
 
+            examContainerView.eventConnectSensor += connectSensor;
             examContainerView.eventDestroySensor += destroySensor;
             examContainerView.eventGetSensorInfo += getSensorInfo;
+            examContainerView.eventOpenTwain += openTwain;
 
-            connectSensor();
+            initializeTwain();
+            connectSensor(this, EventArgs.Empty);
 
             initialize();
         }
 
-        private void connectSensor()
+        private void initializeTwain()
+        {
+            twain = new Twain(new WinFormsWindowMessageHook(examContainerView));
+            twain.TransferImage += (s, e) =>
+            {
+                if (e.Image != null)
+                {
+                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png"), FileMode.Create, FileAccess.Write))
+                    {
+                        using (Bitmap bitmap = new Bitmap(e.Image))
+                        {
+                            bitmap.Save(fileStream, ImageFormat.Png);
+                        }
+                    }
+
+                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-filtered.png"), FileMode.Create, FileAccess.Write))
+                    {
+                        using (Bitmap bitmap = new Bitmap(e.Image))
+                        {
+                            bitmap.Save(fileStream, ImageFormat.Png);
+                        }
+                    }
+
+                    examContainerView.selectedExamView.loadImageOnMainPictureBox();
+                }
+            };
+        }
+
+        private void openTwain(object sender, EventArgs e)
+        {
+            ScanSettings settings = new ScanSettings
+            {
+                UseDocumentFeeder = true,
+                ShowTwainUI = true,
+                ShowProgressIndicatorUI = false,
+                UseDuplex = false,
+                Resolution = ResolutionSettings.Fax,
+                Area = null,
+                ShouldTransferAllPages = true,
+                Rotation = new RotationSettings
+                {
+                    AutomaticRotate = true,
+                    AutomaticBorderDetection = true
+                }
+            };
+
+            twain.StartScanning(settings);
+        }
+
+        private void connectSensor(object sender, EventArgs e)
         {
             try
             {
-                string path = getSensorPath();
+                string workDir = getWorkDir();
                 List<SensorModel> sensors = sensorRepository.getAllSensors();
 
-                if (path.Any())
+                if (workDir.Any())
                 {
-                    sensorId = Detector.CreateDetector(this, path);
+                    sensorId = Detector.CreateDetector(workDir, this);
                     Detector d = Detector.DetectorList[sensorId];
-                    d?.Connect();
+                    d.Connect();
 
-                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_PostOffset);
-                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_Gain);
-                    d.Invoke(SdkInterface.Cmd_SetCorrectOption, (int)Enm_CorrectOption.Enm_CorrectOp_SW_Defect);
-
-                    string sensorName = Regex.Match(path, "Pluto.*?(?=_)").ToString().ToUpper();
+                    string sensorName = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
 
                     examContainerView.selectedExamView.sensorConnected = true;
 
@@ -77,7 +133,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private string getSensorPath()
+        private string getWorkDir()
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
             {
@@ -140,6 +196,15 @@ namespace DMMDigital.Presenters
             }
         }
 
+        private void setSensorOption()
+        {
+            Detector d = Detector.DetectorList[sensorId];
+
+            int correction = (int)(Enm_CorrectOption.Enm_CorrectOp_SW_PostOffset | Enm_CorrectOption.Enm_CorrectOp_SW_Gain | Enm_CorrectOption.Enm_CorrectOp_SW_Defect);
+            d.SetCorrectionOption(correction);
+
+        }
+
         private void initialize()
         {
             examContainerView.initialize();
@@ -154,7 +219,9 @@ namespace DMMDigital.Presenters
 
             d.Disconnect();
             Detector.DestroyDetector(sensorId);
+            sensorId = 0;
         }
+
 
         void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
                        IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
@@ -167,6 +234,7 @@ namespace DMMDigital.Presenters
                         {
                             case SdkInterface.Cmd_Connect:
                                 //MessageBox.Show("Sensor Conectado");
+                                setSensorOption();
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");
@@ -196,7 +264,7 @@ namespace DMMDigital.Presenters
                                 MessageBox.Show("Cmd_ReadTemperature Ack Succeed.");
                                 break;
                             case SdkInterface.Cmd_SetCorrectOption:
-                                MessageBox.Show("Cmd_SetCorrectOption Ack Succeed.");
+                                //MessageBox.Show("Cmd_SetCorrectOption Ack Succeed.");
                                 break;
                             case SdkInterface.Cmd_SetCaliSubset:
                                 MessageBox.Show("Cmd_SetCaliSubset Ack Succeed.");
@@ -291,6 +359,7 @@ namespace DMMDigital.Presenters
                         if (getImage)
                         {
                             IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
+                            saveImg(image);
                             int imageWidth = image.nWidth;
                             int imageHeight = image.nHeight;
                             short[] imageData = new short[imageWidth * imageHeight];
@@ -322,7 +391,7 @@ namespace DMMDigital.Presenters
             {
                 Bitmap pic = new Bitmap(widht, height, System.Drawing.Imaging.PixelFormat.Format16bppGrayScale);
 
-                Rectangle dimension = new Rectangle(0, 0, pic.Width, pic.Height);
+                System.Drawing.Rectangle dimension = new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height);
                 BitmapData picData = pic.LockBits(dimension, ImageLockMode.ReadWrite, pic.PixelFormat);
 
                 IntPtr pixelStartAddress = picData.Scan0;
@@ -359,7 +428,7 @@ namespace DMMDigital.Presenters
 
         private void SaveBmp(Bitmap bmp)
         {
-            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
 
             BitmapData bitmapData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);
 
@@ -418,6 +487,103 @@ namespace DMMDigital.Presenters
             using (Bitmap bmp = new Bitmap(filteredImagePath))
             {
                 bmp.Save(originalImagePath);
+            }
+        }
+
+        private void saveImg(IRayImage image)
+        {
+            var nWidth = image.nWidth;
+            var nHeight = image.nHeight;
+            var nBytesPerPixel = image.nBytesPerPixel;
+            var nImgSize = nWidth * nHeight * nBytesPerPixel;
+            byte[] ImgData = null;
+
+            if ((0 != nImgSize) && (IntPtr.Zero != image.pData))
+            {
+                ImgData = new byte[nImgSize];
+
+                Marshal.Copy(image.pData, ImgData, 0, nImgSize);
+
+            }
+
+            if (image.propList.nItemCount > 0)
+            {
+                IRayVariantMapItem[] Params = new IRayVariantMapItem[image.propList.nItemCount];
+
+                SdkParamConvertor<IRayVariantMapItem>.IntPtrToStructArray(image.propList.pItems, ref Params);
+            }
+
+            string rawPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-raw.raw");
+            string pngPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-png.png");
+            string tiffPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-tiff.tiff");
+
+            SaveImageToFile(rawPath, ImgData);
+            SaveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+            SaveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+        }
+
+        private void SaveImageToFile(string path, byte[] data)
+        {
+            if (null == data || null == path)
+                return;
+
+            FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
+            fileStream.Write(data, 0, data.Length);
+            fileStream.Close();
+            return;
+        }
+
+        private void SaveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
+        {
+            if (data == null || path == null)
+            {
+                return;
+            }
+
+            try
+            {
+                using (Image<L16> image = new Image<L16>(width, height))
+                {
+                    for (int y = 0; y < height; y++)
+                    {
+                        for (int x = 0; x < width; x++)
+                        {
+                            int index = (y * width + x) * bytesPerPixel;
+                            ushort pixelValue = BitConverter.ToUInt16(data, index);
+
+                            image[x, y] = new L16(pixelValue);
+                        }
+                    }
+
+                    image.Save(path, new PngEncoder());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to save image as PNG: {ex.Message}");
+            }
+        }
+
+        private void SaveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
+        {
+            if (data == null || path == null || width <= 0 || height <= 0 || bytesPerPixel != 2)
+            {
+                throw new ArgumentException("Invalid argument.");
+            }
+
+            using (Image<L16> image = new Image<L16>(width, height))
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        int index = (y * width + x) * bytesPerPixel;
+                        ushort pixelValue = BitConverter.ToUInt16(data, index);
+
+                        image[x, y] = new L16(pixelValue);
+                    }
+                }
+                image.Save(path, new TiffEncoder());
             }
         }
     }

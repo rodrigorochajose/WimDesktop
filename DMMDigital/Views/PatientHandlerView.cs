@@ -81,8 +81,7 @@ namespace DMMDigital.Views
             {
                 if (char.IsDigit(e.KeyChar))
                 {
-                    MaskedTextBox mtb = s as MaskedTextBox;
-                    if (mtb != null)
+                    if (s is MaskedTextBox mtb)
                     {
                         int selectionStart = mtb.SelectionStart;
                         if (selectionStart == 2 || selectionStart == 5)

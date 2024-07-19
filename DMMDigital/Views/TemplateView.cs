@@ -14,7 +14,6 @@ namespace DMMDigital.Views
         public List<TemplateFrameModel> templateFrameList { get; set; }
         public int selectedTemplateId { get; set; }
 
-        public event EventHandler eventGetTemplates;
         public event EventHandler showNewTemplateForm;
         public event EventHandler eventDeleteTemplate;
 

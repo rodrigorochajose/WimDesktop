@@ -1,4 +1,5 @@
-﻿using DMMDigital.Interface.IRepository;
+﻿using DMMDigital._Repositories;
+using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
@@ -12,6 +13,7 @@ namespace DMMDigital.Presenters
 
         private ConfigModel currentConfig;
         private readonly IConfigRepository configRepository;
+        private ISensorRepository sensorRepository = new SensorRepository();
         
         public ConfigPresenter(ConfigView configView, IConfigRepository repository) 
         {
@@ -25,8 +27,13 @@ namespace DMMDigital.Presenters
         {
             currentConfig = configRepository.getAllConfig();
 
+            view.setComboBoxSensorModel(sensorRepository.getAllSensors());
+            view.setAcquireMode();
+
             view.sensorPath = currentConfig.sensorPath;
-            view.imagePath = currentConfig.examPath;
+            view.examPath = currentConfig.examPath;
+            view.sensorModel = currentConfig.sensorModel;
+            view.acquireMode = currentConfig.acquireMode;
             view.drawingSize = currentConfig.drawingSize;
             view.drawingColor = currentConfig.drawingColor;
             view.textSize = currentConfig.textSize;
@@ -43,7 +50,9 @@ namespace DMMDigital.Presenters
             try
             {
                 currentConfig.sensorPath = view.sensorPath;
-                currentConfig.examPath = view.imagePath;
+                currentConfig.examPath = view.examPath;
+                currentConfig.sensorModel = view.sensorModel;
+                currentConfig.acquireMode = view.acquireMode;
                 currentConfig.drawingColor = view.drawingColor;
                 currentConfig.drawingSize = view.drawingSize;
                 currentConfig.textColor = view.textColor;
