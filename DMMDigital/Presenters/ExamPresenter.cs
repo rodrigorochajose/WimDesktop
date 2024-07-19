@@ -22,7 +22,6 @@ namespace DMMDigital.Presenters
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IRulerLengthRepository rulerLengthRepository = new RulerLengthRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly string examOpeningMode;
 
         public ExamPresenter(ExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)

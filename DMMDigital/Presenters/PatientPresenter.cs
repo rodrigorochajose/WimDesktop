@@ -252,7 +252,7 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            string examPath = $"{configRepository.getExamPath()}\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt:dd-MM-yyyy}";
+            string examPath = $"{configRepository.getExamPath()}\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt:dd-MM-yyyy-HH-m}";
 
             List<Frame> frames = new List<Frame>();
 
