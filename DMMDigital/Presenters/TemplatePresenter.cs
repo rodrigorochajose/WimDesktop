@@ -42,8 +42,8 @@ namespace DMMDigital.Presenters
 
         private void deleteTemplate(object sender, EventArgs e)
         {
-            DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (DialogResult.Yes.Equals(confirmacao))
+            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DialogResult.Yes.Equals(res))
             {
                 templateRepository.delete(view.selectedTemplateId);
                 getTemplates();

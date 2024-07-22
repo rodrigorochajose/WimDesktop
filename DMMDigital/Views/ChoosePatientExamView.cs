@@ -21,12 +21,12 @@ namespace DMMDigital.Views
         }
 
         public event EventHandler eventSearchPatient;
-        public event EventHandler eventShowAddPatientView;
+        public event EventHandler eventNewPatient;
         public event EventHandler eventSelectPatient;
 
         public void dataGridViewHandler()
         {
-            dataGridViewPatient.Columns["id"].Visible = false;
+            dataGridViewPatient.Columns["columnId"].Visible = false;
         }
 
         public void setPatientList(BindingSource patientList)
@@ -48,25 +48,32 @@ namespace DMMDigital.Views
                 {
                     if (dataGridViewPatient.SelectedRows.Count > 0)
                     {
-                        selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["id"].Value.ToString());
+                        selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["columnId"].Value.ToString());
                     }
                 };
             };
 
-            textBoxSearchPatient.KeyDown += (s, e) =>
+            textBoxSearchPatient.InnerTextBox.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
 
+            buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
+
             buttonNewPatient.Click += delegate 
-            { 
-                eventShowAddPatientView?.Invoke(this, EventArgs.Empty);
+            {
+                int rows = dataGridViewPatient.RowCount;
+                eventNewPatient?.Invoke(this, EventArgs.Empty);
 
-                int indexLastPatient = dataGridViewPatient.Rows.Count - 1;
-                selectedPatientId = int.Parse(dataGridViewPatient.Rows[indexLastPatient].Cells["id"].Value.ToString());
+                if (rows != dataGridViewPatient.RowCount)
+                {
+                    int indexLastPatient = dataGridViewPatient.Rows.Count - 1;
+                    selectedPatientId = int.Parse(dataGridViewPatient.Rows[indexLastPatient].Cells["columnId"].Value.ToString());
 
-                eventSelectPatient?.Invoke(this, EventArgs.Empty);
+                    eventSelectPatient?.Invoke(this, EventArgs.Empty);
+                }
+
             };
 
             dataGridViewPatient.CellDoubleClick += delegate 
@@ -91,7 +98,11 @@ namespace DMMDigital.Views
                 eventSelectPatient?.Invoke(this, EventArgs.Empty);
             };
 
-            buttonCancelAction.Click += delegate { Close(); };
+            buttonCancel.Click += delegate 
+            {
+                DialogResult = DialogResult.Cancel;
+                Close(); 
+            };
         }
     }
 }

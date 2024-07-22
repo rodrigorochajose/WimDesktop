@@ -112,6 +112,7 @@ namespace DMMDigital.Presenters
                 {
                     sensorId = Detector.CreateDetector(workDir, this);
                     Detector d = Detector.DetectorList[sensorId];
+
                     d.Connect();
 
                     string sensorName = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();

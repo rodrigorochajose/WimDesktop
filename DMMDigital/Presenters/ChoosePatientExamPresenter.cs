@@ -25,7 +25,7 @@ namespace DMMDigital.Presenters
             patientRepository = repository;
 
             view.eventSearchPatient += searchPatient;
-            view.eventShowAddPatientView += showAddPatientForm;
+            view.eventNewPatient += newPatient;
             view.eventSelectPatient += showSelectTemplateForm;
 
             view.setPatientList(pacientesBindingSource);
@@ -45,7 +45,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void showAddPatientForm(object sender, EventArgs e)
+        private void newPatient(object sender, EventArgs e)
         {
             IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
             patientHandlerView.eventAddNewPatient += addNewPatient;
@@ -99,6 +99,7 @@ namespace DMMDigital.Presenters
 
             foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
             {
+                loadAllPatients();
                 form.Hide();
             }
 

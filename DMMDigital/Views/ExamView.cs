@@ -57,7 +57,9 @@ namespace DMMDigital.Views
         bool calibrated = false;
         bool recalibrate = false;
         bool examHasChanges = false;
+        bool blinking = false;
 
+        Color sensorStatusColor = Color.Red;
         Color drawingColor = Color.Red;
         Color textColor = Color.Red;
         Color rulerColor = Color.Red;
@@ -66,6 +68,8 @@ namespace DMMDigital.Views
         PictureBox pictureBoxMagnifier;
         NumericUpDown numericUpDownDrawingSize;
         Graphics magnifierGraphics;
+
+        Frame nextFrame;
 
         List<Frame> frames = new List<Frame>();
         List<Point> differenceBetweenPoints = new List<Point>();
@@ -103,6 +107,13 @@ namespace DMMDigital.Views
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
                 
                 selectInitialFrame();
+
+                if (sensorConnected)
+                {
+                    sensorStatusColor = Color.Green;
+                }
+
+                timerSensorStatus.Start();
             };
         }
 
@@ -127,6 +138,13 @@ namespace DMMDigital.Views
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
                 selectInitialFrame();
+
+                if (sensorConnected)
+                {
+                    sensorStatusColor = Color.Green;
+                }
+
+                timerSensorStatus.Start();
             };
 
         }
@@ -157,7 +175,6 @@ namespace DMMDigital.Views
                 labelImageDate.Text = selectedFrame.datePhotoTook;
                 textBoxFrameNotes.Text = selectedFrame.notes;
             }
-
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -449,7 +466,7 @@ namespace DMMDigital.Views
             }
             else
             {
-                Frame nextFrame = frames.FirstOrDefault(f => f.originalImage == null);
+                nextFrame = frames.FirstOrDefault(f => f.originalImage == null);
                 
                 if (nextFrame != null)
                 {
@@ -466,6 +483,8 @@ namespace DMMDigital.Views
 
         public void selectFrame(Frame frameToSelect = null)
         {
+            selectedFrame.BackColor = Color.Black;
+
             checkChangesAndSave();
             selectedFrame = frameToSelect ?? frames[indexFrame];
 
@@ -2026,6 +2045,21 @@ namespace DMMDigital.Views
                 selectedFrame.resize = false;
                 mainPictureBox.Refresh();
             }
+        }
+
+        private void timerSensorStatusTick(object sender, EventArgs e)
+        {
+            Frame currentFrame = frames.FirstOrDefault(f => (Color)f.Tag == Color.LimeGreen);
+
+            if (blinking)
+            {
+                currentFrame.BackColor = Color.Black;
+            }
+            else
+            {
+                currentFrame.BackColor = sensorStatusColor;
+            }
+            blinking = !blinking;
         }
     }
 }

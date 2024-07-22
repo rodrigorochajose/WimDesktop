@@ -109,6 +109,12 @@
     <Compile Include="Components\Rounded\RoundedDataGridView.Designer.cs">
       <DependentUpon>RoundedDataGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Rounded\RoundedMaskedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedMaskedTextBox.Designer.cs">
+      <DependentUpon>RoundedMaskedTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Rounded\RoundedPanel.cs">
       <SubType>Component</SubType>
     </Compile>

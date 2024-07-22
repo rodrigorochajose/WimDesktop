@@ -17,14 +17,14 @@ namespace DMMDigital.Views
 
         public DateTime patientBirthDate
         {
-            get { return DateTime.Parse(maskedTextBoxBirthDate.Text); }
-            set { maskedTextBoxBirthDate.Text = value.ToString(); }
+            get { return DateTime.Parse(textBoxBirthDate.InnerMaskedTextBox.Text); }
+            set { textBoxBirthDate.InnerMaskedTextBox.Text = value.ToString(); }
         }
 
         public string patientPhone
         {
-            get { return textBoxPhone.Text; }
-            set { textBoxPhone.Text = value; }
+            get { return textBoxPhone.InnerMaskedTextBox.Text; }
+            set { textBoxPhone.InnerMaskedTextBox.Text = value; }
         }
 
         public string patientRecommendation
@@ -48,8 +48,10 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
-            maskedTextBoxBirthDate.Mask = "00/00/0000";
-            maskedTextBoxBirthDate.ValidatingType = typeof(DateTime);
+            textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
+            textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
+            textBoxPhone.InnerMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            textBoxBirthDate.InnerMaskedTextBox.ValidatingType = typeof(DateTime);
 
             associateEvents();
 
@@ -77,7 +79,7 @@ namespace DMMDigital.Views
                 }
             };
 
-            maskedTextBoxBirthDate.KeyPress += (s, e) =>
+            textBoxBirthDate.InnerMaskedTextBox.KeyPress += (s, e) =>
             {
                 if (char.IsDigit(e.KeyChar))
                 {
@@ -92,7 +94,7 @@ namespace DMMDigital.Views
                 }
             };
 
-            maskedTextBoxBirthDate.Click += (s, e) =>
+            textBoxBirthDate.InnerMaskedTextBox.Click += (s, e) =>
             {
                 if (s != null)
                 {

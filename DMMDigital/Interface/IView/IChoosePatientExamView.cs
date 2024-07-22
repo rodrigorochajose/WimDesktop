@@ -9,7 +9,7 @@ namespace DMMDigital.Interface.IView
         int selectedPatientId { get; set; }
 
         event EventHandler eventSearchPatient;
-        event EventHandler eventShowAddPatientView;
+        event EventHandler eventNewPatient;
         event EventHandler eventSelectPatient;
 
         void setPatientList(BindingSource patientList);

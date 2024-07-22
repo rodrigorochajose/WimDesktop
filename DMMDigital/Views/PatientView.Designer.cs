@@ -61,8 +61,8 @@
             this.columnEditPatient = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnDeletePatient = new System.Windows.Forms.DataGridViewImageColumn();
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
             this.roundedPanel1.SuspendLayout();
@@ -291,9 +291,9 @@
             this.roundedPanel1.BackColor = System.Drawing.Color.White;
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.Controls.Add(this.textBoxSearchPatient);
             this.roundedPanel1.Controls.Add(this.dataGridViewPatient);
             this.roundedPanel1.Controls.Add(this.buttonNewPatient);
-            this.roundedPanel1.Controls.Add(this.textBoxSearchPatient);
             this.roundedPanel1.Controls.Add(this.buttonSearchPatient);
             this.roundedPanel1.CornerRadius = 20;
             this.roundedPanel1.Location = new System.Drawing.Point(12, 61);
@@ -447,16 +447,6 @@
             this.buttonNewPatient.Text = "Novo Paciente";
             this.buttonNewPatient.UseVisualStyleBackColor = false;
             // 
-            // textBoxSearchPatient
-            // 
-            this.textBoxSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSearchPatient.Location = new System.Drawing.Point(300, 32);
-            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(10);
-            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 42);
-            this.textBoxSearchPatient.TabIndex = 36;
-            // 
             // buttonSearchPatient
             // 
             this.buttonSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -473,6 +463,20 @@
             this.buttonSearchPatient.TabIndex = 35;
             this.buttonSearchPatient.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            // 
+            // textBoxSearchPatient
+            // 
+            this.textBoxSearchPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.textBoxSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.White;
+            this.textBoxSearchPatient.BorderRadius = 10;
+            this.textBoxSearchPatient.BorderSize = 10;
+            this.textBoxSearchPatient.Location = new System.Drawing.Point(299, 26);
+            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
+            this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(2);
+            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
+            this.textBoxSearchPatient.Size = new System.Drawing.Size(309, 53);
+            this.textBoxSearchPatient.TabIndex = 56;
             // 
             // PatientView
             // 
@@ -509,7 +513,6 @@
         private System.Windows.Forms.Label label11;
         private Components.Rounded.RoundedDataGridView dataGridViewExam;
         private Components.Rounded.RoundedButton buttonSearchPatient;
-        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private Components.Rounded.RoundedPanel roundedPanel1;
         private Components.Rounded.RoundedPanel roundedPanel2;
         private System.Windows.Forms.Label label1;
@@ -525,5 +528,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientPhone;
         private System.Windows.Forms.DataGridViewImageColumn columnEditPatient;
         private System.Windows.Forms.DataGridViewImageColumn columnDeletePatient;
+        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
     }
 }

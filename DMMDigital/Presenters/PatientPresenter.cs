@@ -25,7 +25,6 @@ namespace DMMDigital.Presenters
 
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
-        private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
         private IEnumerable<ExamModel> examList;
@@ -110,8 +109,8 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (DialogResult.Yes.Equals(confirmacao))
+            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DialogResult.Yes.Equals(res))
             {
                 patientRepository.deletePatient(view.selectedPatientId);
                 loadAllPatients();

@@ -54,7 +54,7 @@ namespace DMMDigital.Views
                 };
             };
 
-            textBoxSearchPatient.innerTextBox.KeyDown += (s, e) =>
+            textBoxSearchPatient.InnerTextBox.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);

@@ -52,7 +52,6 @@
             this.titulo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.roundedTextBox1 = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -307,20 +306,11 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Radiografia";
             // 
-            // roundedTextBox1
-            // 
-            this.roundedTextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedTextBox1.Location = new System.Drawing.Point(156, 19);
-            this.roundedTextBox1.Name = "roundedTextBox1";
-            this.roundedTextBox1.Size = new System.Drawing.Size(150, 50);
-            this.roundedTextBox1.TabIndex = 17;
-            // 
             // ChooseTemplateExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 593);
-            this.Controls.Add(this.roundedTextBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonInitializeExam);
@@ -368,6 +358,5 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panelShowTemplate;
-        private Components.Rounded.RoundedTextBox roundedTextBox1;
     }
 }

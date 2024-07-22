@@ -30,6 +30,7 @@ namespace DMMDigital.Views
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamView));
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panelDetails = new System.Windows.Forms.Panel();
@@ -86,6 +87,7 @@ namespace DMMDigital.Views
             this.mainPictureBox = new System.Windows.Forms.PictureBox();
             this.panelImage = new System.Windows.Forms.Panel();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.timerSensorStatus = new System.Windows.Forms.Timer(this.components);
             this.panelDetails.SuspendLayout();
             this.panelAnnotation.SuspendLayout();
             this.panelOptions.SuspendLayout();
@@ -791,6 +793,11 @@ namespace DMMDigital.Views
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
             // 
+            // timerSensorStatus
+            // 
+            this.timerSensorStatus.Interval = 500;
+            this.timerSensorStatus.Tick += new System.EventHandler(this.timerSensorStatusTick);
+            // 
             // ExamView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -878,5 +885,6 @@ namespace DMMDigital.Views
         private ToolStripButton buttonZoomSquare;
         private ToolStripButton buttonZoomIn;
         private ToolStripSeparator toolStripSeparator5;
+        private Timer timerSensorStatus;
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace DMMDigital.Components.Rounded
 {
-    partial class RoundedTextBox
+    partial class RoundedMaskedTextBox
     {
-        /// <summary>
+        /// <summary> 
         /// Variável de designer necessária.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
@@ -22,20 +22,14 @@
 
         #region Código gerado pelo Designer de Componentes
 
-        /// <summary>
+        /// <summary> 
         /// Método necessário para suporte ao Designer - não modifique 
         /// o conteúdo deste método com o editor de código.
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // RoundedTextBox
-            // 
-            this.Name = "RoundedTextBox";
-            this.Size = new System.Drawing.Size(150, 34);
-            this.ResumeLayout(false);
-
+            components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion
