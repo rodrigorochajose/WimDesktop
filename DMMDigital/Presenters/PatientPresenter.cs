@@ -112,6 +112,13 @@ namespace DMMDigital.Presenters
             DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
+                string fullPath = $"{configRepository.getExamPath()}\\Paciente-{view.selectedPatientId}";
+
+                if (Directory.Exists(fullPath))
+                {
+                    Directory.Delete(fullPath, true);
+                }
+
                 patientRepository.deletePatient(view.selectedPatientId);
                 loadAllPatients();
             }
@@ -225,17 +232,21 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            string fullPath = $"{configRepository.getExamPath()}{view.selectedExamPath}";
-
-            if (Directory.Exists(fullPath))
+            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DialogResult.Yes.Equals(res))
             {
-                Directory.Delete(fullPath, true);
+                string fullPath = $"{configRepository.getExamPath()}{view.selectedExamPath}";
+
+                if (Directory.Exists(fullPath))
+                {
+                    Directory.Delete(fullPath, true);
+                }
+
+                examRepository.deleteExam(view.selectedExamId);
+
+                MessageBox.Show("Exame deletado com sucesso!");
+                getExamByPatient(this, EventArgs.Empty);
             }
-
-            examRepository.deleteExam(view.selectedExamId);
-
-            MessageBox.Show("Exame deletado com sucesso!");
-            getExamByPatient(this, EventArgs.Empty);
         }
 
         private void exportExam(object sender, EventArgs e)

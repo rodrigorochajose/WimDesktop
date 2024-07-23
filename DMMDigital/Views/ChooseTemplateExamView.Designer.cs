@@ -29,258 +29,38 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChooseTemplateExamView));
-            this.buttonInitializeExam = new System.Windows.Forms.Button();
-            this.buttonCancelAction = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panelShowTemplate = new System.Windows.Forms.Panel();
-            this.buttonNewTemplate = new System.Windows.Forms.Button();
-            this.comboBoxTemplate = new System.Windows.Forms.ComboBox();
-            this.textBoxSessionName = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxObservation = new System.Windows.Forms.TextBox();
-            this.textBoxRecommendation = new System.Windows.Forms.TextBox();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.textBoxPhone = new System.Windows.Forms.MaskedTextBox();
-            this.textBoxBirthDate = new System.Windows.Forms.MaskedTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.titulo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.buttonInitializeExam = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
+            this.roundedPanel2 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.comboBoxTemplate = new DMMDigital.Components.Rounded.RoundedComboBox();
+            this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.buttonNewTemplate = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxSessionName = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.textBoxPhone = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
+            this.textBoxBirthDate = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
+            this.textBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.roundedPanel2.SuspendLayout();
+            this.roundedPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // buttonInitializeExam
-            // 
-            this.buttonInitializeExam.AutoSize = true;
-            this.buttonInitializeExam.BackColor = System.Drawing.Color.White;
-            this.buttonInitializeExam.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonInitializeExam.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.buttonInitializeExam.FlatAppearance.BorderSize = 0;
-            this.buttonInitializeExam.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.buttonInitializeExam.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.buttonInitializeExam.Location = new System.Drawing.Point(881, 538);
-            this.buttonInitializeExam.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonInitializeExam.Name = "buttonInitializeExam";
-            this.buttonInitializeExam.Size = new System.Drawing.Size(75, 27);
-            this.buttonInitializeExam.TabIndex = 14;
-            this.buttonInitializeExam.Text = "Iniciar";
-            this.buttonInitializeExam.UseVisualStyleBackColor = false;
-            // 
-            // buttonCancelAction
-            // 
-            this.buttonCancelAction.BackColor = System.Drawing.Color.White;
-            this.buttonCancelAction.Location = new System.Drawing.Point(48, 542);
-            this.buttonCancelAction.Name = "buttonCancelAction";
-            this.buttonCancelAction.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancelAction.TabIndex = 13;
-            this.buttonCancelAction.Text = "Cancelar";
-            this.buttonCancelAction.UseVisualStyleBackColor = false;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panelShowTemplate);
-            this.panel2.Controls.Add(this.buttonNewTemplate);
-            this.panel2.Controls.Add(this.comboBoxTemplate);
-            this.panel2.Controls.Add(this.textBoxSessionName);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Location = new System.Drawing.Point(488, 107);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(468, 406);
-            this.panel2.TabIndex = 12;
-            // 
-            // panelShowTemplate
-            // 
-            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
-            this.panelShowTemplate.Location = new System.Drawing.Point(53, 151);
-            this.panelShowTemplate.Name = "panelShowTemplate";
-            this.panelShowTemplate.Size = new System.Drawing.Size(350, 225);
-            this.panelShowTemplate.TabIndex = 17;
-            // 
-            // buttonNewTemplate
-            // 
-            this.buttonNewTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.buttonNewTemplate.Location = new System.Drawing.Point(312, 97);
-            this.buttonNewTemplate.Name = "buttonNewTemplate";
-            this.buttonNewTemplate.Size = new System.Drawing.Size(125, 33);
-            this.buttonNewTemplate.TabIndex = 8;
-            this.buttonNewTemplate.Text = "Novo Template";
-            this.buttonNewTemplate.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxTemplate
-            // 
-            this.comboBoxTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.comboBoxTemplate.FormattingEnabled = true;
-            this.comboBoxTemplate.Location = new System.Drawing.Point(23, 102);
-            this.comboBoxTemplate.Name = "comboBoxTemplate";
-            this.comboBoxTemplate.Size = new System.Drawing.Size(260, 25);
-            this.comboBoxTemplate.TabIndex = 6;
-            // 
-            // textBoxSessionName
-            // 
-            this.textBoxSessionName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxSessionName.Location = new System.Drawing.Point(21, 38);
-            this.textBoxSessionName.Name = "textBoxSessionName";
-            this.textBoxSessionName.Size = new System.Drawing.Size(262, 25);
-            this.textBoxSessionName.TabIndex = 5;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.Location = new System.Drawing.Point(19, 78);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 19);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Template";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label10.Location = new System.Drawing.Point(19, 15);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(188, 19);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Nome da Sessão Radiográfica";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.textBoxObservation);
-            this.panel1.Controls.Add(this.textBoxRecommendation);
-            this.panel1.Controls.Add(this.textBoxName);
-            this.panel1.Controls.Add(this.textBoxPhone);
-            this.panel1.Controls.Add(this.textBoxBirthDate);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(35, 107);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(400, 406);
-            this.panel1.TabIndex = 11;
-            // 
-            // textBoxObservation
-            // 
-            this.textBoxObservation.Enabled = false;
-            this.textBoxObservation.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxObservation.Location = new System.Drawing.Point(22, 236);
-            this.textBoxObservation.Multiline = true;
-            this.textBoxObservation.Name = "textBoxObservation";
-            this.textBoxObservation.ReadOnly = true;
-            this.textBoxObservation.Size = new System.Drawing.Size(297, 110);
-            this.textBoxObservation.TabIndex = 12;
-            // 
-            // textBoxRecommendation
-            // 
-            this.textBoxRecommendation.Enabled = false;
-            this.textBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxRecommendation.Location = new System.Drawing.Point(22, 188);
-            this.textBoxRecommendation.Name = "textBoxRecommendation";
-            this.textBoxRecommendation.ReadOnly = true;
-            this.textBoxRecommendation.Size = new System.Drawing.Size(248, 25);
-            this.textBoxRecommendation.TabIndex = 11;
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Enabled = false;
-            this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxName.Location = new System.Drawing.Point(22, 44);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.ReadOnly = true;
-            this.textBoxName.Size = new System.Drawing.Size(248, 25);
-            this.textBoxName.TabIndex = 10;
-            // 
-            // textBoxPhone
-            // 
-            this.textBoxPhone.Enabled = false;
-            this.textBoxPhone.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxPhone.Location = new System.Drawing.Point(22, 141);
-            this.textBoxPhone.Mask = "(99) 99999-9999";
-            this.textBoxPhone.Name = "textBoxPhone";
-            this.textBoxPhone.ReadOnly = true;
-            this.textBoxPhone.Size = new System.Drawing.Size(137, 25);
-            this.textBoxPhone.TabIndex = 9;
-            // 
-            // textBoxBirthDate
-            // 
-            this.textBoxBirthDate.Enabled = false;
-            this.textBoxBirthDate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxBirthDate.Location = new System.Drawing.Point(22, 93);
-            this.textBoxBirthDate.Mask = "00/00/0000";
-            this.textBoxBirthDate.Name = "textBoxBirthDate";
-            this.textBoxBirthDate.ReadOnly = true;
-            this.textBoxBirthDate.Size = new System.Drawing.Size(137, 25);
-            this.textBoxBirthDate.TabIndex = 8;
-            this.textBoxBirthDate.ValidatingType = typeof(System.DateTime);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label5.Location = new System.Drawing.Point(19, 216);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 19);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Observações";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label4.Location = new System.Drawing.Point(19, 168);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 19);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Indicação";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.Location = new System.Drawing.Point(19, 120);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 19);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Telefone";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label2.Location = new System.Drawing.Point(19, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 19);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Data de Nascimento";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label1.Location = new System.Drawing.Point(19, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 19);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nome do Paciente";
             // 
             // titulo
             // 
             this.titulo.AutoSize = true;
             this.titulo.Font = new System.Drawing.Font("Segoe UI", 20F);
-            this.titulo.Location = new System.Drawing.Point(388, 19);
+            this.titulo.Location = new System.Drawing.Point(363, 19);
             this.titulo.Name = "titulo";
             this.titulo.Size = new System.Drawing.Size(166, 37);
             this.titulo.TabIndex = 10;
@@ -306,17 +86,291 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Radiografia";
             // 
+            // buttonInitializeExam
+            // 
+            this.buttonInitializeExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonInitializeExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonInitializeExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonInitializeExam.BorderWidth = 5F;
+            this.buttonInitializeExam.CornerRadius = 5;
+            this.buttonInitializeExam.FlatAppearance.BorderSize = 0;
+            this.buttonInitializeExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInitializeExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonInitializeExam.ForeColor = System.Drawing.Color.White;
+            this.buttonInitializeExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonInitializeExam.Location = new System.Drawing.Point(826, 591);
+            this.buttonInitializeExam.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonInitializeExam.Name = "buttonInitializeExam";
+            this.buttonInitializeExam.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonInitializeExam.Size = new System.Drawing.Size(100, 42);
+            this.buttonInitializeExam.TabIndex = 59;
+            this.buttonInitializeExam.Text = "Iniciar";
+            this.buttonInitializeExam.UseVisualStyleBackColor = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.Location = new System.Drawing.Point(41, 591);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonCancel.Size = new System.Drawing.Size(100, 42);
+            this.buttonCancel.TabIndex = 58;
+            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            // 
+            // roundedPanel2
+            // 
+            this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedPanel2.BorderWidth = 5F;
+            this.roundedPanel2.Controls.Add(this.comboBoxTemplate);
+            this.roundedPanel2.Controls.Add(this.panelShowTemplate);
+            this.roundedPanel2.Controls.Add(this.buttonNewTemplate);
+            this.roundedPanel2.Controls.Add(this.textBoxSessionName);
+            this.roundedPanel2.Controls.Add(this.label8);
+            this.roundedPanel2.Controls.Add(this.label10);
+            this.roundedPanel2.CornerRadius = 20;
+            this.roundedPanel2.Location = new System.Drawing.Point(488, 112);
+            this.roundedPanel2.Name = "roundedPanel2";
+            this.roundedPanel2.Size = new System.Drawing.Size(438, 438);
+            this.roundedPanel2.TabIndex = 43;
+            // 
+            // comboBoxTemplate
+            // 
+            this.comboBoxTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxTemplate.BorderColor = System.Drawing.Color.White;
+            this.comboBoxTemplate.BorderRadius = 10;
+            this.comboBoxTemplate.BorderSize = 10;
+            this.comboBoxTemplate.Location = new System.Drawing.Point(32, 118);
+            this.comboBoxTemplate.Name = "comboBoxTemplate";
+            this.comboBoxTemplate.Size = new System.Drawing.Size(221, 49);
+            this.comboBoxTemplate.TabIndex = 60;
+            // 
+            // panelShowTemplate
+            // 
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.panelShowTemplate.BorderWidth = 5F;
+            this.panelShowTemplate.CornerRadius = 20;
+            this.panelShowTemplate.Location = new System.Drawing.Point(45, 192);
+            this.panelShowTemplate.Name = "panelShowTemplate";
+            this.panelShowTemplate.Size = new System.Drawing.Size(350, 225);
+            this.panelShowTemplate.TabIndex = 0;
+            // 
+            // buttonNewTemplate
+            // 
+            this.buttonNewTemplate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNewTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewTemplate.BorderWidth = 5F;
+            this.buttonNewTemplate.CornerRadius = 5;
+            this.buttonNewTemplate.FlatAppearance.BorderSize = 0;
+            this.buttonNewTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNewTemplate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonNewTemplate.ForeColor = System.Drawing.Color.White;
+            this.buttonNewTemplate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonNewTemplate.Location = new System.Drawing.Point(270, 123);
+            this.buttonNewTemplate.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonNewTemplate.Name = "buttonNewTemplate";
+            this.buttonNewTemplate.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonNewTemplate.Size = new System.Drawing.Size(141, 42);
+            this.buttonNewTemplate.TabIndex = 57;
+            this.buttonNewTemplate.Text = "Novo Template";
+            this.buttonNewTemplate.UseVisualStyleBackColor = false;
+            // 
+            // textBoxSessionName
+            // 
+            this.textBoxSessionName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSessionName.BorderColor = System.Drawing.Color.White;
+            this.textBoxSessionName.BorderRadius = 10;
+            this.textBoxSessionName.BorderSize = 10;
+            this.textBoxSessionName.Location = new System.Drawing.Point(32, 35);
+            this.textBoxSessionName.Name = "textBoxSessionName";
+            this.textBoxSessionName.PlaceholderText = null;
+            this.textBoxSessionName.Size = new System.Drawing.Size(285, 44);
+            this.textBoxSessionName.TabIndex = 43;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label8.Location = new System.Drawing.Point(38, 96);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(64, 19);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Template";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label10.Location = new System.Drawing.Point(28, 13);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(188, 19);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Nome da Sessão Radiográfica";
+            // 
+            // roundedPanel1
+            // 
+            this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.Controls.Add(this.textBoxObservation);
+            this.roundedPanel1.Controls.Add(this.textBoxRecommendation);
+            this.roundedPanel1.Controls.Add(this.textBoxPhone);
+            this.roundedPanel1.Controls.Add(this.textBoxBirthDate);
+            this.roundedPanel1.Controls.Add(this.textBoxName);
+            this.roundedPanel1.Controls.Add(this.label9);
+            this.roundedPanel1.Controls.Add(this.label11);
+            this.roundedPanel1.Controls.Add(this.label12);
+            this.roundedPanel1.Controls.Add(this.label13);
+            this.roundedPanel1.Controls.Add(this.label14);
+            this.roundedPanel1.CornerRadius = 20;
+            this.roundedPanel1.Location = new System.Drawing.Point(41, 112);
+            this.roundedPanel1.Name = "roundedPanel1";
+            this.roundedPanel1.Size = new System.Drawing.Size(369, 438);
+            this.roundedPanel1.TabIndex = 17;
+            // 
+            // textBoxObservation
+            // 
+            this.textBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxObservation.BorderColor = System.Drawing.Color.White;
+            this.textBoxObservation.BorderRadius = 10;
+            this.textBoxObservation.BorderSize = 10;
+            this.textBoxObservation.Location = new System.Drawing.Point(35, 320);
+            this.textBoxObservation.Name = "textBoxObservation";
+            this.textBoxObservation.PlaceholderText = null;
+            this.textBoxObservation.Size = new System.Drawing.Size(285, 106);
+            this.textBoxObservation.TabIndex = 42;
+            // 
+            // textBoxRecommendation
+            // 
+            this.textBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxRecommendation.BorderColor = System.Drawing.Color.White;
+            this.textBoxRecommendation.BorderRadius = 10;
+            this.textBoxRecommendation.BorderSize = 10;
+            this.textBoxRecommendation.Location = new System.Drawing.Point(35, 249);
+            this.textBoxRecommendation.Name = "textBoxRecommendation";
+            this.textBoxRecommendation.PlaceholderText = null;
+            this.textBoxRecommendation.Size = new System.Drawing.Size(285, 44);
+            this.textBoxRecommendation.TabIndex = 41;
+            // 
+            // textBoxPhone
+            // 
+            this.textBoxPhone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxPhone.BorderColor = System.Drawing.Color.White;
+            this.textBoxPhone.BorderRadius = 10;
+            this.textBoxPhone.BorderSize = 10;
+            this.textBoxPhone.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxPhone.Location = new System.Drawing.Point(35, 178);
+            this.textBoxPhone.Name = "textBoxPhone";
+            this.textBoxPhone.Size = new System.Drawing.Size(185, 44);
+            this.textBoxPhone.TabIndex = 40;
+            // 
+            // textBoxBirthDate
+            // 
+            this.textBoxBirthDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxBirthDate.BorderColor = System.Drawing.Color.White;
+            this.textBoxBirthDate.BorderRadius = 10;
+            this.textBoxBirthDate.BorderSize = 10;
+            this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxBirthDate.Location = new System.Drawing.Point(35, 107);
+            this.textBoxBirthDate.Name = "textBoxBirthDate";
+            this.textBoxBirthDate.Size = new System.Drawing.Size(185, 44);
+            this.textBoxBirthDate.TabIndex = 39;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxName.BorderColor = System.Drawing.Color.White;
+            this.textBoxName.BorderRadius = 10;
+            this.textBoxName.BorderSize = 10;
+            this.textBoxName.Location = new System.Drawing.Point(35, 36);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.PlaceholderText = null;
+            this.textBoxName.Size = new System.Drawing.Size(285, 44);
+            this.textBoxName.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label9.Location = new System.Drawing.Point(36, 298);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 19);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Observação";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label11.Location = new System.Drawing.Point(36, 227);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(66, 19);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Indicação";
+            // 
+            // label12
+            // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label12.Location = new System.Drawing.Point(36, 156);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(59, 19);
+            this.label12.TabIndex = 35;
+            this.label12.Text = "Telefone";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label13.Location = new System.Drawing.Point(36, 85);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(133, 19);
+            this.label13.TabIndex = 34;
+            this.label13.Text = "Data de Nascimento";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(36, 14);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(46, 19);
+            this.label14.TabIndex = 33;
+            this.label14.Text = "Nome";
+            // 
             // ChooseTemplateExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 593);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(967, 650);
+            this.Controls.Add(this.buttonInitializeExam);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.roundedPanel2);
+            this.Controls.Add(this.roundedPanel1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.buttonInitializeExam);
-            this.Controls.Add(this.buttonCancelAction);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.titulo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -324,39 +378,38 @@
             this.Name = "ChooseTemplateExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Iniciar Novo Exame";
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.roundedPanel2.ResumeLayout(false);
+            this.roundedPanel2.PerformLayout();
+            this.roundedPanel1.ResumeLayout(false);
+            this.roundedPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonInitializeExam;
-        private System.Windows.Forms.Button buttonCancelAction;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonNewTemplate;
-        private System.Windows.Forms.ComboBox comboBoxTemplate;
-        private System.Windows.Forms.TextBox textBoxSessionName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label titulo;
-        private System.Windows.Forms.TextBox textBoxObservation;
-        private System.Windows.Forms.TextBox textBoxRecommendation;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.MaskedTextBox textBoxPhone;
-        private System.Windows.Forms.MaskedTextBox textBoxBirthDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panelShowTemplate;
+        private Components.Rounded.RoundedPanel roundedPanel1;
+        private Components.Rounded.RoundedTextBox textBoxObservation;
+        private Components.Rounded.RoundedTextBox textBoxRecommendation;
+        private Components.Rounded.RoundedMaskedTextBox textBoxPhone;
+        private Components.Rounded.RoundedMaskedTextBox textBoxBirthDate;
+        private Components.Rounded.RoundedTextBox textBoxName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private Components.Rounded.RoundedPanel roundedPanel2;
+        private Components.Rounded.RoundedTextBox textBoxSessionName;
+        private Components.Rounded.RoundedButton buttonNewTemplate;
+        private Components.Rounded.RoundedButton buttonCancel;
+        private Components.Rounded.RoundedPanel panelShowTemplate;
+        private Components.Rounded.RoundedButton buttonInitializeExam;
+        private Components.Rounded.RoundedComboBox comboBoxTemplate;
     }
 }

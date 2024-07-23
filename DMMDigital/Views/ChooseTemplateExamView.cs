@@ -16,6 +16,10 @@ namespace DMMDigital.Views
         public ChooseTemplateExamView()
         {
             InitializeComponent();
+
+            textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
+            textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
+
             associateEvents();
 
             ActiveControl = textBoxSessionName;
@@ -27,9 +31,9 @@ namespace DMMDigital.Views
 
             buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
 
-            buttonCancelAction.Click += delegate { Close(); };
+            buttonCancel.Click += delegate { Close(); };
 
-            comboBoxTemplate.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
+            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
 
             panelShowTemplate.Paint += (s, e) =>
             {
@@ -41,43 +45,43 @@ namespace DMMDigital.Views
 
         public string patientName
         {
-            get { return textBoxName.Text; }
-            set { textBoxName.Text = value; }
+            get { return textBoxName.InnerTextBox.Text; }
+            set { textBoxName.InnerTextBox.Text = value; }
         }
 
         public DateTime patientBirthDate
         {
-            get { return DateTime.Parse(textBoxBirthDate.Text); }
-            set { textBoxBirthDate.Text = value.ToString(); }
+            get { return DateTime.Parse(textBoxBirthDate.InnerMaskedTextBox.Text); }
+            set { textBoxBirthDate.InnerMaskedTextBox.Text = value.ToString(); }
         }
 
         public string patientPhone
         {
-            get { return textBoxPhone.Text; }
-            set { textBoxPhone.Text = value; }
+            get { return textBoxPhone.InnerMaskedTextBox.Text; }
+            set { textBoxPhone.InnerMaskedTextBox.Text = value; }
         }
 
         public string patientRecommendation
         {
-            get { return textBoxRecommendation.Text; }
-            set { textBoxRecommendation.Text = value; }
+            get { return textBoxRecommendation.InnerTextBox.Text; }
+            set { textBoxRecommendation.InnerTextBox.Text = value; }
         }
 
         public string patientObservation
         {
-            get { return textBoxObservation.Text; }
-            set { textBoxObservation.Text = value; }
+            get { return textBoxObservation.InnerTextBox.Text; }
+            set { textBoxObservation.InnerTextBox.Text = value; }
         }
 
         public string sessionName 
         {
-            get { return textBoxSessionName.Text; }
-            set { textBoxSessionName.Text = value; }
+            get { return textBoxSessionName.InnerTextBox.Text; }
+            set { textBoxSessionName.InnerTextBox.Text = value; }
         }
 
         public int selectedTemplateId 
         {
-            get { return int.Parse(comboBoxTemplate.SelectedValue.ToString()); }
+            get { return int.Parse(comboBoxTemplate.InnerComboBox.SelectedValue.ToString()); }
         }
 
         public string selectedTemplateName
@@ -87,7 +91,7 @@ namespace DMMDigital.Views
 
         public List<TemplateFrameModel> templateFrames
         { 
-            get { return templateFrameList.Where(frame => frame.templateId == int.Parse(comboBoxTemplate.SelectedValue.ToString())).ToList(); }
+            get { return templateFrameList.Where(frame => frame.templateId == int.Parse(comboBoxTemplate.InnerComboBox.SelectedValue.ToString())).ToList(); }
         }
 
         public event EventHandler eventAddNewTemplate;
@@ -95,17 +99,17 @@ namespace DMMDigital.Views
 
         public void setTemplateList(List<TemplateModel> templateList)
         {
-            comboBoxTemplate.DataSource = templateList;
-            comboBoxTemplate.DisplayMember = "name";
-            comboBoxTemplate.ValueMember = "id";
+            comboBoxTemplate.InnerComboBox.DataSource = templateList;
+            comboBoxTemplate.InnerComboBox.DisplayMember = "name";
+            comboBoxTemplate.InnerComboBox.ValueMember = "id";
         }
 
         public void setTemplateFrameList(List<TemplateFrameModel> templateFrameList)
         {
             this.templateFrameList = templateFrameList;
-            if (comboBoxTemplate.Items.Count > 0)
+            if (comboBoxTemplate.InnerComboBox.Items.Count > 0)
             {
-                comboBoxTemplate.SelectedItem = comboBoxTemplate.Items[0];
+                comboBoxTemplate.InnerComboBox.SelectedItem = comboBoxTemplate.InnerComboBox.Items[0];
                 showTemplateOnPanel();
             }
         }
@@ -114,7 +118,7 @@ namespace DMMDigital.Views
         {
             clearTemplatePanel();
 
-            int templateId = int.Parse(comboBoxTemplate.SelectedValue.ToString());
+            int templateId = int.Parse(comboBoxTemplate.InnerComboBox.SelectedValue.ToString());
 
             List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == templateId).ToList();
 
