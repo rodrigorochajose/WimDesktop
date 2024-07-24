@@ -83,6 +83,16 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_folder {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_16x16_original_size {
             get {
                 object obj = ResourceManager.GetObject("icon_16x16_original_size", resourceCulture);

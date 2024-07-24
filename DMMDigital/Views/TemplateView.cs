@@ -32,12 +32,9 @@ namespace DMMDigital.Views
 
             dataGridViewTemplate.CellContentClick += (s, e) =>
             {
-                if (e.RowIndex != -1)
+                if (e.ColumnIndex == 1)
                 {
-                    if (e.ColumnIndex == 0)
-                    {
-                        eventDeleteTemplate?.Invoke(this, EventArgs.Empty);
-                    }
+                    eventDeleteTemplate?.Invoke(this, EventArgs.Empty);
                 }
             };
 
@@ -69,9 +66,9 @@ namespace DMMDigital.Views
         public void templateDataGridViewHandler()
         {
             dataGridViewTemplate.Columns["id"].Visible = false;
-            delete.Frozen = true;
-            delete.Image = Properties.Resources.icon_32x32_delete;
-            delete.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            columnDeleteTemplate.Frozen = true;
+            columnDeleteTemplate.Image = Properties.Resources.icon_32x32_delete;
+            columnDeleteTemplate.ImageLayout = DataGridViewImageCellLayout.Zoom;
         }
 
         private void showTemplateOnPanel()

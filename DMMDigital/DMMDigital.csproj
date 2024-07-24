@@ -121,6 +121,12 @@
     <Compile Include="Components\Rounded\RoundedMaskedTextBox.Designer.cs">
       <DependentUpon>RoundedMaskedTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Rounded\RoundedNumericUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedNumericUpDown.Designer.cs">
+      <DependentUpon>RoundedNumericUpDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Rounded\RoundedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -333,6 +339,9 @@
     <Compile Include="_Repositories\TemplateRepository.cs" />
     <EmbeddedResource Include="Components\Rounded\RoundedComboBox.resx">
       <DependentUpon>RoundedComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Rounded\RoundedNumericUpDown.resx">
+      <DependentUpon>RoundedNumericUpDown.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Rounded\RoundedTextBox.resx">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
@@ -564,6 +573,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\icon-16x16-folder.png" />
     <None Include="Resources\icon-32x32-capture.png" />
     <None Include="Resources\scanner-3d.png" />
     <None Include="Resources\1-original.png" />

@@ -150,6 +150,7 @@
             this.comboBoxTemplate.BorderColor = System.Drawing.Color.White;
             this.comboBoxTemplate.BorderRadius = 10;
             this.comboBoxTemplate.BorderSize = 10;
+            this.comboBoxTemplate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.comboBoxTemplate.Location = new System.Drawing.Point(32, 118);
             this.comboBoxTemplate.Name = "comboBoxTemplate";
             this.comboBoxTemplate.Size = new System.Drawing.Size(221, 49);
@@ -158,7 +159,7 @@
             // panelShowTemplate
             // 
             this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
-            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.panelShowTemplate.BorderWidth = 5F;
             this.panelShowTemplate.CornerRadius = 20;
             this.panelShowTemplate.Location = new System.Drawing.Point(45, 192);

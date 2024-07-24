@@ -5,39 +5,38 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Components.Rounded
 {
-    public partial class RoundedComboBox : UserControl
+    public partial class RoundedNumericUpDown : UserControl
     {
-        private readonly ComboBox comboBox;
+        private readonly NumericUpDown numericUpDown;
         private Color borderColor = Color.Red;
         private int borderSize = 2;
         private int borderRadius = 10;
 
-        public RoundedComboBox()
+        public RoundedNumericUpDown()
         {
             InitializeComponent();
 
-            comboBox = new ComboBox
+            numericUpDown = new NumericUpDown
             {
-                FlatStyle = FlatStyle.Flat,
+                BorderStyle = BorderStyle.None,
                 Location = new Point(borderSize, borderSize),
                 Width = Width - 2 * borderSize,
-                Height = Height - 2 * borderSize
+                Height = Height - 2 * borderSize,
+                AutoSize = false
             };
 
-            comboBox.TextChanged += (s, e) => OnTextChanged(e);
-
-            Controls.Add(comboBox);
-            Resize += new EventHandler(RoundedComboBox_Resize);
-            Paint += new PaintEventHandler(RoundedComboBox_Paint);
+            Controls.Add(numericUpDown);
+            Resize += new EventHandler(RoundedNumericUpDown_Resize);
+            Paint += new PaintEventHandler(RoundedNumericUpDown_Paint);
         }
 
-        private void RoundedComboBox_Resize(object sender, EventArgs e)
+        private void RoundedNumericUpDown_Resize(object sender, EventArgs e)
         {
-            ResizeComboBox();
+            ResizeNumericUpDown();
             Invalidate();
         }
 
-        private void RoundedComboBox_Paint(object sender, PaintEventArgs e)
+        private void RoundedNumericUpDown_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -64,40 +63,40 @@ namespace DMMDigital.Components.Rounded
             return path;
         }
 
-        public ComboBox InnerComboBox
+        public NumericUpDown InnerNumericUpDown
         {
-            get { return comboBox; }
+            get { return numericUpDown; }
         }
 
         public new Color BackColor
         {
-            get { return comboBox.BackColor; }
+            get { return numericUpDown.BackColor; }
             set
             {
                 base.BackColor = value;
-                comboBox.BackColor = value;
+                numericUpDown.BackColor = value;
                 Invalidate();
             }
         }
 
         public new Color ForeColor
         {
-            get { return comboBox.ForeColor; }
-            set 
-            { 
+            get { return numericUpDown.ForeColor; }
+            set
+            {
                 base.ForeColor = value;
-                comboBox.ForeColor = value;
+                numericUpDown.ForeColor = value;
                 Invalidate();
             }
         }
 
         public new Font Font
         {
-            get { return comboBox.Font; }
-            set 
+            get { return numericUpDown.Font; }
+            set
             {
                 base.Font = value;
-                comboBox.Font = value;
+                numericUpDown.Font = value;
                 Invalidate();
             }
         }
@@ -111,7 +110,7 @@ namespace DMMDigital.Components.Rounded
         public int BorderSize
         {
             get { return borderSize; }
-            set { borderSize = value; ResizeComboBox(); Invalidate(); }
+            set { borderSize = value; ResizeNumericUpDown(); Invalidate(); }
         }
 
         public int BorderRadius
@@ -120,16 +119,11 @@ namespace DMMDigital.Components.Rounded
             set { borderRadius = value; Invalidate(); }
         }
 
-        private void ResizeComboBox()
+        private void ResizeNumericUpDown()
         {
-            comboBox.Location = new Point(borderSize, borderSize);
-            comboBox.Width = Width - 2 * borderSize;
-            comboBox.Height = Height - 2 * borderSize;
-        }
-
-        protected override void OnTextChanged(EventArgs e)
-        {
-            base.OnTextChanged(e);
+            numericUpDown.Location = new Point(borderSize, borderSize);
+            numericUpDown.Width = Width - 2 * borderSize;
+            numericUpDown.Height = Height - 2 * borderSize;
         }
     }
 }

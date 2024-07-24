@@ -20,6 +20,19 @@ namespace DMMDigital.Components
 
             Frame frame = this;
 
+            if (frame.Tag != null)
+            {
+                if ((Color)frame.Tag == Color.Black)
+                {
+                    ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
+                }
+                else
+                {
+                    ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
+
+                }
+            }
+
             if (originalImage == null)
             {
                 int orderFontSize;

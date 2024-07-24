@@ -20,20 +20,20 @@ namespace DMMDigital.Views
 
         public string examPath
         {
-            get { return textBoxPath.Text; }
-            set { textBoxPath.Text = value; } 
+            get { return textBoxExamPath.Text; }
+            set { textBoxExamPath.Text = value; } 
         }
 
         public string sensorModel 
         {
-            get { return comboBoxSensorModel.SelectedValue.ToString(); }
-            set { comboBoxSensorModel.SelectedValue = value; } 
+            get { return comboBoxSensorModel.InnerComboBox.SelectedValue.ToString(); }
+            set { comboBoxSensorModel.InnerComboBox.SelectedValue = value; } 
         }
 
         public string acquireMode
         { 
-            get { return comboBoxAcquireMode.SelectedItem.ToString(); } 
-            set { comboBoxAcquireMode.SelectedItem = value; }
+            get { return comboBoxAcquireMode.InnerComboBox.SelectedItem.ToString(); } 
+            set { comboBoxAcquireMode.InnerComboBox.SelectedItem = value; }
         }
 
         public string drawingColor 
@@ -44,8 +44,8 @@ namespace DMMDigital.Views
 
         public int drawingSize
         {
-            get { return int.Parse(numericUpDownDrawingSize.Value.ToString()); }
-            set { numericUpDownDrawingSize.Value = value; }
+            get { return int.Parse(numericUpDownDrawingSize.InnerNumericUpDown.Value.ToString()); }
+            set { numericUpDownDrawingSize.InnerNumericUpDown.Value = value; }
         }
 
         public string textColor 
@@ -56,8 +56,8 @@ namespace DMMDigital.Views
 
         public int textSize
         {
-            get { return int.Parse(numericUpDownTextSize.Value.ToString()); }
-            set { numericUpDownTextSize.Value = value; }
+            get { return int.Parse(numericUpDownTextSize.InnerNumericUpDown.Value.ToString()); }
+            set { numericUpDownTextSize.InnerNumericUpDown.Value = value; }
         }
 
         public string rulerColor 
@@ -93,7 +93,7 @@ namespace DMMDigital.Views
                 sensorPath = folderBrowserDialog1.SelectedPath;
             };
 
-            textBoxPath.Click += delegate 
+            textBoxExamPath.Click += delegate 
             {
                 folderBrowserDialog1.ShowDialog();
                 examPath = folderBrowserDialog1.SelectedPath;
@@ -106,14 +106,14 @@ namespace DMMDigital.Views
 
         public void setComboBoxSensorModel(List<SensorModel> sensorList)
         {
-            comboBoxSensorModel.DataSource = sensorList;
-            comboBoxSensorModel.DisplayMember = "nickname";
-            comboBoxSensorModel.ValueMember = "name";
+            comboBoxSensorModel.InnerComboBox.DataSource = sensorList;
+            comboBoxSensorModel.InnerComboBox.DisplayMember = "nickname";
+            comboBoxSensorModel.InnerComboBox.ValueMember = "name";
         }
 
         public void setAcquireMode()
         {
-            comboBoxAcquireMode.DataSource = new List<string> { "TWAIN", "Nativo" };
+            comboBoxAcquireMode.InnerComboBox.DataSource = new List<string> { "TWAIN", "Nativo" };
         }
 
         private void buttonDrawingColorPickerClick(object sender, EventArgs e)
@@ -127,7 +127,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownDrawingSizeValueChanged(object sender, EventArgs e)
         {
-            drawingSize = (int)numericUpDownDrawingSize.Value;
+            drawingSize = (int)numericUpDownDrawingSize.InnerNumericUpDown.Value;
         }
 
         private void buttonTextColorPickerClick(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace DMMDigital.Views
 
         private void numericUpDownTextSizeValueChanged(object sender, EventArgs e)
         {
-            textSize = (int)numericUpDownTextSize.Value;
+            textSize = (int)numericUpDownTextSize.InnerNumericUpDown.Value;
         }
 
         private void buttonRulerColorPickerClick(object sender, EventArgs e)

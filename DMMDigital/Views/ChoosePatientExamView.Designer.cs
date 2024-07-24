@@ -270,6 +270,7 @@
             this.textBoxSearchPatient.BorderColor = System.Drawing.Color.White;
             this.textBoxSearchPatient.BorderRadius = 10;
             this.textBoxSearchPatient.BorderSize = 10;
+            this.textBoxSearchPatient.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxSearchPatient.Location = new System.Drawing.Point(24, 98);
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
             this.textBoxSearchPatient.Padding = new System.Windows.Forms.Padding(2, 2, 5, 2);

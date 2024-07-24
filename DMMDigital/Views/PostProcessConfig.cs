@@ -10,26 +10,26 @@ namespace DMMDigital.Views
     {
         public float brightness 
         {
-            get { return (float) numericUpDownBrightness.Value; }
-            set { numericUpDownBrightness.Value = (decimal) value; }
+            get { return (float) numericUpDownBrightness.InnerNumericUpDown.Value; }
+            set { numericUpDownBrightness.InnerNumericUpDown.Value = (decimal) value; }
         }
 
         public float contrast 
         {
-            get { return (float)numericUpDownContrast.Value; }
-            set { numericUpDownContrast.Value = (decimal)value; }
+            get { return (float)numericUpDownContrast.InnerNumericUpDown.Value; }
+            set { numericUpDownContrast.InnerNumericUpDown.Value = (decimal)value; }
         }
 
         public float reveal 
         {
-            get { return (float)numericUpDownReveal.Value; }
-            set { numericUpDownReveal.Value = (decimal)value; }
+            get { return (float)numericUpDownReveal.InnerNumericUpDown.Value; }
+            set { numericUpDownReveal.InnerNumericUpDown.Value = (decimal)value; }
         }
 
         public float smartSharpen
         {
-            get { return (float)numericUpDownSmartSharpen.Value; }
-            set { numericUpDownSmartSharpen.Value = (decimal)value; }
+            get { return (float)numericUpDownSmartSharpen.InnerNumericUpDown.Value; }
+            set { numericUpDownSmartSharpen.InnerNumericUpDown.Value = (decimal)value; }
         }
 
         public PostProcessConfig(float brightness, float contrast, float reveal, float smartSharpen)
@@ -76,9 +76,9 @@ namespace DMMDigital.Views
 
         private void buttonRestoreValuesClick(object sender, EventArgs e)
         {
-            numericUpDownBrightness.Value = 0;
-            numericUpDownContrast.Value = 0;
-            numericUpDownReveal.Value = 0;
+            numericUpDownBrightness.InnerNumericUpDown.Value = 0;
+            numericUpDownContrast.InnerNumericUpDown.Value = 0;
+            numericUpDownReveal.InnerNumericUpDown.Value = 0;
         }
 
         private void buttonSaveClick(object sender, EventArgs e)

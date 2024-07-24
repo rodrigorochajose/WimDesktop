@@ -11,12 +11,27 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
+            KeyPreview = true;
+
+            KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    setRulerValue();
+                }
+            };
+
+            buttonConfirm.Click += delegate
+            {
+                setRulerValue();
+            };
+
             label.Text = $"Digite o valor de {lineLength:0.00} pixels em milímetros";
         }
 
-        private void buttonConfirmClick(object sender, EventArgs e)
+        private void setRulerValue()
         {
-            rulerValue = (double)numericUpDown1.Value;
+            rulerValue = (double)numericUpDown.InnerNumericUpDown.Value;
             DialogResult = DialogResult.OK;
             Close();
         }

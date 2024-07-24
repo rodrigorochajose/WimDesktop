@@ -25,7 +25,12 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
-            comboBoxFormat.SelectedIndex = 0;
+            comboBoxFormat.InnerComboBox.Items.Add("JPEG");
+            comboBoxFormat.InnerComboBox.Items.Add("PNG");
+            comboBoxFormat.InnerComboBox.Items.Add("TIFF");
+            comboBoxFormat.InnerComboBox.Items.Add("DICOM");
+            comboBoxFormat.InnerComboBox.Items.Add("RAW");
+            comboBoxFormat.InnerComboBox.SelectedIndex = 0;
 
             buttonCancel.Click += delegate { Close(); };
         }
@@ -34,10 +39,10 @@ namespace DMMDigital.Views
         {
             loadExamFrames();
             pathToExport = folderBrowserDialog1.SelectedPath;
-            textBox1.Text = folderBrowserDialog1.SelectedPath;
+            textBoxSelectPath.Text = folderBrowserDialog1.SelectedPath;
 
-            textBox1.Click += selectPath;
-            button1.Click += selectPath;
+            textBoxSelectPath.Click += selectPath;
+            buttonSelectPath.Click += selectPath;
         }
 
         public void loadExamFrames()
@@ -96,7 +101,7 @@ namespace DMMDigital.Views
         {
             folderBrowserDialog1.ShowDialog();         
             pathToExport = folderBrowserDialog1.SelectedPath;
-            textBox1.Text = folderBrowserDialog1.SelectedPath;
+            textBoxSelectPath.Text = folderBrowserDialog1.SelectedPath;
         }
 
         private void checkBoxSelectAllMouseCaptureChanged(object sender, EventArgs e)
@@ -155,7 +160,7 @@ namespace DMMDigital.Views
 
                 List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
                 
-                switch (comboBoxFormat.SelectedItem)
+                switch (comboBoxFormat.InnerComboBox.SelectedItem)
                 {
                     case "TIFF":
                         format = ImageFormat.Tiff;

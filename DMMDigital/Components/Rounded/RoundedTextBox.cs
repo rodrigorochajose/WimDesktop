@@ -23,7 +23,6 @@ namespace DMMDigital.Components.Rounded
                 Location = new Point(borderSize, borderSize),
                 Width = Width - 2 * borderSize,
                 Height = Height - 2 * borderSize,
-                Font = new Font("Segoe UI", 12F, FontStyle.Regular),
                 AutoSize = false
             };
 
@@ -113,13 +112,23 @@ namespace DMMDigital.Components.Rounded
         public new Color ForeColor
         {
             get { return textBox.ForeColor; }
-            set { textBox.ForeColor = value; }
+            set 
+            {
+                base.ForeColor = value;
+                textBox.ForeColor = value;
+                Invalidate();
+            }
         }
 
         public new Font Font
         {
             get { return textBox.Font; }
-            set { textBox.Font = value; }
+            set 
+            { 
+                base.Font = value;
+                textBox.Font = value;
+                Invalidate();
+            }
         }
 
         public Color BorderColor

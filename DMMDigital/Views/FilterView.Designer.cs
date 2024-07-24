@@ -63,6 +63,7 @@
             this.numericUpDownGamma = new System.Windows.Forms.NumericUpDown();
             this.trackBarGamma = new System.Windows.Forms.TrackBar();
             this.label10 = new System.Windows.Forms.Label();
+            this.roundedNumericUpDown1 = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
@@ -349,9 +350,10 @@
             // 
             // roundedPanel1
             // 
-            this.roundedPanel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.roundedPanel1.BackColor = System.Drawing.Color.White;
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.Controls.Add(this.roundedNumericUpDown1);
             this.roundedPanel1.Controls.Add(this.numericUpDownNoise);
             this.roundedPanel1.Controls.Add(this.buttonApplyChanges);
             this.roundedPanel1.Controls.Add(this.trackBarNoise);
@@ -502,11 +504,24 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Gamma";
             // 
+            // roundedNumericUpDown1
+            // 
+            this.roundedNumericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedNumericUpDown1.BorderColor = System.Drawing.Color.White;
+            this.roundedNumericUpDown1.BorderRadius = 10;
+            this.roundedNumericUpDown1.BorderSize = 10;
+            this.roundedNumericUpDown1.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.roundedNumericUpDown1.Location = new System.Drawing.Point(207, 61);
+            this.roundedNumericUpDown1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.roundedNumericUpDown1.Name = "roundedNumericUpDown1";
+            this.roundedNumericUpDown1.Size = new System.Drawing.Size(58, 39);
+            this.roundedNumericUpDown1.TabIndex = 64;
+            // 
             // FilterView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1370, 725);
             this.Controls.Add(this.roundedPanel1);
             this.Controls.Add(this.buttonBack);
@@ -577,5 +592,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDownGamma;
         private System.Windows.Forms.TrackBar trackBarGamma;
         private System.Windows.Forms.Label label10;
+        private Components.Rounded.RoundedNumericUpDown roundedNumericUpDown1;
     }
 }

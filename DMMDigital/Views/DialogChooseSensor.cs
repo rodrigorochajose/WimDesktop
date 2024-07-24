@@ -1,25 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
     public partial class DialogChooseSensor : Form
     {
-
         public string selectedSensor;
 
         public DialogChooseSensor(List<string> sensors)
         {
             InitializeComponent();
 
-            comboBoxSensor.DataSource = sensors;
+            KeyPreview = true;
+
+            KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    selectSensor();
+                }
+            };
+
+            buttonConfirm.Click += delegate { selectSensor(); };
+
+            comboBoxSensor.InnerComboBox.DataSource = sensors;
             ControlBox = false;
         }
 
-        private void buttonConfirmClick(object sender, EventArgs e)
+        private void selectSensor()
         {
-            selectedSensor = comboBoxSensor.SelectedItem.ToString();
+            selectedSensor = comboBoxSensor.InnerComboBox.SelectedItem.ToString();
             Close();
         }
     }

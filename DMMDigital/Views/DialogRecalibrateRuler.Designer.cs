@@ -30,9 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogRecalibrateRuler));
             this.label = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.buttonConfirm = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.buttonConfirm = new DMMDigital.Components.Rounded.RoundedButton();
+            this.numericUpDown = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.SuspendLayout();
             // 
             // label
@@ -45,40 +44,47 @@
             this.label.TabIndex = 0;
             this.label.Text = "Digite o valor de \"XXX.XXX\" pixels em milímetros:";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(353, 18);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(100, 29);
-            this.numericUpDown1.TabIndex = 1;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonConfirm.Location = new System.Drawing.Point(188, 69);
+            this.buttonConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonConfirm.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonConfirm.BorderWidth = 5F;
+            this.buttonConfirm.CornerRadius = 5;
+            this.buttonConfirm.FlatAppearance.BorderSize = 0;
+            this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConfirm.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonConfirm.ForeColor = System.Drawing.Color.White;
+            this.buttonConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonConfirm.Location = new System.Drawing.Point(180, 63);
+            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(0);
             this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(87, 35);
-            this.buttonConfirm.TabIndex = 2;
+            this.buttonConfirm.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonConfirm.Size = new System.Drawing.Size(98, 32);
+            this.buttonConfirm.TabIndex = 59;
             this.buttonConfirm.Text = "Confirmar";
-            this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirmClick);
+            this.buttonConfirm.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDown
+            // 
+            this.numericUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDown.BorderColor = System.Drawing.Color.White;
+            this.numericUpDown.BorderRadius = 10;
+            this.numericUpDown.BorderSize = 10;
+            this.numericUpDown.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.numericUpDown.Location = new System.Drawing.Point(353, 12);
+            this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.Size = new System.Drawing.Size(96, 45);
+            this.numericUpDown.TabIndex = 60;
             // 
             // DialogRecalibrateRuler
             // 
-            this.AcceptButton = this.buttonConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(464, 115);
+            this.ClientSize = new System.Drawing.Size(464, 110);
+            this.Controls.Add(this.numericUpDown);
             this.Controls.Add(this.buttonConfirm);
-            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -91,7 +97,6 @@
             this.Text = "Recalibrar Régua";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Gainsboro;
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,7 +105,7 @@
         #endregion
 
         private System.Windows.Forms.Label label;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button buttonConfirm;
+        private Components.Rounded.RoundedButton buttonConfirm;
+        private Components.Rounded.RoundedNumericUpDown numericUpDown;
     }
 }

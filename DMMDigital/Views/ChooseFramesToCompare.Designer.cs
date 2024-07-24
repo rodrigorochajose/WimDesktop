@@ -33,8 +33,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonCompare = new System.Windows.Forms.Button();
+            this.buttonCompare = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -73,34 +73,55 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.buttonCancel);
             this.panel3.Controls.Add(this.buttonCompare);
+            this.panel3.Controls.Add(this.buttonCancel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 449);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(700, 56);
             this.panel3.TabIndex = 2;
             // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCancel.Location = new System.Drawing.Point(12, 13);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(84, 31);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Cancelar";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
             // buttonCompare
             // 
-            this.buttonCompare.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCompare.Location = new System.Drawing.Point(597, 13);
+            this.buttonCompare.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonCompare.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCompare.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCompare.BorderWidth = 5F;
+            this.buttonCompare.CornerRadius = 5;
+            this.buttonCompare.FlatAppearance.BorderSize = 0;
+            this.buttonCompare.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCompare.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonCompare.ForeColor = System.Drawing.Color.White;
+            this.buttonCompare.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCompare.Location = new System.Drawing.Point(591, 7);
+            this.buttonCompare.Margin = new System.Windows.Forms.Padding(0);
             this.buttonCompare.Name = "buttonCompare";
-            this.buttonCompare.Size = new System.Drawing.Size(84, 31);
-            this.buttonCompare.TabIndex = 0;
+            this.buttonCompare.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonCompare.Size = new System.Drawing.Size(100, 42);
+            this.buttonCompare.TabIndex = 58;
             this.buttonCompare.Text = "Comparar";
-            this.buttonCompare.UseVisualStyleBackColor = true;
-            this.buttonCompare.Click += new System.EventHandler(this.buttonCompareClick);
+            this.buttonCompare.UseVisualStyleBackColor = false;
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.Location = new System.Drawing.Point(9, 7);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonCancel.Size = new System.Drawing.Size(100, 42);
+            this.buttonCancel.TabIndex = 57;
+            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // ChooseFramesToCompare
             // 
@@ -130,7 +151,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelTemplate;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonCompare;
+        private Components.Rounded.RoundedButton buttonCompare;
+        private Components.Rounded.RoundedButton buttonCancel;
     }
 }

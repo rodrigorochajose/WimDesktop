@@ -29,94 +29,135 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateHandlerView));
-            this.buttonNewFrame = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxOrientation = new System.Windows.Forms.TextBox();
-            this.buttonRotateRight = new System.Windows.Forms.Button();
-            this.buttonRotateLeft = new System.Windows.Forms.Button();
-            this.buttonDeleteFrame = new System.Windows.Forms.Button();
-            this.buttonSaveTemplate = new System.Windows.Forms.Button();
+            this.buttonSaveTemplate = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonDeleteFrame = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonRotateRight = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonNewFrame = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonRotateLeft = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxOrientation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.textBoxSelectedFrame = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxSelectedFrame = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // buttonNewFrame
-            // 
-            this.buttonNewFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonNewFrame.Location = new System.Drawing.Point(34, 251);
-            this.buttonNewFrame.Name = "buttonNewFrame";
-            this.buttonNewFrame.Size = new System.Drawing.Size(128, 30);
-            this.buttonNewFrame.TabIndex = 1;
-            this.buttonNewFrame.Text = "Novo Filme";
-            this.buttonNewFrame.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.LightGray;
-            this.panel1.Controls.Add(this.textBoxOrientation);
-            this.panel1.Controls.Add(this.buttonRotateRight);
-            this.panel1.Controls.Add(this.buttonRotateLeft);
-            this.panel1.Controls.Add(this.buttonDeleteFrame);
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.buttonSaveTemplate);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBoxSelectedFrame);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.buttonDeleteFrame);
+            this.panel1.Controls.Add(this.buttonRotateRight);
             this.panel1.Controls.Add(this.buttonNewFrame);
+            this.panel1.Controls.Add(this.buttonRotateLeft);
+            this.panel1.Controls.Add(this.textBoxOrientation);
+            this.panel1.Controls.Add(this.textBoxSelectedFrame);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(700, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(203, 450);
             this.panel1.TabIndex = 2;
             // 
-            // textBoxOrientation
+            // buttonSaveTemplate
             // 
-            this.textBoxOrientation.Enabled = false;
-            this.textBoxOrientation.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textBoxOrientation.Location = new System.Drawing.Point(20, 117);
-            this.textBoxOrientation.Name = "textBoxOrientation";
-            this.textBoxOrientation.Size = new System.Drawing.Size(157, 29);
-            this.textBoxOrientation.TabIndex = 14;
-            // 
-            // buttonRotateRight
-            // 
-            this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
-            this.buttonRotateRight.Location = new System.Drawing.Point(117, 155);
-            this.buttonRotateRight.Name = "buttonRotateRight";
-            this.buttonRotateRight.Size = new System.Drawing.Size(43, 38);
-            this.buttonRotateRight.TabIndex = 12;
-            this.buttonRotateRight.UseVisualStyleBackColor = true;
-            // 
-            // buttonRotateLeft
-            // 
-            this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
-            this.buttonRotateLeft.Location = new System.Drawing.Point(33, 155);
-            this.buttonRotateLeft.Name = "buttonRotateLeft";
-            this.buttonRotateLeft.Size = new System.Drawing.Size(43, 38);
-            this.buttonRotateLeft.TabIndex = 11;
-            this.buttonRotateLeft.UseVisualStyleBackColor = true;
+            this.buttonSaveTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSaveTemplate.BorderColor = System.Drawing.Color.White;
+            this.buttonSaveTemplate.BorderWidth = 5F;
+            this.buttonSaveTemplate.CornerRadius = 10;
+            this.buttonSaveTemplate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonSaveTemplate.Location = new System.Drawing.Point(45, 377);
+            this.buttonSaveTemplate.Name = "buttonSaveTemplate";
+            this.buttonSaveTemplate.Size = new System.Drawing.Size(122, 46);
+            this.buttonSaveTemplate.TabIndex = 65;
+            this.buttonSaveTemplate.Text = "Salvar";
+            this.buttonSaveTemplate.UseVisualStyleBackColor = false;
             // 
             // buttonDeleteFrame
             // 
+            this.buttonDeleteFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonDeleteFrame.BorderColor = System.Drawing.Color.White;
+            this.buttonDeleteFrame.BorderWidth = 5F;
+            this.buttonDeleteFrame.CornerRadius = 10;
             this.buttonDeleteFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonDeleteFrame.Location = new System.Drawing.Point(34, 287);
+            this.buttonDeleteFrame.Location = new System.Drawing.Point(45, 300);
             this.buttonDeleteFrame.Name = "buttonDeleteFrame";
-            this.buttonDeleteFrame.Size = new System.Drawing.Size(128, 30);
-            this.buttonDeleteFrame.TabIndex = 10;
+            this.buttonDeleteFrame.Size = new System.Drawing.Size(122, 46);
+            this.buttonDeleteFrame.TabIndex = 64;
             this.buttonDeleteFrame.Text = "Excluir Filme";
-            this.buttonDeleteFrame.UseVisualStyleBackColor = true;
+            this.buttonDeleteFrame.UseVisualStyleBackColor = false;
             // 
-            // buttonSaveTemplate
+            // buttonRotateRight
             // 
-            this.buttonSaveTemplate.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.buttonSaveTemplate.Location = new System.Drawing.Point(55, 382);
-            this.buttonSaveTemplate.Name = "buttonSaveTemplate";
-            this.buttonSaveTemplate.Size = new System.Drawing.Size(84, 30);
-            this.buttonSaveTemplate.TabIndex = 9;
-            this.buttonSaveTemplate.Text = "Salvar";
-            this.buttonSaveTemplate.UseVisualStyleBackColor = true;
+            this.buttonRotateRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonRotateRight.BorderColor = System.Drawing.Color.White;
+            this.buttonRotateRight.BorderWidth = 5F;
+            this.buttonRotateRight.CornerRadius = 10;
+            this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
+            this.buttonRotateRight.Location = new System.Drawing.Point(111, 182);
+            this.buttonRotateRight.Name = "buttonRotateRight";
+            this.buttonRotateRight.Size = new System.Drawing.Size(56, 53);
+            this.buttonRotateRight.TabIndex = 62;
+            this.buttonRotateRight.UseVisualStyleBackColor = false;
+            // 
+            // buttonNewFrame
+            // 
+            this.buttonNewFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonNewFrame.BorderColor = System.Drawing.Color.White;
+            this.buttonNewFrame.BorderWidth = 5F;
+            this.buttonNewFrame.CornerRadius = 10;
+            this.buttonNewFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.buttonNewFrame.Location = new System.Drawing.Point(45, 248);
+            this.buttonNewFrame.Name = "buttonNewFrame";
+            this.buttonNewFrame.Size = new System.Drawing.Size(122, 46);
+            this.buttonNewFrame.TabIndex = 63;
+            this.buttonNewFrame.Text = "Novo Filme";
+            this.buttonNewFrame.UseVisualStyleBackColor = false;
+            // 
+            // buttonRotateLeft
+            // 
+            this.buttonRotateLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonRotateLeft.BorderColor = System.Drawing.Color.White;
+            this.buttonRotateLeft.BorderWidth = 5F;
+            this.buttonRotateLeft.CornerRadius = 10;
+            this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
+            this.buttonRotateLeft.Location = new System.Drawing.Point(32, 182);
+            this.buttonRotateLeft.Name = "buttonRotateLeft";
+            this.buttonRotateLeft.Size = new System.Drawing.Size(56, 53);
+            this.buttonRotateLeft.TabIndex = 61;
+            this.buttonRotateLeft.UseVisualStyleBackColor = false;
+            // 
+            // textBoxOrientation
+            // 
+            this.textBoxOrientation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxOrientation.BorderColor = System.Drawing.Color.White;
+            this.textBoxOrientation.BorderRadius = 10;
+            this.textBoxOrientation.BorderSize = 10;
+            this.textBoxOrientation.Enabled = false;
+            this.textBoxOrientation.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.textBoxOrientation.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxOrientation.Location = new System.Drawing.Point(20, 118);
+            this.textBoxOrientation.Name = "textBoxOrientation";
+            this.textBoxOrientation.PlaceholderText = null;
+            this.textBoxOrientation.Size = new System.Drawing.Size(171, 44);
+            this.textBoxOrientation.TabIndex = 60;
+            // 
+            // textBoxSelectedFrame
+            // 
+            this.textBoxSelectedFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSelectedFrame.BorderColor = System.Drawing.Color.White;
+            this.textBoxSelectedFrame.BorderRadius = 10;
+            this.textBoxSelectedFrame.BorderSize = 10;
+            this.textBoxSelectedFrame.Enabled = false;
+            this.textBoxSelectedFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.textBoxSelectedFrame.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxSelectedFrame.Location = new System.Drawing.Point(20, 41);
+            this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
+            this.textBoxSelectedFrame.PlaceholderText = null;
+            this.textBoxSelectedFrame.Size = new System.Drawing.Size(171, 44);
+            this.textBoxSelectedFrame.TabIndex = 32;
             // 
             // label2
             // 
@@ -127,15 +168,6 @@
             this.label2.Size = new System.Drawing.Size(86, 21);
             this.label2.TabIndex = 4;
             this.label2.Text = "Orientação";
-            // 
-            // textBoxSelectedFrame
-            // 
-            this.textBoxSelectedFrame.Enabled = false;
-            this.textBoxSelectedFrame.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textBoxSelectedFrame.Location = new System.Drawing.Point(20, 40);
-            this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
-            this.textBoxSelectedFrame.Size = new System.Drawing.Size(157, 29);
-            this.textBoxSelectedFrame.TabIndex = 3;
             // 
             // label1
             // 
@@ -150,7 +182,7 @@
             // 
             // panelTemplate
             // 
-            this.panelTemplate.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTemplate.Location = new System.Drawing.Point(0, 0);
             this.panelTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.panelTemplate.Name = "panelTemplate";
@@ -179,17 +211,17 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonNewFrame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxSelectedFrame;
-        private System.Windows.Forms.Button buttonSaveTemplate;
-        private System.Windows.Forms.Button buttonDeleteFrame;
         private System.Windows.Forms.Panel panelTemplate;
-        private System.Windows.Forms.Button buttonRotateLeft;
-        private System.Windows.Forms.Button buttonRotateRight;
-        private System.Windows.Forms.TextBox textBoxOrientation;
+        private Components.Rounded.RoundedTextBox textBoxSelectedFrame;
+        private Components.Rounded.RoundedTextBox textBoxOrientation;
+        private Components.Rounded.RoundedButton buttonRotateLeft;
+        private Components.Rounded.RoundedButton buttonRotateRight;
+        private Components.Rounded.RoundedButton buttonNewFrame;
+        private Components.Rounded.RoundedButton buttonDeleteFrame;
+        private Components.Rounded.RoundedButton buttonSaveTemplate;
     }
 }
 
