@@ -63,6 +63,7 @@ namespace DMMDigital.Views
                 label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
             }
         }
+
         private void associateEvents()
         {
             buttonCancel.Click += delegate { Close(); };

@@ -32,10 +32,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.checkBoxClearSelection = new System.Windows.Forms.CheckBox();
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.checkBoxExportEditedImage = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxFormat = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.checkBoxExportOriginalImage = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -44,11 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.comboBoxFormat = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonExportExam = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -57,7 +57,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -95,6 +95,33 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(516, 588);
             this.panel2.TabIndex = 2;
+            // 
+            // textBoxSelectPath
+            // 
+            this.textBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSelectPath.BorderColor = System.Drawing.Color.White;
+            this.textBoxSelectPath.BorderRadius = 10;
+            this.textBoxSelectPath.BorderSize = 10;
+            this.textBoxSelectPath.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.textBoxSelectPath.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxSelectPath.Location = new System.Drawing.Point(63, 7);
+            this.textBoxSelectPath.Name = "textBoxSelectPath";
+            this.textBoxSelectPath.PlaceholderText = null;
+            this.textBoxSelectPath.Size = new System.Drawing.Size(353, 44);
+            this.textBoxSelectPath.TabIndex = 31;
+            // 
+            // buttonSelectPath
+            // 
+            this.buttonSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSelectPath.BorderColor = System.Drawing.Color.White;
+            this.buttonSelectPath.BorderWidth = 5F;
+            this.buttonSelectPath.CornerRadius = 10;
+            this.buttonSelectPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
+            this.buttonSelectPath.Location = new System.Drawing.Point(422, 8);
+            this.buttonSelectPath.Name = "buttonSelectPath";
+            this.buttonSelectPath.Size = new System.Drawing.Size(42, 42);
+            this.buttonSelectPath.TabIndex = 30;
+            this.buttonSelectPath.UseVisualStyleBackColor = false;
             // 
             // checkBoxClearSelection
             // 
@@ -146,6 +173,20 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Opções";
+            // 
+            // comboBoxFormat
+            // 
+            this.comboBoxFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxFormat.BorderColor = System.Drawing.Color.White;
+            this.comboBoxFormat.BorderRadius = 10;
+            this.comboBoxFormat.BorderSize = 10;
+            this.comboBoxFormat.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.comboBoxFormat.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxFormat.Location = new System.Drawing.Point(121, 60);
+            this.comboBoxFormat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comboBoxFormat.Name = "comboBoxFormat";
+            this.comboBoxFormat.Size = new System.Drawing.Size(150, 45);
+            this.comboBoxFormat.TabIndex = 62;
             // 
             // checkBoxExportOriginalImage
             // 
@@ -206,7 +247,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 23);
+            this.label2.Location = new System.Drawing.Point(12, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 19);
             this.label2.TabIndex = 1;
@@ -218,7 +259,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.buttonExportExam);
             this.panel3.Controls.Add(this.buttonCancel);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -226,67 +267,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(516, 58);
             this.panel3.TabIndex = 4;
-            // 
-            // buttonSelectPath
-            // 
-            this.buttonSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSelectPath.BorderColor = System.Drawing.Color.White;
-            this.buttonSelectPath.BorderWidth = 5F;
-            this.buttonSelectPath.CornerRadius = 10;
-            this.buttonSelectPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
-            this.buttonSelectPath.Location = new System.Drawing.Point(422, 12);
-            this.buttonSelectPath.Name = "buttonSelectPath";
-            this.buttonSelectPath.Size = new System.Drawing.Size(42, 42);
-            this.buttonSelectPath.TabIndex = 30;
-            this.buttonSelectPath.UseVisualStyleBackColor = false;
-            // 
-            // textBoxSelectPath
-            // 
-            this.textBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSelectPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxSelectPath.BorderRadius = 10;
-            this.textBoxSelectPath.BorderSize = 10;
-            this.textBoxSelectPath.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.textBoxSelectPath.Location = new System.Drawing.Point(63, 12);
-            this.textBoxSelectPath.Name = "textBoxSelectPath";
-            this.textBoxSelectPath.PlaceholderText = null;
-            this.textBoxSelectPath.Size = new System.Drawing.Size(353, 44);
-            this.textBoxSelectPath.TabIndex = 31;
-            // 
-            // comboBoxFormat
-            // 
-            this.comboBoxFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxFormat.BorderColor = System.Drawing.Color.White;
-            this.comboBoxFormat.BorderRadius = 10;
-            this.comboBoxFormat.BorderSize = 10;
-            this.comboBoxFormat.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.comboBoxFormat.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxFormat.Location = new System.Drawing.Point(121, 60);
-            this.comboBoxFormat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBoxFormat.Name = "comboBoxFormat";
-            this.comboBoxFormat.Size = new System.Drawing.Size(150, 45);
-            this.comboBoxFormat.TabIndex = 62;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
-            this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(16, 13);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Padding = new System.Windows.Forms.Padding(2);
-            this.buttonCancel.Size = new System.Drawing.Size(87, 33);
-            this.buttonCancel.TabIndex = 59;
-            this.buttonCancel.Text = "Cancelar";
-            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // buttonExportExam
             // 
@@ -308,6 +288,28 @@
             this.buttonExportExam.TabIndex = 60;
             this.buttonExportExam.Text = "Exportar";
             this.buttonExportExam.UseVisualStyleBackColor = false;
+            this.buttonExportExam.Click += new System.EventHandler(this.buttonExportExamClick);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.Location = new System.Drawing.Point(16, 13);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Padding = new System.Windows.Forms.Padding(2);
+            this.buttonCancel.Size = new System.Drawing.Size(87, 33);
+            this.buttonCancel.TabIndex = 59;
+            this.buttonCancel.Text = "Cancelar";
+            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // ExportExamView
             // 

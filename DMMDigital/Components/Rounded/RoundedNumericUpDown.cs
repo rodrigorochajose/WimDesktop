@@ -25,9 +25,39 @@ namespace DMMDigital.Components.Rounded
                 AutoSize = false
             };
 
+            numericUpDown.ValueChanged += NumericUpDown_ValueChanged;
+            numericUpDown.KeyPress += NumericUpDown_KeyPress;
+
             Controls.Add(numericUpDown);
             Resize += new EventHandler(RoundedNumericUpDown_Resize);
             Paint += new PaintEventHandler(RoundedNumericUpDown_Paint);
+        }
+
+        private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDown.Value < numericUpDown.Minimum)
+            {
+                numericUpDown.Value = numericUpDown.Minimum;
+            }
+            else if (numericUpDown.Value > numericUpDown.Maximum)
+            {
+                numericUpDown.Value = numericUpDown.Maximum;
+            }
+        }
+
+        private void NumericUpDown_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (numericUpDown.Value < numericUpDown.Minimum)
+                {
+                    numericUpDown.Value = numericUpDown.Minimum;
+                }
+                else if (numericUpDown.Value > numericUpDown.Maximum)
+                {
+                    numericUpDown.Value = numericUpDown.Maximum;
+                }
+            }
         }
 
         private void RoundedNumericUpDown_Resize(object sender, EventArgs e)
@@ -117,6 +147,18 @@ namespace DMMDigital.Components.Rounded
         {
             get { return borderRadius; }
             set { borderRadius = value; Invalidate(); }
+        }
+
+        public decimal Minimum
+        {
+            get { return numericUpDown.Minimum; }
+            set { numericUpDown.Minimum = value; }
+        }
+
+        public decimal Maximum
+        {
+            get { return numericUpDown.Maximum; }
+            set { numericUpDown.Maximum = value; }
         }
 
         private void ResizeNumericUpDown()

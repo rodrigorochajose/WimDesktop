@@ -74,10 +74,16 @@ namespace DMMDigital.Views
         public event EventHandler loadConfigs;
         public event EventHandler saveConfigs;
 
+        private Twain twain;
+
         public ConfigView()
         {
             InitializeComponent();
             associateEvents();
+
+            twain = new Twain(new WinFormsWindowMessageHook(this));
+
+            textBoxTwainSource.Text = twain.DefaultSourceName;
         }
 
         private void associateEvents()
@@ -93,11 +99,16 @@ namespace DMMDigital.Views
                 sensorPath = folderBrowserDialog1.SelectedPath;
             };
 
+
             textBoxExamPath.Click += delegate 
             {
                 folderBrowserDialog1.ShowDialog();
                 examPath = folderBrowserDialog1.SelectedPath;
             };
+
+            buttonSelectTwainSource.Click += delegate { selectTwainSource(); };
+
+            textBoxTwainSource.Click += delegate { selectTwainSource(); };
 
             buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
 
@@ -125,11 +136,6 @@ namespace DMMDigital.Views
             }
         }
 
-        private void numericUpDownDrawingSizeValueChanged(object sender, EventArgs e)
-        {
-            drawingSize = (int)numericUpDownDrawingSize.InnerNumericUpDown.Value;
-        }
-
         private void buttonTextColorPickerClick(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
@@ -137,11 +143,6 @@ namespace DMMDigital.Views
                 textColor = colorDialog.Color.ToArgb().ToString();
                 buttonTextColorPicker.BackColor = colorDialog.Color;
             }
-        }
-
-        private void numericUpDownTextSizeValueChanged(object sender, EventArgs e)
-        {
-            textSize = (int)numericUpDownTextSize.InnerNumericUpDown.Value;
         }
 
         private void buttonRulerColorPickerClick(object sender, EventArgs e)
@@ -166,11 +167,10 @@ namespace DMMDigital.Views
             }
         }
 
-        private void buttonTwainSourceClick(object sender, EventArgs e)
+        private void selectTwainSource()
         {
-            Twain twain = new Twain(new WinFormsWindowMessageHook(this));
-
             twain.SelectSource();
+            textBoxTwainSource.Text = twain.DefaultSourceName;
         }
     }
 }

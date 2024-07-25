@@ -39,7 +39,7 @@
             this.buttonConfigureFilters = new DMMDigital.Components.Rounded.RoundedButton();
             this.comboBoxAcquireMode = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.comboBoxSensorModel = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.roundedTextBox1 = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.textBoxTwainSource = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSelectTwainSource = new DMMDigital.Components.Rounded.RoundedButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
@@ -184,7 +184,7 @@
             this.tabPage1.Controls.Add(this.buttonConfigureFilters);
             this.tabPage1.Controls.Add(this.comboBoxAcquireMode);
             this.tabPage1.Controls.Add(this.comboBoxSensorModel);
-            this.tabPage1.Controls.Add(this.roundedTextBox1);
+            this.tabPage1.Controls.Add(this.textBoxTwainSource);
             this.tabPage1.Controls.Add(this.buttonSelectTwainSource);
             this.tabPage1.Controls.Add(this.panel7);
             this.tabPage1.Controls.Add(this.panel6);
@@ -211,6 +211,7 @@
             this.buttonConfigureFilters.Size = new System.Drawing.Size(63, 51);
             this.buttonConfigureFilters.TabIndex = 63;
             this.buttonConfigureFilters.UseVisualStyleBackColor = false;
+            this.buttonConfigureFilters.Click += new System.EventHandler(this.buttonConfigureFiltersClick);
             // 
             // comboBoxAcquireMode
             // 
@@ -240,18 +241,18 @@
             this.comboBoxSensorModel.Size = new System.Drawing.Size(150, 45);
             this.comboBoxSensorModel.TabIndex = 61;
             // 
-            // roundedTextBox1
+            // textBoxTwainSource
             // 
-            this.roundedTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedTextBox1.BorderColor = System.Drawing.Color.White;
-            this.roundedTextBox1.BorderRadius = 10;
-            this.roundedTextBox1.BorderSize = 10;
-            this.roundedTextBox1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.roundedTextBox1.Location = new System.Drawing.Point(12, 148);
-            this.roundedTextBox1.Name = "roundedTextBox1";
-            this.roundedTextBox1.PlaceholderText = null;
-            this.roundedTextBox1.Size = new System.Drawing.Size(250, 44);
-            this.roundedTextBox1.TabIndex = 30;
+            this.textBoxTwainSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxTwainSource.BorderColor = System.Drawing.Color.White;
+            this.textBoxTwainSource.BorderRadius = 10;
+            this.textBoxTwainSource.BorderSize = 10;
+            this.textBoxTwainSource.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxTwainSource.Location = new System.Drawing.Point(12, 148);
+            this.textBoxTwainSource.Name = "textBoxTwainSource";
+            this.textBoxTwainSource.PlaceholderText = null;
+            this.textBoxTwainSource.Size = new System.Drawing.Size(250, 44);
+            this.textBoxTwainSource.TabIndex = 30;
             // 
             // buttonSelectTwainSource
             // 
@@ -376,6 +377,16 @@
             this.numericUpDownTextSize.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numericUpDownTextSize.Location = new System.Drawing.Point(265, 157);
             this.numericUpDownTextSize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numericUpDownTextSize.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownTextSize.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.numericUpDownTextSize.Name = "numericUpDownTextSize";
             this.numericUpDownTextSize.Size = new System.Drawing.Size(92, 45);
             this.numericUpDownTextSize.TabIndex = 62;
@@ -389,6 +400,16 @@
             this.numericUpDownDrawingSize.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numericUpDownDrawingSize.Location = new System.Drawing.Point(265, 45);
             this.numericUpDownDrawingSize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.numericUpDownDrawingSize.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownDrawingSize.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.numericUpDownDrawingSize.Name = "numericUpDownDrawingSize";
             this.numericUpDownDrawingSize.Size = new System.Drawing.Size(92, 45);
             this.numericUpDownDrawingSize.TabIndex = 61;
@@ -735,7 +756,7 @@
         private Components.Rounded.RoundedButton buttonExamPath;
         private Components.Rounded.RoundedTextBox textBoxExamPath;
         private Components.Rounded.RoundedButton buttonSelectTwainSource;
-        private Components.Rounded.RoundedTextBox roundedTextBox1;
+        private Components.Rounded.RoundedTextBox textBoxTwainSource;
         private Components.Rounded.RoundedComboBox comboBoxAcquireMode;
         private Components.Rounded.RoundedComboBox comboBoxSensorModel;
         private System.Windows.Forms.Panel panel1;

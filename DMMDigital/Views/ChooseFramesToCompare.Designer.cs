@@ -101,6 +101,7 @@
             this.buttonCompare.TabIndex = 58;
             this.buttonCompare.Text = "Comparar";
             this.buttonCompare.UseVisualStyleBackColor = false;
+            this.buttonCompare.Click += new System.EventHandler(this.buttonCompareClick);
             // 
             // buttonCancel
             // 

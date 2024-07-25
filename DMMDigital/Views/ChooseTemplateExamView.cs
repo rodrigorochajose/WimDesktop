@@ -13,34 +13,6 @@ namespace DMMDigital.Views
     {
         List<TemplateFrameModel> templateFrameList;
 
-        public ChooseTemplateExamView()
-        {
-            InitializeComponent();
-
-            textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
-            textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
-
-            associateEvents();
-
-            ActiveControl = textBoxSessionName;
-        }
-
-        private void associateEvents()
-        {
-            buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
-
-            buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
-
-            buttonCancel.Click += delegate { Close(); };
-
-            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
-
-            panelShowTemplate.Paint += (s, e) =>
-            {
-                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
-            };
-        }
-
         public int patientId { get; set; }
 
         public string patientName
@@ -96,6 +68,35 @@ namespace DMMDigital.Views
 
         public event EventHandler eventAddNewTemplate;
         public event EventHandler eventInitializeExam;
+
+        public ChooseTemplateExamView()
+        {
+            InitializeComponent();
+
+            textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
+            textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
+
+            associateEvents();
+
+            ActiveControl = textBoxSessionName;
+        }
+
+        private void associateEvents()
+        {
+            buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
+
+            buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
+
+            buttonCancel.Click += delegate { Close(); };
+
+            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
+
+            panelShowTemplate.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
+            };
+        }
+
 
         public void setTemplateList(List<TemplateModel> templateList)
         {

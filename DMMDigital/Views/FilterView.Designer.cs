@@ -35,53 +35,45 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.trackBarBrightness = new System.Windows.Forms.TrackBar();
-            this.numericUpDownBrightness = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownContrast = new System.Windows.Forms.NumericUpDown();
-            this.trackBarContrast = new System.Windows.Forms.TrackBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDownReveal = new System.Windows.Forms.NumericUpDown();
-            this.trackBarReveal = new System.Windows.Forms.TrackBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDownSmartSharpen = new System.Windows.Forms.NumericUpDown();
-            this.trackBarSmartSharpen = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.buttonRestoreImage = new System.Windows.Forms.Button();
-            this.buttonApplyChanges = new System.Windows.Forms.Button();
-            this.checkBoxPositiveNegative = new System.Windows.Forms.CheckBox();
-            this.checkBoxColorImage = new System.Windows.Forms.CheckBox();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
-            this.numericUpDownNoise = new System.Windows.Forms.NumericUpDown();
+            this.buttonApplyChanges = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonRestoreImage = new DMMDigital.Components.Rounded.RoundedButton();
+            this.numericUpDownGamma = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownNoise = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownEdge = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownSmartSharpen = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownReveal = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownContrast = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownBrightness = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.trackBarNoise = new System.Windows.Forms.TrackBar();
             this.label12 = new System.Windows.Forms.Label();
-            this.numericUpDownEdge = new System.Windows.Forms.NumericUpDown();
             this.trackBarEdge = new System.Windows.Forms.TrackBar();
             this.label11 = new System.Windows.Forms.Label();
-            this.numericUpDownGamma = new System.Windows.Forms.NumericUpDown();
             this.trackBarGamma = new System.Windows.Forms.TrackBar();
             this.label10 = new System.Windows.Forms.Label();
-            this.roundedNumericUpDown1 = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.trackBarBrightness = new System.Windows.Forms.TrackBar();
+            this.checkBoxColorImage = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.checkBoxPositiveNegative = new System.Windows.Forms.CheckBox();
+            this.trackBarContrast = new System.Windows.Forms.TrackBar();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.trackBarReveal = new System.Windows.Forms.TrackBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.trackBarSmartSharpen = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReveal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSmartSharpen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).BeginInit();
             this.roundedPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNoise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEdge)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEdge)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGamma)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGamma)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -159,227 +151,37 @@
             this.buttonBack.UseVisualStyleBackColor = true;
             this.buttonBack.Click += new System.EventHandler(this.buttonBackClick);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(19, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Brilho";
-            // 
-            // trackBarBrightness
-            // 
-            this.trackBarBrightness.Location = new System.Drawing.Point(27, 30);
-            this.trackBarBrightness.Maximum = 100;
-            this.trackBarBrightness.Minimum = -100;
-            this.trackBarBrightness.Name = "trackBarBrightness";
-            this.trackBarBrightness.Size = new System.Drawing.Size(175, 45);
-            this.trackBarBrightness.TabIndex = 3;
-            this.trackBarBrightness.MouseCaptureChanged += new System.EventHandler(this.trackBarBrightnessMouseCaptureChanged);
-            // 
-            // numericUpDownBrightness
-            // 
-            this.numericUpDownBrightness.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownBrightness.Location = new System.Drawing.Point(208, 31);
-            this.numericUpDownBrightness.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownBrightness.Name = "numericUpDownBrightness";
-            this.numericUpDownBrightness.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownBrightness.TabIndex = 4;
-            this.numericUpDownBrightness.ValueChanged += new System.EventHandler(this.numericUpDownBrightnessValueChanged);
-            // 
-            // numericUpDownContrast
-            // 
-            this.numericUpDownContrast.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownContrast.Location = new System.Drawing.Point(208, 108);
-            this.numericUpDownContrast.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownContrast.Name = "numericUpDownContrast";
-            this.numericUpDownContrast.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownContrast.TabIndex = 7;
-            this.numericUpDownContrast.ValueChanged += new System.EventHandler(this.numericUpDownContrastValueChanged);
-            // 
-            // trackBarContrast
-            // 
-            this.trackBarContrast.Location = new System.Drawing.Point(27, 105);
-            this.trackBarContrast.Maximum = 100;
-            this.trackBarContrast.Minimum = -100;
-            this.trackBarContrast.Name = "trackBarContrast";
-            this.trackBarContrast.Size = new System.Drawing.Size(175, 45);
-            this.trackBarContrast.TabIndex = 6;
-            this.trackBarContrast.MouseCaptureChanged += new System.EventHandler(this.trackBarContrastMouseCaptureChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 85);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Contraste";
-            // 
-            // numericUpDownReveal
-            // 
-            this.numericUpDownReveal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownReveal.Location = new System.Drawing.Point(208, 181);
-            this.numericUpDownReveal.Maximum = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            this.numericUpDownReveal.Name = "numericUpDownReveal";
-            this.numericUpDownReveal.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownReveal.TabIndex = 10;
-            this.numericUpDownReveal.ValueChanged += new System.EventHandler(this.numericUpDownRevealValueChanged);
-            // 
-            // trackBarReveal
-            // 
-            this.trackBarReveal.Location = new System.Drawing.Point(27, 180);
-            this.trackBarReveal.Maximum = 15;
-            this.trackBarReveal.Name = "trackBarReveal";
-            this.trackBarReveal.Size = new System.Drawing.Size(175, 45);
-            this.trackBarReveal.TabIndex = 9;
-            this.trackBarReveal.MouseCaptureChanged += new System.EventHandler(this.trackBarRevealMouseCaptureChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(19, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(50, 15);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Revelar";
-            // 
-            // numericUpDownSmartSharpen
-            // 
-            this.numericUpDownSmartSharpen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownSmartSharpen.Location = new System.Drawing.Point(208, 256);
-            this.numericUpDownSmartSharpen.Name = "numericUpDownSmartSharpen";
-            this.numericUpDownSmartSharpen.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownSmartSharpen.TabIndex = 13;
-            this.numericUpDownSmartSharpen.ValueChanged += new System.EventHandler(this.numericUpDownSmartSharpenValueChanged);
-            // 
-            // trackBarSmartSharpen
-            // 
-            this.trackBarSmartSharpen.Location = new System.Drawing.Point(27, 255);
-            this.trackBarSmartSharpen.Maximum = 100;
-            this.trackBarSmartSharpen.Name = "trackBarSmartSharpen";
-            this.trackBarSmartSharpen.Size = new System.Drawing.Size(175, 45);
-            this.trackBarSmartSharpen.TabIndex = 12;
-            this.trackBarSmartSharpen.MouseCaptureChanged += new System.EventHandler(this.trackBarSmartSharpenMouseCaptureChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(19, 235);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Smart Sharpen";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 526);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(110, 15);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Positivo/Negativo:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(19, 562);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(47, 15);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Colorir:";
-            // 
-            // buttonRestoreImage
-            // 
-            this.buttonRestoreImage.Location = new System.Drawing.Point(27, 605);
-            this.buttonRestoreImage.Name = "buttonRestoreImage";
-            this.buttonRestoreImage.Size = new System.Drawing.Size(80, 40);
-            this.buttonRestoreImage.TabIndex = 21;
-            this.buttonRestoreImage.Text = "Restaurar";
-            this.buttonRestoreImage.UseVisualStyleBackColor = true;
-            this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
-            // 
-            // buttonApplyChanges
-            // 
-            this.buttonApplyChanges.Location = new System.Drawing.Point(163, 605);
-            this.buttonApplyChanges.Name = "buttonApplyChanges";
-            this.buttonApplyChanges.Size = new System.Drawing.Size(80, 40);
-            this.buttonApplyChanges.TabIndex = 22;
-            this.buttonApplyChanges.Text = "Aplicar";
-            this.buttonApplyChanges.UseVisualStyleBackColor = true;
-            this.buttonApplyChanges.Click += new System.EventHandler(this.buttonApplyChangesClick);
-            // 
-            // checkBoxPositiveNegative
-            // 
-            this.checkBoxPositiveNegative.AutoSize = true;
-            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(228, 527);
-            this.checkBoxPositiveNegative.Name = "checkBoxPositiveNegative";
-            this.checkBoxPositiveNegative.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxPositiveNegative.TabIndex = 23;
-            this.checkBoxPositiveNegative.UseVisualStyleBackColor = true;
-            this.checkBoxPositiveNegative.CheckedChanged += new System.EventHandler(this.checkBoxPositiveNegativeCheckedChanged);
-            // 
-            // checkBoxColorImage
-            // 
-            this.checkBoxColorImage.AutoSize = true;
-            this.checkBoxColorImage.Location = new System.Drawing.Point(228, 563);
-            this.checkBoxColorImage.Name = "checkBoxColorImage";
-            this.checkBoxColorImage.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxColorImage.TabIndex = 24;
-            this.checkBoxColorImage.UseVisualStyleBackColor = true;
-            this.checkBoxColorImage.CheckedChanged += new System.EventHandler(this.checkBoxColorImageCheckedChanged);
-            // 
             // roundedPanel1
             // 
             this.roundedPanel1.BackColor = System.Drawing.Color.White;
-            this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel1.BorderWidth = 5F;
-            this.roundedPanel1.Controls.Add(this.roundedNumericUpDown1);
-            this.roundedPanel1.Controls.Add(this.numericUpDownNoise);
             this.roundedPanel1.Controls.Add(this.buttonApplyChanges);
-            this.roundedPanel1.Controls.Add(this.trackBarNoise);
             this.roundedPanel1.Controls.Add(this.buttonRestoreImage);
-            this.roundedPanel1.Controls.Add(this.label12);
+            this.roundedPanel1.Controls.Add(this.numericUpDownGamma);
+            this.roundedPanel1.Controls.Add(this.numericUpDownNoise);
             this.roundedPanel1.Controls.Add(this.numericUpDownEdge);
+            this.roundedPanel1.Controls.Add(this.numericUpDownSmartSharpen);
+            this.roundedPanel1.Controls.Add(this.numericUpDownReveal);
+            this.roundedPanel1.Controls.Add(this.numericUpDownContrast);
+            this.roundedPanel1.Controls.Add(this.numericUpDownBrightness);
+            this.roundedPanel1.Controls.Add(this.trackBarNoise);
+            this.roundedPanel1.Controls.Add(this.label12);
             this.roundedPanel1.Controls.Add(this.trackBarEdge);
             this.roundedPanel1.Controls.Add(this.label11);
-            this.roundedPanel1.Controls.Add(this.numericUpDownGamma);
             this.roundedPanel1.Controls.Add(this.trackBarGamma);
             this.roundedPanel1.Controls.Add(this.label10);
             this.roundedPanel1.Controls.Add(this.trackBarBrightness);
             this.roundedPanel1.Controls.Add(this.checkBoxColorImage);
             this.roundedPanel1.Controls.Add(this.label3);
             this.roundedPanel1.Controls.Add(this.checkBoxPositiveNegative);
-            this.roundedPanel1.Controls.Add(this.numericUpDownBrightness);
             this.roundedPanel1.Controls.Add(this.trackBarContrast);
             this.roundedPanel1.Controls.Add(this.label4);
             this.roundedPanel1.Controls.Add(this.label9);
-            this.roundedPanel1.Controls.Add(this.numericUpDownContrast);
             this.roundedPanel1.Controls.Add(this.label8);
             this.roundedPanel1.Controls.Add(this.trackBarReveal);
             this.roundedPanel1.Controls.Add(this.label5);
-            this.roundedPanel1.Controls.Add(this.numericUpDownReveal);
             this.roundedPanel1.Controls.Add(this.label6);
-            this.roundedPanel1.Controls.Add(this.numericUpDownSmartSharpen);
             this.roundedPanel1.Controls.Add(this.trackBarSmartSharpen);
             this.roundedPanel1.CornerRadius = 20;
             this.roundedPanel1.Location = new System.Drawing.Point(2, 53);
@@ -387,10 +189,69 @@
             this.roundedPanel1.Size = new System.Drawing.Size(274, 665);
             this.roundedPanel1.TabIndex = 25;
             // 
+            // buttonApplyChanges
+            // 
+            this.buttonApplyChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonApplyChanges.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonApplyChanges.BorderWidth = 10F;
+            this.buttonApplyChanges.CornerRadius = 10;
+            this.buttonApplyChanges.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.buttonApplyChanges.ForeColor = System.Drawing.Color.White;
+            this.buttonApplyChanges.Location = new System.Drawing.Point(163, 605);
+            this.buttonApplyChanges.Name = "buttonApplyChanges";
+            this.buttonApplyChanges.Size = new System.Drawing.Size(80, 40);
+            this.buttonApplyChanges.TabIndex = 73;
+            this.buttonApplyChanges.Text = "Aplicar";
+            this.buttonApplyChanges.UseVisualStyleBackColor = false;
+            this.buttonApplyChanges.Click += new System.EventHandler(this.buttonApplyChangesClick);
+            // 
+            // buttonRestoreImage
+            // 
+            this.buttonRestoreImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonRestoreImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonRestoreImage.BorderWidth = 10F;
+            this.buttonRestoreImage.CornerRadius = 10;
+            this.buttonRestoreImage.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.buttonRestoreImage.Location = new System.Drawing.Point(29, 605);
+            this.buttonRestoreImage.Name = "buttonRestoreImage";
+            this.buttonRestoreImage.Size = new System.Drawing.Size(80, 40);
+            this.buttonRestoreImage.TabIndex = 72;
+            this.buttonRestoreImage.Text = "Restaurar";
+            this.buttonRestoreImage.UseVisualStyleBackColor = false;
+            this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
+            // 
+            // numericUpDownGamma
+            // 
+            this.numericUpDownGamma.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownGamma.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownGamma.BorderRadius = 10;
+            this.numericUpDownGamma.BorderSize = 10;
+            this.numericUpDownGamma.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownGamma.Location = new System.Drawing.Point(201, 324);
+            this.numericUpDownGamma.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownGamma.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numericUpDownGamma.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownGamma.Name = "numericUpDownGamma";
+            this.numericUpDownGamma.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownGamma.TabIndex = 71;
+            // 
             // numericUpDownNoise
             // 
-            this.numericUpDownNoise.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownNoise.Location = new System.Drawing.Point(208, 474);
+            this.numericUpDownNoise.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownNoise.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownNoise.BorderRadius = 10;
+            this.numericUpDownNoise.BorderSize = 10;
+            this.numericUpDownNoise.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownNoise.Location = new System.Drawing.Point(201, 474);
+            this.numericUpDownNoise.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.numericUpDownNoise.Maximum = new decimal(new int[] {
             50,
             0,
@@ -402,34 +263,18 @@
             0,
             -2147483648});
             this.numericUpDownNoise.Name = "numericUpDownNoise";
-            this.numericUpDownNoise.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownNoise.TabIndex = 33;
-            this.numericUpDownNoise.ValueChanged += new System.EventHandler(this.numericUpDownNoiseValueChanged);
-            // 
-            // trackBarNoise
-            // 
-            this.trackBarNoise.Location = new System.Drawing.Point(27, 474);
-            this.trackBarNoise.Maximum = 50;
-            this.trackBarNoise.Minimum = -50;
-            this.trackBarNoise.Name = "trackBarNoise";
-            this.trackBarNoise.Size = new System.Drawing.Size(175, 45);
-            this.trackBarNoise.TabIndex = 32;
-            this.trackBarNoise.MouseCaptureChanged += new System.EventHandler(this.trackBarNoiseMouseCaptureChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(19, 454);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(38, 15);
-            this.label12.TabIndex = 31;
-            this.label12.Text = "Noise";
+            this.numericUpDownNoise.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownNoise.TabIndex = 70;
             // 
             // numericUpDownEdge
             // 
-            this.numericUpDownEdge.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownEdge.Location = new System.Drawing.Point(208, 399);
+            this.numericUpDownEdge.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownEdge.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownEdge.BorderRadius = 10;
+            this.numericUpDownEdge.BorderSize = 10;
+            this.numericUpDownEdge.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownEdge.Location = new System.Drawing.Point(201, 399);
+            this.numericUpDownEdge.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.numericUpDownEdge.Maximum = new decimal(new int[] {
             50,
             0,
@@ -441,9 +286,119 @@
             0,
             -2147483648});
             this.numericUpDownEdge.Name = "numericUpDownEdge";
-            this.numericUpDownEdge.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownEdge.TabIndex = 30;
-            this.numericUpDownEdge.ValueChanged += new System.EventHandler(this.numericUpDownEdgeValueChanged);
+            this.numericUpDownEdge.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownEdge.TabIndex = 69;
+            // 
+            // numericUpDownSmartSharpen
+            // 
+            this.numericUpDownSmartSharpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownSmartSharpen.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownSmartSharpen.BorderRadius = 10;
+            this.numericUpDownSmartSharpen.BorderSize = 10;
+            this.numericUpDownSmartSharpen.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownSmartSharpen.Location = new System.Drawing.Point(201, 255);
+            this.numericUpDownSmartSharpen.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numericUpDownSmartSharpen.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownSmartSharpen.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numericUpDownSmartSharpen.Name = "numericUpDownSmartSharpen";
+            this.numericUpDownSmartSharpen.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownSmartSharpen.TabIndex = 67;
+            // 
+            // numericUpDownReveal
+            // 
+            this.numericUpDownReveal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownReveal.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownReveal.BorderRadius = 10;
+            this.numericUpDownReveal.BorderSize = 10;
+            this.numericUpDownReveal.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownReveal.Location = new System.Drawing.Point(201, 180);
+            this.numericUpDownReveal.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numericUpDownReveal.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.numericUpDownReveal.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numericUpDownReveal.Name = "numericUpDownReveal";
+            this.numericUpDownReveal.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownReveal.TabIndex = 66;
+            // 
+            // numericUpDownContrast
+            // 
+            this.numericUpDownContrast.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownContrast.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownContrast.BorderRadius = 10;
+            this.numericUpDownContrast.BorderSize = 10;
+            this.numericUpDownContrast.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownContrast.Location = new System.Drawing.Point(201, 105);
+            this.numericUpDownContrast.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numericUpDownContrast.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownContrast.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownContrast.Name = "numericUpDownContrast";
+            this.numericUpDownContrast.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownContrast.TabIndex = 65;
+            // 
+            // numericUpDownBrightness
+            // 
+            this.numericUpDownBrightness.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownBrightness.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownBrightness.BorderRadius = 10;
+            this.numericUpDownBrightness.BorderSize = 10;
+            this.numericUpDownBrightness.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.numericUpDownBrightness.Location = new System.Drawing.Point(201, 30);
+            this.numericUpDownBrightness.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numericUpDownBrightness.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownBrightness.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDownBrightness.Name = "numericUpDownBrightness";
+            this.numericUpDownBrightness.Size = new System.Drawing.Size(64, 39);
+            this.numericUpDownBrightness.TabIndex = 64;
+            // 
+            // trackBarNoise
+            // 
+            this.trackBarNoise.Location = new System.Drawing.Point(27, 474);
+            this.trackBarNoise.Maximum = 50;
+            this.trackBarNoise.Minimum = -50;
+            this.trackBarNoise.Name = "trackBarNoise";
+            this.trackBarNoise.Size = new System.Drawing.Size(175, 45);
+            this.trackBarNoise.TabIndex = 32;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(19, 454);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(38, 15);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "Noise";
             // 
             // trackBarEdge
             // 
@@ -453,7 +408,6 @@
             this.trackBarEdge.Name = "trackBarEdge";
             this.trackBarEdge.Size = new System.Drawing.Size(175, 45);
             this.trackBarEdge.TabIndex = 29;
-            this.trackBarEdge.MouseCaptureChanged += new System.EventHandler(this.trackBarEdgeMouseCaptureChanged);
             // 
             // label11
             // 
@@ -465,25 +419,6 @@
             this.label11.TabIndex = 28;
             this.label11.Text = "Edge";
             // 
-            // numericUpDownGamma
-            // 
-            this.numericUpDownGamma.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDownGamma.Location = new System.Drawing.Point(208, 324);
-            this.numericUpDownGamma.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownGamma.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDownGamma.Name = "numericUpDownGamma";
-            this.numericUpDownGamma.Size = new System.Drawing.Size(57, 23);
-            this.numericUpDownGamma.TabIndex = 27;
-            this.numericUpDownGamma.ValueChanged += new System.EventHandler(this.numericUpDownGammaValueChanged);
-            // 
             // trackBarGamma
             // 
             this.trackBarGamma.Location = new System.Drawing.Point(27, 324);
@@ -492,7 +427,6 @@
             this.trackBarGamma.Name = "trackBarGamma";
             this.trackBarGamma.Size = new System.Drawing.Size(175, 45);
             this.trackBarGamma.TabIndex = 26;
-            this.trackBarGamma.MouseCaptureChanged += new System.EventHandler(this.trackBarGammaMouseCaptureChanged);
             // 
             // label10
             // 
@@ -504,18 +438,117 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Gamma";
             // 
-            // roundedNumericUpDown1
+            // trackBarBrightness
             // 
-            this.roundedNumericUpDown1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedNumericUpDown1.BorderColor = System.Drawing.Color.White;
-            this.roundedNumericUpDown1.BorderRadius = 10;
-            this.roundedNumericUpDown1.BorderSize = 10;
-            this.roundedNumericUpDown1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.roundedNumericUpDown1.Location = new System.Drawing.Point(207, 61);
-            this.roundedNumericUpDown1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.roundedNumericUpDown1.Name = "roundedNumericUpDown1";
-            this.roundedNumericUpDown1.Size = new System.Drawing.Size(58, 39);
-            this.roundedNumericUpDown1.TabIndex = 64;
+            this.trackBarBrightness.Location = new System.Drawing.Point(27, 30);
+            this.trackBarBrightness.Maximum = 100;
+            this.trackBarBrightness.Minimum = -100;
+            this.trackBarBrightness.Name = "trackBarBrightness";
+            this.trackBarBrightness.Size = new System.Drawing.Size(175, 45);
+            this.trackBarBrightness.TabIndex = 3;
+            // 
+            // checkBoxColorImage
+            // 
+            this.checkBoxColorImage.AutoSize = true;
+            this.checkBoxColorImage.Location = new System.Drawing.Point(228, 563);
+            this.checkBoxColorImage.Name = "checkBoxColorImage";
+            this.checkBoxColorImage.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxColorImage.TabIndex = 24;
+            this.checkBoxColorImage.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(19, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Brilho";
+            // 
+            // checkBoxPositiveNegative
+            // 
+            this.checkBoxPositiveNegative.AutoSize = true;
+            this.checkBoxPositiveNegative.Location = new System.Drawing.Point(228, 527);
+            this.checkBoxPositiveNegative.Name = "checkBoxPositiveNegative";
+            this.checkBoxPositiveNegative.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxPositiveNegative.TabIndex = 23;
+            this.checkBoxPositiveNegative.UseVisualStyleBackColor = true;
+            // 
+            // trackBarContrast
+            // 
+            this.trackBarContrast.Location = new System.Drawing.Point(27, 105);
+            this.trackBarContrast.Maximum = 100;
+            this.trackBarContrast.Minimum = -100;
+            this.trackBarContrast.Name = "trackBarContrast";
+            this.trackBarContrast.Size = new System.Drawing.Size(175, 45);
+            this.trackBarContrast.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(19, 85);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Contraste";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(19, 562);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 15);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Colorir:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 526);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(110, 15);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Positivo/Negativo:";
+            // 
+            // trackBarReveal
+            // 
+            this.trackBarReveal.Location = new System.Drawing.Point(27, 180);
+            this.trackBarReveal.Maximum = 15;
+            this.trackBarReveal.Name = "trackBarReveal";
+            this.trackBarReveal.Size = new System.Drawing.Size(175, 45);
+            this.trackBarReveal.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(19, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Revelar";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(19, 235);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 15);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Smart Sharpen";
+            // 
+            // trackBarSmartSharpen
+            // 
+            this.trackBarSmartSharpen.Location = new System.Drawing.Point(27, 255);
+            this.trackBarSmartSharpen.Maximum = 100;
+            this.trackBarSmartSharpen.Name = "trackBarSmartSharpen";
+            this.trackBarSmartSharpen.Size = new System.Drawing.Size(175, 45);
+            this.trackBarSmartSharpen.TabIndex = 12;
             // 
             // FilterView
             // 
@@ -536,22 +569,15 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBrightness)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownReveal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSmartSharpen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).EndInit();
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNoise)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEdge)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEdge)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownGamma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGamma)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -564,34 +590,33 @@
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBarBrightness;
-        private System.Windows.Forms.NumericUpDown numericUpDownBrightness;
-        private System.Windows.Forms.NumericUpDown numericUpDownContrast;
         private System.Windows.Forms.TrackBar trackBarContrast;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDownReveal;
         private System.Windows.Forms.TrackBar trackBarReveal;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDownSmartSharpen;
         private System.Windows.Forms.TrackBar trackBarSmartSharpen;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBoxOriginalImage;
         private System.Windows.Forms.PictureBox pictureBoxEditedImage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button buttonRestoreImage;
-        private System.Windows.Forms.Button buttonApplyChanges;
         private System.Windows.Forms.CheckBox checkBoxPositiveNegative;
         private System.Windows.Forms.CheckBox checkBoxColorImage;
         private Components.Rounded.RoundedPanel roundedPanel1;
-        private System.Windows.Forms.NumericUpDown numericUpDownNoise;
         private System.Windows.Forms.TrackBar trackBarNoise;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.NumericUpDown numericUpDownEdge;
         private System.Windows.Forms.TrackBar trackBarEdge;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numericUpDownGamma;
         private System.Windows.Forms.TrackBar trackBarGamma;
         private System.Windows.Forms.Label label10;
-        private Components.Rounded.RoundedNumericUpDown roundedNumericUpDown1;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownBrightness;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownNoise;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownEdge;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownSmartSharpen;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownReveal;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownContrast;
+        private Components.Rounded.RoundedNumericUpDown numericUpDownGamma;
+        private Components.Rounded.RoundedButton buttonApplyChanges;
+        private Components.Rounded.RoundedButton buttonRestoreImage;
     }
 }

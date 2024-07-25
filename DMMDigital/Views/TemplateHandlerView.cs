@@ -6,7 +6,6 @@ using DMMDigital.Components;
 using DMMDigital.Models;
 using DMMDigital.Interface.IView;
 using System.Linq;
-using System.Net;
 
 namespace DMMDigital.Views
 {

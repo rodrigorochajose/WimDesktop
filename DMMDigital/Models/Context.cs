@@ -17,6 +17,6 @@ namespace DMMDigital.Models
         public DbSet<ExamModel> exam { get; set; }
         public DbSet<PatientModel> patient{ get; set; }
         public DbSet<TemplateFrameModel> templateFrame { get; set; }
-        public DbSet<TemplateModel> template{ get; set; }
+        public DbSet<TemplateModel> template { get; set; }
     }
 }
