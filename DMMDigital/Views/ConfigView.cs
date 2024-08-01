@@ -93,22 +93,17 @@ namespace DMMDigital.Views
                 loadConfigs?.Invoke(this, EventArgs.Empty);
             };
 
-            textBoxSensorPath.Click += delegate
-            {
-                folderBrowserDialog1.ShowDialog();
-                sensorPath = folderBrowserDialog1.SelectedPath;
-            };
-
-
-            textBoxExamPath.Click += delegate 
-            {
-                folderBrowserDialog1.ShowDialog();
-                examPath = folderBrowserDialog1.SelectedPath;
-            };
+            textBoxTwainSource.InnerTextBox.Click += delegate { selectTwainSource(); };
 
             buttonSelectTwainSource.Click += delegate { selectTwainSource(); };
+            
+            textBoxSensorPath.InnerTextBox.Click += delegate { selectSensorPath(); };
 
-            textBoxTwainSource.Click += delegate { selectTwainSource(); };
+            buttonSensorPath.Click += delegate { selectSensorPath(); };
+
+            textBoxExamPath.InnerTextBox.Click += delegate { selectExamPath(); };
+
+            buttonExamPath.Click += delegate { selectExamPath(); };
 
             buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
 
@@ -171,6 +166,18 @@ namespace DMMDigital.Views
         {
             twain.SelectSource();
             textBoxTwainSource.Text = twain.DefaultSourceName;
+        }
+
+        private void selectSensorPath()
+        {
+            folderBrowserDialog1.ShowDialog();
+            sensorPath = folderBrowserDialog1.SelectedPath;
+        }
+
+        private void selectExamPath()
+        {
+            folderBrowserDialog1.ShowDialog();
+            examPath = folderBrowserDialog1.SelectedPath;
         }
     }
 }
