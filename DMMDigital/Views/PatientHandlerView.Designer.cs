@@ -133,6 +133,7 @@
             this.textBoxObservation.BorderColor = System.Drawing.Color.White;
             this.textBoxObservation.BorderRadius = 10;
             this.textBoxObservation.BorderSize = 10;
+            this.textBoxObservation.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxObservation.Location = new System.Drawing.Point(85, 390);
             this.textBoxObservation.Name = "textBoxObservation";
             this.textBoxObservation.PlaceholderText = null;
@@ -145,6 +146,7 @@
             this.textBoxRecommendation.BorderColor = System.Drawing.Color.White;
             this.textBoxRecommendation.BorderRadius = 10;
             this.textBoxRecommendation.BorderSize = 10;
+            this.textBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxRecommendation.Location = new System.Drawing.Point(85, 319);
             this.textBoxRecommendation.Name = "textBoxRecommendation";
             this.textBoxRecommendation.PlaceholderText = null;
@@ -181,6 +183,7 @@
             this.textBoxName.BorderColor = System.Drawing.Color.White;
             this.textBoxName.BorderRadius = 10;
             this.textBoxName.BorderSize = 10;
+            this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.textBoxName.Location = new System.Drawing.Point(85, 106);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.PlaceholderText = null;

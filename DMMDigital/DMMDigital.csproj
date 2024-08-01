@@ -352,6 +352,9 @@
     <EmbeddedResource Include="Views\CompareFrames.resx">
       <DependentUpon>CompareFrames.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ConfigView.en-US.resx">
+      <DependentUpon>ConfigView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
     </EmbeddedResource>
@@ -366,6 +369,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogChooseSensor.resx">
       <DependentUpon>DialogChooseSensor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MenuView.en-US.resx">
+      <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PostProcessConfig.resx">
       <DependentUpon>PostProcessConfig.cs</DependentUpon>
@@ -401,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateView.en-US.resx">
+      <DependentUpon>TemplateView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateView.resx">
       <DependentUpon>TemplateView.cs</DependentUpon>
