@@ -45,8 +45,15 @@ namespace DMMDigital.Presenters
             examContainerView.eventGetSensorInfo += getSensorInfo;
             examContainerView.eventOpenTwain += openTwain;
 
-            initializeTwain();
-            connectSensor(this, EventArgs.Empty);
+
+            if (examContainerView.selectedExamView.acquireMode == "TWAIN")
+            {
+                initializeTwain();
+            } 
+            else
+            {
+                connectSensor(this, EventArgs.Empty);
+            }
 
             initialize();
         }
