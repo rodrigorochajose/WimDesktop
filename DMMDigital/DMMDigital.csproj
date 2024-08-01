@@ -346,8 +346,20 @@
     <EmbeddedResource Include="Components\Rounded\RoundedTextBox.resx">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChooseFramesToCompare.en-US.resx">
+      <DependentUpon>ChooseFramesToCompare.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ChooseFramesToCompare.resx">
       <DependentUpon>ChooseFramesToCompare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChoosePatientExamView.en-US.resx">
+      <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChooseTemplateExamView.en-US.resx">
+      <DependentUpon>ChooseTemplateExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CompareFrames.en-US.resx">
+      <DependentUpon>CompareFrames.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CompareFrames.resx">
       <DependentUpon>CompareFrames.cs</DependentUpon>
@@ -358,11 +370,32 @@
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogChooseSensor.en-US.resx">
+      <DependentUpon>DialogChooseSensor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogGenerateTemplate.en-US.resx">
+      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogRecalibrateRuler.en-US.resx">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogRecalibrateRuler.resx">
       <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamContainerView.en-US.resx">
+      <DependentUpon>ExamContainerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamView.en-US.resx">
+      <DependentUpon>ExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExportExamView.en-US.resx">
+      <DependentUpon>ExportExamView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ExportExamView.resx">
       <DependentUpon>ExportExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FilterView.en-US.resx">
+      <DependentUpon>FilterView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FilterView.resx">
       <DependentUpon>FilterView.cs</DependentUpon>
@@ -372,6 +405,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.en-US.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientHandlerView.en-US.resx">
+      <DependentUpon>PatientHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientView.en-US.resx">
+      <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PostProcessConfig.en-US.resx">
+      <DependentUpon>PostProcessConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PostProcessConfig.resx">
       <DependentUpon>PostProcessConfig.cs</DependentUpon>
@@ -384,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExamView.resx">
       <DependentUpon>ExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateHandlerView.en-US.resx">
+      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateHandlerView.resx">
       <DependentUpon>TemplateHandlerView.cs</DependentUpon>

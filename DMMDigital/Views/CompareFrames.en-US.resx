@@ -118,75 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>Compare Frames</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="buttonChangeSides.Text" xml:space="preserve">
+    <value>Swap Sides</value>
   </data>
-  <data name="buttonSave.Text" xml:space="preserve">
-    <value>Save</value>
+  <data name="buttonImportImage.Text" xml:space="preserve">
+    <value>Import Image</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="buttonOverlay.Text" xml:space="preserve">
+    <value>Override</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Color</value>
+  <data name="buttonRotate.Text" xml:space="preserve">
+    <value>Rotate</value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Click here to set the filters</value>
+  <data name="dialogFileImage.Filter" xml:space="preserve">
+    <value>Image Files |*.jpg;*.jpeg;*.png;*.bmp;</value>
   </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Acquire Mode</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>TWAIN Source</value>
-  </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>Sensor Model</value>
-  </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>Sensor Settings</value>
-  </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>Filters Settings</value>
-  </data>
-  <data name="label17.Text" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Free Draw and Shapes</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>Ruler</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Sensor Path</value>
-  </data>
-  <data name="labelCaminho.Text" xml:space="preserve">
-    <value>Exam Path</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Shapes</value>
-  </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Advanced Settings</value>
+  <data name="labelOpacity.Text" xml:space="preserve">
+    <value>Opacity:</value>
   </data>
 </root>

@@ -56,24 +56,13 @@
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label4.Location = new System.Drawing.Point(12, 16);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(125, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Nome do Template";
             // 
             // checkBoxGenerateMode
             // 
-            this.checkBoxGenerateMode.AutoSize = true;
-            this.checkBoxGenerateMode.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxGenerateMode.Location = new System.Drawing.Point(427, 18);
+            resources.ApplyResources(this.checkBoxGenerateMode, "checkBoxGenerateMode");
             this.checkBoxGenerateMode.Name = "checkBoxGenerateMode";
-            this.checkBoxGenerateMode.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkBoxGenerateMode.Size = new System.Drawing.Size(164, 23);
-            this.checkBoxGenerateMode.TabIndex = 15;
-            this.checkBoxGenerateMode.Text = "Usar template modelo";
             this.checkBoxGenerateMode.UseVisualStyleBackColor = true;
             this.checkBoxGenerateMode.CheckedChanged += new System.EventHandler(this.checkBoxGenerateModeCheckedChanged);
             // 
@@ -83,11 +72,8 @@
             this.panel1.Controls.Add(this.textBoxTemplateName);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.checkBoxGenerateMode);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(624, 54);
-            this.panel1.TabIndex = 17;
             // 
             // textBoxTemplateName
             // 
@@ -95,43 +81,28 @@
             this.textBoxTemplateName.BorderColor = System.Drawing.Color.White;
             this.textBoxTemplateName.BorderRadius = 10;
             this.textBoxTemplateName.BorderSize = 10;
-            this.textBoxTemplateName.Font = new System.Drawing.Font("Segoe UI", 10F);
+            resources.ApplyResources(this.textBoxTemplateName, "textBoxTemplateName");
             this.textBoxTemplateName.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxTemplateName.Location = new System.Drawing.Point(143, 6);
             this.textBoxTemplateName.Name = "textBoxTemplateName";
             this.textBoxTemplateName.PlaceholderText = null;
-            this.textBoxTemplateName.Size = new System.Drawing.Size(261, 44);
-            this.textBoxTemplateName.TabIndex = 31;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.buttonGenerateTemplate);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 333);
+            resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(624, 57);
-            this.panel3.TabIndex = 18;
             // 
             // buttonGenerateTemplate
             // 
-            this.buttonGenerateTemplate.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            resources.ApplyResources(this.buttonGenerateTemplate, "buttonGenerateTemplate");
             this.buttonGenerateTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonGenerateTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonGenerateTemplate.BorderWidth = 5F;
             this.buttonGenerateTemplate.CornerRadius = 5;
             this.buttonGenerateTemplate.FlatAppearance.BorderSize = 0;
-            this.buttonGenerateTemplate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGenerateTemplate.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonGenerateTemplate.ForeColor = System.Drawing.Color.White;
-            this.buttonGenerateTemplate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonGenerateTemplate.Location = new System.Drawing.Point(250, 7);
-            this.buttonGenerateTemplate.Margin = new System.Windows.Forms.Padding(0);
             this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";
-            this.buttonGenerateTemplate.Padding = new System.Windows.Forms.Padding(2);
-            this.buttonGenerateTemplate.Size = new System.Drawing.Size(99, 40);
-            this.buttonGenerateTemplate.TabIndex = 58;
-            this.buttonGenerateTemplate.Text = "Gerar";
             this.buttonGenerateTemplate.UseVisualStyleBackColor = false;
             // 
             // panelGenerateByTemplate
@@ -140,11 +111,8 @@
             this.panelGenerateByTemplate.Controls.Add(this.comboBoxTemplate);
             this.panelGenerateByTemplate.Controls.Add(this.panelShowTemplate);
             this.panelGenerateByTemplate.Controls.Add(this.label5);
-            this.panelGenerateByTemplate.Location = new System.Drawing.Point(248, 0);
+            resources.ApplyResources(this.panelGenerateByTemplate, "panelGenerateByTemplate");
             this.panelGenerateByTemplate.Name = "panelGenerateByTemplate";
-            this.panelGenerateByTemplate.Size = new System.Drawing.Size(376, 278);
-            this.panelGenerateByTemplate.TabIndex = 12;
-            this.panelGenerateByTemplate.Visible = false;
             // 
             // comboBoxTemplate
             // 
@@ -152,12 +120,8 @@
             this.comboBoxTemplate.BorderColor = System.Drawing.Color.White;
             this.comboBoxTemplate.BorderRadius = 10;
             this.comboBoxTemplate.BorderSize = 10;
-            this.comboBoxTemplate.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.comboBoxTemplate.Location = new System.Drawing.Point(106, 6);
-            this.comboBoxTemplate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            resources.ApplyResources(this.comboBoxTemplate, "comboBoxTemplate");
             this.comboBoxTemplate.Name = "comboBoxTemplate";
-            this.comboBoxTemplate.Size = new System.Drawing.Size(222, 43);
-            this.comboBoxTemplate.TabIndex = 61;
             // 
             // panelShowTemplate
             // 
@@ -165,20 +129,13 @@
             this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.panelShowTemplate.BorderWidth = 5F;
             this.panelShowTemplate.CornerRadius = 20;
-            this.panelShowTemplate.Location = new System.Drawing.Point(14, 51);
+            resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
             this.panelShowTemplate.Name = "panelShowTemplate";
-            this.panelShowTemplate.Size = new System.Drawing.Size(350, 225);
-            this.panelShowTemplate.TabIndex = 50;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(35, 16);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 19);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Template";
             // 
             // panelGenerateDefault
             // 
@@ -189,10 +146,8 @@
             this.panelGenerateDefault.Controls.Add(this.label1);
             this.panelGenerateDefault.Controls.Add(this.label3);
             this.panelGenerateDefault.Controls.Add(this.label2);
-            this.panelGenerateDefault.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panelGenerateDefault, "panelGenerateDefault");
             this.panelGenerateDefault.Name = "panelGenerateDefault";
-            this.panelGenerateDefault.Size = new System.Drawing.Size(248, 278);
-            this.panelGenerateDefault.TabIndex = 11;
             // 
             // comboBoxOrientation
             // 
@@ -200,12 +155,8 @@
             this.comboBoxOrientation.BorderColor = System.Drawing.Color.White;
             this.comboBoxOrientation.BorderRadius = 10;
             this.comboBoxOrientation.BorderSize = 10;
-            this.comboBoxOrientation.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.comboBoxOrientation.Location = new System.Drawing.Point(8, 199);
-            this.comboBoxOrientation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            resources.ApplyResources(this.comboBoxOrientation, "comboBoxOrientation");
             this.comboBoxOrientation.Name = "comboBoxOrientation";
-            this.comboBoxOrientation.Size = new System.Drawing.Size(224, 46);
-            this.comboBoxOrientation.TabIndex = 62;
             // 
             // numericUpDownRows
             // 
@@ -213,12 +164,18 @@
             this.numericUpDownRows.BorderColor = System.Drawing.Color.White;
             this.numericUpDownRows.BorderRadius = 10;
             this.numericUpDownRows.BorderSize = 10;
-            this.numericUpDownRows.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.numericUpDownRows.Location = new System.Drawing.Point(163, 96);
-            this.numericUpDownRows.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            resources.ApplyResources(this.numericUpDownRows, "numericUpDownRows");
+            this.numericUpDownRows.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.numericUpDownRows.Name = "numericUpDownRows";
-            this.numericUpDownRows.Size = new System.Drawing.Size(69, 42);
-            this.numericUpDownRows.TabIndex = 63;
             // 
             // numericUpDownColumns
             // 
@@ -226,69 +183,53 @@
             this.numericUpDownColumns.BorderColor = System.Drawing.Color.White;
             this.numericUpDownColumns.BorderRadius = 10;
             this.numericUpDownColumns.BorderSize = 10;
-            this.numericUpDownColumns.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.numericUpDownColumns.Location = new System.Drawing.Point(163, 21);
-            this.numericUpDownColumns.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            resources.ApplyResources(this.numericUpDownColumns, "numericUpDownColumns");
+            this.numericUpDownColumns.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownColumns.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             this.numericUpDownColumns.Name = "numericUpDownColumns";
-            this.numericUpDownColumns.Size = new System.Drawing.Size(69, 42);
-            this.numericUpDownColumns.TabIndex = 62;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label1.Location = new System.Drawing.Point(8, 106);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 19);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Quantidade de Linhas";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label3.Location = new System.Drawing.Point(75, 171);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 19);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Orientação";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label2.Location = new System.Drawing.Point(8, 30);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Quantidade de Colunas";
             // 
             // panelGenerateTemplate
             // 
             this.panelGenerateTemplate.BackColor = System.Drawing.Color.White;
             this.panelGenerateTemplate.Controls.Add(this.panelGenerateByTemplate);
             this.panelGenerateTemplate.Controls.Add(this.panelGenerateDefault);
-            this.panelGenerateTemplate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGenerateTemplate.Location = new System.Drawing.Point(0, 54);
+            resources.ApplyResources(this.panelGenerateTemplate, "panelGenerateTemplate");
             this.panelGenerateTemplate.Name = "panelGenerateTemplate";
-            this.panelGenerateTemplate.Size = new System.Drawing.Size(624, 279);
-            this.panelGenerateTemplate.TabIndex = 20;
             // 
             // DialogGenerateTemplate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 390);
             this.Controls.Add(this.panelGenerateTemplate);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogGenerateTemplate";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gerar Template";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

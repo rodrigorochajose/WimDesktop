@@ -117,76 +117,109 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="buttonAcquireMode.ToolTipText" xml:space="preserve">
+    <value>Native Capture</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="buttonArrow.ToolTipText" xml:space="preserve">
+    <value>Arrow</value>
   </data>
-  <data name="buttonSave.Text" xml:space="preserve">
-    <value>Save</value>
+  <data name="buttonCloseExam.Text" xml:space="preserve">
+    <value>Close Exam</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="buttonCompareFrame.ToolTipText" xml:space="preserve">
+    <value>Compare Images</value>
   </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Color</value>
+  <data name="buttonDeleteImage.ToolTipText" xml:space="preserve">
+    <value>Delete Image</value>
   </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Click here to set the filters</value>
+  <data name="buttonEllipse.ToolTipText" xml:space="preserve">
+    <value>Circle</value>
   </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Acquire Mode</value>
+  <data name="buttonExport.ToolTipText" xml:space="preserve">
+    <value>Export Exam</value>
   </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>TWAIN Source</value>
+  <data name="buttonFilter.ToolTipText" xml:space="preserve">
+    <value>Filter</value>
   </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>Sensor Model</value>
+  <data name="buttonFitZoom.Text" xml:space="preserve">
+    <value>Fit Image</value>
   </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>Sensor Settings</value>
+  <data name="buttonFreeDraw.ToolTipText" xml:space="preserve">
+    <value>Free Draw</value>
   </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>Filters Settings</value>
+  <data name="buttonImport.ToolTipText" xml:space="preserve">
+    <value>Import Image</value>
   </data>
-  <data name="label17.Text" xml:space="preserve">
-    <value>Language</value>
+  <data name="buttonMagnifier.ToolTipText" xml:space="preserve">
+    <value>Magnifier</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Color</value>
+  <data name="buttonMoveDrawing.ToolTipText" xml:space="preserve">
+    <value>Move</value>
   </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Size</value>
+  <data name="buttonNewExam.Text" xml:space="preserve">
+    <value>New Exam</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Free Draw and Shapes</value>
+  <data name="buttonOpenExam.Text" xml:space="preserve">
+    <value>Open Exam</value>
   </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Text</value>
+  <data name="buttonRectangle.ToolTipText" xml:space="preserve">
+    <value>Rectangle</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Size</value>
+  <data name="buttonRedo.ToolTipText" xml:space="preserve">
+    <value>Redo</value>
   </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Color</value>
+  <data name="buttonRestoreExam.ToolTipText" xml:space="preserve">
+    <value>Restore Exam</value>
   </data>
-  <data name="label8.Text" xml:space="preserve">
+  <data name="buttonRotateLeft.ToolTipText" xml:space="preserve">
+    <value>Rotate Left</value>
+  </data>
+  <data name="buttonRotateRight.ToolTipText" xml:space="preserve">
+    <value>Rotate Right</value>
+  </data>
+  <data name="buttonRuler.ToolTipText" xml:space="preserve">
     <value>Ruler</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Sensor Path</value>
+  <data name="buttonSelect.ToolTipText" xml:space="preserve">
+    <value>Select</value>
   </data>
-  <data name="labelCaminho.Text" xml:space="preserve">
-    <value>Exam Path</value>
+  <data name="buttonText.ToolTipText" xml:space="preserve">
+    <value>Text</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="buttonUndo.ToolTipText" xml:space="preserve">
+    <value>Undo</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Shapes</value>
+  <data name="buttonZoomIn.Text" xml:space="preserve">
+    <value>Increase Zoom</value>
   </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Advanced Settings</value>
+  <data name="buttonZoomOut.Text" xml:space="preserve">
+    <value>Decrease Zoom</value>
+  </data>
+  <data name="dialogFileImage.Filter" xml:space="preserve">
+    <value>Image Files|*.jpg;*.jpeg;*.png;*.bmp;</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Patient:</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Tool Options</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Drawings</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Image Date:</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Observations:</value>
+  </data>
+  <data name="labelPatient.Text" xml:space="preserve">
+    <value>Patient Name</value>
+  </data>
+  <data name="labelTemplate.Text" xml:space="preserve">
+    <value>Template Name</value>
+  </data>
+  <data name="toolStripDropDownButton.Text" xml:space="preserve">
+    <value>Exam</value>
   </data>
 </root>
