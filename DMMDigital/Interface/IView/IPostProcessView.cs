@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Interface.IView
 {
-    public interface IPostProcessConfig
+    public interface IPostProcessView
     {
         float brightness { get; set; }
         float contrast { get; set; }

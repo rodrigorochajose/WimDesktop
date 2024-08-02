@@ -67,7 +67,6 @@
             this.buttonDrawingColorPicker = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.buttonExamPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
@@ -79,6 +78,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -414,16 +414,6 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             // 
-            // comboBoxLanguage
-            // 
-            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
-            this.comboBoxLanguage.BorderRadius = 10;
-            this.comboBoxLanguage.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
-            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxLanguage.Name = "comboBoxLanguage";
-            // 
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
@@ -506,6 +496,16 @@
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
+            // 
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
+            this.comboBoxLanguage.BorderRadius = 10;
+            this.comboBoxLanguage.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
+            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
             // 
             // ConfigView
             // 
@@ -591,7 +591,7 @@
         private Components.Rounded.RoundedButton buttonConfigureFilters;
         private Components.Rounded.RoundedNumericUpDown numericUpDownTextSize;
         private Components.Rounded.RoundedNumericUpDown numericUpDownDrawingSize;
-        private Components.Rounded.RoundedComboBox comboBoxLanguage;
         private System.Windows.Forms.Label label17;
+        private Components.Rounded.RoundedComboBox comboBoxLanguage;
     }
 }

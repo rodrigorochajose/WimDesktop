@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class DialogChooseSensor
+    partial class MultiSensorDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogChooseSensor));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiSensorDialog));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxSensor = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.buttonConfirm = new DMMDigital.Components.Rounded.RoundedButton();

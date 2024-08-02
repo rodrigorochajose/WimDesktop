@@ -5,6 +5,7 @@ namespace DMMDigital.Interface.IView
 {
     public interface IConfigView
     {
+        string language { get; set; }
         string sensorPath { get; set; }
         string examPath { get; set; }
         string sensorModel { get; set; }

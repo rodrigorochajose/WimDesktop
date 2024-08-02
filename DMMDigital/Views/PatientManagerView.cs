@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class PatientHandlerView : Form, IPatientHandlerView
+    public partial class PatientManagerView : Form, IPatientManagerView
     {
         public int patientId { get; set; }
 
@@ -44,7 +44,7 @@ namespace DMMDigital.Views
 
         private string action;
 
-        public PatientHandlerView(string action)
+        public PatientManagerView(string action)
         {
             InitializeComponent();
 
@@ -55,9 +55,10 @@ namespace DMMDigital.Views
 
             associateEvents();
 
+            this.action = action;
+
             if (action == "add")
             {
-                this.action = action;
                 Text = "Cadastrar Paciente";
                 label1.Text = "Cadastrar Paciente";
                 label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
@@ -70,7 +71,7 @@ namespace DMMDigital.Views
 
             buttonSave.Click += delegate
             {
-                if (action == null)
+                if (action == "edit")
                 {
                     eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
                 } 

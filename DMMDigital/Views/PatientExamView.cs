@@ -4,7 +4,7 @@ using DMMDigital.Interface.IView;
 
 namespace DMMDigital.Views
 {
-    public partial class ChoosePatientExamView : Form, IChoosePatientExamView
+    public partial class PatientExamView : Form, IPatientExamView
     {
         public string searchedValue 
         {
@@ -34,7 +34,7 @@ namespace DMMDigital.Views
             dataGridViewPatient.DataSource = patientList;
         }
 
-        public ChoosePatientExamView()
+        public PatientExamView()
         {
             InitializeComponent();
             associateEvents();

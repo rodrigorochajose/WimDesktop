@@ -4,7 +4,7 @@ using DMMDigital.Components;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface ITemplateHandlerView
+    public interface ITemplateCreationView
     {
         string templateName { get; set; }
         List<FrameTemplate> framesList { get; }

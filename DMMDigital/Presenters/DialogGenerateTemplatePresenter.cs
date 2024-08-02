@@ -13,12 +13,12 @@ namespace DMMDigital.Presenters
 {
     public class DialogGenerateTemplatePresenter
     {
-        private readonly IDialogGenerateTemplate dialogGenerateTemplate;
+        private readonly ITemplateCreationDialog dialogGenerateTemplate;
 
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public DialogGenerateTemplatePresenter(IDialogGenerateTemplate view)
+        public DialogGenerateTemplatePresenter(ITemplateCreationDialog view)
         {
             dialogGenerateTemplate = view;
 
@@ -40,7 +40,7 @@ namespace DMMDigital.Presenters
                 {
                     List<TemplateFrameModel> selectedFrames = dialogGenerateTemplate.templateFrames.Where(t => t.templateId == dialogGenerateTemplate.selectedTemplateId).ToList();
 
-                    TemplateHandlerView templateHandlerView = new TemplateHandlerView(
+                    TemplateCreationView templateHandlerView = new TemplateCreationView(
                         dialogGenerateTemplate.templateName,
                         selectedFrames
                     );
@@ -50,7 +50,7 @@ namespace DMMDigital.Presenters
                 }
                 else
                 {
-                    TemplateHandlerView templateHandlerView = new TemplateHandlerView(
+                    TemplateCreationView templateHandlerView = new TemplateCreationView(
                         dialogGenerateTemplate.templateName,
                         dialogGenerateTemplate.rows,
                         dialogGenerateTemplate.columns,

@@ -143,7 +143,7 @@
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
-    <Compile Include="Interface\IView\IPostProcessConfig.cs" />
+    <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IRepository\IConfigRepository.cs" />
@@ -172,11 +172,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChooseFramesToCompare.cs">
+    <Compile Include="Views\FramesComparisonDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChooseFramesToCompare.Designer.cs">
-      <DependentUpon>ChooseFramesToCompare.cs</DependentUpon>
+    <Compile Include="Views\FramesComparisonDialog.Designer.cs">
+      <DependentUpon>FramesComparisonDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\CompareFrames.cs">
       <SubType>Form</SubType>
@@ -213,40 +213,40 @@
     <Compile Include="Views\FilterView.Designer.cs">
       <DependentUpon>FilterView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DialogChooseSensor.cs">
+    <Compile Include="Views\MultiSensorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DialogChooseSensor.Designer.cs">
-      <DependentUpon>DialogChooseSensor.cs</DependentUpon>
+    <Compile Include="Views\MultiSensorDialog.Designer.cs">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\PostProcessConfig.cs">
+    <Compile Include="Views\PostProcessView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PostProcessConfig.Designer.cs">
-      <DependentUpon>PostProcessConfig.cs</DependentUpon>
+    <Compile Include="Views\PostProcessView.Designer.cs">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\IView\IChooseFramesToCompare.cs" />
-    <Compile Include="Interface\IView\IChooseTemplateExamView.cs" />
+    <Compile Include="Interface\IView\IFramesComparisonDialog.cs" />
+    <Compile Include="Interface\IView\ITemplateExamView.cs" />
     <Compile Include="Interface\IView\IConfigView.cs" />
-    <Compile Include="Interface\IView\IChoosePatientExamView.cs" />
-    <Compile Include="Interface\IView\IDialogGenerateTemplate.cs" />
+    <Compile Include="Interface\IView\IPatientExamView.cs" />
+    <Compile Include="Interface\IView\ITemplateCreationDialog.cs" />
     <Compile Include="Interface\IView\IExamContainerView.cs" />
     <Compile Include="Interface\IView\IExamView.cs" />
     <Compile Include="Interface\IView\IExportExamView.cs" />
     <Compile Include="Interface\IView\IFilterView.cs" />
-    <Compile Include="Interface\IView\ITemplateHandlerView.cs" />
+    <Compile Include="Interface\IView\ITemplateCreationView.cs" />
     <Compile Include="Interface\IView\ITemplateView.cs" />
-    <Compile Include="Views\PatientHandlerView.cs">
+    <Compile Include="Views\PatientManagerView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PatientHandlerView.Designer.cs">
-      <DependentUpon>PatientHandlerView.cs</DependentUpon>
+    <Compile Include="Views\PatientManagerView.Designer.cs">
+      <DependentUpon>PatientManagerView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\DialogGenerateTemplate.cs">
+    <Compile Include="Views\TemplateCreationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\DialogGenerateTemplate.Designer.cs">
-      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
+    <Compile Include="Views\TemplateCreationDialog.Designer.cs">
+      <DependentUpon>TemplateCreationDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ExamView.cs">
       <SubType>Form</SubType>
@@ -254,33 +254,33 @@
     <Compile Include="Views\ExamView.Designer.cs">
       <DependentUpon>ExamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TemplateHandlerView.cs">
+    <Compile Include="Views\TemplateCreationView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\TemplateHandlerView.Designer.cs">
-      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
+    <Compile Include="Views\TemplateCreationView.Designer.cs">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Frame.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\ChoosePatientExamView.cs">
+    <Compile Include="Views\PatientExamView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChoosePatientExamView.Designer.cs">
-      <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
+    <Compile Include="Views\PatientExamView.Designer.cs">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interface\IView\IPatientHandlerView.cs" />
+    <Compile Include="Interface\IView\IPatientManagerView.cs" />
     <Compile Include="Views\MenuView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\MenuView.Designer.cs">
       <DependentUpon>MenuView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChooseTemplateExamView.cs">
+    <Compile Include="Views\TemplateExamView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChooseTemplateExamView.Designer.cs">
-      <DependentUpon>ChooseTemplateExamView.cs</DependentUpon>
+    <Compile Include="Views\TemplateExamView.Designer.cs">
+      <DependentUpon>TemplateExamView.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\IDrawing.cs" />
     <Compile Include="Interface\iRay\IRayAttrDef.cs" />
@@ -346,17 +346,17 @@
     <EmbeddedResource Include="Components\Rounded\RoundedTextBox.resx">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChooseFramesToCompare.en-US.resx">
-      <DependentUpon>ChooseFramesToCompare.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonDialog.en-US.resx">
+      <DependentUpon>FramesComparisonDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChooseFramesToCompare.resx">
-      <DependentUpon>ChooseFramesToCompare.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonDialog.resx">
+      <DependentUpon>FramesComparisonDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChoosePatientExamView.en-US.resx">
-      <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PatientExamView.en-US.resx">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChooseTemplateExamView.en-US.resx">
-      <DependentUpon>ChooseTemplateExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateExamView.en-US.resx">
+      <DependentUpon>TemplateExamView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CompareFrames.en-US.resx">
       <DependentUpon>CompareFrames.cs</DependentUpon>
@@ -370,11 +370,11 @@
     <EmbeddedResource Include="Views\ConfigView.resx">
       <DependentUpon>ConfigView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DialogChooseSensor.en-US.resx">
-      <DependentUpon>DialogChooseSensor.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MultiSensorDialog.en-US.resx">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DialogGenerateTemplate.en-US.resx">
-      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateCreationDialog.en-US.resx">
+      <DependentUpon>TemplateCreationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogRecalibrateRuler.en-US.resx">
       <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
@@ -400,47 +400,47 @@
     <EmbeddedResource Include="Views\FilterView.resx">
       <DependentUpon>FilterView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DialogChooseSensor.resx">
-      <DependentUpon>DialogChooseSensor.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MultiSensorDialog.resx">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.en-US.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PatientHandlerView.en-US.resx">
-      <DependentUpon>PatientHandlerView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PatientManagerView.en-US.resx">
+      <DependentUpon>PatientManagerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientView.en-US.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PostProcessConfig.en-US.resx">
-      <DependentUpon>PostProcessConfig.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PostProcessView.en-US.resx">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PostProcessConfig.resx">
-      <DependentUpon>PostProcessConfig.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PostProcessView.resx">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PatientHandlerView.resx">
-      <DependentUpon>PatientHandlerView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PatientManagerView.resx">
+      <DependentUpon>PatientManagerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DialogGenerateTemplate.resx">
-      <DependentUpon>DialogGenerateTemplate.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateCreationDialog.resx">
+      <DependentUpon>TemplateCreationDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ExamView.resx">
       <DependentUpon>ExamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TemplateHandlerView.en-US.resx">
-      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateCreationView.en-US.resx">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TemplateHandlerView.resx">
-      <DependentUpon>TemplateHandlerView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateCreationView.resx">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChoosePatientExamView.resx">
-      <DependentUpon>ChoosePatientExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\PatientExamView.resx">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChooseTemplateExamView.resx">
-      <DependentUpon>ChooseTemplateExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\TemplateExamView.resx">
+      <DependentUpon>TemplateExamView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

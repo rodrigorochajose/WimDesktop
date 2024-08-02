@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace DMMDigital.Views
 {
-    public partial class TemplateHandlerView : Form, ITemplateHandlerView
+    public partial class TemplateCreationView : Form, ITemplateCreationView
     {
         public string templateName { get; set; }
         public List<FrameTemplate> framesList { get { return frames; } }
@@ -28,7 +28,7 @@ namespace DMMDigital.Views
         List<Point> verticalBottomPoints = new List<Point>();
         List<Point> midPoints = new List<Point>();
 
-        public TemplateHandlerView(string templateName, decimal rows, decimal columns, string orientation)
+        public TemplateCreationView(string templateName, decimal rows, decimal columns, string orientation)
         {
             InitializeComponent();
 
@@ -58,7 +58,7 @@ namespace DMMDigital.Views
             associateEvents();
         }
 
-        public TemplateHandlerView(string templateName, List<TemplateFrameModel> templateFrames)
+        public TemplateCreationView(string templateName, List<TemplateFrameModel> templateFrames)
         {
             InitializeComponent();
             this.templateName = templateName;

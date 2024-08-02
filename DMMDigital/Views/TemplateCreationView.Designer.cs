@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class TemplateHandlerView
+    partial class TemplateCreationView
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateHandlerView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationView));
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSaveTemplate = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonDeleteFrame = new DMMDigital.Components.Rounded.RoundedButton();

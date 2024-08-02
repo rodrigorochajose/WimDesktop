@@ -9,5 +9,7 @@ namespace DMMDigital.Interface.IRepository
         string getSensorPath();
         string getExamPath();
         float[] getFiltersValues();
+
+        string getLanguage();
     }
 }

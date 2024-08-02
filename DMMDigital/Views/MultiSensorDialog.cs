@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class DialogChooseSensor : Form
+    public partial class MultiSensorDialog : Form
     {
         public string selectedSensor;
 
-        public DialogChooseSensor(List<string> sensors)
+        public MultiSensorDialog(List<string> sensors)
         {
             InitializeComponent();
 

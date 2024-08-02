@@ -173,10 +173,10 @@ namespace DMMDigital.Presenters
 
                     if (sensorUsbDevices.Count > 1)
                     {
-                        using (Form dialogChooseSensor = new DialogChooseSensor(sensorUsbDevices))
+                        using (Form dialogChooseSensor = new MultiSensorDialog(sensorUsbDevices))
                         {
                             dialogChooseSensor.ShowDialog();
-                            selectedSensor = (dialogChooseSensor as DialogChooseSensor).selectedSensor;
+                            selectedSensor = (dialogChooseSensor as MultiSensorDialog).selectedSensor;
                         }
                     }
 

@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class DialogGenerateTemplate
+    partial class TemplateCreationDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogGenerateTemplate));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationDialog));
             this.label4 = new System.Windows.Forms.Label();
             this.checkBoxGenerateMode = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();

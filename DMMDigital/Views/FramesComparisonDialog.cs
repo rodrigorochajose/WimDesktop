@@ -8,12 +8,12 @@ using DMMDigital.Interface.IView;
 
 namespace DMMDigital.Views
 {
-    public partial class ChooseFramesToCompare : Form, IChooseFramesToCompare
+    public partial class FramesComparisonDialog : Form, IFramesComparisonDialog
     {
         public List<Frame> frames { get; set; }
         public List<Frame> selectedFrames { get; set; }
 
-        public ChooseFramesToCompare(List<Frame> frames)
+        public FramesComparisonDialog(List<Frame> frames)
         {
             InitializeComponent();
             ActiveControl = label1;

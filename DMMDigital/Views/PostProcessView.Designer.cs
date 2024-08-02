@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class PostProcessConfig
+    partial class PostProcessView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PostProcessConfig));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PostProcessView));
             this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
             this.pictureBoxFilteredImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();

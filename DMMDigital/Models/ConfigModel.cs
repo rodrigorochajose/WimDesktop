@@ -8,6 +8,9 @@ namespace DMMDigital.Models
         [Column("ID")]
         public int id { get; set; }
 
+        [Column("LANGUAGE")]
+        public string language { get; set; }
+
         [Column("SENSOR_PATH")]
         public string sensorPath { get; set; }
 

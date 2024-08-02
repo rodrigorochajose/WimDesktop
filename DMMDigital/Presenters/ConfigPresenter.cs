@@ -29,7 +29,9 @@ namespace DMMDigital.Presenters
 
             view.setComboBoxSensorModel(sensorRepository.getAllSensors());
             view.setAcquireMode();
+            view.setLanguages();
 
+            view.language = currentConfig.language;
             view.sensorPath = currentConfig.sensorPath;
             view.examPath = currentConfig.examPath;
             view.sensorModel = currentConfig.sensorModel;
@@ -49,6 +51,7 @@ namespace DMMDigital.Presenters
         {
             try
             {
+                currentConfig.language = view.language;
                 currentConfig.sensorPath = view.sensorPath;
                 currentConfig.examPath = view.examPath;
                 currentConfig.sensorModel = view.sensorModel;

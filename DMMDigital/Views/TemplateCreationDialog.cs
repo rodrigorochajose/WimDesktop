@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class DialogGenerateTemplate : Form, IDialogGenerateTemplate
+    public partial class TemplateCreationDialog : Form, ITemplateCreationDialog
     {
         [Required(ErrorMessage = "Nome do Template é obrigatório.")]
         public string templateName 
@@ -53,7 +53,7 @@ namespace DMMDigital.Views
 
         public event EventHandler eventShowTemplateHandlerView;
 
-        public DialogGenerateTemplate()
+        public TemplateCreationDialog()
         {
             InitializeComponent();
             associateEvents();

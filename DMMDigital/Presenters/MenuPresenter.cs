@@ -32,7 +32,7 @@ namespace DMMDigital.Presenters
 
             menuView.showNewExamView += delegate 
             {
-                FormManager.instance.showForm("choosePatientExamView", () => new ChoosePatientExamPresenter(new ChoosePatientExamView(), new PatientRepository())); 
+                FormManager.instance.showForm("choosePatientExamView", () => new ChoosePatientExamPresenter(new PatientExamView(), new PatientRepository())); 
             };
 
             generateDatabaseBackup();

@@ -49,5 +49,10 @@ namespace DMMDigital._Repositories
             ConfigModel config = context.config.First();
             return new float[] { config.brightness, config.contrast, config.reveal, config.smartSharpen };
         }
+
+        public string getLanguage()
+        {
+            return context.config.First().language;
+        }
     }
 }

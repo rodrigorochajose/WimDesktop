@@ -11,14 +11,14 @@ namespace DMMDigital.Presenters
 {
     public class ChooseTemplateExamPresenter
     {
-        private readonly IChooseTemplateExamView chooseTemplateExamView;
+        private readonly ITemplateExamView chooseTemplateExamView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
 
         private string examOpeningMode = "newPage";
 
-        public ChooseTemplateExamPresenter(IChooseTemplateExamView view, ITemplateRepository repository, string calledFromView)
+        public ChooseTemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, string calledFromView)
         {
             chooseTemplateExamView = view;
             templateRepository = repository;
@@ -80,7 +80,7 @@ namespace DMMDigital.Presenters
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
-            new DialogGenerateTemplatePresenter(new DialogGenerateTemplate());
+            new DialogGenerateTemplatePresenter(new TemplateCreationDialog());
             chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
             chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }

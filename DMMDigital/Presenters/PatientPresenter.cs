@@ -78,7 +78,7 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
+            IPatientManagerView patientHandlerView = new PatientManagerView("add");
             patientHandlerView.eventAddNewPatient += addNewPatient;
             (patientHandlerView as Form).ShowDialog();
             loadAllPatients();
@@ -86,7 +86,7 @@ namespace DMMDigital.Presenters
 
         private void showEditPatientForm(object sender, EventArgs e)
         {
-            IPatientHandlerView patientHandlerView = new PatientHandlerView("edit");
+            IPatientManagerView patientHandlerView = new PatientManagerView("edit");
             patientHandlerView.eventSaveEditedPatient += saveEditedPatient;
 
             selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
@@ -128,16 +128,16 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                selectedPatient.id = (sender as PatientHandlerView).patientId;
-                selectedPatient.name = (sender as PatientHandlerView).patientName;
-                selectedPatient.birthDate = (sender as PatientHandlerView).patientBirthDate;
-                selectedPatient.phone = (sender as PatientHandlerView).patientPhone;
-                selectedPatient.recommendation = (sender as PatientHandlerView).patientRecommendation;
-                selectedPatient.observation = (sender as PatientHandlerView).patientObservation;
+                selectedPatient.id = (sender as PatientManagerView).patientId;
+                selectedPatient.name = (sender as PatientManagerView).patientName;
+                selectedPatient.birthDate = (sender as PatientManagerView).patientBirthDate;
+                selectedPatient.phone = (sender as PatientManagerView).patientPhone;
+                selectedPatient.recommendation = (sender as PatientManagerView).patientRecommendation;
+                selectedPatient.observation = (sender as PatientManagerView).patientObservation;
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
                 patientRepository.editPatient();
-                (sender as PatientHandlerView).Close();
+                (sender as PatientManagerView).Close();
             }
             catch (Exception ex)
             {
@@ -151,16 +151,16 @@ namespace DMMDigital.Presenters
             {
                 selectedPatient = new PatientModel
                 {
-                    name = (sender as PatientHandlerView).patientName,
-                    birthDate = (sender as PatientHandlerView).patientBirthDate,
-                    phone = (sender as PatientHandlerView).patientPhone,
-                    recommendation = (sender as PatientHandlerView).patientRecommendation,
-                    observation = (sender as PatientHandlerView).patientObservation,
+                    name = (sender as PatientManagerView).patientName,
+                    birthDate = (sender as PatientManagerView).patientBirthDate,
+                    phone = (sender as PatientManagerView).patientPhone,
+                    recommendation = (sender as PatientManagerView).patientRecommendation,
+                    observation = (sender as PatientManagerView).patientObservation,
                 };
 
                 new Common.ModelDataValidation().Validate(selectedPatient);
                 patientRepository.addPatient(selectedPatient);
-                (sender as PatientHandlerView).Close();
+                (sender as PatientManagerView).Close();
             } 
             catch (Exception ex)
             {
@@ -181,7 +181,7 @@ namespace DMMDigital.Presenters
 
         private void newExam(object sender, EventArgs e)
         {
-            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            ITemplateExamView chooseTemplateView = new TemplateExamView();
 
             PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             chooseTemplateView.patientId = selectedPatient.id;

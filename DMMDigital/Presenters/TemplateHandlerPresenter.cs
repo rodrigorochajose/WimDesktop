@@ -10,11 +10,11 @@ namespace DMMDigital.Presenters
 {
     public class TemplateHandlerPresenter
     {
-        private readonly ITemplateHandlerView templateHandlerView;
+        private readonly ITemplateCreationView templateHandlerView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public TemplateHandlerPresenter(ITemplateHandlerView view, ITemplateRepository repository) 
+        public TemplateHandlerPresenter(ITemplateCreationView view, ITemplateRepository repository) 
         { 
             templateHandlerView = view;
             templateRepository = repository;

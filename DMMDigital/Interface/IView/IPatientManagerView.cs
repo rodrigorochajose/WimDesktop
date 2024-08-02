@@ -2,7 +2,7 @@
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IPatientHandlerView
+    public interface IPatientManagerView
     {
         int patientId { get; set; }
         string patientName { get; set; }

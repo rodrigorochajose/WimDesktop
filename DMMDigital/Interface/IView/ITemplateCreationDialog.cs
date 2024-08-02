@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IDialogGenerateTemplate
+    public interface ITemplateCreationDialog
     {
         string templateName { get; set; }
         bool generateByTemplate { get; set; }

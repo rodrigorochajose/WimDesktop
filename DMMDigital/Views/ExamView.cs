@@ -991,7 +991,7 @@ namespace DMMDigital.Views
 
         private void buttonNewExamClick(object sender, EventArgs e)
         {
-            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            ITemplateExamView chooseTemplateView = new TemplateExamView();
             eventGetPatient?.Invoke(this, e);
 
             chooseTemplateView.patientId = patient.id;
@@ -1117,7 +1117,7 @@ namespace DMMDigital.Views
 
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
-            IChooseFramesToCompare compareFrames = new ChooseFramesToCompare(frames);
+            IFramesComparisonDialog compareFrames = new FramesComparisonDialog(frames);
             (compareFrames as Form).ShowDialog();
         }
 

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class ChooseTemplateExamView : Form, IChooseTemplateExamView
+    public partial class TemplateExamView : Form, ITemplateExamView
     {
         List<TemplateFrameModel> templateFrameList;
 
@@ -69,7 +69,7 @@ namespace DMMDigital.Views
         public event EventHandler eventAddNewTemplate;
         public event EventHandler eventInitializeExam;
 
-        public ChooseTemplateExamView()
+        public TemplateExamView()
         {
             InitializeComponent();
 

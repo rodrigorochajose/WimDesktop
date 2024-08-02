@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IChoosePatientExamView
+    public interface IPatientExamView
     {
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }

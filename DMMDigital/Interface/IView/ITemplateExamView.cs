@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IChooseTemplateExamView
+    public interface ITemplateExamView
     {
         int patientId { get; set; }
         string patientName { get; set; }

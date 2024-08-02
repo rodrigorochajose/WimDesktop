@@ -12,13 +12,13 @@ namespace DMMDigital.Presenters
 {
     public class ChoosePatientExamPresenter
     {
-        public ChoosePatientExamView view { get; }
+        public PatientExamView view { get; }
 
         private readonly IPatientRepository patientRepository;
         private readonly BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
-        public ChoosePatientExamPresenter(ChoosePatientExamView choosePatientExamView, IPatientRepository repository)
+        public ChoosePatientExamPresenter(PatientExamView choosePatientExamView, IPatientRepository repository)
         {
             pacientesBindingSource = new BindingSource();
             view = choosePatientExamView;
@@ -47,7 +47,7 @@ namespace DMMDigital.Presenters
 
         private void newPatient(object sender, EventArgs e)
         {
-            IPatientHandlerView patientHandlerView = new PatientHandlerView("add");
+            IPatientManagerView patientHandlerView = new PatientManagerView("add");
             patientHandlerView.eventAddNewPatient += addNewPatient;
             (patientHandlerView as Form).ShowDialog();
 
@@ -60,17 +60,17 @@ namespace DMMDigital.Presenters
             {
                 PatientModel newPatient = new PatientModel
                 {
-                    id = (sender as PatientHandlerView).patientId,
-                    name = (sender as PatientHandlerView).patientName,
-                    birthDate = (sender as PatientHandlerView).patientBirthDate,
-                    phone = (sender as PatientHandlerView).patientPhone,
-                    recommendation = (sender as PatientHandlerView).patientRecommendation,
-                    observation = (sender as PatientHandlerView).patientObservation,
+                    id = (sender as PatientManagerView).patientId,
+                    name = (sender as PatientManagerView).patientName,
+                    birthDate = (sender as PatientManagerView).patientBirthDate,
+                    phone = (sender as PatientManagerView).patientPhone,
+                    recommendation = (sender as PatientManagerView).patientRecommendation,
+                    observation = (sender as PatientManagerView).patientObservation,
                 };
 
                 new Common.ModelDataValidation().Validate(newPatient);
                 patientRepository.addPatient(newPatient);
-                (sender as PatientHandlerView).Close();
+                (sender as PatientManagerView).Close();
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace DMMDigital.Presenters
 
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
-            IChooseTemplateExamView chooseTemplateView = new ChooseTemplateExamView();
+            ITemplateExamView chooseTemplateView = new TemplateExamView();
             
             PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             chooseTemplateView.patientId = selectedPatient.id;

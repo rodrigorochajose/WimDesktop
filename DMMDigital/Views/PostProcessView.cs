@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class PostProcessConfig : Form, IPostProcessConfig
+    public partial class PostProcessView : Form, IPostProcessView
     {
         public float brightness 
         {
@@ -32,7 +32,7 @@ namespace DMMDigital.Views
             set { numericUpDownSmartSharpen.InnerNumericUpDown.Value = (decimal)value; }
         }
 
-        public PostProcessConfig(float brightness, float contrast, float reveal, float smartSharpen)
+        public PostProcessView(float brightness, float contrast, float reveal, float smartSharpen)
         {
             InitializeComponent();
 

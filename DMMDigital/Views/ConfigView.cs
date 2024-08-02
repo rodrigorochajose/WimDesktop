@@ -13,6 +13,12 @@ namespace DMMDigital.Views
 {
     public partial class ConfigView : Form, IConfigView
     {
+        public string language
+        {
+            get { return comboBoxLanguage.InnerComboBox.SelectedItem.ToString(); }
+            set { comboBoxLanguage.InnerComboBox.SelectedItem = value; }
+        }
+
         public string sensorPath
         {
             get { return textBoxSensorPath.Text; }
@@ -85,10 +91,14 @@ namespace DMMDigital.Views
             twain = new Twain(new WinFormsWindowMessageHook(this));
 
             textBoxTwainSource.Text = twain.DefaultSourceName;
+        }
 
-            comboBoxLanguage.InnerComboBox.Items.Add("pt-BR");
-            comboBoxLanguage.InnerComboBox.Items.Add("en-US");
-            comboBoxLanguage.InnerComboBox.SelectedIndex = 0;
+        private void associateEvents()
+        {
+            Load += delegate 
+            {
+                loadConfigs?.Invoke(this, EventArgs.Empty);
+            };
 
             comboBoxLanguage.InnerComboBox.SelectionChangeCommitted += delegate
             {
@@ -96,14 +106,6 @@ namespace DMMDigital.Views
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
-            };
-        }
-
-        private void associateEvents()
-        {
-            Load += delegate 
-            { 
-                loadConfigs?.Invoke(this, EventArgs.Empty);
             };
 
             textBoxTwainSource.InnerTextBox.Click += delegate { selectTwainSource(); };
@@ -135,6 +137,11 @@ namespace DMMDigital.Views
             comboBoxAcquireMode.InnerComboBox.DataSource = new List<string> { "TWAIN", "Nativo" };
         }
 
+        public void setLanguages()
+        {
+            comboBoxLanguage.InnerComboBox.DataSource = new List<string> { "pt-BR", "en-US" };
+        }
+
         private void buttonDrawingColorPickerClick(object sender, EventArgs e)
         {
             if (colorDialog.ShowDialog() == DialogResult.OK)
@@ -164,7 +171,7 @@ namespace DMMDigital.Views
 
         private void buttonConfigureFiltersClick(object sender, EventArgs e)
         {
-            PostProcessConfig postProcessConfig = new PostProcessConfig(brightness, contrast, reveal, smartSharpen);
+            PostProcessView postProcessConfig = new PostProcessView(brightness, contrast, reveal, smartSharpen);
 
             if (postProcessConfig.ShowDialog() == DialogResult.OK)
             {
