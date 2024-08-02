@@ -40,7 +40,7 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
-            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -49,67 +49,42 @@
             this.buttonTemplate,
             this.buttonConfig});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(15, 10, 15, 10);
-            this.menuStrip1.Size = new System.Drawing.Size(919, 56);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // buttonNewExam
             // 
-            this.buttonNewExam.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.buttonNewExam, "buttonNewExam");
             this.buttonNewExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_xray_new;
-            this.buttonNewExam.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNewExam.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonNewExam.Name = "buttonNewExam";
-            this.buttonNewExam.Size = new System.Drawing.Size(151, 36);
-            this.buttonNewExam.Text = "Novo Exame";
             // 
             // buttonPatient
             // 
-            this.buttonPatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonPatient.Image = ((System.Drawing.Image)(resources.GetObject("buttonPatient.Image")));
-            this.buttonPatient.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.buttonPatient, "buttonPatient");
             this.buttonPatient.Name = "buttonPatient";
-            this.buttonPatient.Size = new System.Drawing.Size(127, 36);
-            this.buttonPatient.Text = "Pacientes";
             // 
             // buttonTemplate
             // 
-            this.buttonTemplate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.buttonTemplate, "buttonTemplate");
             this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_template;
-            this.buttonTemplate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonTemplate.Name = "buttonTemplate";
-            this.buttonTemplate.Size = new System.Drawing.Size(125, 36);
-            this.buttonTemplate.Text = "Template";
             // 
             // buttonConfig
             // 
-            this.buttonConfig.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.buttonConfig.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfig.Image")));
-            this.buttonConfig.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            resources.ApplyResources(this.buttonConfig, "buttonConfig");
             this.buttonConfig.Name = "buttonConfig";
-            this.buttonConfig.Size = new System.Drawing.Size(164, 36);
-            this.buttonConfig.Text = "Configurações";
             // 
             // MenuView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BackgroundImage = global::DMMDigital.Properties.Resources.banner_principal_f3639437;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(919, 631);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WIM Desktop";
             this.TransparencyKey = System.Drawing.Color.Transparent;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.menuViewLoad);

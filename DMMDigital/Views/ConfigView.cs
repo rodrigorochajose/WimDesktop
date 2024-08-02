@@ -1,12 +1,13 @@
 ﻿using DMMDigital.Interface.IView;
 using System;
-using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Windows.Forms;
 using TwainDotNet.WinFroms;
 using TwainDotNet;
 using DMMDigital.Models;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 
 namespace DMMDigital.Views
 {
@@ -84,6 +85,18 @@ namespace DMMDigital.Views
             twain = new Twain(new WinFormsWindowMessageHook(this));
 
             textBoxTwainSource.Text = twain.DefaultSourceName;
+
+            comboBoxLanguage.InnerComboBox.Items.Add("pt-BR");
+            comboBoxLanguage.InnerComboBox.Items.Add("en-US");
+            comboBoxLanguage.InnerComboBox.SelectedIndex = 0;
+
+            comboBoxLanguage.InnerComboBox.SelectionChangeCommitted += delegate
+            {
+                string culture = comboBoxLanguage.InnerComboBox.SelectedItem.ToString();
+
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+            };
         }
 
         private void associateEvents()
