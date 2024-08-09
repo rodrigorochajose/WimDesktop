@@ -34,15 +34,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxPhone = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
             this.textBoxBirthDate = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
             this.textBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // label7
@@ -70,15 +71,41 @@
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
             // 
-            // label2
+            // labelTitle
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.Name = "labelTitle";
             // 
-            // label1
+            // pictureBoxIcon
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_patients;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
+            // 
+            // buttonSave
+            // 
+            resources.ApplyResources(this.buttonSave, "buttonSave");
+            this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSave.BorderWidth = 5F;
+            this.buttonSave.CornerRadius = 5;
+            this.buttonSave.FlatAppearance.BorderSize = 0;
+            this.buttonSave.ForeColor = System.Drawing.Color.White;
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.UseVisualStyleBackColor = false;
+            // 
+            // buttonCancel
+            // 
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // textBoxObservation
             // 
@@ -130,35 +157,12 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.PlaceholderText = null;
             // 
-            // buttonCancel
-            // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
-            this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            // 
-            // buttonSave
-            // 
-            resources.ApplyResources(this.buttonSave, "buttonSave");
-            this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSave.BorderWidth = 5F;
-            this.buttonSave.CornerRadius = 5;
-            this.buttonSave.FlatAppearance.BorderSize = 0;
-            this.buttonSave.ForeColor = System.Drawing.Color.White;
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.UseVisualStyleBackColor = false;
-            // 
-            // PatientHandlerView
+            // PatientManagerView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxObservation);
@@ -171,12 +175,12 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PatientHandlerView";
+            this.Name = "PatientManagerView";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,8 +192,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTitle;
         private Components.Rounded.RoundedTextBox textBoxName;
         private Components.Rounded.RoundedMaskedTextBox textBoxBirthDate;
         private Components.Rounded.RoundedMaskedTextBox textBoxPhone;
@@ -197,5 +200,6 @@
         private Components.Rounded.RoundedTextBox textBoxObservation;
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedButton buttonSave;
+        private System.Windows.Forms.PictureBox pictureBoxIcon;
     }
 }

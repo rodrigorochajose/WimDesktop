@@ -8,6 +8,12 @@ using DMMDigital.Models;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Resources;
+using DMMDigital.Components.Rounded;
+using System.Text.RegularExpressions;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -82,15 +88,22 @@ namespace DMMDigital.Views
         public event EventHandler saveConfigs;
 
         private Twain twain;
+        private bool languageChanged = false;
 
         public ConfigView()
         {
             InitializeComponent();
+            adjustComponent();
             associateEvents();
 
             twain = new Twain(new WinFormsWindowMessageHook(this));
-
             textBoxTwainSource.Text = twain.DefaultSourceName;
+        }
+
+        private void adjustComponent()
+        {
+            pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
+            labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
         }
 
         private void associateEvents()
@@ -106,6 +119,8 @@ namespace DMMDigital.Views
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+
+                languageChanged = !languageChanged;
             };
 
             textBoxTwainSource.InnerTextBox.Click += delegate { selectTwainSource(); };
@@ -120,9 +135,48 @@ namespace DMMDigital.Views
 
             buttonExamPath.Click += delegate { selectExamPath(); };
 
-            buttonSave.Click += delegate { saveConfigs?.Invoke(this, EventArgs.Empty); };
+            buttonSave.Click += delegate
+            {
+                if (languageChanged)
+                {
+                    foreach (Form form in Application.OpenForms)
+                    {
+                        applyLocalization(form);
+                    }
+                }
+
+                saveConfigs?.Invoke(this, EventArgs.Empty);
+            };
 
             buttonCancel.Click += delegate { Close(); };
+        }
+
+        public void applyLocalization(Form form)
+        {
+            ComponentResourceManager resources = new ComponentResourceManager(form.GetType());
+            resources.ApplyResources(form, "$this");
+
+            foreach (Control control in form.Controls)
+            {
+                resources.ApplyResources(control, control.Name);
+
+                if (control is ToolStrip toolStrip)
+                {
+                    foreach (ToolStripItem item in toolStrip.Items)
+                    {
+                        Console.WriteLine(item.GetCurrentParent());
+                        resources.ApplyResources(item, item.Name);
+                    }
+                }
+
+                if (control is RoundedPanel p)
+                {
+                    foreach (Control c in p.Controls)
+                    {
+                        resources.ApplyResources(c, c.Name);
+                    }
+                }
+            }
         }
 
         public void setComboBoxSensorModel(List<SensorModel> sensorList)
@@ -134,7 +188,7 @@ namespace DMMDigital.Views
 
         public void setAcquireMode()
         {
-            comboBoxAcquireMode.InnerComboBox.DataSource = new List<string> { "TWAIN", "Nativo" };
+            comboBoxAcquireMode.InnerComboBox.DataSource = new List<string> { "TWAIN", Resources.nativeAquireMode };
         }
 
         public void setLanguages()

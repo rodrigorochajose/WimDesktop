@@ -11,11 +11,13 @@ namespace DMMDigital.Views
         public int patientId { get; set; }
         public List<int> openExamsId { get; set; }
         public ExamView selectedExamView { get; set; }
+        public bool twainInitialized { get; set; }
 
         public event EventHandler eventConnectSensor;
         public event EventHandler eventDestroySensor;
         public event EventHandler eventGetSensorInfo;
         public event EventHandler eventOpenTwain;
+        public event EventHandler eventInitializeTwain;
 
         public ExamContainerView(IExamView examView)
         {
@@ -81,6 +83,11 @@ namespace DMMDigital.Views
                 {
                     eventDestroySensor?.Invoke(this, e);
                     examView.acquireMode = "TWAIN";
+
+                    if (!twainInitialized)
+                    {
+                        eventInitializeTwain?.Invoke(this, e);
+                    }
                 }
             };
 
@@ -136,6 +143,5 @@ namespace DMMDigital.Views
                 }
             }
         }
-
     }
 }

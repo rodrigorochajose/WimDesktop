@@ -34,9 +34,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.panelHeader = new System.Windows.Forms.Panel();
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
@@ -47,30 +47,30 @@
             this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
+            this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelTitle
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.Name = "labelTitle";
             // 
-            // pictureBox1
+            // pictureBoxIcon
             // 
-            this.pictureBox1.Image = global::DMMDigital.Properties.Resources.icon_32x32_patients;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_patients;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
             // 
-            // panel1
+            // panelHeader
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.pictureBox1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.panelHeader.BackColor = System.Drawing.Color.White;
+            this.panelHeader.Controls.Add(this.labelTitle);
+            this.panelHeader.Controls.Add(this.pictureBoxIcon);
+            resources.ApplyResources(this.panelHeader, "panelHeader");
+            this.panelHeader.Name = "panelHeader";
             // 
             // buttonNewPatient
             // 
@@ -220,7 +220,7 @@
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
             this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
             // 
-            // ChoosePatientExamView
+            // PatientExamView
             // 
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
@@ -229,15 +229,15 @@
             this.Controls.Add(this.buttonSelectPatient);
             this.Controls.Add(this.buttonNewPatient);
             this.Controls.Add(this.buttonSearchPatient);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.dataGridViewPatient);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ChoosePatientExamView";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Name = "PatientExamView";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).EndInit();
             this.ResumeLayout(false);
 
@@ -245,9 +245,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.PictureBox pictureBoxIcon;
+        private System.Windows.Forms.Panel panelHeader;
         private Components.Rounded.RoundedButton buttonNewPatient;
         private Components.Rounded.RoundedButton buttonSearchPatient;
         private Components.Rounded.RoundedDataGridView dataGridViewPatient;

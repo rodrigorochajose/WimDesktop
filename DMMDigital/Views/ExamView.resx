@@ -976,7 +976,7 @@
     <value>50, 40</value>
   </data>
   <data name="buttonRestoreExam.Text" xml:space="preserve">
-    <value>buttonRestoreExam</value>
+    <value>buttonRestoreImage</value>
   </data>
   <data name="buttonRestoreExam.ToolTipText" xml:space="preserve">
     <value>Restaurar Exame</value>

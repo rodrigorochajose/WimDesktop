@@ -118,19 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Edit Patient</value>
+    <value>Create Patient</value>
   </data>
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Edit Patient</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Fill in patient data</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Name</value>
@@ -146,5 +140,11 @@
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Observation</value>
+  </data>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Create Patient</value>
+  </data>
+  <data name="titleEdit" xml:space="preserve">
+    <value>Edit Patient</value>
   </data>
 </root>

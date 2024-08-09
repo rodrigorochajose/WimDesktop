@@ -6,6 +6,7 @@ using DMMDigital.Components;
 using DMMDigital.Models;
 using DMMDigital.Interface.IView;
 using System.Linq;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -28,7 +29,23 @@ namespace DMMDigital.Views
         List<Point> verticalBottomPoints = new List<Point>();
         List<Point> midPoints = new List<Point>();
 
-        public TemplateCreationView(string templateName, decimal rows, decimal columns, string orientation)
+        private enum EnumOrientation
+        {
+            verticalTop,
+            verticalBottom,
+            horizontalLeft,
+            horizontalRight
+        };
+
+        private readonly Dictionary<EnumOrientation, string> dictOrientation = new Dictionary<EnumOrientation, string>
+        {
+            { EnumOrientation.verticalTop, Resources.textVerticalTop },
+            { EnumOrientation.verticalBottom, Resources.textVerticalBottom },
+            { EnumOrientation.horizontalLeft, Resources.textHorizontalLeft },
+            { EnumOrientation.horizontalRight, Resources.textHorizontalRight }
+        };
+
+        public TemplateCreationView(string templateName, decimal rows, decimal columns, int orientation)
         {
             InitializeComponent();
 
@@ -36,7 +53,7 @@ namespace DMMDigital.Views
             int height;
             int width;
 
-            if (orientation.Contains("Vertical"))
+            if (orientation < 2)
             {
                 height = 70;
                 width = 50;
@@ -68,7 +85,7 @@ namespace DMMDigital.Views
                 int height;
                 int width;
 
-                if (templateFrame.orientation.Contains("Vertical"))
+                if (templateFrame.orientation < 2)
                 {
                     height = 70;
                     width = 50;
@@ -93,14 +110,14 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonNewFrame.Click += delegate { createNewFrame("Vertical Cima", 50, 70, 0, 0); };
+            buttonNewFrame.Click += delegate { createNewFrame(0, 50, 70, 0, 0); };
             buttonDeleteFrame.Click += delegate { deleteFrame(); };
             buttonSaveTemplate.Click += delegate { eventSaveTemplate?.Invoke(this, EventArgs.Empty); };
             buttonRotateLeft.Click += delegate { rotateFrameLeft(); };
             buttonRotateRight.Click += delegate { rotateFrameRight(); };
         }
 
-        private void createNewFrame(string orientation, int width, int height, int locationX, int locationY)
+        private void createNewFrame(int orientation, int width, int height, int locationX, int locationY)
         {
             framesCounter++;
             FrameTemplate newFrame = new FrameTemplate
@@ -110,7 +127,7 @@ namespace DMMDigital.Views
                 Width = width,
                 Height = height,
                 BackColor = Color.Black,
-                Name = "filme" + framesCounter,
+                Name = "frame" + framesCounter,
                 Location = new Point(locationX, locationY),
                 Tag = Color.Black,
                 topPoint = new Point(locationX, locationY),
@@ -139,7 +156,7 @@ namespace DMMDigital.Views
 
             selectedFrame = (FrameTemplate)sender;
             textBoxSelectedFrame.Text = selectedFrame.Name;
-            textBoxOrientation.Text = selectedFrame.orientation;
+            textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
             selectedFrame.Tag = Color.LimeGreen;
             selectedFrame.Invalidate();
 
@@ -226,25 +243,25 @@ namespace DMMDigital.Views
             {
                 switch (selectedFrame.orientation)
                 {
-                    case "Vertical Cima":
-                        selectedFrame.orientation = "Horizontal Esquerda";
+                    case 0:
+                        selectedFrame.orientation = 2;
                         break;
 
-                    case "Horizontal Esquerda":
-                        selectedFrame.orientation = "Vertical Baixo";
+                    case 1:
+                        selectedFrame.orientation = 3;
                         break;
 
-                    case "Vertical Baixo":
-                        selectedFrame.orientation = "Horizontal Direita";
+                    case 2:
+                        selectedFrame.orientation = 1;
                         break;
 
-                    case "Horizontal Direita":
-                        selectedFrame.orientation = "Vertical Cima";
+                    case 3:
+                        selectedFrame.orientation = 0;
                         break;
                 }
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-                textBoxOrientation.Text = selectedFrame.orientation;
+                textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
                 selectedFrame.Refresh();
             }
         }
@@ -255,25 +272,25 @@ namespace DMMDigital.Views
             {
                 switch (selectedFrame.orientation)
                 {
-                    case "Vertical Cima":
-                        selectedFrame.orientation = "Horizontal Direita";
+                    case 0:
+                        selectedFrame.orientation = 3;
                         break;
 
-                    case "Horizontal Esquerda":
-                        selectedFrame.orientation = "Vertical Cima";
+                    case 1:
+                        selectedFrame.orientation = 2;
                         break;
 
-                    case "Vertical Baixo":
-                        selectedFrame.orientation = "Horizontal Esquerda";
+                    case 2:
+                        selectedFrame.orientation = 0;
                         break;
 
-                    case "Horizontal Direita":
-                        selectedFrame.orientation = "Vertical Baixo";
+                    case 3:
+                        selectedFrame.orientation = 1;
                         break;
                 }
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-                textBoxOrientation.Text = selectedFrame.orientation;
+                textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
                 selectedFrame.Refresh();
             }
         }

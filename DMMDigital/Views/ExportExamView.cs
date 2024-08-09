@@ -10,6 +10,7 @@ using DMMDigital.Components;
 using DMMDigital.Models;
 using FellowOakDicom.Imaging;
 using FellowOakDicom;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -24,15 +25,18 @@ namespace DMMDigital.Views
         public ExportExamView()
         {
             InitializeComponent();
+            adjustComponent();
 
-            comboBoxFormat.InnerComboBox.Items.Add("JPEG");
-            comboBoxFormat.InnerComboBox.Items.Add("PNG");
-            comboBoxFormat.InnerComboBox.Items.Add("TIFF");
-            comboBoxFormat.InnerComboBox.Items.Add("DICOM");
-            comboBoxFormat.InnerComboBox.Items.Add("RAW");
+            comboBoxFormat.InnerComboBox.DataSource = new List<string> { "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
             comboBoxFormat.InnerComboBox.SelectedIndex = 0;
 
             buttonCancel.Click += delegate { Close(); };
+        }
+
+        private void adjustComponent()
+        {
+            pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
+            labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
         }
 
         private void exportExamViewLoad(object sender, EventArgs e)
@@ -61,7 +65,7 @@ namespace DMMDigital.Views
                     Size = new Size(60, 85)
                 };
 
-                if (frame.orientation.Contains("Horizontal"))
+                if (frame.orientation > 1)
                 {
                     pictureBox.Location = new Point(17, 10);
                     pictureBox.Size = new Size(85, 60);
@@ -75,7 +79,7 @@ namespace DMMDigital.Views
                     Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     Location = new Point(120, 33),
                     Size = new Size(120, 17),
-                    Text = $"Template - Filme {frame.order}"
+                    Text = $"Template - Frame {frame.order}"
                 };
 
                 CheckBox checkBox = new CheckBox { 
@@ -146,7 +150,7 @@ namespace DMMDigital.Views
         {
             if (!checkBoxExportOriginalImage.Checked && !checkBoxExportEditedImage.Checked)
             {
-                MessageBox.Show("Selecione como deseja exportar a imagem!");
+                MessageBox.Show(Resources.messageExamExportMode);
             }
             else
             {
@@ -230,7 +234,7 @@ namespace DMMDigital.Views
                     }
                 }
 
-                MessageBox.Show("Exportado com sucesso!");
+                MessageBox.Show(Resources.messageExamExportSucess);
                 Close();
             }
         }

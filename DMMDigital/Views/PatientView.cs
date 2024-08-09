@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using DMMDigital.Properties;
 using System;
 using System.Windows.Forms;
 
@@ -83,11 +84,11 @@ namespace DMMDigital.Views
                 {
                     if(selectedExamId == 0)
                     {
-                        MessageBox.Show("Nenhum Exame foi selecionado!");
+                        MessageBox.Show(Resources.messageExamNotSelected);
                         return;
                     }
 
-                    DialogResult confirmacao = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir Exame", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult confirmacao = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (DialogResult.Yes.Equals(confirmacao))
                     {
                         int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
@@ -113,7 +114,7 @@ namespace DMMDigital.Views
             buttonNewExam.Click += delegate {
                 if (selectedPatientId == 0)
                 {
-                    MessageBox.Show("Nenhum Paciente foi selecionado!");
+                    MessageBox.Show(Resources.messagePatientNotSelected);
                     return;
                 }
                 eventShowFormNewExam?.Invoke(this, EventArgs.Empty); 
@@ -122,7 +123,7 @@ namespace DMMDigital.Views
             buttonOpenExam.Click += delegate {
                 if (selectedExamId == 0)
                 {
-                    MessageBox.Show("Nenhum Exame foi selecionado!");
+                    MessageBox.Show(Resources.messageExamNotSelected);
                     return;
                 } 
                 eventOpenExam?.Invoke(this, EventArgs.Empty); 
@@ -131,7 +132,7 @@ namespace DMMDigital.Views
             buttonExportExam.Click += delegate {
                 if (selectedExamId == 0)
                 {
-                    MessageBox.Show("Nenhum Exame foi selecionado!");
+                    MessageBox.Show(Resources.messageExamNotSelected);
                     return;
                 }
                 eventExportExam?.Invoke(this, EventArgs.Empty);

@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace DMMDigital._Repositories
             {
                 if (context.exam.Any(e => e.templateId == templateId))
                 {
-                    MessageBox.Show("Template não pode ser excluido pois existem exames que o utilizam.");
+                    MessageBox.Show(Resources.messageTemplateCannotDelete);
                     return;
                 }
 
@@ -38,7 +39,7 @@ namespace DMMDigital._Repositories
                 context.template.Remove(context.template.Single(p => p.id == templateId));
                 context.SaveChanges();
 
-                MessageBox.Show("Template Removido com sucesso !");
+                MessageBox.Show(Resources.messageTemplateDeleteSucess);
             }
             catch (Exception ex)
             {

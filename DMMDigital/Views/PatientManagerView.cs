@@ -1,6 +1,8 @@
 ﻿using DMMDigital.Interface.IView;
 using System;
 using System.Drawing;
+using System.Globalization;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -47,22 +49,36 @@ namespace DMMDigital.Views
         public PatientManagerView(string action)
         {
             InitializeComponent();
+            this.action = action;
+
+            adjustComponent();
+            associateEvents();
+        }
+
+        private void adjustComponent()
+        {
+            if (action == "edit")
+            {
+                var resourceManager = new ResourceManager($"{CompanyName}.{Name}", typeof(PatientManagerView).Assembly);
+
+                using (ResourceSet resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true))
+                {
+                    string str = resourceSet.GetObject("titleEdit").ToString();
+
+                    Text = str;
+                    labelTitle.Text = str;
+                    labelTitle.Location = new Point(labelTitle.Location.X - 25, labelTitle.Location.Y);
+                }
+            }
 
             textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
             textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
             textBoxPhone.InnerMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             textBoxBirthDate.InnerMaskedTextBox.ValidatingType = typeof(DateTime);
 
-            associateEvents();
 
-            this.action = action;
-
-            if (action == "add")
-            {
-                Text = "Cadastrar Paciente";
-                label1.Text = "Cadastrar Paciente";
-                label1.Location = new Point(label1.Location.X - 25, label1.Location.Y);
-            }
+            pictureBoxIcon.Left = (Width - (pictureBoxIcon.Width + labelTitle.Width + 10)) / 2;
+            labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width;
         }
 
         private void associateEvents()

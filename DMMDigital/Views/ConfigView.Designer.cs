@@ -48,25 +48,25 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonRulerColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonTextColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonDrawingColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
             this.numericUpDownTextSize = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.numericUpDownDrawingSize = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.buttonRulerColorPicker = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonTextColorPicker = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.buttonDrawingColorPicker = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelRulerColor = new System.Windows.Forms.Label();
+            this.labelTextSize = new System.Windows.Forms.Label();
+            this.labelShapeSize = new System.Windows.Forms.Label();
+            this.labelTextColor = new System.Windows.Forms.Label();
+            this.labelShapeColor = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.buttonExamPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
@@ -74,11 +74,10 @@
             this.textBoxSensorPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.labelCaminho = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -90,8 +89,8 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -100,7 +99,7 @@
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panelHeader, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // panel1
@@ -157,7 +156,6 @@
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
-            this.tabPage1.Controls.Add(this.label11);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             // 
@@ -253,29 +251,60 @@
             resources.ApplyResources(this.label12, "label12");
             this.label12.Name = "label12";
             // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.buttonRulerColorPicker);
+            this.tabPage2.Controls.Add(this.buttonTextColorPicker);
+            this.tabPage2.Controls.Add(this.buttonDrawingColorPicker);
             this.tabPage2.Controls.Add(this.numericUpDownTextSize);
             this.tabPage2.Controls.Add(this.numericUpDownDrawingSize);
             this.tabPage2.Controls.Add(this.panel5);
             this.tabPage2.Controls.Add(this.panel3);
-            this.tabPage2.Controls.Add(this.buttonRulerColorPicker);
             this.tabPage2.Controls.Add(this.panel4);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.buttonTextColorPicker);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.buttonDrawingColorPicker);
-            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Controls.Add(this.labelRulerColor);
+            this.tabPage2.Controls.Add(this.labelTextSize);
+            this.tabPage2.Controls.Add(this.labelShapeSize);
+            this.tabPage2.Controls.Add(this.labelTextColor);
+            this.tabPage2.Controls.Add(this.labelShapeColor);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
+            // 
+            // buttonRulerColorPicker
+            // 
+            this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonRulerColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonRulerColorPicker.BorderWidth = 7F;
+            this.buttonRulerColorPicker.CornerRadius = 5;
+            this.buttonRulerColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.buttonRulerColorPicker, "buttonRulerColorPicker");
+            this.buttonRulerColorPicker.Name = "buttonRulerColorPicker";
+            this.buttonRulerColorPicker.UseVisualStyleBackColor = false;
+            this.buttonRulerColorPicker.Click += new System.EventHandler(this.buttonRulerColorPickerClick);
+            // 
+            // buttonTextColorPicker
+            // 
+            this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonTextColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonTextColorPicker.BorderWidth = 7F;
+            this.buttonTextColorPicker.CornerRadius = 5;
+            this.buttonTextColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.buttonTextColorPicker, "buttonTextColorPicker");
+            this.buttonTextColorPicker.Name = "buttonTextColorPicker";
+            this.buttonTextColorPicker.UseVisualStyleBackColor = false;
+            this.buttonTextColorPicker.Click += new System.EventHandler(this.buttonTextColorPickerClick);
+            // 
+            // buttonDrawingColorPicker
+            // 
+            this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
+            this.buttonDrawingColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonDrawingColorPicker.BorderWidth = 7F;
+            this.buttonDrawingColorPicker.CornerRadius = 5;
+            this.buttonDrawingColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.buttonDrawingColorPicker, "buttonDrawingColorPicker");
+            this.buttonDrawingColorPicker.Name = "buttonDrawingColorPicker";
+            this.buttonDrawingColorPicker.UseVisualStyleBackColor = false;
+            this.buttonDrawingColorPicker.Click += new System.EventHandler(this.buttonDrawingColorPickerClick);
             // 
             // numericUpDownTextSize
             // 
@@ -339,14 +368,6 @@
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
-            // buttonRulerColorPicker
-            // 
-            this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
-            resources.ApplyResources(this.buttonRulerColorPicker, "buttonRulerColorPicker");
-            this.buttonRulerColorPicker.Name = "buttonRulerColorPicker";
-            this.buttonRulerColorPicker.UseVisualStyleBackColor = false;
-            this.buttonRulerColorPicker.Click += new System.EventHandler(this.buttonRulerColorPickerClick);
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -359,46 +380,30 @@
             resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
             // 
-            // label10
+            // labelRulerColor
             // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
+            resources.ApplyResources(this.labelRulerColor, "labelRulerColor");
+            this.labelRulerColor.Name = "labelRulerColor";
             // 
-            // label6
+            // labelTextSize
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.labelTextSize, "labelTextSize");
+            this.labelTextSize.Name = "labelTextSize";
             // 
-            // buttonTextColorPicker
+            // labelShapeSize
             // 
-            this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
-            resources.ApplyResources(this.buttonTextColorPicker, "buttonTextColorPicker");
-            this.buttonTextColorPicker.Name = "buttonTextColorPicker";
-            this.buttonTextColorPicker.UseVisualStyleBackColor = false;
-            this.buttonTextColorPicker.Click += new System.EventHandler(this.buttonTextColorPickerClick);
+            resources.ApplyResources(this.labelShapeSize, "labelShapeSize");
+            this.labelShapeSize.Name = "labelShapeSize";
             // 
-            // label3
+            // labelTextColor
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.labelTextColor, "labelTextColor");
+            this.labelTextColor.Name = "labelTextColor";
             // 
-            // label7
+            // labelShapeColor
             // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // buttonDrawingColorPicker
-            // 
-            this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
-            resources.ApplyResources(this.buttonDrawingColorPicker, "buttonDrawingColorPicker");
-            this.buttonDrawingColorPicker.Name = "buttonDrawingColorPicker";
-            this.buttonDrawingColorPicker.UseVisualStyleBackColor = false;
-            this.buttonDrawingColorPicker.Click += new System.EventHandler(this.buttonDrawingColorPickerClick);
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelShapeColor, "labelShapeColor");
+            this.labelShapeColor.Name = "labelShapeColor";
             // 
             // tabPage4
             // 
@@ -413,6 +418,16 @@
             this.tabPage4.Controls.Add(this.labelCaminho);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
+            // 
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
+            this.comboBoxLanguage.BorderRadius = 10;
+            this.comboBoxLanguage.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
+            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
             // 
             // label17
             // 
@@ -471,41 +486,30 @@
             resources.ApplyResources(this.labelCaminho, "labelCaminho");
             this.labelCaminho.Name = "labelCaminho";
             // 
-            // panel2
+            // panelHeader
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
+            this.panelHeader.Controls.Add(this.pictureBoxIcon);
+            this.panelHeader.Controls.Add(this.labelTitle);
+            resources.ApplyResources(this.panelHeader, "panelHeader");
+            this.panelHeader.Name = "panelHeader";
             // 
-            // pictureBox1
+            // pictureBoxIcon
             // 
-            this.pictureBox1.Image = global::DMMDigital.Properties.Resources.icon_32x32_settings;
-            resources.ApplyResources(this.pictureBox1, "pictureBox1");
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_settings;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
             // 
-            // label1
+            // labelTitle
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitle.Name = "labelTitle";
             // 
             // colorDialog
             // 
             this.colorDialog.AnyColor = true;
             this.colorDialog.FullOpen = true;
-            // 
-            // comboBoxLanguage
-            // 
-            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
-            this.comboBoxLanguage.BorderRadius = 10;
-            this.comboBoxLanguage.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
-            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxLanguage.Name = "comboBoxLanguage";
             // 
             // ConfigView
             // 
@@ -535,9 +539,9 @@
             this.panel4.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,9 +549,8 @@
         #endregion
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
@@ -558,22 +561,18 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button buttonRulerColorPicker;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button buttonTextColorPicker;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button buttonDrawingColorPicker;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelRulerColor;
+        private System.Windows.Forms.Label labelTextSize;
+        private System.Windows.Forms.Label labelShapeSize;
+        private System.Windows.Forms.Label labelTextColor;
+        private System.Windows.Forms.Label labelShapeColor;
         private System.Windows.Forms.TabPage tabPage4;
         private Components.Rounded.RoundedTextBox textBoxSensorPath;
         private System.Windows.Forms.Label label9;
@@ -593,5 +592,9 @@
         private Components.Rounded.RoundedNumericUpDown numericUpDownDrawingSize;
         private System.Windows.Forms.Label label17;
         private Components.Rounded.RoundedComboBox comboBoxLanguage;
+        private System.Windows.Forms.Panel panelHeader;
+        private Components.Rounded.RoundedButton buttonDrawingColorPicker;
+        private Components.Rounded.RoundedButton buttonTextColorPicker;
+        private Components.Rounded.RoundedButton buttonRulerColorPicker;
     }
 }

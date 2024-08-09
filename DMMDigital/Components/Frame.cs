@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using DMMDigital.Properties;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Components
@@ -6,7 +8,7 @@ namespace DMMDigital.Components
     public class Frame : PictureBox
     {
         public int order { get ; set; }
-        public string orientation { get; set; }
+        public int orientation { get; set; }
         public Image originalImage { get; set; }
         public Image filteredImage { get; set; }
         public Image editedImage { get; set; }
@@ -53,28 +55,27 @@ namespace DMMDigital.Components
                     directionPoint = new Point(frame.Width - 17, frame.Height - 12);
                 }
 
-
                 switch (frame.orientation)
                 {
-                    case "Vertical Cima":
+                    case 0:
                         direction = "\u2191";
                         directionPoint.X += 7;
                         break;
-
-                    case "Horizontal Esquerda":
-                        direction = "\u2190";
-                        break;
-
-                    case "Vertical Baixo":
+                    
+                    case 1:
                         direction = "\u2193";
                         directionPoint.X += 7;
                         break;
 
-                    case "Horizontal Direita":
+                    case 2:
+                        direction = "\u2190";
+                        break;
+
+
+                    case 3:
                         direction = "\u2192";
                         break;
                 }
-
 
                 e.Graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", orderFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
                 e.Graphics.DrawString(direction, new Font("TimesNewRoman", directionFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, directionPoint);

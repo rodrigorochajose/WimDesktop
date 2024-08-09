@@ -31,7 +31,7 @@ namespace DMMDigital.Interface.IView
 
         void selectFrame(Frame frameToSelected = null);
         void loadImageOnMainPictureBox();
-        bool dialogOverrideCurrentImage();
+        bool dialogOverwriteCurrentImage();
         void setLabelPatientTemplate(string patient, string template);
     }
 }

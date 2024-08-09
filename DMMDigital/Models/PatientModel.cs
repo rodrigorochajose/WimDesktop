@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DMMDigital.Properties;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,14 +16,14 @@ namespace DMMDigital.Models
 
         [Column("NAME")]
         [DisplayName("Nome")]
-        [Required(ErrorMessage = "Nome do Paciente é obrigatório!")]
-        [StringLength(65, MinimumLength = 4, ErrorMessage = "Nome do Paciente deve ser entre 4 e 65 letras.")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientRequiredName")]
+        [StringLength(65, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messageRequiredPatientName")]
         public string name{ get; set; }
 
         [Column("BIRTH_DATE")]
         [DisplayName("Data de Nascimento")]
         [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
-        [Required(ErrorMessage = "Data de Nascimento é obrigatória!")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientRequiredBirthDate")]
         public DateTime birthDate { get; set; }
 
         [Column("PHONE")]

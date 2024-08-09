@@ -2,6 +2,7 @@
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using MoreLinq;
 using System;
@@ -64,7 +65,7 @@ namespace DMMDigital.Presenters
                 }
                 else
                 {
-                    MessageBox.Show("Exame já está aberto!");
+                    MessageBox.Show(Resources.messageExamIsOpened);
                 }
             }
         }
@@ -91,7 +92,7 @@ namespace DMMDigital.Presenters
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao carregar exame - {ex.Message}");
+                MessageBox.Show($"{Resources.messageExamErrorOnLoad} - {ex.Message}");
             }
         }
 

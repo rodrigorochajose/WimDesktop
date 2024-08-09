@@ -16,7 +16,7 @@ namespace DMMDigital.Models
         public int templateId { get; set; }
         public virtual TemplateModel template { get; set; }
 
-        [Column("ORDER")]
+        [Column("ORDINATION")]
         public int order { get; set; }
 
         [Column("LOCATION_X")]
@@ -26,6 +26,6 @@ namespace DMMDigital.Models
         public int locationY { get; set; }
 
         [Column("ORIENTATION")]
-        public string orientation { get; set; }
+        public int orientation { get; set; }
     }
 }

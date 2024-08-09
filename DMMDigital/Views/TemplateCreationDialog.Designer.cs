@@ -32,21 +32,21 @@
             this.label4 = new System.Windows.Forms.Label();
             this.checkBoxGenerateMode = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBoxTemplateName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonGenerateTemplate = new DMMDigital.Components.Rounded.RoundedButton();
             this.panelGenerateByTemplate = new System.Windows.Forms.Panel();
-            this.comboBoxTemplate = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.panelGenerateDefault = new System.Windows.Forms.Panel();
-            this.comboBoxOrientation = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.numericUpDownRows = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
-            this.numericUpDownColumns = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panelGenerateTemplate = new System.Windows.Forms.Panel();
+            this.comboBoxTemplate = new DMMDigital.Components.Rounded.RoundedComboBox();
+            this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.comboBoxOrientation = new DMMDigital.Components.Rounded.RoundedComboBox();
+            this.numericUpDownRows = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.numericUpDownColumns = new DMMDigital.Components.Rounded.RoundedNumericUpDown();
+            this.buttonGenerateTemplate = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxTemplateName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panelGenerateByTemplate.SuspendLayout();
@@ -75,35 +75,12 @@
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
-            // textBoxTemplateName
-            // 
-            this.textBoxTemplateName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxTemplateName.BorderColor = System.Drawing.Color.White;
-            this.textBoxTemplateName.BorderRadius = 10;
-            this.textBoxTemplateName.BorderSize = 10;
-            resources.ApplyResources(this.textBoxTemplateName, "textBoxTemplateName");
-            this.textBoxTemplateName.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxTemplateName.Name = "textBoxTemplateName";
-            this.textBoxTemplateName.PlaceholderText = null;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.buttonGenerateTemplate);
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
-            // 
-            // buttonGenerateTemplate
-            // 
-            resources.ApplyResources(this.buttonGenerateTemplate, "buttonGenerateTemplate");
-            this.buttonGenerateTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonGenerateTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonGenerateTemplate.BorderWidth = 5F;
-            this.buttonGenerateTemplate.CornerRadius = 5;
-            this.buttonGenerateTemplate.FlatAppearance.BorderSize = 0;
-            this.buttonGenerateTemplate.ForeColor = System.Drawing.Color.White;
-            this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";
-            this.buttonGenerateTemplate.UseVisualStyleBackColor = false;
             // 
             // panelGenerateByTemplate
             // 
@@ -113,24 +90,6 @@
             this.panelGenerateByTemplate.Controls.Add(this.label5);
             resources.ApplyResources(this.panelGenerateByTemplate, "panelGenerateByTemplate");
             this.panelGenerateByTemplate.Name = "panelGenerateByTemplate";
-            // 
-            // comboBoxTemplate
-            // 
-            this.comboBoxTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxTemplate.BorderColor = System.Drawing.Color.White;
-            this.comboBoxTemplate.BorderRadius = 10;
-            this.comboBoxTemplate.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxTemplate, "comboBoxTemplate");
-            this.comboBoxTemplate.Name = "comboBoxTemplate";
-            // 
-            // panelShowTemplate
-            // 
-            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
-            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelShowTemplate.BorderWidth = 5F;
-            this.panelShowTemplate.CornerRadius = 20;
-            resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
-            this.panelShowTemplate.Name = "panelShowTemplate";
             // 
             // label5
             // 
@@ -148,53 +107,6 @@
             this.panelGenerateDefault.Controls.Add(this.label2);
             resources.ApplyResources(this.panelGenerateDefault, "panelGenerateDefault");
             this.panelGenerateDefault.Name = "panelGenerateDefault";
-            // 
-            // comboBoxOrientation
-            // 
-            this.comboBoxOrientation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxOrientation.BorderColor = System.Drawing.Color.White;
-            this.comboBoxOrientation.BorderRadius = 10;
-            this.comboBoxOrientation.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxOrientation, "comboBoxOrientation");
-            this.comboBoxOrientation.Name = "comboBoxOrientation";
-            // 
-            // numericUpDownRows
-            // 
-            this.numericUpDownRows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.numericUpDownRows.BorderColor = System.Drawing.Color.White;
-            this.numericUpDownRows.BorderRadius = 10;
-            this.numericUpDownRows.BorderSize = 10;
-            resources.ApplyResources(this.numericUpDownRows, "numericUpDownRows");
-            this.numericUpDownRows.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownRows.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numericUpDownRows.Name = "numericUpDownRows";
-            // 
-            // numericUpDownColumns
-            // 
-            this.numericUpDownColumns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.numericUpDownColumns.BorderColor = System.Drawing.Color.White;
-            this.numericUpDownColumns.BorderRadius = 10;
-            this.numericUpDownColumns.BorderSize = 10;
-            resources.ApplyResources(this.numericUpDownColumns, "numericUpDownColumns");
-            this.numericUpDownColumns.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownColumns.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numericUpDownColumns.Name = "numericUpDownColumns";
             // 
             // label1
             // 
@@ -219,7 +131,95 @@
             resources.ApplyResources(this.panelGenerateTemplate, "panelGenerateTemplate");
             this.panelGenerateTemplate.Name = "panelGenerateTemplate";
             // 
-            // DialogGenerateTemplate
+            // comboBoxTemplate
+            // 
+            this.comboBoxTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxTemplate.BorderColor = System.Drawing.Color.White;
+            this.comboBoxTemplate.BorderRadius = 10;
+            this.comboBoxTemplate.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxTemplate, "comboBoxTemplate");
+            this.comboBoxTemplate.Name = "comboBoxTemplate";
+            // 
+            // panelShowTemplate
+            // 
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.panelShowTemplate.BorderWidth = 5F;
+            this.panelShowTemplate.CornerRadius = 20;
+            resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
+            this.panelShowTemplate.Name = "panelShowTemplate";
+            // 
+            // comboBoxOrientation
+            // 
+            this.comboBoxOrientation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxOrientation.BorderColor = System.Drawing.Color.White;
+            this.comboBoxOrientation.BorderRadius = 10;
+            this.comboBoxOrientation.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxOrientation, "comboBoxOrientation");
+            this.comboBoxOrientation.Name = "comboBoxOrientation";
+            // 
+            // numericUpDownRows
+            // 
+            this.numericUpDownRows.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownRows.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownRows.BorderRadius = 10;
+            this.numericUpDownRows.BorderSize = 10;
+            resources.ApplyResources(this.numericUpDownRows, "numericUpDownRows");
+            this.numericUpDownRows.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownRows.Name = "numericUpDownRows";
+            // 
+            // numericUpDownColumns
+            // 
+            this.numericUpDownColumns.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.numericUpDownColumns.BorderColor = System.Drawing.Color.White;
+            this.numericUpDownColumns.BorderRadius = 10;
+            this.numericUpDownColumns.BorderSize = 10;
+            resources.ApplyResources(this.numericUpDownColumns, "numericUpDownColumns");
+            this.numericUpDownColumns.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownColumns.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownColumns.Name = "numericUpDownColumns";
+            // 
+            // buttonGenerateTemplate
+            // 
+            resources.ApplyResources(this.buttonGenerateTemplate, "buttonGenerateTemplate");
+            this.buttonGenerateTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonGenerateTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonGenerateTemplate.BorderWidth = 5F;
+            this.buttonGenerateTemplate.CornerRadius = 5;
+            this.buttonGenerateTemplate.FlatAppearance.BorderSize = 0;
+            this.buttonGenerateTemplate.ForeColor = System.Drawing.Color.White;
+            this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";
+            this.buttonGenerateTemplate.UseVisualStyleBackColor = false;
+            // 
+            // textBoxTemplateName
+            // 
+            this.textBoxTemplateName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxTemplateName.BorderColor = System.Drawing.Color.White;
+            this.textBoxTemplateName.BorderRadius = 10;
+            this.textBoxTemplateName.BorderSize = 10;
+            resources.ApplyResources(this.textBoxTemplateName, "textBoxTemplateName");
+            this.textBoxTemplateName.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxTemplateName.Name = "textBoxTemplateName";
+            this.textBoxTemplateName.PlaceholderText = null;
+            // 
+            // TemplateCreationDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -229,7 +229,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DialogGenerateTemplate";
+            this.Name = "TemplateCreationDialog";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

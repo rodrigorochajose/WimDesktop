@@ -294,6 +294,99 @@
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;comboBoxTemplate.Name" xml:space="preserve">
+    <value>comboBoxTemplate</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedComboBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Name" xml:space="preserve">
+    <value>panelShowTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Name" xml:space="preserve">
+    <value>buttonNewTemplate</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.Name" xml:space="preserve">
+    <value>textBoxSessionName</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>488, 112</value>
+  </data>
+  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 438</value>
+  </data>
+  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="comboBoxTemplate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
@@ -384,6 +477,9 @@
   <data name="&gt;&gt;buttonNewTemplate.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="textBoxSessionName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
   <data name="textBoxSessionName.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 35</value>
   </data>
@@ -465,26 +561,8 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>488, 112</value>
-  </data>
-  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 438</value>
-  </data>
-  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="textBoxObservation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
   <data name="textBoxObservation.Location" type="System.Drawing.Point, System.Drawing">
     <value>35, 320</value>
@@ -506,6 +584,9 @@
   </data>
   <data name="&gt;&gt;textBoxObservation.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="textBoxRecommendation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
   <data name="textBoxRecommendation.Location" type="System.Drawing.Point, System.Drawing">
     <value>35, 249</value>
@@ -569,6 +650,9 @@
   </data>
   <data name="&gt;&gt;textBoxBirthDate.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="textBoxName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
   <data name="textBoxName.Location" type="System.Drawing.Point, System.Drawing">
     <value>35, 36</value>
@@ -1432,7 +1516,7 @@
     <value>Iniciar Novo Exame</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ChooseTemplateExamView</value>
+    <value>TemplateExamView</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

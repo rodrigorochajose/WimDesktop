@@ -1,6 +1,7 @@
 ﻿using DMMDigital.Components;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,8 @@ namespace DMMDigital.Views
 {
     public partial class TemplateCreationDialog : Form, ITemplateCreationDialog
     {
-        [Required(ErrorMessage = "Nome do Template é obrigatório.")]
+
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientRequiredName")]
         public string templateName 
         { 
             get { return textBoxTemplateName.Text; } 
@@ -37,10 +39,10 @@ namespace DMMDigital.Views
             set { numericUpDownColumns.InnerNumericUpDown.Value = value; } 
         }
 
-        public string orientation
+        public int orientation
         { 
-            get { return comboBoxOrientation.InnerComboBox.SelectedItem.ToString(); }
-            set { comboBoxOrientation.InnerComboBox.SelectedItem = value; } 
+            get { return comboBoxOrientation.InnerComboBox.SelectedIndex; }
+            set { comboBoxOrientation.InnerComboBox.SelectedIndex = value; } 
         }
 
         public List<TemplateFrameModel> templateFrames { get; set; }
@@ -53,17 +55,31 @@ namespace DMMDigital.Views
 
         public event EventHandler eventShowTemplateHandlerView;
 
+        private enum enumDict
+        {
+            verticalTop,
+            verticalBottom,
+            horizontalLeft,
+            horizontalRight
+        };
+
+        private readonly Dictionary<enumDict, string> dictOrientation = new Dictionary<enumDict, string>
+        {
+            { enumDict.verticalTop, Resources.textVerticalTop },
+            { enumDict.verticalBottom, Resources.textVerticalBottom },
+            { enumDict.horizontalLeft, Resources.textHorizontalLeft },
+            { enumDict.horizontalRight, Resources.textHorizontalRight }
+        };
+
         public TemplateCreationDialog()
         {
             InitializeComponent();
             associateEvents();
 
-            comboBoxOrientation.InnerComboBox.Items.Add("Vertical Cima");
-            comboBoxOrientation.InnerComboBox.Items.Add("Vertical Baixo");
-            comboBoxOrientation.InnerComboBox.Items.Add("Horizontal Esquerda");
-            comboBoxOrientation.InnerComboBox.Items.Add("Horizontal Direita");
+            comboBoxOrientation.InnerComboBox.DataSource = dictOrientation.ToList();
 
-            comboBoxOrientation.InnerComboBox.SelectedItem = comboBoxOrientation.InnerComboBox.Items[0];
+            comboBoxOrientation.InnerComboBox.DisplayMember = "Value";
+            comboBoxOrientation.InnerComboBox.ValueMember = "Key";
 
             panelGenerateDefault.Location = new Point((panelGenerateTemplate.Width - panelGenerateDefault.Width) / 2, panelGenerateDefault.Location.Y);
             panelGenerateByTemplate.Location = new Point((panelGenerateTemplate.Width - panelGenerateByTemplate.Width) / 2, panelGenerateByTemplate.Location.Y);
@@ -109,7 +125,7 @@ namespace DMMDigital.Views
             {
                 int height;
                 int width;
-                if (frame.orientation.Contains("Vertical"))
+                if (frame.orientation < 2)
                 {
                     height = 35;
                     width = 25;

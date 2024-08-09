@@ -123,17 +123,11 @@
   <data name="buttonCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="buttonConfigureFilters.Text" xml:space="preserve">
+    <value>Set Filters</value>
+  </data>
   <data name="buttonSave.Text" xml:space="preserve">
     <value>Save</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="label10.Text" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Click here to set the filters</value>
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Acquire Mode</value>
@@ -153,23 +147,11 @@
   <data name="label17.Text" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Free Draw and Shapes</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Text</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Size</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Color</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Ruler</value>
@@ -179,6 +161,24 @@
   </data>
   <data name="labelCaminho.Text" xml:space="preserve">
     <value>Exam Path</value>
+  </data>
+  <data name="labelRulerColor.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="labelShapeColor.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="labelShapeSize.Text" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="labelTextColor.Text" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="labelTextSize.Text" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>General</value>

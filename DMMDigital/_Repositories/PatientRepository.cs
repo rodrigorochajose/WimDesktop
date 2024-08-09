@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +22,7 @@ namespace DMMDigital._Repositories
 
                 Directory.CreateDirectory(@"C:\WimDesktopDB\img\Paciente-" + patient.id);
 
-                MessageBox.Show("Paciente cadastrado com sucesso !");
+                MessageBox.Show(Resources.messagePatientCreated);
             }
             catch (Exception ex)
             {
@@ -34,7 +35,7 @@ namespace DMMDigital._Repositories
             try
             {
                 context.SaveChanges();
-                MessageBox.Show("As informações do paciente foram editadas com sucesso !");
+                MessageBox.Show(Resources.messagePatientEdited);
             }
             catch (Exception ex)
             {
@@ -49,7 +50,7 @@ namespace DMMDigital._Repositories
                 context.patient.Remove(getPatientById(patientId));
                 context.SaveChanges();
 
-                MessageBox.Show("Paciente deletado com sucesso !");
+                MessageBox.Show(Resources.messagePatientDeleted);
             } 
             catch (Exception ex)
             {

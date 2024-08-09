@@ -1,5 +1,6 @@
 ﻿using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using System;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace DMMDigital._Repositories
             try
             {
                 context.SaveChanges();
-                return "Configuração Salva !";
+                return Resources.messageConfigSucess;
             } 
             catch (Exception ex)
             {

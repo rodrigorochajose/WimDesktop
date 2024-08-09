@@ -1,6 +1,7 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace DMMDigital.Presenters
 
         private void deleteTemplate(object sender, EventArgs e)
         {
-            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
                 templateRepository.delete(view.selectedTemplateId);

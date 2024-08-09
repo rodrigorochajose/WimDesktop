@@ -127,7 +127,7 @@
     <value>Import Image</value>
   </data>
   <data name="buttonOverlay.Text" xml:space="preserve">
-    <value>Override</value>
+    <value>Overwrite</value>
   </data>
   <data name="buttonRotate.Text" xml:space="preserve">
     <value>Rotate</value>

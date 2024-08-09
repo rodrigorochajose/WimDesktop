@@ -252,7 +252,7 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // ChooseTemplateExamView
+            // TemplateExamView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -266,7 +266,7 @@
             this.Controls.Add(this.titulo);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ChooseTemplateExamView";
+            this.Name = "TemplateExamView";
             this.roundedPanel2.ResumeLayout(false);
             this.roundedPanel2.PerformLayout();
             this.roundedPanel1.ResumeLayout(false);

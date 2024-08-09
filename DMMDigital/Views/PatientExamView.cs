@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DMMDigital.Interface.IView;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -24,20 +25,17 @@ namespace DMMDigital.Views
         public event EventHandler eventNewPatient;
         public event EventHandler eventSelectPatient;
 
-        public void dataGridViewHandler()
-        {
-            dataGridViewPatient.Columns["columnId"].Visible = false;
-        }
-
-        public void setPatientList(BindingSource patientList)
-        {
-            dataGridViewPatient.DataSource = patientList;
-        }
-
         public PatientExamView()
         {
             InitializeComponent();
+            adjustComponent();
             associateEvents();
+        }
+
+        private void adjustComponent()
+        {
+            pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
+            labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
         }
 
         private void associateEvents()
@@ -80,7 +78,7 @@ namespace DMMDigital.Views
             {
                 if (selectedPatientId == 0)
                 {
-                    MessageBox.Show("Nenhum Paciente foi selecionado!");
+                    MessageBox.Show(Resources.messagePatientNotSelected);
                     return;
                 }
 
@@ -91,7 +89,7 @@ namespace DMMDigital.Views
             {
                 if (selectedPatientId == 0)
                 {
-                    MessageBox.Show("Nenhum Paciente foi selecionado!");
+                    MessageBox.Show(Resources.messagePatientNotSelected);
                     return;
                 }
 
@@ -103,6 +101,16 @@ namespace DMMDigital.Views
                 DialogResult = DialogResult.Cancel;
                 Close(); 
             };
+        }
+
+        public void dataGridViewHandler()
+        {
+            dataGridViewPatient.Columns["columnId"].Visible = false;
+        }
+
+        public void setPatientList(BindingSource patientList)
+        {
+            dataGridViewPatient.DataSource = patientList;
         }
     }
 }

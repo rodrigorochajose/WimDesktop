@@ -250,173 +250,173 @@
   <data name="icon_32x32_scanner" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_32x32_scanner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="labelArrow" xml:space="preserve">
+    <value>Arrow</value>
+  </data>
+  <data name="labelEllipse" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+  <data name="labelFreeDraw" xml:space="preserve">
+    <value>Free Draw</value>
+  </data>
+  <data name="labelRectangle" xml:space="preserve">
+    <value>Rectangle</value>
+  </data>
+  <data name="labelRuler" xml:space="preserve">
+    <value>Ruler</value>
+  </data>
+  <data name="labelText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="messageComparisonSelection" xml:space="preserve">
+    <value>Select more than one image for comparison</value>
+  </data>
   <data name="messageConfigSucess" xml:space="preserve">
-    <value>Configuração Salva !</value>
+    <value>Settings Saved!</value>
     <comment>Config</comment>
   </data>
-  <data name="messagePatientCreated" xml:space="preserve">
-    <value>Paciente cadastrado com sucesso !</value>
-    <comment>Patient</comment>
-  </data>
-  <data name="messagePatientDeleted" xml:space="preserve">
-    <value>Paciente deletado com sucesso !</value>
-    <comment>Patient</comment>
-  </data>
-  <data name="messagePatientEdited" xml:space="preserve">
-    <value>As informações do paciente foram atualizadas com sucesso !</value>
-    <comment>Patient</comment>
-  </data>
-  <data name="messagePatientRequiredName" xml:space="preserve">
-    <value>Nome do Paciente é obrigatório!</value>
-    <comment>Patient</comment>
-  </data>
-  <data name="messageTemplateCannotDelete" xml:space="preserve">
-    <value>Template não pode ser excluido pois existem exames que o utilizam.</value>
-    <comment>Template</comment>
-  </data>
-  <data name="messageTemplateDeleteSucess" xml:space="preserve">
-    <value>Template Removido com sucesso !</value>
-    <comment>Template</comment>
-  </data>
-  <data name="messageTemplateFrameSucess" xml:space="preserve">
-    <value>Template Cadastrado com sucesso !</value>
-    <comment>Template</comment>
-  </data>
   <data name="messageConfirmDelete" xml:space="preserve">
-    <value>Deseja realmente realizar a exclusão?</value>
+    <value>Do you really want to delete?</value>
     <comment>Confirm Delete</comment>
   </data>
   <data name="messageExamCannotDelete" xml:space="preserve">
-    <value>Exame possui imagens, não será possível excluí-lo.</value>
+    <value>Exam has images, it cannot be deleted.</value>
     <comment>Exam</comment>
   </data>
   <data name="messageExamCannotExport" xml:space="preserve">
-    <value>Exame não possui nenhuma imagem para exportação</value>
+    <value>Exam has no images to export.</value>
     <comment>Exam</comment>
   </data>
   <data name="messageExamDeleted" xml:space="preserve">
-    <value>Exame excluido com sucesso !</value>
+    <value>Exam successfully deleted!</value>
     <comment>Exam</comment>
   </data>
   <data name="messageExamErrorOnLoad" xml:space="preserve">
-    <value>Erro ao carregar exame</value>
+    <value>Error loading exam</value>
     <comment>Exam</comment>
+  </data>
+  <data name="messageExamExportMode" xml:space="preserve">
+    <value>Select how you want to export the image!</value>
+  </data>
+  <data name="messageExamExportSucess" xml:space="preserve">
+    <value>Successfully exported!</value>
   </data>
   <data name="messageExamIsOpened" xml:space="preserve">
-    <value>Exame já está aberto</value>
+    <value>Exam is already open</value>
     <comment>Exam</comment>
   </data>
+  <data name="messageExamNotSelected" xml:space="preserve">
+    <value>No Exam selected!</value>
+  </data>
+  <data name="messageImageConfirmDelete" xml:space="preserve">
+    <value>Do you really want to delete the current image?</value>
+  </data>
+  <data name="messageImageConfirmOverwrite" xml:space="preserve">
+    <value>Do you really want to overwrite the current image?</value>
+  </data>
+  <data name="messageImageConfirmRestore" xml:space="preserve">
+    <value>Are you sure you want to restore the original image?</value>
+  </data>
   <data name="messagePatientCannotDelete" xml:space="preserve">
-    <value>Paciente possui exames, não será possível excluí-lo.</value>
+    <value>Patient has exams, it cannot be deleted.</value>
     <comment>Patient</comment>
   </data>
   <data name="messagePatientConditionName" xml:space="preserve">
-    <value>Nome do Paciente deve ser entre 4 e 65 letras.</value>
+    <value>Patient's name must be between 4 and 65 letters.</value>
     <comment>Patient</comment>
   </data>
-  <data name="messagePatientRequiredBirthDate" xml:space="preserve">
-    <value>Data de Nascimento é obrigatória!</value>
+  <data name="messagePatientCreated" xml:space="preserve">
+    <value>Patient successfully registered!</value>
     <comment>Patient</comment>
   </data>
-  <data name="messageSensorCannotConnect" xml:space="preserve">
-    <value>Não foi possível conectar o sensor, verifique se o apontamento está correto.</value>
-    <comment>Sensor</comment>
+  <data name="messagePatientDeleted" xml:space="preserve">
+    <value>Patient successfully deleted!</value>
+    <comment>Patient</comment>
   </data>
-  <data name="titleDelete" xml:space="preserve">
-    <value>Excluir</value>
-    <comment>Title</comment>
-  </data>
-  <data name="messageImageConfirmOverwrite" xml:space="preserve">
-    <value>Deseja realmente sobrescrever a imagem atual?</value>
-  </data>
-  <data name="messageRecalibrateRuler" xml:space="preserve">
-    <value>Digite o valor de {0} pixels em milímetros</value>
-  </data>
-  <data name="textButtonResetCalibration" xml:space="preserve">
-    <value>Padrão do Sensor</value>
-  </data>
-  <data name="titleOverwriteImage" xml:space="preserve">
-    <value>Sobrescrever Imagem</value>
-  </data>
-  <data name="labelArrow" xml:space="preserve">
-    <value>Seta</value>
-  </data>
-  <data name="labelEllipse" xml:space="preserve">
-    <value>Círculo</value>
-  </data>
-  <data name="labelFreeDraw" xml:space="preserve">
-    <value>Desenho Livre</value>
-  </data>
-  <data name="labelRectangle" xml:space="preserve">
-    <value>Retângulo</value>
-  </data>
-  <data name="labelRuler" xml:space="preserve">
-    <value>Régua</value>
-  </data>
-  <data name="labelText" xml:space="preserve">
-    <value>Texto</value>
-  </data>
-  <data name="messageImageConfirmDelete" xml:space="preserve">
-    <value>Deseja realmente excluir a imagem atual ?</value>
-  </data>
-  <data name="messageImageConfirmRestore" xml:space="preserve">
-    <value>Tem certeza que deseja restaurar a imagem original ?</value>
-  </data>
-  <data name="textButtonSetCalibration" xml:space="preserve">
-    <value>Recalibrar</value>
-  </data>
-  <data name="textCheckBoxMultiRuler" xml:space="preserve">
-    <value>Medição Multipla</value>
-  </data>
-  <data name="textLabelColor" xml:space="preserve">
-    <value>Cor</value>
-  </data>
-  <data name="textLabelSize" xml:space="preserve">
-    <value>Tamanho</value>
-  </data>
-  <data name="titleDialogText" xml:space="preserve">
-    <value>Inserir Texto</value>
-  </data>
-  <data name="titleImageDelete" xml:space="preserve">
-    <value>Excluir Imagem</value>
-  </data>
-  <data name="titleImageRestore" xml:space="preserve">
-    <value>Restaurar Imagem</value>
-  </data>
-  <data name="messageComparisonSelection" xml:space="preserve">
-    <value>Selecione mais de uma imagem para comparação.</value>
-  </data>
-  <data name="messageExamExportMode" xml:space="preserve">
-    <value>Selecione como deseja exportar a imagem!</value>
-  </data>
-  <data name="messageExamExportSucess" xml:space="preserve">
-    <value>Exportado com sucesso !</value>
-  </data>
-  <data name="messageExamNotSelected" xml:space="preserve">
-    <value>Nenhum Exame foi selecionado!</value>
+  <data name="messagePatientEdited" xml:space="preserve">
+    <value>Patient information successfully updated!</value>
+    <comment>Patient</comment>
   </data>
   <data name="messagePatientNotSelected" xml:space="preserve">
-    <value>Nenhum Paciente foi selecionado!</value>
+    <value>No Patient selected!</value>
+  </data>
+  <data name="messagePatientRequiredBirthDate" xml:space="preserve">
+    <value>Birth Date is required!</value>
+    <comment>Patient</comment>
+  </data>
+  <data name="messagePatientRequiredName" xml:space="preserve">
+    <value>Patient's name is required!</value>
+    <comment>Patient</comment>
+  </data>
+  <data name="messageRecalibrateRuler" xml:space="preserve">
+    <value>Enter the value of {0} pixels in millimeters</value>
+  </data>
+  <data name="messageSensorCannotConnect" xml:space="preserve">
+    <value>Could not connect the sensor, please check if the pointing is correct.</value>
+    <comment>Sensor</comment>
+  </data>
+  <data name="messageTemplateCannotDelete" xml:space="preserve">
+    <value>Template cannot be deleted because there are exams using it.</value>
+    <comment>Template</comment>
+  </data>
+  <data name="messageTemplateDeleteSucess" xml:space="preserve">
+    <value>Template successfully removed!</value>
+    <comment>Template</comment>
+  </data>
+  <data name="messageTemplateFrameSucess" xml:space="preserve">
+    <value>Template successfully registered!</value>
+    <comment>Template</comment>
   </data>
   <data name="messageTemplateRequiredName" xml:space="preserve">
-    <value>Nome do Template é obrigatório!</value>
+    <value>Template name is required!</value>
+  </data>
+  <data name="textButtonResetCalibration" xml:space="preserve">
+    <value>Sensor Default</value>
+  </data>
+  <data name="textButtonSetCalibration" xml:space="preserve">
+    <value>Recalibrate</value>
+  </data>
+  <data name="textCheckBoxMultiRuler" xml:space="preserve">
+    <value>Multiple Measurement</value>
+  </data>
+  <data name="textLabelColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="textLabelSize" xml:space="preserve">
+    <value>Size</value>
   </data>
   <data name="titleComparison" xml:space="preserve">
-    <value>Comparação de Imagens</value>
+    <value>Image Comparison</value>
+  </data>
+  <data name="titleDelete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Title</comment>
+  </data>
+  <data name="titleDialogText" xml:space="preserve">
+    <value>Insert Text</value>
+  </data>
+  <data name="titleImageDelete" xml:space="preserve">
+    <value>Delete Image</value>
+  </data>
+  <data name="titleImageRestore" xml:space="preserve">
+    <value>Restore Image</value>
+  </data>
+  <data name="titleOverwriteImage" xml:space="preserve">
+    <value>Overwrite Image</value>
   </data>
   <data name="textHorizontalLeft" xml:space="preserve">
-    <value>Horizontal Esquerda</value>
+    <value>Horizontal Left</value>
   </data>
   <data name="textHorizontalRight" xml:space="preserve">
-    <value>Horizontal Direita</value>
+    <value>Horizontal Right</value>
   </data>
   <data name="textVerticalBottom" xml:space="preserve">
-    <value>Vertical Baixo</value>
+    <value>Vertical Bottom</value>
   </data>
   <data name="textVerticalTop" xml:space="preserve">
-    <value>Vertical Cima</value>
+    <value>Vertical Top</value>
   </data>
   <data name="nativeAquireMode" xml:space="preserve">
-    <value>Nativo</value>
+    <value>Native</value>
   </data>
 </root>

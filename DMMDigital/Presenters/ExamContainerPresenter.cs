@@ -22,6 +22,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Formats.Tiff;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Presenters
 {
@@ -40,25 +41,32 @@ namespace DMMDigital.Presenters
             examContainerView = view as ExamContainerView;
             view.patientId = patientId;
 
-            examContainerView.eventConnectSensor += connectSensor;
-            examContainerView.eventDestroySensor += destroySensor;
-            examContainerView.eventGetSensorInfo += getSensorInfo;
-            examContainerView.eventOpenTwain += openTwain;
-
+            associateEvents();
 
             if (examContainerView.selectedExamView.acquireMode == "TWAIN")
             {
-                initializeTwain();
+                initializeTwain(this, EventArgs.Empty);
+                examContainerView.twainInitialized = true;
             } 
             else
             {
                 connectSensor(this, EventArgs.Empty);
+                examContainerView.twainInitialized = false;
             }
 
             initialize();
         }
 
-        private void initializeTwain()
+        private void associateEvents()
+        {
+            examContainerView.eventConnectSensor += connectSensor;
+            examContainerView.eventDestroySensor += destroySensor;
+            examContainerView.eventGetSensorInfo += getSensorInfo;
+            examContainerView.eventOpenTwain += openTwain;
+            examContainerView.eventInitializeTwain += initializeTwain;
+        }
+
+        private void initializeTwain(object sender, EventArgs ev)
         {
             twain = new Twain(new WinFormsWindowMessageHook(examContainerView));
             twain.TransferImage += (s, e) =>
@@ -136,7 +144,7 @@ namespace DMMDigital.Presenters
             }
             catch
             {
-                MessageBox.Show("Não foi possível conectar o sensor, verifique se o apontamento está correto.");
+                MessageBox.Show(Resources.messageSensorCannotConnect);
             }
         }
 
@@ -360,7 +368,7 @@ namespace DMMDigital.Presenters
                         bool getImage = true;
                         if (examContainerView.selectedExamView.selectedFrame.originalImage != null)
                         {
-                            getImage = examContainerView.selectedExamView.dialogOverrideCurrentImage();
+                            getImage = examContainerView.selectedExamView.dialogOverwriteCurrentImage();
                         }
 
                         if (getImage)
@@ -407,15 +415,15 @@ namespace DMMDigital.Presenters
 
                 pic.UnlockBits(picData);
 
-                if (examContainerView.selectedExamView.selectedFrame.orientation == "Horizontal Esquerda")
+                if (examContainerView.selectedExamView.selectedFrame.orientation == 2)
                 {
                     pic.RotateFlip(RotateFlipType.Rotate270FlipNone);
                 }
-                else if (examContainerView.selectedExamView.selectedFrame.orientation == "Horizontal Direita")
+                else if (examContainerView.selectedExamView.selectedFrame.orientation == 3)
                 {
                     pic.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 }
-                else if (examContainerView.selectedExamView.selectedFrame.orientation == "Vertical Baixo")
+                else if (examContainerView.selectedExamView.selectedFrame.orientation == 1)
                 {
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }

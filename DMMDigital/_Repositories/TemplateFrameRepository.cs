@@ -5,6 +5,7 @@ using System.Linq;
 using DMMDigital.Components;
 using DMMDigital.Interface.IRepository;
 using System.Windows;
+using DMMDigital.Properties;
 
 namespace DMMDigital._Repositories
 {
@@ -29,7 +30,7 @@ namespace DMMDigital._Repositories
                 }
                 context.SaveChanges();
 
-                MessageBox.Show("Template cadastrado com sucesso!");
+                MessageBox.Show(Resources.messageTemplateFrameSucess);
             }
             catch (Exception ex)
             {

@@ -127,7 +127,7 @@ namespace DMMDigital.Views
             {
                 int height;
                 int width;
-                if (frame.orientation.Contains("Vertical"))
+                if (frame.orientation < 2)
                 {
                     height = 35;
                     width = 25;

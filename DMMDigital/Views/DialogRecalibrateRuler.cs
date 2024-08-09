@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DMMDigital.Properties;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -19,6 +19,10 @@ namespace DMMDigital.Views
                 {
                     setRulerValue();
                 }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    Close();
+                }
             };
 
             buttonConfirm.Click += delegate
@@ -26,7 +30,7 @@ namespace DMMDigital.Views
                 setRulerValue();
             };
 
-            label.Text = $"Digite o valor de {lineLength:0.00} pixels em milímetros";
+            label.Text = string.Format(Resources.messageRecalibrateRuler, lineLength.ToString("0.00"));
         }
 
         private void setRulerValue()

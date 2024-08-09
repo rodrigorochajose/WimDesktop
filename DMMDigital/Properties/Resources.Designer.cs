@@ -499,5 +499,455 @@ namespace DMMDigital.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Seta.
+        /// </summary>
+        internal static string labelArrow {
+            get {
+                return ResourceManager.GetString("labelArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Círculo.
+        /// </summary>
+        internal static string labelEllipse {
+            get {
+                return ResourceManager.GetString("labelEllipse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Desenho Livre.
+        /// </summary>
+        internal static string labelFreeDraw {
+            get {
+                return ResourceManager.GetString("labelFreeDraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Retângulo.
+        /// </summary>
+        internal static string labelRectangle {
+            get {
+                return ResourceManager.GetString("labelRectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Régua.
+        /// </summary>
+        internal static string labelRuler {
+            get {
+                return ResourceManager.GetString("labelRuler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Texto.
+        /// </summary>
+        internal static string labelText {
+            get {
+                return ResourceManager.GetString("labelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Selecione mais de uma imagem para comparação..
+        /// </summary>
+        internal static string messageComparisonSelection {
+            get {
+                return ResourceManager.GetString("messageComparisonSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Configuração Salva !.
+        /// </summary>
+        internal static string messageConfigSucess {
+            get {
+                return ResourceManager.GetString("messageConfigSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja realmente realizar a exclusão?.
+        /// </summary>
+        internal static string messageConfirmDelete {
+            get {
+                return ResourceManager.GetString("messageConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exame possui imagens, não será possível excluí-lo..
+        /// </summary>
+        internal static string messageExamCannotDelete {
+            get {
+                return ResourceManager.GetString("messageExamCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exame não possui nenhuma imagem para exportação.
+        /// </summary>
+        internal static string messageExamCannotExport {
+            get {
+                return ResourceManager.GetString("messageExamCannotExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exame excluido com sucesso !.
+        /// </summary>
+        internal static string messageExamDeleted {
+            get {
+                return ResourceManager.GetString("messageExamDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao carregar exame.
+        /// </summary>
+        internal static string messageExamErrorOnLoad {
+            get {
+                return ResourceManager.GetString("messageExamErrorOnLoad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Selecione como deseja exportar a imagem!.
+        /// </summary>
+        internal static string messageExamExportMode {
+            get {
+                return ResourceManager.GetString("messageExamExportMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exportado com sucesso !.
+        /// </summary>
+        internal static string messageExamExportSucess {
+            get {
+                return ResourceManager.GetString("messageExamExportSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exame já está aberto.
+        /// </summary>
+        internal static string messageExamIsOpened {
+            get {
+                return ResourceManager.GetString("messageExamIsOpened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum Exame foi selecionado!.
+        /// </summary>
+        internal static string messageExamNotSelected {
+            get {
+                return ResourceManager.GetString("messageExamNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja realmente excluir a imagem atual ?.
+        /// </summary>
+        internal static string messageImageConfirmDelete {
+            get {
+                return ResourceManager.GetString("messageImageConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja realmente sobrescrever a imagem atual?.
+        /// </summary>
+        internal static string messageImageConfirmOverwrite {
+            get {
+                return ResourceManager.GetString("messageImageConfirmOverwrite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tem certeza que deseja restaurar a imagem original ?.
+        /// </summary>
+        internal static string messageImageConfirmRestore {
+            get {
+                return ResourceManager.GetString("messageImageConfirmRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente possui exames, não será possível excluí-lo..
+        /// </summary>
+        internal static string messagePatientCannotDelete {
+            get {
+                return ResourceManager.GetString("messagePatientCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome do Paciente deve ser entre 4 e 65 letras..
+        /// </summary>
+        internal static string messagePatientConditionName {
+            get {
+                return ResourceManager.GetString("messagePatientConditionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente cadastrado com sucesso !.
+        /// </summary>
+        internal static string messagePatientCreated {
+            get {
+                return ResourceManager.GetString("messagePatientCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente deletado com sucesso !.
+        /// </summary>
+        internal static string messagePatientDeleted {
+            get {
+                return ResourceManager.GetString("messagePatientDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a As informações do paciente foram atualizadas com sucesso !.
+        /// </summary>
+        internal static string messagePatientEdited {
+            get {
+                return ResourceManager.GetString("messagePatientEdited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum Paciente foi selecionado!.
+        /// </summary>
+        internal static string messagePatientNotSelected {
+            get {
+                return ResourceManager.GetString("messagePatientNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de Nascimento é obrigatória!.
+        /// </summary>
+        internal static string messagePatientRequiredBirthDate {
+            get {
+                return ResourceManager.GetString("messagePatientRequiredBirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome do Paciente é obrigatório!.
+        /// </summary>
+        internal static string messagePatientRequiredName {
+            get {
+                return ResourceManager.GetString("messagePatientRequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Digite o valor de {0} pixels em milímetros.
+        /// </summary>
+        internal static string messageRecalibrateRuler {
+            get {
+                return ResourceManager.GetString("messageRecalibrateRuler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível conectar o sensor, verifique se o apontamento está correto..
+        /// </summary>
+        internal static string messageSensorCannotConnect {
+            get {
+                return ResourceManager.GetString("messageSensorCannotConnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Template não pode ser excluido pois existem exames que o utilizam..
+        /// </summary>
+        internal static string messageTemplateCannotDelete {
+            get {
+                return ResourceManager.GetString("messageTemplateCannotDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Template Removido com sucesso !.
+        /// </summary>
+        internal static string messageTemplateDeleteSucess {
+            get {
+                return ResourceManager.GetString("messageTemplateDeleteSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Template Cadastrado com sucesso !.
+        /// </summary>
+        internal static string messageTemplateFrameSucess {
+            get {
+                return ResourceManager.GetString("messageTemplateFrameSucess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome do Template é obrigatório!.
+        /// </summary>
+        internal static string messageTemplateRequiredName {
+            get {
+                return ResourceManager.GetString("messageTemplateRequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nativo.
+        /// </summary>
+        internal static string nativeAquireMode {
+            get {
+                return ResourceManager.GetString("nativeAquireMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Padrão do Sensor.
+        /// </summary>
+        internal static string textButtonResetCalibration {
+            get {
+                return ResourceManager.GetString("textButtonResetCalibration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Recalibrar.
+        /// </summary>
+        internal static string textButtonSetCalibration {
+            get {
+                return ResourceManager.GetString("textButtonSetCalibration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Medição Multipla.
+        /// </summary>
+        internal static string textCheckBoxMultiRuler {
+            get {
+                return ResourceManager.GetString("textCheckBoxMultiRuler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Horizontal Esquerda.
+        /// </summary>
+        internal static string textHorizontalLeft {
+            get {
+                return ResourceManager.GetString("textHorizontalLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Horizontal Direita.
+        /// </summary>
+        internal static string textHorizontalRight {
+            get {
+                return ResourceManager.GetString("textHorizontalRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cor.
+        /// </summary>
+        internal static string textLabelColor {
+            get {
+                return ResourceManager.GetString("textLabelColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tamanho.
+        /// </summary>
+        internal static string textLabelSize {
+            get {
+                return ResourceManager.GetString("textLabelSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Vertical Baixo.
+        /// </summary>
+        internal static string textVerticalBottom {
+            get {
+                return ResourceManager.GetString("textVerticalBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Vertical Cima.
+        /// </summary>
+        internal static string textVerticalTop {
+            get {
+                return ResourceManager.GetString("textVerticalTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Comparação de Imagens.
+        /// </summary>
+        internal static string titleComparison {
+            get {
+                return ResourceManager.GetString("titleComparison", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Excluir.
+        /// </summary>
+        internal static string titleDelete {
+            get {
+                return ResourceManager.GetString("titleDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Inserir Texto.
+        /// </summary>
+        internal static string titleDialogText {
+            get {
+                return ResourceManager.GetString("titleDialogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Excluir Imagem.
+        /// </summary>
+        internal static string titleImageDelete {
+            get {
+                return ResourceManager.GetString("titleImageDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Restaurar Imagem.
+        /// </summary>
+        internal static string titleImageRestore {
+            get {
+                return ResourceManager.GetString("titleImageRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Sobrescrever Imagem.
+        /// </summary>
+        internal static string titleOverwriteImage {
+            get {
+                return ResourceManager.GetString("titleOverwriteImage", resourceCulture);
+            }
+        }
     }
 }

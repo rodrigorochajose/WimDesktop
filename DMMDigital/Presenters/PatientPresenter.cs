@@ -9,6 +9,7 @@ using DMMDigital.Components;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using MoreLinq.Extensions;
 
@@ -105,11 +106,11 @@ namespace DMMDigital.Presenters
         {
             if (examRepository.getPatientExams(view.selectedPatientId).Any())
             {
-                MessageBox.Show("Paciente possui exames, não será possível excluí-lo.");
+                MessageBox.Show(Resources.messagePatientCannotDelete);
                 return;
             }
 
-            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
                 string fullPath = $"{configRepository.getExamPath()}\\Paciente-{view.selectedPatientId}";
@@ -228,11 +229,11 @@ namespace DMMDigital.Presenters
         {
             if (examImageRepository.getExamImages(view.selectedExamId).Any())
             {
-                MessageBox.Show("Exame possui imagens, não será possível excluí-lo.");
+                MessageBox.Show(Resources.messageExamCannotDelete);
                 return;
             }
 
-            DialogResult res = MessageBox.Show("Deseja realmente realizar a exclusão?", "Excluir", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
                 string fullPath = $"{configRepository.getExamPath()}{view.selectedExamPath}";
@@ -244,7 +245,7 @@ namespace DMMDigital.Presenters
 
                 examRepository.deleteExam(view.selectedExamId);
 
-                MessageBox.Show("Exame deletado com sucesso!");
+                MessageBox.Show(Resources.messageExamDeleted);
                 getExamByPatient(this, EventArgs.Empty);
             }
         }
@@ -258,7 +259,7 @@ namespace DMMDigital.Presenters
 
             if (!examImages.Any())
             {
-                MessageBox.Show("Exame não possui nenhuma imagem para exportação");
+                MessageBox.Show(Resources.messageExamCannotExport);
                 return;
             }
 
@@ -276,7 +277,7 @@ namespace DMMDigital.Presenters
                     {
                         BackColor = Color.Black,
                         order = frame.order,
-                        Name = "filme" + frame.id,
+                        Name = "frame" + frame.id,
                         orientation = frame.orientation
                     };
 

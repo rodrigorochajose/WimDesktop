@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Interface.IView;
+using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
@@ -16,7 +17,8 @@ namespace DMMDigital.Views
         public FramesComparisonDialog(List<Frame> frames)
         {
             InitializeComponent();
-            ActiveControl = label1;
+            adjustComponent();
+            ActiveControl = labelTitle;
 
             selectedFrames = new List<Frame>();
             this.frames = frames;
@@ -26,13 +28,19 @@ namespace DMMDigital.Views
             buttonCancel.Click += delegate { Close(); };
         }
 
+        private void adjustComponent()
+        {
+            pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
+            labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
+        }
+
         private void drawTemplate()
         {
             foreach (Frame frame in frames)
             {
                 int width;
                 int height;
-                if (frame.orientation.Contains("Vertical"))
+                if (frame.orientation < 2)
                 {
                     height = 70;
                     width = 50;
@@ -82,7 +90,7 @@ namespace DMMDigital.Views
             {
                 selectedFrame.Tag = Color.Black;
                 selectedFrames.Remove(selectedFrames.First(f => f.order == selectedFrame.order));
-            } 
+            }
             else
             {
                 selectedFrame.Tag = Color.LimeGreen;
@@ -102,7 +110,7 @@ namespace DMMDigital.Views
 
             if (selectedImages.Count < 2)
             {
-                MessageBox.Show("Selecione mais de uma imagem para comparação.", "Comparação de Imagens");
+                MessageBox.Show(Resources.messageComparisonSelection, Resources.titleComparison);
                 return;
             }
 

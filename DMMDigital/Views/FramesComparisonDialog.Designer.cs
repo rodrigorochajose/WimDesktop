@@ -29,28 +29,38 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FramesComparisonDialog));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.panelHeader = new System.Windows.Forms.Panel();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonCompare = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.panel1.SuspendLayout();
+            this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelHeader
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Name = "panel1";
+            this.panelHeader.BackColor = System.Drawing.Color.White;
+            this.panelHeader.Controls.Add(this.pictureBoxIcon);
+            this.panelHeader.Controls.Add(this.labelTitle);
+            resources.ApplyResources(this.panelHeader, "panelHeader");
+            this.panelHeader.Name = "panelHeader";
             // 
-            // label1
+            // pictureBoxIcon
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Image = global::DMMDigital.Properties.Resources.icon_32x32_compare;
-            this.label1.Name = "label1";
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_compare;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
+            // 
+            // labelTitle
+            // 
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitle.Name = "labelTitle";
             // 
             // panelTemplate
             // 
@@ -91,18 +101,19 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = false;
             // 
-            // ChooseFramesToCompare
+            // FramesComparisonDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelTemplate);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelHeader);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ChooseFramesToCompare";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.Name = "FramesComparisonDialog";
+            this.panelHeader.ResumeLayout(false);
+            this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -110,11 +121,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panelHeader;
         private System.Windows.Forms.Panel panelTemplate;
         private System.Windows.Forms.Panel panel3;
         private Components.Rounded.RoundedButton buttonCompare;
         private Components.Rounded.RoundedButton buttonCancel;
+        private System.Windows.Forms.PictureBox pictureBoxIcon;
+        private System.Windows.Forms.Label labelTitle;
     }
 }

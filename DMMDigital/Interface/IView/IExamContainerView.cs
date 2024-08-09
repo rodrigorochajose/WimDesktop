@@ -10,10 +10,13 @@ namespace DMMDigital.Interface.IView
         List<int> openExamsId { get; set; }
         ExamView selectedExamView { get; set; }
 
+        bool twainInitialized { get; set; }
+
         event EventHandler eventConnectSensor;
         event EventHandler eventDestroySensor;
         event EventHandler eventGetSensorInfo;
         event EventHandler eventOpenTwain;
+        event EventHandler eventInitializeTwain;
 
         void initialize();
         void addNewPage(IExamView examView);

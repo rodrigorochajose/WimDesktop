@@ -141,9 +141,6 @@
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>      Export Exam</value>
-  </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Path :</value>
   </data>
@@ -155,5 +152,8 @@
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Format :</value>
+  </data>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Export Exam</value>
   </data>
 </root>
