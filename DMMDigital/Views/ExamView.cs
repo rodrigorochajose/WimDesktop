@@ -82,6 +82,11 @@ namespace DMMDigital.Views
         Size mainPictureBoxOriginalSize = new Size();
         Size mainPictureBoxPreviousSize = new Size();
 
+        private readonly List<string> acquireModes = new List<string>
+        {
+           Resources.nativeAquireMode, "TWAIN"
+        };
+
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
         {
             InitializeComponent();
@@ -190,7 +195,7 @@ namespace DMMDigital.Views
             rulerColor = Color.FromArgb(int.Parse(config.rulerColor));
             textDrawingPreviousSize = config.textSize;
             drawingSize = config.drawingSize;
-            acquireMode = config.acquireMode;
+            acquireMode = acquireModes[config.acquireMode];
 
             if (acquireMode == "TWAIN")
             {
@@ -414,8 +419,6 @@ namespace DMMDigital.Views
         {
             selectFrame();
 
-            DateTime createdAt = DateTime.Now;
-
             if (selectedFrame.originalImage != null)
             {
                 examImages.RemoveAll(i => i.frameId == selectedFrame.order);
@@ -426,11 +429,10 @@ namespace DMMDigital.Views
                 examId = examId,
                 frameId = selectedFrame.order,
                 file = $"{selectedFrame.order}-original.png",
-                notes = selectedFrame.notes,
-                createdAt = createdAt
+                notes = selectedFrame.notes
             });
 
-            selectedFrame.datePhotoTook = createdAt.ToString();
+            selectedFrame.datePhotoTook = DateTime.Now.ToString();
 
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
@@ -934,7 +936,7 @@ namespace DMMDigital.Views
             if (acquireMode == "TWAIN")
             {
                 buttonAcquireMode.Image = Resources.icon_32x32_scanner;
-                buttonAcquireMode.ToolTipText = acquireMode;
+                buttonAcquireMode.ToolTipText = "TWAIN";
 
                 sensorConnected = false;
                 sensorStatusColor = Color.Blue;
@@ -942,7 +944,7 @@ namespace DMMDigital.Views
             else
             {
                 buttonAcquireMode.Image = Resources.icon_32x32_capture;
-                buttonAcquireMode.ToolTipText = acquireMode;
+                buttonAcquireMode.ToolTipText = Resources.nativeAquireMode;
 
                 if (sensorConnected)
                 {

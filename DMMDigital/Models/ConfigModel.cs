@@ -21,7 +21,7 @@ namespace DMMDigital.Models
         public string sensorModel { get; set; }
 
         [Column("ACQUIRE_MODE")]
-        public string acquireMode { get; set; }
+        public int acquireMode { get; set; }
 
         [Column("DRAWING_COLOR")]
         public string drawingColor { get; set; }

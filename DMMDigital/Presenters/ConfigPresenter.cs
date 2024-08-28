@@ -1,8 +1,11 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
@@ -14,7 +17,13 @@ namespace DMMDigital.Presenters
         private ConfigModel currentConfig;
         private readonly IConfigRepository configRepository;
         private ISensorRepository sensorRepository = new SensorRepository();
-        
+
+
+        private readonly List<string> acquireModes = new List<string>
+        {
+           Resources.nativeAquireMode, "TWAIN"
+        };
+
         public ConfigPresenter(ConfigView configView, IConfigRepository repository) 
         {
             view = configView;
@@ -35,7 +44,7 @@ namespace DMMDigital.Presenters
             view.sensorPath = currentConfig.sensorPath;
             view.examPath = currentConfig.examPath;
             view.sensorModel = currentConfig.sensorModel;
-            view.acquireMode = currentConfig.acquireMode;
+            view.acquireMode = acquireModes[currentConfig.acquireMode];
             view.drawingSize = currentConfig.drawingSize;
             view.drawingColor = currentConfig.drawingColor;
             view.textSize = currentConfig.textSize;
@@ -55,7 +64,7 @@ namespace DMMDigital.Presenters
                 currentConfig.sensorPath = view.sensorPath;
                 currentConfig.examPath = view.examPath;
                 currentConfig.sensorModel = view.sensorModel;
-                currentConfig.acquireMode = view.acquireMode;
+                currentConfig.acquireMode = acquireModes.IndexOf(view.acquireMode);
                 currentConfig.drawingColor = view.drawingColor;
                 currentConfig.drawingSize = view.drawingSize;
                 currentConfig.textColor = view.textColor;

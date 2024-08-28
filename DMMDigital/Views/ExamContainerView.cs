@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,7 +78,7 @@ namespace DMMDigital.Views
                 if (examView.acquireMode == "TWAIN")
                 {
                     eventConnectSensor?.Invoke(s, e);
-                    examView.acquireMode = "NATIVE";
+                    examView.acquireMode = Resources.nativeAquireMode;
                 }
                 else
                 {

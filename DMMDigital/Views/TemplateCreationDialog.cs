@@ -14,7 +14,7 @@ namespace DMMDigital.Views
     public partial class TemplateCreationDialog : Form, ITemplateCreationDialog
     {
 
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientRequiredName")]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messageTemplateRequiredName")]
         public string templateName 
         { 
             get { return textBoxTemplateName.Text; } 
@@ -77,7 +77,6 @@ namespace DMMDigital.Views
             associateEvents();
 
             comboBoxOrientation.InnerComboBox.DataSource = dictOrientation.ToList();
-
             comboBoxOrientation.InnerComboBox.DisplayMember = "Value";
             comboBoxOrientation.InnerComboBox.ValueMember = "Key";
 

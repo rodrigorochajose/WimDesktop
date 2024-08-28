@@ -119,6 +119,7 @@ namespace DMMDigital.Presenters
         {
             try
             {
+                
                 string workDir = getWorkDir();
                 List<SensorModel> sensors = sensorRepository.getAllSensors();
 
@@ -566,7 +567,11 @@ namespace DMMDigital.Presenters
                             int index = (y * width + x) * bytesPerPixel;
                             ushort pixelValue = BitConverter.ToUInt16(data, index);
 
-                            image[x, y] = new L16(pixelValue);
+                            double gamma = 2.2; // Valor padrão para gamma correction
+                            double adjustedValue = Math.Pow(pixelValue / 65535.0, 1.0 / gamma) * 65535.0;
+                            ushort invertedPixelValue = (ushort)(65535 - adjustedValue);
+
+                            image[x, y] = new L16(invertedPixelValue);
                         }
                     }
 

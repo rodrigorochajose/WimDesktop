@@ -9,10 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Resources;
 using DMMDigital.Components.Rounded;
-using System.Text.RegularExpressions;
 using DMMDigital.Properties;
 
 namespace DMMDigital.Views
@@ -44,8 +41,8 @@ namespace DMMDigital.Views
         }
 
         public string acquireMode
-        { 
-            get { return comboBoxAcquireMode.InnerComboBox.SelectedItem.ToString(); } 
+        {
+            get { return comboBoxAcquireMode.InnerComboBox.SelectedItem.ToString(); }
             set { comboBoxAcquireMode.InnerComboBox.SelectedItem = value; }
         }
 
