@@ -1,12 +1,16 @@
-﻿using DMMDigital._Repositories;
+﻿using CsvHelper.Configuration;
+using CsvHelper;
+using DMMDigital._Repositories;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Models;
 using DMMDigital.Properties;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Windows.Forms;
+using System.Linq;
+using System.Globalization;
 
 namespace DMMDigital.Presenters
 {
@@ -16,7 +20,8 @@ namespace DMMDigital.Presenters
 
         private ConfigModel currentConfig;
         private readonly IConfigRepository configRepository;
-        private ISensorRepository sensorRepository = new SensorRepository();
+        private readonly ISensorRepository sensorRepository = new SensorRepository();
+
 
 
         private readonly List<string> acquireModes = new List<string>
@@ -30,6 +35,8 @@ namespace DMMDigital.Presenters
             configRepository = repository;
             configView.saveConfigs += saveConfigs;
             configView.loadConfigs += loadConfigs;
+            configView.migrateWimDesktop += migrateWimDesktopDatabase;
+            configView.migrateCDR += migrateCDRDatabase;
         }
 
         private void loadConfigs(object sender, EventArgs e)
@@ -80,6 +87,108 @@ namespace DMMDigital.Presenters
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void migrateWimDesktopDatabase(object sender, EventArgs e)
+        {
+            generateCSV();
+            importImages();
+        }
+
+        private void migrateCDRDatabase(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateCSV()
+        {
+            string dataPath = @"C:\WIMDesktopDB\migracao";
+
+            List<ConfigModel> configs = generateModel<ConfigModel, ConfigModelMap>(Path.Combine(dataPath, "config.csv"));
+            configs[0].drawingColor = convertHexToARGB(configs[0].drawingColor);
+            configs[0].textColor = convertHexToARGB(configs[0].textColor);
+            configs[0].rulerColor = convertHexToARGB(configs[0].rulerColor);
+
+            List<PatientModel> patients = generateModel<PatientModel, PatientModelMap>(Path.Combine(dataPath, "patient.csv"));
+            List<ExamModel> exams = generateModel<ExamModel, ExamModelMap>(Path.Combine(dataPath, "exam.csv"));
+            List<ExamImageModel> examImages = generateModel<ExamImageModel, ExamImageModelMap>(Path.Combine(dataPath, "exam_image.csv"));
+
+            IPatientRepository patientRepository = new PatientRepository();
+            IExamRepository examRepository = new ExamRepository();
+            IExamImageRepository examImageRepository = new ExamImageRepository();
+
+            configRepository.importConfig(configs.First());
+            patientRepository.importPatients(patients);
+            examRepository.importExams(exams);
+            examImageRepository.importExamImages(examImages);
+        }
+
+        public static List<T> generateModel<T, TMap>(string caminhoArquivoCsv)
+        where TMap : ClassMap<T>
+        {
+            using (var reader = new StreamReader(caminhoArquivoCsv))
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+            {
+                csv.Context.RegisterClassMap<TMap>();
+                var registros = csv.GetRecords<T>();
+                return new List<T>(registros);
+            }
+        }
+
+        public string convertHexToARGB(string hex)
+        {
+            hex = hex.Replace("#", "");
+
+            hex = hex.Substring(0, hex.Length - 2);
+
+            int argb = int.Parse(hex, NumberStyles.HexNumber);
+
+            int alpha = 255;
+
+            int red = (argb >> 16) & 0xFF;
+            int green = (argb >> 8) & 0xFF;
+            int blue = argb & 0xFF;
+
+            int argbInt = (alpha << 24) | (red << 16) | (green << 8) | blue;
+
+            return argbInt.ToString();
+        }
+
+        private void importImages()
+        {
+
+            string imgFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), $".wimdesktop\\imgs");
+
+            string[] patientFolders = Directory.GetDirectories(imgFolderPath);
+
+            foreach (string patientFolder in patientFolders)
+            {
+                string[] examFolders = Directory.GetDirectories(patientFolder);
+
+                foreach (string examFolder in examFolders)
+                {
+                    string[] files = Directory.GetFiles(examFolder);
+
+                    string patientExam = examFolder.Substring(examFolder.IndexOf("imgs") + 5);
+                    string folderDest = Path.Combine("C:\\WimDesktopDB\\img", patientExam);
+
+                    if (!Directory.Exists(folderDest))
+                    {
+                        Directory.CreateDirectory(folderDest);
+                    }
+
+                    foreach (string file in files)
+                    {
+                        string fileName = Path.GetFileName(file);
+
+                        if (fileName.Contains("_original") || fileName.Contains("_filtered"))
+                        {
+                            string dest = Path.Combine(folderDest, fileName);
+                            File.Copy(file, dest, overwrite: true);
+                        }
+                    }
+                }
             }
         }
     }

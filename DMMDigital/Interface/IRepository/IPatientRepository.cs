@@ -11,5 +11,6 @@ namespace DMMDigital.Interface.IRepository
         IEnumerable<PatientModel> getAllPatients();
         PatientModel getPatientById(int patientid);
         IEnumerable<PatientModel> getPatientsByName(string value);
+        void importPatients(List<PatientModel> patients);
     }
 }

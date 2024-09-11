@@ -419,4 +419,7 @@
   <data name="nativeAquireMode" xml:space="preserve">
     <value>Nativo</value>
   </data>
+  <data name="messageMigrationSuccess" xml:space="preserve">
+    <value>Migração do banco de dados feita com sucesso!</value>
+  </data>
 </root>

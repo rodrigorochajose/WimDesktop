@@ -3,6 +3,7 @@ using DMMDigital.Models;
 using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -20,7 +21,7 @@ namespace DMMDigital._Repositories
                 context.patient.Add(patient);
                 context.SaveChanges();
 
-                Directory.CreateDirectory(@"C:\WimDesktopDB\img\Paciente-" + patient.id);
+                Directory.CreateDirectory($"C:\\WimDesktopDB\\img\\{patient.id}");
 
                 MessageBox.Show(Resources.messagePatientCreated);
             }
@@ -71,6 +72,27 @@ namespace DMMDigital._Repositories
         public IEnumerable<PatientModel> getPatientsByName(string value)
         {
             return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower()));
+        }
+
+        public void importPatients(List<PatientModel> patients)
+        {
+            try
+            {
+                context.patient.AddRange(patients);
+                context.SaveChanges();
+                MessageBox.Show("Patient OK");
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                var errorMessages = dbEx.EntityValidationErrors
+                    .SelectMany(e => e.ValidationErrors)
+                    .Select(e => $"Property: {e.PropertyName} Error: {e.ErrorMessage}");
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = $"Validation failed: {fullErrorMessage}";
+
+                MessageBox.Show(exceptionMessage);
+            }
         }
        
     }

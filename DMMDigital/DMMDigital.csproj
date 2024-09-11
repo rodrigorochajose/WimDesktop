@@ -536,6 +536,9 @@
     <PackageReference Include="Control.Draggable">
       <Version>1.0.5049.269</Version>
     </PackageReference>
+    <PackageReference Include="CsvHelper">
+      <Version>33.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Emgu.CV">
       <Version>4.7.0.5276</Version>
     </PackageReference>

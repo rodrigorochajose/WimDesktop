@@ -681,6 +681,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Migração do banco de dados feita com sucesso!.
+        /// </summary>
+        internal static string messageMigrationSuccess {
+            get {
+                return ResourceManager.GetString("messageMigrationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente possui exames, não será possível excluí-lo..
         /// </summary>
         internal static string messagePatientCannotDelete {

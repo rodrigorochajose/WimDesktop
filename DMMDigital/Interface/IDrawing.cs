@@ -7,7 +7,7 @@ namespace DMMDigital.Interface
     public interface IDrawing
     {
         int id { get; set; }
-        int frameId { get; set; }
+        int examImageId { get; set; }
         GraphicsPath graphicsPath { get; set; }
         Color drawingColor { get; set; }
         float drawingSize { get; set; }
@@ -15,7 +15,7 @@ namespace DMMDigital.Interface
 
         void drawPreview(Graphics g);
         void draw(Graphics g);
-        Image generateDrawingImageAndThumb(int frameId, string path, int width, int height);
+        Image generateDrawingImageAndThumb(int examImageId, string path, int width, int height);
         IDrawing deepCopy();
     }
 }

@@ -14,7 +14,6 @@ namespace DMMDigital.Models
 
         [Column("TEMPLATE_ID")]
         public int templateId { get; set; }
-        public virtual TemplateModel template { get; set; }
 
         [Column("ORDINATION")]
         public int order { get; set; }

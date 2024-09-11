@@ -81,7 +81,7 @@ namespace DMMDigital.Presenters
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath += $"\\Paciente-{examView.patient.id}\\{examView.sessionName}_{exam.createdAt:dd-MM-yyyy-HH-m}";
+                examView.examPath += $"\\{examView.patient.id}\\{examView.examId}";
                 examView.templateId = exam.templateId;
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();
@@ -142,10 +142,10 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                int currentFrameId = examView.selectedFrame.order;
+                int currentFrameId = examView.selectedFrame.id;
 
                 ExamImageModel currentExamImage = examImageRepository.getExamImageById(examView.examId, currentFrameId);
-                ExamImageModel examImageToSave = examView.examImages.FirstOrDefault(ei => ei.frameId == currentFrameId);
+                ExamImageModel examImageToSave = examView.examImages.FirstOrDefault(ei => ei.templateFrameId == currentFrameId);
 
                 if (examImageToSave == null && currentExamImage != null)
                 {
@@ -177,11 +177,11 @@ namespace DMMDigital.Presenters
         {
             try
             {
-                int selectedFrameId = examView.selectedFrame.order;
+                int examImageId = examView.examImages.FirstOrDefault(ei => ei.templateFrameId == examView.selectedFrame.id).id;
 
-                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == selectedFrameId).ToList();
+                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == examImageId).ToList();
 
-                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImageId).ToList();
 
                 List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
 
@@ -192,7 +192,7 @@ namespace DMMDigital.Presenters
                     examImageDrawingPointsRepository.deleteRangeDrawingPoints(drawingsIdToDelete);
                     examImageDrawingRepository.deleteRangeDrawing(drawingsToDelete);
 
-                    currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).ToList();
+                    currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImageId).ToList();
                 }
 
                 foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)
@@ -202,17 +202,13 @@ namespace DMMDigital.Presenters
                     {
                         examImageDrawingRepository.addDrawing(item);
 
-                        int drawingId  = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, selectedFrameId).Last().id;
-
                         List<ExamImageDrawingPointsModel> pointsToSave = new List<ExamImageDrawingPointsModel>();
 
                         foreach (Point point in item.points)
                         {
                             pointsToSave.Add(new ExamImageDrawingPointsModel
                             {
-                                examId = item.examId,
-                                examImageId = item.examImageId,
-                                examImageDrawingId = drawingId,
+                                examImageDrawingId = item.id,
                                 pointX = point.X,
                                 pointY = point.Y
                             });
@@ -228,7 +224,7 @@ namespace DMMDigital.Presenters
                             {
                                 rulerLengths.Add(new RulerLengthModel
                                 {
-                                    examImageDrawingId = drawingId,
+                                    examImageDrawingId = item.id,
                                     lineLength = length,
                                 });
                             }

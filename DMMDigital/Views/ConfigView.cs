@@ -11,6 +11,7 @@ using System.Threading;
 using System.ComponentModel;
 using DMMDigital.Components.Rounded;
 using DMMDigital.Properties;
+using System.IO;
 
 namespace DMMDigital.Views
 {
@@ -83,6 +84,8 @@ namespace DMMDigital.Views
 
         public event EventHandler loadConfigs;
         public event EventHandler saveConfigs;
+        public event EventHandler migrateWimDesktop;
+        public event EventHandler migrateCDR;
 
         private Twain twain;
         private bool languageChanged = false;
@@ -250,5 +253,17 @@ namespace DMMDigital.Views
             folderBrowserDialog1.ShowDialog();
             examPath = folderBrowserDialog1.SelectedPath;
         }
+
+        private void roundedButtonMigrateWimDesktopClick(object sender, EventArgs e)
+        {
+            migrateWimDesktop?.Invoke(this, e);
+        }
+
+        private void roundedButtonMigrateCDRClick(object sender, EventArgs e)
+        {
+            migrateCDR?.Invoke(this, e);
+        }
+
+       
     }
 }

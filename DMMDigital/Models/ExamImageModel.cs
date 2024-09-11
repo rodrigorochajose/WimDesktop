@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CsvHelper.Configuration;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,8 +16,14 @@ namespace DMMDigital.Models
         [Column("EXAM_ID")]
         public int examId { get; set; }
 
-        [Column("FRAME_ID")]
-        public int frameId { get; set; }
+        [ForeignKey("examId")]
+        public virtual ExamModel exam { get; set; }
+
+        [Column("TEMPLATE_FRAME_ID")]
+        public int templateFrameId { get; set; }
+
+        [ForeignKey("templateFrameId")]
+        public virtual TemplateModel template { get; set; }
 
         [Column("FILE")]
         public string file { get; set; }
@@ -26,5 +33,18 @@ namespace DMMDigital.Models
 
         [Column("CREATED_AT")]
         public DateTime createdAt { get; set; }
+    }
+
+    public class ExamImageModelMap : ClassMap<ExamImageModel>
+    {
+        public ExamImageModelMap()
+        {
+            Map(m => m.id).Name("ID");
+            Map(m => m.examId).Name("EXAM_ID");
+            Map(m => m.templateFrameId).Name("TEMPLATE_FRAME_ID");
+            Map(m => m.file).Name("FILE");
+            Map(m => m.notes).Name("NOTES");
+            Map(m => m.createdAt).Name("CREATED_AT");
+        }
     }
 }

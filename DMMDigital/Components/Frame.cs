@@ -1,12 +1,11 @@
-﻿using DMMDigital.Properties;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Components
 {
     public class Frame : PictureBox
     {
+        public int id { get; set; }
         public int order { get ; set; }
         public int orientation { get; set; }
         public Image originalImage { get; set; }

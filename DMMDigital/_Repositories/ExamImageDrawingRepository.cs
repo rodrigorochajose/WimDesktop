@@ -74,7 +74,7 @@ namespace DMMDigital._Repositories
 
         private void getDrawingPoints(int examId, ExamImageDrawingModel drawing)
         {
-            List<ExamImageDrawingPointsModel> drawingPoints = context.examImageDrawingPoints.Where(e => e.examId == examId && e.examImageDrawingId == drawing.id).ToList();
+            List<ExamImageDrawingPointsModel> drawingPoints = context.examImageDrawingPoints.Where(e => e.examImageDrawingId == drawing.id).ToList();
 
             drawing.points = new List<System.Drawing.Point>();
 

@@ -10,5 +10,6 @@ namespace DMMDigital.Interface.IRepository
         void deleteExamImage(ExamImageModel examImages);
         IEnumerable<ExamImageModel> getExamImages(int examId);
         ExamImageModel getExamImageById(int examId, int frameId);
+        void importExamImages(List<ExamImageModel> examImages);
     }
 }

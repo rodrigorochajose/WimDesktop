@@ -106,7 +106,7 @@ namespace DMMDigital.Views
             {
                 drawTemplate();
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
-                DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\Paciente-{patient.id}\\{sessionName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
+                DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\{patient.id}\\{examId}");
                 examPath = di.FullName;
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
@@ -156,7 +156,7 @@ namespace DMMDigital.Views
 
         private void selectInitialFrame()
         {
-            Frame emptyFrame = frames.First(f => f.originalImage == null);
+            Frame emptyFrame = frames.FirstOrDefault(f => f.originalImage == null);
 
             if (emptyFrame != null)
             {
@@ -230,11 +230,12 @@ namespace DMMDigital.Views
 
                 Frame newFrame = new Frame
                 {
+                    id = frame.id,
                     Width = width,
                     Height = height,
                     BackColor = Color.Black,
                     order = frame.order,
-                    Name = "frame" + frame.id,
+                    Name = $"frame{frame.id}",
                     orientation = frame.orientation,
                     Tag = Color.Black,
                     Location = new Point(frame.locationX / 2, frame.locationY / 2),
@@ -244,7 +245,7 @@ namespace DMMDigital.Views
                 newFrame.Click += frameClick;
                 newFrame.DoubleClick += frameDoubleClick;
 
-                ExamImageModel selectedExamImage = examImages.FirstOrDefault(e => e.frameId == newFrame.order);
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(e => e.templateFrameId == newFrame.id);
 
                 if (selectedExamImage != null)
                 {
@@ -258,7 +259,7 @@ namespace DMMDigital.Views
                     newFrame.notes = selectedExamImage.notes;
                     newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
-                    string filteredFile = $"{newFrame.order}-filtered.png";
+                    string filteredFile = $"{newFrame.order}_filtered.png";
 
                     if (File.Exists(Path.Combine(examPath, filteredFile)))
                     {
@@ -272,7 +273,7 @@ namespace DMMDigital.Views
                     newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
                 }
 
-                frameDrawingHistories.Add(new FrameDrawingHistory(frame.order, new List<List<IDrawing>> { new List<IDrawing>() }));
+                frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { new List<IDrawing>() }));
 
                 frames.Add(newFrame);
                 panelTemplate.Controls.Add(newFrame);
@@ -301,7 +302,7 @@ namespace DMMDigital.Views
                             return new Arrow
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -315,7 +316,7 @@ namespace DMMDigital.Views
                             return new Ellipse
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -329,7 +330,7 @@ namespace DMMDigital.Views
                             return new RectangleDraw
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -343,7 +344,7 @@ namespace DMMDigital.Views
                             return new FreeDraw
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -357,7 +358,7 @@ namespace DMMDigital.Views
                             return new Text
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -375,7 +376,7 @@ namespace DMMDigital.Views
                             Ruler ruler = new Ruler
                             {
                                 id = drawing.id,
-                                frameId = drawing.examImageId,
+                                examImageId = drawing.examImageId,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
                                 drawingSize = drawing.drawingSize,
@@ -402,7 +403,7 @@ namespace DMMDigital.Views
 
                 foreach (IDrawing drawing in frameDrawings)
                 {
-                    List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == drawing.frameId).drawingHistory;
+                    List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == examImages.FirstOrDefault(ei => ei.id == drawing.examImageId).templateFrameId).drawingHistory;
 
                     currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
                     {
@@ -421,13 +422,13 @@ namespace DMMDigital.Views
 
             if (selectedFrame.originalImage != null)
             {
-                examImages.RemoveAll(i => i.frameId == selectedFrame.order);
+                examImages.RemoveAll(i => i.templateFrameId == selectedFrame.id);
             }
 
             examImages.Add(new ExamImageModel
             {
                 examId = examId,
-                frameId = selectedFrame.order,
+                templateFrameId = selectedFrame.id,
                 file = $"{selectedFrame.order}-original.png",
                 notes = selectedFrame.notes
             });
@@ -504,7 +505,7 @@ namespace DMMDigital.Views
 
             panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
 
-            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.order).drawingHistory;
+            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
             selectedDrawingHistoryHandler();
         }
@@ -550,7 +551,7 @@ namespace DMMDigital.Views
         public void loadImageOnMainPictureBox()
         {
             Image image;
-            using (FileStream fs = File.Open(Path.Combine(examPath, $"{selectedFrame.order}-original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
+            using (FileStream fs = File.Open(Path.Combine(examPath, $"{selectedFrame.order}_original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 image = Image.FromStream(fs);
             }
@@ -1002,8 +1003,8 @@ namespace DMMDigital.Views
                 frameHandler(selectedImage);
 
                 mainPictureBox.Image = selectedImage;
-                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
-                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
+                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
                 resizeMainPictureBox();
 
                 provideTools(true);
@@ -1043,10 +1044,10 @@ namespace DMMDigital.Views
 
                 selectTool(buttonSelect);
 
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-original.png"));
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
-                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}-edited.png");
+                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}_edited.png");
 
                 if (File.Exists(editedImagePath))
                 {
@@ -1059,7 +1060,7 @@ namespace DMMDigital.Views
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                 flowLayoutPanel1.Controls.Clear();
 
-                examImages.RemoveAll(ei => ei.frameId == selectedFrame.order);
+                examImages.RemoveAll(ei => ei.templateFrameId == selectedFrame.id);
 
                 selectedFrame.Image = drawFrameDefaultImage(selectedFrame);
                 selectedFrame.originalImage = null;
@@ -1176,7 +1177,7 @@ namespace DMMDigital.Views
 
             Image image = filterView.originalImage;
 
-            image.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+            image.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
@@ -1259,7 +1260,7 @@ namespace DMMDigital.Views
             }
 
             selectedFrame.filteredImage = currentImage;
-            currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+            currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
             mainPictureBox.Image = currentImage;
             selectedFrame.Image = new Bitmap(currentImage).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
@@ -1318,7 +1319,7 @@ namespace DMMDigital.Views
                     selectedFrame.Refresh();
                 }));
 
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-filtered.png"));
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
                 restoreFrameDrawings();
                 examHasChanges = true;
@@ -1331,7 +1332,7 @@ namespace DMMDigital.Views
         {
             if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
             {
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
                 selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                 frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
@@ -1444,7 +1445,7 @@ namespace DMMDigital.Views
         {
             selectedFrame.notes = textBoxFrameNotes.Text;
 
-            ExamImageModel selectedImage = examImages.Find(f => f.frameId == selectedFrame.order);
+            ExamImageModel selectedImage = examImages.Find(f => f.templateFrameId == selectedFrame.id);
             selectedImage.notes = selectedFrame.notes;
         }
 
@@ -1520,7 +1521,7 @@ namespace DMMDigital.Views
                                 }
 
                                 selectedDrawingToMove.id = currentDrawing.id;
-                                selectedDrawingToMove.frameId = currentDrawing.frameId;
+                                selectedDrawingToMove.examImageId = currentDrawing.examImageId;
                                 selectedDrawingToMove.graphicsPath = currentDrawing.graphicsPath;
                                 selectedDrawingToMove.drawingColor = currentDrawing.drawingColor;
                                 selectedDrawingToMove.drawingSize = currentDrawing.drawingSize;
@@ -1562,7 +1563,7 @@ namespace DMMDigital.Views
                                         currentDrawing = new Ruler
                                         {
                                             id = counterDrawings,
-                                            frameId = selectedFrame.order,
+                                            examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                             graphicsPath = new GraphicsPath(),
                                             drawingColor = rulerColor,
                                             drawingSize = 2,
@@ -1596,7 +1597,7 @@ namespace DMMDigital.Views
                                 currentDrawing = new Ruler
                                 {
                                     id = counterDrawings,
-                                    frameId = selectedFrame.order,
+                                    examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                     graphicsPath = new GraphicsPath(),
                                     drawingColor = rulerColor,
                                     drawingSize = 2,
@@ -1613,7 +1614,7 @@ namespace DMMDigital.Views
                             currentDrawing = new FreeDraw
                             {
                                 id = counterDrawings,
-                                frameId = selectedFrame.order,
+                                examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                 graphicsPath = new GraphicsPath(),
                                 points = new List<Point> { clickPosition },
                                 drawingColor = drawingColor,
@@ -1632,7 +1633,7 @@ namespace DMMDigital.Views
                                 currentDrawing = new Text
                                 {
                                     id = counterDrawings,
-                                    frameId = selectedFrame.order,
+                                    examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                     graphicsPath = new GraphicsPath(),
                                     text = textToDraw,
                                     font = new Font("Arial", textDrawingPreviousSize),
@@ -1657,7 +1658,7 @@ namespace DMMDigital.Views
                             currentDrawing = new Arrow
                             {
                                 id = counterDrawings,
-                                frameId = selectedFrame.order,
+                                examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = drawingColor,
                                 drawingSize = drawingSize,
@@ -1670,7 +1671,7 @@ namespace DMMDigital.Views
                             currentDrawing = new Ellipse
                             {
                                 id = counterDrawings,
-                                frameId = selectedFrame.order,
+                                examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = drawingColor,
                                 drawingSize = drawingSize,
@@ -1683,7 +1684,7 @@ namespace DMMDigital.Views
                             currentDrawing = new RectangleDraw
                             {
                                 id = counterDrawings,
-                                frameId = selectedFrame.order,
+                                examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
                                 graphicsPath = new GraphicsPath(),
                                 drawingColor = drawingColor,
                                 drawingSize = drawingSize,
@@ -1892,15 +1893,13 @@ namespace DMMDigital.Views
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel
                     {
-                        id = d.id,
                         examId = examId,
-                        examImageId = d.frameId,
+                        examImageId = d.examImageId,
                         drawingColor = d.drawingColor.ToArgb().ToString(),
                         drawingSize = (int)d.drawingSize,
                         drawingType = d.GetType().ToString().Split('.').Last(),
+                        points = getCalibratedDrawingPoints(new List<Point>(d.points))
                     };
-
-                    drawingToSave.points = getCalibratedDrawingPoints(new List<Point>(d.points));
 
                     if (d is Text)
                     {
@@ -1962,7 +1961,7 @@ namespace DMMDigital.Views
 
                 Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
 
-                editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}-edited.png"));
+                editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
                 selectedFrame.editedImage = editedImage;
             }
         }
@@ -2014,15 +2013,13 @@ namespace DMMDigital.Views
 
         private void timerSensorStatusTick(object sender, EventArgs e)
         {
-            Frame currentFrame = frames.FirstOrDefault(f => (Color)f.Tag == Color.LimeGreen);
-
             if (blinking)
             {
-                currentFrame.BackColor = Color.Black;
+                selectedFrame.BackColor = Color.Black;
             }
             else
             {
-                currentFrame.BackColor = sensorStatusColor;
+                selectedFrame.BackColor = sensorStatusColor;
             }
 
             blinking = !blinking;

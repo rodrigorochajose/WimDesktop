@@ -11,12 +11,6 @@ namespace DMMDigital.Models
         [Column("ID")]
         public int id { get; set; }
 
-        [Column("EXAM_ID")]
-        public int examId { get; set;}
-
-        [Column("EXAM_IMAGE_ID")]
-        public int examImageId { get; set;}
-
         [Column("EXAM_IMAGE_DRAWING_ID")]
         public int examImageDrawingId { get; set; }
 

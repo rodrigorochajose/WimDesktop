@@ -180,11 +180,17 @@
   <data name="labelTitle.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="roundedButtonMigrateCDR.Text" xml:space="preserve">
+    <value>Migrate CDR</value>
+  </data>
+  <data name="roundedButtonMigrateWimDesktop.Text" xml:space="preserve">
+    <value>Migrate WIMDESKTOP</value>
+  </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
-    <value>Shapes</value>
+    <value>Filters and Drawings</value>
   </data>
   <data name="tabPage4.Text" xml:space="preserve">
     <value>Advanced Settings</value>

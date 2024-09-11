@@ -2,6 +2,7 @@
 using DMMDigital.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 
@@ -56,7 +57,28 @@ namespace DMMDigital._Repositories
 
         public ExamImageModel getExamImageById(int examId, int frameId)
         {
-            return context.examImage.FirstOrDefault(e => e.examId == examId && e.frameId == frameId);
+            return context.examImage.FirstOrDefault(e => e.examId == examId && e.templateFrameId == frameId);
+        }
+
+        public void importExamImages(List<ExamImageModel> examImages)
+        {
+            try
+            {
+                context.examImage.AddRange(examImages);
+                context.SaveChanges();
+                MessageBox.Show("Exam Images OK");
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                var errorMessages = dbEx.EntityValidationErrors
+                    .SelectMany(e => e.ValidationErrors)
+                    .Select(e => $"Property: {e.PropertyName} Error: {e.ErrorMessage}");
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = $"Validation failed: {fullErrorMessage}";
+
+                MessageBox.Show(exceptionMessage);
+            }
         }
     }
 }

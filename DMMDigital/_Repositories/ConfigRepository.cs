@@ -3,6 +3,7 @@ using DMMDigital.Models;
 using DMMDigital.Properties;
 using System;
 using System.Linq;
+using System.Windows;
 
 namespace DMMDigital._Repositories
 {
@@ -54,6 +55,21 @@ namespace DMMDigital._Repositories
         public string getLanguage()
         {
             return context.config.First().language;
+        }
+
+        public void importConfig(ConfigModel config)
+        {
+            try
+            {
+                ConfigModel currentConfig = context.config.First();
+                context.Entry(currentConfig).CurrentValues.SetValues(config);
+                context.SaveChanges();
+                MessageBox.Show("CONFIG OK");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

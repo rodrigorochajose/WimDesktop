@@ -10,5 +10,7 @@ namespace DMMDigital.Interface.IRepository
         int getExamId(ExamModel exam);
         ExamModel getExam (int examId);
         IEnumerable<ExamModel> getPatientExams(int patientId);
+        bool examHasImages(int examId);
+        void importExams(List<ExamModel> exams);
     }
 }

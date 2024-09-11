@@ -22,5 +22,7 @@ namespace DMMDigital.Interface.IView
 
         event EventHandler loadConfigs;
         event EventHandler saveConfigs;
+        event EventHandler migrateWimDesktop;
+        event EventHandler migrateCDR;
     }
 }

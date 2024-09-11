@@ -36,19 +36,23 @@
             this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonConfigureFilters = new DMMDigital.Components.Rounded.RoundedButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.comboBoxAcquireMode = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.comboBoxSensorModel = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.textBoxTwainSource = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSelectTwainSource = new DMMDigital.Components.Rounded.RoundedButton();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.buttonConfigureFilters = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRulerColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonTextColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonDrawingColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
@@ -66,8 +70,12 @@
             this.labelTextColor = new System.Windows.Forms.Label();
             this.labelShapeColor = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.roundedButtonMigrateCDR = new DMMDigital.Components.Rounded.RoundedButton();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.roundedButtonMigrateWimDesktop = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonExamPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSensorPath = new DMMDigital.Components.Rounded.RoundedButton();
@@ -82,13 +90,16 @@
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
@@ -146,12 +157,13 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.buttonConfigureFilters);
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Controls.Add(this.comboBoxLanguage);
+            this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.comboBoxAcquireMode);
             this.tabPage1.Controls.Add(this.comboBoxSensorModel);
             this.tabPage1.Controls.Add(this.textBoxTwainSource);
             this.tabPage1.Controls.Add(this.buttonSelectTwainSource);
-            this.tabPage1.Controls.Add(this.panel7);
             this.tabPage1.Controls.Add(this.panel6);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
@@ -159,17 +171,32 @@
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             // 
-            // buttonConfigureFilters
+            // panel2
             // 
-            this.buttonConfigureFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonConfigureFilters.BorderColor = System.Drawing.Color.White;
-            this.buttonConfigureFilters.BorderWidth = 5F;
-            this.buttonConfigureFilters.CornerRadius = 10;
-            this.buttonConfigureFilters.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
-            resources.ApplyResources(this.buttonConfigureFilters, "buttonConfigureFilters");
-            this.buttonConfigureFilters.Name = "buttonConfigureFilters";
-            this.buttonConfigureFilters.UseVisualStyleBackColor = false;
-            this.buttonConfigureFilters.Click += new System.EventHandler(this.buttonConfigureFiltersClick);
+            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel2.Controls.Add(this.label1);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // comboBoxLanguage
+            // 
+            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
+            this.comboBoxLanguage.BorderRadius = 10;
+            this.comboBoxLanguage.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
+            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            // 
+            // label17
+            // 
+            resources.ApplyResources(this.label17, "label17");
+            this.label17.Name = "label17";
             // 
             // comboBoxAcquireMode
             // 
@@ -212,18 +239,6 @@
             this.buttonSelectTwainSource.Name = "buttonSelectTwainSource";
             this.buttonSelectTwainSource.UseVisualStyleBackColor = false;
             // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel7.Controls.Add(this.label16);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -254,6 +269,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.panel7);
+            this.tabPage2.Controls.Add(this.buttonConfigureFilters);
             this.tabPage2.Controls.Add(this.buttonRulerColorPicker);
             this.tabPage2.Controls.Add(this.buttonTextColorPicker);
             this.tabPage2.Controls.Add(this.buttonDrawingColorPicker);
@@ -269,6 +286,29 @@
             this.tabPage2.Controls.Add(this.labelShapeColor);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel7.Controls.Add(this.label16);
+            resources.ApplyResources(this.panel7, "panel7");
+            this.panel7.Name = "panel7";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // buttonConfigureFilters
+            // 
+            this.buttonConfigureFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonConfigureFilters.BorderColor = System.Drawing.Color.White;
+            this.buttonConfigureFilters.BorderWidth = 5F;
+            this.buttonConfigureFilters.CornerRadius = 10;
+            this.buttonConfigureFilters.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
+            resources.ApplyResources(this.buttonConfigureFilters, "buttonConfigureFilters");
+            this.buttonConfigureFilters.Name = "buttonConfigureFilters";
+            this.buttonConfigureFilters.UseVisualStyleBackColor = false;
             // 
             // buttonRulerColorPicker
             // 
@@ -408,8 +448,10 @@
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
-            this.tabPage4.Controls.Add(this.comboBoxLanguage);
-            this.tabPage4.Controls.Add(this.label17);
+            this.tabPage4.Controls.Add(this.roundedButtonMigrateCDR);
+            this.tabPage4.Controls.Add(this.panel9);
+            this.tabPage4.Controls.Add(this.panel8);
+            this.tabPage4.Controls.Add(this.roundedButtonMigrateWimDesktop);
             this.tabPage4.Controls.Add(this.buttonExamPath);
             this.tabPage4.Controls.Add(this.textBoxExamPath);
             this.tabPage4.Controls.Add(this.buttonSensorPath);
@@ -419,20 +461,55 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             // 
-            // comboBoxLanguage
+            // roundedButtonMigrateCDR
             // 
-            this.comboBoxLanguage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxLanguage.BorderColor = System.Drawing.Color.White;
-            this.comboBoxLanguage.BorderRadius = 10;
-            this.comboBoxLanguage.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
-            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxLanguage.Name = "comboBoxLanguage";
+            resources.ApplyResources(this.roundedButtonMigrateCDR, "roundedButtonMigrateCDR");
+            this.roundedButtonMigrateCDR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedButtonMigrateCDR.BorderColor = System.Drawing.Color.White;
+            this.roundedButtonMigrateCDR.BorderWidth = 5F;
+            this.roundedButtonMigrateCDR.CornerRadius = 5;
+            this.roundedButtonMigrateCDR.FlatAppearance.BorderSize = 0;
+            this.roundedButtonMigrateCDR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedButtonMigrateCDR.Name = "roundedButtonMigrateCDR";
+            this.roundedButtonMigrateCDR.UseVisualStyleBackColor = false;
+            this.roundedButtonMigrateCDR.Click += new System.EventHandler(this.roundedButtonMigrateCDRClick);
             // 
-            // label17
+            // panel9
             // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
+            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel9.Controls.Add(this.label6);
+            resources.ApplyResources(this.panel9, "panel9");
+            this.panel9.Name = "panel9";
+            // 
+            // label6
+            // 
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel8.Controls.Add(this.label3);
+            resources.ApplyResources(this.panel8, "panel8");
+            this.panel8.Name = "panel8";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // roundedButtonMigrateWimDesktop
+            // 
+            resources.ApplyResources(this.roundedButtonMigrateWimDesktop, "roundedButtonMigrateWimDesktop");
+            this.roundedButtonMigrateWimDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedButtonMigrateWimDesktop.BorderColor = System.Drawing.Color.White;
+            this.roundedButtonMigrateWimDesktop.BorderWidth = 5F;
+            this.roundedButtonMigrateWimDesktop.CornerRadius = 5;
+            this.roundedButtonMigrateWimDesktop.FlatAppearance.BorderSize = 0;
+            this.roundedButtonMigrateWimDesktop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedButtonMigrateWimDesktop.Name = "roundedButtonMigrateWimDesktop";
+            this.roundedButtonMigrateWimDesktop.UseVisualStyleBackColor = false;
+            this.roundedButtonMigrateWimDesktop.Click += new System.EventHandler(this.roundedButtonMigrateWimDesktopClick);
             // 
             // buttonExamPath
             // 
@@ -525,12 +602,14 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -539,6 +618,10 @@
             this.panel4.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
@@ -554,8 +637,6 @@
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
@@ -587,14 +668,24 @@
         private System.Windows.Forms.Panel panel1;
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedButton buttonSave;
-        private Components.Rounded.RoundedButton buttonConfigureFilters;
         private Components.Rounded.RoundedNumericUpDown numericUpDownTextSize;
         private Components.Rounded.RoundedNumericUpDown numericUpDownDrawingSize;
-        private System.Windows.Forms.Label label17;
-        private Components.Rounded.RoundedComboBox comboBoxLanguage;
         private System.Windows.Forms.Panel panelHeader;
         private Components.Rounded.RoundedButton buttonDrawingColorPicker;
         private Components.Rounded.RoundedButton buttonTextColorPicker;
         private Components.Rounded.RoundedButton buttonRulerColorPicker;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private Components.Rounded.RoundedComboBox comboBoxLanguage;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label16;
+        private Components.Rounded.RoundedButton buttonConfigureFilters;
+        private Components.Rounded.RoundedButton roundedButtonMigrateWimDesktop;
+        private Components.Rounded.RoundedButton roundedButtonMigrateCDR;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label3;
     }
 }

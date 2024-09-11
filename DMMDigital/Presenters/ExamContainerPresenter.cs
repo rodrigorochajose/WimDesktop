@@ -73,7 +73,7 @@ namespace DMMDigital.Presenters
             {
                 if (e.Image != null)
                 {
-                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png"), FileMode.Create, FileAccess.Write))
+                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png"), FileMode.Create, FileAccess.Write))
                     {
                         using (Bitmap bitmap = new Bitmap(e.Image))
                         {
@@ -81,7 +81,7 @@ namespace DMMDigital.Presenters
                         }
                     }
 
-                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-filtered.png"), FileMode.Create, FileAccess.Write))
+                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_filtered.png"), FileMode.Create, FileAccess.Write))
                     {
                         using (Bitmap bitmap = new Bitmap(e.Image))
                         {
@@ -454,7 +454,7 @@ namespace DMMDigital.Presenters
 
             bmp.UnlockBits(bitmapData);
 
-            using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 PngBitmapEncoder encoder = new PngBitmapEncoder();
 
@@ -490,8 +490,8 @@ namespace DMMDigital.Presenters
 
         private void postProcess()
         {
-            string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-original.png");
-            string filteredImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-filtered.png");
+            string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
+            string filteredImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_filtered.png");
 
             using (Bitmap originalImage = new Bitmap(originalImagePath))
             {

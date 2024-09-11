@@ -11,7 +11,7 @@ namespace DMMDigital.Models.Drawings
     public class Ruler : IDrawing
     {
         public int id { get; set; }
-        public int frameId { get; set; }
+        public int examImageId { get; set; }
         public GraphicsPath graphicsPath { get; set; }
         public Color drawingColor { get; set; }
         public float drawingSize { get; set; }
@@ -96,7 +96,7 @@ namespace DMMDigital.Models.Drawings
             }
         }
 
-        public Image generateDrawingImageAndThumb(int frameId, string path, int width, int height)
+        public Image generateDrawingImageAndThumb(int examImageId, string path, int width, int height)
         {
             Bitmap bitmap = new Bitmap(width, height);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -111,7 +111,7 @@ namespace DMMDigital.Models.Drawings
             Ruler rulerCopy = new Ruler
             {
                 id = id,
-                frameId = frameId,
+                examImageId = examImageId,
                 graphicsPath = graphicsPath,
                 drawingColor = drawingColor,
                 drawingSize = drawingSize,

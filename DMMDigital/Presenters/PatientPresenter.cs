@@ -113,7 +113,7 @@ namespace DMMDigital.Presenters
             DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
-                string fullPath = $"{configRepository.getExamPath()}\\Paciente-{view.selectedPatientId}";
+                string fullPath = $"{configRepository.getExamPath()}\\{view.selectedPatientId}";
 
                 if (Directory.Exists(fullPath))
                 {
@@ -227,7 +227,7 @@ namespace DMMDigital.Presenters
 
         private void deleteExam(object sender, EventArgs e)
         {
-            if (examImageRepository.getExamImages(view.selectedExamId).Any())
+            if (examRepository.examHasImages(view.selectedExamId))
             {
                 MessageBox.Show(Resources.messageExamCannotDelete);
                 return;
@@ -263,13 +263,13 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            string examPath = $"{configRepository.getExamPath()}\\Paciente-{selectedExam.patient.id}\\{selectedExam.sessionName}_{selectedExam.createdAt:dd-MM-yyyy-HH-m}";
+            string examPath = $"{configRepository.getExamPath()}\\{selectedExam.patient.id}\\{selectedExam.id}";
 
             List<Frame> frames = new List<Frame>();
 
             foreach (TemplateFrameModel frame in templateFrames)
             {
-                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.frameId == frame.order);
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.templateFrameId == frame.order);
 
                 if (selectedExamImage != null)
                 {
@@ -283,9 +283,9 @@ namespace DMMDigital.Presenters
 
                     string imagePath = Path.Combine(examPath, selectedExamImage.file);
 
-                    if (File.Exists(Path.Combine(examPath, $"{newFrame.order}-filtered.png")))
+                    if (File.Exists(Path.Combine(examPath, $"{newFrame.order}_filtered.png")))
                     {
-                        imagePath = Path.Combine(examPath, $"{newFrame.order}-filtered.png");
+                        imagePath = Path.Combine(examPath, $"{newFrame.order}_filtered.png");
                     }
 
                     using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
