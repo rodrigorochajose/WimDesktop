@@ -82,23 +82,19 @@ namespace DMMDigital.Views
             {
                 if (e.ColumnIndex == 0)
                 {
-                    if(selectedExamId == 0)
+                    if (selectedExamId == 0)
                     {
                         MessageBox.Show(Resources.messageExamNotSelected);
                         return;
                     }
 
-                    DialogResult confirmacao = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (DialogResult.Yes.Equals(confirmacao))
-                    {
-                        int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
+                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
 
-                        string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString();
-                        DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
+                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString();
+                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
 
-                        selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy-HH-m}";
-                        eventDeleteExam?.Invoke(this, EventArgs.Empty);
-                    }
+                    selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy-HH-m}";
+                    eventDeleteExam?.Invoke(this, EventArgs.Empty);
                 }
             };
 
@@ -111,7 +107,8 @@ namespace DMMDigital.Views
 
             buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
 
-            buttonNewExam.Click += delegate {
+            buttonNewExam.Click += delegate 
+            {
                 if (selectedPatientId == 0)
                 {
                     MessageBox.Show(Resources.messagePatientNotSelected);
@@ -120,7 +117,8 @@ namespace DMMDigital.Views
                 eventShowFormNewExam?.Invoke(this, EventArgs.Empty); 
             };
 
-            buttonOpenExam.Click += delegate {
+            buttonOpenExam.Click += delegate 
+            {
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show(Resources.messageExamNotSelected);
@@ -129,7 +127,8 @@ namespace DMMDigital.Views
                 eventOpenExam?.Invoke(this, EventArgs.Empty); 
             };
 
-            buttonExportExam.Click += delegate {
+            buttonExportExam.Click += delegate 
+            {
                 if (selectedExamId == 0)
                 {
                     MessageBox.Show(Resources.messageExamNotSelected);

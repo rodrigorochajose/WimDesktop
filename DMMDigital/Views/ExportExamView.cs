@@ -191,7 +191,7 @@ namespace DMMDigital.Views
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
-                        files.Add(Path.Combine(pathImages, $"{cb.Tag}-original.png"));
+                        files.Add(Path.Combine(pathImages, $"{cb.Tag}_original.png"));
                     }
                 }
 
@@ -199,7 +199,7 @@ namespace DMMDigital.Views
                 {
                     foreach (CheckBox cb in checkBoxes)
                     {
-                        string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}-edited.png");
+                        string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}_edited.png");
 
                         if (File.Exists(currentImagePath))
                         {

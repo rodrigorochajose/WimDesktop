@@ -22,8 +22,6 @@ namespace DMMDigital.Presenters
         private readonly IConfigRepository configRepository;
         private readonly ISensorRepository sensorRepository = new SensorRepository();
 
-
-
         private readonly List<string> acquireModes = new List<string>
         {
            Resources.nativeAquireMode, "TWAIN"
@@ -92,8 +90,8 @@ namespace DMMDigital.Presenters
 
         private void migrateWimDesktopDatabase(object sender, EventArgs e)
         {
-            generateCSV();
-            importImages();
+            importData();
+            //importImages();
         }
 
         private void migrateCDRDatabase(object sender, EventArgs e)
@@ -101,7 +99,7 @@ namespace DMMDigital.Presenters
 
         }
 
-        private void generateCSV()
+        private void importData()
         {
             string dataPath = @"C:\WIMDesktopDB\migracao";
 
@@ -118,10 +116,35 @@ namespace DMMDigital.Presenters
             IExamRepository examRepository = new ExamRepository();
             IExamImageRepository examImageRepository = new ExamImageRepository();
 
-            configRepository.importConfig(configs.First());
-            patientRepository.importPatients(patients);
-            examRepository.importExams(exams);
-            examImageRepository.importExamImages(examImages);
+            foreach (PatientModel patient in patients)
+            {
+                int patientOldId = patient.id;
+
+                List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
+                
+                patientRepository.importPatient(patient);
+
+                if (patientExams.Any())
+                {
+                    foreach (ExamModel patientExam in patientExams)
+                    {
+                        int examOldId = patientExam.id;
+                        patientExam.patientId = patient.id;
+
+                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id).ToList();
+
+                        examRepository.addExam(patientExam);
+
+                        if (patientExamImages.Any())
+                        {
+                            patientExamImages.ForEach(ei => ei.examId = patientExam.id);
+                            examImageRepository.importExamImages(patientExamImages);
+                        }
+
+                        importImages(patientOldId, patient.id, examOldId, patientExam.id);
+                    }
+                }
+            }
         }
 
         public static List<T> generateModel<T, TMap>(string caminhoArquivoCsv)
@@ -155,39 +178,27 @@ namespace DMMDigital.Presenters
             return argbInt.ToString();
         }
 
-        private void importImages()
+        private void importImages(int patientOldId, int patientId, int examOldId, int examId)
         {
+            string patientFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), $".wimdesktop\\imgs\\{patientOldId}");
 
-            string imgFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), $".wimdesktop\\imgs");
+            string[] files = Directory.GetFiles(Path.Combine(patientFolder, $"{examOldId}"));
 
-            string[] patientFolders = Directory.GetDirectories(imgFolderPath);
+            string folderDest = $"C:\\WimDesktopDB\\img{patientId}\\{examId}";
 
-            foreach (string patientFolder in patientFolders)
+            if (!Directory.Exists(folderDest))
             {
-                string[] examFolders = Directory.GetDirectories(patientFolder);
+                Directory.CreateDirectory(folderDest);
+            }
 
-                foreach (string examFolder in examFolders)
+            foreach (string file in files)
+            {
+                string fileName = Path.GetFileName(file);
+
+                if (fileName.Contains("_original") || fileName.Contains("_filtered"))
                 {
-                    string[] files = Directory.GetFiles(examFolder);
-
-                    string patientExam = examFolder.Substring(examFolder.IndexOf("imgs") + 5);
-                    string folderDest = Path.Combine("C:\\WimDesktopDB\\img", patientExam);
-
-                    if (!Directory.Exists(folderDest))
-                    {
-                        Directory.CreateDirectory(folderDest);
-                    }
-
-                    foreach (string file in files)
-                    {
-                        string fileName = Path.GetFileName(file);
-
-                        if (fileName.Contains("_original") || fileName.Contains("_filtered"))
-                        {
-                            string dest = Path.Combine(folderDest, fileName);
-                            File.Copy(file, dest, overwrite: true);
-                        }
-                    }
+                    string dest = Path.Combine(folderDest, fileName);
+                    File.Copy(file, dest, overwrite: true);
                 }
             }
         }

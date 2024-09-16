@@ -41,7 +41,7 @@ namespace DMMDigital.Models
         public string observation { get; set; }
 
         [Column("CREATED_AT")]
-        public DateTime createdAt { get; set; }
+        public DateTime createdAt { get; set; } = DateTime.Now;
 
         public virtual ICollection<ExamModel> exams { get; set; }
     }

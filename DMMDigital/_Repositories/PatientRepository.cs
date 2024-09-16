@@ -3,6 +3,7 @@ using DMMDigital.Models;
 using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
@@ -74,13 +75,12 @@ namespace DMMDigital._Repositories
             return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower()));
         }
 
-        public void importPatients(List<PatientModel> patients)
+        public void importPatient (PatientModel patient)
         {
             try
             {
-                context.patient.AddRange(patients);
+                context.patient.Add(patient);
                 context.SaveChanges();
-                MessageBox.Show("Patient OK");
             }
             catch (DbEntityValidationException dbEx)
             {

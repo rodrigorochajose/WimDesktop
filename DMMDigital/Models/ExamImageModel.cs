@@ -32,7 +32,7 @@ namespace DMMDigital.Models
         public string notes { get; set; }
 
         [Column("CREATED_AT")]
-        public DateTime createdAt { get; set; }
+        public DateTime createdAt { get; set; } = DateTime.Now;
     }
 
     public class ExamImageModelMap : ClassMap<ExamImageModel>

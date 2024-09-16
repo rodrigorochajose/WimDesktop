@@ -380,6 +380,7 @@ namespace DMMDigital.Presenters
                             int imageHeight = image.nHeight;
                             short[] imageData = new short[imageWidth * imageHeight];
                             Marshal.Copy(image.pData, imageData, 0, imageData.Length);
+
                             for (int counter = 0; counter < imageData.Length; counter++)
                             {
                                 if (imageData[counter] > 0)
@@ -387,6 +388,7 @@ namespace DMMDigital.Presenters
                                     imageData[counter] = (short)(short.MaxValue - imageData[counter]);
                                 }
                             }
+
                             ConvertToBitmap(imageData, imageWidth, imageHeight);
 
                             examContainerView.selectedExamView.loadImageOnMainPictureBox();
@@ -519,7 +521,6 @@ namespace DMMDigital.Presenters
                 ImgData = new byte[nImgSize];
 
                 Marshal.Copy(image.pData, ImgData, 0, nImgSize);
-
             }
 
             if (image.propList.nItemCount > 0)

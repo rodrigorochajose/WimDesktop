@@ -156,7 +156,7 @@ namespace DMMDigital.Presenters
                     birthDate = (sender as PatientManagerView).patientBirthDate,
                     phone = (sender as PatientManagerView).patientPhone,
                     recommendation = (sender as PatientManagerView).patientRecommendation,
-                    observation = (sender as PatientManagerView).patientObservation,
+                    observation = (sender as PatientManagerView).patientObservation
                 };
 
                 new Common.ModelDataValidation().Validate(selectedPatient);

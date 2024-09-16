@@ -19,10 +19,17 @@ namespace DMMDigital._Repositories
             {
                 context.exam.Add(exam);
                 context.SaveChanges();
-            } 
-            catch (Exception ex)
+            }
+            catch (DbEntityValidationException dbEx)
             {
-                MessageBox.Show(ex.Message);
+                var errorMessages = dbEx.EntityValidationErrors
+                    .SelectMany(e => e.ValidationErrors)
+                    .Select(e => $"Property: {e.PropertyName} Error: {e.ErrorMessage}");
+
+                var fullErrorMessage = string.Join("; ", errorMessages);
+                var exceptionMessage = $"Validation failed: {fullErrorMessage}";
+
+                MessageBox.Show(exceptionMessage);
             }
         }
 
@@ -58,27 +65,6 @@ namespace DMMDigital._Repositories
         {
             ExamModel exam = context.exam.FirstOrDefault(e => e.id == examId);
             return exam.examImages.Any();
-        }
-
-        public void importExams(List<ExamModel> exams)
-        {
-            try
-            {
-                context.exam.AddRange(exams);
-                context.SaveChanges();
-                MessageBox.Show("Exam OK");
-            }
-            catch (DbEntityValidationException dbEx)
-            {
-                var errorMessages = dbEx.EntityValidationErrors
-                    .SelectMany(e => e.ValidationErrors)
-                    .Select(e => $"Property: {e.PropertyName} Error: {e.ErrorMessage}");
-
-                var fullErrorMessage = string.Join("; ", errorMessages);
-                var exceptionMessage = $"Validation failed: {fullErrorMessage}";
-
-                MessageBox.Show(exceptionMessage);
-            }
         }
     }
 }

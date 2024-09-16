@@ -1,8 +1,11 @@
 ﻿using DMMDigital.Interface.IView;
 using DMMDigital.Properties;
+using Emgu.CV.CvEnum;
+using Emgu.CV;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Emgu.CV.Util;
 
 namespace DMMDigital.Views
 {

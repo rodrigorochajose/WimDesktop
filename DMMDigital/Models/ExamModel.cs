@@ -26,7 +26,7 @@ namespace DMMDigital.Models
         public string sessionName { get; set; }
 
         [Column("CREATED_AT")]
-        public DateTime createdAt { get; set; }
+        public DateTime createdAt { get; set; } = DateTime.Now;
 
         public virtual PatientModel patient { get; set; }
         public virtual TemplateModel template { get; set; }

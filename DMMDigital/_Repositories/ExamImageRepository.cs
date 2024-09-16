@@ -66,7 +66,6 @@ namespace DMMDigital._Repositories
             {
                 context.examImage.AddRange(examImages);
                 context.SaveChanges();
-                MessageBox.Show("Exam Images OK");
             }
             catch (DbEntityValidationException dbEx)
             {

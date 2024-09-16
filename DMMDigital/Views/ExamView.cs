@@ -429,7 +429,7 @@ namespace DMMDigital.Views
             {
                 examId = examId,
                 templateFrameId = selectedFrame.id,
-                file = $"{selectedFrame.order}-original.png",
+                file = $"{selectedFrame.order}_original.png",
                 notes = selectedFrame.notes
             });
 
