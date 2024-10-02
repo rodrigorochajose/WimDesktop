@@ -32,7 +32,7 @@ namespace DMMDigital.Presenters
 
             menuView.showNewExamView += delegate 
             {
-                FormManager.instance.showForm("choosePatientExamView", () => new ChoosePatientExamPresenter(new PatientExamView(), new PatientRepository())); 
+                FormManager.instance.showForm("choosePatientExamView", () => new PatientExamPresenter(new PatientExamView(), new PatientRepository())); 
             };
 
             generateDatabaseBackup();
@@ -40,9 +40,9 @@ namespace DMMDigital.Presenters
 
         public void generateDatabaseBackup()
         {
-            string backupDirectory = @"C:\\WimDesktopDB\\bkp\\";
+            string backupDirectory = "C:\\WimDesktopDB\\bkp\\";
 
-            string currentDatabaseFilePath = @"C:\WimDesktopDB\db\WIMDESKTOPDB.FDB";
+            string currentDatabaseFilePath = "C:\\WimDesktopDB\\db\\WIMDESKTOPDB.FDB";
 
             string targetDirectoryPath = Path.Combine(backupDirectory, $"BKP_{DateTime.Now:dd-MM-yyyy-HH-m-ss}");
 
@@ -53,8 +53,7 @@ namespace DMMDigital.Presenters
 
             File.Copy(currentDatabaseFilePath, Path.Combine(targetDirectoryPath, "WIMDESKTOPDB.FDB"));
 
-            var directories = Directory.GetDirectories(@"C:\WimDesktopDB\bkp");
-
+            var directories = Directory.GetDirectories("C:\\WimDesktopDB\\bkp");
 
             if (directories.Length > 200)
             {

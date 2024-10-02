@@ -83,13 +83,43 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonNewTemplate.Click += delegate { eventAddNewTemplate?.Invoke(this, EventArgs.Empty); };
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    eventInitializeExam?.Invoke(this, EventArgs.Empty);
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
 
-            buttonInitializeExam.Click += delegate { eventInitializeExam?.Invoke(this, EventArgs.Empty); };
+                    MenuView menu = Application.OpenForms.OfType<MenuView>().First();
+                    if (!menu.Visible)
+                    {
+                        menu.Show();
+                    }
+                }
+            };
 
-            buttonCancel.Click += delegate { Close(); };
+            buttonNewTemplate.Click += delegate 
+            { 
+                eventAddNewTemplate?.Invoke(this, EventArgs.Empty); 
+            };
 
-            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
+            buttonInitializeExam.Click += delegate 
+            { 
+                eventInitializeExam?.Invoke(this, EventArgs.Empty); 
+            };
+
+            buttonCancel.Click += delegate 
+            { 
+                Close(); 
+            };
+
+            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate 
+            { 
+                showTemplateOnPanel(); 
+            };
 
             panelShowTemplate.Paint += (s, e) =>
             {

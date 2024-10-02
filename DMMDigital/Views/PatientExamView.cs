@@ -40,6 +40,24 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    if (selectedPatientId == 0)
+                    {
+                        MessageBox.Show(Resources.messagePatientNotSelected);
+                        return;
+                    }
+
+                    eventSelectPatient?.Invoke(this, EventArgs.Empty);
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
             Load += (sender, e) =>
             {
                 dataGridViewPatient.SelectionChanged += (s, ev) =>
@@ -57,7 +75,10 @@ namespace DMMDigital.Views
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
 
-            buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
+            buttonSearchPatient.Click += delegate 
+            { 
+                eventSearchPatient?.Invoke(this, EventArgs.Empty); 
+            };
 
             buttonNewPatient.Click += delegate 
             {
@@ -71,7 +92,6 @@ namespace DMMDigital.Views
 
                     eventSelectPatient?.Invoke(this, EventArgs.Empty);
                 }
-
             };
 
             dataGridViewPatient.CellDoubleClick += delegate 

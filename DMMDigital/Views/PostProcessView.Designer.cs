@@ -261,7 +261,7 @@
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
             // 
-            // PostProcessConfig
+            // PostProcessView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -271,9 +271,10 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pictureBoxFilteredImage);
             this.Controls.Add(this.pictureBoxOriginalImage);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PostProcessConfig";
+            this.Name = "PostProcessView";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFilteredImage)).EndInit();
             this.panel3.ResumeLayout(false);

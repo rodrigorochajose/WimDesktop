@@ -11,53 +11,53 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
-    public class DialogGenerateTemplatePresenter
+    public class TemplateCreationDialogPresenter
     {
-        private readonly ITemplateCreationDialog dialogGenerateTemplate;
+        private readonly ITemplateCreationDialog templateCreationDialog;
 
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public DialogGenerateTemplatePresenter(ITemplateCreationDialog view)
+        public TemplateCreationDialogPresenter(ITemplateCreationDialog view)
         {
-            dialogGenerateTemplate = view;
+            templateCreationDialog = view;
 
-            dialogGenerateTemplate.eventShowTemplateHandlerView += showTemplateHandlerView;
+            templateCreationDialog.eventShowTemplateHandlerView += showTemplateHandlerView;
 
-            dialogGenerateTemplate.setTemplateList(templateRepository.getAllTemplates());
-            dialogGenerateTemplate.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
+            templateCreationDialog.setTemplateList(templateRepository.getAllTemplates());
+            templateCreationDialog.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
 
-            (dialogGenerateTemplate as Form).ShowDialog();
+            (templateCreationDialog as Form).ShowDialog();
         }
 
         private void showTemplateHandlerView(object sender, EventArgs e)
         {
             try
             {
-                new Common.ModelDataValidation().Validate(dialogGenerateTemplate);
+                new Common.ModelDataValidation().Validate(templateCreationDialog);
 
-                if (dialogGenerateTemplate.generateByTemplate)
+                if (templateCreationDialog.generateByTemplate)
                 {
-                    List<TemplateFrameModel> selectedFrames = dialogGenerateTemplate.templateFrames.Where(t => t.templateId == dialogGenerateTemplate.selectedTemplateId).ToList();
+                    List<TemplateFrameModel> selectedFrames = templateCreationDialog.templateFrames.Where(t => t.templateId == templateCreationDialog.selectedTemplateId).ToList();
 
                     TemplateCreationView templateHandlerView = new TemplateCreationView(
-                        dialogGenerateTemplate.templateName,
+                        templateCreationDialog.templateName,
                         selectedFrames
                     );
 
-                    (dialogGenerateTemplate as Form).Close();
+                    (templateCreationDialog as Form).Close();
                     new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
                 }
                 else
                 {
                     TemplateCreationView templateHandlerView = new TemplateCreationView(
-                        dialogGenerateTemplate.templateName,
-                        dialogGenerateTemplate.rows,
-                        dialogGenerateTemplate.columns,
-                        dialogGenerateTemplate.orientation
+                        templateCreationDialog.templateName,
+                        templateCreationDialog.rows,
+                        templateCreationDialog.columns,
+                        templateCreationDialog.orientation
                     );
 
-                    (dialogGenerateTemplate as Form).Close();
+                    (templateCreationDialog as Form).Close();
                     new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
                 }
                 

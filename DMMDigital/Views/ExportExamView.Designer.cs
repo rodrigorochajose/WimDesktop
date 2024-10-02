@@ -30,11 +30,16 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportExamView));
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.checkBoxClearSelection = new System.Windows.Forms.CheckBox();
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
             this.checkBoxExportEditedImage = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxFormat = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.checkBoxExportOriginalImage = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -43,18 +48,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.labelTitle = new System.Windows.Forms.Label();
             this.buttonExportExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
-            this.comboBoxFormat = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.panelHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -64,6 +64,19 @@
             this.panelHeader.Controls.Add(this.labelTitle);
             resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.Name = "panelHeader";
+            // 
+            // pictureBoxIcon
+            // 
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
+            // 
+            // labelTitle
+            // 
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitle.Name = "labelTitle";
             // 
             // panel2
             // 
@@ -79,6 +92,28 @@
             this.panel2.Controls.Add(this.label2);
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
+            // 
+            // textBoxSelectPath
+            // 
+            this.textBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSelectPath.BorderColor = System.Drawing.Color.White;
+            this.textBoxSelectPath.BorderRadius = 10;
+            this.textBoxSelectPath.BorderSize = 10;
+            resources.ApplyResources(this.textBoxSelectPath, "textBoxSelectPath");
+            this.textBoxSelectPath.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxSelectPath.Name = "textBoxSelectPath";
+            this.textBoxSelectPath.PlaceholderText = null;
+            // 
+            // buttonSelectPath
+            // 
+            this.buttonSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSelectPath.BorderColor = System.Drawing.Color.White;
+            this.buttonSelectPath.BorderWidth = 5F;
+            this.buttonSelectPath.CornerRadius = 10;
+            this.buttonSelectPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
+            resources.ApplyResources(this.buttonSelectPath, "buttonSelectPath");
+            this.buttonSelectPath.Name = "buttonSelectPath";
+            this.buttonSelectPath.UseVisualStyleBackColor = false;
             // 
             // checkBoxClearSelection
             // 
@@ -111,6 +146,16 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // comboBoxFormat
+            // 
+            this.comboBoxFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.comboBoxFormat.BorderColor = System.Drawing.Color.White;
+            this.comboBoxFormat.BorderRadius = 10;
+            this.comboBoxFormat.BorderSize = 10;
+            resources.ApplyResources(this.comboBoxFormat, "comboBoxFormat");
+            this.comboBoxFormat.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxFormat.Name = "comboBoxFormat";
             // 
             // checkBoxExportOriginalImage
             // 
@@ -158,19 +203,6 @@
             resources.ApplyResources(this.panel3, "panel3");
             this.panel3.Name = "panel3";
             // 
-            // pictureBoxIcon
-            // 
-            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
-            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.TabStop = false;
-            // 
-            // labelTitle
-            // 
-            resources.ApplyResources(this.labelTitle, "labelTitle");
-            this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTitle.Name = "labelTitle";
-            // 
             // buttonExportExam
             // 
             resources.ApplyResources(this.buttonExportExam, "buttonExportExam");
@@ -196,38 +228,6 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = false;
             // 
-            // textBoxSelectPath
-            // 
-            this.textBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSelectPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxSelectPath.BorderRadius = 10;
-            this.textBoxSelectPath.BorderSize = 10;
-            resources.ApplyResources(this.textBoxSelectPath, "textBoxSelectPath");
-            this.textBoxSelectPath.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxSelectPath.Name = "textBoxSelectPath";
-            this.textBoxSelectPath.PlaceholderText = null;
-            // 
-            // buttonSelectPath
-            // 
-            this.buttonSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSelectPath.BorderColor = System.Drawing.Color.White;
-            this.buttonSelectPath.BorderWidth = 5F;
-            this.buttonSelectPath.CornerRadius = 10;
-            this.buttonSelectPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
-            resources.ApplyResources(this.buttonSelectPath, "buttonSelectPath");
-            this.buttonSelectPath.Name = "buttonSelectPath";
-            this.buttonSelectPath.UseVisualStyleBackColor = false;
-            // 
-            // comboBoxFormat
-            // 
-            this.comboBoxFormat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.comboBoxFormat.BorderColor = System.Drawing.Color.White;
-            this.comboBoxFormat.BorderRadius = 10;
-            this.comboBoxFormat.BorderSize = 10;
-            resources.ApplyResources(this.comboBoxFormat, "comboBoxFormat");
-            this.comboBoxFormat.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxFormat.Name = "comboBoxFormat";
-            // 
             // ExportExamView
             // 
             resources.ApplyResources(this, "$this");
@@ -236,18 +236,19 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ExportExamView";
             this.Load += new System.EventHandler(this.exportExamViewLoad);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
 
         }

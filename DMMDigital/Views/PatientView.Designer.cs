@@ -409,6 +409,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.roundedPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PatientView";

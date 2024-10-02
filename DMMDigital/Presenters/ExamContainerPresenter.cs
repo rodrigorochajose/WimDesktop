@@ -389,7 +389,7 @@ namespace DMMDigital.Presenters
                                 }
                             }
 
-                            ConvertToBitmap(imageData, imageWidth, imageHeight);
+                            convertToBitmap(imageData, imageWidth, imageHeight);
 
                             examContainerView.selectedExamView.loadImageOnMainPictureBox();
                         }
@@ -403,7 +403,7 @@ namespace DMMDigital.Presenters
             return;
         }
 
-        private void ConvertToBitmap(short[] data, int widht, int height)
+        private void convertToBitmap(short[] data, int widht, int height)
         {
             try
             {
@@ -431,7 +431,7 @@ namespace DMMDigital.Presenters
                     pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
                 }
 
-                SaveBmp(pic);
+                saveBmp(pic);
 
                 pic.Dispose();
 
@@ -444,13 +444,13 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void SaveBmp(Bitmap bmp)
+        private void saveBmp(Bitmap bmp)
         {
             System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
 
             BitmapData bitmapData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);
 
-            System.Windows.Media.PixelFormat pixelFormats = ConvertBmpPixelFormat(bmp.PixelFormat);
+            System.Windows.Media.PixelFormat pixelFormats = convertBmpPixelFormat(bmp.PixelFormat);
 
             BitmapSource source = BitmapSource.Create(bmp.Width, bmp.Height, bmp.HorizontalResolution, bmp.VerticalResolution, pixelFormats, null, bitmapData.Scan0, bitmapData.Stride * bmp.Height, bitmapData.Stride);
 
@@ -468,7 +468,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private static System.Windows.Media.PixelFormat ConvertBmpPixelFormat(System.Drawing.Imaging.PixelFormat pixelformat)
+        private static System.Windows.Media.PixelFormat convertBmpPixelFormat(System.Drawing.Imaging.PixelFormat pixelformat)
         {
             System.Windows.Media.PixelFormat pixelFormats = PixelFormats.Default;
 
@@ -534,12 +534,12 @@ namespace DMMDigital.Presenters
             string pngPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-png.png");
             string tiffPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-tiff.tiff");
 
-            SaveImageToFile(rawPath, ImgData);
-            SaveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
-            SaveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+            saveImageToFile(rawPath, ImgData);
+            saveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+            saveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
         }
 
-        private void SaveImageToFile(string path, byte[] data)
+        private void saveImageToFile(string path, byte[] data)
         {
             if (null == data || null == path)
                 return;
@@ -550,7 +550,7 @@ namespace DMMDigital.Presenters
             return;
         }
 
-        private void SaveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
+        private void saveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
         {
             if (data == null || path == null)
             {
@@ -585,7 +585,7 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void SaveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
+        private void saveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
         {
             if (data == null || path == null || width <= 0 || height <= 0 || bytesPerPixel != 2)
             {

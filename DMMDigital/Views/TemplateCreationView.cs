@@ -110,11 +110,48 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonNewFrame.Click += delegate { createNewFrame(0, 50, 70, 0, 0); };
-            buttonDeleteFrame.Click += delegate { deleteFrame(); };
-            buttonSaveTemplate.Click += delegate { eventSaveTemplate?.Invoke(this, EventArgs.Empty); };
-            buttonRotateLeft.Click += delegate { rotateFrameLeft(); };
-            buttonRotateRight.Click += delegate { rotateFrameRight(); };
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    saveTemplate();
+                }
+            };
+
+            buttonNewFrame.Click += delegate 
+            { 
+                createNewFrame(0, 50, 70, 0, 0); 
+            };
+
+            buttonDeleteFrame.Click += delegate 
+            { 
+                deleteFrame(); 
+            };
+
+            buttonSaveTemplate.Click += delegate 
+            { 
+                saveTemplate();
+            };
+
+            buttonRotateLeft.Click += delegate 
+            { 
+                rotateFrameLeft(); 
+            };
+
+            buttonRotateRight.Click += delegate 
+            { 
+                rotateFrameRight(); 
+            };
+        }
+
+        private void saveTemplate()
+        {
+            DialogResult res = MessageBox.Show("Salvar Template", "Confirma salvar template?", MessageBoxButtons.YesNo);
+
+            if (DialogResult.Yes.Equals(res))
+            {
+                eventSaveTemplate?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void createNewFrame(int orientation, int width, int height, int locationX, int locationY)

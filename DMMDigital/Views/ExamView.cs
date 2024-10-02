@@ -970,7 +970,7 @@ namespace DMMDigital.Views
             chooseTemplateView.patientRecommendation = patient.recommendation;
             chooseTemplateView.patientObservation = patient.observation;
 
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
+            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)

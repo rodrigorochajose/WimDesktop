@@ -138,7 +138,7 @@
     <value>0</value>
   </data>
   <data name="labelTitle.Text" xml:space="preserve">
-    <value>Selecione um paciente para o Exame</value>
+    <value>Selecione um paciente para o exame</value>
   </data>
   <data name="labelTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
@@ -282,36 +282,36 @@
   <data name="dataGridViewPatient.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="columnId.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnId.HeaderText" xml:space="preserve">
     <value>id</value>
   </data>
   <data name="columnId.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="columnName.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnName.HeaderText" xml:space="preserve">
     <value>Nome</value>
   </data>
   <data name="columnName.Width" type="System.Int32, mscorlib">
     <value>250</value>
   </data>
-  <data name="columnBirthDate.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnBirthDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnBirthDate.HeaderText" xml:space="preserve">
     <value>Data de Nascimento</value>
   </data>
   <data name="columnBirthDate.Width" type="System.Int32, mscorlib">
     <value>175</value>
   </data>
-  <data name="columnPhone.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnPhone.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnPhone.HeaderText" xml:space="preserve">
     <value>Telefone</value>
   </data>
@@ -453,9 +453,9 @@
   <data name="&gt;&gt;textBoxSearchPatient.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>639, 566</value>
   </data>
@@ -1133,8 +1133,5 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textBoxSearchPatient.PlaceholderText" xml:space="preserve">
-    <value>Buscar Paciente</value>
   </data>
 </root>

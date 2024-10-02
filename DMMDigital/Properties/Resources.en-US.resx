@@ -422,4 +422,22 @@
   <data name="messageMigrationSuccess" xml:space="preserve">
     <value>Database Migration successful!</value>
   </data>
+  <data name="messageExitWithoutSave" xml:space="preserve">
+    <value>Exit without save?</value>
+  </data>
+  <data name="messageExportExam" xml:space="preserve">
+    <value>Export selected images?</value>
+  </data>
+  <data name="messageGettingData" xml:space="preserve">
+    <value>Getting data...</value>
+  </data>
+  <data name="messageImportData" xml:space="preserve">
+    <value>Importing data...</value>
+  </data>
+  <data name="messageMigrationSucess" xml:space="preserve">
+    <value>Migration completed !</value>
+  </data>
+  <data name="messageWrongPassword" xml:space="preserve">
+    <value>Wrong Password</value>
+  </data>
 </root>

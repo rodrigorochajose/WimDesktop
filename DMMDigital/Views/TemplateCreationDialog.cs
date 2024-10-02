@@ -13,7 +13,6 @@ namespace DMMDigital.Views
 {
     public partial class TemplateCreationDialog : Form, ITemplateCreationDialog
     {
-
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messageTemplateRequiredName")]
         public string templateName 
         { 
@@ -45,13 +44,13 @@ namespace DMMDigital.Views
             set { comboBoxOrientation.InnerComboBox.SelectedIndex = value; } 
         }
 
-        public List<TemplateFrameModel> templateFrames { get; set; }
-
         public int selectedTemplateId
         {
             get { return int.Parse(comboBoxTemplate.InnerComboBox.SelectedValue.ToString()); }
             set { comboBoxTemplate.InnerComboBox.SelectedValue = value; }
         }
+
+        public List<TemplateFrameModel> templateFrames { get; set; }
 
         public event EventHandler eventShowTemplateHandlerView;
 
@@ -88,8 +87,27 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate { showTemplateOnPanel(); };
-            buttonGenerateTemplate.Click += delegate { eventShowTemplateHandlerView?.Invoke(this, EventArgs.Empty); };
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    eventShowTemplateHandlerView?.Invoke(this, EventArgs.Empty);
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
+            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate 
+            { 
+                showTemplateOnPanel(); 
+            };
+
+            buttonGenerateTemplate.Click += delegate 
+            { 
+                eventShowTemplateHandlerView?.Invoke(this, EventArgs.Empty); 
+            };
 
             panelShowTemplate.Paint += (s, e) =>
             {

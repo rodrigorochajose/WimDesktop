@@ -232,6 +232,7 @@
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.dataGridViewPatient);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PatientExamView";

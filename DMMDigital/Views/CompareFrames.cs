@@ -89,7 +89,7 @@ namespace DMMDigital.Views
             Image backgroundImage = new Bitmap(selectedPictureBox.Image);
             Image foregroundImage = new Bitmap(pictureBoxes.First(p => p != selectedPictureBox).Image);
 
-            overlayPictureBox.Image = CombineImages(backgroundImage, foregroundImage, transparency);
+            overlayPictureBox.Image = combineImages(backgroundImage, foregroundImage, transparency);
         }
 
         private void buttonChangeSidesClick(object sender, EventArgs e)
@@ -317,7 +317,7 @@ namespace DMMDigital.Views
             }
         }
 
-        private Image CombineImages(Image background, Image foreground, float transparency)
+        private Image combineImages(Image background, Image foreground, float transparency)
         {
             Bitmap combinedBitmap = new Bitmap(background.Width, background.Height);
 

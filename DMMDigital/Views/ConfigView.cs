@@ -11,7 +11,6 @@ using System.Threading;
 using System.ComponentModel;
 using DMMDigital.Components.Rounded;
 using DMMDigital.Properties;
-using System.IO;
 
 namespace DMMDigital.Views
 {
@@ -108,6 +107,14 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
             Load += delegate 
             {
                 loadConfigs?.Invoke(this, EventArgs.Empty);
@@ -123,17 +130,35 @@ namespace DMMDigital.Views
                 languageChanged = !languageChanged;
             };
 
-            textBoxTwainSource.InnerTextBox.Click += delegate { selectTwainSource(); };
+            textBoxTwainSource.InnerTextBox.Click += delegate 
+            {
+                selectTwainSource(); 
+            };
 
-            buttonSelectTwainSource.Click += delegate { selectTwainSource(); };
+            buttonSelectTwainSource.Click += delegate 
+            { 
+                selectTwainSource(); 
+            };
             
-            textBoxSensorPath.InnerTextBox.Click += delegate { selectSensorPath(); };
+            textBoxSensorPath.InnerTextBox.Click += delegate 
+            { 
+                selectSensorPath(); 
+            };
 
-            buttonSensorPath.Click += delegate { selectSensorPath(); };
+            buttonSensorPath.Click += delegate 
+            { 
+                selectSensorPath(); 
+            };
 
-            textBoxExamPath.InnerTextBox.Click += delegate { selectExamPath(); };
+            textBoxExamPath.InnerTextBox.Click += delegate 
+            { 
+                selectExamPath(); 
+            };
 
-            buttonExamPath.Click += delegate { selectExamPath(); };
+            buttonExamPath.Click += delegate 
+            { 
+                selectExamPath(); 
+            };
 
             buttonSave.Click += delegate
             {
@@ -148,7 +173,10 @@ namespace DMMDigital.Views
                 saveConfigs?.Invoke(this, EventArgs.Empty);
             };
 
-            buttonCancel.Click += delegate { Close(); };
+            buttonCancel.Click += delegate 
+            { 
+                Close(); 
+            };
         }
 
         public void applyLocalization(Form form)
@@ -264,6 +292,19 @@ namespace DMMDigital.Views
             migrateCDR?.Invoke(this, e);
         }
 
-       
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            //if (e.TabPageIndex == 2)
+            //{
+            //    using (Form dialogAdvancedSettings = new DialogAdvancedSettings())
+            //    {
+            //        var result = dialogAdvancedSettings.ShowDialog();
+            //        if (result == DialogResult.Cancel)
+            //        {
+            //            e.Cancel = true;
+            //        }
+            //    }
+            //}
+        }
     }
 }

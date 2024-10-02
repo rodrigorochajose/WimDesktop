@@ -80,6 +80,14 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
             trackBarBrightness.MouseCaptureChanged += delegate
             {
                 if (!restore)

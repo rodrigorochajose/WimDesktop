@@ -153,6 +153,7 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
             // tabPage1
             // 
@@ -309,6 +310,7 @@
             resources.ApplyResources(this.buttonConfigureFilters, "buttonConfigureFilters");
             this.buttonConfigureFilters.Name = "buttonConfigureFilters";
             this.buttonConfigureFilters.UseVisualStyleBackColor = false;
+            this.buttonConfigureFilters.Click += new System.EventHandler(this.buttonConfigureFiltersClick);
             // 
             // buttonRulerColorPicker
             // 
@@ -594,6 +596,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ConfigView";

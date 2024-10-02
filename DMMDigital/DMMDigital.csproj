@@ -79,6 +79,9 @@
   <PropertyGroup>
     <ApplicationIcon>icon-96x96-transparent.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -159,9 +162,9 @@
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Filters.cs" />
-    <Compile Include="Presenters\ChooseTemplateExamPresenter.cs" />
-    <Compile Include="Presenters\ChoosePatientExamPresenter.cs" />
-    <Compile Include="Presenters\DialogGenerateTemplatePresenter.cs" />
+    <Compile Include="Presenters\TemplateExamPresenter.cs" />
+    <Compile Include="Presenters\PatientExamPresenter.cs" />
+    <Compile Include="Presenters\TemplateCreationDialogPresenter.cs" />
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
     <Compile Include="Presenters\ExportExamPresenter.cs" />
@@ -177,6 +180,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DialogAdvancedSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogAdvancedSettings.Designer.cs">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogGetTextToDraw.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,12 +197,6 @@
     </Compile>
     <Compile Include="Views\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\FramesComparisonDialog.cs">
       <SubType>Form</SubType>
@@ -235,6 +238,12 @@
     </Compile>
     <Compile Include="Views\FilterView.Designer.cs">
       <DependentUpon>FilterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MigrationDatabaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MigrationDatabaseView.Designer.cs">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiSensorDialog.cs">
       <SubType>Form</SubType>
@@ -374,6 +383,12 @@
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogAdvancedSettings.en-US.resx">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogAdvancedSettings.resx">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogGetTextToDraw.en-US.resx">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,6 +404,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.en-US.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MigrationDatabaseView.en-US.resx">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MigrationDatabaseView.resx">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientExamView.en-US.resx">
       <DependentUpon>PatientExamView.cs</DependentUpon>
@@ -497,6 +518,7 @@
     <EmbeddedResource Include="Views\TemplateView.resx">
       <DependentUpon>TemplateView.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

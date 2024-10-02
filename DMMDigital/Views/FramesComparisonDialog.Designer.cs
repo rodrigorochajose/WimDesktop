@@ -108,6 +108,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panelTemplate);
             this.Controls.Add(this.panelHeader);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FramesComparisonDialog";

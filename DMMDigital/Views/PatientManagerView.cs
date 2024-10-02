@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using DMMDigital.Properties;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -83,18 +84,26 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonCancel.Click += delegate { Close(); };
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    save();
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    DialogResult res = MessageBox.Show(Resources.messageExitWithoutSave, Text, MessageBoxButtons.YesNo);
+
+                    if (res.Equals(DialogResult.Yes))
+                    {
+                        Close();
+                    }
+                }
+            };
 
             buttonSave.Click += delegate
             {
-                if (action == "edit")
-                {
-                    eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
-                } 
-                else
-                {
-                    eventAddNewPatient?.Invoke(this, EventArgs.Empty);
-                }
+                save();
             };
 
             textBoxBirthDate.InnerMaskedTextBox.KeyPress += (s, e) =>
@@ -119,6 +128,23 @@ namespace DMMDigital.Views
                     (s as MaskedTextBox).SelectionStart = 0;
                 }
             };
+
+            buttonCancel.Click += delegate
+            {
+                Close();
+            };
+        }
+
+        private void save()
+        {
+            if (action == "edit")
+            {
+                eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                eventAddNewPatient?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

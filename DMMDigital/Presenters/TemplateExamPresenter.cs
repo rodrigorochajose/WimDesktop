@@ -9,29 +9,29 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
-    public class ChooseTemplateExamPresenter
+    public class TemplateExamPresenter
     {
-        private readonly ITemplateExamView chooseTemplateExamView;
+        private readonly ITemplateExamView templateExamView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IConfigRepository configRepository = new ConfigRepository();
 
         private string examOpeningMode = "newPage";
 
-        public ChooseTemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, string calledFromView)
+        public TemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, string calledFromView)
         {
-            chooseTemplateExamView = view;
+            templateExamView = view;
             templateRepository = repository;
 
-            chooseTemplateExamView.eventInitializeExam += showExamForm;
-            chooseTemplateExamView.eventAddNewTemplate += showAddTemplateForm;
+            templateExamView.eventInitializeExam += showExamForm;
+            templateExamView.eventAddNewTemplate += showAddTemplateForm;
 
-            chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
-            chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
+            templateExamView.setTemplateList(templateRepository.getAllTemplates());
+            templateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
 
-            (chooseTemplateExamView as Form).Show();
+            (templateExamView as Form).Show();
 
-            (chooseTemplateExamView as Form).FormClosed += delegate
+            (templateExamView as Form).FormClosed += delegate
             {
                 if (calledFromView != "examView")
                 {
@@ -50,13 +50,6 @@ namespace DMMDigital.Presenters
                             }
                         };
                     }
-                    else
-                    {
-                        foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
-                        {
-                            form.Show();
-                        };
-                    }
                 }
             };
         }
@@ -65,14 +58,14 @@ namespace DMMDigital.Presenters
         {
             PatientModel patient = new PatientModel
             {
-                id = chooseTemplateExamView.patientId,
-                name = chooseTemplateExamView.patientName,
+                id = templateExamView.patientId,
+                name = templateExamView.patientName,
             };
 
             ConfigModel config = configRepository.getAllConfig();
 
-            ExamView examView = new ExamView(patient, chooseTemplateExamView.selectedTemplateId, chooseTemplateExamView.templateFrames, chooseTemplateExamView.selectedTemplateName, chooseTemplateExamView.sessionName, config);
-            (chooseTemplateExamView as Form).Close();
+            ExamView examView = new ExamView(patient, templateExamView.selectedTemplateId, templateExamView.templateFrames, templateExamView.selectedTemplateName, templateExamView.sessionName, config);
+            (templateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 
             new ExamPresenter(examView, new ExamRepository(), false, examOpeningMode);
@@ -80,9 +73,9 @@ namespace DMMDigital.Presenters
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
-            new DialogGenerateTemplatePresenter(new TemplateCreationDialog());
-            chooseTemplateExamView.setTemplateList(templateRepository.getAllTemplates());
-            chooseTemplateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
+            new TemplateCreationDialogPresenter(new TemplateCreationDialog());
+            templateExamView.setTemplateList(templateRepository.getAllTemplates());
+            templateExamView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }
     }
 }

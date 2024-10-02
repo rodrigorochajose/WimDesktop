@@ -25,9 +25,12 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            buttonNewTemplate.Click += delegate
+            KeyPress += (s, e) =>
             {
-                showNewTemplateForm?.Invoke(this, EventArgs.Empty);
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
             };
 
             dataGridViewTemplate.CellContentClick += (s, e) =>
@@ -36,6 +39,11 @@ namespace DMMDigital.Views
                 {
                     eventDeleteTemplate?.Invoke(this, EventArgs.Empty);
                 }
+            };
+
+            buttonNewTemplate.Click += delegate
+            {
+                showNewTemplateForm?.Invoke(this, EventArgs.Empty);
             };
 
             panelShowTemplate.Paint += (s, e) =>

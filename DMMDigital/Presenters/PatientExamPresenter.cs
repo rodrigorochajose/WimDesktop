@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
-    public class ChoosePatientExamPresenter
+    public class PatientExamPresenter
     {
         public PatientExamView view { get; }
 
@@ -18,10 +18,10 @@ namespace DMMDigital.Presenters
         private readonly BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
-        public ChoosePatientExamPresenter(PatientExamView choosePatientExamView, IPatientRepository repository)
+        public PatientExamPresenter(PatientExamView patientExamView, IPatientRepository repository)
         {
             pacientesBindingSource = new BindingSource();
-            view = choosePatientExamView;
+            view = patientExamView;
             patientRepository = repository;
 
             view.eventSearchPatient += searchPatient;
@@ -87,23 +87,23 @@ namespace DMMDigital.Presenters
 
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
-            ITemplateExamView chooseTemplateView = new TemplateExamView();
+            ITemplateExamView templateView = new TemplateExamView();
             
             PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
-            chooseTemplateView.patientId = selectedPatient.id;
-            chooseTemplateView.patientName = selectedPatient.name;
-            chooseTemplateView.patientBirthDate = selectedPatient.birthDate;
-            chooseTemplateView.patientPhone = selectedPatient.phone;
-            chooseTemplateView.patientRecommendation = selectedPatient.recommendation;
-            chooseTemplateView.patientObservation = selectedPatient.observation;
+            templateView.patientId = selectedPatient.id;
+            templateView.patientName = selectedPatient.name;
+            templateView.patientBirthDate = selectedPatient.birthDate;
+            templateView.patientPhone = selectedPatient.phone;
+            templateView.patientRecommendation = selectedPatient.recommendation;
+            templateView.patientObservation = selectedPatient.observation;
 
             foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
             {
-                loadAllPatients();
+                //loadAllPatients();
                 form.Hide();
             }
 
-            new ChooseTemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "choosePatientView");
+            new TemplateExamPresenter(templateView, new TemplateRepository(), "patientExamView");
         }
     }
 }

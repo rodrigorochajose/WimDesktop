@@ -26,17 +26,41 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             adjustComponent();
+            associateEvents();
 
             comboBoxFormat.InnerComboBox.DataSource = new List<string> { "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
             comboBoxFormat.InnerComboBox.SelectedIndex = 0;
-
-            buttonCancel.Click += delegate { Close(); };
         }
 
         private void adjustComponent()
         {
             pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
             labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
+        }
+
+        private void associateEvents()
+        {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    DialogResult res = MessageBox.Show(Resources.messageExportExam, Text, MessageBoxButtons.YesNo);
+
+                    if (res.Equals(DialogResult.Yes))
+                    {
+                        buttonExportExamClick(null, EventArgs.Empty);
+                    }
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
+            buttonCancel.Click += delegate 
+            { 
+                Close(); 
+            };
         }
 
         private void exportExamViewLoad(object sender, EventArgs e)
@@ -241,7 +265,7 @@ namespace DMMDigital.Views
 
         private void getAndSaveDicomFile(Bitmap bitmap, string path)
         {
-            byte[] pixelData = ConvertBitmapToGrayscaleByteArray(bitmap);
+            byte[] pixelData = convertBitmapToGrayscaleByteArray(bitmap);
 
             var dataset = new DicomDataset
             {
@@ -270,24 +294,20 @@ namespace DMMDigital.Views
         {
             using (Bitmap bmp = new Bitmap(bitmap))
             {
-                // Definindo o formato do pixel como 32 bits por pixel (RGBA)
                 BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 
                 int numBytes = bmpData.Stride * bmp.Height;
                 byte[] pixelData = new byte[numBytes];
 
-                // Copiando os dados de pixel para o array de bytes
                 System.Runtime.InteropServices.Marshal.Copy(bmpData.Scan0, pixelData, 0, numBytes);
 
-                // Desbloqueando os bits da imagem
                 bmp.UnlockBits(bmpData);
 
-                // Salvando os dados de pixel em um arquivo .raw
                 File.WriteAllBytes(path, pixelData);
             }
         }
 
-        private static byte[] ConvertBitmapToGrayscaleByteArray(Bitmap bitmap)
+        private static byte[] convertBitmapToGrayscaleByteArray(Bitmap bitmap)
         {
             int width = bitmap.Width;
             int height = bitmap.Height;

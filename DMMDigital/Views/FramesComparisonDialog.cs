@@ -18,20 +18,39 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             adjustComponent();
-            ActiveControl = labelTitle;
+            associateEvents();
 
             selectedFrames = new List<Frame>();
             this.frames = frames;
 
             drawTemplate();
-
-            buttonCancel.Click += delegate { Close(); };
         }
 
         private void adjustComponent()
         {
+            ActiveControl = labelTitle;
             pictureBoxIcon.Left = (panelHeader.Width - (pictureBoxIcon.Width + labelTitle.Width)) / 2;
             labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width + 5;
+        }
+
+        private void associateEvents()
+        {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    buttonCompareClick(null, EventArgs.Empty);
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
+            buttonCancel.Click += delegate 
+            { 
+                Close(); 
+            };
         }
 
         private void drawTemplate()

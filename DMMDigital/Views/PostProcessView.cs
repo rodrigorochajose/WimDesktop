@@ -1,11 +1,8 @@
 ﻿using DMMDigital.Interface.IView;
 using DMMDigital.Properties;
-using Emgu.CV.CvEnum;
-using Emgu.CV;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Emgu.CV.Util;
 
 namespace DMMDigital.Views
 {
@@ -44,8 +41,30 @@ namespace DMMDigital.Views
             this.reveal = reveal;
             this.smartSharpen = smartSharpen;
 
+            adjustComponent();
+            associateEvents();
+        }
+        
+        private void adjustComponent()
+        {
             pictureBoxOriginalImage.Image = Resources.imageConfigFilter;
             pictureBoxFilteredImage.Image = Resources.imageConfigFilter;
+        }
+
+        private void associateEvents()
+        {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    DialogResult res = MessageBox.Show(Resources.messageExitWithoutSave, Text, MessageBoxButtons.YesNo);
+
+                    if (res.Equals(DialogResult.Yes))
+                    {
+                        Close();
+                    }
+                }
+            };
         }
 
         private void buttonImportClick(object sender, EventArgs e)

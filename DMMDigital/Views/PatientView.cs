@@ -35,6 +35,23 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
+            KeyPress += (sender, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    if (selectedExamId == 0)
+                    {
+                        MessageBox.Show(Resources.messageExamNotSelected);
+                        return;
+                    }
+                    eventOpenExam?.Invoke(this, EventArgs.Empty);
+                }
+                else if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
             Load += (sender, e) =>
             {
                 dataGridViewPatient.SelectionChanged += (s, ev) =>

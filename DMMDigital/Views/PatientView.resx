@@ -192,18 +192,18 @@
   <data name="dataGridViewExam.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="columnExamId.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnExamId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnExamId.HeaderText" xml:space="preserve">
     <value>examId</value>
   </data>
   <data name="columnExamId.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="columnTemplateId.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnTemplateId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnTemplateId.HeaderText" xml:space="preserve">
     <value>templateId</value>
   </data>
@@ -228,9 +228,9 @@
   <data name="columnTemplate.Width" type="System.Int32, mscorlib">
     <value>197</value>
   </data>
-  <data name="columnDeleteExam.UserAddedColumn" type="System.Boolean, mscorlib">
+  <metadata name="columnDeleteExam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="columnDeleteExam.HeaderText" xml:space="preserve">
     <value>Excluir</value>
   </data>
@@ -582,9 +582,9 @@
   <data name="&gt;&gt;roundedPanel1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -1313,8 +1313,5 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="textBoxSearchPatient.PlaceholderText" xml:space="preserve">
-    <value>Buscar Paciente</value>
   </data>
 </root>

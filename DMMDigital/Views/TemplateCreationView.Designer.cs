@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelTemplate = new System.Windows.Forms.Panel();
             this.buttonSaveTemplate = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonDeleteFrame = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRotateRight = new DMMDigital.Components.Rounded.RoundedButton();
@@ -40,6 +37,9 @@
             this.buttonRotateLeft = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxOrientation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxSelectedFrame = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,23 +57,6 @@
             this.panel1.Controls.Add(this.label1);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // panelTemplate
-            // 
-            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.panelTemplate, "panelTemplate");
-            this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);
             // 
             // buttonSaveTemplate
             // 
@@ -149,6 +132,23 @@
             this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
             this.textBoxSelectedFrame.PlaceholderText = null;
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // panelTemplate
+            // 
+            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.panelTemplate, "panelTemplate");
+            this.panelTemplate.Name = "panelTemplate";
+            this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);
+            // 
             // TemplateCreationView
             // 
             resources.ApplyResources(this, "$this");
@@ -156,6 +156,7 @@
             this.Controls.Add(this.panelTemplate);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TemplateCreationView";

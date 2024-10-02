@@ -654,6 +654,33 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja sair sem salvar?.
+        /// </summary>
+        internal static string messageExitWithoutSave {
+            get {
+                return ResourceManager.GetString("messageExitWithoutSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Exportar as imagens selecionadas?.
+        /// </summary>
+        internal static string messageExportExam {
+            get {
+                return ResourceManager.GetString("messageExportExam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Obtendo dados....
+        /// </summary>
+        internal static string messageGettingData {
+            get {
+                return ResourceManager.GetString("messageGettingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja realmente excluir a imagem atual ?.
         /// </summary>
         internal static string messageImageConfirmDelete {
@@ -681,11 +708,29 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Importando os dados....
+        /// </summary>
+        internal static string messageImportData {
+            get {
+                return ResourceManager.GetString("messageImportData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Migração do banco de dados feita com sucesso!.
         /// </summary>
         internal static string messageMigrationSuccess {
             get {
                 return ResourceManager.GetString("messageMigrationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Migração feita com sucesso!.
+        /// </summary>
+        internal static string messageMigrationSucess {
+            get {
+                return ResourceManager.GetString("messageMigrationSucess", resourceCulture);
             }
         }
         
@@ -812,6 +857,15 @@ namespace DMMDigital.Properties {
         internal static string messageTemplateRequiredName {
             get {
                 return ResourceManager.GetString("messageTemplateRequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha Incorreta.
+        /// </summary>
+        internal static string messageWrongPassword {
+            get {
+                return ResourceManager.GetString("messageWrongPassword", resourceCulture);
             }
         }
         
