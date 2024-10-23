@@ -145,6 +145,7 @@
             // panelTemplate
             // 
             this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelTemplate.BackgroundImage = global::DMMDigital.Properties.Resources.grid;
             resources.ApplyResources(this.panelTemplate, "panelTemplate");
             this.panelTemplate.Name = "panelTemplate";
             this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);

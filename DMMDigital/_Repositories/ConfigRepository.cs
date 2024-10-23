@@ -64,7 +64,6 @@ namespace DMMDigital._Repositories
                 ConfigModel currentConfig = context.config.First();
                 context.Entry(currentConfig).CurrentValues.SetValues(config);
                 context.SaveChanges();
-                MessageBox.Show("CONFIG OK");
             }
             catch (Exception ex)
             {

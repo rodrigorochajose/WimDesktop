@@ -19,7 +19,7 @@ namespace DMMDigital.Models
         [Column("NAME")]
         [DisplayName("Nome")]
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientRequiredName")]
-        [StringLength(65, MinimumLength = 4, ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messagePatientConditionName")]
+        [StringLength(65)]
         public string name{ get; set; }
 
         [Column("BIRTH_DATE")]

@@ -46,7 +46,7 @@ namespace DMMDigital.Presenters
                     );
 
                     (templateCreationDialog as Form).Close();
-                    new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
+                    new TemplateCreationPresenter(templateHandlerView, new TemplateRepository());
                 }
                 else
                 {
@@ -58,7 +58,7 @@ namespace DMMDigital.Presenters
                     );
 
                     (templateCreationDialog as Form).Close();
-                    new TemplateHandlerPresenter(templateHandlerView, new TemplateRepository());
+                    new TemplateCreationPresenter(templateHandlerView, new TemplateRepository());
                 }
                 
             } 

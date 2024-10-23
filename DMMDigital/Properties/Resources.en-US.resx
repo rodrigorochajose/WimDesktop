@@ -440,4 +440,10 @@
   <data name="messageWrongPassword" xml:space="preserve">
     <value>Wrong Password</value>
   </data>
+  <data name="messageSaveTemplate" xml:space="preserve">
+    <value>Are you sure you want to save this template ?</value>
+  </data>
+  <data name="titleSaveTemplate" xml:space="preserve">
+    <value>Save Template</value>
+  </data>
 </root>

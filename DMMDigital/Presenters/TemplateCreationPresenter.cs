@@ -8,32 +8,32 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
-    public class TemplateHandlerPresenter
+    public class TemplateCreationPresenter
     {
-        private readonly ITemplateCreationView templateHandlerView;
+        private readonly ITemplateCreationView templateCreationView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public TemplateHandlerPresenter(ITemplateCreationView view, ITemplateRepository repository) 
+        public TemplateCreationPresenter(ITemplateCreationView view, ITemplateRepository repository) 
         { 
-            templateHandlerView = view;
+            templateCreationView = view;
             templateRepository = repository;
 
-            templateHandlerView.eventSaveTemplate += saveTemplate;
+            templateCreationView.eventSaveTemplate += saveTemplate;
 
-            (templateHandlerView as Form).ShowDialog();
+            (templateCreationView as Form).ShowDialog();
         }
 
         private void saveTemplate(object sender, EventArgs e)
         {
             try
             {
-                templateRepository.addTemplate(new Models.TemplateModel { name = templateHandlerView.templateName });
+                templateRepository.addTemplate(new Models.TemplateModel { name = templateCreationView.templateName });
 
                 int templateId = templateRepository.getLastTemplateId();
 
-                templateFrameRepository.addTemplateFrame(templateId, templateHandlerView.framesList.Cast<Frame>().ToList());
-                (templateHandlerView as Form).Close();
+                templateFrameRepository.addTemplateFrame(templateId, templateCreationView.framesList.Cast<Frame>().ToList());
+                (templateCreationView as Form).Close();
             }
             catch (Exception ex)
             {

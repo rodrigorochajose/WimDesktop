@@ -93,7 +93,10 @@ namespace DMMDigital.Presenters
 
         private void migrateCDRDatabase(object sender, EventArgs e)
         {
-
+            using (Form migrationDatabaseView = new MigrationDatabaseView("CDR"))
+            {
+                migrationDatabaseView.ShowDialog();
+            }
         }
     }
 }

@@ -63,9 +63,19 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap banner_principal_f3639437 {
+        internal static System.Drawing.Bitmap banner_principal {
             get {
-                object obj = ResourceManager.GetObject("banner_principal_f3639437", resourceCulture);
+                object obj = ResourceManager.GetObject("banner_principal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap grid {
+            get {
+                object obj = ResourceManager.GetObject("grid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -816,6 +826,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Confirma salvar o template ?.
+        /// </summary>
+        internal static string messageSaveTemplate {
+            get {
+                return ResourceManager.GetString("messageSaveTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível conectar o sensor, verifique se o apontamento está correto..
         /// </summary>
         internal static string messageSensorCannotConnect {
@@ -1010,6 +1029,15 @@ namespace DMMDigital.Properties {
         internal static string titleOverwriteImage {
             get {
                 return ResourceManager.GetString("titleOverwriteImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Salvar Template.
+        /// </summary>
+        internal static string titleSaveTemplate {
+            get {
+                return ResourceManager.GetString("titleSaveTemplate", resourceCulture);
             }
         }
     }

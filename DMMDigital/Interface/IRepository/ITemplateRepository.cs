@@ -9,5 +9,6 @@ namespace DMMDigital.Interface.IRepository
         void delete(int templateId);
         List<TemplateModel> getAllTemplates();
         int getLastTemplateId();
+        int getTemplateIdByName(string templateName);
     }
 }

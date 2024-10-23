@@ -28,6 +28,12 @@ namespace DMMDigital.Components.Rounded
             set { _borderWidth = value; Invalidate(); }
         }
 
+        protected override void OnScroll(ScrollEventArgs e)
+        {
+            base.OnScroll(e);
+            Invalidate(); // Repintar a borda após o scroll
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

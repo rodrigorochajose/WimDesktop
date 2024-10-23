@@ -56,5 +56,25 @@ namespace DMMDigital._Repositories
         {
             return context.template.OrderByDescending(t => t.id).First().id;
         }
+
+        public int getTemplateIdByName(string templateName)
+        {
+            int id = 0;
+            try
+            {
+                if (templateName == "ENDO HORIZONTAL (15)")
+                {
+                    templateName = "HORIZONTAL ENDO";
+                }
+                id = context.template.Single(t => t.name == templateName).id;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+            return id;
+        }
     }
 }

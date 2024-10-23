@@ -21,7 +21,7 @@ namespace DMMDigital._Repositories
                 {
                     context.templateFrame.Add(new TemplateFrameModel
                     {
-                        templateId = frame.id,
+                        templateId = templateId,
                         locationX = frame.Location.X,
                         locationY = frame.Location.Y,
                         orientation = frame.orientation,

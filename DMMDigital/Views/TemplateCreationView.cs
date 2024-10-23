@@ -48,7 +48,6 @@ namespace DMMDigital.Views
         public TemplateCreationView(string templateName, decimal rows, decimal columns, int orientation)
         {
             InitializeComponent();
-
             this.templateName = templateName;
             int height;
             int width;
@@ -146,7 +145,7 @@ namespace DMMDigital.Views
 
         private void saveTemplate()
         {
-            DialogResult res = MessageBox.Show("Salvar Template", "Confirma salvar template?", MessageBoxButtons.YesNo);
+            DialogResult res = MessageBox.Show(Resources.messageSaveTemplate, Resources.titleSaveTemplate, MessageBoxButtons.YesNo);
 
             if (DialogResult.Yes.Equals(res))
             {

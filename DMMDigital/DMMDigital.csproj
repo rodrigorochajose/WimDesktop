@@ -168,7 +168,7 @@
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
     <Compile Include="Presenters\ExportExamPresenter.cs" />
-    <Compile Include="Presenters\TemplateHandlerPresenter.cs" />
+    <Compile Include="Presenters\TemplateCreationPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
     <Compile Include="Properties\Resources.en-US.Designer.cs">
       <DependentUpon>Resources.en-US.resx</DependentUpon>
@@ -693,6 +693,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\grid.png" />
     <None Include="Resources\icon_32x32_scanner.png" />
     <None Include="Resources\icon-16x16-folder.png" />
     <None Include="Resources\icon-32x32-capture.png" />
