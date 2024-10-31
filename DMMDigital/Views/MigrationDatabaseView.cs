@@ -293,7 +293,7 @@ namespace DMMDigital.Views
                 {
                     MessageBox.Show(Resources.messageMigrationSuccess + warningMessage);
 
-                    //Directory.Delete(@"C:\WimDesktopDB\migration\data", true);
+                    Directory.Delete(@"C:\WimDesktopDB\migration\data", true);
 
                     Close();
                 }
