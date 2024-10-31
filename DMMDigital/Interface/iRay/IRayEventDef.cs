@@ -12,7 +12,7 @@
 */
 namespace DMMDigital.Interface.iRay
 {
-	public partial class SdkInterface
+    public partial class SdkInterface
 	{
 		public const int Evt_GeneralInfo = 1; // General Info
 		public const int Evt_GeneralWarn = 2; // General Warn

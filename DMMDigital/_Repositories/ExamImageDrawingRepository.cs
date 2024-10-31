@@ -56,7 +56,7 @@ namespace DMMDigital._Repositories
 
             foreach (ExamImageDrawingModel drawing in examImageDrawings)
             {
-                getDrawingPoints(examId, drawing);
+                getDrawingPoints(drawing);
                 
                 if (drawing.drawingType == "Ruler")
                 {
@@ -72,7 +72,7 @@ namespace DMMDigital._Repositories
             return context.examImageDrawing.Where(e => e.examId == examId && e.examImageId == examImageId);
         }
 
-        private void getDrawingPoints(int examId, ExamImageDrawingModel drawing)
+        private void getDrawingPoints(ExamImageDrawingModel drawing)
         {
             List<ExamImageDrawingPointsModel> drawingPoints = context.examImageDrawingPoints.Where(e => e.examImageDrawingId == drawing.id).ToList();
 

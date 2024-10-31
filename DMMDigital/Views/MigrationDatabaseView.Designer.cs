@@ -59,6 +59,7 @@
             this.ClientSize = new System.Drawing.Size(514, 148);
             this.Controls.Add(this.label);
             this.Controls.Add(this.progressBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

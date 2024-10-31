@@ -37,16 +37,7 @@ namespace DMMDigital.Views
         {
             KeyPress += (sender, e) =>
             {
-                if (e.KeyChar == (char)Keys.Enter)
-                {
-                    if (selectedExamId == 0)
-                    {
-                        MessageBox.Show(Resources.messageExamNotSelected);
-                        return;
-                    }
-                    eventOpenExam?.Invoke(this, EventArgs.Empty);
-                }
-                else if (e.KeyChar == (char)Keys.Escape)
+                if (e.KeyChar == (char)Keys.Escape)
                 {
                     Close();
                 }
@@ -98,6 +89,10 @@ namespace DMMDigital.Views
             dataGridViewExam.CellClick += (s, e) =>
             {
                 if (e.ColumnIndex == 0)
+                {
+                    Console.WriteLine("editar exame");
+                }
+                else if (e.ColumnIndex == 1)
                 {
                     if (selectedExamId == 0)
                     {

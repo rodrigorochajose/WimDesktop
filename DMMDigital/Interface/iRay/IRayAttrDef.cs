@@ -12,7 +12,7 @@
 */
 namespace DMMDigital.Interface.iRay
 {
-	public partial class SdkInterface
+    public partial class SdkInterface
 	{
 		public const int Cfg_ProtocolEdition = 1;
 		public const int Cfg_ProductNo = 2;

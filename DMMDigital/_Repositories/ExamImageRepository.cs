@@ -64,7 +64,14 @@ namespace DMMDigital._Repositories
         {
             try
             {
-                context.examImage.AddRange(examImages);
+                foreach (ExamImageModel examImage in examImages)
+                {
+                    if (examImage.file.Contains("original.png"))
+                    {
+                        context.examImage.Add(examImage);
+                    }
+                }
+
                 context.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)

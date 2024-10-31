@@ -12,7 +12,7 @@
 */
 namespace DMMDigital.Interface.iRay
 {
-	public partial class SdkInterface
+    public partial class SdkInterface
 	{
 		public const int Cmd_SetLogLevel = 1;
 		public const int Cmd_Connect = 2;

@@ -12,7 +12,7 @@
 */
 namespace DMMDigital.Interface.iRay
 {
-	public enum Enm_EventLevel
+    public enum Enm_EventLevel
 	{
 		Enm_EventLevel_Info = 0,
 		Enm_EventLevel_Warn = 1,

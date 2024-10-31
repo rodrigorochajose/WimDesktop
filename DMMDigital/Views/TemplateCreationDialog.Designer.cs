@@ -166,7 +166,7 @@
             this.numericUpDownRows.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownRows, "numericUpDownRows");
             this.numericUpDownRows.Maximum = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
@@ -185,7 +185,7 @@
             this.numericUpDownColumns.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownColumns, "numericUpDownColumns");
             this.numericUpDownColumns.Maximum = new decimal(new int[] {
-            10,
+            15,
             0,
             0,
             0});

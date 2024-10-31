@@ -12,7 +12,7 @@
 */
 namespace DMMDigital.Interface.iRay
 {
-	public partial class SdkInterface
+    public partial class SdkInterface
 	{
 		public const int Err_OK = 0;
 		public const int Err_TaskPending = 1;

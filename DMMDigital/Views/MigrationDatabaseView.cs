@@ -24,6 +24,7 @@ namespace DMMDigital.Views
 
         private string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
 
+        private string warningMessage = "";
 
         private List<PatientModel> patients = new List<PatientModel>();
         private List<ExamModel> exams = new List<ExamModel>();
@@ -45,12 +46,9 @@ namespace DMMDigital.Views
             }
             else
             {
-                MessageBox.Show("ainda em implementação...");
-                return;
-                //generateCdrModels();
+                generateCdrModels();
             }
 
-            // importData
             startProgressBar();
         }
 
@@ -230,7 +228,7 @@ namespace DMMDigital.Views
 
         public List<ExamModel> getExams(SqlConnection connection)
         {
-            string query = "SELECT StudyNumber as ID, PatientNumber as PATIENT_ID, 13 as TEMPLATE_ID, '' as SESSION_NAME, EnteredDate as CREATED_AT from Study";
+            string query = "SELECT SeriesNumber as ID, Study.PatientNumber as PATIENT_ID, 0 as TEMPLATE_ID, '' as SESSION_NAME, SeriesDate as CREATED_AT from Series INNER JOIN Study ON Series.StudyNumber = Study.StudyNumber WHERE Series.Modality = 'IO'";
 
             List<ExamModel> exams = new List<ExamModel>();
 
@@ -258,7 +256,8 @@ namespace DMMDigital.Views
 
         public List<ExamImageModel> getExamImages(SqlConnection connection)
         {
-            string query = "SELECT ImageNumber as ID, Series.StudyNumber as EXAM_ID, ImageNumberDICOM as FRAME_ID, ImageFileName as 'FILE', '' as NOTES, Image.EnteredDate as CREATED_AT FROM Image INNER JOIN Series ON Image.SeriesNumber = Series.SeriesNumber WHERE ImageNumberDICOM IS NOT NULL";
+            string query = "SELECT ImageNumber as ID, Series.SeriesNumber as EXAM_ID, ImageNumberDICOM as TEMPLATE_FRAME_ID, ImageFileName as 'FILE', '' as NOTES, Image.EnteredDate as CREATED_AT FROM Image INNER JOIN Series ON Image.SeriesNumber = Series.SeriesNumber WHERE ImageNumberDICOM IS NOT NULL AND ImageFileName LIKE '%\\IO%' AND LEN(SUBSTRING(ImageFileName, CHARINDEX('\\IO', ImageFileName), LEN(ImageFileName))) = LEN('\\IO000000')";
+
             List<ExamImageModel> examImages = new List<ExamImageModel>();
 
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -271,7 +270,7 @@ namespace DMMDigital.Views
                         {
                             id = (int)reader["ID"],
                             examId = (int)reader["EXAM_ID"],
-                            templateFrameId = int.Parse((string)reader["FRAME_ID"]),
+                            templateFrameId = int.Parse((string)reader["TEMPLATE_FRAME_ID"]),
                             file = (string)reader["FILE"],
                             notes = (string)reader["NOTES"],
                             createdAt = (DateTime)reader["CREATED_AT"]
@@ -292,7 +291,7 @@ namespace DMMDigital.Views
 
                 if (progressBar.Value >= progressBar.Maximum)
                 {
-                    MessageBox.Show(Resources.messageMigrationSuccess);
+                    MessageBox.Show(Resources.messageMigrationSuccess + warningMessage);
 
                     //Directory.Delete(@"C:\WimDesktopDB\migration\data", true);
 
@@ -310,6 +309,7 @@ namespace DMMDigital.Views
 
             int totalPatients = patients.Count;
             int processedPatients = 0;
+            int examsNotImported = 0;
 
             IPatientRepository patientRepository = new PatientRepository();
             IExamRepository examRepository = new ExamRepository();
@@ -321,7 +321,7 @@ namespace DMMDigital.Views
 
                 List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
 
-                await Task.Run(() => patientRepository.importPatient(patient));
+                patientRepository.importPatient(patient);
 
                 if (patientExams.Any())
                 {
@@ -330,34 +330,53 @@ namespace DMMDigital.Views
                         int examOldId = patientExam.id;
                         patientExam.patientId = patient.id;
 
-                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id).ToList();
+                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id && File.Exists(Path.Combine("C:\\images", ei.file + ".jpeg"))).ToList();
 
-                        await Task.Run(() => examRepository.addExam(patientExam));
+                        int frames = patientExamImages.Count();
+
+                        if (frames > 50)
+                        {
+                            examsNotImported++;
+                            generateMigrationLog(frames, examOldId, patientExamImages.First().file);
+                            continue;
+                        }
+
+                        int templateId = frames < 6 ? 13 : frames < 16 ? 14 : frames < 26 ? 15 : 16;
+
+                        patientExam.templateId = templateId;
+                        examRepository.addExam(patientExam);
+
+                        patientExamImages = patientExamImages.Select(ei => new ExamImageModel
+                        {
+                            examId = patientExam.id,
+                            templateFrameId = ei.templateFrameId,
+                            file = ei.file,
+                            notes = ei.notes,
+                            createdAt = ei.createdAt
+                        }).ToList();
 
                         if (patientExamImages.Any())
                         {
-                            await Task.Run(() => patientExamImages.ForEach(ei => ei.examId = patientExam.id));
-
-                            var importExamImagesTask = Task.Run(() => examImageRepository.importExamImages(patientExamImages));
-
-                            Task importImagesAsyncTask;
-
                             if (software == "WIM")
                             {
-                                importImagesAsyncTask = importImagesAsync(patientOldId, patient.id, examOldId, patientExam.id);
+                                await importImagesAsync(patientOldId, patient.id, examOldId, patientExam.id);
                             }
                             else
                             {
-                                List<string> files = patientExamImages.Select(p => p.file).ToList();
-                                importImagesAsyncTask = importImagesCDRAsync(files, patient.id, examOldId);
+                                await importImagesCDRAsync(patientExamImages, patient.id, patientExam.id);
+                                getTemplateFrameId(patientExamImages, templateId);
                             }
-
-                            await Task.WhenAll(importExamImagesTask, importImagesAsyncTask);
+                            examImageRepository.importExamImages(patientExamImages);
                         }
                     }
                 }
                 processedPatients++;
                 progress.Report((processedPatients * 100) / totalPatients);
+
+                if (examsNotImported > 0)
+                {
+                    warningMessage = $"\nNão foi possível importar {examsNotImported} exames por exceder o limite de frames suportado.";
+                }
             }
         }
 
@@ -386,20 +405,51 @@ namespace DMMDigital.Views
             }
         }
 
-        private async Task importImagesCDRAsync(List<string> files, int patientId, int examId)
+        private async Task importImagesCDRAsync(List<ExamImageModel> patientExamImages, int patientId, int examId)
         {
-            string basePath = "C:/images";
             string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
 
-
-            foreach (string file in files)
+            if (!Directory.Exists(folderDest))
             {
-                string originFile = Path.Combine(basePath, file, ".jpeg");
+                Directory.CreateDirectory(folderDest);
+            }
 
-                string destFileName = file.Substring(file.Length - 2);
+            int imageCounter = 1;
 
-                //string dest = Path.Combine(folderDest, fileName);
-                //await Task.Run(() => File.Copy(file, dest, overwrite: true));
+            foreach (ExamImageModel examImage in patientExamImages)
+            {
+                string originFile = Path.Combine("C:\\images", examImage.file + ".jpeg");
+
+                examImage.templateFrameId = imageCounter;
+                examImage.file = $"{imageCounter}_original.png";
+
+                string dest = Path.Combine(folderDest, examImage.file);
+
+                await Task.Run(() => File.Copy(originFile, dest, overwrite: true));
+
+                imageCounter++;
+            }
+        }
+
+        private void getTemplateFrameId(List<ExamImageModel> examImages, int templateId)
+        {
+            ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+
+            List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(templateId);
+
+            foreach (ExamImageModel examImage in examImages)
+            {
+                examImage.templateFrameId = templateFrames.First(tf => tf.order == examImage.templateFrameId).id;
+            }
+        }
+
+        private void generateMigrationLog(int frames, int examOldId, string file)
+        {
+            using (StreamWriter writer = new StreamWriter("C:/WimDesktopDB/migration/migration_log.txt", append: true))
+            {
+                writer.WriteLine($"ID do exame no CDR: {examOldId}");
+                writer.WriteLine($"Quantidade de frames: {frames}");
+                writer.WriteLine($"Caminho do arquivo: {file}\n\n\n");
             }
         }
     }

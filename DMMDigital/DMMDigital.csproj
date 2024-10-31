@@ -353,6 +353,12 @@
     <Compile Include="Views\PatientView.Designer.cs">
       <DependentUpon>PatientView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\TemplateSwitchView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateSwitchView.Designer.cs">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\TemplateView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -511,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateSwitchView.resx">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateView.en-US.resx">
       <DependentUpon>TemplateView.cs</DependentUpon>
