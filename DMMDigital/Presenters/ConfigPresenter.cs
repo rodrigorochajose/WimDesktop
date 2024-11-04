@@ -85,17 +85,17 @@ namespace DMMDigital.Presenters
 
         private void migrateWimDesktopDatabase(object sender, EventArgs e)
         {
-            using (Form migrationDatabaseView = new MigrationDatabaseView("WIM"))
+            using (Form dialogMigration = new DialogMigration("WIM"))
             {
-                migrationDatabaseView.ShowDialog();
+                dialogMigration.ShowDialog();
             }
         }
 
         private void migrateCDRDatabase(object sender, EventArgs e)
         {
-            using (Form migrationDatabaseView = new MigrationDatabaseView("CDR"))
+            using (Form dialogMigration = new DialogMigration("CDR"))
             {
-                migrationDatabaseView.ShowDialog();
+                dialogMigration.ShowDialog();
             }
         }
     }

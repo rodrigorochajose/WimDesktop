@@ -192,6 +192,12 @@
     <Compile Include="Views\DialogGetTextToDraw.Designer.cs">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\DialogMigration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogMigration.Designer.cs">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -400,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogGetTextToDraw.resx">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogMigration.resx">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FramesComparisonDialog.en-US.resx">
       <DependentUpon>FramesComparisonDialog.cs</DependentUpon>

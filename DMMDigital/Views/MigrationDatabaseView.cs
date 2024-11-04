@@ -21,28 +21,30 @@ namespace DMMDigital.Views
     public partial class MigrationDatabaseView : Form
     {
         private string software = "";
+        private string warningMessage = "";
 
         private string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
-
-        private string warningMessage = "";
+        private string dataPath = "";
 
         private List<PatientModel> patients = new List<PatientModel>();
         private List<ExamModel> exams = new List<ExamModel>();
         private List<ExamImageModel> examImages = new List<ExamImageModel>();
+        private List<ConfigModel> configs = new List<ConfigModel>();
 
-        public MigrationDatabaseView(string software)
+        public MigrationDatabaseView(string software, string path)
         {
             InitializeComponent();
 
             label.Text = Resources.messageGettingData;
 
-            adjust();
+            adjustUI();
 
+            dataPath = path;
             this.software = software;
 
             if (software == "WIM")
             {
-                getDataFromCSV();
+                getData_WIM();
             }
             else
             {
@@ -52,12 +54,12 @@ namespace DMMDigital.Views
             startProgressBar();
         }
 
-        private void adjust()
+        private void adjustUI()
         {
             label.Left = (Width - label.Width) / 2;
         }
 
-        private void createSQLToGetData()
+        private void generateSQLFile_WIM()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -69,7 +71,7 @@ namespace DMMDigital.Views
             }
 
             sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "config.csv").Replace("\\", "/")}', " +
-            "'SELECT 1 as ID, ''en-US'' AS LANGUAGE, ''C:\\IRay\\IRayIntraoral_x86\\work_dir'' AS SENSOR_PATH, " +
+            "'SELECT 1 as ID, ''pt-BR'' AS LANGUAGE, ''C:\\IRay\\IRayIntraoral_x86\\work_dir'' AS SENSOR_PATH, " +
             "''C:\\WimDesktopDB\\img'' AS EXAM_PATH, ''PLUTO0002X'' AS SENSOR_MODEL, 0 AS ACQUIRE_MODE, " +
             "DRAWING_COLOR, DRAWING_SIZE, TEXT_COLOR, TEXT_SIZE, RULER_COLOR, 0 AS FILTER_BRIGHTNESS, " +
             "0 AS FILTER_CONTRAST, 0 AS FILTER_REVEAL, 0 AS FILTER_SMART_SHARPEN FROM SETTINGS');");
@@ -87,19 +89,16 @@ namespace DMMDigital.Views
                 "CASE WHEN NOTES IS NULL THEN '''' ELSE NOTES END AS NOTES, COALESCE(CREATED_AT, ''1990-01-01 00:00:00'') AS CREATED_AT " +
                 "FROM XRAY_EXAM_PICTURE');");
 
-
-            // string sqlContent = @"CALL CSVWRITE('C:/WimDesktopDB/migration/data/config.csv', 'SELECT 1 as ID, ''en-US'' AS LANGUAGE, ''C:\IRay\IRayIntraoral_x86\work_dir'' AS SENSOR_PATH, ''C:\WimDesktopDB\img'' AS EXAM_PATH, ''PLUTO0002X'' AS SENSOR_MODEL, 0 AS ACQUIRE_MODE, DRAWING_COLOR, DRAWING_SIZE, TEXT_COLOR, TEXT_SIZE, RULER_COLOR, 0 AS FILTER_BRIGHTNESS, 0 AS FILTER_CONTRAST, 0 AS FILTER_REVEAL, 0 AS FILTER_SMART_SHARPEN FROM SETTINGS'); CALL CSVWRITE('C:/WimDesktopDB/migration/data/patient.csv', 'SELECT ID, NAME, BIRTH_DATE, PHONE, REFERRAL AS RECOMMENDATION, NOTES AS OBSERVATION, CREATED_AT FROM PATIENT'); CALL CSVWRITE('C:/WimDesktopDB/migration/data/exam.csv', 'SELECT XRAY_EXAM.ID, MEDICAL_RECORD.PATIENT_ID AS PATIENT_ID, XRAY_EXAM_TEMPLATE_ID AS TEMPLATE_ID, NAME AS SESSION_NAME, XRAY_EXAM.CREATED_AT FROM XRAY_EXAM INNER JOIN TREATMENT ON TREATMENT.ID = XRAY_EXAM.TREATMENT_ID INNER JOIN MEDICAL_RECORD ON TREATMENT.MEDICAL_RECORD_ID = MEDICAL_RECORD.ID'); CALL CSVWRITE('C:/WimDesktopDB/migration/data/exam_image.csv', 'SELECT ID, XRAY_EXAM_ID AS EXAM_ID, XRAY_EXAM_REGION_ID AS TEMPLATE_FRAME_ID, ORIGINAL_FILE AS FILE, CASE WHEN NOTES IS NULL THEN '''' ELSE NOTES END AS NOTES, COALESCE(CREATED_AT, ''1990-01-01 00:00:00'') AS CREATED_AT FROM XRAY_EXAM_PICTURE');";
-
             File.WriteAllText(Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql"), sb.ToString());
         }
 
-        private void getDataFromCSV()
+        private void getData_WIM()
         {
-            createSQLToGetData();
+            generateSQLFile_WIM();
 
             string javaPath = Path.Combine(wimMigrationPath, @"jdk-21_windows-x64_bin\jdk-21.0.4\bin\java.exe");
             string h2Path = Path.Combine(wimMigrationPath, @"h2-2019-10-14\h2\bin\h2-1.4.200.jar");
-            string dbPath = $@"jdbc:h2:{Environment.GetEnvironmentVariable("USERPROFILE")}\.wimdesktop\db\wimdb";
+            string dbPath = $@"jdbc:h2:{dataPath}\db\wimdb";
             string scriptPath = Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql");
 
             string command = $@"cd ""C:"" && ""{javaPath}"" -cp ""{h2Path}"" org.h2.tools.RunScript -url ""{dbPath}"" -user sa -password """" -script ""{scriptPath}""";
@@ -129,17 +128,15 @@ namespace DMMDigital.Views
 
             File.Delete(Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql"));
 
-            generateWimModels();
+            generateModels_WIM();
         }
 
-        private void generateWimModels()
+        private void generateModels_WIM()
         {
-            List<ConfigModel> configs = generateModel<ConfigModel, ConfigModelMap>(@"C:\WIMDesktopDB\migration\data\config.csv");
+            configs = generateModel<ConfigModel, ConfigModelMap>(@"C:\WIMDesktopDB\migration\data\config.csv");
             configs[0].drawingColor = convertHexToARGB(configs[0].drawingColor);
             configs[0].textColor = convertHexToARGB(configs[0].textColor);
             configs[0].rulerColor = convertHexToARGB(configs[0].rulerColor);
-
-            // importar configuração 
 
             patients = generateModel<PatientModel, PatientModelMap>(@"C:\WIMDesktopDB\migration\data\patient.csv");
             exams = generateModel<ExamModel, ExamModelMap>(@"C:\WIMDesktopDB\migration\data\exam.csv");
@@ -179,7 +176,7 @@ namespace DMMDigital.Views
 
         private void generateCdrModels()
         {
-            using (SqlConnection connection = new SqlConnection(@"Server=DESKTOP-KJ85CG4\CDRDICOM;Database=CDRData;Trusted_Connection=True;"))
+            using (SqlConnection connection = new SqlConnection($@"Server={Environment.MachineName}\CDRDICOM;Database=CDRData;Trusted_Connection=True;"))
             {
                 try
                 {
@@ -198,7 +195,7 @@ namespace DMMDigital.Views
 
         public List<PatientModel> getPatients(SqlConnection connection)
         {
-            string query = "SELECT PatientNumber as ID, (NameFirst + ' ' + NameLast) as NAME, ISNULL(BirthDate, '1899-12-30') as BIRTHDATE, '' as PHONE, '' as RECOMMENDATION, ISNULL(Comments, '') as OBSERVATION, EnteredDate as CREATED_AT from Patient";
+            string query = "SELECT PatientNumber as ID, (NameFirst + ' - ' + NameLast) as NAME, ISNULL(BirthDate, '1899-12-30') as BIRTHDATE, '' as PHONE, '' as RECOMMENDATION, ISNULL(Comments, '') as OBSERVATION, EnteredDate as CREATED_AT from Patient";
 
             List<PatientModel> patients = new List<PatientModel>();
 
@@ -293,27 +290,47 @@ namespace DMMDigital.Views
                 {
                     MessageBox.Show(Resources.messageMigrationSuccess + warningMessage);
 
-                    Directory.Delete(@"C:\WimDesktopDB\migration\data", true);
+                    string dataPath_WIM = @"C:\WimDesktopDB\migration\data";
+
+                    if (Directory.Exists(dataPath_WIM))
+                    {
+                        Directory.Delete(dataPath_WIM, true);
+                    }
 
                     Close();
                 }
             });
+
+            label.Text = Resources.messageImportData;
+            adjustUI();
 
             await importDataAsync(progress);
         }
 
         private async Task importDataAsync(IProgress<int> progress)
         {
-            label.Text = Resources.messageImportData;
-            adjust();
-
-            int totalPatients = patients.Count;
             int processedPatients = 0;
-            int examsNotImported = 0;
 
             IPatientRepository patientRepository = new PatientRepository();
             IExamRepository examRepository = new ExamRepository();
             IExamImageRepository examImageRepository = new ExamImageRepository();
+
+            if (software == "WIM")
+            {
+                await importData_WIM(progress, processedPatients, patientRepository, examRepository, examImageRepository);
+            }
+            else
+            {
+                await importData_CDR(progress, processedPatients, patientRepository, examRepository, examImageRepository);
+            }
+        }
+
+        private async Task importData_WIM(IProgress<int> progress, int processedPatients, IPatientRepository patientRepository, IExamRepository examRepository, IExamImageRepository examImageRepository)
+        {
+            int totalPatients = patients.Count;
+
+            IConfigRepository configRepository = new ConfigRepository();
+            configRepository.importConfig(configs[0]);
 
             foreach (PatientModel patient in patients)
             {
@@ -330,20 +347,8 @@ namespace DMMDigital.Views
                         int examOldId = patientExam.id;
                         patientExam.patientId = patient.id;
 
-                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id && File.Exists(Path.Combine("C:\\images", ei.file + ".jpeg"))).ToList();
+                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id && File.Exists($@"{dataPath}\imgs\{patientOldId}\{examOldId}\{ei.file}")).ToList();
 
-                        int frames = patientExamImages.Count();
-
-                        if (frames > 50)
-                        {
-                            examsNotImported++;
-                            generateMigrationLog(frames, examOldId, patientExamImages.First().file);
-                            continue;
-                        }
-
-                        int templateId = frames < 6 ? 13 : frames < 16 ? 14 : frames < 26 ? 15 : 16;
-
-                        patientExam.templateId = templateId;
                         examRepository.addExam(patientExam);
 
                         patientExamImages = patientExamImages.Select(ei => new ExamImageModel
@@ -357,15 +362,64 @@ namespace DMMDigital.Views
 
                         if (patientExamImages.Any())
                         {
-                            if (software == "WIM")
-                            {
-                                await importImagesAsync(patientOldId, patient.id, examOldId, patientExam.id);
-                            }
-                            else
-                            {
-                                await importImagesCDRAsync(patientExamImages, patient.id, patientExam.id);
-                                getTemplateFrameId(patientExamImages, templateId);
-                            }
+                            await importImages_WIM(patientOldId, patient.id, examOldId, patientExam.id);
+                            examImageRepository.importExamImages(patientExamImages);
+                        }
+                    }
+                }
+                processedPatients++;
+                progress.Report((processedPatients * 100) / totalPatients);
+            }
+        }
+
+        private async Task importData_CDR(IProgress<int> progress, int processedPatients, IPatientRepository patientRepository, IExamRepository examRepository, IExamImageRepository examImageRepository)
+        {
+            int examsNotImported = 0;
+            int totalPatients = patients.Count;
+
+            foreach (PatientModel patient in patients)
+            {
+                int patientOldId = patient.id;
+
+                List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
+
+                patientRepository.importPatient(patient);
+
+                if (patientExams.Any())
+                {
+                    foreach (ExamModel patientExam in patientExams)
+                    {
+                        int examOldId = patientExam.id;
+                        patientExam.patientId = patient.id;
+
+                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id && File.Exists(Path.Combine(dataPath, ei.file + ".jpeg"))).ToList();
+
+                        int frames = patientExamImages.Count();
+
+                        if (frames > 50)
+                        {
+                            examsNotImported++;
+                            generateMigrationLog(frames, examOldId, patientExamImages.First().file);
+                            continue;
+                        }
+
+                        patientExam.templateId = frames < 6 ? 13 : frames < 16 ? 14 : frames < 26 ? 15 : 16;
+
+                        examRepository.addExam(patientExam);
+
+                        patientExamImages = patientExamImages.Select(ei => new ExamImageModel
+                        {
+                            examId = patientExam.id,
+                            templateFrameId = ei.templateFrameId,
+                            file = ei.file,
+                            notes = ei.notes,
+                            createdAt = ei.createdAt
+                        }).ToList();
+
+                        if (patientExamImages.Any())
+                        {
+                            await importImages_CDR(patientExamImages, patient.id, patientExam.id);
+                            getTemplateFrameId(patientExamImages, patientExam.templateId);
                             examImageRepository.importExamImages(patientExamImages);
                         }
                     }
@@ -380,11 +434,9 @@ namespace DMMDigital.Views
             }
         }
 
-        private async Task importImagesAsync(int patientOldId, int patientId, int examOldId, int examId)
+        private async Task importImages_WIM(int patientOldId, int patientId, int examOldId, int examId)
         {
-            string patientFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), $".wimdesktop\\imgs\\{patientOldId}");
-
-            string[] files = Directory.GetFiles(Path.Combine(patientFolder, $"{examOldId}"));
+            string[] files = Directory.GetFiles($@"{dataPath}\imgs\{patientOldId}\{examOldId}");
 
             string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
 
@@ -405,7 +457,7 @@ namespace DMMDigital.Views
             }
         }
 
-        private async Task importImagesCDRAsync(List<ExamImageModel> patientExamImages, int patientId, int examId)
+        private async Task importImages_CDR(List<ExamImageModel> patientExamImages, int patientId, int examId)
         {
             string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
 
@@ -418,7 +470,7 @@ namespace DMMDigital.Views
 
             foreach (ExamImageModel examImage in patientExamImages)
             {
-                string originFile = Path.Combine("C:\\images", examImage.file + ".jpeg");
+                string originFile = Path.Combine(dataPath, examImage.file + ".jpeg");
 
                 examImage.templateFrameId = imageCounter;
                 examImage.file = $"{imageCounter}_original.png";

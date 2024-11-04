@@ -139,20 +139,10 @@ namespace DMMDigital.Views
             { 
                 selectTwainSource(); 
             };
-            
-            textBoxSensorPath.InnerTextBox.Click += delegate 
-            { 
-                selectSensorPath(); 
-            };
 
             buttonSensorPath.Click += delegate 
             { 
                 selectSensorPath(); 
-            };
-
-            textBoxExamPath.InnerTextBox.Click += delegate 
-            { 
-                selectExamPath(); 
             };
 
             buttonExamPath.Click += delegate 

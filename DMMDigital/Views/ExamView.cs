@@ -92,7 +92,7 @@ namespace DMMDigital.Views
             InitializeComponent();
             associateConfigs(config);
 
-            ActiveControl = label1;
+            ActiveControl = labelPatientName;
 
             this.sessionName = sessionName;
             this.patient = patient;

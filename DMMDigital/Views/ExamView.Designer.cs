@@ -36,18 +36,18 @@ namespace DMMDigital.Views
             this.panelDetails = new System.Windows.Forms.Panel();
             this.labelImageDate = new System.Windows.Forms.Label();
             this.textBoxFrameNotes = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelNotes = new System.Windows.Forms.Label();
+            this.labelImageData = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelAnnotation = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelAnnotations = new System.Windows.Forms.Label();
             this.panelOptions = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelToolOptions = new System.Windows.Forms.Label();
             this.panelToolOptions = new System.Windows.Forms.Panel();
             this.labelTemplate = new System.Windows.Forms.Label();
             this.labelPatient = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTemplateName = new System.Windows.Forms.Label();
+            this.labelPatientName = new System.Windows.Forms.Label();
             this.panelTools = new System.Windows.Forms.Panel();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
@@ -109,16 +109,16 @@ namespace DMMDigital.Views
             this.panelDetails.BackColor = System.Drawing.Color.White;
             this.panelDetails.Controls.Add(this.labelImageDate);
             this.panelDetails.Controls.Add(this.textBoxFrameNotes);
-            this.panelDetails.Controls.Add(this.label6);
-            this.panelDetails.Controls.Add(this.label5);
+            this.panelDetails.Controls.Add(this.labelNotes);
+            this.panelDetails.Controls.Add(this.labelImageData);
             this.panelDetails.Controls.Add(this.flowLayoutPanel1);
             this.panelDetails.Controls.Add(this.panelAnnotation);
             this.panelDetails.Controls.Add(this.panelOptions);
             this.panelDetails.Controls.Add(this.panelToolOptions);
             this.panelDetails.Controls.Add(this.labelTemplate);
             this.panelDetails.Controls.Add(this.labelPatient);
-            this.panelDetails.Controls.Add(this.label2);
-            this.panelDetails.Controls.Add(this.label1);
+            this.panelDetails.Controls.Add(this.labelTemplateName);
+            this.panelDetails.Controls.Add(this.labelPatientName);
             this.panelDetails.Controls.Add(this.panelTemplate);
             this.panelDetails.Name = "panelDetails";
             // 
@@ -133,15 +133,15 @@ namespace DMMDigital.Views
             this.textBoxFrameNotes.Name = "textBoxFrameNotes";
             this.textBoxFrameNotes.TextChanged += new System.EventHandler(this.textBoxFrameNotesTextChanged);
             // 
-            // label6
+            // labelNotes
             // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
+            resources.ApplyResources(this.labelNotes, "labelNotes");
+            this.labelNotes.Name = "labelNotes";
             // 
-            // label5
+            // labelImageData
             // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
+            resources.ApplyResources(this.labelImageData, "labelImageData");
+            this.labelImageData.Name = "labelImageData";
             // 
             // flowLayoutPanel1
             // 
@@ -152,27 +152,27 @@ namespace DMMDigital.Views
             // panelAnnotation
             // 
             this.panelAnnotation.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelAnnotation.Controls.Add(this.label4);
+            this.panelAnnotation.Controls.Add(this.labelAnnotations);
             resources.ApplyResources(this.panelAnnotation, "panelAnnotation");
             this.panelAnnotation.Name = "panelAnnotation";
             // 
-            // label4
+            // labelAnnotations
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.labelAnnotations, "labelAnnotations");
+            this.labelAnnotations.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelAnnotations.Name = "labelAnnotations";
             // 
             // panelOptions
             // 
             this.panelOptions.BackColor = System.Drawing.Color.Gainsboro;
-            this.panelOptions.Controls.Add(this.label3);
+            this.panelOptions.Controls.Add(this.labelToolOptions);
             resources.ApplyResources(this.panelOptions, "panelOptions");
             this.panelOptions.Name = "panelOptions";
             // 
-            // label3
+            // labelToolOptions
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.labelToolOptions, "labelToolOptions");
+            this.labelToolOptions.Name = "labelToolOptions";
             // 
             // panelToolOptions
             // 
@@ -190,15 +190,15 @@ namespace DMMDigital.Views
             resources.ApplyResources(this.labelPatient, "labelPatient");
             this.labelPatient.Name = "labelPatient";
             // 
-            // label2
+            // labelTemplateName
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.labelTemplateName, "labelTemplateName");
+            this.labelTemplateName.Name = "labelTemplateName";
             // 
-            // label1
+            // labelPatientName
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.labelPatientName, "labelPatientName");
+            this.labelPatientName.Name = "labelPatientName";
             // 
             // panelTools
             // 
@@ -620,10 +620,10 @@ namespace DMMDigital.Views
 
         private System.Windows.Forms.Panel panelTemplate;
         private System.Windows.Forms.Panel panelDetails;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPatientName;
         private System.Windows.Forms.Label labelTemplate;
         private System.Windows.Forms.Label labelPatient;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTemplateName;
         private System.Windows.Forms.Panel panelTools;
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.PictureBox mainPictureBox;
@@ -631,12 +631,12 @@ namespace DMMDigital.Views
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Panel panelToolOptions;
         private System.Windows.Forms.Panel panelOptions;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelToolOptions;
         private Panel panelAnnotation;
-        private Label label4;
+        private Label labelAnnotations;
         private FlowLayoutPanel flowLayoutPanel1;
-        private Label label6;
-        private Label label5;
+        private Label labelNotes;
+        private Label labelImageData;
         private TextBox textBoxFrameNotes;
         private Label labelImageDate;
         private ToolStrip toolStrip;
