@@ -40,13 +40,13 @@
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
+            this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
+            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
@@ -154,38 +154,6 @@
             this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
-            // columnId
-            // 
-            this.columnId.DataPropertyName = "id";
-            this.columnId.Frozen = true;
-            resources.ApplyResources(this.columnId, "columnId");
-            this.columnId.Name = "columnId";
-            this.columnId.ReadOnly = true;
-            // 
-            // columnName
-            // 
-            this.columnName.DataPropertyName = "name";
-            this.columnName.Frozen = true;
-            resources.ApplyResources(this.columnName, "columnName");
-            this.columnName.Name = "columnName";
-            this.columnName.ReadOnly = true;
-            // 
-            // columnBirthDate
-            // 
-            this.columnBirthDate.DataPropertyName = "birthDate";
-            this.columnBirthDate.Frozen = true;
-            resources.ApplyResources(this.columnBirthDate, "columnBirthDate");
-            this.columnBirthDate.Name = "columnBirthDate";
-            this.columnBirthDate.ReadOnly = true;
-            // 
-            // columnPhone
-            // 
-            this.columnPhone.DataPropertyName = "phone";
-            this.columnPhone.Frozen = true;
-            resources.ApplyResources(this.columnPhone, "columnPhone");
-            this.columnPhone.Name = "columnPhone";
-            this.columnPhone.ReadOnly = true;
-            // 
             // buttonSelectPatient
             // 
             resources.ApplyResources(this.buttonSelectPatient, "buttonSelectPatient");
@@ -220,6 +188,38 @@
             this.textBoxSearchPatient.Name = "textBoxSearchPatient";
             this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
             // 
+            // columnId
+            // 
+            this.columnId.DataPropertyName = "id";
+            this.columnId.Frozen = true;
+            resources.ApplyResources(this.columnId, "columnId");
+            this.columnId.Name = "columnId";
+            this.columnId.ReadOnly = true;
+            // 
+            // columnName
+            // 
+            this.columnName.DataPropertyName = "name";
+            this.columnName.Frozen = true;
+            resources.ApplyResources(this.columnName, "columnName");
+            this.columnName.Name = "columnName";
+            this.columnName.ReadOnly = true;
+            // 
+            // columnBirthDate
+            // 
+            this.columnBirthDate.DataPropertyName = "birthDate";
+            this.columnBirthDate.Frozen = true;
+            resources.ApplyResources(this.columnBirthDate, "columnBirthDate");
+            this.columnBirthDate.Name = "columnBirthDate";
+            this.columnBirthDate.ReadOnly = true;
+            // 
+            // columnPhone
+            // 
+            this.columnPhone.DataPropertyName = "phone";
+            this.columnPhone.Frozen = true;
+            resources.ApplyResources(this.columnPhone, "columnPhone");
+            this.columnPhone.Name = "columnPhone";
+            this.columnPhone.ReadOnly = true;
+            // 
             // PatientExamView
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -252,12 +252,12 @@
         private Components.Rounded.RoundedButton buttonNewPatient;
         private Components.Rounded.RoundedButton buttonSearchPatient;
         private Components.Rounded.RoundedDataGridView dataGridViewPatient;
+        private Components.Rounded.RoundedButton buttonSelectPatient;
+        private Components.Rounded.RoundedButton buttonCancel;
+        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPhone;
-        private Components.Rounded.RoundedButton buttonSelectPatient;
-        private Components.Rounded.RoundedButton buttonCancel;
-        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
     }
 }

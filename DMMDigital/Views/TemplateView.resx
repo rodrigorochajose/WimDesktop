@@ -244,7 +244,7 @@
     <value>Excluir</value>
   </data>
   <data name="columnDeleteTemplate.Width" type="System.Int32, mscorlib">
-    <value>75</value>
+    <value>90</value>
   </data>
   <data name="dataGridViewTemplate.Location" type="System.Drawing.Point, System.Drawing">
     <value>17, 54</value>
@@ -917,9 +917,6 @@
         //////4AAAAAAAH///////+AAAAAAAP////////gAAAAAA/////////4AAAAAD/////////+AAAAAP//
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

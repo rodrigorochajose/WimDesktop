@@ -177,7 +177,6 @@ namespace DMMDigital.Views
             newFrame.MouseUp += frameMouseUp;
             panelTemplate.Controls.Add(newFrame);
 
-
             frames.Add(newFrame);
         }
 

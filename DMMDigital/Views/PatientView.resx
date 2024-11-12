@@ -129,6 +129,9 @@
   <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt, style=Bold</value>
   </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>729, 17</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt, style=Bold</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>22, 17</value>
@@ -244,16 +250,16 @@
     <value>Excluir</value>
   </data>
   <data name="columnDeleteExam.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>75</value>
   </data>
   <data name="dataGridViewExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 100</value>
+    <value>16, 100</value>
   </data>
   <data name="dataGridViewExam.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="dataGridViewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>657, 397</value>
+    <value>656, 397</value>
   </data>
   <data name="dataGridViewExam.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -281,6 +287,9 @@
   </data>
   <data name="buttonExportExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonExportExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonExportExam.Location" type="System.Drawing.Point, System.Drawing">
     <value>515, 33</value>
@@ -318,6 +327,9 @@
   <data name="buttonNewExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="buttonNewExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonNewExam.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 33</value>
   </data>
@@ -353,6 +365,9 @@
   </data>
   <data name="buttonOpenExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonOpenExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonOpenExam.Location" type="System.Drawing.Point, System.Drawing">
     <value>269, 33</value>
@@ -469,7 +484,7 @@
     <value>Excluir</value>
   </data>
   <data name="columnDeletePatient.Width" type="System.Int32, mscorlib">
-    <value>58</value>
+    <value>75</value>
   </data>
   <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 99</value>
@@ -478,7 +493,7 @@
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 396</value>
+    <value>667, 396</value>
   </data>
   <data name="dataGridViewPatient.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -506,6 +521,9 @@
   </data>
   <data name="buttonNewPatient.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonNewPatient.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonNewPatient.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 32</value>
@@ -545,6 +563,9 @@
   </data>
   <data name="buttonSearchPatient.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonSearchPatient.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
     <value>622, 32</value>

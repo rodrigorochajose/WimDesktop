@@ -316,13 +316,13 @@
     <value>Telefone</value>
   </data>
   <data name="columnPhone.Width" type="System.Int32, mscorlib">
-    <value>151</value>
+    <value>170</value>
   </data>
   <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 163</value>
+    <value>25, 163</value>
   </data>
   <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>579, 330</value>
+    <value>594, 330</value>
   </data>
   <data name="dataGridViewPatient.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

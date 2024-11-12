@@ -83,9 +83,9 @@ namespace DMMDigital.Views
         {
             Bitmap image = new Bitmap(pictureBoxOriginalImage.Image); 
 
-            image = Filters.applyBrightnessAndContrast(image, brightness / 4, contrast);
-            image = Filters.applyReveal(image, reveal);
-            image = Filters.applySmartSharpen(image, smartSharpen);
+            //image = Filters.applyBrightnessAndContrast(image, brightness / 4, contrast);
+            //image = Filters.applyReveal(image, reveal);
+            //image = Filters.applySmartSharpen(image, smartSharpen);
 
             pictureBoxFilteredImage.Image = image;
             Refresh();

@@ -179,10 +179,10 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedDataGridView dataGridViewTemplate;
+        private Components.Rounded.RoundedPanel panelShowTemplate;
+        private Components.Rounded.RoundedButton buttonNewTemplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewImageColumn columnDeleteTemplate;
-        private Components.Rounded.RoundedPanel panelShowTemplate;
-        private Components.Rounded.RoundedButton buttonNewTemplate;
     }
 }

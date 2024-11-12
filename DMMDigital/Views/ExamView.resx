@@ -580,19 +580,19 @@
     <value>Segoe UI, 9.75pt</value>
   </data>
   <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="buttonOpenExam.Text" xml:space="preserve">
     <value>Abrir Exame</value>
   </data>
   <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="buttonNewExam.Text" xml:space="preserve">
     <value>Novo Exame</value>
   </data>
   <data name="buttonCloseExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>156, 22</value>
   </data>
   <data name="buttonCloseExam.Text" xml:space="preserve">
     <value>Fechar Exame</value>
@@ -966,23 +966,23 @@
   <data name="buttonRotateRight.ToolTipText" xml:space="preserve">
     <value>Girar à Direita</value>
   </data>
-  <data name="buttonRestoreExam.Enabled" type="System.Boolean, mscorlib">
+  <data name="buttonRestoreImage.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="buttonRestoreExam.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+  <data name="buttonRestoreImage.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="buttonRestoreExam.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="buttonRestoreImage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="buttonRestoreExam.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonRestoreImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 40</value>
   </data>
-  <data name="buttonRestoreExam.Text" xml:space="preserve">
+  <data name="buttonRestoreImage.Text" xml:space="preserve">
     <value>buttonRestoreImage</value>
   </data>
-  <data name="buttonRestoreExam.ToolTipText" xml:space="preserve">
-    <value>Restaurar Exame</value>
+  <data name="buttonRestoreImage.ToolTipText" xml:space="preserve">
+    <value>Restaurar Image</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 42</value>
@@ -1977,10 +1977,10 @@
   <data name="&gt;&gt;buttonRotateRight.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonRestoreExam.Name" xml:space="preserve">
-    <value>buttonRestoreExam</value>
+  <data name="&gt;&gt;buttonRestoreImage.Name" xml:space="preserve">
+    <value>buttonRestoreImage</value>
   </data>
-  <data name="&gt;&gt;buttonRestoreExam.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonRestoreImage.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">

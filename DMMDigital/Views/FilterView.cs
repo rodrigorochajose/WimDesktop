@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using Emgu.CV;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,8 +11,6 @@ namespace DMMDigital.Views
         public Bitmap originalImage { get; set; }
         public Bitmap editedImage { get; set; }
 
-        private bool restore = false;
-
         public FilterView(Bitmap image)
         {
             InitializeComponent();
@@ -22,264 +21,120 @@ namespace DMMDigital.Views
             pictureBoxOriginalImage.Image = image;
             pictureBoxEditedImage.Image = image;
 
-            associateEvents();
+            bindControls();
+            applyFilters();
         }
 
         private void applyFilters()
         {
             Bitmap image = new Bitmap(originalImage);
+            Mat matImg = image.ToMat();
 
             if (trackBarBrightness.Value != 0)
-            {
-                image = Filters.applyBrightnessAndContrast(image, trackBarBrightness.Value / 4, 0);
-            }
+                matImg = Filters.applyBrightnessAndContrast(matImg, trackBarBrightness.Value / 4, 0);
 
             if (trackBarContrast.Value != 0)
-            {
-                image = Filters.applyBrightnessAndContrast(image, 0, trackBarContrast.Value);
-            }
+                matImg = Filters.applyBrightnessAndContrast(matImg, 0, trackBarContrast.Value);
 
             if (trackBarReveal.Value != 0)
-            {
-                image = Filters.applyReveal(image, trackBarReveal.Value);
-            }
+                matImg = Filters.applyReveal(matImg, trackBarReveal.Value);
 
             if (trackBarSmartSharpen.Value != 0)
-            {
-                image = Filters.applySmartSharpen(image, trackBarSmartSharpen.Value);
-            }
+                matImg = Filters.applySmartSharpen(matImg, trackBarSmartSharpen.Value);
 
             if (trackBarGamma.Value != 0)
-            {
-                image = Filters.applyGamma(image, trackBarGamma.Value);
-            }
+                matImg = Filters.applyGamma(matImg, trackBarGamma.Value);
 
             if (trackBarEdge.Value != 0)
-            {
-                image = Filters.applyEdge(image, trackBarEdge.Value);
-            }
+                matImg = Filters.applyEdge(matImg, trackBarEdge.Value);
 
             if (trackBarNoise.Value != 0)
-            {
-                image = Filters.applyNoise(image, trackBarNoise.Value);
-            }
+                matImg = Filters.applyNoise(matImg, trackBarNoise.Value);
 
             if (checkBoxColorImage.Checked)
-            {
-                image = Filters.colorImage(image, 0, 62, 158);
-            }
+                matImg = Filters.colorImage(matImg, 0, 62, 158);
 
             if (checkBoxPositiveNegative.Checked)
-            {
-                image = Filters.invertColors(new Bitmap(image));
-            }
+                matImg = Filters.invertColors(matImg);
 
-            editedImage = image;
+            editedImage = matImg.ToBitmap();
             pictureBoxEditedImage.Image = editedImage;
         }
 
-        private void associateEvents()
+        private void bindControls()
         {
+            foreach (var control in new[]
+            {
+                (trackBarBrightness, numericUpDownBrightness),
+                (trackBarContrast, numericUpDownContrast),
+                (trackBarReveal, numericUpDownReveal),
+                (trackBarSmartSharpen, numericUpDownSmartSharpen),
+                (trackBarGamma, numericUpDownGamma),
+                (trackBarEdge, numericUpDownEdge),
+                (trackBarNoise, numericUpDownNoise)
+            })
+            {
+                var trackBar = control.Item1;
+                var numericUpDown = control.Item2;
+
+                trackBar.ValueChanged += (s, e) => 
+                { 
+                    numericUpDown.InnerNumericUpDown.Value = trackBar.Value; 
+                    applyFilters(); 
+                };
+
+                numericUpDown.InnerNumericUpDown.ValueChanged += (s, e) => 
+                { 
+                    trackBar.Value = (int)numericUpDown.InnerNumericUpDown.Value;
+                    applyFilters(); 
+                };
+            }
+
+            checkBoxColorImage.CheckedChanged += (s, e) => applyFilters();
+            checkBoxPositiveNegative.CheckedChanged += (s, e) => applyFilters();
+
             KeyPress += (s, e) =>
             {
                 if (e.KeyChar == (char)Keys.Escape)
-                {
                     Close();
-                }
-            };
-
-            trackBarBrightness.MouseCaptureChanged += delegate
-            {
-                if (!restore)
-                {
-                    applyFilters();
-                }
-
-                numericUpDownBrightness.InnerNumericUpDown.Value = trackBarBrightness.Value;
-            };
-
-            numericUpDownBrightness.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarBrightness.Value = (int)numericUpDownBrightness.InnerNumericUpDown.Value;
-
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarContrast.MouseCaptureChanged += delegate
-            {
-                numericUpDownContrast.InnerNumericUpDown.Value = trackBarContrast.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownContrast.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarContrast.Value = (int)numericUpDownContrast.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarReveal.MouseCaptureChanged += delegate
-            {
-                numericUpDownReveal.InnerNumericUpDown.Value = trackBarReveal.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownReveal.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarReveal.Value = (int)numericUpDownReveal.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarSmartSharpen.MouseCaptureChanged += delegate
-            {
-                numericUpDownSmartSharpen.InnerNumericUpDown.Value = trackBarSmartSharpen.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownSmartSharpen.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarSmartSharpen.Value = (int)numericUpDownSmartSharpen.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarGamma.MouseCaptureChanged += delegate
-            {
-                numericUpDownGamma.InnerNumericUpDown.Value = trackBarGamma.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownGamma.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarGamma.Value = (int)numericUpDownGamma.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarEdge.MouseCaptureChanged += delegate
-            {
-                numericUpDownEdge.InnerNumericUpDown.Value = trackBarEdge.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownEdge.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarEdge.Value = (int)numericUpDownEdge.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            trackBarNoise.MouseCaptureChanged += delegate
-            {
-                numericUpDownNoise.InnerNumericUpDown.Value = trackBarNoise.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            numericUpDownNoise.InnerNumericUpDown.ValueChanged += delegate
-            {
-                trackBarNoise.Value = (int)numericUpDownNoise.InnerNumericUpDown.Value;
-                
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            checkBoxColorImage.CheckedChanged += delegate
-            {
-                if (!restore)
-                {
-                    applyFilters();
-                }
-            };
-
-            checkBoxPositiveNegative.CheckedChanged += delegate
-            {
-                if (!restore)
-                {
-                    applyFilters();
-                }
             };
         }
 
-        private void buttonRestoreImageClick(object sender, EventArgs e)
+        private void restoreImage()
         {
-            restore = !restore;
-
             pictureBoxEditedImage.Image = pictureBoxOriginalImage.Image;
+            resetControls();
+            editedImage = new Bitmap(originalImage);
+        }
 
-            trackBarBrightness.Value = 0;
-            numericUpDownBrightness.InnerNumericUpDown.Value = 0;
-            trackBarContrast.Value = 0;
-            numericUpDownContrast.InnerNumericUpDown.Value = 0;
-            trackBarReveal.Value = 0;
-            numericUpDownReveal.InnerNumericUpDown.Value = 0;
-            trackBarSmartSharpen.Value = 0;
-            numericUpDownSmartSharpen.InnerNumericUpDown.Value = 0;
-            trackBarGamma.Value = 0;
-            numericUpDownGamma.InnerNumericUpDown.Value = 0;
-            trackBarEdge.Value = 0;
-            numericUpDownEdge.InnerNumericUpDown.Value = 0;
-            trackBarNoise.Value = 0;
-            numericUpDownNoise.InnerNumericUpDown.Value = 0;
+        private void resetControls()
+        {
+            foreach (var control in new[]
+            {
+                trackBarBrightness, trackBarContrast, trackBarReveal,
+                trackBarSmartSharpen, trackBarGamma, trackBarEdge, trackBarNoise
+            })
+            control.Value = 0;
+
+            foreach (var control in new[]
+            {
+                numericUpDownBrightness, numericUpDownContrast, numericUpDownReveal,
+                numericUpDownSmartSharpen, numericUpDownGamma, numericUpDownEdge, numericUpDownNoise
+            })
+            control.InnerNumericUpDown.Value = 0;
+
             checkBoxColorImage.Checked = false;
             checkBoxPositiveNegative.Checked = false;
-
-            restore = !restore;
         }
+
+        private void buttonRestoreImageClick(object sender, EventArgs e) => restoreImage();
 
         private void buttonApplyChangesClick(object sender, EventArgs e)
         {
-            originalImage = editedImage;
+            originalImage = new Bitmap(editedImage);
             Close();
         }
 
-        private void buttonBackClick(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void buttonBackClick(object sender, EventArgs e) => Close();
     }
 }

@@ -77,7 +77,7 @@ namespace DMMDigital.Views
             this.buttonEllipse = new System.Windows.Forms.ToolStripButton();
             this.buttonRotateLeft = new System.Windows.Forms.ToolStripButton();
             this.buttonRotateRight = new System.Windows.Forms.ToolStripButton();
-            this.buttonRestoreExam = new System.Windows.Forms.ToolStripButton();
+            this.buttonRestoreImage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonFitZoom = new System.Windows.Forms.ToolStripButton();
             this.buttonZoomOut = new System.Windows.Forms.ToolStripButton();
@@ -240,7 +240,7 @@ namespace DMMDigital.Views
             this.buttonEllipse,
             this.buttonRotateLeft,
             this.buttonRotateRight,
-            this.buttonRestoreExam,
+            this.buttonRestoreImage,
             this.toolStripSeparator5,
             this.buttonFitZoom,
             this.buttonZoomOut,
@@ -504,16 +504,16 @@ namespace DMMDigital.Views
             this.buttonRotateRight.Tag = "stateChangeable";
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
-            // buttonRestoreExam
+            // buttonRestoreImage
             // 
-            this.buttonRestoreExam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.buttonRestoreExam, "buttonRestoreExam");
-            this.buttonRestoreExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
-            this.buttonRestoreExam.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonRestoreExam.Name = "buttonRestoreExam";
-            this.buttonRestoreExam.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.buttonRestoreExam.Tag = "stateChangeable";
-            this.buttonRestoreExam.Click += new System.EventHandler(this.buttonRestoreExamClick);
+            this.buttonRestoreImage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.buttonRestoreImage, "buttonRestoreImage");
+            this.buttonRestoreImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
+            this.buttonRestoreImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRestoreImage.Name = "buttonRestoreImage";
+            this.buttonRestoreImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRestoreImage.Tag = "stateChangeable";
+            this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
             // 
             // toolStripSeparator5
             // 
@@ -667,7 +667,7 @@ namespace DMMDigital.Views
         private ToolStripButton buttonEllipse;
         private ToolStripButton buttonRotateLeft;
         private ToolStripButton buttonRotateRight;
-        private ToolStripButton buttonRestoreExam;
+        private ToolStripButton buttonRestoreImage;
         private ToolStripButton buttonFitZoom;
         private ToolStripButton buttonZoomOut;
         private ToolStripButton buttonZoomSquare;

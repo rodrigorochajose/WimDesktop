@@ -187,6 +187,50 @@ namespace DMMDigital.Views
             checkChangesAndSave();
         }
 
+        private void examViewResize(object sender, EventArgs e)
+        {
+            mainPictureBoxPreviousSize = mainPictureBox.Size;
+
+            resizeMainPictureBox();
+
+            if (selectedDrawingHistory.Any())
+            {
+                if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
+                {
+                    if (mainPictureBox.Height != 0)
+                    {
+                        if (mainPictureBoxPreviousSize.Height == 0)
+                        {
+                            mainPictureBoxPreviousSize = mainPictureBoxOriginalSize;
+                            return;
+                        }
+
+                        frames.ForEach(f => f.resize = !f.resize);
+                    }
+                }
+            }
+        }
+
+        private void resizeDrawings(float scale)
+        {
+            foreach (FrameDrawingHistory fdh in frameDrawingHistories)
+            {
+                if (fdh.drawingHistory.Count() > 1)
+                {
+                    foreach (IDrawing d in fdh.drawingHistory.Last())
+                    {
+                        for (int counter = 0; counter < d.points.Count; counter++)
+                        {
+                            d.points[counter] = Point.Round(new PointF(d.points[counter].X * scale, d.points[counter].Y * scale));
+                        }
+                    }
+                }
+            }
+
+            selectedFrame.resize = false;
+            mainPictureBox.Refresh();
+        }
+
         private void associateConfigs(ConfigModel config)
         {
             examPath = config.examPath;
@@ -489,6 +533,11 @@ namespace DMMDigital.Views
 
             checkChangesAndSave();
             selectedFrame = frameToSelect ?? frames[indexFrame];
+            selectedFrame.Tag = Color.LimeGreen;
+
+            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
 
             if (selectedFrame.originalImage != null)
             {
@@ -501,13 +550,8 @@ namespace DMMDigital.Views
 
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
-            selectedFrame.Tag = Color.LimeGreen;
 
             panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
-
-            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
-            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-            selectedDrawingHistoryHandler();
         }
 
         private void frameClick(object sender, EventArgs e)
@@ -520,14 +564,6 @@ namespace DMMDigital.Views
             mainPictureBox.Image = selectedFrame.filteredImage;
 
             resizeMainPictureBox();
-
-            if (mainPictureBox.Height != 0 && mainPictureBoxPreviousSize.Height != 0)
-            {
-                if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
-                {
-                    resizeDrawings();
-                }
-            }
         }
 
         private void frameDoubleClick(object sender, EventArgs e)
@@ -568,6 +604,8 @@ namespace DMMDigital.Views
         {
             if (mainPictureBox.Image != null)
             {
+                Size previousSizeMainPictureBox = mainPictureBox.Size;
+
                 mainPictureBox.Invoke((MethodInvoker)(() =>
                 {
                     mainPictureBox.Size = new Size(
@@ -578,6 +616,17 @@ namespace DMMDigital.Views
                     mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
                     mainPictureBox.Refresh();
                 }));
+
+                if (mainPictureBox.Width != 0 && previousSizeMainPictureBox.Width != 0)
+                {
+                    if (previousSizeMainPictureBox != mainPictureBox.Size)
+                    {
+                        float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
+
+                        resizeDrawings(scale);
+                    }
+                }
+
             }
         }
 
@@ -1305,7 +1354,7 @@ namespace DMMDigital.Views
             }
         }
 
-        private void buttonRestoreExamClick(object sender, EventArgs e)
+        private void buttonRestoreImageClick(object sender, EventArgs e)
         {
             if (MessageBox.Show(Resources.messageImageConfirmRestore, Resources.titleImageRestore, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -1348,9 +1397,6 @@ namespace DMMDigital.Views
 
             resizeMainPictureBox();
 
-            selectedFrame.resize = true;
-            resizeDrawings();
-
             panelImage.AutoScroll = false;
         }
 
@@ -1358,32 +1404,21 @@ namespace DMMDigital.Views
         {
             mainPictureBoxZoom(1 / 1.25f);
 
-            selectedFrame.resize = true;
-            resizeDrawings();
+            resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
         }
 
         private void buttonZoomSquareClick(object sender, EventArgs e)
         {
-            mainPictureBoxPreviousSize = mainPictureBox.Size;
+            mainPictureBoxZoom(3.25f);
 
-            int newWidth = (int)(mainPictureBoxOriginalSize.Width * 4.25f);
-            int newHeight = (int)(mainPictureBoxOriginalSize.Height * 4.25f);
-
-            mainPictureBox.Size = new Size(newWidth, newHeight);
-            panelImage.AutoScrollMinSize = mainPictureBox.Size;
-
-            mainPictureBox.Location = new Point(0, 0);
-
-            selectedFrame.resize = true;
-            resizeDrawings();
+            resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
         }
 
         private void buttonZoomInClick(object sender, EventArgs e)
         {
             mainPictureBoxZoom(1.25f);
 
-            selectedFrame.resize = true;
-            resizeDrawings();
+            resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
         }
 
         private void mainPictureBoxZoom(float factor)
@@ -1966,60 +2001,24 @@ namespace DMMDigital.Views
             }
         }
 
-        private void examViewResize(object sender, EventArgs e)
-        {
-            mainPictureBoxPreviousSize = mainPictureBox.Size;
-
-            resizeMainPictureBox();
-
-            if (selectedDrawingHistory.Any())
-            {
-                if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
-                {
-                    if (mainPictureBox.Height != 0)
-                    {
-                        if (mainPictureBoxPreviousSize.Height == 0)
-                        {
-                            mainPictureBoxPreviousSize = mainPictureBoxOriginalSize;
-                            return;
-                        }
-
-                        frames.ForEach(f => f.resize = !f.resize);
-                    }
-
-                    resizeDrawings();
-                }
-            }
-        }
-
-        private void resizeDrawings()
-        {
-            if (selectedFrame.resize)
-            {
-                float scale = mainPictureBox.Height / (float)mainPictureBoxPreviousSize.Height;
-
-                foreach (IDrawing d in selectedDrawingHistory[indexSelectedDrawingHistory])
-                {
-                    for (int counter = 0; counter < d.points.Count; counter++)
-                    {
-                        d.points[counter] = Point.Round(new PointF(d.points[counter].X * scale, d.points[counter].Y * scale));
-
-                    }
-                }
-                selectedFrame.resize = false;
-                mainPictureBox.Refresh();
-            }
-        }
-
         private void timerSensorStatusTick(object sender, EventArgs e)
         {
+            Frame blinkingFrame = frames.FirstOrDefault(f => (Color)f.Tag == Color.LimeGreen) ?? selectedFrame;
+
             if (blinking)
             {
-                selectedFrame.BackColor = Color.Black;
+                blinkingFrame.BackColor = Color.Black;
             }
             else
             {
-                selectedFrame.BackColor = sensorStatusColor;
+                Frame previousBlinking = frames.FirstOrDefault(f => f.BackColor == sensorStatusColor);
+
+                if (previousBlinking != null)
+                {
+                    previousBlinking.BackColor = Color.Black;
+                }
+
+                blinkingFrame.BackColor = sensorStatusColor;
             }
 
             blinking = !blinking;

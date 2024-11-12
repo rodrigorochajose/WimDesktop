@@ -30,6 +30,9 @@ namespace DMMDigital.Views
         public PatientView()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
+
             associateEvents();
         }
 

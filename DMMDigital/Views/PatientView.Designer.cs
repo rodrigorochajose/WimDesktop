@@ -445,13 +445,13 @@
         private Components.Rounded.RoundedPanel roundedPanel1;
         private Components.Rounded.RoundedPanel roundedPanel2;
         private System.Windows.Forms.Label label1;
+        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientPhone;
         private System.Windows.Forms.DataGridViewImageColumn columnEditPatient;
         private System.Windows.Forms.DataGridViewImageColumn columnDeletePatient;
-        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnExamId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTemplateId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSessionName;
