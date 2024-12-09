@@ -718,6 +718,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhuma Imagem foi selecionada..
+        /// </summary>
+        internal static string messageImageNotSelected {
+            get {
+                return ResourceManager.GetString("messageImageNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Importando os dados....
         /// </summary>
         internal static string messageImportData {

@@ -55,6 +55,11 @@ namespace DMMDigital._Repositories
             return context.examImage.Where(e => e.examId == examId);
         }
 
+        public IEnumerable<string> getExamImagesPath(int examId)
+        {
+            return context.examImage.Where(e => e.examId == examId).Select(e => e.file);
+        }
+
         public ExamImageModel getExamImageById(int examId, int frameId)
         {
             return context.examImage.FirstOrDefault(e => e.examId == examId && e.templateFrameId == frameId);

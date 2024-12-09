@@ -146,6 +146,7 @@
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
+    <Compile Include="Interface\IView\IImportExamImageView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Filters.cs" />
+    <Compile Include="Presenters\ImportExamImagePresenter.cs" />
     <Compile Include="Presenters\TemplateExamPresenter.cs" />
     <Compile Include="Presenters\PatientExamPresenter.cs" />
     <Compile Include="Presenters\TemplateCreationDialogPresenter.cs" />
@@ -180,6 +182,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\MultiComparisonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MultiComparisonView.Designer.cs">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogAdvancedSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +199,12 @@
     </Compile>
     <Compile Include="Views\DialogGetTextToDraw.Designer.cs">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ImportExamImageView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ImportExamImageView.Designer.cs">
+      <DependentUpon>ImportExamImageView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogMigration.cs">
       <SubType>Form</SubType>
@@ -210,11 +224,11 @@
     <Compile Include="Views\FramesComparisonDialog.Designer.cs">
       <DependentUpon>FramesComparisonDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\CompareFrames.cs">
+    <Compile Include="Views\FramesComparisonView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\CompareFrames.Designer.cs">
-      <DependentUpon>CompareFrames.cs</DependentUpon>
+    <Compile Include="Views\FramesComparisonView.Designer.cs">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigView.cs">
       <SubType>Form</SubType>
@@ -395,6 +409,15 @@
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ImportExamImageView.en-US.resx">
+      <DependentUpon>ImportExamImageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiComparisonView.en-US.resx">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiComparisonView.resx">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogAdvancedSettings.en-US.resx">
       <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,6 +429,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogGetTextToDraw.resx">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ImportExamImageView.resx">
+      <DependentUpon>ImportExamImageView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogMigration.en-US.resx">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogMigration.resx">
       <DependentUpon>DialogMigration.cs</DependentUpon>
@@ -432,12 +461,12 @@
     <EmbeddedResource Include="Views\TemplateExamView.en-US.resx">
       <DependentUpon>TemplateExamView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CompareFrames.en-US.resx">
-      <DependentUpon>CompareFrames.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonView.en-US.resx">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\CompareFrames.resx">
-      <DependentUpon>CompareFrames.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonView.resx">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ConfigView.en-US.resx">

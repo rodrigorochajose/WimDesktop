@@ -55,22 +55,26 @@
             // 
             resources.ApplyResources(this.buttonNewExam, "buttonNewExam");
             this.buttonNewExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_xray_new;
+            this.buttonNewExam.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonNewExam.Name = "buttonNewExam";
             // 
             // buttonPatient
             // 
             resources.ApplyResources(this.buttonPatient, "buttonPatient");
+            this.buttonPatient.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonPatient.Name = "buttonPatient";
             // 
             // buttonTemplate
             // 
             resources.ApplyResources(this.buttonTemplate, "buttonTemplate");
             this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_template;
+            this.buttonTemplate.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonTemplate.Name = "buttonTemplate";
             // 
             // buttonConfig
             // 
             resources.ApplyResources(this.buttonConfig, "buttonConfig");
+            this.buttonConfig.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonConfig.Name = "buttonConfig";
             // 
             // MenuView

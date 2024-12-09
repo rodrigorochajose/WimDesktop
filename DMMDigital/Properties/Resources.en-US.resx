@@ -446,4 +446,7 @@
   <data name="titleSaveTemplate" xml:space="preserve">
     <value>Save Template</value>
   </data>
+  <data name="messageImageNotSelected" xml:space="preserve">
+    <value>No Images selected.</value>
+  </data>
 </root>

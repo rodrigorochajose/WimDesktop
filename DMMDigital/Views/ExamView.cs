@@ -1131,11 +1131,9 @@ namespace DMMDigital.Views
 
         private void buttonCompareFrameClick(object sender, EventArgs e)
         {
-            selectTool(sender);
-
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
-            IFramesComparisonDialog compareFrames = new FramesComparisonDialog(frames);
+            IFramesComparisonDialog compareFrames = new FramesComparisonDialog(frames, patient.id);
             (compareFrames as Form).ShowDialog();
         }
 

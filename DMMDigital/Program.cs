@@ -29,7 +29,7 @@ namespace DMMDigital
 
             IMenuView view = new MenuView();
             new MenuPresenter(view);
-            Application.Run((Form)view);
+            Application.Run((Form)view);     
         }
     }
 }

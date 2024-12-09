@@ -123,6 +123,9 @@
   <data name="buttonChangeSides.Text" xml:space="preserve">
     <value>Swap Sides</value>
   </data>
+  <data name="buttonImportExamImage.Text" xml:space="preserve">
+    <value>Import Exam Image</value>
+  </data>
   <data name="buttonImportImage.Text" xml:space="preserve">
     <value>Import Image</value>
   </data>

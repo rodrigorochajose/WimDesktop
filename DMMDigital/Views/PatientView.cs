@@ -31,7 +31,7 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
-            this.DoubleBuffered = true;
+            DoubleBuffered = true;
 
             associateEvents();
         }
@@ -93,6 +93,7 @@ namespace DMMDigital.Views
             {
                 if (e.ColumnIndex == 0)
                 {
+                    // para fazer a troca de template
                     Console.WriteLine("editar exame");
                 }
                 else if (e.ColumnIndex == 1)

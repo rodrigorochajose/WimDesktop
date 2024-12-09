@@ -121,7 +121,7 @@ namespace DMMDigital.Views
                 panel.Controls.Add(label);
                 panel.Controls.Add(pictureBox);
 
-                flowLayoutPanel1.Controls.Add(panel);
+                flowLayoutPanel.Controls.Add(panel);
             }
         }
 
@@ -163,10 +163,11 @@ namespace DMMDigital.Views
         private List<CheckBox> getAllFrameCheckBox()
         {
             List<CheckBox> checkBoxes = new List<CheckBox>();
-            foreach (Panel panel in flowLayoutPanel1.Controls.OfType<Panel>())
+            foreach (Panel panel in flowLayoutPanel.Controls.OfType<Panel>())
             {
-                checkBoxes.Add(panel.Controls.OfType<CheckBox>().First());
+                checkBoxes.AddRange(panel.Controls.OfType<CheckBox>().Where(c => c.Checked == true));
             }
+
             return checkBoxes;
         }
 
@@ -186,7 +187,7 @@ namespace DMMDigital.Views
 
                 List<string> files = new List<string>();
 
-                List<CheckBox> checkBoxes = getAllFrameCheckBox().Where(cb => cb.Checked).ToList();
+                List<CheckBox> checkBoxes = getAllFrameCheckBox();
                 
                 switch (comboBoxFormat.InnerComboBox.SelectedItem)
                 {

@@ -14,7 +14,9 @@ namespace DMMDigital.Views
         public List<Frame> frames { get; set; }
         public List<Frame> selectedFrames { get; set; }
 
-        public FramesComparisonDialog(List<Frame> frames)
+        private int patientId = 0;
+
+        public FramesComparisonDialog(List<Frame> frames, int patientId)
         {
             InitializeComponent();
             adjustComponent();
@@ -22,6 +24,7 @@ namespace DMMDigital.Views
 
             selectedFrames = new List<Frame>();
             this.frames = frames;
+            this.patientId = patientId;
 
             drawTemplate();
         }
@@ -133,12 +136,53 @@ namespace DMMDigital.Views
                 return;
             }
 
-            CompareFrames form = new CompareFrames(selectedImages);
+            int formsQuantity = selectedImages.Count();
 
-            DialogResult result = form.ShowDialog();
-            if (result == DialogResult.Cancel)
+            if (formsQuantity == 2)
             {
-                Close();
+                FramesComparisonView form = new FramesComparisonView(selectedImages, patientId);
+
+                DialogResult result = form.ShowDialog();
+                if (result == DialogResult.Cancel)
+                {
+                    Close();
+                }
+                return;
+            }
+
+            Rectangle screenArea = Screen.PrimaryScreen.WorkingArea;
+
+            int cols = (int)Math.Ceiling(Math.Sqrt(formsQuantity));
+            int rows = (int)Math.Ceiling((double)formsQuantity / cols);
+
+            int formWidth = screenArea.Width / cols;
+            int formHeight = screenArea.Height / rows;
+
+            int formIndex = 0;
+
+            for (int row = 0; row < rows; row++)
+            {
+                int actualCols = (row == rows - 1 && formsQuantity % cols != 0) ? formsQuantity % cols : cols;
+                int adjustedFormWidth = screenArea.Width / actualCols;
+
+                for (int col = 0; col < actualCols; col++)
+                {
+                    if (formIndex >= formsQuantity) break;
+
+                    int x = col * adjustedFormWidth;
+                    int y = row * formHeight;
+
+                    MultiComparisonView form = new MultiComparisonView(selectedImages[formIndex], patientId)
+                    {
+                        StartPosition = FormStartPosition.Manual,
+                        Size = new Size(adjustedFormWidth, formHeight),
+                        Location = new Point(x, y),
+                        Owner = null
+                    };
+
+                    form.Show();
+                    formIndex++;
+                }
             }
         }
     }

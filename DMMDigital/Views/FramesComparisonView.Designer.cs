@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class CompareFrames
+    partial class FramesComparisonView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompareFrames));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FramesComparisonView));
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
@@ -41,6 +41,7 @@
             this.buttonOverlay = new System.Windows.Forms.Button();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonImportExamImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOpacity)).BeginInit();
@@ -62,7 +63,6 @@
             this.buttonClose.Image = global::DMMDigital.Properties.Resources.icon_32x32_cancel;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonCloseClick);
             // 
             // buttonBack
             // 
@@ -72,11 +72,11 @@
             this.buttonBack.Image = global::DMMDigital.Properties.Resources.icon_32x32_left_arrow;
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBackClick);
             // 
             // panelTools
             // 
             this.panelTools.BackColor = System.Drawing.Color.White;
+            this.panelTools.Controls.Add(this.buttonImportExamImage);
             this.panelTools.Controls.Add(this.buttonRotate);
             this.panelTools.Controls.Add(this.trackBarOpacity);
             this.panelTools.Controls.Add(this.labelOpacity);
@@ -140,7 +140,15 @@
             resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             // 
-            // CompareFrames
+            // buttonImportExamImage
+            // 
+            resources.ApplyResources(this.buttonImportExamImage, "buttonImportExamImage");
+            this.buttonImportExamImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
+            this.buttonImportExamImage.Name = "buttonImportExamImage";
+            this.buttonImportExamImage.UseVisualStyleBackColor = true;
+            this.buttonImportExamImage.Click += new System.EventHandler(this.buttonImportExamImageClick);
+            // 
+            // FramesComparisonView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -150,7 +158,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "CompareFrames";
+            this.Name = "FramesComparisonView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.compareFramesLoad);
             this.panel1.ResumeLayout(false);
@@ -175,5 +183,6 @@
         private System.Windows.Forms.Label labelOpacity;
         private System.Windows.Forms.OpenFileDialog dialogFileImage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Button buttonImportExamImage;
     }
 }

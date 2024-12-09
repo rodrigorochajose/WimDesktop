@@ -25,7 +25,7 @@ namespace DMMDigital.Presenters
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly string examOpeningMode;
 
-        public ExamPresenter(ExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
+        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
         {
             examView = view;
             examRepository = repository;
