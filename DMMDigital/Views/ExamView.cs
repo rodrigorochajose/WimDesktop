@@ -79,6 +79,7 @@ namespace DMMDigital.Views
         IDrawing currentDrawing;
         IDrawing selectedDrawingToMove;
         Point clickPosition = new Point();
+        Point lastMagnifierPosition = new Point(0, 0);
         Size mainPictureBoxOriginalSize = new Size();
         Size mainPictureBoxPreviousSize = new Size();
 
@@ -110,7 +111,7 @@ namespace DMMDigital.Views
                 examPath = di.FullName;
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
-                
+
                 selectInitialFrame();
 
                 if (sensorConnected)
@@ -135,7 +136,7 @@ namespace DMMDigital.Views
                 drawTemplate();
 
                 selectInitialFrame();
-                
+
                 loadExamDrawings();
 
                 if (examImageDrawings.Any())
@@ -513,7 +514,7 @@ namespace DMMDigital.Views
             else
             {
                 nextFrame = frames.FirstOrDefault(f => f.originalImage == null);
-                
+
                 if (nextFrame != null)
                 {
                     indexFrame = frames.IndexOf(nextFrame);
@@ -542,7 +543,7 @@ namespace DMMDigital.Views
             if (selectedFrame.originalImage != null)
             {
                 provideTools(true);
-            } 
+            }
             else
             {
                 provideTools(false);
@@ -556,11 +557,13 @@ namespace DMMDigital.Views
 
         private void frameClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
 
             selectFrame((Frame)sender);
             indexFrame = selectedFrame.order - 1;
-            
+
             mainPictureBox.Image = selectedFrame.filteredImage;
 
             resizeMainPictureBox();
@@ -749,14 +752,48 @@ namespace DMMDigital.Views
                     trackBarZoom = new TrackBar
                     {
                         Location = new Point(11, 11),
-                        Minimum = 1,
-                        Value = 1,
+                        Maximum = 60,
+                        Minimum = 18,
+                        Value = 18,
                         Name = "trackBarZoom",
                         Size = new Size(338, 45)
                     };
 
+                    trackBarZoom.ValueChanged += delegate
+                    {
+                        adjustMagnifierImage(lastMagnifierPosition, false);
+                    };
+
                     panelToolOptions.Controls.Add(trackBarZoom);
                     break;
+            }
+        }
+
+        private void adjustMagnifierImage(Point point, bool updateLocation)
+        {
+            float zoomFactor = (float)(trackBarZoom.Value * 0.05);
+
+            int rectangleWidth = (int)(pictureBoxMagnifier.Width / zoomFactor);
+            int rectangleHeight = (int)(pictureBoxMagnifier.Height / zoomFactor);
+
+            PointF rectangleInitialPosition = new PointF(
+            (point.X * mainPictureBox.Image.Width / mainPictureBox.Width) - rectangleWidth / 2,
+            (point.Y * (mainPictureBox.Image.Height + 10) / mainPictureBox.Height) - rectangleHeight / 2
+            );
+
+            RectangleF rectangle = new RectangleF(rectangleInitialPosition, new Size(rectangleWidth, rectangleHeight));
+
+            magnifierGraphics.Clear(Color.White);
+            magnifierGraphics.DrawImage(mainPictureBox.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
+
+            pictureBoxMagnifier.Refresh();
+
+            if (updateLocation)
+            {
+                Point currentCursorPoint = panelImage.PointToClient(Cursor.Position);
+                pictureBoxMagnifier.Location = new Point(currentCursorPoint.X - (pictureBoxMagnifier.Width / 2), currentCursorPoint.Y - (pictureBoxMagnifier.Height / 2));
+
+                mainPictureBox.Update();
             }
         }
 
@@ -1024,7 +1061,7 @@ namespace DMMDigital.Views
 
         private void buttonOpenExamClick(object sender, EventArgs e)
         {
-            FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView(), new PatientRepository(), "newPage")); 
+            FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView(), new PatientRepository(), "newPage"));
         }
 
         private void buttonCloseExamClick(object sender, EventArgs e)
@@ -1159,7 +1196,7 @@ namespace DMMDigital.Views
 
             pictureBoxMagnifier = new PictureBox
             {
-                Location = new Point(1, 1),
+                Location = new Point(mainPictureBox.Left, mainPictureBox.Top),
                 Name = "pictureBoxMagnifier",
                 Size = new Size(250, 250),
                 Image = new Bitmap(mainPictureBox.Width, mainPictureBox.Height),
@@ -1180,6 +1217,8 @@ namespace DMMDigital.Views
 
             panelImage.Controls.Add(pictureBoxMagnifier);
             panelImage.Controls.SetChildIndex(pictureBoxMagnifier, 0);
+
+            adjustMagnifierImage(new Point(139, 137), false);
 
             mainPictureBox.Cursor = Cursors.Cross;
         }
@@ -1426,7 +1465,7 @@ namespace DMMDigital.Views
             int newWidth = (int)(mainPictureBox.Width * factor);
             int newHeight = (int)(mainPictureBox.Height * factor);
 
-            if (newWidth < 50 || newHeight < 50 || newWidth > selectedFrame.originalImage.Width * 10 || newHeight > selectedFrame.originalImage.Height * 10)
+            if (newWidth < 500 || newWidth > 4500)
             {
                 return;
             }
@@ -1789,25 +1828,9 @@ namespace DMMDigital.Views
 
                 if (action == 8)
                 {
-                    int rectangleWidth = pictureBoxMagnifier.Width / trackBarZoom.Value;
-                    int rectangleHeight = pictureBoxMagnifier.Height / trackBarZoom.Value;
+                    lastMagnifierPosition = e.Location;
 
-                    PointF rectangleInitialPosition = new PointF(
-                    (e.X * mainPictureBox.Image.Width / mainPictureBox.Width) - rectangleWidth / 2,
-                    (e.Y * (mainPictureBox.Image.Height + 10) / mainPictureBox.Height) - rectangleHeight / 2
-                    );
-
-                    RectangleF rectangle = new RectangleF(rectangleInitialPosition, new Size(rectangleWidth, rectangleHeight));
-
-                    magnifierGraphics.Clear(Color.White);
-                    magnifierGraphics.DrawImage(mainPictureBox.Image, new Rectangle(0, 0, pictureBoxMagnifier.Width, pictureBoxMagnifier.Height), rectangle, GraphicsUnit.Pixel);
-
-                    pictureBoxMagnifier.Refresh();
-
-                    Point currentCursorPoint = panelImage.PointToClient(Cursor.Position);
-                    pictureBoxMagnifier.Location = new Point(currentCursorPoint.X - (pictureBoxMagnifier.Width / 2), currentCursorPoint.Y - (pictureBoxMagnifier.Height / 2));
-
-                    mainPictureBox.Update();
+                    adjustMagnifierImage(lastMagnifierPosition, true);
                 }
             }
         }
