@@ -14,6 +14,7 @@ namespace DMMDigital.Views
         }
         public int selectedPatientId { get; set; }
         public int selectedExamId { get; set; }
+        public int selectedTemplateId { get; set; }
         public string selectedExamPath { get; set; }
 
         public event EventHandler eventSearchPatient;
@@ -26,6 +27,7 @@ namespace DMMDigital.Views
         public event EventHandler eventOpenExam;
         public event EventHandler eventDeleteExam;
         public event EventHandler eventExportExam;
+        public event EventHandler eventSwitchTemplate;
 
         public PatientView()
         {
@@ -93,8 +95,8 @@ namespace DMMDigital.Views
             {
                 if (e.ColumnIndex == 0)
                 {
-                    // para fazer a troca de template
-                    Console.WriteLine("editar exame");
+                    selectedTemplateId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["columnTemplateId"].Value.ToString());
+                    eventSwitchTemplate?.Invoke(this, EventArgs.Empty);
                 }
                 else if (e.ColumnIndex == 1)
                 {
@@ -119,9 +121,15 @@ namespace DMMDigital.Views
                 eventOpenExam?.Invoke(this, EventArgs.Empty);
             };
 
-            buttonSearchPatient.Click += delegate { eventSearchPatient?.Invoke(this, EventArgs.Empty); };
+            buttonSearchPatient.Click += delegate 
+            { 
+                eventSearchPatient?.Invoke(this, EventArgs.Empty); 
+            };
 
-            buttonNewPatient.Click += delegate { eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); };
+            buttonNewPatient.Click += delegate 
+            { 
+                eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); 
+            };
 
             buttonNewExam.Click += delegate 
             {

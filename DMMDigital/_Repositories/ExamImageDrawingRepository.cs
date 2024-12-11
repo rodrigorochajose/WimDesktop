@@ -11,6 +11,17 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
+        public void save()
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         public void addDrawing(ExamImageDrawingModel drawing)
         {
             try

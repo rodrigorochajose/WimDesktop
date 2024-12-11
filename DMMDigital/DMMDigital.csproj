@@ -148,6 +148,7 @@
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Interface\IView\IImportExamImageView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
+    <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IRepository\IConfigRepository.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Presenters\ExportExamPresenter.cs" />
     <Compile Include="Presenters\TemplateCreationPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
+    <Compile Include="Presenters\TemplateSwitchPresenter.cs" />
     <Compile Include="Properties\Resources.en-US.Designer.cs">
       <DependentUpon>Resources.en-US.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -555,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PatientView.resx">
       <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateSwitchView.en-US.resx">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateSwitchView.resx">
       <DependentUpon>TemplateSwitchView.cs</DependentUpon>

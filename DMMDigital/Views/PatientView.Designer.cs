@@ -43,6 +43,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.roundedPanel2 = new DMMDigital.Components.Rounded.RoundedPanel();
             this.dataGridViewExam = new DMMDigital.Components.Rounded.RoundedDataGridView();
+            this.columnExamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTemplateId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSessionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnExamDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTemplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnEditExam = new System.Windows.Forms.DataGridViewImageColumn();
+            this.columnDeleteExam = new System.Windows.Forms.DataGridViewImageColumn();
             this.buttonExportExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonNewExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonOpenExam = new DMMDigital.Components.Rounded.RoundedButton();
@@ -57,13 +64,6 @@
             this.columnDeletePatient = new System.Windows.Forms.DataGridViewImageColumn();
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.columnExamId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTemplateId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnSessionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnExamDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnTemplate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnEditExam = new System.Windows.Forms.DataGridViewImageColumn();
-            this.columnDeleteExam = new System.Windows.Forms.DataGridViewImageColumn();
             this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
             this.roundedPanel1.SuspendLayout();
@@ -154,6 +154,69 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridViewExam.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewExam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // columnExamId
+            // 
+            this.columnExamId.DataPropertyName = "id";
+            this.columnExamId.Frozen = true;
+            resources.ApplyResources(this.columnExamId, "columnExamId");
+            this.columnExamId.Name = "columnExamId";
+            this.columnExamId.ReadOnly = true;
+            // 
+            // columnTemplateId
+            // 
+            this.columnTemplateId.DataPropertyName = "templateId";
+            this.columnTemplateId.Frozen = true;
+            resources.ApplyResources(this.columnTemplateId, "columnTemplateId");
+            this.columnTemplateId.Name = "columnTemplateId";
+            this.columnTemplateId.ReadOnly = true;
+            // 
+            // columnSessionName
+            // 
+            this.columnSessionName.DataPropertyName = "sessionName";
+            this.columnSessionName.Frozen = true;
+            resources.ApplyResources(this.columnSessionName, "columnSessionName");
+            this.columnSessionName.Name = "columnSessionName";
+            this.columnSessionName.ReadOnly = true;
+            this.columnSessionName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnExamDate
+            // 
+            this.columnExamDate.DataPropertyName = "createdAt";
+            this.columnExamDate.Frozen = true;
+            resources.ApplyResources(this.columnExamDate, "columnExamDate");
+            this.columnExamDate.Name = "columnExamDate";
+            this.columnExamDate.ReadOnly = true;
+            this.columnExamDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnTemplate
+            // 
+            this.columnTemplate.DataPropertyName = "name";
+            this.columnTemplate.Frozen = true;
+            resources.ApplyResources(this.columnTemplate, "columnTemplate");
+            this.columnTemplate.Name = "columnTemplate";
+            this.columnTemplate.ReadOnly = true;
+            this.columnTemplate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // columnEditExam
+            // 
+            this.columnEditExam.Frozen = true;
+            resources.ApplyResources(this.columnEditExam, "columnEditExam");
+            this.columnEditExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
+            this.columnEditExam.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnEditExam.Name = "columnEditExam";
+            this.columnEditExam.ReadOnly = true;
+            // 
+            // columnDeleteExam
+            // 
+            this.columnDeleteExam.Frozen = true;
+            resources.ApplyResources(this.columnDeleteExam, "columnDeleteExam");
+            this.columnDeleteExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
+            this.columnDeleteExam.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.columnDeleteExam.Name = "columnDeleteExam";
+            this.columnDeleteExam.ReadOnly = true;
+            this.columnDeleteExam.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnDeleteExam.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // buttonExportExam
             // 
@@ -346,69 +409,6 @@
             this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
             this.buttonSearchPatient.Name = "buttonSearchPatient";
             this.buttonSearchPatient.UseVisualStyleBackColor = false;
-            // 
-            // columnExamId
-            // 
-            this.columnExamId.DataPropertyName = "id";
-            this.columnExamId.Frozen = true;
-            resources.ApplyResources(this.columnExamId, "columnExamId");
-            this.columnExamId.Name = "columnExamId";
-            this.columnExamId.ReadOnly = true;
-            // 
-            // columnTemplateId
-            // 
-            this.columnTemplateId.DataPropertyName = "templateId";
-            this.columnTemplateId.Frozen = true;
-            resources.ApplyResources(this.columnTemplateId, "columnTemplateId");
-            this.columnTemplateId.Name = "columnTemplateId";
-            this.columnTemplateId.ReadOnly = true;
-            // 
-            // columnSessionName
-            // 
-            this.columnSessionName.DataPropertyName = "sessionName";
-            this.columnSessionName.Frozen = true;
-            resources.ApplyResources(this.columnSessionName, "columnSessionName");
-            this.columnSessionName.Name = "columnSessionName";
-            this.columnSessionName.ReadOnly = true;
-            this.columnSessionName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnExamDate
-            // 
-            this.columnExamDate.DataPropertyName = "createdAt";
-            this.columnExamDate.Frozen = true;
-            resources.ApplyResources(this.columnExamDate, "columnExamDate");
-            this.columnExamDate.Name = "columnExamDate";
-            this.columnExamDate.ReadOnly = true;
-            this.columnExamDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnTemplate
-            // 
-            this.columnTemplate.DataPropertyName = "name";
-            this.columnTemplate.Frozen = true;
-            resources.ApplyResources(this.columnTemplate, "columnTemplate");
-            this.columnTemplate.Name = "columnTemplate";
-            this.columnTemplate.ReadOnly = true;
-            this.columnTemplate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // columnEditExam
-            // 
-            this.columnEditExam.Frozen = true;
-            resources.ApplyResources(this.columnEditExam, "columnEditExam");
-            this.columnEditExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
-            this.columnEditExam.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.columnEditExam.Name = "columnEditExam";
-            this.columnEditExam.ReadOnly = true;
-            // 
-            // columnDeleteExam
-            // 
-            this.columnDeleteExam.Frozen = true;
-            resources.ApplyResources(this.columnDeleteExam, "columnDeleteExam");
-            this.columnDeleteExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
-            this.columnDeleteExam.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.columnDeleteExam.Name = "columnDeleteExam";
-            this.columnDeleteExam.ReadOnly = true;
-            this.columnDeleteExam.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnDeleteExam.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // PatientView
             // 

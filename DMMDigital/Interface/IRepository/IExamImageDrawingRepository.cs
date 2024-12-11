@@ -4,7 +4,8 @@ using System.Collections.Generic;
 namespace DMMDigital.Interface.IRepository
 {
     public interface IExamImageDrawingRepository
-    { 
+    {
+        void save();
         void addDrawing(ExamImageDrawingModel drawing);
         void deleteRangeDrawing(List<ExamImageDrawingModel> drawings);
         void deleteAllDrawings(int examId);

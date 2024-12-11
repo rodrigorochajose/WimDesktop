@@ -58,13 +58,31 @@ namespace DMMDigital._Repositories
 
         public IEnumerable<ExamModel> getPatientExams(int patientId)
         {
-            return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).ToList();
+            return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).AsNoTracking().ToList();
         }
 
         public bool examHasImages(int examId)
         {
             ExamModel exam = context.exam.FirstOrDefault(e => e.id == examId);
             return exam.examImages.Any();
+        }
+
+        public void updateExamTemplate(int examId, int templateId)
+        {
+            try
+            {
+                ExamModel exam = context.exam.FirstOrDefault(e => e.id == examId);
+
+                if (exam != null)
+                {
+                    exam.templateId = templateId;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace DMMDigital._Repositories
     {
         private readonly Context context = new Context();
 
-        public void save() 
+        public void save()
         {
             try
             {

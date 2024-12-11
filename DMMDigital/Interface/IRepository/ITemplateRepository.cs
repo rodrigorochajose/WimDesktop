@@ -10,5 +10,6 @@ namespace DMMDigital.Interface.IRepository
         List<TemplateModel> getAllTemplates();
         int getLastTemplateId();
         int getTemplateIdByName(string templateName);
+        string getTemplateNameById(int templateId);
     }
 }

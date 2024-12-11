@@ -51,6 +51,7 @@ namespace DMMDigital.Presenters
             view.eventOpenExam += openExam;
             view.eventDeleteExam += deleteExam;
             view.eventExportExam += exportExam;
+            view.eventSwitchTemplate += switchTemplate;
 
             view.setPatientList(patientBindingSource);
             view.setExamList(examBindingSource);
@@ -311,6 +312,15 @@ namespace DMMDigital.Presenters
                 },
                 view.selectedExamId
             );
+        }
+
+        private void switchTemplate(object sender, EventArgs e)
+        {
+            ITemplateSwitchView templateSwitchView = new TemplateSwitchView();
+            new TemplateSwitchPresenter(templateSwitchView, view.selectedExamId, view.selectedTemplateId);
+
+            (templateSwitchView as Form).ShowDialog();
+            getExamByPatient(sender, e);
         }
     }
 }

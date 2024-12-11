@@ -853,6 +853,24 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Template selecionado é menor que o template atual..
+        /// </summary>
+        internal static string messageSwitchTemplateNotAvailable {
+            get {
+                return ResourceManager.GetString("messageSwitchTemplateNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Troca de Template realizada com sucesso!.
+        /// </summary>
+        internal static string messageSwitchTemplateSuccess {
+            get {
+                return ResourceManager.GetString("messageSwitchTemplateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Template não pode ser excluido pois existem exames que o utilizam..
         /// </summary>
         internal static string messageTemplateCannotDelete {

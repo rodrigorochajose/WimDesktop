@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOpenExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 33</value>
+    <value>271, 33</value>
   </data>
   <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 42</value>
@@ -1266,42 +1266,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Pacientes</value>
   </data>
-  <data name="&gt;&gt;columnPatientId.Name" xml:space="preserve">
-    <value>columnPatientId</value>
-  </data>
-  <data name="&gt;&gt;columnPatientId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnPatientName.Name" xml:space="preserve">
-    <value>columnPatientName</value>
-  </data>
-  <data name="&gt;&gt;columnPatientName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnPatientBirthDate.Name" xml:space="preserve">
-    <value>columnPatientBirthDate</value>
-  </data>
-  <data name="&gt;&gt;columnPatientBirthDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnPatientPhone.Name" xml:space="preserve">
-    <value>columnPatientPhone</value>
-  </data>
-  <data name="&gt;&gt;columnPatientPhone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnEditPatient.Name" xml:space="preserve">
-    <value>columnEditPatient</value>
-  </data>
-  <data name="&gt;&gt;columnEditPatient.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnDeletePatient.Name" xml:space="preserve">
-    <value>columnDeletePatient</value>
-  </data>
-  <data name="&gt;&gt;columnDeletePatient.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;columnExamId.Name" xml:space="preserve">
     <value>columnExamId</value>
   </data>
@@ -1342,6 +1306,42 @@
     <value>columnDeleteExam</value>
   </data>
   <data name="&gt;&gt;columnDeleteExam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnPatientId.Name" xml:space="preserve">
+    <value>columnPatientId</value>
+  </data>
+  <data name="&gt;&gt;columnPatientId.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnPatientName.Name" xml:space="preserve">
+    <value>columnPatientName</value>
+  </data>
+  <data name="&gt;&gt;columnPatientName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnPatientBirthDate.Name" xml:space="preserve">
+    <value>columnPatientBirthDate</value>
+  </data>
+  <data name="&gt;&gt;columnPatientBirthDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnPatientPhone.Name" xml:space="preserve">
+    <value>columnPatientPhone</value>
+  </data>
+  <data name="&gt;&gt;columnPatientPhone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnEditPatient.Name" xml:space="preserve">
+    <value>columnEditPatient</value>
+  </data>
+  <data name="&gt;&gt;columnEditPatient.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnDeletePatient.Name" xml:space="preserve">
+    <value>columnDeletePatient</value>
+  </data>
+  <data name="&gt;&gt;columnDeletePatient.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

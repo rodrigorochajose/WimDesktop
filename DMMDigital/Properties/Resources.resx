@@ -452,4 +452,10 @@
   <data name="messageImageNotSelected" xml:space="preserve">
     <value>Nenhuma Imagem foi selecionada.</value>
   </data>
+  <data name="messageSwitchTemplateNotAvailable" xml:space="preserve">
+    <value>O Template selecionado é menor que o template atual.</value>
+  </data>
+  <data name="messageSwitchTemplateSuccess" xml:space="preserve">
+    <value>Troca de Template realizada com sucesso!</value>
+  </data>
 </root>

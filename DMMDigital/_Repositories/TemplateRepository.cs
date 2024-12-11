@@ -73,8 +73,12 @@ namespace DMMDigital._Repositories
                 MessageBox.Show(ex.Message);
             }
 
-
             return id;
+        }
+
+        public string getTemplateNameById(int templateId)
+        {
+            return context.template.Single(t => t.id == templateId).name;
         }
     }
 }

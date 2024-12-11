@@ -8,6 +8,7 @@ namespace DMMDigital.Interface.IView
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
         int selectedExamId { get; set; }
+        int selectedTemplateId { get; set; }
         string selectedExamPath { get; set; }
 
         event EventHandler eventSearchPatient;
@@ -20,6 +21,7 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventOpenExam;
         event EventHandler eventDeleteExam;
         event EventHandler eventExportExam;
+        event EventHandler eventSwitchTemplate;
 
         void setPatientList(BindingSource patientList);
         void setExamList(BindingSource examList);
