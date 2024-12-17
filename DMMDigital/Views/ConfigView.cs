@@ -282,19 +282,19 @@ namespace DMMDigital.Views
             migrateCDR?.Invoke(this, e);
         }
 
-        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        private void tabControlSelecting(object sender, TabControlCancelEventArgs e)
         {
-            //if (e.TabPageIndex == 2)
-            //{
-            //    using (Form dialogAdvancedSettings = new DialogAdvancedSettings())
-            //    {
-            //        var result = dialogAdvancedSettings.ShowDialog();
-            //        if (result == DialogResult.Cancel)
-            //        {
-            //            e.Cancel = true;
-            //        }
-            //    }
-            //}
+            if (e.TabPageIndex == 2)
+            {
+                using (Form dialogAdvancedSettings = new DialogAdvancedSettings())
+                {
+                    var result = dialogAdvancedSettings.ShowDialog();
+                    if (result == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                    }
+                }
+            }
         }
     }
 }

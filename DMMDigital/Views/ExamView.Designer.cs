@@ -56,6 +56,7 @@ namespace DMMDigital.Views
             this.buttonCloseExam = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonAcquireMode = new System.Windows.Forms.ToolStripButton();
+            this.buttonAutoTake = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonExport = new System.Windows.Forms.ToolStripButton();
@@ -219,6 +220,7 @@ namespace DMMDigital.Views
             this.toolStripDropDownButton,
             this.toolStripSeparator1,
             this.buttonAcquireMode,
+            this.buttonAutoTake,
             this.toolStripSeparator2,
             this.buttonImport,
             this.buttonExport,
@@ -291,6 +293,16 @@ namespace DMMDigital.Views
             this.buttonAcquireMode.Name = "buttonAcquireMode";
             this.buttonAcquireMode.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonAcquireMode.Click += new System.EventHandler(this.buttonAcquireModeClick);
+            // 
+            // buttonAutoTake
+            // 
+            this.buttonAutoTake.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonAutoTake.Image = global::DMMDigital.Properties.Resources.icon_32x32_autotake;
+            resources.ApplyResources(this.buttonAutoTake, "buttonAutoTake");
+            this.buttonAutoTake.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.buttonAutoTake.Name = "buttonAutoTake";
+            this.buttonAutoTake.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonAutoTake.Click += new System.EventHandler(this.buttonAutoTakeClick);
             // 
             // toolStripSeparator2
             // 
@@ -525,7 +537,7 @@ namespace DMMDigital.Views
             this.buttonFitZoom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.buttonFitZoom, "buttonFitZoom");
             this.buttonFitZoom.Image = global::DMMDigital.Properties.Resources.icon_16x16_fit;
-            this.buttonFitZoom.Margin = new System.Windows.Forms.Padding(25, 0, 0, 2);
+            this.buttonFitZoom.Margin = new System.Windows.Forms.Padding(10, 0, 0, 2);
             this.buttonFitZoom.Name = "buttonFitZoom";
             this.buttonFitZoom.Click += new System.EventHandler(this.buttonFitZoomClick);
             // 
@@ -674,5 +686,6 @@ namespace DMMDigital.Views
         private ToolStripButton buttonZoomIn;
         private ToolStripSeparator toolStripSeparator5;
         private Timer timerSensorStatus;
+        private ToolStripButton buttonAutoTake;
     }
 }

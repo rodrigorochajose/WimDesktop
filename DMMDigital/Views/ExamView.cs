@@ -31,6 +31,7 @@ namespace DMMDigital.Views
         public SensorModel sensor { get; set; }
         public bool sensorConnected { get; set; }
         public string acquireMode { get; set; }
+        public bool twainAutoTake { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventSaveExamImage;
@@ -114,10 +115,7 @@ namespace DMMDigital.Views
 
                 selectInitialFrame();
 
-                if (sensorConnected)
-                {
-                    sensorStatusColor = Color.Green;
-                }
+                setAcquireStatus();
 
                 timerSensorStatus.Start();
             };
@@ -144,15 +142,24 @@ namespace DMMDigital.Views
                     selectedDrawingHistoryHandler();
                 }
 
-                if (sensorConnected)
-                {
-                    sensorStatusColor = Color.Green;
-                }
+                setAcquireStatus();
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
                 timerSensorStatus.Start();
             };
 
+        }
+
+        private void setAcquireStatus()
+        {
+            if (sensorConnected)
+            {
+                sensorStatusColor = Color.Green;
+            }
+            else if (acquireMode == "TWAIN")
+            {
+                sensorStatusColor = Color.Blue;
+            }
         }
 
         private void selectInitialFrame()
@@ -229,7 +236,7 @@ namespace DMMDigital.Views
             }
 
             selectedFrame.resize = false;
-            mainPictureBox.Refresh();
+            mainPictureBox.Invoke((MethodInvoker)(() => mainPictureBox.Refresh()));
         }
 
         private void associateConfigs(ConfigModel config)
@@ -573,6 +580,7 @@ namespace DMMDigital.Views
         {
             if (acquireMode == "TWAIN")
             {
+                twainAutoTake = false;
                 eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -1041,6 +1049,15 @@ namespace DMMDigital.Views
                 {
                     sensorStatusColor = Color.Red;
                 }
+            }
+        }
+
+        private void buttonAutoTakeClick(object sender, EventArgs e)
+        {
+            if (acquireMode == "TWAIN")
+            {
+                twainAutoTake = true;
+                eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -1927,7 +1944,7 @@ namespace DMMDigital.Views
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
                 getDrawingsToSave();
 
-                if (examImageDrawings != null)
+                if (examImageDrawings.Any())
                 {
                     eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
                 }

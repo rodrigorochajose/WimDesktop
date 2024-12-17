@@ -613,103 +613,16 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabControl</value>
   </data>
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label16.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="label16.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 3</value>
-  </data>
-  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 19</value>
-  </data>
-  <data name="label16.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>Configurações dos Filtros</value>
-  </data>
-  <data name="&gt;&gt;label16.Name" xml:space="preserve">
-    <value>label16</value>
-  </data>
-  <data name="&gt;&gt;label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
-    <value>panel7</value>
-  </data>
-  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panel7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 315</value>
-  </data>
-  <data name="panel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 26</value>
-  </data>
-  <data name="panel7.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="&gt;&gt;panel7.Name" xml:space="preserve">
-    <value>panel7</value>
-  </data>
-  <data name="&gt;&gt;panel7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel7.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;panel7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonConfigureFilters.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonConfigureFilters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 348</value>
-  </data>
-  <data name="buttonConfigureFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 45</value>
-  </data>
-  <data name="buttonConfigureFilters.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="buttonConfigureFilters.Text" xml:space="preserve">
-    <value>Configurar Filtros</value>
-  </data>
-  <data name="buttonConfigureFilters.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="buttonConfigureFilters.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
-    <value>ImageBeforeText</value>
-  </data>
-  <data name="&gt;&gt;buttonConfigureFilters.Name" xml:space="preserve">
-    <value>buttonConfigureFilters</value>
-  </data>
-  <data name="&gt;&gt;buttonConfigureFilters.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonConfigureFilters.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;buttonConfigureFilters.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="buttonRulerColorPicker.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonRulerColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 269</value>
+    <value>142, 338</value>
   </data>
   <data name="buttonRulerColorPicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 38</value>
@@ -727,13 +640,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonRulerColorPicker.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="buttonTextColorPicker.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonTextColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 166</value>
+    <value>60, 208</value>
   </data>
   <data name="buttonTextColorPicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 38</value>
@@ -751,10 +664,10 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonTextColorPicker.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="buttonDrawingColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 57</value>
+    <value>60, 69</value>
   </data>
   <data name="buttonDrawingColorPicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 38</value>
@@ -772,13 +685,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonDrawingColorPicker.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="numericUpDownTextSize.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
   <data name="numericUpDownTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 165</value>
+    <value>226, 207</value>
   </data>
   <data name="numericUpDownTextSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -799,13 +712,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;numericUpDownTextSize.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="numericUpDownDrawingSize.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
   <data name="numericUpDownDrawingSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 57</value>
+    <value>226, 69</value>
   </data>
   <data name="numericUpDownDrawingSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -826,7 +739,7 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;numericUpDownDrawingSize.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="label8.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -859,7 +772,7 @@
     <value>0</value>
   </data>
   <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 217</value>
+    <value>0, 281</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 26</value>
@@ -877,7 +790,7 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;panel5.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -910,7 +823,7 @@
     <value>0</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 111</value>
+    <value>0, 145</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
     <value>384, 26</value>
@@ -928,7 +841,7 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -979,13 +892,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;panel4.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="labelRulerColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelRulerColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 251</value>
+    <value>141, 320</value>
   </data>
   <data name="labelRulerColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 15</value>
@@ -1006,13 +919,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelRulerColor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="labelTextSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 148</value>
+    <value>228, 190</value>
   </data>
   <data name="labelTextSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 15</value>
@@ -1033,13 +946,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelTextSize.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="labelShapeSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelShapeSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 38</value>
+    <value>228, 50</value>
   </data>
   <data name="labelShapeSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 15</value>
@@ -1060,13 +973,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelShapeSize.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="labelTextColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelTextColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 148</value>
+    <value>57, 190</value>
   </data>
   <data name="labelTextColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 15</value>
@@ -1087,13 +1000,13 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelTextColor.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="labelShapeColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="labelShapeColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 39</value>
+    <value>57, 51</value>
   </data>
   <data name="labelShapeColor.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 15</value>
@@ -1114,7 +1027,7 @@
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelShapeColor.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 24</value>
@@ -1138,7 +1051,7 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabControl</value>
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1513,39 +1426,39 @@
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage4.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+    <value>tabControl</value>
   </data>
   <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tabControl1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="tabControl.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 85</value>
   </data>
-  <data name="tabControl1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
     <value>387, 427</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="&gt;&gt;tabControl.Name" xml:space="preserve">
+    <value>tabControl</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabControl.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabControl.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
   </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="pictureBoxIcon.Location" type="System.Drawing.Point, System.Drawing">
@@ -1663,7 +1576,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tabControl1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHeader" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,15,Percent,75,Percent,10,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel1" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tabControl" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="panelHeader" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,15,Percent,75,Percent,10,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>184, 17</value>

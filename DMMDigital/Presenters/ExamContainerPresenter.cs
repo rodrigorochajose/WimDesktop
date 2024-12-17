@@ -32,6 +32,7 @@ namespace DMMDigital.Presenters
         private SensorModel connectedSensor = new SensorModel();
         private readonly ExamContainerView examContainerView;
         private Twain twain;
+        private bool continueAcquiring = false;
 
         private readonly IConfigRepository configRepository = new ConfigRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
@@ -69,10 +70,15 @@ namespace DMMDigital.Presenters
         private void initializeTwain(object sender, EventArgs ev)
         {
             twain = new Twain(new WinFormsWindowMessageHook(examContainerView));
+
             twain.TransferImage += (s, e) =>
             {
+                continueAcquiring = true;
+
                 if (e.Image != null)
                 {
+                    examContainerView.selectedExamView.selectFrame();
+
                     using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png"), FileMode.Create, FileAccess.Write))
                     {
                         using (Bitmap bitmap = new Bitmap(e.Image))
@@ -90,6 +96,20 @@ namespace DMMDigital.Presenters
                     }
 
                     examContainerView.selectedExamView.loadImageOnMainPictureBox();
+                }
+            };
+
+            twain.ScanningComplete += (s, e) =>
+            {
+                if (examContainerView.selectedExamView.twainAutoTake)
+                {
+                    int examImages = examContainerView.selectedExamView.examImages.Count();
+                    int frames = examContainerView.selectedExamView.templateFrames.Count();
+
+                    if (examImages < frames && continueAcquiring)
+                    {
+                        openTwain(s, e);
+                    }
                 }
             };
         }
@@ -111,6 +131,8 @@ namespace DMMDigital.Presenters
                     AutomaticBorderDetection = true
                 }
             };
+
+            continueAcquiring = false;
 
             twain.StartScanning(settings);
         }
@@ -375,7 +397,7 @@ namespace DMMDigital.Presenters
                         if (getImage)
                         {
                             IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
-                            saveImg(image);
+                            //saveImg(image);
                             int imageWidth = image.nWidth;
                             int imageHeight = image.nHeight;
                             short[] imageData = new short[imageWidth * imageHeight];
@@ -435,8 +457,6 @@ namespace DMMDigital.Presenters
 
                 pic.Dispose();
 
-                postProcess();
-
             }
             catch (Exception ex)
             {
@@ -457,6 +477,17 @@ namespace DMMDigital.Presenters
             bmp.UnlockBits(bitmapData);
 
             using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
+            {
+                PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                encoder.Frames.Add(BitmapFrame.Create(source));
+
+                encoder.Save(stream);
+
+                stream.Close();
+            }
+
+            using (FileStream stream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_filtered.png"), FileMode.Create, FileAccess.Write, FileShare.Read))
             {
                 PngBitmapEncoder encoder = new PngBitmapEncoder();
 
@@ -488,24 +519,6 @@ namespace DMMDigital.Presenters
             }
 
             return pixelFormats;
-        }
-
-        private void postProcess()
-        {
-            string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
-            string filteredImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_filtered.png");
-
-            using (Bitmap originalImage = new Bitmap(originalImagePath))
-            {
-                Bitmap bmp = Filters.applyPostProcessFilters(originalImage, configRepository.getFiltersValues());
-
-                bmp.Save(filteredImagePath);
-            }
-
-            using (Bitmap bmp = new Bitmap(filteredImagePath))
-            {
-                bmp.Save(originalImagePath);
-            }
         }
 
         private void saveImg(IRayImage image)

@@ -20,6 +20,8 @@ namespace DMMDigital.Interface.IView
         bool sensorConnected { get; set; }
         string acquireMode { get; set; }
 
+        bool twainAutoTake { get; set; }
+
         event EventHandler eventSaveExam;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;

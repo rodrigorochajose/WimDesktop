@@ -108,8 +108,8 @@ namespace DMMDigital.Views
 
                     int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
 
-                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells[3].Value.ToString();
-                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells[4].Value.ToString());
+                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells["columnSessionName"].Value.ToString();
+                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells["columnExamDate"].Value.ToString());
 
                     selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy-HH-m}";
                     eventDeleteExam?.Invoke(this, EventArgs.Empty);

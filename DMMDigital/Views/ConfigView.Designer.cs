@@ -34,7 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,9 +50,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.buttonConfigureFilters = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRulerColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonTextColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonDrawingColorPicker = new DMMDigital.Components.Rounded.RoundedButton();
@@ -88,12 +85,11 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -109,7 +105,7 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tabControl, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panelHeader, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -145,15 +141,15 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.UseVisualStyleBackColor = false;
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            resources.ApplyResources(this.tabControl1, "tabControl1");
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage4);
+            resources.ApplyResources(this.tabControl, "tabControl");
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControlSelecting);
             // 
             // tabPage1
             // 
@@ -270,8 +266,6 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.panel7);
-            this.tabPage2.Controls.Add(this.buttonConfigureFilters);
             this.tabPage2.Controls.Add(this.buttonRulerColorPicker);
             this.tabPage2.Controls.Add(this.buttonTextColorPicker);
             this.tabPage2.Controls.Add(this.buttonDrawingColorPicker);
@@ -287,30 +281,6 @@
             this.tabPage2.Controls.Add(this.labelShapeColor);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel7.Controls.Add(this.label16);
-            resources.ApplyResources(this.panel7, "panel7");
-            this.panel7.Name = "panel7";
-            // 
-            // label16
-            // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
-            // 
-            // buttonConfigureFilters
-            // 
-            this.buttonConfigureFilters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonConfigureFilters.BorderColor = System.Drawing.Color.White;
-            this.buttonConfigureFilters.BorderWidth = 5F;
-            this.buttonConfigureFilters.CornerRadius = 10;
-            this.buttonConfigureFilters.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
-            resources.ApplyResources(this.buttonConfigureFilters, "buttonConfigureFilters");
-            this.buttonConfigureFilters.Name = "buttonConfigureFilters";
-            this.buttonConfigureFilters.UseVisualStyleBackColor = false;
-            this.buttonConfigureFilters.Click += new System.EventHandler(this.buttonConfigureFiltersClick);
             // 
             // buttonRulerColorPicker
             // 
@@ -602,7 +572,7 @@
             this.Name = "ConfigView";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -611,8 +581,6 @@
             this.panel6.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -638,7 +606,7 @@
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label15;
@@ -681,9 +649,6 @@
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedComboBox comboBoxLanguage;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Label label16;
-        private Components.Rounded.RoundedButton buttonConfigureFilters;
         private Components.Rounded.RoundedButton roundedButtonMigrateWimDesktop;
         private Components.Rounded.RoundedButton roundedButtonMigrateCDR;
         private System.Windows.Forms.Panel panel9;

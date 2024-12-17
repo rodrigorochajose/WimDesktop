@@ -745,6 +745,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\icon-32x32-autotake1.png" />
     <None Include="Resources\grid.png" />
     <None Include="Resources\icon_32x32_scanner.png" />
     <None Include="Resources\icon-16x16-folder.png" />

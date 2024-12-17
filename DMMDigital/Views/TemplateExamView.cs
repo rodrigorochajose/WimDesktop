@@ -58,7 +58,7 @@ namespace DMMDigital.Views
 
         public string selectedTemplateName
         { 
-            get { return comboBoxTemplate.Text; } 
+            get { return comboBoxTemplate.InnerComboBox.Text; } 
         }
 
         public List<TemplateFrameModel> templateFrames

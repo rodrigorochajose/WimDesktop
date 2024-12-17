@@ -153,6 +153,16 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_autotake {
+            get {
+                object obj = ResourceManager.GetObject("icon-32x32-autotake", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_cancel {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_cancel", resourceCulture);

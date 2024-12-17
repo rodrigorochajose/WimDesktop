@@ -1,6 +1,7 @@
 ﻿using DMMDigital.Interface.IView;
 using Emgu.CV;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -27,39 +28,43 @@ namespace DMMDigital.Views
 
         private void applyFilters()
         {
-            Bitmap image = new Bitmap(originalImage);
-            Mat matImg = image.ToMat();
+            Mat matImg = originalImage.ToMat();
+
+            List<Func<Mat, Mat>> filters = new List<Func<Mat, Mat>>();
 
             if (trackBarBrightness.Value != 0)
-                matImg = Filters.applyBrightnessAndContrast(matImg, trackBarBrightness.Value / 4, 0);
+                filters.Add(img => Filters.applyBrightnessAndContrast(img, trackBarBrightness.Value / 4, 0));
 
             if (trackBarContrast.Value != 0)
-                matImg = Filters.applyBrightnessAndContrast(matImg, 0, trackBarContrast.Value);
+                filters.Add(img => Filters.applyBrightnessAndContrast(img, 0, trackBarContrast.Value));
 
             if (trackBarReveal.Value != 0)
-                matImg = Filters.applyReveal(matImg, trackBarReveal.Value);
+                filters.Add(img => Filters.applyReveal(img, trackBarReveal.Value));
 
             if (trackBarSmartSharpen.Value != 0)
-                matImg = Filters.applySmartSharpen(matImg, trackBarSmartSharpen.Value);
+                filters.Add(img => Filters.applySmartSharpen(img, trackBarSmartSharpen.Value));
 
             if (trackBarGamma.Value != 0)
-                matImg = Filters.applyGamma(matImg, trackBarGamma.Value);
+                filters.Add(img => Filters.applyGamma(img, trackBarGamma.Value));
 
             if (trackBarEdge.Value != 0)
-                matImg = Filters.applyEdge(matImg, trackBarEdge.Value);
+                filters.Add(img => Filters.applyEdge(img, trackBarEdge.Value));
 
             if (trackBarNoise.Value != 0)
-                matImg = Filters.applyNoise(matImg, trackBarNoise.Value);
-
-            if (checkBoxColorImage.Checked)
-                matImg = Filters.colorImage(matImg, 0, 62, 158);
+                filters.Add(img => Filters.applyNoise(img, trackBarNoise.Value));
 
             if (checkBoxPositiveNegative.Checked)
-                matImg = Filters.invertColors(matImg);
+                filters.Add(img => Filters.invertColors(img));
+
+            foreach (var filter in filters)
+            {
+                matImg = filter(matImg);
+            }
 
             editedImage = matImg.ToBitmap();
             pictureBoxEditedImage.Image = editedImage;
         }
+
 
         private void bindControls()
         {
@@ -77,20 +82,19 @@ namespace DMMDigital.Views
                 var trackBar = control.Item1;
                 var numericUpDown = control.Item2;
 
-                trackBar.ValueChanged += (s, e) => 
-                { 
-                    numericUpDown.InnerNumericUpDown.Value = trackBar.Value; 
-                    applyFilters(); 
+                trackBar.ValueChanged += (s, e) =>
+                {
+                    numericUpDown.InnerNumericUpDown.Value = trackBar.Value;
+                    applyFilters();
                 };
 
-                numericUpDown.InnerNumericUpDown.ValueChanged += (s, e) => 
-                { 
+                numericUpDown.InnerNumericUpDown.ValueChanged += (s, e) =>
+                {
                     trackBar.Value = (int)numericUpDown.InnerNumericUpDown.Value;
-                    applyFilters(); 
+                    applyFilters();
                 };
             }
 
-            checkBoxColorImage.CheckedChanged += (s, e) => applyFilters();
             checkBoxPositiveNegative.CheckedChanged += (s, e) => applyFilters();
 
             KeyPress += (s, e) =>
@@ -100,34 +104,23 @@ namespace DMMDigital.Views
             };
         }
 
-        private void restoreImage()
+        private void resetControls()
+        {
+            foreach (var control in new[] { trackBarBrightness, trackBarContrast, trackBarReveal, trackBarSmartSharpen, trackBarGamma, trackBarEdge, trackBarNoise })
+                control.Value = 0;
+
+            foreach (var control in new[] { numericUpDownBrightness, numericUpDownContrast, numericUpDownReveal, numericUpDownSmartSharpen, numericUpDownGamma, numericUpDownEdge, numericUpDownNoise })
+                control.InnerNumericUpDown.Value = 0;
+
+            checkBoxPositiveNegative.Checked = false;
+        }
+
+        private void buttonRestoreImageClick(object sender, EventArgs e)
         {
             pictureBoxEditedImage.Image = pictureBoxOriginalImage.Image;
             resetControls();
             editedImage = new Bitmap(originalImage);
         }
-
-        private void resetControls()
-        {
-            foreach (var control in new[]
-            {
-                trackBarBrightness, trackBarContrast, trackBarReveal,
-                trackBarSmartSharpen, trackBarGamma, trackBarEdge, trackBarNoise
-            })
-            control.Value = 0;
-
-            foreach (var control in new[]
-            {
-                numericUpDownBrightness, numericUpDownContrast, numericUpDownReveal,
-                numericUpDownSmartSharpen, numericUpDownGamma, numericUpDownEdge, numericUpDownNoise
-            })
-            control.InnerNumericUpDown.Value = 0;
-
-            checkBoxColorImage.Checked = false;
-            checkBoxPositiveNegative.Checked = false;
-        }
-
-        private void buttonRestoreImageClick(object sender, EventArgs e) => restoreImage();
 
         private void buttonApplyChangesClick(object sender, EventArgs e)
         {
@@ -135,6 +128,9 @@ namespace DMMDigital.Views
             Close();
         }
 
-        private void buttonBackClick(object sender, EventArgs e) => Close();
+        private void buttonBackClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
