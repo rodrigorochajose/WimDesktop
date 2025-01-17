@@ -2,6 +2,7 @@
 using Emgu.CV;
 using System;
 using System.Drawing;
+using Emgu.CV.Util;
 
 namespace DMMDigital
 {
@@ -118,8 +119,53 @@ namespace DMMDigital
         public static Mat invertColors(Mat image)
         {
             Mat invertedImage = image.Clone();
+
+            if (invertedImage.NumberOfChannels == 4)
+            {
+                CvInvoke.CvtColor(invertedImage, invertedImage, ColorConversion.Bgra2Bgr);
+            }
+            else
+            {
+                invertedImage = invertedImage.Clone();
+            }
+
             CvInvoke.BitwiseNot(invertedImage, invertedImage);
+
             return invertedImage;
         }
+
+        public static Mat colorImage(Mat img)
+        {
+            VectorOfMat bgrChannels = new VectorOfMat();
+            CvInvoke.Split(img, bgrChannels);
+
+            CvInvoke.LUT(bgrChannels[2], createLookupTable(0), bgrChannels[2]);
+            CvInvoke.LUT(bgrChannels[1], createLookupTable(62), bgrChannels[1]);
+            CvInvoke.LUT(bgrChannels[0], createLookupTable(158), bgrChannels[0]);
+
+            Mat destImage = new Mat();
+            CvInvoke.Merge(bgrChannels, destImage);
+
+            return destImage;
+        }
+
+        private static Mat createLookupTable(float threshold)
+        {
+            Mat lookup = new Mat(1, 256, DepthType.Cv8U, 1);
+
+            float m1 = 255.0f / threshold;
+            float m2 = 255.0f / (255.0f - threshold);
+            byte[] lookupData = new byte[256];
+
+            for (int i = 0; i < 256; i++)
+            {
+                float lookupValue = (i > threshold) ? 255 - m2 * (i - threshold) : 255 - m1 * (threshold - i);
+                lookupData[i] = (byte)Math.Min(255, Math.Max(0, lookupValue));
+            }
+
+            lookup.SetTo(lookupData);
+            return lookup;
+        }
+
     }
 }

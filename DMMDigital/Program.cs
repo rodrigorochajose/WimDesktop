@@ -3,6 +3,8 @@ using DMMDigital.Interface.IView;
 using DMMDigital.Presenters;
 using DMMDigital.Views;
 using System;
+using System.Configuration;
+using System.Data.Common;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -22,7 +24,18 @@ namespace DMMDigital
 
             ConfigRepository configRepository = new ConfigRepository();
 
-            string culture = configRepository.getLanguage();
+            configDatabase();
+
+            string culture = "";
+
+            try
+            {
+                culture = configRepository.getLanguage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
@@ -30,6 +43,29 @@ namespace DMMDigital
             IMenuView view = new MenuView();
             new MenuPresenter(view);
             Application.Run((Form)view);
+        }
+
+        static void configDatabase()
+        {
+            string connectionStringName = "Database";
+            string newClientLibraryPath = @"C:\WimDesktopDB\db\Firebird\fbclient.dll";
+
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var connectionStringsSection = (ConnectionStringsSection)configFile.GetSection("connectionStrings");
+
+            var connectionStringSettings = connectionStringsSection.ConnectionStrings[connectionStringName];
+            if (connectionStringSettings != null)
+            {
+                DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
+                builder.ConnectionString = connectionStringSettings.ConnectionString;
+
+                builder["ClientLibrary"] = newClientLibraryPath;
+
+                connectionStringSettings.ConnectionString = builder.ConnectionString;
+
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("connectionStrings");
+            }
         }
     }
 }

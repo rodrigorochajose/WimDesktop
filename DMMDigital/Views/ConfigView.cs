@@ -182,7 +182,6 @@ namespace DMMDigital.Views
                 {
                     foreach (ToolStripItem item in toolStrip.Items)
                     {
-                        Console.WriteLine(item.GetCurrentParent());
                         resources.ApplyResources(item, item.Name);
                     }
                 }

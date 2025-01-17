@@ -366,6 +366,9 @@
   <data name="comboBoxAcquireMode.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
+  <data name="comboBoxAcquireMode.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;comboBoxAcquireMode.Name" xml:space="preserve">
     <value>comboBoxAcquireMode</value>
   </data>
@@ -578,6 +581,9 @@
   </data>
   <data name="label12.Text" xml:space="preserve">
     <value>Modo de Acesso ao Sensor</value>
+  </data>
+  <data name="label12.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>

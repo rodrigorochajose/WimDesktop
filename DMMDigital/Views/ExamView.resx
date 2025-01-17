@@ -1126,7 +1126,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="mainPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 0</value>
+    <value>265, 1</value>
   </data>
   <data name="mainPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1162,7 +1162,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panelImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1012, 619</value>
+    <value>1012, 620</value>
   </data>
   <data name="panelImage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

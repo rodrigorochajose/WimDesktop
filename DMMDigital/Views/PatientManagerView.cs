@@ -2,8 +2,6 @@
 using DMMDigital.Properties;
 using System;
 using System.Drawing;
-using System.Globalization;
-using System.Resources;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -60,16 +58,9 @@ namespace DMMDigital.Views
         {
             if (action == "edit")
             {
-                var resourceManager = new ResourceManager($"{CompanyName}.{Name}", typeof(PatientManagerView).Assembly);
-
-                using (ResourceSet resourceSet = resourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true))
-                {
-                    string str = resourceSet.GetObject("titleEdit").ToString();
-
-                    Text = str;
-                    labelTitle.Text = str;
-                    labelTitle.Location = new Point(labelTitle.Location.X - 25, labelTitle.Location.Y);
-                }
+                Text = Resources.titleEditPatient;
+                labelTitle.Text = Text;
+                labelTitle.Location = new Point(labelTitle.Location.X - 25, labelTitle.Location.Y);
             }
 
             textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";

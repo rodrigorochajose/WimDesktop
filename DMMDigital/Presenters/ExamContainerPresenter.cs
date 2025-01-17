@@ -18,10 +18,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using TwainDotNet;
 using TwainDotNet.WinFroms;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.Formats.Tiff;
 using DMMDigital.Properties;
 
 namespace DMMDigital.Presenters
@@ -48,7 +44,9 @@ namespace DMMDigital.Presenters
             {
                 initializeTwain(this, EventArgs.Empty);
                 examContainerView.twainInitialized = true;
-            } 
+
+                setDefaultSensor();
+            }
             else
             {
                 connectSensor(this, EventArgs.Empty);
@@ -83,6 +81,7 @@ namespace DMMDigital.Presenters
                     {
                         using (Bitmap bitmap = new Bitmap(e.Image))
                         {
+                            rotateImage(bitmap);
                             bitmap.Save(fileStream, ImageFormat.Png);
                         }
                     }
@@ -91,6 +90,7 @@ namespace DMMDigital.Presenters
                     {
                         using (Bitmap bitmap = new Bitmap(e.Image))
                         {
+                            rotateImage(bitmap);
                             bitmap.Save(fileStream, ImageFormat.Png);
                         }
                     }
@@ -137,13 +137,17 @@ namespace DMMDigital.Presenters
             twain.StartScanning(settings);
         }
 
+        private void setDefaultSensor()
+        {
+            string sensorModel = configRepository.getSensorModel();
+            setConnectedSensor(sensorModel);
+        }
+
         private void connectSensor(object sender, EventArgs e)
         {
             try
             {
-                
                 string workDir = getWorkDir();
-                List<SensorModel> sensors = sensorRepository.getAllSensors();
 
                 if (workDir.Any())
                 {
@@ -152,23 +156,36 @@ namespace DMMDigital.Presenters
 
                     d.Connect();
 
-                    string sensorName = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
+                    string sensor = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
 
-                    examContainerView.selectedExamView.sensorConnected = true;
-
-                    connectedSensor = sensors.FirstOrDefault(s => s.name == sensorName);
+                    setConnectedSensor(sensor);
                 }
                 else
                 {
-                    connectedSensor = sensors.Last();
+                    setDefaultSensor();
                 }
-
-                examContainerView.selectedExamView.sensor = connectedSensor;
             }
             catch
             {
                 MessageBox.Show(Resources.messageSensorCannotConnect);
             }
+        }
+
+        private void setConnectedSensor(string sensor)
+        {
+            List<SensorModel> sensors = sensorRepository.getAllSensors();
+
+            SensorModel matchedSensor = sensors.FirstOrDefault(s => s.name == sensor);
+            
+            if (matchedSensor != null)
+            {
+                connectedSensor = matchedSensor;
+            }
+            else
+            {
+                setDefaultSensor();
+            }
+
         }
 
         private string getWorkDir()
@@ -227,11 +244,8 @@ namespace DMMDigital.Presenters
 
         private void getSensorInfo(object sender, EventArgs e)
         {
-            if (Detector.DetectorList.Any())
-            {
-                examContainerView.selectedExamView.sensorConnected = true;
-                examContainerView.selectedExamView.sensor = connectedSensor;
-            }
+            examContainerView.selectedExamView.sensorConnected = true;
+            examContainerView.selectedExamView.sensor = connectedSensor;
         }
 
         private void setSensorOption()
@@ -240,7 +254,6 @@ namespace DMMDigital.Presenters
 
             int correction = (int)(Enm_CorrectOption.Enm_CorrectOp_SW_PostOffset | Enm_CorrectOption.Enm_CorrectOp_SW_Gain | Enm_CorrectOption.Enm_CorrectOp_SW_Defect);
             d.SetCorrectionOption(correction);
-
         }
 
         private void initialize()
@@ -440,18 +453,7 @@ namespace DMMDigital.Presenters
 
                 pic.UnlockBits(picData);
 
-                if (examContainerView.selectedExamView.selectedFrame.orientation == 2)
-                {
-                    pic.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                }
-                else if (examContainerView.selectedExamView.selectedFrame.orientation == 3)
-                {
-                    pic.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                }
-                else if (examContainerView.selectedExamView.selectedFrame.orientation == 1)
-                {
-                    pic.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                }
+                rotateImage(pic);
 
                 saveBmp(pic);
 
@@ -461,6 +463,24 @@ namespace DMMDigital.Presenters
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void rotateImage(Bitmap img)
+        {
+            switch (examContainerView.selectedExamView.selectedFrame.orientation)
+            {
+                case 1:
+                    img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    break;
+
+                case 2:
+                    img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    break;
+
+                case 3:
+                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    break;
             }
         }
 
@@ -548,8 +568,8 @@ namespace DMMDigital.Presenters
             string tiffPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-tiff.tiff");
 
             saveImageToFile(rawPath, ImgData);
-            saveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
-            saveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+            //saveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
+            //saveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
         }
 
         private void saveImageToFile(string path, byte[] data)
@@ -563,62 +583,62 @@ namespace DMMDigital.Presenters
             return;
         }
 
-        private void saveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
-        {
-            if (data == null || path == null)
-            {
-                return;
-            }
+        //private void saveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
+        //{
+        //    if (data == null || path == null)
+        //    {
+        //        return;
+        //    }
 
-            try
-            {
-                using (Image<L16> image = new Image<L16>(width, height))
-                {
-                    for (int y = 0; y < height; y++)
-                    {
-                        for (int x = 0; x < width; x++)
-                        {
-                            int index = (y * width + x) * bytesPerPixel;
-                            ushort pixelValue = BitConverter.ToUInt16(data, index);
+        //    try
+        //    {
+        //        using (Image<L16> image = new Image<L16>(width, height))
+        //        {
+        //            for (int y = 0; y < height; y++)
+        //            {
+        //                for (int x = 0; x < width; x++)
+        //                {
+        //                    int index = (y * width + x) * bytesPerPixel;
+        //                    ushort pixelValue = BitConverter.ToUInt16(data, index);
 
-                            double gamma = 2.2; // Valor padrão para gamma correction
-                            double adjustedValue = Math.Pow(pixelValue / 65535.0, 1.0 / gamma) * 65535.0;
-                            ushort invertedPixelValue = (ushort)(65535 - adjustedValue);
+        //                    double gamma = 2.2; // Valor padrão para gamma correction
+        //                    double adjustedValue = Math.Pow(pixelValue / 65535.0, 1.0 / gamma) * 65535.0;
+        //                    ushort invertedPixelValue = (ushort)(65535 - adjustedValue);
 
-                            image[x, y] = new L16(invertedPixelValue);
-                        }
-                    }
+        //                    image[x, y] = new L16(invertedPixelValue);
+        //                }
+        //            }
 
-                    image.Save(path, new PngEncoder());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to save image as PNG: {ex.Message}");
-            }
-        }
+        //            image.Save(path, new PngEncoder());
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Failed to save image as PNG: {ex.Message}");
+        //    }
+        //}
 
-        private void saveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
-        {
-            if (data == null || path == null || width <= 0 || height <= 0 || bytesPerPixel != 2)
-            {
-                throw new ArgumentException("Invalid argument.");
-            }
+        //private void saveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
+        //{
+        //    if (data == null || path == null || width <= 0 || height <= 0 || bytesPerPixel != 2)
+        //    {
+        //        throw new ArgumentException("Invalid argument.");
+        //    }
 
-            using (Image<L16> image = new Image<L16>(width, height))
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    for (int x = 0; x < width; x++)
-                    {
-                        int index = (y * width + x) * bytesPerPixel;
-                        ushort pixelValue = BitConverter.ToUInt16(data, index);
+        //    using (Image<L16> image = new Image<L16>(width, height))
+        //    {
+        //        for (int y = 0; y < height; y++)
+        //        {
+        //            for (int x = 0; x < width; x++)
+        //            {
+        //                int index = (y * width + x) * bytesPerPixel;
+        //                ushort pixelValue = BitConverter.ToUInt16(data, index);
 
-                        image[x, y] = new L16(pixelValue);
-                    }
-                }
-                image.Save(path, new TiffEncoder());
-            }
-        }
+        //                image[x, y] = new L16(pixelValue);
+        //            }
+        //        }
+        //        image.Save(path, new TiffEncoder());
+        //    }
+        //}
     }
 }

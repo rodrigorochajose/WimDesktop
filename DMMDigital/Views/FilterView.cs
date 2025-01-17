@@ -56,6 +56,9 @@ namespace DMMDigital.Views
             if (checkBoxPositiveNegative.Checked)
                 filters.Add(img => Filters.invertColors(img));
 
+            if (checkBoxColorImage.Checked)
+                filters.Add(img => Filters.colorImage(img));
+
             foreach (var filter in filters)
             {
                 matImg = filter(matImg);
@@ -64,7 +67,6 @@ namespace DMMDigital.Views
             editedImage = matImg.ToBitmap();
             pictureBoxEditedImage.Image = editedImage;
         }
-
 
         private void bindControls()
         {
@@ -95,7 +97,8 @@ namespace DMMDigital.Views
                 };
             }
 
-            checkBoxPositiveNegative.CheckedChanged += (s, e) => applyFilters();
+            checkBoxPositiveNegative.CheckedChanged += delegate { applyFilters(); };
+            checkBoxColorImage.CheckedChanged += delegate { applyFilters(); };
 
             KeyPress += (s, e) =>
             {

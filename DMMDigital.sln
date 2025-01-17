@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMMDigital", "DMMDigital\DMMDigital.csproj", "{E30BDFA5-1D8D-462C-82E0-D8E6DFA8FFDA}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WimDesktop", "WimDesktop\WimDesktop.vdproj", "{C530E96A-5B31-41DD-AFF6-D013C67DF804}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E30BDFA5-1D8D-462C-82E0-D8E6DFA8FFDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E30BDFA5-1D8D-462C-82E0-D8E6DFA8FFDA}.Release|x86.ActiveCfg = Release|x86
 		{E30BDFA5-1D8D-462C-82E0-D8E6DFA8FFDA}.Release|x86.Build.0 = Release|x86
+		{C530E96A-5B31-41DD-AFF6-D013C67DF804}.Debug|Any CPU.ActiveCfg = Debug
+		{C530E96A-5B31-41DD-AFF6-D013C67DF804}.Debug|x86.ActiveCfg = Debug
+		{C530E96A-5B31-41DD-AFF6-D013C67DF804}.Release|Any CPU.ActiveCfg = Release
+		{C530E96A-5B31-41DD-AFF6-D013C67DF804}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

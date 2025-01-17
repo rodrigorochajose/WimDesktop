@@ -14,17 +14,17 @@ using System.Threading.Tasks;
 using DMMDigital.Properties;
 using System.Data.SqlClient;
 using System.Text;
+using System.IO.Compression;
 
 
 namespace DMMDigital.Views
 {
     public partial class MigrationDatabaseView : Form
     {
-        private string software = "";
         private string warningMessage = "";
-
-        private string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
-        private string dataPath = "";
+        private readonly string software = "";
+        private readonly string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
+        private readonly string dataPath = "";
 
         private List<PatientModel> patients = new List<PatientModel>();
         private List<ExamModel> exams = new List<ExamModel>();
@@ -96,8 +96,10 @@ namespace DMMDigital.Views
         {
             generateSQLFile_WIM();
 
-            string javaPath = Path.Combine(wimMigrationPath, @"jdk-21_windows-x64_bin\jdk-21.0.4\bin\java.exe");
-            string h2Path = Path.Combine(wimMigrationPath, @"h2-2019-10-14\h2\bin\h2-1.4.200.jar");
+            unzipFolders();
+
+            string javaPath = Path.Combine(wimMigrationPath, @"jdk-21.0.4\bin\java.exe");
+            string h2Path = Path.Combine(wimMigrationPath, @"h2\bin\h2-1.4.200.jar");
             string dbPath = $@"jdbc:h2:{dataPath}\db\wimdb";
             string scriptPath = Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql");
 
@@ -129,6 +131,23 @@ namespace DMMDigital.Views
             File.Delete(Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql"));
 
             generateModels_WIM();
+        }
+
+        private void unzipFolders()
+        {
+            string jdkFolder = Path.Combine(wimMigrationPath, @"jdk-21_windows-x64_bin.zip");
+            string h2Folder = Path.Combine(wimMigrationPath, @"h2-2019-10-14.zip");
+
+            if (File.Exists(jdkFolder))
+            {
+                ZipFile.ExtractToDirectory(jdkFolder, wimMigrationPath);
+            }
+
+            if (File.Exists(h2Folder))
+            {
+                ZipFile.ExtractToDirectory(h2Folder, wimMigrationPath);
+            }
+
         }
 
         private void generateModels_WIM()
@@ -188,7 +207,7 @@ namespace DMMDigital.Views
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Erro ao conectar ao banco de dados: " + ex.Message);
+                    MessageBox.Show($"{Resources.messageErrorConnectingDatabase} \n {ex.Message}");
                 }
             }
         }
@@ -290,11 +309,19 @@ namespace DMMDigital.Views
                 {
                     MessageBox.Show(Resources.messageMigrationSuccess + warningMessage);
 
-                    string dataPath_WIM = @"C:\WimDesktopDB\migration\data";
-
-                    if (Directory.Exists(dataPath_WIM))
+                    string[] directoriesToDelete = new string[]
                     {
-                        Directory.Delete(dataPath_WIM, true);
+                        @"C:\WimDesktopDB\migration\data",
+                        Path.Combine(wimMigrationPath, "jdk-21.0.4"),
+                        Path.Combine(wimMigrationPath, "h2")
+                    };
+
+                    foreach (string dir in directoriesToDelete)
+                    {
+                        if (Directory.Exists(dir))
+                        {
+                            Directory.Delete(dir, true);
+                        }
                     }
 
                     Close();

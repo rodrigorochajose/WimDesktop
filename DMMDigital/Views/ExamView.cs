@@ -147,7 +147,6 @@ namespace DMMDigital.Views
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
                 timerSensorStatus.Start();
             };
-
         }
 
         private void setAcquireStatus()
@@ -155,10 +154,6 @@ namespace DMMDigital.Views
             if (sensorConnected)
             {
                 sensorStatusColor = Color.Green;
-            }
-            else if (acquireMode == "TWAIN")
-            {
-                sensorStatusColor = Color.Blue;
             }
         }
 
@@ -197,6 +192,13 @@ namespace DMMDigital.Views
 
         private void examViewResize(object sender, EventArgs e)
         {
+            IExamContainerView container = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
+
+            if (container == null)
+            {
+                return;
+            }
+
             mainPictureBoxPreviousSize = mainPictureBox.Size;
 
             resizeMainPictureBox();
@@ -632,9 +634,7 @@ namespace DMMDigital.Views
                 {
                     if (previousSizeMainPictureBox != mainPictureBox.Size)
                     {
-                        float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
-
-                        resizeDrawings(scale);
+                        resizeDrawings((float)mainPictureBox.Height / previousSizeMainPictureBox.Height);
                     }
                 }
 
@@ -1033,8 +1033,7 @@ namespace DMMDigital.Views
                 buttonAcquireMode.Image = Resources.icon_32x32_scanner;
                 buttonAcquireMode.ToolTipText = "TWAIN";
 
-                sensorConnected = false;
-                sensorStatusColor = Color.Blue;
+                sensorConnected = true;
             }
             else
             {
@@ -1103,11 +1102,28 @@ namespace DMMDigital.Views
             if (result == DialogResult.OK)
             {
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-                frameHandler(selectedImage);
+                Bitmap img = new Bitmap(selectedImage);
 
-                mainPictureBox.Image = selectedImage;
-                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
-                selectedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+                switch (selectedFrame.orientation)
+                {
+                    case 1:
+                        img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        break;
+
+                    case 2:
+                        img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        break;
+
+                    case 3:
+                        img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        break;
+                }
+
+                frameHandler(img);
+
+                mainPictureBox.Image = img;
+                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
+                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
                 resizeMainPictureBox();
 
                 provideTools(true);
@@ -1535,7 +1551,13 @@ namespace DMMDigital.Views
             selectedFrame.notes = textBoxFrameNotes.Text;
 
             ExamImageModel selectedImage = examImages.Find(f => f.templateFrameId == selectedFrame.id);
-            selectedImage.notes = selectedFrame.notes;
+
+            if (selectedImage != null)
+            {
+                selectedImage.notes = selectedFrame.notes;
+
+                examHasChanges = true;
+            }
         }
 
         private void getDifferenceBetweenPoints(List<Point> points)
@@ -1842,13 +1864,13 @@ namespace DMMDigital.Views
                     }
                     mainPictureBox.Invalidate();
                 }
+            }
 
-                if (action == 8)
-                {
-                    lastMagnifierPosition = e.Location;
+            if (action == 8)
+            {
+                lastMagnifierPosition = e.Location;
 
-                    adjustMagnifierImage(lastMagnifierPosition, true);
-                }
+                adjustMagnifierImage(lastMagnifierPosition, true);
             }
         }
 
@@ -1944,10 +1966,7 @@ namespace DMMDigital.Views
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
                 getDrawingsToSave();
 
-                if (examImageDrawings.Any())
-                {
-                    eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
-                }
+                eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
 
                 generateEditedImage();
                 examHasChanges = false;

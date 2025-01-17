@@ -22,9 +22,6 @@ namespace DMMDigital.Models
         [Column("TEMPLATE_FRAME_ID")]
         public int templateFrameId { get; set; }
 
-        [ForeignKey("templateFrameId")]
-        public virtual TemplateModel template { get; set; }
-
         [Column("FILE")]
         public string file { get; set; }
 

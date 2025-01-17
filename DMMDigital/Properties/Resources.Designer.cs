@@ -71,6 +71,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a .
+        /// </summary>
+        internal static string banner_principal_f3639437 {
+            get {
+                return ResourceManager.GetString("banner_principal_f3639437", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap grid {
@@ -602,6 +611,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Erro ao se conectar com banco de dados..
+        /// </summary>
+        internal static string messageErrorConnectingDatabase {
+            get {
+                return ResourceManager.GetString("messageErrorConnectingDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Exame possui imagens, não será possível excluí-lo..
         /// </summary>
         internal static string messageExamCannotDelete {
@@ -1039,6 +1057,15 @@ namespace DMMDigital.Properties {
         internal static string titleDialogText {
             get {
                 return ResourceManager.GetString("titleDialogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Editar Paciente.
+        /// </summary>
+        internal static string titleEditPatient {
+            get {
+                return ResourceManager.GetString("titleEditPatient", resourceCulture);
             }
         }
         

@@ -20,9 +20,6 @@ namespace DMMDigital.Models
         [Column("EXAM_IMAGE_ID")]
         public int examImageId { get; set; }
 
-        [ForeignKey("examImageId")]
-        public virtual ExamImageModel examImage { get; set; }
-
         [Column("DRAWING_COLOR")]
         public string drawingColor { get; set; }
 

@@ -41,6 +41,11 @@ namespace DMMDigital._Repositories
             return context.config.First().sensorPath;
         }
 
+        public string getSensorModel()
+        {
+            return context.config.First().sensorModel;
+        }
+
         public string getExamPath()
         {
             return context.config.First().examPath;

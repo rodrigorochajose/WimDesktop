@@ -157,11 +157,6 @@ namespace DMMDigital.Presenters
                 }
                 else if (examImageToSave != null && currentExamImage != null)
                 {
-                    if (currentExamImage.Equals(examImageToSave))
-                    {
-                        return;
-                    }
-
                     currentExamImage.notes = examImageToSave.notes;
                     currentExamImage.createdAt = examImageToSave.createdAt;
                     examImageRepository.save();

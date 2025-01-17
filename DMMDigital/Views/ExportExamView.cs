@@ -28,7 +28,7 @@ namespace DMMDigital.Views
             adjustComponent();
             associateEvents();
 
-            comboBoxFormat.InnerComboBox.DataSource = new List<string> { "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
+            comboBoxFormat.InnerComboBox.DataSource = new List<string> { "JPG", "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
             comboBoxFormat.InnerComboBox.SelectedIndex = 0;
         }
 
@@ -194,6 +194,10 @@ namespace DMMDigital.Views
                     case "TIFF":
                         format = ImageFormat.Tiff;
                         extension = ".tiff";
+                        break;
+                    case "JPG":
+                        format = ImageFormat.Jpeg;
+                        extension = ".jpg";
                         break;
                     case "JPEG":
                         format = ImageFormat.Jpeg;
