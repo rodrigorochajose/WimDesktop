@@ -9,26 +9,29 @@ namespace DMMDigital.Views
 {
     public partial class FilterView : Form, IFilterView
     {
-        public Bitmap originalImage { get; set; }
-        public Bitmap editedImage { get; set; }
+        public Mat originalImage { get; set; }
+        public Mat editedImage { get; set; }
 
         public FilterView(Bitmap image)
         {
             InitializeComponent();
             MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
 
-            originalImage = image;
-            editedImage = image;
-            pictureBoxOriginalImage.Image = image;
-            pictureBoxEditedImage.Image = image;
+            originalImage = image.ToMat();
+            editedImage = originalImage;
+
+            pictureBoxOriginalImage.Image = originalImage;
+            pictureBoxOriginalImage.HorizontalScrollBar.Enabled = false;
+
+            pictureBoxEditedImage.Image = originalImage;
+            pictureBoxEditedImage.HorizontalScrollBar.Enabled = false;
 
             bindControls();
-            applyFilters();
         }
 
         private void applyFilters()
         {
-            Mat matImg = originalImage.ToMat();
+            Mat matImg = originalImage.Clone();
 
             List<Func<Mat, Mat>> filters = new List<Func<Mat, Mat>>();
 
@@ -64,8 +67,10 @@ namespace DMMDigital.Views
                 matImg = filter(matImg);
             }
 
-            editedImage = matImg.ToBitmap();
+            editedImage = matImg.Clone();
             pictureBoxEditedImage.Image = editedImage;
+
+            matImg.Dispose();
         }
 
         private void bindControls()
@@ -122,12 +127,12 @@ namespace DMMDigital.Views
         {
             pictureBoxEditedImage.Image = pictureBoxOriginalImage.Image;
             resetControls();
-            editedImage = new Bitmap(originalImage);
+            editedImage = originalImage.Clone();
         }
 
         private void buttonApplyChangesClick(object sender, EventArgs e)
         {
-            originalImage = new Bitmap(editedImage);
+            originalImage = editedImage.Clone();
             Close();
         }
 

@@ -14,6 +14,7 @@ using DMMDigital._Repositories;
 using DMMDigital.Presenters;
 using MoreLinq;
 using DMMDigital.Properties;
+using Emgu.CV;
 
 namespace DMMDigital.Views
 {
@@ -1294,7 +1295,7 @@ namespace DMMDigital.Views
             IFilterView filterView = new FilterView(new Bitmap(selectedFrame.filteredImage));
             (filterView as Form).ShowDialog();
 
-            Image image = filterView.originalImage;
+            Image image = filterView.originalImage.ToBitmap();
 
             image.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
@@ -1940,7 +1941,10 @@ namespace DMMDigital.Views
         {
             if (selectedDrawingHistory.Any())
             {
-                selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
+                if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
+                {
+                    selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
+                }
             }
 
             if (draw && currentDrawing != null)
@@ -1964,8 +1968,8 @@ namespace DMMDigital.Views
             if (examHasChanges)
             {
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
-                getDrawingsToSave();
 
+                getDrawingsToSave();
                 eventSaveExamImageDrawing?.Invoke(this, EventArgs.Empty);
 
                 generateEditedImage();
@@ -1981,6 +1985,16 @@ namespace DMMDigital.Views
 
             if (drawings.Any())
             {
+                if (drawings.Any(d => d.examImageId == 0))
+                {
+                    int examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id;
+
+                    foreach (IDrawing d in drawings)
+                    {
+                        d.examImageId = examImageId;
+                    }
+                }
+
                 foreach (IDrawing d in drawings)
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel

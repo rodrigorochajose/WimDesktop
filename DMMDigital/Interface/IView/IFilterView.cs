@@ -1,10 +1,10 @@
-﻿using System.Drawing;
+﻿using Emgu.CV;
 
 namespace DMMDigital.Interface.IView
 {
     public interface IFilterView
     {
-        Bitmap originalImage { get; set; }
-        Bitmap editedImage { get; set; }
+        Mat originalImage { get; set; }
+        Mat editedImage { get; set; }
     }
 }

@@ -149,6 +149,7 @@ namespace DMMDigital.Presenters
 
                 if (examImageToSave == null && currentExamImage != null)
                 {
+                    deleteExamImageDrawings(currentExamImage.id);
                     examImageRepository.deleteExamImage(currentExamImage);
                 }
                 else if (examImageToSave != null && currentExamImage == null)
@@ -168,15 +169,34 @@ namespace DMMDigital.Presenters
             }
         }
 
+        private void deleteExamImageDrawings(int examImageId)
+        {
+            List<ExamImageDrawingModel> examImageDrawingsToDelete = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImageId).ToList();
+
+            if (examImageDrawingsToDelete.Any())
+            {
+                List<int> drawingsIdToDelete = examImageDrawingsToDelete.Select(d => d.id).ToList();
+
+                rulerLengthRepository.deleteRangeRulerLength(drawingsIdToDelete);
+                examImageDrawingPointsRepository.deleteRangeDrawingPoints(drawingsIdToDelete);
+                examImageDrawingRepository.deleteRangeDrawing(examImageDrawingsToDelete);
+            }
+        }
+
         private void saveExamImageDrawing(object sender, EventArgs e)
         {
             try
             {
-                int examImageId = examView.examImages.FirstOrDefault(ei => ei.templateFrameId == examView.selectedFrame.id).id;
+                ExamImageModel examImage = examView.examImages.FirstOrDefault(ei => ei.templateFrameId == examView.selectedFrame.id);
 
-                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == examImageId).ToList();
+                if (examImage == null)
+                {
+                    return;
+                }
 
-                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImageId).ToList();
+                List<ExamImageDrawingModel> selectedFrameExamImageDrawings = examView.examImageDrawings.Where(eid => eid.examImageId == examImage.id).ToList();
+
+                List<ExamImageDrawingModel> currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImage.id).ToList();
 
                 List<ExamImageDrawingModel> drawingsToDelete = currentFrameExamImageDrawings.ExceptBy(selectedFrameExamImageDrawings, item => item.id).ToList();
 
@@ -187,7 +207,7 @@ namespace DMMDigital.Presenters
                     examImageDrawingPointsRepository.deleteRangeDrawingPoints(drawingsIdToDelete);
                     examImageDrawingRepository.deleteRangeDrawing(drawingsToDelete);
 
-                    currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImageId).ToList();
+                    currentFrameExamImageDrawings = examImageDrawingRepository.getDrawingsByExamImage(examView.examId, examImage.id).ToList();
                 }
 
                 foreach (ExamImageDrawingModel item in selectedFrameExamImageDrawings)

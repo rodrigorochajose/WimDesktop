@@ -39,7 +39,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(249)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
@@ -81,8 +81,8 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BackgroundImage = global::DMMDigital.Properties.Resources.banner_principal;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackgroundImage = global::DMMDigital.Properties.Resources.IMAGEMBG;
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

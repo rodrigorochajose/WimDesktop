@@ -125,67 +125,13 @@
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="pictureBoxOriginalImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBoxOriginalImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 43</value>
-  </data>
-  <data name="pictureBoxOriginalImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 679</value>
-  </data>
-  <data name="pictureBoxOriginalImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="pictureBoxOriginalImage.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxOriginalImage.Name" xml:space="preserve">
-    <value>pictureBoxOriginalImage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxOriginalImage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxOriginalImage.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxOriginalImage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pictureBoxEditedImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="pictureBoxEditedImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>549, 43</value>
-  </data>
-  <data name="pictureBoxEditedImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>541, 679</value>
-  </data>
-  <data name="pictureBoxEditedImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>Zoom</value>
-  </data>
-  <data name="pictureBoxEditedImage.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxEditedImage.Name" xml:space="preserve">
-    <value>pictureBoxEditedImage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxEditedImage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxEditedImage.Parent" xml:space="preserve">
-    <value>tableLayoutPanel1</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxEditedImage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11pt, style=Bold</value>
   </data>
@@ -214,7 +160,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -250,6 +196,60 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pictureBoxOriginalImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pictureBoxOriginalImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 43</value>
+  </data>
+  <data name="pictureBoxOriginalImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>540, 679</value>
+  </data>
+  <data name="pictureBoxOriginalImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBoxOriginalImage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxOriginalImage.Name" xml:space="preserve">
+    <value>pictureBoxOriginalImage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxOriginalImage.Type" xml:space="preserve">
+    <value>Emgu.CV.UI.ImageBox, Emgu.CV.Platform.NetFramework, Version=4.9.0.5494, Culture=neutral, PublicKeyToken=7281126722ab4438</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxOriginalImage.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxOriginalImage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="pictureBoxEditedImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="pictureBoxEditedImage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>549, 43</value>
+  </data>
+  <data name="pictureBoxEditedImage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>541, 679</value>
+  </data>
+  <data name="pictureBoxEditedImage.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="pictureBoxEditedImage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxEditedImage.Name" xml:space="preserve">
+    <value>pictureBoxEditedImage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxEditedImage.Type" xml:space="preserve">
+    <value>Emgu.CV.UI.ImageBox, Emgu.CV.Platform.NetFramework, Version=4.9.0.5494, Culture=neutral, PublicKeyToken=7281126722ab4438</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxEditedImage.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxEditedImage.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -280,7 +280,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="pictureBoxOriginalImage" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxEditedImage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Absolute,40,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxOriginalImage" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxEditedImage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Absolute,40,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="buttonBack.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>

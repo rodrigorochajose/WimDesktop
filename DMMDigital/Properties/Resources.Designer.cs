@@ -61,16 +61,6 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap banner_principal {
-            get {
-                object obj = ResourceManager.GetObject("banner_principal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a .
         /// </summary>
         internal static string banner_principal_f3639437 {
@@ -525,6 +515,16 @@ namespace DMMDigital.Properties {
         internal static System.Drawing.Bitmap imageConfigFilter {
             get {
                 object obj = ResourceManager.GetObject("imageConfigFilter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMAGEMBG {
+            get {
+                object obj = ResourceManager.GetObject("IMAGEMBG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

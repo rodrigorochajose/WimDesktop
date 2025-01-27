@@ -622,6 +622,9 @@
     <PackageReference Include="Emgu.CV.runtime.windows">
       <Version>4.9.0.5494</Version>
     </PackageReference>
+    <PackageReference Include="Emgu.CV.UI">
+      <Version>4.9.0.5494</Version>
+    </PackageReference>
     <PackageReference Include="EntityFramework">
       <Version>6.5.1</Version>
     </PackageReference>
@@ -708,9 +711,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\banner-principal.f3639437.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon-96x96-transparent.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -736,6 +736,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\IMAGEMBG.png" />
     <None Include="Resources\icon-32x32-autotake1.png" />
     <None Include="Resources\grid.png" />
     <None Include="Resources\icon_32x32_scanner.png" />

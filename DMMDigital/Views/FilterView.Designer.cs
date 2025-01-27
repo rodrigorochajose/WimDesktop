@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterView));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBoxOriginalImage = new System.Windows.Forms.PictureBox();
-            this.pictureBoxEditedImage = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonBack = new System.Windows.Forms.Button();
@@ -63,9 +62,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.trackBarSmartSharpen = new System.Windows.Forms.TrackBar();
+            this.pictureBoxOriginalImage = new Emgu.CV.UI.ImageBox();
+            this.pictureBoxEditedImage = new Emgu.CV.UI.ImageBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
             this.roundedPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEdge)).BeginInit();
@@ -74,28 +73,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.pictureBoxOriginalImage, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBoxEditedImage, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxOriginalImage, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBoxEditedImage, 1, 1);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            // 
-            // pictureBoxOriginalImage
-            // 
-            resources.ApplyResources(this.pictureBoxOriginalImage, "pictureBoxOriginalImage");
-            this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
-            this.pictureBoxOriginalImage.TabStop = false;
-            // 
-            // pictureBoxEditedImage
-            // 
-            resources.ApplyResources(this.pictureBoxEditedImage, "pictureBoxEditedImage");
-            this.pictureBoxEditedImage.Name = "pictureBoxEditedImage";
-            this.pictureBoxEditedImage.TabStop = false;
             // 
             // label2
             // 
@@ -411,6 +400,18 @@
             this.trackBarSmartSharpen.Maximum = 100;
             this.trackBarSmartSharpen.Name = "trackBarSmartSharpen";
             // 
+            // pictureBoxOriginalImage
+            // 
+            resources.ApplyResources(this.pictureBoxOriginalImage, "pictureBoxOriginalImage");
+            this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
+            this.pictureBoxOriginalImage.TabStop = false;
+            // 
+            // pictureBoxEditedImage
+            // 
+            resources.ApplyResources(this.pictureBoxEditedImage, "pictureBoxEditedImage");
+            this.pictureBoxEditedImage.Name = "pictureBoxEditedImage";
+            this.pictureBoxEditedImage.TabStop = false;
+            // 
             // FilterView
             // 
             resources.ApplyResources(this, "$this");
@@ -425,8 +426,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).EndInit();
@@ -436,6 +435,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -454,8 +455,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TrackBar trackBarSmartSharpen;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox pictureBoxOriginalImage;
-        private System.Windows.Forms.PictureBox pictureBoxEditedImage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBoxPositiveNegative;
@@ -476,5 +475,7 @@
         private Components.Rounded.RoundedNumericUpDown numericUpDownGamma;
         private Components.Rounded.RoundedButton buttonApplyChanges;
         private Components.Rounded.RoundedButton buttonRestoreImage;
+        private Emgu.CV.UI.ImageBox pictureBoxOriginalImage;
+        private Emgu.CV.UI.ImageBox pictureBoxEditedImage;
     }
 }
