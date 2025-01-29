@@ -1292,23 +1292,27 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.filteredImage));
-            (filterView as Form).ShowDialog();
+            string imagePath = Path.Combine(examPath, $"{selectedFrame.order}_filtered.png");
 
-            Image image = filterView.originalImage.ToBitmap();
+            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.filteredImage), imagePath);
 
-            image.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+            DialogResult res = (filterView as Form).ShowDialog();
 
-            selectedFrame.Invoke((MethodInvoker)(() =>
+            if (res == DialogResult.OK)
             {
-                selectedFrame.filteredImage = image;
-                selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-                selectedFrame.Refresh();
-            }));
+                Image image = Image.FromFile(imagePath);
 
-            mainPictureBox.Image = image;
+                selectedFrame.Invoke((MethodInvoker)(() =>
+                {
+                    selectedFrame.filteredImage = image;
+                    selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                    selectedFrame.Refresh();
+                }));
 
-            examHasChanges = true;
+                mainPictureBox.Image = image;
+                
+                examHasChanges = true;
+            }
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)

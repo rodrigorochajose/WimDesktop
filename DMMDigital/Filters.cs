@@ -26,7 +26,8 @@ namespace DMMDigital
 
         public static Mat applyGamma(Mat img, float value)
         {
-            Mat output = new Mat(img.Size, DepthType.Cv8U, img.NumberOfChannels);
+            if (value == 0)
+                return img; 
 
             float gamma = 1.0f / (1.0f + value * 0.1f);
 
@@ -36,20 +37,26 @@ namespace DMMDigital
                 gammaTable[i] = (byte)Math.Min(255, Math.Max(0, Math.Pow(i / 255.0, gamma) * 255));
             }
 
-            Mat lookupTable = new Mat(1, 256, DepthType.Cv8U, 1);
-            lookupTable.SetTo(gammaTable);
+            using (Mat lookupTable = new Mat(1, 256, DepthType.Cv8U, 1)) 
+            {
+                lookupTable.SetTo(gammaTable);
 
-            CvInvoke.LUT(img, lookupTable, output);
+                Mat output = new Mat();
+                CvInvoke.LUT(img, lookupTable, output); 
 
-            return output;
+                return output;
+            }
         }
 
         public static Mat applyNoise(Mat img, float value)
         {
             Mat noiseImage = new Mat();
+            Mat tempImage = new Mat();
 
-            CvInvoke.GaussianBlur(img, noiseImage, new Size(5, 5), 0);
-            CvInvoke.AddWeighted(noiseImage, 1, noiseImage, 0, value, noiseImage);
+            CvInvoke.GaussianBlur(img, tempImage, new Size(5, 5), 0);
+            CvInvoke.AddWeighted(tempImage, 1, tempImage, 0, value, noiseImage);
+
+            tempImage.Dispose();
 
             return noiseImage;
         }
@@ -57,8 +64,12 @@ namespace DMMDigital
         public static Mat applyEdge(Mat img, float value)
         {
             Mat edgeImage = new Mat();
-            CvInvoke.Sobel(img, edgeImage, DepthType.Cv8U, 1, 0, 3);
-            CvInvoke.AddWeighted(edgeImage, 1.2, img, 0.8, value, edgeImage);
+            Mat tempImage = new Mat();
+
+            CvInvoke.Sobel(img, tempImage, DepthType.Cv8U, 1, 0, 3);
+            CvInvoke.AddWeighted(tempImage, 1.2, img, 0.8, value, edgeImage);
+
+            tempImage.Dispose();
 
             return edgeImage;
         }
@@ -66,7 +77,7 @@ namespace DMMDigital
         public static Mat applyBrightnessAndContrast(Mat image, float brightness, float contrast)
         {
             if (brightness == 0 && contrast == 0)
-                return image.Clone();
+                return image;
 
             double contrastFactor = (259.0 * (contrast * 2.55 + 255)) / (255.0 * (259 - contrast * 2.55));
 
@@ -76,13 +87,15 @@ namespace DMMDigital
                 lookup[i] = (byte)Math.Min(255, Math.Max(0, contrastFactor * (i - 128) + 128 + brightness * 10));
             }
 
-            Mat lookupTable = new Mat(1, 256, DepthType.Cv8U, 1);
-            lookupTable.SetTo<byte>(lookup);
+            using (Mat lookupTable = new Mat(1, 256, DepthType.Cv8U, 1))
+            {
+                lookupTable.SetTo<byte>(lookup);
 
-            Mat result = new Mat();
-            CvInvoke.LUT(image, lookupTable, result);
+                Mat result = new Mat();
+                CvInvoke.LUT(image, lookupTable, result);
 
-            return result;
+                return result;
+            }
         }
 
         public static Mat applyReveal(Mat image, float value)
@@ -90,14 +103,15 @@ namespace DMMDigital
             Mat grayImage = new Mat();
             CvInvoke.CvtColor(image, grayImage, ColorConversion.Bgr2Gray);
 
-            Mat blurredImage = new Mat();
-            CvInvoke.GaussianBlur(grayImage, blurredImage, new Size(0, 0), value);
+            Mat resultImage = new Mat();
+            CvInvoke.GaussianBlur(grayImage, resultImage, new Size(0, 0), value);
 
             Mat sharpenedImage = new Mat();
-            CvInvoke.AddWeighted(grayImage, 1.5, blurredImage, -0.5, 0, sharpenedImage);
+            CvInvoke.AddWeighted(grayImage, 1.5, resultImage, -0.5, 0, sharpenedImage);
 
-            Mat resultImage = new Mat();
             CvInvoke.CvtColor(sharpenedImage, resultImage, ColorConversion.Gray2Bgr);
+
+            sharpenedImage.Dispose();
 
             return resultImage;
         }
@@ -107,13 +121,12 @@ namespace DMMDigital
             Mat grayImage = new Mat();
             CvInvoke.CvtColor(image, grayImage, ColorConversion.Bgr2Gray);
 
-            Mat blurredImage = new Mat();
-            CvInvoke.GaussianBlur(grayImage, blurredImage, new Size(0, 0), value + 1);
+            Mat resultImage = new Mat();
+            CvInvoke.GaussianBlur(grayImage, resultImage, new Size(0, 0), value + 1);
 
-            Mat unsharpMask = new Mat();
-            CvInvoke.AddWeighted(grayImage, 2.0, blurredImage, -1.0, 0, unsharpMask);
+            CvInvoke.AddWeighted(grayImage, 2.0, resultImage, -1.0, 0, resultImage);
 
-            return unsharpMask;
+            return resultImage;
         }
 
         public static Mat invertColors(Mat image)
@@ -139,33 +152,40 @@ namespace DMMDigital
             VectorOfMat bgrChannels = new VectorOfMat();
             CvInvoke.Split(img, bgrChannels);
 
-            CvInvoke.LUT(bgrChannels[2], createLookupTable(0), bgrChannels[2]);
-            CvInvoke.LUT(bgrChannels[1], createLookupTable(62), bgrChannels[1]);
-            CvInvoke.LUT(bgrChannels[0], createLookupTable(158), bgrChannels[0]);
+            using (Mat channel0 = bgrChannels[0], channel1 = bgrChannels[1], channel2 = bgrChannels[2])
+            {
+                CvInvoke.LUT(channel2, createLookupTable(0), channel2);
+                CvInvoke.LUT(channel1, createLookupTable(62), channel1);
+                CvInvoke.LUT(channel0, createLookupTable(158), channel0);
 
-            Mat destImage = new Mat();
-            CvInvoke.Merge(bgrChannels, destImage);
+                Mat destImage = new Mat();
+                CvInvoke.Merge(bgrChannels, destImage);
 
-            return destImage;
+                return destImage;
+            }
         }
 
         private static Mat createLookupTable(float threshold)
         {
             Mat lookup = new Mat(1, 256, DepthType.Cv8U, 1);
-
             float m1 = 255.0f / threshold;
             float m2 = 255.0f / (255.0f - threshold);
-            byte[] lookupData = new byte[256];
 
-            for (int i = 0; i < 256; i++)
+            using (Mat lookupData = new Mat(1, 256, DepthType.Cv8U, 1))
             {
-                float lookupValue = (i > threshold) ? 255 - m2 * (i - threshold) : 255 - m1 * (threshold - i);
-                lookupData[i] = (byte)Math.Min(255, Math.Max(0, lookupValue));
+                byte[] data = new byte[256];
+
+                for (int i = 0; i < 256; i++)
+                {
+                    float lookupValue = (i > threshold) ? 255 - m2 * (i - threshold) : 255 - m1 * (threshold - i);
+                    data[i] = (byte)Math.Min(255, Math.Max(0, lookupValue));
+                }
+
+                lookupData.SetTo(data);
+                lookup = lookupData.Clone();
             }
 
-            lookup.SetTo(lookupData);
             return lookup;
         }
-
     }
 }

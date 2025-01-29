@@ -135,6 +135,9 @@
   <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11pt, style=Bold</value>
   </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>758, 10</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 11pt, style=Bold</value>
   </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 10</value>
   </data>
@@ -201,8 +207,14 @@
   <data name="pictureBoxOriginalImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="pictureBoxOriginalImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBoxOriginalImage.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 43</value>
+  </data>
+  <data name="pictureBoxOriginalImage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="pictureBoxOriginalImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>540, 679</value>
@@ -228,8 +240,14 @@
   <data name="pictureBoxEditedImage.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="pictureBoxEditedImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBoxEditedImage.Location" type="System.Drawing.Point, System.Drawing">
     <value>549, 43</value>
+  </data>
+  <data name="pictureBoxEditedImage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <data name="pictureBoxEditedImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>541, 679</value>
@@ -282,6 +300,9 @@
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxOriginalImage" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="pictureBoxEditedImage" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,50" /&gt;&lt;Rows Styles="Absolute,40,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
+  <data name="buttonBack.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonBack.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
@@ -305,6 +326,9 @@
   </data>
   <data name="buttonApplyChanges.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="buttonApplyChanges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonApplyChanges.Location" type="System.Drawing.Point, System.Drawing">
     <value>163, 605</value>
@@ -332,6 +356,9 @@
   </data>
   <data name="buttonRestoreImage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="buttonRestoreImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonRestoreImage.Location" type="System.Drawing.Point, System.Drawing">
     <value>29, 605</value>
@@ -546,6 +573,9 @@
   <data name="&gt;&gt;numericUpDownBrightness.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="trackBarNoise.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="trackBarNoise.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 474</value>
   </data>
@@ -573,6 +603,9 @@
   <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 454</value>
   </data>
@@ -596,6 +629,9 @@
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="trackBarEdge.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="trackBarEdge.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 399</value>
@@ -624,6 +660,9 @@
   <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 379</value>
   </data>
@@ -647,6 +686,9 @@
   </data>
   <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="trackBarGamma.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="trackBarGamma.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 324</value>
@@ -675,6 +717,9 @@
   <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 304</value>
   </data>
@@ -699,6 +744,9 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="trackBarBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="trackBarBrightness.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 30</value>
   </data>
@@ -722,6 +770,9 @@
   </data>
   <data name="checkBoxColorImage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="checkBoxColorImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="checkBoxColorImage.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 563</value>
@@ -750,6 +801,9 @@
   <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 10</value>
   </data>
@@ -777,6 +831,9 @@
   <data name="checkBoxPositiveNegative.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="checkBoxPositiveNegative.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="checkBoxPositiveNegative.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 527</value>
   </data>
@@ -797,6 +854,9 @@
   </data>
   <data name="&gt;&gt;checkBoxPositiveNegative.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="trackBarContrast.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="trackBarContrast.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 105</value>
@@ -824,6 +884,9 @@
   </data>
   <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 85</value>
@@ -855,6 +918,9 @@
   <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 562</value>
   </data>
@@ -885,6 +951,9 @@
   <data name="label8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 526</value>
   </data>
@@ -908,6 +977,9 @@
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>22</value>
+  </data>
+  <data name="trackBarReveal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="trackBarReveal.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 180</value>
@@ -935,6 +1007,9 @@
   </data>
   <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 160</value>
@@ -966,6 +1041,9 @@
   <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 235</value>
   </data>
@@ -989,6 +1067,9 @@
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>25</value>
+  </data>
+  <data name="trackBarSmartSharpen.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="trackBarSmartSharpen.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 255</value>

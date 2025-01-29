@@ -33,6 +33,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBoxOriginalImage = new Emgu.CV.UI.ImageBox();
+            this.pictureBoxEditedImage = new Emgu.CV.UI.ImageBox();
             this.buttonBack = new System.Windows.Forms.Button();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
             this.buttonApplyChanges = new DMMDigital.Components.Rounded.RoundedButton();
@@ -62,9 +64,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.trackBarSmartSharpen = new System.Windows.Forms.TrackBar();
-            this.pictureBoxOriginalImage = new Emgu.CV.UI.ImageBox();
-            this.pictureBoxEditedImage = new Emgu.CV.UI.ImageBox();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
             this.roundedPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarEdge)).BeginInit();
@@ -73,8 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -95,6 +95,20 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
+            // 
+            // pictureBoxOriginalImage
+            // 
+            resources.ApplyResources(this.pictureBoxOriginalImage, "pictureBoxOriginalImage");
+            this.pictureBoxOriginalImage.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
+            this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
+            this.pictureBoxOriginalImage.TabStop = false;
+            // 
+            // pictureBoxEditedImage
+            // 
+            resources.ApplyResources(this.pictureBoxEditedImage, "pictureBoxEditedImage");
+            this.pictureBoxEditedImage.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
+            this.pictureBoxEditedImage.Name = "pictureBoxEditedImage";
+            this.pictureBoxEditedImage.TabStop = false;
             // 
             // buttonBack
             // 
@@ -400,18 +414,6 @@
             this.trackBarSmartSharpen.Maximum = 100;
             this.trackBarSmartSharpen.Name = "trackBarSmartSharpen";
             // 
-            // pictureBoxOriginalImage
-            // 
-            resources.ApplyResources(this.pictureBoxOriginalImage, "pictureBoxOriginalImage");
-            this.pictureBoxOriginalImage.Name = "pictureBoxOriginalImage";
-            this.pictureBoxOriginalImage.TabStop = false;
-            // 
-            // pictureBoxEditedImage
-            // 
-            resources.ApplyResources(this.pictureBoxEditedImage, "pictureBoxEditedImage");
-            this.pictureBoxEditedImage.Name = "pictureBoxEditedImage";
-            this.pictureBoxEditedImage.TabStop = false;
-            // 
             // FilterView
             // 
             resources.ApplyResources(this, "$this");
@@ -424,8 +426,11 @@
             this.KeyPreview = true;
             this.Name = "FilterView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.filterViewFormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarNoise)).EndInit();
@@ -435,8 +440,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarReveal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSmartSharpen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOriginalImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEditedImage)).EndInit();
             this.ResumeLayout(false);
 
         }
