@@ -3,6 +3,7 @@ using Emgu.CV;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -63,17 +64,18 @@ namespace DMMDigital.Views
             if (checkBoxColorImage.Checked)
                 filters.Add(img => Filters.colorImage(img));
 
-            foreach (var filter in filters)
+            if (filters.Any())
             {
-                editedImage = filter(editedImage);
+                foreach (var filter in filters)
+                {
+                    editedImage = filter(editedImage);
+                }
+
+                pictureBoxEditedImage.Image.Dispose();
+                pictureBoxEditedImage.Image = editedImage.Clone();
+
+                filters.Clear();
             }
-
-            pictureBoxEditedImage.Image.Dispose();
-            pictureBoxEditedImage.Image = editedImage.Clone();
-
-            editedImage?.Dispose();
-
-            filters.Clear();
         }
 
         private void bindControls()

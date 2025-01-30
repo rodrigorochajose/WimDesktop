@@ -22,6 +22,9 @@ namespace DMMDigital.Views
         public List<Frame> framesToExport { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
+        public event EventHandler eventSaveExportPath;
+        public event EventHandler eventGetExportPath;
+
         public ExportExamView()
         {
             InitializeComponent();
@@ -66,8 +69,9 @@ namespace DMMDigital.Views
         private void exportExamViewLoad(object sender, EventArgs e)
         {
             loadExamFrames();
-            pathToExport = folderBrowserDialog1.SelectedPath;
-            textBoxSelectPath.Text = folderBrowserDialog1.SelectedPath;
+            eventGetExportPath?.Invoke(this, EventArgs.Empty);
+
+            textBoxSelectPath.Text = pathToExport;
 
             textBoxSelectPath.Click += selectPath;
             buttonSelectPath.Click += selectPath;
@@ -179,6 +183,8 @@ namespace DMMDigital.Views
             }
             else
             {
+                eventSaveExportPath?.Invoke(this, EventArgs.Empty);
+
                 string path = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
                 Directory.CreateDirectory(path);
 

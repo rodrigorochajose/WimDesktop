@@ -2,6 +2,7 @@
 using DMMDigital.Models;
 using DMMDigital.Properties;
 using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 
@@ -74,6 +75,20 @@ namespace DMMDigital._Repositories
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void saveExportPath(string path)
+        {
+            ConfigModel currentConfig = context.config.First();
+
+            currentConfig.exportPath = path;
+
+            context.SaveChanges();
+        }
+
+        public string getExportPath()
+        {
+            return context.config.First().exportPath;
         }
     }
 }

@@ -12,5 +12,7 @@ namespace DMMDigital.Interface.IRepository
         float[] getFiltersValues();
         string getLanguage();
         void importConfig(ConfigModel config);
+        void saveExportPath(string path);
+        string getExportPath();
     }
 }

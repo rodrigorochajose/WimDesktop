@@ -644,7 +644,7 @@ namespace DMMDigital.Views
 
         private void provideTools(bool state)
         {
-            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(3);
+            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(4);
 
             Invoke((MethodInvoker)(() => tools.ForEach(i => i.Enabled = state)));
         }
