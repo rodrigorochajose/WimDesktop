@@ -7,7 +7,7 @@ namespace DMMDigital.Interface.IView
         event EventHandler showPatientView;
         event EventHandler showNewExamView;
         event EventHandler showTemplateView;
-        event EventHandler showConfigView;
+        event EventHandler showSettingsView;
     }
 }
  

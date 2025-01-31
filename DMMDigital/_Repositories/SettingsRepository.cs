@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace DMMDigital._Repositories
 {
-    public class ConfigRepository : IConfigRepository
+    public class SettingsRepository : ISettingsRepository
     {
         private readonly Context context = new Context();
 
@@ -25,50 +25,50 @@ namespace DMMDigital._Repositories
             }
         }
 
-        public ConfigModel getAllConfig()
+        public SettingsModel getAllSettings()
         {
             try
             {
-                return context.config.First();
+                return context.settings.First();
             }
             catch
             {
-                return new ConfigModel();
+                return new SettingsModel();
             }
         }
 
         public string getSensorPath()
         {
-            return context.config.First().sensorPath;
+            return context.settings.First().sensorPath;
         }
 
         public string getSensorModel()
         {
-            return context.config.First().sensorModel;
+            return context.settings.First().sensorModel;
         }
 
         public string getExamPath()
         {
-            return context.config.First().examPath;
+            return context.settings.First().examPath;
         }
 
         public float[] getFiltersValues()
         {
-            ConfigModel config = context.config.First();
-            return new float[] { config.brightness, config.contrast, config.reveal, config.smartSharpen };
+            SettingsModel settings = context.settings.First();
+            return new float[] { settings.brightness, settings.contrast, settings.reveal, settings.smartSharpen };
         }
 
         public string getLanguage()
         {
-            return context.config.First().language;
+            return context.settings.First().language;
         }
 
-        public void importConfig(ConfigModel config)
+        public void importSettings(SettingsModel settings)
         {
             try
             {
-                ConfigModel currentConfig = context.config.First();
-                context.Entry(currentConfig).CurrentValues.SetValues(config);
+                SettingsModel currentSettings = context.settings.First();
+                context.Entry(currentSettings).CurrentValues.SetValues(settings);
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -79,16 +79,16 @@ namespace DMMDigital._Repositories
 
         public void saveExportPath(string path)
         {
-            ConfigModel currentConfig = context.config.First();
+            SettingsModel currentSettings = context.settings.First();
 
-            currentConfig.exportPath = path;
+            currentSettings.exportPath = path;
 
             context.SaveChanges();
         }
 
         public string getExportPath()
         {
-            return context.config.First().exportPath;
+            return context.settings.First().exportPath;
         }
     }
 }

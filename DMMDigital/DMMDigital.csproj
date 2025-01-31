@@ -144,12 +144,13 @@
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
+    <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
     <Compile Include="Interface\IView\IImportExamImageView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
-    <Compile Include="Interface\IRepository\IConfigRepository.cs" />
+    <Compile Include="Interface\IRepository\ISettingsRepository.cs" />
     <Compile Include="Interface\IRepository\IExamImageDrawingRepository.cs" />
     <Compile Include="Interface\IRepository\IExamImageRepository.cs" />
     <Compile Include="Interface\IRepository\IExamRepository.cs" />
@@ -181,6 +182,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AdvancedSettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AdvancedSettingsView.Designer.cs">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiComparisonView.cs">
       <SubType>Form</SubType>
@@ -224,17 +231,17 @@
     <Compile Include="Views\FramesComparisonView.Designer.cs">
       <DependentUpon>FramesComparisonView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ConfigView.cs">
+    <Compile Include="Views\SettingsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ConfigView.Designer.cs">
-      <DependentUpon>ConfigView.cs</DependentUpon>
+    <Compile Include="Views\SettingsView.Designer.cs">
+      <DependentUpon>SettingsView.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ExamModel.cs" />
     <Compile Include="Models\ExamImageModel.cs" />
     <Compile Include="Interface\IRepository\IPatientRepository.cs" />
     <Compile Include="Presenters\Common\ModelDataValidation.cs" />
-    <Compile Include="Presenters\ConfigPresenter.cs" />
+    <Compile Include="Presenters\SettingsPresenter.cs" />
     <Compile Include="Views\DialogRecalibrateRuler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,7 +280,7 @@
     </Compile>
     <Compile Include="Interface\IView\IFramesComparisonDialog.cs" />
     <Compile Include="Interface\IView\ITemplateExamView.cs" />
-    <Compile Include="Interface\IView\IConfigView.cs" />
+    <Compile Include="Interface\IView\ISettingsView.cs" />
     <Compile Include="Interface\IView\IPatientExamView.cs" />
     <Compile Include="Interface\IView\ITemplateCreationDialog.cs" />
     <Compile Include="Interface\IView\IExamContainerView.cs" />
@@ -339,7 +346,7 @@
     <Compile Include="Interface\iRay\IRayFpdSysEx.cs" />
     <Compile Include="Interface\iRay\IRayImage.cs" />
     <Compile Include="Interface\iRay\IRayVariant.cs" />
-    <Compile Include="Models\ConfigModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Models\Drawings\Ellipse.cs" />
     <Compile Include="Models\Drawings\FreeDraw.cs" />
@@ -379,7 +386,7 @@
     <Compile Include="Views\TemplateView.Designer.cs">
       <DependentUpon>TemplateView.cs</DependentUpon>
     </Compile>
-    <Compile Include="_Repositories\ConfigRepository.cs" />
+    <Compile Include="_Repositories\SettingsRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingPointsRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
     <Compile Include="_Repositories\ExamImageRepository.cs" />
@@ -401,6 +408,13 @@
     <EmbeddedResource Include="Properties\Resources.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AdvancedSettingsView.en-US.resx">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AdvancedSettingsView.resx">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ImportExamImageView.en-US.resx">
@@ -442,6 +456,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MenuView.en-US.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MigrationDatabaseView.en-US.resx">
       <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
@@ -463,11 +478,11 @@
       <DependentUpon>FramesComparisonView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ConfigView.en-US.resx">
-      <DependentUpon>ConfigView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\SettingsView.en-US.resx">
+      <DependentUpon>SettingsView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ConfigView.resx">
-      <DependentUpon>ConfigView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\SettingsView.resx">
+      <DependentUpon>SettingsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MultiSensorDialog.en-US.resx">
       <DependentUpon>MultiSensorDialog.cs</DependentUpon>

@@ -27,7 +27,7 @@ namespace DMMDigital.Presenters
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private IEnumerable<ExamModel> examList;
         private readonly BindingSource examBindingSource;
 
@@ -114,7 +114,7 @@ namespace DMMDigital.Presenters
             DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
-                string fullPath = $"{configRepository.getExamPath()}\\{view.selectedPatientId}";
+                string fullPath = $"{settingsRepository.getExamPath()}\\{view.selectedPatientId}";
 
                 if (Directory.Exists(fullPath))
                 {
@@ -218,10 +218,10 @@ namespace DMMDigital.Presenters
 
         private void openExam(object sender, EventArgs e)
         {
-            ConfigModel config = configRepository.getAllConfig();
+            SettingsModel settings = settingsRepository.getAllSettings();
 
             PatientModel selectedPatient = patientList.FirstOrDefault(p => p.id == view.selectedPatientId);
-            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, config), new ExamRepository(), true, examOpeningMode);
+            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, settings), new ExamRepository(), true, examOpeningMode);
             Application.OpenForms.Cast<Form>().First().Hide();
             view.Close();
         }
@@ -237,7 +237,7 @@ namespace DMMDigital.Presenters
             DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (DialogResult.Yes.Equals(res))
             {
-                string fullPath = $"{configRepository.getExamPath()}{view.selectedExamPath}";
+                string fullPath = $"{settingsRepository.getExamPath()}{view.selectedExamPath}";
 
                 if (Directory.Exists(fullPath))
                 {
@@ -264,7 +264,7 @@ namespace DMMDigital.Presenters
                 return;
             }
 
-            string examPath = $"{configRepository.getExamPath()}\\{selectedExam.patient.id}\\{selectedExam.id}";
+            string examPath = $"{settingsRepository.getExamPath()}\\{selectedExam.patient.id}\\{selectedExam.id}";
 
             List<Frame> frames = new List<Frame>();
 

@@ -22,7 +22,7 @@ namespace DMMDigital
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            ConfigRepository configRepository = new ConfigRepository();
+            SettingsRepository settingsRepository = new SettingsRepository();
 
             configDatabase();
 
@@ -30,7 +30,7 @@ namespace DMMDigital
 
             try
             {
-                culture = configRepository.getLanguage();
+                culture = settingsRepository.getLanguage();
             }
             catch (Exception ex)
             {
@@ -53,15 +53,15 @@ namespace DMMDigital
             var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var connectionStringsSection = (ConnectionStringsSection)configFile.GetSection("connectionStrings");
 
-            var connectionStringSettings = connectionStringsSection.ConnectionStrings[connectionStringName];
-            if (connectionStringSettings != null)
+            var connectionStringConfig = connectionStringsSection.ConnectionStrings[connectionStringName];
+            if (connectionStringConfig != null)
             {
                 DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
-                builder.ConnectionString = connectionStringSettings.ConnectionString;
+                builder.ConnectionString = connectionStringConfig.ConnectionString;
 
                 builder["ClientLibrary"] = newClientLibraryPath;
 
-                connectionStringSettings.ConnectionString = builder.ConnectionString;
+                connectionStringConfig.ConnectionString = builder.ConnectionString;
 
                 configFile.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("connectionStrings");

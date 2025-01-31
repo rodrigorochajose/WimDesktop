@@ -25,9 +25,9 @@ namespace DMMDigital.Views
             MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
 
             originalImage = image.ToMat();
-            editedImage = originalImage;
+            editedImage = originalImage.Clone();
 
-            pictureBoxOriginalImage.Image = originalImage;
+            pictureBoxOriginalImage.Image = originalImage.Clone();
             pictureBoxEditedImage.Image = originalImage.Clone();
 
             bindControls();
@@ -35,7 +35,10 @@ namespace DMMDigital.Views
 
         private void applyFilters()
         {
-            editedImage = originalImage;
+            editedImage?.Dispose();
+            editedImage = originalImage.Clone();
+
+            filters.Clear();
 
             if (trackBarBrightness.Value != 0)
                 filters.Add(img => Filters.applyBrightnessAndContrast(img, trackBarBrightness.Value / 4, 0));
@@ -64,18 +67,13 @@ namespace DMMDigital.Views
             if (checkBoxColorImage.Checked)
                 filters.Add(img => Filters.colorImage(img));
 
-            if (filters.Any())
+            foreach (var filter in filters)
             {
-                foreach (var filter in filters)
-                {
-                    editedImage = filter(editedImage);
-                }
-
-                pictureBoxEditedImage.Image.Dispose();
-                pictureBoxEditedImage.Image = editedImage.Clone();
-
-                filters.Clear();
+                editedImage = filter(editedImage);
             }
+
+            pictureBoxEditedImage.Image.Dispose();
+            pictureBoxEditedImage.Image = editedImage.Clone();
         }
 
         private void bindControls()
@@ -97,7 +95,6 @@ namespace DMMDigital.Views
                 trackBar.MouseCaptureChanged += (s, e) =>
                 {
                     numericUpDown.InnerNumericUpDown.Value = trackBar.Value;
-                    applyFilters();
                 };
 
                 numericUpDown.InnerNumericUpDown.ValueChanged += (s, e) =>

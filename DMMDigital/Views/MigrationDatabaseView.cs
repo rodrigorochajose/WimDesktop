@@ -29,7 +29,7 @@ namespace DMMDigital.Views
         private List<PatientModel> patients = new List<PatientModel>();
         private List<ExamModel> exams = new List<ExamModel>();
         private List<ExamImageModel> examImages = new List<ExamImageModel>();
-        private List<ConfigModel> configs = new List<ConfigModel>();
+        private List<SettingsModel> settings = new List<SettingsModel>();
 
         public MigrationDatabaseView(string software, string path)
         {
@@ -70,7 +70,7 @@ namespace DMMDigital.Views
                 Directory.CreateDirectory(migrationPath);
             }
 
-            sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "config.csv").Replace("\\", "/")}', " +
+            sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "settings.csv").Replace("\\", "/")}', " +
             "'SELECT 1 as ID, ''pt-BR'' AS LANGUAGE, ''C:\\IRay\\IRayIntraoral_x86\\work_dir'' AS SENSOR_PATH, " +
             "''C:\\WimDesktopDB\\img'' AS EXAM_PATH, ''PLUTO0002X'' AS SENSOR_MODEL, 0 AS ACQUIRE_MODE, " +
             "DRAWING_COLOR, DRAWING_SIZE, TEXT_COLOR, TEXT_SIZE, RULER_COLOR, 0 AS FILTER_BRIGHTNESS, " +
@@ -152,10 +152,10 @@ namespace DMMDigital.Views
 
         private void generateModels_WIM()
         {
-            configs = generateModel<ConfigModel, ConfigModelMap>(@"C:\WIMDesktopDB\migration\data\config.csv");
-            configs[0].drawingColor = convertHexToARGB(configs[0].drawingColor);
-            configs[0].textColor = convertHexToARGB(configs[0].textColor);
-            configs[0].rulerColor = convertHexToARGB(configs[0].rulerColor);
+            settings = generateModel<SettingsModel, SettingsModelMap>(@"C:\WIMDesktopDB\migration\data\settings.csv");
+            settings[0].drawingColor = convertHexToARGB(settings[0].drawingColor);
+            settings[0].textColor = convertHexToARGB(settings[0].textColor);
+            settings[0].rulerColor = convertHexToARGB(settings[0].rulerColor);
 
             patients = generateModel<PatientModel, PatientModelMap>(@"C:\WIMDesktopDB\migration\data\patient.csv");
             exams = generateModel<ExamModel, ExamModelMap>(@"C:\WIMDesktopDB\migration\data\exam.csv");
@@ -356,8 +356,8 @@ namespace DMMDigital.Views
         {
             int totalPatients = patients.Count;
 
-            IConfigRepository configRepository = new ConfigRepository();
-            configRepository.importConfig(configs[0]);
+            ISettingsRepository settingsRepository = new SettingsRepository();
+            settingsRepository.importSettings(settings[0]);
 
             foreach (PatientModel patient in patients)
             {

@@ -11,7 +11,7 @@ namespace DMMDigital.Presenters
     {
         private readonly IExportExamView exportExamView;
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         public ExportExamPresenter(IExportExamView view, int examId) 
         {
@@ -32,12 +32,12 @@ namespace DMMDigital.Presenters
 
         private void saveExportPath(object sender, EventArgs e)
         {
-            configRepository.saveExportPath(exportExamView.pathToExport);
+            settingsRepository.saveExportPath(exportExamView.pathToExport);
         }
 
         private void getExportPath(object sender, EventArgs e)
         {
-            exportExamView.pathToExport = configRepository.getExportPath();
+            exportExamView.pathToExport = settingsRepository.getExportPath();
         }
     }
 }

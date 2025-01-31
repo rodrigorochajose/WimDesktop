@@ -14,7 +14,7 @@ namespace DMMDigital.Presenters
         private readonly ITemplateExamView templateExamView;
         private readonly ITemplateRepository templateRepository;
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         private string examOpeningMode = "newPage";
 
@@ -62,9 +62,9 @@ namespace DMMDigital.Presenters
                 name = templateExamView.patientName,
             };
 
-            ConfigModel config = configRepository.getAllConfig();
+            SettingsModel settings = settingsRepository.getAllSettings();
 
-            ExamView examView = new ExamView(patient, templateExamView.selectedTemplateId, templateExamView.templateFrames, templateExamView.selectedTemplateName, templateExamView.sessionName, config);
+            ExamView examView = new ExamView(patient, templateExamView.selectedTemplateId, templateExamView.templateFrames, templateExamView.selectedTemplateName, templateExamView.sessionName, settings);
             (templateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 

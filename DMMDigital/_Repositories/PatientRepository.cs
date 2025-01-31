@@ -22,6 +22,7 @@ namespace DMMDigital._Repositories
                 context.SaveChanges();
 
                 Directory.CreateDirectory($"C:\\WimDesktopDB\\img\\{patient.id}");
+                Directory.CreateDirectory($"C:\\WimDesktopDB\\img\\{patient.id}\\recycle");
 
                 MessageBox.Show(Resources.messagePatientCreated);
             }

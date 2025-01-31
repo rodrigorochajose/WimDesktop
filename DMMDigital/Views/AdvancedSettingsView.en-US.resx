@@ -117,16 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="buttonSettings.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="labelTitle.Text" xml:space="preserve">
+    <value>Advanced Settings</value>
   </data>
-  <data name="buttonNewExam.Text" xml:space="preserve">
-    <value>New Exam</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label6.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="buttonPatient.Text" xml:space="preserve">
-    <value>Patients</value>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Sensor Path</value>
   </data>
-  <data name="buttonTemplate.Text" xml:space="preserve">
-    <value>Templates</value>
+  <data name="labelCaminho.AutoSize" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="labelCaminho.Text" xml:space="preserve">
+    <value>Images Path</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Database Migration</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="panel1.Location" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="buttonExamPath.ImeMode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="textBoxExamPath.Font" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="roundedButtonMigrateCDR.Text" xml:space="preserve">
+    <value>Migrate CDR</value>
+  </data>
+  <data name="roundedButtonMigrateWimDesktop.Anchor" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="roundedButtonMigrateWimDesktop.Text" xml:space="preserve">
+    <value>Migrate WIMDESKTOP</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Advanced Settings</value>
   </data>
 </root>

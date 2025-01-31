@@ -30,9 +30,9 @@ namespace DMMDigital.Views
 
             toolStripButtonImportExamImage.Click += delegate { importExamImage(); };
 
-            toolStripButtonZoomIn.Click += zoomIn;
+            toolStripButtonZoomIn.Click += delegate { zoomIn(); };
 
-            toolStripButtonZoomOut.Click += zoomOut;
+            toolStripButtonZoomOut.Click += delegate { zoomOut(); };
 
             toolStripButtonRotateLeft.Click += delegate { rotateImage("left"); };
 
@@ -145,13 +145,13 @@ namespace DMMDigital.Views
             }
         }
 
-        private void zoomIn(object sender, EventArgs e)
+        private void zoomIn()
         {
             zoomFactor += 0.1f;
             pictureBoxZoom();
         }
 
-        private void zoomOut(object sender, EventArgs e)
+        private void zoomOut()
         {
             zoomFactor = Math.Max(0.1f, zoomFactor - 0.1f);
             pictureBoxZoom();
