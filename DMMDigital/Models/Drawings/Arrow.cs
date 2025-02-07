@@ -20,7 +20,7 @@ namespace DMMDigital.Models.Drawings
         {
             Pen pen = new Pen(drawingColor, drawingSize)
             {
-                CustomEndCap = new AdjustableArrowCap(5, 5)
+                CustomStartCap = new AdjustableArrowCap(5, 5)
             };
 
             g.DrawLine(pen, points.First(), points.Last());
@@ -30,7 +30,7 @@ namespace DMMDigital.Models.Drawings
         {
             Pen pen = new Pen(drawingColor, drawingSize)
             {
-                CustomEndCap = new AdjustableArrowCap(5, 5)
+                CustomStartCap = new AdjustableArrowCap(5, 5)
             };
 
             graphicsPath = new GraphicsPath();

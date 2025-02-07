@@ -56,14 +56,14 @@
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
             this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
+            this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.columnPatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPatientPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnEditPatient = new System.Windows.Forms.DataGridViewImageColumn();
             this.columnDeletePatient = new System.Windows.Forms.DataGridViewImageColumn();
-            this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
             this.roundedPanel1.SuspendLayout();
@@ -335,6 +335,29 @@
             this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
+            // buttonNewPatient
+            // 
+            resources.ApplyResources(this.buttonNewPatient, "buttonNewPatient");
+            this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonNewPatient.BorderWidth = 5F;
+            this.buttonNewPatient.CornerRadius = 5;
+            this.buttonNewPatient.FlatAppearance.BorderSize = 0;
+            this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
+            this.buttonNewPatient.Name = "buttonNewPatient";
+            this.buttonNewPatient.UseVisualStyleBackColor = false;
+            // 
+            // buttonSearchPatient
+            // 
+            resources.ApplyResources(this.buttonSearchPatient, "buttonSearchPatient");
+            this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonSearchPatient.BorderWidth = 5F;
+            this.buttonSearchPatient.CornerRadius = 5;
+            this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
+            this.buttonSearchPatient.Name = "buttonSearchPatient";
+            this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            // 
             // columnPatientId
             // 
             this.columnPatientId.DataPropertyName = "id";
@@ -387,29 +410,6 @@
             this.columnDeletePatient.ReadOnly = true;
             this.columnDeletePatient.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // buttonNewPatient
-            // 
-            resources.ApplyResources(this.buttonNewPatient, "buttonNewPatient");
-            this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewPatient.BorderWidth = 5F;
-            this.buttonNewPatient.CornerRadius = 5;
-            this.buttonNewPatient.FlatAppearance.BorderSize = 0;
-            this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
-            this.buttonNewPatient.Name = "buttonNewPatient";
-            this.buttonNewPatient.UseVisualStyleBackColor = false;
-            // 
-            // buttonSearchPatient
-            // 
-            resources.ApplyResources(this.buttonSearchPatient, "buttonSearchPatient");
-            this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSearchPatient.BorderWidth = 5F;
-            this.buttonSearchPatient.CornerRadius = 5;
-            this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
-            this.buttonSearchPatient.Name = "buttonSearchPatient";
-            this.buttonSearchPatient.UseVisualStyleBackColor = false;
-            // 
             // PatientView
             // 
             resources.ApplyResources(this, "$this");
@@ -446,12 +446,6 @@
         private Components.Rounded.RoundedPanel roundedPanel2;
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedTextBox textBoxSearchPatient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientBirthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientPhone;
-        private System.Windows.Forms.DataGridViewImageColumn columnEditPatient;
-        private System.Windows.Forms.DataGridViewImageColumn columnDeletePatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnExamId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTemplateId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSessionName;
@@ -459,5 +453,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnTemplate;
         private System.Windows.Forms.DataGridViewImageColumn columnEditExam;
         private System.Windows.Forms.DataGridViewImageColumn columnDeleteExam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientBirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientPhone;
+        private System.Windows.Forms.DataGridViewImageColumn columnEditPatient;
+        private System.Windows.Forms.DataGridViewImageColumn columnDeletePatient;
     }
 }

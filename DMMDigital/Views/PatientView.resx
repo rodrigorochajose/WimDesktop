@@ -460,13 +460,13 @@
     <value>Nome</value>
   </data>
   <data name="columnPatientName.Width" type="System.Int32, mscorlib">
-    <value>235</value>
+    <value>250</value>
   </data>
   <data name="columnPatientBirthDate.HeaderText" xml:space="preserve">
     <value>Data de Nascimento</value>
   </data>
   <data name="columnPatientBirthDate.Width" type="System.Int32, mscorlib">
-    <value>175</value>
+    <value>160</value>
   </data>
   <data name="columnPatientPhone.HeaderText" xml:space="preserve">
     <value>Telefone</value>

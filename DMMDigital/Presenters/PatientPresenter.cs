@@ -163,6 +163,10 @@ namespace DMMDigital.Presenters
                 new Common.ModelDataValidation().Validate(selectedPatient);
                 patientRepository.addPatient(selectedPatient);
                 (sender as PatientManagerView).Close();
+
+                string examPath = settingsRepository.getExamPath();
+
+                Directory.CreateDirectory(Path.Combine(examPath, $"\\{selectedPatient.id}\\recycle"));
             } 
             catch (Exception ex)
             {
