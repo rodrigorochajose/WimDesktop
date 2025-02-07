@@ -15,7 +15,7 @@ namespace DMMDigital.Presenters
         private readonly IImportExamImageView view;
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
-        private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly BindingSource examBindingSource;
 
         private string basePath = "";
@@ -31,7 +31,7 @@ namespace DMMDigital.Presenters
             view.setExamList(examBindingSource);
             getExams();
 
-            basePath = configRepository.getExamPath();
+            basePath = settingsRepository.getExamPath();
 
             (view as Form).ShowDialog();
         }

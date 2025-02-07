@@ -3,6 +3,7 @@ using Emgu.CV;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -12,28 +13,32 @@ namespace DMMDigital.Views
         public Mat originalImage { get; set; }
         public Mat editedImage { get; set; }
 
-        public FilterView(Bitmap image)
+        private string imagePath = "";
+
+        private List<Func<Mat, Mat>> filters = new List<Func<Mat, Mat>>();
+
+        public FilterView(Bitmap image, string imagePath)
         {
             InitializeComponent();
+            this.imagePath = imagePath; 
+
             MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
 
             originalImage = image.ToMat();
-            editedImage = originalImage;
+            editedImage = originalImage.Clone();
 
-            pictureBoxOriginalImage.Image = originalImage;
-            pictureBoxOriginalImage.HorizontalScrollBar.Enabled = false;
-
-            pictureBoxEditedImage.Image = originalImage;
-            pictureBoxEditedImage.HorizontalScrollBar.Enabled = false;
+            pictureBoxOriginalImage.Image = originalImage.Clone();
+            pictureBoxEditedImage.Image = originalImage.Clone();
 
             bindControls();
         }
 
         private void applyFilters()
         {
-            Mat matImg = originalImage.Clone();
+            editedImage?.Dispose();
+            editedImage = originalImage.Clone();
 
-            List<Func<Mat, Mat>> filters = new List<Func<Mat, Mat>>();
+            filters.Clear();
 
             if (trackBarBrightness.Value != 0)
                 filters.Add(img => Filters.applyBrightnessAndContrast(img, trackBarBrightness.Value / 4, 0));
@@ -64,13 +69,11 @@ namespace DMMDigital.Views
 
             foreach (var filter in filters)
             {
-                matImg = filter(matImg);
+                editedImage = filter(editedImage);
             }
 
-            editedImage = matImg.Clone();
-            pictureBoxEditedImage.Image = editedImage;
-
-            matImg.Dispose();
+            pictureBoxEditedImage.Image.Dispose();
+            pictureBoxEditedImage.Image = editedImage.Clone();
         }
 
         private void bindControls()
@@ -89,10 +92,9 @@ namespace DMMDigital.Views
                 var trackBar = control.Item1;
                 var numericUpDown = control.Item2;
 
-                trackBar.ValueChanged += (s, e) =>
+                trackBar.MouseCaptureChanged += (s, e) =>
                 {
                     numericUpDown.InnerNumericUpDown.Value = trackBar.Value;
-                    applyFilters();
                 };
 
                 numericUpDown.InnerNumericUpDown.ValueChanged += (s, e) =>
@@ -132,13 +134,25 @@ namespace DMMDigital.Views
 
         private void buttonApplyChangesClick(object sender, EventArgs e)
         {
-            originalImage = editedImage.Clone();
+            editedImage.Save(imagePath);
+
+            DialogResult = DialogResult.OK;
             Close();
         }
 
         private void buttonBackClick(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void filterViewFormClosed(object sender, FormClosedEventArgs e)
+        {
+            originalImage.Dispose();
+            editedImage.Dispose();
+            imagePath = null;
+            filters = null;
+            Dispose();
         }
     }
 }

@@ -21,8 +21,6 @@ namespace DMMDigital._Repositories
                 context.patient.Add(patient);
                 context.SaveChanges();
 
-                Directory.CreateDirectory($"C:\\WimDesktopDB\\img\\{patient.id}");
-
                 MessageBox.Show(Resources.messagePatientCreated);
             }
             catch (Exception ex)

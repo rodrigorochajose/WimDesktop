@@ -14,7 +14,7 @@ using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
-    public partial class ConfigView : Form, IConfigView
+    public partial class SettingsView : Form, ISettingsView
     {
         public string language
         {
@@ -22,17 +22,9 @@ namespace DMMDigital.Views
             set { comboBoxLanguage.InnerComboBox.SelectedItem = value; }
         }
 
-        public string sensorPath
-        {
-            get { return textBoxSensorPath.Text; }
-            set { textBoxSensorPath.Text = value; }
-        }
+        public string sensorPath { get; set; }
 
-        public string examPath
-        {
-            get { return textBoxExamPath.Text; }
-            set { textBoxExamPath.Text = value; } 
-        }
+        public string examPath { get; set; }
 
         public string sensorModel 
         {
@@ -81,15 +73,13 @@ namespace DMMDigital.Views
         public float reveal { get; set; }
         public float smartSharpen { get; set; }
 
-        public event EventHandler loadConfigs;
-        public event EventHandler saveConfigs;
-        public event EventHandler migrateWimDesktop;
-        public event EventHandler migrateCDR;
+        public event EventHandler loadSettings;
+        public event EventHandler saveSettings;
 
         private Twain twain;
         private bool languageChanged = false;
 
-        public ConfigView()
+        public SettingsView()
         {
             InitializeComponent();
             adjustComponent();
@@ -107,17 +97,34 @@ namespace DMMDigital.Views
 
         private void associateEvents()
         {
-            KeyPress += (s, e) =>
+            KeyDown += (s, e) =>
             {
-                if (e.KeyChar == (char)Keys.Escape)
+                if (e.KeyCode == Keys.Escape)
                 {
                     Close();
+                }
+
+                if (e.Shift && e.KeyCode == Keys.Home)
+                {
+                    using (DialogAdvancedSettings dialogAdvancedSettings = new DialogAdvancedSettings())
+                    {
+                        if (dialogAdvancedSettings.ShowDialog() == DialogResult.OK)
+                        {
+                            IAdvancedSettingsView advancedSettingsView = new AdvancedSettingsView(sensorPath, examPath);
+
+                            if ((advancedSettingsView as Form).ShowDialog() == DialogResult.OK)
+                            {
+                                sensorPath = advancedSettingsView.sensorPath;
+                                examPath = advancedSettingsView.examPath;
+                            }
+                        }
+                    }
                 }
             };
 
             Load += delegate 
             {
-                loadConfigs?.Invoke(this, EventArgs.Empty);
+                loadSettings?.Invoke(this, EventArgs.Empty);
             };
 
             comboBoxLanguage.InnerComboBox.SelectionChangeCommitted += delegate
@@ -140,16 +147,6 @@ namespace DMMDigital.Views
                 selectTwainSource(); 
             };
 
-            buttonSensorPath.Click += delegate 
-            { 
-                selectSensorPath(); 
-            };
-
-            buttonExamPath.Click += delegate 
-            { 
-                selectExamPath(); 
-            };
-
             buttonSave.Click += delegate
             {
                 if (languageChanged)
@@ -160,7 +157,7 @@ namespace DMMDigital.Views
                     }
                 }
 
-                saveConfigs?.Invoke(this, EventArgs.Empty);
+                saveSettings?.Invoke(this, EventArgs.Empty);
             };
 
             buttonCancel.Click += delegate 
@@ -257,43 +254,6 @@ namespace DMMDigital.Views
         {
             twain.SelectSource();
             textBoxTwainSource.Text = twain.DefaultSourceName;
-        }
-
-        private void selectSensorPath()
-        {
-            folderBrowserDialog1.ShowDialog();
-            sensorPath = folderBrowserDialog1.SelectedPath;
-        }
-
-        private void selectExamPath()
-        {
-            folderBrowserDialog1.ShowDialog();
-            examPath = folderBrowserDialog1.SelectedPath;
-        }
-
-        private void roundedButtonMigrateWimDesktopClick(object sender, EventArgs e)
-        {
-            migrateWimDesktop?.Invoke(this, e);
-        }
-
-        private void roundedButtonMigrateCDRClick(object sender, EventArgs e)
-        {
-            migrateCDR?.Invoke(this, e);
-        }
-
-        private void tabControlSelecting(object sender, TabControlCancelEventArgs e)
-        {
-            if (e.TabPageIndex == 2)
-            {
-                using (Form dialogAdvancedSettings = new DialogAdvancedSettings())
-                {
-                    var result = dialogAdvancedSettings.ShowDialog();
-                    if (result == DialogResult.Cancel)
-                    {
-                        e.Cancel = true;
-                    }
-                }
-            }
         }
     }
 }

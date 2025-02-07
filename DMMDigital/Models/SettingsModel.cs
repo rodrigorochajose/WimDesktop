@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DMMDigital.Models
 {
-    [Table("CONFIG")]
-    public class ConfigModel
+    [Table("SETTINGS")]
+    public class SettingsModel
     {
         [Column("ID")]
         public int id { get; set; }
@@ -17,6 +17,9 @@ namespace DMMDigital.Models
 
         [Column("EXAM_PATH")]
         public string examPath { get; set; }
+
+        [Column("EXPORT_PATH")]
+        public string exportPath { get; set; }
 
         [Column("SENSOR_MODEL")]
         public string sensorModel { get; set; }
@@ -52,9 +55,9 @@ namespace DMMDigital.Models
         public float smartSharpen { get; set; }
     }
 
-    public class ConfigModelMap : ClassMap<ConfigModel>
+    public class SettingsModelMap : ClassMap<SettingsModel>
     {
-        public ConfigModelMap()
+        public SettingsModelMap()
         {
             Map(m => m.id).Name("ID");
             Map(m => m.language).Name("LANGUAGE");

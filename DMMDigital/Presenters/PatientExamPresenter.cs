@@ -5,6 +5,7 @@ using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,6 +16,7 @@ namespace DMMDigital.Presenters
         public PatientExamView view { get; }
 
         private readonly IPatientRepository patientRepository;
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly BindingSource pacientesBindingSource;
         private IEnumerable<PatientModel> patientList;
 
@@ -71,6 +73,11 @@ namespace DMMDigital.Presenters
                 new Common.ModelDataValidation().Validate(newPatient);
                 patientRepository.addPatient(newPatient);
                 (sender as PatientManagerView).Close();
+
+                string examPath = settingsRepository.getExamPath();
+
+                Directory.CreateDirectory(Path.Combine(examPath, $"\\{newPatient.id}\\recycle"));
+
             }
             catch (Exception ex)
             {

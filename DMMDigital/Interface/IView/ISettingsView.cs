@@ -2,7 +2,7 @@
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IConfigView
+    public interface ISettingsView
     {
         string language { get; set; }
         string sensorPath { get; set; }
@@ -19,9 +19,7 @@ namespace DMMDigital.Interface.IView
         float reveal { get; set; }
         float smartSharpen { get; set; }
 
-        event EventHandler loadConfigs;
-        event EventHandler saveConfigs;
-        event EventHandler migrateWimDesktop;
-        event EventHandler migrateCDR;
+        event EventHandler loadSettings;
+        event EventHandler saveSettings;
     }
 }

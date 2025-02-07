@@ -15,9 +15,9 @@ namespace DMMDigital.Presenters
         {
             menuView = view;
 
-            menuView.showConfigView += delegate 
+            menuView.showSettingsView += delegate 
             {
-                FormManager.instance.showForm("configView", () => new ConfigPresenter(new ConfigView(), new ConfigRepository())); 
+                FormManager.instance.showForm("settingsView", () => new SettingsPresenter(new SettingsView(), new SettingsRepository())); 
             };
 
             menuView.showPatientView += delegate 

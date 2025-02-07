@@ -90,10 +90,10 @@ namespace DMMDigital.Views
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, ConfigModel config)
+        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
         {
             InitializeComponent();
-            associateConfigs(config);
+            associateSettings(settings);
 
             ActiveControl = labelPatientName;
 
@@ -122,10 +122,10 @@ namespace DMMDigital.Views
             };
         }
 
-        public ExamView(int examId, PatientModel patient, ConfigModel config)
+        public ExamView(int examId, PatientModel patient, SettingsModel settings)
         {
             InitializeComponent();
-            associateConfigs(config);
+            associateSettings(settings);
 
             this.examId = examId;
             this.patient = patient;
@@ -242,15 +242,15 @@ namespace DMMDigital.Views
             mainPictureBox.Invoke((MethodInvoker)(() => mainPictureBox.Refresh()));
         }
 
-        private void associateConfigs(ConfigModel config)
+        private void associateSettings(SettingsModel settings)
         {
-            examPath = config.examPath;
-            drawingColor = Color.FromArgb(int.Parse(config.drawingColor));
-            textColor = Color.FromArgb(int.Parse(config.textColor));
-            rulerColor = Color.FromArgb(int.Parse(config.rulerColor));
-            textDrawingPreviousSize = config.textSize;
-            drawingSize = config.drawingSize;
-            acquireMode = acquireModes[config.acquireMode];
+            examPath = settings.examPath;
+            drawingColor = Color.FromArgb(int.Parse(settings.drawingColor));
+            textColor = Color.FromArgb(int.Parse(settings.textColor));
+            rulerColor = Color.FromArgb(int.Parse(settings.rulerColor));
+            textDrawingPreviousSize = settings.textSize;
+            drawingSize = settings.drawingSize;
+            acquireMode = acquireModes[settings.acquireMode];
 
             if (acquireMode == "TWAIN")
             {
@@ -644,7 +644,7 @@ namespace DMMDigital.Views
 
         private void provideTools(bool state)
         {
-            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(3);
+            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(4);
 
             Invoke((MethodInvoker)(() => tools.ForEach(i => i.Enabled = state)));
         }
@@ -1292,23 +1292,27 @@ namespace DMMDigital.Views
         {
             selectTool(sender);
 
-            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.filteredImage));
-            (filterView as Form).ShowDialog();
+            string imagePath = Path.Combine(examPath, $"{selectedFrame.order}_filtered.png");
 
-            Image image = filterView.originalImage.ToBitmap();
+            IFilterView filterView = new FilterView(new Bitmap(selectedFrame.filteredImage), imagePath);
 
-            image.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+            DialogResult res = (filterView as Form).ShowDialog();
 
-            selectedFrame.Invoke((MethodInvoker)(() =>
+            if (res == DialogResult.OK)
             {
-                selectedFrame.filteredImage = image;
-                selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-                selectedFrame.Refresh();
-            }));
+                Image image = Image.FromFile(imagePath);
 
-            mainPictureBox.Image = image;
+                selectedFrame.Invoke((MethodInvoker)(() =>
+                {
+                    selectedFrame.filteredImage = image;
+                    selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                    selectedFrame.Refresh();
+                }));
 
-            examHasChanges = true;
+                mainPictureBox.Image = image;
+                
+                examHasChanges = true;
+            }
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)

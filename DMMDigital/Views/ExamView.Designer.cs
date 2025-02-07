@@ -327,7 +327,7 @@ namespace DMMDigital.Views
             this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.buttonExport.Tag = "stateChangeable";
+            this.buttonExport.Tag = "";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
             // 
             // toolStripSeparator3

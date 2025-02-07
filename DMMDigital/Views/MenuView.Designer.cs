@@ -33,7 +33,7 @@
             this.buttonNewExam = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonPatient = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTemplate = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             this.buttonNewExam,
             this.buttonPatient,
             this.buttonTemplate,
-            this.buttonConfig});
+            this.buttonSettings});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -71,11 +71,11 @@
             this.buttonTemplate.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonTemplate.Name = "buttonTemplate";
             // 
-            // buttonConfig
+            // buttonSettings
             // 
-            resources.ApplyResources(this.buttonConfig, "buttonConfig");
-            this.buttonConfig.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            this.buttonConfig.Name = "buttonConfig";
+            resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.buttonSettings.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
+            this.buttonSettings.Name = "buttonSettings";
             // 
             // MenuView
             // 
@@ -104,7 +104,7 @@
         private System.Windows.Forms.ToolStripMenuItem buttonNewExam;
         private System.Windows.Forms.ToolStripMenuItem buttonPatient;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem buttonConfig;
+        private System.Windows.Forms.ToolStripMenuItem buttonSettings;
         private System.Windows.Forms.ToolStripMenuItem buttonTemplate;
     }
 }

@@ -2,15 +2,17 @@
 
 namespace DMMDigital.Interface.IRepository
 {
-    public interface IConfigRepository
+    public interface ISettingsRepository
     {
         string save();
-        ConfigModel getAllConfig();
+        SettingsModel getAllSettings();
         string getSensorPath();
         string getSensorModel();
         string getExamPath();
         float[] getFiltersValues();
         string getLanguage();
-        void importConfig(ConfigModel config);
+        void importSettings(SettingsModel settings);
+        void saveExportPath(string path);
+        string getExportPath();
     }
 }

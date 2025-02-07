@@ -30,7 +30,7 @@ namespace DMMDigital.Presenters
         private Twain twain;
         private bool continueAcquiring = false;
 
-        private readonly IConfigRepository configRepository = new ConfigRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
 
         public ExamContainerPresenter(IExamContainerView view, int patientId)
@@ -139,7 +139,7 @@ namespace DMMDigital.Presenters
 
         private void setDefaultSensor()
         {
-            string sensorModel = configRepository.getSensorModel();
+            string sensorModel = settingsRepository.getSensorModel();
             setConnectedSensor(sensorModel);
         }
 
@@ -228,7 +228,7 @@ namespace DMMDigital.Presenters
                         }
                     }
 
-                    string[] directories = Directory.GetDirectories(configRepository.getSensorPath());
+                    string[] directories = Directory.GetDirectories(settingsRepository.getSensorPath());
 
                     foreach (string directory in directories)
                     {

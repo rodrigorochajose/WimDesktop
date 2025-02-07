@@ -15,13 +15,12 @@ using DMMDigital.Properties;
 using System.Data.SqlClient;
 using System.Text;
 using System.IO.Compression;
-
+using System.Text.RegularExpressions;
 
 namespace DMMDigital.Views
 {
     public partial class MigrationDatabaseView : Form
     {
-        private string warningMessage = "";
         private readonly string software = "";
         private readonly string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
         private readonly string dataPath = "";
@@ -29,7 +28,20 @@ namespace DMMDigital.Views
         private List<PatientModel> patients = new List<PatientModel>();
         private List<ExamModel> exams = new List<ExamModel>();
         private List<ExamImageModel> examImages = new List<ExamImageModel>();
-        private List<ConfigModel> configs = new List<ConfigModel>();
+        private List<ExamImageCDR> examImagesCDR = new List<ExamImageCDR>();
+        private List<SettingsModel> settings = new List<SettingsModel>();
+
+        class ExamImageCDR
+        {
+            public string uid { get; set; }
+            public int id { get; set; }
+            public int examId { get; set; }
+            public int order { get; set; }
+            public int templateFrameId { get; set; }
+            public string file { get; set; }
+            public string notes { get; set; }
+            public DateTime createdAt { get; set; } = DateTime.Now;
+        }
 
         public MigrationDatabaseView(string software, string path)
         {
@@ -70,7 +82,7 @@ namespace DMMDigital.Views
                 Directory.CreateDirectory(migrationPath);
             }
 
-            sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "config.csv").Replace("\\", "/")}', " +
+            sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "settings.csv").Replace("\\", "/")}', " +
             "'SELECT 1 as ID, ''pt-BR'' AS LANGUAGE, ''C:\\IRay\\IRayIntraoral_x86\\work_dir'' AS SENSOR_PATH, " +
             "''C:\\WimDesktopDB\\img'' AS EXAM_PATH, ''PLUTO0002X'' AS SENSOR_MODEL, 0 AS ACQUIRE_MODE, " +
             "DRAWING_COLOR, DRAWING_SIZE, TEXT_COLOR, TEXT_SIZE, RULER_COLOR, 0 AS FILTER_BRIGHTNESS, " +
@@ -152,10 +164,10 @@ namespace DMMDigital.Views
 
         private void generateModels_WIM()
         {
-            configs = generateModel<ConfigModel, ConfigModelMap>(@"C:\WIMDesktopDB\migration\data\config.csv");
-            configs[0].drawingColor = convertHexToARGB(configs[0].drawingColor);
-            configs[0].textColor = convertHexToARGB(configs[0].textColor);
-            configs[0].rulerColor = convertHexToARGB(configs[0].rulerColor);
+            settings = generateModel<SettingsModel, SettingsModelMap>(@"C:\WIMDesktopDB\migration\data\settings.csv");
+            settings[0].drawingColor = convertHexToARGB(settings[0].drawingColor);
+            settings[0].textColor = convertHexToARGB(settings[0].textColor);
+            settings[0].rulerColor = convertHexToARGB(settings[0].rulerColor);
 
             patients = generateModel<PatientModel, PatientModelMap>(@"C:\WIMDesktopDB\migration\data\patient.csv");
             exams = generateModel<ExamModel, ExamModelMap>(@"C:\WIMDesktopDB\migration\data\exam.csv");
@@ -201,9 +213,9 @@ namespace DMMDigital.Views
                 {
                     connection.Open();
 
-                    patients = getPatients(connection);
-                    exams = getExams(connection);
-                    examImages = getExamImages(connection);
+                    getPatients(connection);
+                    getExams(connection);
+                    getExamImages(connection);
                 }
                 catch (Exception ex)
                 {
@@ -212,11 +224,9 @@ namespace DMMDigital.Views
             }
         }
 
-        public List<PatientModel> getPatients(SqlConnection connection)
+        public void getPatients(SqlConnection connection)
         {
             string query = "SELECT PatientNumber as ID, (NameFirst + ' - ' + NameLast) as NAME, ISNULL(BirthDate, '1899-12-30') as BIRTHDATE, '' as PHONE, '' as RECOMMENDATION, ISNULL(Comments, '') as OBSERVATION, EnteredDate as CREATED_AT from Patient";
-
-            List<PatientModel> patients = new List<PatientModel>();
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -239,14 +249,11 @@ namespace DMMDigital.Views
                     }
                 }
             }
-            return patients;
         }
 
-        public List<ExamModel> getExams(SqlConnection connection)
+        public void getExams(SqlConnection connection)
         {
-            string query = "SELECT SeriesNumber as ID, Study.PatientNumber as PATIENT_ID, 0 as TEMPLATE_ID, '' as SESSION_NAME, SeriesDate as CREATED_AT from Series INNER JOIN Study ON Series.StudyNumber = Study.StudyNumber WHERE Series.Modality = 'IO'";
-
-            List<ExamModel> exams = new List<ExamModel>();
+            string query = "SELECT StudyNumber as ID, PatientNumber as PATIENT_ID, 0 as TEMPLATE_ID, '' as SESSION_NAME, StudyDate as CREATED_AT from Study";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -267,14 +274,11 @@ namespace DMMDigital.Views
                     }
                 }
             }
-            return exams;
         }
 
-        public List<ExamImageModel> getExamImages(SqlConnection connection)
+        public void getExamImages(SqlConnection connection)
         {
-            string query = "SELECT ImageNumber as ID, Series.SeriesNumber as EXAM_ID, ImageNumberDICOM as TEMPLATE_FRAME_ID, ImageFileName as 'FILE', '' as NOTES, Image.EnteredDate as CREATED_AT FROM Image INNER JOIN Series ON Image.SeriesNumber = Series.SeriesNumber WHERE ImageNumberDICOM IS NOT NULL AND ImageFileName LIKE '%\\IO%' AND LEN(SUBSTRING(ImageFileName, CHARINDEX('\\IO', ImageFileName), LEN(ImageFileName))) = LEN('\\IO000000')";
-
-            List<ExamImageModel> examImages = new List<ExamImageModel>();
+            string query = "SELECT ImageNumber as ID, Study.StudyNumber as EXAM_ID, ImageNumberDICOM as TEMPLATE_FRAME_ID, ImageNumberDICOM as ORDINATION, ImageUID as IMGUID, ImageFileName as 'FILE', '' as NOTES, Image.EnteredDate as CREATED_AT FROM Image INNER JOIN Series ON Image.SeriesNumber = Series.SeriesNumber INNER JOIN Study ON Series.StudyNumber = Study.StudyNumber WHERE ImageNumberDICOM IS NOT NULL";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -282,21 +286,22 @@ namespace DMMDigital.Views
                 {
                     while (reader.Read())
                     {
-                        ExamImageModel examImage = new ExamImageModel
+                        ExamImageCDR examImage = new ExamImageCDR
                         {
+                            uid = (string)reader["IMGUID"],
                             id = (int)reader["ID"],
                             examId = (int)reader["EXAM_ID"],
+                            order = int.Parse((string)reader["ORDINATION"]),
                             templateFrameId = int.Parse((string)reader["TEMPLATE_FRAME_ID"]),
                             file = (string)reader["FILE"],
                             notes = (string)reader["NOTES"],
                             createdAt = (DateTime)reader["CREATED_AT"]
                         };
 
-                        examImages.Add(examImage);
+                        examImagesCDR.Add(examImage);
                     }
                 }
             }
-            return examImages;
         }
 
         private async void startProgressBar()
@@ -307,7 +312,7 @@ namespace DMMDigital.Views
 
                 if (progressBar.Value >= progressBar.Maximum)
                 {
-                    MessageBox.Show(Resources.messageMigrationSuccess + warningMessage);
+                    MessageBox.Show(Resources.messageMigrationSuccess);
 
                     string[] directoriesToDelete = new string[]
                     {
@@ -356,8 +361,8 @@ namespace DMMDigital.Views
         {
             int totalPatients = patients.Count;
 
-            IConfigRepository configRepository = new ConfigRepository();
-            configRepository.importConfig(configs[0]);
+            ISettingsRepository settingsRepository = new SettingsRepository();
+            settingsRepository.importSettings(settings[0]);
 
             foreach (PatientModel patient in patients)
             {
@@ -401,7 +406,6 @@ namespace DMMDigital.Views
 
         private async Task importData_CDR(IProgress<int> progress, int processedPatients, IPatientRepository patientRepository, IExamRepository examRepository, IExamImageRepository examImageRepository)
         {
-            int examsNotImported = 0;
             int totalPatients = patients.Count;
 
             foreach (PatientModel patient in patients)
@@ -419,46 +423,150 @@ namespace DMMDigital.Views
                         int examOldId = patientExam.id;
                         patientExam.patientId = patient.id;
 
-                        List<ExamImageModel> patientExamImages = examImages.Where(ei => ei.examId == patientExam.id && File.Exists(Path.Combine(dataPath, ei.file + ".jpeg"))).ToList();
+                        List<ExamImageCDR> currentExamImages = examImagesCDR.Where(ei => ei.examId == patientExam.id).ToList();
 
-                        int frames = patientExamImages.Count();
-
-                        if (frames > 50)
+                        if (!currentExamImages.Any())
                         {
-                            examsNotImported++;
-                            generateMigrationLog(frames, examOldId, patientExamImages.First().file);
                             continue;
                         }
 
-                        patientExam.templateId = frames < 6 ? 13 : frames < 16 ? 14 : frames < 26 ? 15 : 16;
+                        string filePath = currentExamImages.First().file;
+                        int index = filePath.LastIndexOf('\\');
 
-                        examRepository.addExam(patientExam);
+                        string examContentPath = Path.Combine(dataPath, filePath.Substring(0, index), "SR000001");
 
-                        patientExamImages = patientExamImages.Select(ei => new ExamImageModel
+                        currentExamImages = getUsedImages(examContentPath, currentExamImages);
+
+                        if (currentExamImages.Any())
                         {
-                            examId = patientExam.id,
-                            templateFrameId = ei.templateFrameId,
-                            file = ei.file,
-                            notes = ei.notes,
-                            createdAt = ei.createdAt
-                        }).ToList();
+                            patientExam.templateId = getTemplateId(examContentPath, currentExamImages.Count);
 
-                        if (patientExamImages.Any())
-                        {
-                            await importImages_CDR(patientExamImages, patient.id, patientExam.id);
-                            getTemplateFrameId(patientExamImages, patientExam.templateId);
+                            examRepository.addExam(patientExam);
+
+                            getTemplateFrameId(currentExamImages, patientExam.templateId);
+
+                            await importImages_CDR(currentExamImages, patient.id, patientExam.id);
+
+                            List<ExamImageModel> patientExamImages = convertExamImageModels(currentExamImages, patientExam.id);
+
                             examImageRepository.importExamImages(patientExamImages);
                         }
                     }
                 }
                 processedPatients++;
                 progress.Report((processedPatients * 100) / totalPatients);
+            }
+        }
 
-                if (examsNotImported > 0)
+        private List<ExamImageModel> convertExamImageModels(List<ExamImageCDR> examImages, int examId)
+        {
+            return examImages.Select(ei => new ExamImageModel
+            {
+                examId = examId,
+                templateFrameId = ei.templateFrameId,
+                file = ei.file,
+                notes = ei.notes,
+                createdAt = ei.createdAt
+            }).ToList();
+        }
+
+        private List<ExamImageCDR> getUsedImages(string path, List<ExamImageCDR> currentExamImages)
+        {
+            string content = File.ReadAllText(path, Encoding.Default);
+
+            var lines = content.Split('à').Where(p => p.Contains("SCHICK TECHNOLOGIES"));
+
+            List<string> imagesIdentifier = new List<string>();
+
+            foreach (var line in lines)
+            {
+                Match match = Regex.Matches(line, @"\d+(\.\d+)*").Cast<Match>().FirstOrDefault(m => m.Length > 2);
+
+                if (match != null)
                 {
-                    warningMessage = $"\nNão foi possível importar {examsNotImported} exames por exceder o limite de frames suportado.";
+                    imagesIdentifier.Add(match.Value);
                 }
             }
+
+            currentExamImages = examImagesCDR.Where(ei => imagesIdentifier.Contains(ei.uid)).ToList();
+
+            examImagesCDR.RemoveAll(ei => ei.examId == currentExamImages.First().examId);
+
+            return currentExamImages.OrderBy(ei => ei.order).ToList();
+        }
+
+        private int getTemplateId(string path, int imagesCount)
+        {
+            string content = File.ReadAllText(path, Encoding.Default);
+
+            int init = content.IndexOf("Sirona Dental");
+            int final = content.IndexOf("CDR");
+
+            string text = content.Substring(init, final - init);
+
+            string resultClean = Regex.Replace(text, @"[^\x20-\x7E]", "");
+
+            string[] parts = resultClean.Split(new string[] { "LO" }, StringSplitOptions.None);
+
+            ITemplateRepository templateRepository = new TemplateRepository();
+
+            List<TemplateModel> templates = templateRepository.getAllTemplates();
+
+            TemplateModel matchedTemplate = findMatch(parts, templates);
+
+            if (matchedTemplate != null)
+            {
+                return matchedTemplate.id;
+            }
+            else
+            {
+                if (imagesCount < 6)
+                {
+                    return 13;
+                }
+                else if (imagesCount < 16)
+                {
+                    return 14;
+                }
+                else
+                {
+                    return 15;
+                }
+            }
+        }
+
+        static TemplateModel findMatch(string[] inputs, List<TemplateModel> templates)
+        {
+            return templates.OrderByDescending(t => inputs.Max(input => calcSimilarity(input, t.name))).FirstOrDefault(m => inputs.Max(input => calcSimilarity(input, m.name)) > 0.5);
+        }
+
+        static double calcSimilarity(string input, string templateName)
+        {
+            var inputWords = extractWords(input);
+            var templateNameWords = extractWords(templateName);
+
+            int commonWords = templateNameWords.Count(p => inputWords.Contains(p, StringComparer.OrdinalIgnoreCase));
+
+            long inputNumber = extractNumbers(input);
+            long templateNameNumber = extractNumbers(templateName);
+
+            double score = commonWords * 1.5;
+
+            if (inputNumber == templateNameNumber && inputNumber > 0)
+                score += 0.5;
+
+            return score;
+        }
+
+        static IEnumerable<string> extractWords(string texto)
+        {
+            return texto.Split(new[] { ' ', '(', ')' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        static long extractNumbers(string texto)
+        {
+            var match = Regex.Match(texto, @"\d+");
+            return match.Success ? long.Parse(match.Value) : 0;
         }
 
         private async Task importImages_WIM(int patientOldId, int patientId, int examOldId, int examId)
@@ -484,7 +592,7 @@ namespace DMMDigital.Views
             }
         }
 
-        private async Task importImages_CDR(List<ExamImageModel> patientExamImages, int patientId, int examId)
+        private async Task importImages_CDR(List<ExamImageCDR> examImages, int patientId, int examId)
         {
             string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
 
@@ -493,42 +601,28 @@ namespace DMMDigital.Views
                 Directory.CreateDirectory(folderDest);
             }
 
-            int imageCounter = 1;
-
-            foreach (ExamImageModel examImage in patientExamImages)
+            foreach (var examImage in examImages)
             {
                 string originFile = Path.Combine(dataPath, examImage.file + ".jpeg");
 
-                examImage.templateFrameId = imageCounter;
-                examImage.file = $"{imageCounter}_original.png";
+                examImage.file = $"{examImage.order}_original.png";
 
                 string dest = Path.Combine(folderDest, examImage.file);
 
                 await Task.Run(() => File.Copy(originFile, dest, overwrite: true));
-
-                imageCounter++;
             }
         }
 
-        private void getTemplateFrameId(List<ExamImageModel> examImages, int templateId)
+        private void getTemplateFrameId(List<ExamImageCDR> examImages, int templateId)
         {
             ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
             List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(templateId);
 
-            foreach (ExamImageModel examImage in examImages)
+            foreach (var examImage in examImages)
             {
-                examImage.templateFrameId = templateFrames.First(tf => tf.order == examImage.templateFrameId).id;
-            }
-        }
-
-        private void generateMigrationLog(int frames, int examOldId, string file)
-        {
-            using (StreamWriter writer = new StreamWriter("C:/WimDesktopDB/migration/migration_log.txt", append: true))
-            {
-                writer.WriteLine($"ID do exame no CDR: {examOldId}");
-                writer.WriteLine($"Quantidade de frames: {frames}");
-                writer.WriteLine($"Caminho do arquivo: {file}\n\n\n");
+                TemplateFrameModel tfm = templateFrames.First(tf => tf.order == examImage.order);
+                examImage.templateFrameId = tfm.id;
             }
         }
     }

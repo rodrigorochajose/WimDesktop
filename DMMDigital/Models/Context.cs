@@ -7,7 +7,7 @@ namespace DMMDigital.Models
         public Context() : base("Database")
         {
         }
-        public DbSet<ConfigModel> config { get; set; }
+        public DbSet<SettingsModel> settings { get; set; }
         public DbSet<SensorModel> sensor { get; set; }
         public DbSet<RulerLengthModel> rulerLength { get; set; }
         public DbSet<ExamImageDrawingPointsModel> examImageDrawingPoints { get; set; }

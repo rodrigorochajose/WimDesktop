@@ -187,10 +187,10 @@
   <data name="buttonTemplate.Text" xml:space="preserve">
     <value>Template</value>
   </data>
-  <data name="buttonConfig.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="buttonSettings.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt, style=Bold</value>
   </data>
-  <data name="buttonConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="buttonSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAAd0SU1FB+QGFA4cI1+0x3kAAAV0SURBVFhH7ZdrbBRVFMdnH10oRnyQSkJCIhIS
@@ -220,13 +220,13 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="buttonConfig.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+  <data name="buttonSettings.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="buttonConfig.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 36</value>
   </data>
-  <data name="buttonConfig.Text" xml:space="preserve">
+  <data name="buttonSettings.Text" xml:space="preserve">
     <value>Configurações</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
@@ -932,10 +932,10 @@
   <data name="&gt;&gt;buttonTemplate.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonConfig.Name" xml:space="preserve">
-    <value>buttonConfig</value>
+  <data name="&gt;&gt;buttonSettings.Name" xml:space="preserve">
+    <value>buttonSettings</value>
   </data>
-  <data name="&gt;&gt;buttonConfig.Type" xml:space="preserve">
+  <data name="&gt;&gt;buttonSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
