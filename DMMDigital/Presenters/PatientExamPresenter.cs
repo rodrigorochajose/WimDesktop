@@ -76,7 +76,7 @@ namespace DMMDigital.Presenters
 
                 string examPath = settingsRepository.getExamPath();
 
-                Directory.CreateDirectory(Path.Combine(examPath, $"\\{newPatient.id}\\recycle"));
+                Directory.CreateDirectory(Path.Combine(examPath, $"{newPatient.id}\\recycle"));
 
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace DMMDigital.Presenters
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateView, new TemplateRepository(), "patientExamView");
+            new TemplateExamPresenter(templateView, new TemplateRepository(), view.GetType());
         }
     }
 }

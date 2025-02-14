@@ -133,7 +133,7 @@
     <value>NoControl</value>
   </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>729, 17</value>
+    <value>695, 17</value>
   </data>
   <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 30</value>
@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 17</value>
+    <value>10, 17</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 30</value>
@@ -232,7 +232,7 @@
     <value>Template</value>
   </data>
   <data name="columnTemplate.Width" type="System.Int32, mscorlib">
-    <value>197</value>
+    <value>150</value>
   </data>
   <metadata name="columnEditExam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -253,13 +253,13 @@
     <value>75</value>
   </data>
   <data name="dataGridViewExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 100</value>
+    <value>13, 99</value>
   </data>
   <data name="dataGridViewExam.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="dataGridViewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>656, 397</value>
+    <value>609, 397</value>
   </data>
   <data name="dataGridViewExam.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonExportExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 33</value>
+    <value>465, 35</value>
   </data>
   <data name="buttonExportExam.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 42</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 33</value>
+    <value>39, 35</value>
   </data>
   <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 42</value>
@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOpenExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 33</value>
+    <value>257, 35</value>
   </data>
   <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 42</value>
@@ -394,10 +394,10 @@
     <value>3</value>
   </data>
   <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>721, 61</value>
+    <value>699, 61</value>
   </data>
   <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 520</value>
+    <value>643, 520</value>
   </data>
   <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -421,7 +421,7 @@
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="textBoxSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 26</value>
+    <value>289, 26</value>
   </data>
   <data name="textBoxSearchPatient.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -471,9 +471,6 @@
   <data name="columnPatientPhone.HeaderText" xml:space="preserve">
     <value>Telefone</value>
   </data>
-  <data name="columnPatientPhone.Width" type="System.Int32, mscorlib">
-    <value>125</value>
-  </data>
   <data name="columnEditPatient.HeaderText" xml:space="preserve">
     <value>Editar</value>
   </data>
@@ -493,7 +490,7 @@
     <value>Vertical</value>
   </data>
   <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 396</value>
+    <value>641, 396</value>
   </data>
   <data name="dataGridViewPatient.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -526,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>25, 32</value>
+    <value>8, 32</value>
   </data>
   <data name="buttonNewPatient.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -568,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 32</value>
+    <value>605, 32</value>
   </data>
   <data name="buttonSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 42</value>
@@ -595,7 +592,7 @@
     <value>13, 61</value>
   </data>
   <data name="roundedPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>700, 519</value>
+    <value>667, 519</value>
   </data>
   <data name="roundedPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -619,7 +616,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1423, 599</value>
+    <value>1353, 599</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

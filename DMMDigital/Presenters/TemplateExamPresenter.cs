@@ -18,7 +18,7 @@ namespace DMMDigital.Presenters
 
         private string examOpeningMode = "newPage";
 
-        public TemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, string calledFromView)
+        public TemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, Type calledFromView)
         {
             templateExamView = view;
             templateRepository = repository;
@@ -33,23 +33,21 @@ namespace DMMDigital.Presenters
 
             (templateExamView as Form).FormClosed += delegate
             {
-                if (calledFromView != "examView")
+                if (calledFromView != typeof(ExamView))
                 {
                     examOpeningMode = "newContainer";
-                    if (calledFromView == "patientView")
+
+                    foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
                     {
-                        foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+                        if (form.Text.Contains("WIM Desktop"))
                         {
-                            if (form.Text.Contains("WIM Desktop"))
-                            {
-                                form.Show();
-                            }
-                            else
-                            {
-                                form.Close();
-                            }
-                        };
-                    }
+                            form.Show();
+                        }
+                        else
+                        {
+                            form.Close();
+                        }
+                    };
                 }
             };
         }

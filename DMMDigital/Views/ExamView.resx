@@ -660,21 +660,6 @@
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 42</value>
   </data>
-  <data name="buttonImport.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="buttonImport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
-  </data>
-  <data name="buttonImport.Text" xml:space="preserve">
-    <value>buttonImport</value>
-  </data>
-  <data name="buttonImport.ToolTipText" xml:space="preserve">
-    <value>Importar Imagem</value>
-  </data>
   <data name="buttonExport.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -682,13 +667,43 @@
     <value>Magenta</value>
   </data>
   <data name="buttonExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonExport.Text" xml:space="preserve">
     <value>buttonExport</value>
   </data>
   <data name="buttonExport.ToolTipText" xml:space="preserve">
     <value>Exportar Exame</value>
+  </data>
+  <data name="buttonImport.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="buttonImport.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="buttonImport.Text" xml:space="preserve">
+    <value>buttonImport</value>
+  </data>
+  <data name="buttonImport.ToolTipText" xml:space="preserve">
+    <value>Importar Imagem</value>
+  </data>
+  <data name="buttonRecycleBin.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="buttonRecycleBin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonRecycleBin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="buttonRecycleBin.Text" xml:space="preserve">
+    <value>buttonRecycleBin</value>
+  </data>
+  <data name="buttonRecycleBin.ToolTipText" xml:space="preserve">
+    <value>Lixeira</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 42</value>
@@ -703,7 +718,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonDeleteImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonDeleteImage.Text" xml:space="preserve">
     <value>buttonDeleteImage</value>
@@ -721,7 +736,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonCompareFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonCompareFrame.Text" xml:space="preserve">
     <value>buttonCompareFrame</value>
@@ -731,24 +746,6 @@
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 42</value>
-  </data>
-  <data name="buttonSelect.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonSelect.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="buttonSelect.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="buttonSelect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
-  </data>
-  <data name="buttonSelect.Text" xml:space="preserve">
-    <value>buttonSelect</value>
-  </data>
-  <data name="buttonSelect.ToolTipText" xml:space="preserve">
-    <value>Selecionar</value>
   </data>
   <data name="buttonMoveDrawing.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -760,13 +757,31 @@
     <value>Magenta</value>
   </data>
   <data name="buttonMoveDrawing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonMoveDrawing.Text" xml:space="preserve">
     <value>buttonMoveDrawing</value>
   </data>
   <data name="buttonMoveDrawing.ToolTipText" xml:space="preserve">
     <value>Mover</value>
+  </data>
+  <data name="buttonSelect.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonSelect.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="buttonSelect.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="buttonSelect.Text" xml:space="preserve">
+    <value>buttonSelect</value>
+  </data>
+  <data name="buttonSelect.ToolTipText" xml:space="preserve">
+    <value>Selecionar</value>
   </data>
   <data name="buttonMagnifier.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -778,7 +793,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonMagnifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonMagnifier.Text" xml:space="preserve">
     <value>buttonMagnifier</value>
@@ -796,7 +811,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonRuler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonRuler.Text" xml:space="preserve">
     <value>buttonRuler</value>
@@ -814,31 +829,13 @@
     <value>Magenta</value>
   </data>
   <data name="buttonUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonUndo.Text" xml:space="preserve">
     <value>buttonUndo</value>
   </data>
   <data name="buttonUndo.ToolTipText" xml:space="preserve">
     <value>Desfazer</value>
-  </data>
-  <data name="buttonRedo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonRedo.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="buttonRedo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="buttonRedo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
-  </data>
-  <data name="buttonRedo.Text" xml:space="preserve">
-    <value>buttonRedo</value>
-  </data>
-  <data name="buttonRedo.ToolTipText" xml:space="preserve">
-    <value>Refazer</value>
   </data>
   <data name="buttonFilter.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -850,13 +847,31 @@
     <value>Magenta</value>
   </data>
   <data name="buttonFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonFilter.Text" xml:space="preserve">
     <value>buttonFilter</value>
   </data>
   <data name="buttonFilter.ToolTipText" xml:space="preserve">
     <value>Filtro</value>
+  </data>
+  <data name="buttonRedo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonRedo.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="buttonRedo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonRedo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="buttonRedo.Text" xml:space="preserve">
+    <value>buttonRedo</value>
+  </data>
+  <data name="buttonRedo.ToolTipText" xml:space="preserve">
+    <value>Refazer</value>
   </data>
   <data name="buttonFreeDraw.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -868,7 +883,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonFreeDraw.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonFreeDraw.Text" xml:space="preserve">
     <value>buttonFreeDraw</value>
@@ -886,7 +901,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonText.Text" xml:space="preserve">
     <value>buttonText</value>
@@ -904,7 +919,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonArrow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonArrow.Text" xml:space="preserve">
     <value>buttonArrow</value>
@@ -922,7 +937,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonRectangle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonRectangle.Text" xml:space="preserve">
     <value>buttonRectangle</value>
@@ -940,7 +955,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonEllipse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonEllipse.Text" xml:space="preserve">
     <value>buttonEllipse</value>
@@ -958,7 +973,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonRotateLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonRotateLeft.Text" xml:space="preserve">
     <value>buttonRotateLeft</value>
@@ -976,7 +991,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonRotateRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonRotateRight.Text" xml:space="preserve">
     <value>buttonRotateRight</value>
@@ -994,7 +1009,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonRestoreImage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 40</value>
+    <value>46, 40</value>
   </data>
   <data name="buttonRestoreImage.Text" xml:space="preserve">
     <value>buttonRestoreImage</value>
@@ -1060,7 +1075,7 @@
     <value>Magenta</value>
   </data>
   <data name="buttonZoomIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 39</value>
+    <value>23, 40</value>
   </data>
   <data name="buttonZoomIn.Text" xml:space="preserve">
     <value>Aumentar Zoom</value>
@@ -1891,6 +1906,12 @@
     <value>buttonExport</value>
   </data>
   <data name="&gt;&gt;buttonExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRecycleBin.Name" xml:space="preserve">
+    <value>buttonRecycleBin</value>
+  </data>
+  <data name="&gt;&gt;buttonRecycleBin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">

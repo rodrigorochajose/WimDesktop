@@ -2,7 +2,6 @@
 using DMMDigital.Interface.IView;
 using DMMDigital.Presenters;
 using DMMDigital.Views;
-using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
 using System.Data.Common;
@@ -20,30 +19,28 @@ namespace DMMDigital
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
-            //SettingsRepository settingsRepository = new SettingsRepository();
+            SettingsRepository settingsRepository = new SettingsRepository();
 
-            //string culture = "";
+            string culture = "";
 
-            //try
-            //{
-            //    culture = settingsRepository.getLanguage();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.StackTrace);
-            //}
+            try
+            {
+                culture = settingsRepository.getLanguage();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace);
+            }
 
-            //Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
-            //Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
 
-            //IMenuView view = new MenuView();
-            //new MenuPresenter(view);
-            //Application.Run((Form)view);
-
-            Application.Run(new Form1());
+            IMenuView view = new MenuView();
+            new MenuPresenter(view);
+            Application.Run((Form)view);
         }
 
         static void configDatabase()

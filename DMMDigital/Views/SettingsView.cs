@@ -11,6 +11,7 @@ using System.Threading;
 using System.ComponentModel;
 using DMMDigital.Components.Rounded;
 using DMMDigital.Properties;
+using System.IO;
 
 namespace DMMDigital.Views
 {
@@ -254,6 +255,40 @@ namespace DMMDigital.Views
         {
             twain.SelectSource();
             textBoxTwainSource.Text = twain.DefaultSourceName;
+        }
+
+        private void buttonEmptyAllRecycleBinClick(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show(Resources.messageConfirmEmptyAllRecycleBin, Resources.titleEmptyRecycleBin, MessageBoxButtons.YesNo);
+
+            if (res.Equals(DialogResult.No))
+            {
+                return;
+            }
+
+            string[] patientDirectories = Directory.GetDirectories(examPath);
+
+            foreach (string patientDirectory in patientDirectories)
+            {
+                string[] examsDirectories = Directory.GetDirectories(patientDirectory);
+
+                foreach(string examDirectory in examsDirectories)
+                {
+                    string recyclePath = Path.Combine(examDirectory, "recycle");
+
+                    if (Directory.Exists(recyclePath))
+                    {
+                        string[] imagesInRecycleBin = Directory.GetFiles(recyclePath);
+
+                        foreach(string file in imagesInRecycleBin)
+                        {
+                            File.Delete(file);
+                        }
+                    }
+                }
+            }
+
+            MessageBox.Show(Resources.messageEmptyAllRecycleBinSuccess);
         }
     }
 }

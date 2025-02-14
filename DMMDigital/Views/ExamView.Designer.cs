@@ -60,6 +60,7 @@ namespace DMMDigital.Views
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonExport = new System.Windows.Forms.ToolStripButton();
+            this.buttonRecycleBin = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.buttonCompareFrame = new System.Windows.Forms.ToolStripButton();
@@ -222,19 +223,20 @@ namespace DMMDigital.Views
             this.buttonAcquireMode,
             this.buttonAutoTake,
             this.toolStripSeparator2,
-            this.buttonImport,
             this.buttonExport,
+            this.buttonImport,
+            this.buttonRecycleBin,
             this.toolStripSeparator3,
             this.buttonDeleteImage,
             this.buttonCompareFrame,
             this.toolStripSeparator4,
-            this.buttonSelect,
             this.buttonMoveDrawing,
+            this.buttonSelect,
             this.buttonMagnifier,
             this.buttonRuler,
             this.buttonUndo,
-            this.buttonRedo,
             this.buttonFilter,
+            this.buttonRedo,
             this.buttonFreeDraw,
             this.buttonText,
             this.buttonArrow,
@@ -289,7 +291,7 @@ namespace DMMDigital.Views
             this.buttonAcquireMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonAcquireMode.Image = global::DMMDigital.Properties.Resources.icon_32x32_capture;
             resources.ApplyResources(this.buttonAcquireMode, "buttonAcquireMode");
-            this.buttonAcquireMode.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.buttonAcquireMode.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonAcquireMode.Name = "buttonAcquireMode";
             this.buttonAcquireMode.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonAcquireMode.Click += new System.EventHandler(this.buttonAcquireModeClick);
@@ -299,7 +301,7 @@ namespace DMMDigital.Views
             this.buttonAutoTake.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonAutoTake.Image = global::DMMDigital.Properties.Resources.icon_32x32_autotake;
             resources.ApplyResources(this.buttonAutoTake, "buttonAutoTake");
-            this.buttonAutoTake.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.buttonAutoTake.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonAutoTake.Name = "buttonAutoTake";
             this.buttonAutoTake.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.buttonAutoTake.Click += new System.EventHandler(this.buttonAutoTakeClick);
@@ -316,7 +318,7 @@ namespace DMMDigital.Views
             resources.ApplyResources(this.buttonImport, "buttonImport");
             this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonImport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
             // 
             // buttonExport
@@ -326,9 +328,20 @@ namespace DMMDigital.Views
             resources.ApplyResources(this.buttonExport, "buttonExport");
             this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonExport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonExport.Tag = "";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
+            // 
+            // buttonRecycleBin
+            // 
+            this.buttonRecycleBin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRecycleBin.Image = global::DMMDigital.Properties.Resources.icon_32x32_recyclebin;
+            resources.ApplyResources(this.buttonRecycleBin, "buttonRecycleBin");
+            this.buttonRecycleBin.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRecycleBin.Name = "buttonRecycleBin";
+            this.buttonRecycleBin.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonRecycleBin.Tag = "";
+            this.buttonRecycleBin.Click += new System.EventHandler(this.buttonRecycleBinClick);
             // 
             // toolStripSeparator3
             // 
@@ -342,7 +355,7 @@ namespace DMMDigital.Views
             this.buttonDeleteImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_delete;
             this.buttonDeleteImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonDeleteImage.Name = "buttonDeleteImage";
-            this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonDeleteImage.Tag = "stateChangeable";
             this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteClick);
             // 
@@ -353,7 +366,7 @@ namespace DMMDigital.Views
             this.buttonCompareFrame.Image = global::DMMDigital.Properties.Resources.icon_32x32_compare;
             this.buttonCompareFrame.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonCompareFrame.Name = "buttonCompareFrame";
-            this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonCompareFrame.Tag = "stateChangeable";
             this.buttonCompareFrame.Click += new System.EventHandler(this.buttonCompareFrameClick);
             // 
@@ -369,7 +382,7 @@ namespace DMMDigital.Views
             this.buttonSelect.Image = global::DMMDigital.Properties.Resources.icon_32x32_cursor;
             this.buttonSelect.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonSelect.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonSelect.Tag = "stateChangeable";
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
             // 
@@ -380,7 +393,7 @@ namespace DMMDigital.Views
             this.buttonMoveDrawing.Image = global::DMMDigital.Properties.Resources.icon_32x32_move;
             this.buttonMoveDrawing.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonMoveDrawing.Name = "buttonMoveDrawing";
-            this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonMoveDrawing.Tag = "stateChangeable";
             this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
             // 
@@ -391,7 +404,7 @@ namespace DMMDigital.Views
             this.buttonMagnifier.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
             this.buttonMagnifier.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonMagnifier.Name = "buttonMagnifier";
-            this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonMagnifier.Tag = "stateChangeable";
             this.buttonMagnifier.Click += new System.EventHandler(this.buttonMagnifierClick);
             // 
@@ -402,7 +415,7 @@ namespace DMMDigital.Views
             this.buttonRuler.Image = global::DMMDigital.Properties.Resources.icon_32x32_ruler;
             this.buttonRuler.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRuler.Name = "buttonRuler";
-            this.buttonRuler.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRuler.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRuler.Tag = "stateChangeable";
             this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
             // 
@@ -413,7 +426,7 @@ namespace DMMDigital.Views
             this.buttonUndo.Image = global::DMMDigital.Properties.Resources.icon_32x32_undo;
             this.buttonUndo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonUndo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonUndo.Tag = "stateChangeable";
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
@@ -424,7 +437,7 @@ namespace DMMDigital.Views
             this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
             this.buttonRedo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRedo.Name = "buttonRedo";
-            this.buttonRedo.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRedo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRedo.Tag = "stateChangeable";
             this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
             // 
@@ -435,7 +448,7 @@ namespace DMMDigital.Views
             this.buttonFilter.Image = global::DMMDigital.Properties.Resources.icon_32x32_exposure;
             this.buttonFilter.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonFilter.Name = "buttonFilter";
-            this.buttonFilter.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonFilter.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFilter.Tag = "stateChangeable";
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
             // 
@@ -446,7 +459,7 @@ namespace DMMDigital.Views
             this.buttonFreeDraw.Image = global::DMMDigital.Properties.Resources.icon_32x32_pencil;
             this.buttonFreeDraw.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonFreeDraw.Name = "buttonFreeDraw";
-            this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFreeDraw.Tag = "stateChangeable";
             this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
             // 
@@ -457,7 +470,7 @@ namespace DMMDigital.Views
             this.buttonText.Image = global::DMMDigital.Properties.Resources.icon_32x32_text;
             this.buttonText.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonText.Name = "buttonText";
-            this.buttonText.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonText.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonText.Tag = "stateChangeable";
             this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
             // 
@@ -468,7 +481,7 @@ namespace DMMDigital.Views
             this.buttonArrow.Image = global::DMMDigital.Properties.Resources.icon_32x32_arrow;
             this.buttonArrow.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonArrow.Name = "buttonArrow";
-            this.buttonArrow.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonArrow.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonArrow.Tag = "stateChangeable";
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
             // 
@@ -479,7 +492,7 @@ namespace DMMDigital.Views
             this.buttonRectangle.Image = global::DMMDigital.Properties.Resources.icon_32x32_rectangle;
             this.buttonRectangle.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRectangle.Name = "buttonRectangle";
-            this.buttonRectangle.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRectangle.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRectangle.Tag = "stateChangeable";
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
             // 
@@ -490,7 +503,7 @@ namespace DMMDigital.Views
             this.buttonEllipse.Image = global::DMMDigital.Properties.Resources.icon_32x32_circle;
             this.buttonEllipse.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonEllipse.Name = "buttonEllipse";
-            this.buttonEllipse.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonEllipse.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonEllipse.Tag = "stateChangeable";
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
             // 
@@ -501,7 +514,7 @@ namespace DMMDigital.Views
             this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
             this.buttonRotateLeft.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRotateLeft.Name = "buttonRotateLeft";
-            this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRotateLeft.Tag = "stateChangeable";
             this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
@@ -512,7 +525,7 @@ namespace DMMDigital.Views
             this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
             this.buttonRotateRight.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRotateRight.Name = "buttonRotateRight";
-            this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRotateRight.Tag = "stateChangeable";
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
@@ -523,7 +536,7 @@ namespace DMMDigital.Views
             this.buttonRestoreImage.Image = global::DMMDigital.Properties.Resources.icon_32x32_reset;
             this.buttonRestoreImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRestoreImage.Name = "buttonRestoreImage";
-            this.buttonRestoreImage.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonRestoreImage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRestoreImage.Tag = "stateChangeable";
             this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
             // 
@@ -546,7 +559,7 @@ namespace DMMDigital.Views
             this.buttonZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.buttonZoomOut, "buttonZoomOut");
             this.buttonZoomOut.Image = global::DMMDigital.Properties.Resources.icon_16x16_zoom_out;
-            this.buttonZoomOut.Margin = new System.Windows.Forms.Padding(13, 0, 3, 2);
+            this.buttonZoomOut.Margin = new System.Windows.Forms.Padding(10, 0, 3, 2);
             this.buttonZoomOut.Name = "buttonZoomOut";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOutClick);
             // 
@@ -564,7 +577,7 @@ namespace DMMDigital.Views
             this.buttonZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(this.buttonZoomIn, "buttonZoomIn");
             this.buttonZoomIn.Image = global::DMMDigital.Properties.Resources.icon_16x16_zoom_in;
-            this.buttonZoomIn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.buttonZoomIn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.buttonZoomIn.Name = "buttonZoomIn";
             this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomInClick);
             // 
@@ -687,5 +700,6 @@ namespace DMMDigital.Views
         private ToolStripSeparator toolStripSeparator5;
         private Timer timerSensorStatus;
         private ToolStripButton buttonAutoTake;
+        private ToolStripButton buttonRecycleBin;
     }
 }

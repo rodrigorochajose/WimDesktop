@@ -166,7 +166,7 @@ namespace DMMDigital.Presenters
 
                 string examPath = settingsRepository.getExamPath();
 
-                Directory.CreateDirectory(Path.Combine(examPath, $"\\{selectedPatient.id}\\recycle"));
+                Directory.CreateDirectory(Path.Combine(examPath, $"{selectedPatient.id}\\recycle"));
             } 
             catch (Exception ex)
             {
@@ -202,7 +202,7 @@ namespace DMMDigital.Presenters
                 form.Hide();
             }
 
-            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "patientView");
+            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), view.GetType());
         }
 
         private void getExamByPatient(object sender, EventArgs e)
@@ -274,7 +274,7 @@ namespace DMMDigital.Presenters
 
             foreach (TemplateFrameModel frame in templateFrames)
             {
-                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.templateFrameId == frame.order);
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.templateFrameId == frame.id);
 
                 if (selectedExamImage != null)
                 {

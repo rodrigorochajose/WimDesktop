@@ -85,6 +85,8 @@ namespace DMMDigital.Views
         Size mainPictureBoxOriginalSize = new Size();
         Size mainPictureBoxPreviousSize = new Size();
 
+        string recyclePath;
+
         private readonly List<string> acquireModes = new List<string>
         {
            Resources.nativeAquireMode, "TWAIN"
@@ -111,6 +113,7 @@ namespace DMMDigital.Views
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
                 DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\{patient.id}\\{examId}");
                 examPath = di.FullName;
+                recyclePath = Path.Combine(examPath, "recycle");
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
@@ -129,6 +132,8 @@ namespace DMMDigital.Views
 
             this.examId = examId;
             this.patient = patient;
+
+            recyclePath = Path.Combine(examPath, $"{patient.id}\\recycle");
 
             Load += delegate
             {
@@ -1073,7 +1078,7 @@ namespace DMMDigital.Views
             chooseTemplateView.patientRecommendation = patient.recommendation;
             chooseTemplateView.patientObservation = patient.observation;
 
-            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), "examView");
+            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), this.GetType());
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)
@@ -1155,6 +1160,38 @@ namespace DMMDigital.Views
             );
         }
 
+        private void buttonRecycleBinClick(object sender, EventArgs e)
+        {
+            Form recycleBinView = new RecycleBinView(recyclePath);
+            recycleBinView.ShowDialog();
+
+            Image img = (recycleBinView as IRecycleBinView).imageToRestore;
+
+            if (img != null)
+            {
+                if (frames[indexFrame].originalImage != null)
+                {
+                    if (dialogOverwriteCurrentImage() == false)
+                    {
+                        return;
+                    }
+                    restoreFrameDrawings();
+                }
+
+                selectTool(buttonSelect);
+
+                frameHandler(img);
+
+                mainPictureBox.Image = img;
+                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
+                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+                resizeMainPictureBox();
+
+                provideTools(true);
+                examHasChanges = true;
+            }
+        }
+
         private void buttonDeleteClick(object sender, EventArgs e)
         {
             if (selectedFrame.originalImage != null)
@@ -1164,14 +1201,18 @@ namespace DMMDigital.Views
 
                 selectTool(buttonSelect);
 
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+                string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
+                string filteredImagePath = originalImagePath.Replace("original", "filtered");
+                string editedImagePath = originalImagePath.Replace("original", "edited");
 
-                string editedImagePath = Path.Combine(examPath, $"{selectedFrame.order}_edited.png");
+                string originalFileDestName = $"{selectedFrame.order}_original-{DateTime.Now:ddMMyyyyHHmss}.png";
+
+                File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
+                File.Move(filteredImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "filtered")));
 
                 if (File.Exists(editedImagePath))
                 {
-                    File.Delete(editedImagePath);
+                    File.Move(editedImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "edited")));
                 }
 
                 frameDrawingHistories[indexFrame].drawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
@@ -1443,7 +1484,10 @@ namespace DMMDigital.Views
                     selectedFrame.Refresh();
                 }));
 
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+                File.Move(
+                    Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"),
+                    Path.Combine(recyclePath, $"{selectedFrame.order}_filtered-{DateTime.Now:dd-MM-yyyy-HH-m-ss}.png")
+                    );
 
                 restoreFrameDrawings();
                 examHasChanges = true;
@@ -1456,7 +1500,11 @@ namespace DMMDigital.Views
         {
             if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
             {
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
+                File.Move(
+                    Path.Combine(examPath, $"{selectedFrame.order}_edited.png"),
+                    Path.Combine(recyclePath, $"{selectedFrame.order}_edited-{DateTime.Now:dd-MM-yyyy-HH-m-ss}.png")
+                    );
+
                 selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                 frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());

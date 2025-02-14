@@ -362,6 +362,16 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_recyclebin {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_recyclebin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_red {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_red", resourceCulture);
@@ -607,6 +617,24 @@ namespace DMMDigital.Properties {
         internal static string messageConfirmDelete {
             get {
                 return ResourceManager.GetString("messageConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Deseja realmente esvaziar todas as lixeiras?.
+        /// </summary>
+        internal static string messageConfirmEmptyAllRecycleBin {
+            get {
+                return ResourceManager.GetString("messageConfirmEmptyAllRecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Todas as Lixeiras foram esvaziadas com sucesso !.
+        /// </summary>
+        internal static string messageEmptyAllRecycleBinSuccess {
+            get {
+                return ResourceManager.GetString("messageEmptyAllRecycleBinSuccess", resourceCulture);
             }
         }
         
@@ -1066,6 +1094,15 @@ namespace DMMDigital.Properties {
         internal static string titleEditPatient {
             get {
                 return ResourceManager.GetString("titleEditPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Esvaziar Lixeira.
+        /// </summary>
+        internal static string titleEmptyRecycleBin {
+            get {
+                return ResourceManager.GetString("titleEmptyRecycleBin", resourceCulture);
             }
         }
         
