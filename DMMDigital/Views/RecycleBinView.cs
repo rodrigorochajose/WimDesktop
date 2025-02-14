@@ -37,6 +37,7 @@ namespace DMMDigital.Views
                 else if (e.KeyChar == (char)Keys.Escape)
                 {
                     Close();
+                    DialogResult = DialogResult.Cancel;
                 }
             };
 
@@ -132,6 +133,7 @@ namespace DMMDigital.Views
             imageToRestore = pb.Image;
 
             Close();
+            DialogResult = DialogResult.OK;
         }
     }
 }

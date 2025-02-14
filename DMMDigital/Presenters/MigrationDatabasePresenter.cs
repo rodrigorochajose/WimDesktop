@@ -15,6 +15,7 @@ using System.Text;
 using System.Windows;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
@@ -40,6 +41,8 @@ namespace DMMDigital.Presenters
             view.eventImportExamImages += importExamImages;
             view.eventImportSettings += importSettings;
             view.eventGetDataToImport += getData;
+
+            (view as Form).ShowDialog();
         }
 
         private void getData(object sender, EventArgs e)
@@ -68,7 +71,7 @@ namespace DMMDigital.Presenters
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"{Resources.messageErrorConnectingDatabase} \n {ex.Message}");
+                    System.Windows.MessageBox.Show($"{Resources.messageErrorConnectingDatabase} \n {ex.Message}");
                 }
             }
         }
@@ -185,7 +188,7 @@ namespace DMMDigital.Presenters
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    System.Windows.MessageBox.Show(ex.Message);
                 }
             }
 

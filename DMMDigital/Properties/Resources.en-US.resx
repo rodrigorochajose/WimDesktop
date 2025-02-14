@@ -467,4 +467,7 @@
   <data name="messageEmptyAllRecycleBinSuccess" xml:space="preserve">
     <value>All bins have been successfully emptied !</value>
   </data>
+  <data name="messageBinAlreadyEmpty" xml:space="preserve">
+    <value>The Recycle Bin is already empty</value>
+  </data>
 </root>

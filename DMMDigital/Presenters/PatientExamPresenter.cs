@@ -75,9 +75,6 @@ namespace DMMDigital.Presenters
                 (sender as PatientManagerView).Close();
 
                 string examPath = settingsRepository.getExamPath();
-
-                Directory.CreateDirectory(Path.Combine(examPath, $"{newPatient.id}\\recycle"));
-
             }
             catch (Exception ex)
             {

@@ -594,6 +594,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A lixeira já está vazia.
+        /// </summary>
+        internal static string messageBinAlreadyEmpty {
+            get {
+                return ResourceManager.GetString("messageBinAlreadyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Selecione mais de uma imagem para comparação..
         /// </summary>
         internal static string messageComparisonSelection {

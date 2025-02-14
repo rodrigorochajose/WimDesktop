@@ -58,20 +58,20 @@ namespace DMMDigital.Views
             this.buttonAcquireMode = new System.Windows.Forms.ToolStripButton();
             this.buttonAutoTake = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonExport = new System.Windows.Forms.ToolStripButton();
+            this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonRecycleBin = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.buttonCompareFrame = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonSelect = new System.Windows.Forms.ToolStripButton();
             this.buttonMoveDrawing = new System.Windows.Forms.ToolStripButton();
+            this.buttonSelect = new System.Windows.Forms.ToolStripButton();
             this.buttonMagnifier = new System.Windows.Forms.ToolStripButton();
             this.buttonRuler = new System.Windows.Forms.ToolStripButton();
             this.buttonUndo = new System.Windows.Forms.ToolStripButton();
-            this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonFreeDraw = new System.Windows.Forms.ToolStripButton();
             this.buttonText = new System.Windows.Forms.ToolStripButton();
             this.buttonArrow = new System.Windows.Forms.ToolStripButton();
@@ -223,9 +223,9 @@ namespace DMMDigital.Views
             this.buttonAcquireMode,
             this.buttonAutoTake,
             this.toolStripSeparator2,
-            this.buttonExport,
             this.buttonImport,
             this.buttonRecycleBin,
+            this.buttonExport,
             this.toolStripSeparator3,
             this.buttonDeleteImage,
             this.buttonCompareFrame,
@@ -311,16 +311,6 @@ namespace DMMDigital.Views
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
-            // buttonImport
-            // 
-            this.buttonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
-            resources.ApplyResources(this.buttonImport, "buttonImport");
-            this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
-            // 
             // buttonExport
             // 
             this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -331,6 +321,16 @@ namespace DMMDigital.Views
             this.buttonExport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonExport.Tag = "";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonImport.Image = global::DMMDigital.Properties.Resources.icon_32x32_import;
+            resources.ApplyResources(this.buttonImport, "buttonImport");
+            this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
             // 
             // buttonRecycleBin
             // 
@@ -375,17 +375,6 @@ namespace DMMDigital.Views
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
-            // buttonSelect
-            // 
-            this.buttonSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.buttonSelect, "buttonSelect");
-            this.buttonSelect.Image = global::DMMDigital.Properties.Resources.icon_32x32_cursor;
-            this.buttonSelect.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonSelect.Tag = "stateChangeable";
-            this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
-            // 
             // buttonMoveDrawing
             // 
             this.buttonMoveDrawing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -396,6 +385,17 @@ namespace DMMDigital.Views
             this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonMoveDrawing.Tag = "stateChangeable";
             this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.buttonSelect, "buttonSelect");
+            this.buttonSelect.Image = global::DMMDigital.Properties.Resources.icon_32x32_cursor;
+            this.buttonSelect.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonSelect.Tag = "stateChangeable";
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
             // 
             // buttonMagnifier
             // 
@@ -430,17 +430,6 @@ namespace DMMDigital.Views
             this.buttonUndo.Tag = "stateChangeable";
             this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
-            // buttonRedo
-            // 
-            this.buttonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.buttonRedo, "buttonRedo");
-            this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
-            this.buttonRedo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonRedo.Name = "buttonRedo";
-            this.buttonRedo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRedo.Tag = "stateChangeable";
-            this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
-            // 
             // buttonFilter
             // 
             this.buttonFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -451,6 +440,17 @@ namespace DMMDigital.Views
             this.buttonFilter.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonFilter.Tag = "stateChangeable";
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
+            // 
+            // buttonRedo
+            // 
+            this.buttonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.buttonRedo, "buttonRedo");
+            this.buttonRedo.Image = global::DMMDigital.Properties.Resources.icon_32x32_redo;
+            this.buttonRedo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonRedo.Name = "buttonRedo";
+            this.buttonRedo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonRedo.Tag = "stateChangeable";
+            this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
             // 
             // buttonFreeDraw
             // 

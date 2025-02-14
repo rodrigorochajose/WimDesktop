@@ -114,6 +114,7 @@ namespace DMMDigital.Views
                 DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\{patient.id}\\{examId}");
                 examPath = di.FullName;
                 recyclePath = Path.Combine(examPath, "recycle");
+                Directory.CreateDirectory(recyclePath);
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
@@ -133,7 +134,8 @@ namespace DMMDigital.Views
             this.examId = examId;
             this.patient = patient;
 
-            recyclePath = Path.Combine(examPath, $"{patient.id}\\recycle");
+            recyclePath = Path.Combine(examPath, $"{patient.id}\\{examId}\\recycle");
+            Directory.CreateDirectory(recyclePath);
 
             Load += delegate
             {
@@ -649,7 +651,7 @@ namespace DMMDigital.Views
 
         private void provideTools(bool state)
         {
-            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(4);
+            IEnumerable<ToolStripButton> tools = toolStrip.Items.OfType<ToolStripButton>().Skip(5);
 
             Invoke((MethodInvoker)(() => tools.ForEach(i => i.Enabled = state)));
         }
@@ -1093,47 +1095,13 @@ namespace DMMDigital.Views
 
         private void buttonImportClick(object sender, EventArgs e)
         {
-            if (frames[indexFrame].originalImage != null)
-            {
-                if (dialogOverwriteCurrentImage() == false)
-                {
-                    return;
-                }
-                restoreFrameDrawings();
-            }
-
-            selectTool(buttonSelect);
+            checkOverwriteImage();
 
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-                Bitmap img = new Bitmap(selectedImage);
-
-                switch (selectedFrame.orientation)
-                {
-                    case 1:
-                        img.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                        break;
-
-                    case 2:
-                        img.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                        break;
-
-                    case 3:
-                        img.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                        break;
-                }
-
-                frameHandler(img);
-
-                mainPictureBox.Image = img;
-                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
-                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
-                resizeMainPictureBox();
-
-                provideTools(true);
-                examHasChanges = true;
+                importImage(new Bitmap(selectedImage));
             }
         }
 
@@ -1162,34 +1130,65 @@ namespace DMMDigital.Views
 
         private void buttonRecycleBinClick(object sender, EventArgs e)
         {
-            Form recycleBinView = new RecycleBinView(recyclePath);
-            recycleBinView.ShowDialog();
-
-            Image img = (recycleBinView as IRecycleBinView).imageToRestore;
-
-            if (img != null)
+            if (!Directory.GetFiles(recyclePath).Any())
             {
-                if (frames[indexFrame].originalImage != null)
-                {
-                    if (dialogOverwriteCurrentImage() == false)
-                    {
-                        return;
-                    }
-                    restoreFrameDrawings();
-                }
-
-                selectTool(buttonSelect);
-
-                frameHandler(img);
-
-                mainPictureBox.Image = img;
-                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
-                img.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
-                resizeMainPictureBox();
-
-                provideTools(true);
-                examHasChanges = true;
+                MessageBox.Show(Resources.messageBinAlreadyEmpty);
             }
+
+            checkOverwriteImage();
+
+            Form recycleBinView = new RecycleBinView(recyclePath);
+            DialogResult result = recycleBinView.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Image image = (recycleBinView as IRecycleBinView).imageToRestore;
+                importImage(new Bitmap(image));
+            }
+        }
+
+        private void checkOverwriteImage()
+        {
+            if (frames[indexFrame].originalImage != null)
+            {
+                if (dialogOverwriteCurrentImage() == false)
+                {
+                    return;
+                }
+                restoreFrameDrawings();
+            }
+
+            selectTool(buttonSelect);
+        }
+
+        private void importImage(Bitmap img)
+        {
+            selectFrame();
+
+            if (img.Width > img.Height)
+            {
+                if (selectedFrame.orientation < 2)
+                {
+                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                }
+            }
+            else
+            {
+                if (selectedFrame.orientation > 1)
+                {
+                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                }
+            }
+
+            frameHandler(img);
+
+            mainPictureBox.Image = img;
+            img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
+            img.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+            resizeMainPictureBox();
+
+            provideTools(true);
+            examHasChanges = true;
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
@@ -1208,7 +1207,11 @@ namespace DMMDigital.Views
                 string originalFileDestName = $"{selectedFrame.order}_original-{DateTime.Now:ddMMyyyyHHmss}.png";
 
                 File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
-                File.Move(filteredImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "filtered")));
+
+                if (File.Exists(filteredImagePath)) 
+                {
+                     File.Move(filteredImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "filtered")));
+                }
 
                 if (File.Exists(editedImagePath))
                 {

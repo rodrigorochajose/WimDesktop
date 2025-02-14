@@ -77,22 +77,13 @@ namespace DMMDigital.Presenters
                 {
                     examContainerView.selectedExamView.selectFrame();
 
-                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png"), FileMode.Create, FileAccess.Write))
-                    {
-                        using (Bitmap bitmap = new Bitmap(e.Image))
-                        {
-                            rotateImage(bitmap);
-                            bitmap.Save(fileStream, ImageFormat.Png);
-                        }
-                    }
+                    string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
 
-                    using (FileStream fileStream = new FileStream(Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_filtered.png"), FileMode.Create, FileAccess.Write))
+                    using (Bitmap bitmap = new Bitmap(e.Image))
                     {
-                        using (Bitmap bitmap = new Bitmap(e.Image))
-                        {
-                            rotateImage(bitmap);
-                            bitmap.Save(fileStream, ImageFormat.Png);
-                        }
+                        rotateImage(bitmap);
+                        bitmap.Save(originalImagePath, ImageFormat.Png);
+                        bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
                     }
 
                     examContainerView.selectedExamView.loadImageOnMainPictureBox();
@@ -444,7 +435,7 @@ namespace DMMDigital.Presenters
             {
                 Bitmap pic = new Bitmap(widht, height, System.Drawing.Imaging.PixelFormat.Format16bppGrayScale);
 
-                System.Drawing.Rectangle dimension = new System.Drawing.Rectangle(0, 0, pic.Width, pic.Height);
+                Rectangle dimension = new Rectangle(0, 0, pic.Width, pic.Height);
                 BitmapData picData = pic.LockBits(dimension, ImageLockMode.ReadWrite, pic.PixelFormat);
 
                 IntPtr pixelStartAddress = picData.Scan0;
@@ -486,7 +477,7 @@ namespace DMMDigital.Presenters
 
         private void saveBmp(Bitmap bmp)
         {
-            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, bmp.Width, bmp.Height);
+            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
 
             BitmapData bitmapData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);
 
@@ -540,105 +531,5 @@ namespace DMMDigital.Presenters
 
             return pixelFormats;
         }
-
-        private void saveImg(IRayImage image)
-        {
-            var nWidth = image.nWidth;
-            var nHeight = image.nHeight;
-            var nBytesPerPixel = image.nBytesPerPixel;
-            var nImgSize = nWidth * nHeight * nBytesPerPixel;
-            byte[] ImgData = null;
-
-            if ((0 != nImgSize) && (IntPtr.Zero != image.pData))
-            {
-                ImgData = new byte[nImgSize];
-
-                Marshal.Copy(image.pData, ImgData, 0, nImgSize);
-            }
-
-            if (image.propList.nItemCount > 0)
-            {
-                IRayVariantMapItem[] Params = new IRayVariantMapItem[image.propList.nItemCount];
-
-                SdkParamConvertor<IRayVariantMapItem>.IntPtrToStructArray(image.propList.pItems, ref Params);
-            }
-
-            string rawPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-raw.raw");
-            string pngPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-png.png");
-            string tiffPath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}-tiff.tiff");
-
-            saveImageToFile(rawPath, ImgData);
-            //saveImageAsPng(pngPath, ImgData, nWidth, nHeight, nBytesPerPixel);
-            //saveImageAsTiff(tiffPath, ImgData, nWidth, nHeight, nBytesPerPixel);
-        }
-
-        private void saveImageToFile(string path, byte[] data)
-        {
-            if (null == data || null == path)
-                return;
-
-            FileStream fileStream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.Read);
-            fileStream.Write(data, 0, data.Length);
-            fileStream.Close();
-            return;
-        }
-
-        //private void saveImageAsPng(string path, byte[] data, int width, int height, int bytesPerPixel)
-        //{
-        //    if (data == null || path == null)
-        //    {
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        using (Image<L16> image = new Image<L16>(width, height))
-        //        {
-        //            for (int y = 0; y < height; y++)
-        //            {
-        //                for (int x = 0; x < width; x++)
-        //                {
-        //                    int index = (y * width + x) * bytesPerPixel;
-        //                    ushort pixelValue = BitConverter.ToUInt16(data, index);
-
-        //                    double gamma = 2.2; // Valor padrão para gamma correction
-        //                    double adjustedValue = Math.Pow(pixelValue / 65535.0, 1.0 / gamma) * 65535.0;
-        //                    ushort invertedPixelValue = (ushort)(65535 - adjustedValue);
-
-        //                    image[x, y] = new L16(invertedPixelValue);
-        //                }
-        //            }
-
-        //            image.Save(path, new PngEncoder());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Failed to save image as PNG: {ex.Message}");
-        //    }
-        //}
-
-        //private void saveImageAsTiff(string path, byte[] data, int width, int height, int bytesPerPixel)
-        //{
-        //    if (data == null || path == null || width <= 0 || height <= 0 || bytesPerPixel != 2)
-        //    {
-        //        throw new ArgumentException("Invalid argument.");
-        //    }
-
-        //    using (Image<L16> image = new Image<L16>(width, height))
-        //    {
-        //        for (int y = 0; y < height; y++)
-        //        {
-        //            for (int x = 0; x < width; x++)
-        //            {
-        //                int index = (y * width + x) * bytesPerPixel;
-        //                ushort pixelValue = BitConverter.ToUInt16(data, index);
-
-        //                image[x, y] = new L16(pixelValue);
-        //            }
-        //        }
-        //        image.Save(path, new TiffEncoder());
-        //    }
-        //}
     }
 }

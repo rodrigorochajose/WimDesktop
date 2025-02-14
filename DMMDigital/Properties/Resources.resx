@@ -482,4 +482,7 @@
   <data name="messageEmptyAllRecycleBinSuccess" xml:space="preserve">
     <value>Todas as Lixeiras foram esvaziadas com sucesso !</value>
   </data>
+  <data name="messageBinAlreadyEmpty" xml:space="preserve">
+    <value>A lixeira já está vazia</value>
+  </data>
 </root>

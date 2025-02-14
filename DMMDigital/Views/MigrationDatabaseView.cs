@@ -20,14 +20,14 @@ namespace DMMDigital.Views
         private readonly string dataPath = "";
 
         public string software { get; set; }
-        public List<PatientModel> patients { get; set; }
-        public List<ExamModel> exams { get; set; }
-        public List<ExamImageModel> examImages { get; set; }
-        public List<ExamImageCDR> examImagesCDR { get; set; }
+        public List<PatientModel> patients { get; set; } = new List<PatientModel>();
+        public List<ExamModel> exams { get; set; } = new List<ExamModel>();
+        public List<ExamImageModel> examImages { get; set; } = new List<ExamImageModel>();
+        public List<ExamImageCDR> examImagesCDR { get; set; } = new List<ExamImageCDR>();
 
         public PatientModel patientToImport { get; set; }
         public ExamModel examToImport { get; set; }
-        public List<ExamImageModel> examImagesToImport { get; set; }
+        public List<ExamImageModel> examImagesToImport { get; set; } = new List<ExamImageModel>();
         public SettingsModel settingsToImport { get; set; }
 
         public event EventHandler eventImportPatient;
@@ -45,9 +45,12 @@ namespace DMMDigital.Views
             dataPath = path;
             this.software = software;
 
-            eventGetDataToImport?.Invoke(this, EventArgs.Empty);
+            Load += delegate
+            {
+                eventGetDataToImport?.Invoke(this, EventArgs.Empty);
 
-            startProgressBar();
+                startProgressBar();
+            };
         }
 
         private void adjustUI()

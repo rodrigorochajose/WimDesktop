@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DMMDigital.Interface.IView;
+using DMMDigital.Presenters;
+using System;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -47,8 +49,8 @@ namespace DMMDigital.Views
             buttonContinue.Click += delegate
             {
                 Visible = false;
-                Form migrationDatabaseView = new MigrationDatabaseView(software, path);
-                migrationDatabaseView.ShowDialog();
+                new MigrationDatabasePresenter(new MigrationDatabaseView(software, path), path);
+
                 Close();
             };
 
