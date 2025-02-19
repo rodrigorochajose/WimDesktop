@@ -49,7 +49,7 @@ namespace DMMDigital.Views
             Regex regex = new Regex(@"^\d+");
 
             var files = Directory.GetFiles(path)
-                .AsEnumerable()
+                .Where(file => Path.GetFileNameWithoutExtension(file).Contains("original"))
                 .OrderBy(file =>
                 {
                     string fileName = Path.GetFileNameWithoutExtension(file);
@@ -66,7 +66,7 @@ namespace DMMDigital.Views
                 Panel panel = new Panel
                 {
                     Size = new Size(230, 300),
-                    Padding = new Padding(10, 15, 10, 10),
+                    Padding = new Padding(10, 5, 10, 5),
                     BackColor = Color.FromArgb(224, 224, 224)
                 };
 
@@ -79,24 +79,37 @@ namespace DMMDigital.Views
 
                 pictureBox.Click += selectImage;
 
-                Panel panelLabel = new Panel
+                panel.Controls.Add(pictureBox);
+
+                FlowLayoutPanel panelLabel = new FlowLayoutPanel
                 {
                     Dock = DockStyle.Bottom,
-                    Size = new Size(230, 20)
+                    Size = new Size(230, 50),
+                    FlowDirection = FlowDirection.TopDown
                 };
 
-                Label label = new Label
+                string[] fileNameParts = file.Name.Split('_');
+
+                Label labelImageName = new Label
                 {
-                    AutoSize = true,
+                    Width = pictureBox.Width,
+                    TextAlign = ContentAlignment.MiddleCenter,
                     Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    Text = file.Name.Split('-')[0]
+                    Text = $"{fileNameParts[0]}_{fileNameParts[1]}"
                 };
 
-                panelLabel.Controls.Add(label);
+                panelLabel.Controls.Add(labelImageName);
 
-                label.Left = (panelLabel.Width - label.Width) / 2;
+                Label labelDeletedDate = new Label
+                {
+                    Width = pictureBox.Width,
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                    Text = $"{fileNameParts[2].Replace('-', '\\')} {fileNameParts[3].Replace('-', ':')}"
+                };
 
-                panel.Controls.Add(pictureBox);
+                panelLabel.Controls.Add(labelDeletedDate);
+
                 panel.Controls.Add(panelLabel);
                 flowLayoutPanel.Controls.Add(panel);
             }

@@ -2,8 +2,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using TwainDotNet.WinFroms;
-using TwainDotNet;
 using DMMDigital.Models;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,6 +10,7 @@ using System.ComponentModel;
 using DMMDigital.Components.Rounded;
 using DMMDigital.Properties;
 using System.IO;
+using Saraff.Twain;
 
 namespace DMMDigital.Views
 {
@@ -77,7 +76,7 @@ namespace DMMDigital.Views
         public event EventHandler loadSettings;
         public event EventHandler saveSettings;
 
-        private Twain twain;
+        private Twain32 twain = new Twain32();
         private bool languageChanged = false;
 
         public SettingsView()
@@ -86,8 +85,10 @@ namespace DMMDigital.Views
             adjustComponent();
             associateEvents();
 
-            twain = new Twain(new WinFormsWindowMessageHook(this));
-            textBoxTwainSource.Text = twain.DefaultSourceName;
+            twain.OpenDSM();
+
+            Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
+            textBoxTwainSource.Text = currentSource.Name;
         }
 
         private void adjustComponent()
@@ -254,7 +255,9 @@ namespace DMMDigital.Views
         private void selectTwainSource()
         {
             twain.SelectSource();
-            textBoxTwainSource.Text = twain.DefaultSourceName;
+
+            var currentSource = twain.GetSourceIdentity(twain.SourceIndex);
+            textBoxTwainSource.Text = currentSource.Name;
         }
 
         private void buttonEmptyAllRecycleBinClick(object sender, EventArgs e)

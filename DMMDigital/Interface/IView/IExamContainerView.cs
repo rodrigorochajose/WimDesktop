@@ -17,6 +17,8 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventGetSensorInfo;
         event EventHandler eventOpenTwain;
         event EventHandler eventInitializeTwain;
+        event EventHandler eventCloseTwain;
+
 
         void initialize();
         void addNewPage(IExamView examView);

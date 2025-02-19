@@ -19,6 +19,7 @@ namespace DMMDigital.Views
         public event EventHandler eventGetSensorInfo;
         public event EventHandler eventOpenTwain;
         public event EventHandler eventInitializeTwain;
+        public event EventHandler eventCloseTwain;
 
         public ExamContainerView(IExamView examView)
         {
@@ -94,7 +95,7 @@ namespace DMMDigital.Views
 
             examView.eventAcquireTwain += (s, e) =>
             {
-                eventOpenTwain(s, e);
+                eventOpenTwain?.Invoke(s, e);
             };
         }
 
@@ -122,6 +123,8 @@ namespace DMMDigital.Views
             {
                 exam.Close();
             }
+
+            eventCloseTwain?.Invoke(this, e);
         }
 
         private void closePage(object sender, EventArgs e)

@@ -1204,18 +1204,18 @@ namespace DMMDigital.Views
                 string filteredImagePath = originalImagePath.Replace("original", "filtered");
                 string editedImagePath = originalImagePath.Replace("original", "edited");
 
-                string originalFileDestName = $"{selectedFrame.order}_original-{DateTime.Now:ddMMyyyyHHmss}.png";
+                string originalFileDestName = $"{selectedFrame.order}_original_{DateTime.Now:dd-MM-yyyy_HH-m-s}.png";
 
                 File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
 
                 if (File.Exists(filteredImagePath)) 
                 {
-                     File.Move(filteredImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "filtered")));
+                     File.Delete(filteredImagePath);
                 }
 
                 if (File.Exists(editedImagePath))
                 {
-                    File.Move(editedImagePath, Path.Combine(recyclePath, originalFileDestName.Replace("original", "edited")));
+                    File.Delete(editedImagePath);
                 }
 
                 frameDrawingHistories[indexFrame].drawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
@@ -1487,10 +1487,7 @@ namespace DMMDigital.Views
                     selectedFrame.Refresh();
                 }));
 
-                File.Move(
-                    Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"),
-                    Path.Combine(recyclePath, $"{selectedFrame.order}_filtered-{DateTime.Now:dd-MM-yyyy-HH-m-ss}.png")
-                    );
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
                 restoreFrameDrawings();
                 examHasChanges = true;
@@ -1503,10 +1500,7 @@ namespace DMMDigital.Views
         {
             if (frameDrawingHistories[indexFrame].drawingHistory.Count > 1)
             {
-                File.Move(
-                    Path.Combine(examPath, $"{selectedFrame.order}_edited.png"),
-                    Path.Combine(recyclePath, $"{selectedFrame.order}_edited-{DateTime.Now:dd-MM-yyyy-HH-m-ss}.png")
-                    );
+                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
 
                 selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                 frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;

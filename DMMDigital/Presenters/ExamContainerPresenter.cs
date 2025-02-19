@@ -16,9 +16,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using TwainDotNet;
-using TwainDotNet.WinFroms;
 using DMMDigital.Properties;
+using Saraff.Twain;
 
 namespace DMMDigital.Presenters
 {
@@ -27,7 +26,7 @@ namespace DMMDigital.Presenters
         private int sensorId = 0;
         private SensorModel connectedSensor = new SensorModel();
         private readonly ExamContainerView examContainerView;
-        private Twain twain;
+        private Twain32 twain;
         private bool continueAcquiring = false;
 
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
@@ -63,69 +62,77 @@ namespace DMMDigital.Presenters
             examContainerView.eventGetSensorInfo += getSensorInfo;
             examContainerView.eventOpenTwain += openTwain;
             examContainerView.eventInitializeTwain += initializeTwain;
+            examContainerView.eventCloseTwain += closeTwain;
         }
 
         private void initializeTwain(object sender, EventArgs ev)
         {
-            twain = new Twain(new WinFormsWindowMessageHook(examContainerView));
+            twain = new Twain32();
+            twain.OpenDSM();
 
-            twain.TransferImage += (s, e) =>
+            twain.EndXfer += twainTransferImage;
+            twain.AcquireCompleted += twainAcquireCompleted;
+        }
+
+        private void twainTransferImage(object sender, Twain32.EndXferEventArgs e)
+        {
+            continueAcquiring = true;
+
+            if (e.Image != null)
             {
-                continueAcquiring = true;
+                examContainerView.selectedExamView.selectFrame();
 
-                if (e.Image != null)
+                string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
+
+                Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
+
+                using (Bitmap bitmap = new Bitmap(e.Image))
                 {
-                    examContainerView.selectedExamView.selectFrame();
-
-                    string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
-
-                    using (Bitmap bitmap = new Bitmap(e.Image))
+                    if (currentSource.Name.Contains("CDR"))
                     {
-                        rotateImage(bitmap);
-                        bitmap.Save(originalImagePath, ImageFormat.Png);
-                        bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
+                        bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
                     }
-
-                    examContainerView.selectedExamView.loadImageOnMainPictureBox();
+            
+                    rotateImage(bitmap);
+                    bitmap.Save(originalImagePath, ImageFormat.Png);
+                    bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
                 }
-            };
 
-            twain.ScanningComplete += (s, e) =>
+                examContainerView.selectedExamView.loadImageOnMainPictureBox();
+            }
+        }
+
+        private void twainAcquireCompleted(object sender, EventArgs e)
+        {
+            if (examContainerView.selectedExamView.twainAutoTake)
             {
-                if (examContainerView.selectedExamView.twainAutoTake)
-                {
-                    int examImages = examContainerView.selectedExamView.examImages.Count();
-                    int frames = examContainerView.selectedExamView.templateFrames.Count();
+                int examImages = examContainerView.selectedExamView.examImages.Count();
+                int frames = examContainerView.selectedExamView.templateFrames.Count();
 
-                    if (examImages < frames && continueAcquiring)
-                    {
-                        openTwain(s, e);
-                    }
+                if (examImages < frames && continueAcquiring)
+                {
+                    openTwain(sender, e);
                 }
-            };
+            }
         }
 
         private void openTwain(object sender, EventArgs e)
         {
-            ScanSettings settings = new ScanSettings
-            {
-                UseDocumentFeeder = true,
-                ShowTwainUI = true,
-                ShowProgressIndicatorUI = false,
-                UseDuplex = false,
-                Resolution = ResolutionSettings.Fax,
-                Area = null,
-                ShouldTransferAllPages = true,
-                Rotation = new RotationSettings
-                {
-                    AutomaticRotate = true,
-                    AutomaticBorderDetection = true
-                }
-            };
-
             continueAcquiring = false;
 
-            twain.StartScanning(settings);
+            twain.CloseDataSource();
+            twain.OpenDataSource();
+
+            twain.Capabilities.XferMech.Set(TwSX.Native);
+
+            twain.Acquire();
+        }
+
+        private void closeTwain(object sender, EventArgs e)
+        {
+            twain.CloseDataSource();
+            twain.CloseDSM();
+            twain.Dispose();
         }
 
         private void setDefaultSensor()
@@ -264,9 +271,7 @@ namespace DMMDigital.Presenters
             sensorId = 0;
         }
 
-
-        void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel,
-                       IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
+        void IEventReceiver.SdkCallbackHandler(int nDetectorID, int nEventID, int nEventLevel, IntPtr pszMsg, int nParam1, int nParam2, int nPtrParamLen, IntPtr pParam)
         {
             switch (nEventID)
             {
