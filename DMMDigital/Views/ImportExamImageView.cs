@@ -118,16 +118,16 @@ namespace DMMDigital.Views
                     Size = new Size(60, 85)
                 };
 
-                Image img = Image.FromFile(imageFiles[counter]);
+                Bitmap bmp = new Bitmap(imageFiles[counter]);
 
-                checkBox.Tag = img;
+                checkBox.Tag = bmp;
 
-                if (img.Width > img.Height)
+                if (bmp.Width > bmp.Height)
                 {
                     pictureBox.Size = new Size(85, 60);
                 }
 
-                pictureBox.Image = img.GetThumbnailImage(pictureBox.Width, pictureBox.Height, () => false, IntPtr.Zero);
+                pictureBox.Image = bmp.GetThumbnailImage(pictureBox.Width, pictureBox.Height, () => false, IntPtr.Zero);
 
                 panel.Controls.Add(checkBox);
                 panel.Controls.Add(pictureBox);

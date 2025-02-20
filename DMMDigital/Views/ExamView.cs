@@ -1344,16 +1344,20 @@ namespace DMMDigital.Views
 
             if (res == DialogResult.OK)
             {
-                Image image = Image.FromFile(imagePath);
+                Bitmap bmp = new Bitmap(imagePath);
+
+                Bitmap bit = new Bitmap(bmp);
+
+                bmp.Dispose();
 
                 selectedFrame.Invoke((MethodInvoker)(() =>
                 {
-                    selectedFrame.filteredImage = image;
-                    selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                    selectedFrame.filteredImage = bit;
+                    selectedFrame.Image = bit.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
                     selectedFrame.Refresh();
                 }));
 
-                mainPictureBox.Image = image;
+                mainPictureBox.Image = bit;
                 
                 examHasChanges = true;
             }

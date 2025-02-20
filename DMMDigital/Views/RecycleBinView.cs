@@ -61,7 +61,7 @@ namespace DMMDigital.Views
 
             foreach (var file in files)
             {
-                Image img = Image.FromFile(file.FullPath);
+                Bitmap bmp = new Bitmap(file.FullPath);
 
                 Panel panel = new Panel
                 {
@@ -74,7 +74,7 @@ namespace DMMDigital.Views
                 {
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Dock = DockStyle.Fill,
-                    Image = img
+                    Image = bmp
                 };
 
                 pictureBox.Click += selectImage;

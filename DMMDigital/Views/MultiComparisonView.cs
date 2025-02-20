@@ -50,8 +50,8 @@ namespace DMMDigital.Views
 
                 foreach (string file in selectedImages)
                 {
-                    Image img = Image.FromFile(file);
-                    MultiComparisonView form = new MultiComparisonView(img, patientId);
+                    Bitmap bmp = new Bitmap(file);
+                    MultiComparisonView form = new MultiComparisonView(bmp, patientId);
                     form.Show();
                 }
             }

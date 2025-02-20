@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace DMMDigital.Views
 {
@@ -12,6 +13,8 @@ namespace DMMDigital.Views
     {
         public Mat originalImage { get; set; }
         public Mat editedImage { get; set; }
+
+        private Mat imageToSave;
 
         private string imagePath = "";
 
@@ -148,9 +151,15 @@ namespace DMMDigital.Views
 
         private void filterViewFormClosed(object sender, FormClosedEventArgs e)
         {
+            pictureBoxOriginalImage.Image?.Dispose();
+            pictureBoxOriginalImage.Image = null;
+
+            pictureBoxEditedImage.Image?.Dispose();
+            pictureBoxEditedImage.Image = null;
+
             originalImage.Dispose();
             editedImage.Dispose();
-            imagePath = null;
+
             filters = null;
             Dispose();
         }
