@@ -14,8 +14,6 @@ namespace DMMDigital.Views
         public Mat originalImage { get; set; }
         public Mat editedImage { get; set; }
 
-        private Mat imageToSave;
-
         private string imagePath = "";
 
         private List<Func<Mat, Mat>> filters = new List<Func<Mat, Mat>>();
