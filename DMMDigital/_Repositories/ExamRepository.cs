@@ -84,5 +84,21 @@ namespace DMMDigital._Repositories
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void updateExamLastChange(int examId)
+        {
+            try
+            {
+                ExamModel exam = context.exam.FirstOrDefault(e => e.id == examId);
+
+                exam.updatedAt = DateTime.Now;
+
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

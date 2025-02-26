@@ -23,13 +23,13 @@ namespace DMMDigital.Views
 
             buttonConfirm.Click += delegate { selectSensor(); };
 
-            comboBoxSensor.InnerComboBox.DataSource = sensors;
+            comboBoxSensor.InnerControl.DataSource = sensors;
             ControlBox = false;
         }
 
         private void selectSensor()
         {
-            selectedSensor = comboBoxSensor.InnerComboBox.SelectedItem.ToString();
+            selectedSensor = comboBoxSensor.InnerControl.SelectedItem.ToString();
             Close();
         }
     }

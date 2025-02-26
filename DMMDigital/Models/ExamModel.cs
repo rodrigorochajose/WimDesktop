@@ -28,6 +28,9 @@ namespace DMMDigital.Models
         [Column("CREATED_AT")]
         public DateTime createdAt { get; set; } = DateTime.Now;
 
+        [Column("UPDATED_AT")]
+        public DateTime updatedAt { get; set; } = DateTime.Now;
+
         public virtual PatientModel patient { get; set; }
         public virtual TemplateModel template { get; set; }
         public virtual ICollection<ExamImageModel> examImages { get; set; }
@@ -42,6 +45,7 @@ namespace DMMDigital.Models
             Map(m => m.templateId).Name("TEMPLATE_ID");
             Map(m => m.sessionName).Name("SESSION_NAME");
             Map(m => m.createdAt).Name("CREATED_AT");
+            Map(m => m.updatedAt).Name("UPDATED_AT");
         }
     }
 }

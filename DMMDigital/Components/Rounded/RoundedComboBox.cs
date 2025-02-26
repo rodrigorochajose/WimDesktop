@@ -64,7 +64,7 @@ namespace DMMDigital.Components.Rounded
             return path;
         }
 
-        public ComboBox InnerComboBox
+        public ComboBox InnerControl
         {
             get { return comboBox; }
         }

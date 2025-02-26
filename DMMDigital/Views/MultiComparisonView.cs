@@ -59,7 +59,7 @@ namespace DMMDigital.Views
 
         private void importExamImage()
         {
-            IImportExamImageView importExamImageView = new ImportExamImageView("multi");
+            IFramesComparisonImportView importExamImageView = new FramesComparisonImportView("multi");
 
             new ImportExamImagePresenter(importExamImageView, patientId);
 

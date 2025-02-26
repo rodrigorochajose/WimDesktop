@@ -27,9 +27,9 @@ namespace DMMDigital.Views
         
         private void associateEvents()
         {
-            comboBoxTemplate.InnerComboBox.SelectionChangeCommitted += delegate
+            comboBoxTemplate.InnerControl.SelectionChangeCommitted += delegate
             {
-                selectedTemplateId = int.Parse(comboBoxTemplate.InnerComboBox.SelectedValue.ToString());
+                selectedTemplateId = int.Parse(comboBoxTemplate.InnerControl.SelectedValue.ToString());
 
                 showTemplateOnPanel();
             };
@@ -52,18 +52,18 @@ namespace DMMDigital.Views
 
         public void setTemplateList(List<TemplateModel> templateList)
         {
-            comboBoxTemplate.InnerComboBox.DataSource = templateList;
-            comboBoxTemplate.InnerComboBox.DisplayMember = "name";
-            comboBoxTemplate.InnerComboBox.ValueMember = "id";
+            comboBoxTemplate.InnerControl.DataSource = templateList;
+            comboBoxTemplate.InnerControl.DisplayMember = "name";
+            comboBoxTemplate.InnerControl.ValueMember = "id";
         }
 
         public void setTemplateFrameList(List<TemplateFrameModel> templateFrameList)
         {
             this.templateFrameList = templateFrameList;
 
-            if (comboBoxTemplate.InnerComboBox.Items.Count > 0)
+            if (comboBoxTemplate.InnerControl.Items.Count > 0)
             {
-                comboBoxTemplate.InnerComboBox.SelectedItem = comboBoxTemplate.InnerComboBox.Items[0];
+                comboBoxTemplate.InnerControl.SelectedItem = comboBoxTemplate.InnerControl.Items[0];
                 selectedTemplateId = templateFrameList.First().id;
                 showTemplateOnPanel();
             }

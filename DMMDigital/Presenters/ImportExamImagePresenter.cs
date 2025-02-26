@@ -12,7 +12,7 @@ namespace DMMDigital.Presenters
 {
     public class ImportExamImagePresenter
     {
-        private readonly IImportExamImageView view;
+        private readonly IFramesComparisonImportView view;
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
@@ -20,7 +20,7 @@ namespace DMMDigital.Presenters
 
         private string basePath = "";
 
-        public ImportExamImagePresenter(IImportExamImageView importExamImage, int patientId = 0)
+        public ImportExamImagePresenter(IFramesComparisonImportView importExamImage, int patientId = 0)
         {
             examBindingSource = new BindingSource();
 

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class ImportExamImageView : Form, IImportExamImageView
+    public partial class FramesComparisonImportView : Form, IFramesComparisonImportView
     {
         public int patientId { get; set; }
         public int examId { get; set; }
@@ -22,7 +22,7 @@ namespace DMMDigital.Views
 
         string selectionMode = "";
 
-        public ImportExamImageView(string selectionMode)
+        public FramesComparisonImportView(string selectionMode)
         {
             InitializeComponent();
 

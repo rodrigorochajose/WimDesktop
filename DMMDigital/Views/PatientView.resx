@@ -523,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 32</value>
+    <value>14, 32</value>
   </data>
   <data name="buttonNewPatient.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

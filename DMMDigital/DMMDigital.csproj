@@ -116,6 +116,9 @@
     <Compile Include="Components\Rounded\RoundedDataGridView.Designer.cs">
       <DependentUpon>RoundedDataGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Rounded\RoundedDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Components\Rounded\RoundedMaskedTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -145,7 +148,7 @@
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
-    <Compile Include="Interface\IView\IImportExamImageView.cs" />
+    <Compile Include="Interface\IView\IFramesComparisonImportView.cs" />
     <Compile Include="Interface\IView\IMigrationDatabaseView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Interface\IView\IRecycleBinView.cs" />
@@ -176,15 +179,15 @@
     <Compile Include="Presenters\TemplateCreationPresenter.cs" />
     <Compile Include="Presenters\TemplatePresenter.cs" />
     <Compile Include="Presenters\TemplateSwitchPresenter.cs" />
-    <Compile Include="Properties\Resources.en-US.Designer.cs">
-      <DependentUpon>Resources.en-US.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.en-US.Designer.cs">
+      <DependentUpon>Resources.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Views\AdvancedSettingsView.cs">
       <SubType>Form</SubType>
@@ -210,11 +213,11 @@
     <Compile Include="Views\DialogGetTextToDraw.Designer.cs">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ImportExamImageView.cs">
+    <Compile Include="Views\FramesComparisonImportView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ImportExamImageView.Designer.cs">
-      <DependentUpon>ImportExamImageView.cs</DependentUpon>
+    <Compile Include="Views\FramesComparisonImportView.Designer.cs">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogMigration.cs">
       <SubType>Form</SubType>
@@ -290,7 +293,7 @@
     <Compile Include="Interface\IView\IFramesComparisonDialog.cs" />
     <Compile Include="Interface\IView\ITemplateExamView.cs" />
     <Compile Include="Interface\IView\ISettingsView.cs" />
-    <Compile Include="Interface\IView\IPatientExamView.cs" />
+    <Compile Include="Interface\IView\ISelectExamPatientView.cs" />
     <Compile Include="Interface\IView\ITemplateCreationDialog.cs" />
     <Compile Include="Interface\IView\IExamContainerView.cs" />
     <Compile Include="Interface\IView\IExamView.cs" />
@@ -325,11 +328,12 @@
     <Compile Include="Components\Frame.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Views\PatientExamView.cs">
+    <Compile Include="Views\SelectExamPatientView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\PatientExamView.Designer.cs">
-      <DependentUpon>PatientExamView.cs</DependentUpon>
+    <Compile Include="Views\.Designer.cs">
+      <DependentUpon>SelectExamPatientView.cs</DependentUpon>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Interface\IView\IPatientManagerView.cs" />
     <Compile Include="Views\MenuView.cs">
@@ -426,8 +430,8 @@
       <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ImportExamImageView.en-US.resx">
-      <DependentUpon>ImportExamImageView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonImportView.en-US.resx">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MultiComparisonView.en-US.resx">
       <DependentUpon>MultiComparisonView.cs</DependentUpon>
@@ -447,8 +451,8 @@
     <EmbeddedResource Include="Views\DialogGetTextToDraw.resx">
       <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ImportExamImageView.resx">
-      <DependentUpon>ImportExamImageView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\FramesComparisonImportView.resx">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogMigration.en-US.resx">
       <DependentUpon>DialogMigration.cs</DependentUpon>
@@ -473,8 +477,8 @@
     <EmbeddedResource Include="Views\MigrationDatabaseView.resx">
       <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PatientExamView.en-US.resx">
-      <DependentUpon>PatientExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\SelectExamPatientView.en-US.resx">
+      <DependentUpon>SelectExamPatientView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RecycleBinView.en-US.resx">
       <DependentUpon>RecycleBinView.cs</DependentUpon>
@@ -563,8 +567,8 @@
     <EmbeddedResource Include="Views\MenuView.resx">
       <DependentUpon>MenuView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\PatientExamView.resx">
-      <DependentUpon>PatientExamView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\SelectExamPatientView.resx">
+      <DependentUpon>SelectExamPatientView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateExamView.resx">
       <DependentUpon>TemplateExamView.cs</DependentUpon>
@@ -757,6 +761,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\whiteCalendar.png" />
+    <None Include="Resources\darkCalendar.png" />
     <None Include="Resources\icon_32x32_recyclebin.png" />
     <None Include="Resources\IMAGEMBG.png" />
     <None Include="Resources\icon-32x32-autotake1.png" />

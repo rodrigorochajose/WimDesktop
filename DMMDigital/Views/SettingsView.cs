@@ -18,8 +18,8 @@ namespace DMMDigital.Views
     {
         public string language
         {
-            get { return comboBoxLanguage.InnerComboBox.SelectedItem.ToString(); }
-            set { comboBoxLanguage.InnerComboBox.SelectedItem = value; }
+            get { return comboBoxLanguage.InnerControl.SelectedItem.ToString(); }
+            set { comboBoxLanguage.InnerControl.SelectedItem = value; }
         }
 
         public string sensorPath { get; set; }
@@ -28,14 +28,14 @@ namespace DMMDigital.Views
 
         public string sensorModel 
         {
-            get { return comboBoxSensorModel.InnerComboBox.SelectedValue.ToString(); }
-            set { comboBoxSensorModel.InnerComboBox.SelectedValue = value; } 
+            get { return comboBoxSensorModel.InnerControl.SelectedValue.ToString(); }
+            set { comboBoxSensorModel.InnerControl.SelectedValue = value; } 
         }
 
         public string acquireMode
         {
-            get { return comboBoxAcquireMode.InnerComboBox.SelectedItem.ToString(); }
-            set { comboBoxAcquireMode.InnerComboBox.SelectedItem = value; }
+            get { return comboBoxAcquireMode.InnerControl.SelectedItem.ToString(); }
+            set { comboBoxAcquireMode.InnerControl.SelectedItem = value; }
         }
 
         public string drawingColor 
@@ -129,9 +129,9 @@ namespace DMMDigital.Views
                 loadSettings?.Invoke(this, EventArgs.Empty);
             };
 
-            comboBoxLanguage.InnerComboBox.SelectionChangeCommitted += delegate
+            comboBoxLanguage.InnerControl.SelectionChangeCommitted += delegate
             {
-                string culture = comboBoxLanguage.InnerComboBox.SelectedItem.ToString();
+                string culture = comboBoxLanguage.InnerControl.SelectedItem.ToString();
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
@@ -197,19 +197,19 @@ namespace DMMDigital.Views
 
         public void setComboBoxSensorModel(List<SensorModel> sensorList)
         {
-            comboBoxSensorModel.InnerComboBox.DataSource = sensorList;
-            comboBoxSensorModel.InnerComboBox.DisplayMember = "nickname";
-            comboBoxSensorModel.InnerComboBox.ValueMember = "name";
+            comboBoxSensorModel.InnerControl.DataSource = sensorList;
+            comboBoxSensorModel.InnerControl.DisplayMember = "nickname";
+            comboBoxSensorModel.InnerControl.ValueMember = "name";
         }
 
         public void setAcquireMode()
         {
-            comboBoxAcquireMode.InnerComboBox.DataSource = new List<string> { "TWAIN", Resources.nativeAquireMode };
+            comboBoxAcquireMode.InnerControl.DataSource = new List<string> { "TWAIN", Resources.nativeAquireMode };
         }
 
         public void setLanguages()
         {
-            comboBoxLanguage.InnerComboBox.DataSource = new List<string> { "pt-BR", "en-US" };
+            comboBoxLanguage.InnerControl.DataSource = new List<string> { "pt-BR", "en-US" };
         }
 
         private void buttonDrawingColorPickerClick(object sender, EventArgs e)

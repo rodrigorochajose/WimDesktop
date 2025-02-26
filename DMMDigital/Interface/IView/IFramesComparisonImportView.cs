@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IImportExamImageView
+    public interface IFramesComparisonImportView
     {
         int patientId { get; set;  }
         int examId { get; set; }

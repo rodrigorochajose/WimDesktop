@@ -31,8 +31,8 @@ namespace DMMDigital.Views
             adjustComponent();
             associateEvents();
 
-            comboBoxFormat.InnerComboBox.DataSource = new List<string> { "JPG", "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
-            comboBoxFormat.InnerComboBox.SelectedIndex = 0;
+            comboBoxFormat.InnerControl.DataSource = new List<string> { "JPG", "JPEG", "PNG", "TIFF", "DICOM", "RAW" };
+            comboBoxFormat.InnerControl.SelectedIndex = 0;
         }
 
         private void adjustComponent()
@@ -195,7 +195,7 @@ namespace DMMDigital.Views
 
                 List<CheckBox> checkBoxes = getAllFrameCheckBox();
                 
-                switch (comboBoxFormat.InnerComboBox.SelectedItem)
+                switch (comboBoxFormat.InnerControl.SelectedItem)
                 {
                     case "TIFF":
                         format = ImageFormat.Tiff;

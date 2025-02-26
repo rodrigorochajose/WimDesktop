@@ -35,6 +35,7 @@ namespace DMMDigital.Views
         public bool twainAutoTake { get; set; }
 
         public event EventHandler eventSaveExam;
+        public event EventHandler eventUpdateExamLastChange;
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
         public event EventHandler eventGetPatient;
@@ -2020,6 +2021,7 @@ namespace DMMDigital.Views
         {
             if (examHasChanges)
             {
+                eventUpdateExamLastChange?.Invoke(this, EventArgs.Empty);
                 eventSaveExamImage?.Invoke(this, EventArgs.Empty);
 
                 getDrawingsToSave();

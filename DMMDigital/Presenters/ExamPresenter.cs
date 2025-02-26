@@ -32,6 +32,7 @@ namespace DMMDigital.Presenters
             this.examOpeningMode = examOpeningMode;
 
             examView.eventSaveExam += saveExam;
+            examView.eventUpdateExamLastChange += updateExamLastChange;
             examView.eventSaveExamImage += saveExamImage;
             examView.eventSaveExamImageDrawing += saveExamImageDrawing;
             examView.eventGetPatient += getPatient;
@@ -136,6 +137,11 @@ namespace DMMDigital.Presenters
             {
                 MessageBox.Show($"Exam - {ex.Message}");
             }
+        }
+
+        private void updateExamLastChange(object sender, EventArgs e)
+        {
+            examRepository.updateExamLastChange(examView.examId);
         }
 
         private void saveExamImage(object sender, EventArgs e)

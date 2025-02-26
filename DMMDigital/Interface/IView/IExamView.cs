@@ -23,6 +23,7 @@ namespace DMMDigital.Interface.IView
         bool twainAutoTake { get; set; }
 
         event EventHandler eventSaveExam;
+        event EventHandler eventUpdateExamLastChange;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
         event EventHandler eventGetPatient;
