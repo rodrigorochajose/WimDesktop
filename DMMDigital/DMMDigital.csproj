@@ -150,6 +150,7 @@
     <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
     <Compile Include="Interface\IView\IFramesComparisonImportView.cs" />
     <Compile Include="Interface\IView\IMigrationDatabaseView.cs" />
+    <Compile Include="Interface\IView\IPatientExamView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Interface\IView\IRecycleBinView.cs" />
     <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
@@ -170,8 +171,9 @@
     <Compile Include="Filters.cs" />
     <Compile Include="Presenters\ImportExamImagePresenter.cs" />
     <Compile Include="Presenters\MigrationDatabasePresenter.cs" />
-    <Compile Include="Presenters\TemplateExamPresenter.cs" />
     <Compile Include="Presenters\PatientExamPresenter.cs" />
+    <Compile Include="Presenters\TemplateExamPresenter.cs" />
+    <Compile Include="Presenters\SelectExamPatientPresenter.cs" />
     <Compile Include="Presenters\TemplateCreationDialogPresenter.cs" />
     <Compile Include="Presenters\ExamContainerPresenter.cs" />
     <Compile Include="Presenters\ExamPresenter.cs" />
@@ -236,6 +238,12 @@
     </Compile>
     <Compile Include="Views\FramesComparisonView.Designer.cs">
       <DependentUpon>FramesComparisonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PatientExamView.Designer.cs">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\RecycleBinView.cs">
       <SubType>Form</SubType>
@@ -331,7 +339,7 @@
     <Compile Include="Views\SelectExamPatientView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\.Designer.cs">
+    <Compile Include="Views\SelectExamPatientView.Designer.cs">
       <DependentUpon>SelectExamPatientView.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -453,6 +461,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FramesComparisonImportView.resx">
       <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogMigration.en-US.resx">
       <DependentUpon>DialogMigration.cs</DependentUpon>
@@ -476,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MigrationDatabaseView.resx">
       <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientExamView.resx">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SelectExamPatientView.en-US.resx">
       <DependentUpon>SelectExamPatientView.cs</DependentUpon>
@@ -569,6 +581,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SelectExamPatientView.resx">
       <DependentUpon>SelectExamPatientView.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\TemplateExamView.resx">
       <DependentUpon>TemplateExamView.cs</DependentUpon>

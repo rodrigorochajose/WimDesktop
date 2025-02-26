@@ -1,5 +1,4 @@
 ﻿using DMMDigital.Views;
-using DMMDigital._Repositories;
 using DMMDigital.Interface.IView;
 using System.IO;
 using System;
@@ -17,12 +16,12 @@ namespace DMMDigital.Presenters
 
             menuView.showSettingsView += delegate 
             {
-                FormManager.instance.showForm("settingsView", () => new SettingsPresenter(new SettingsView(), new SettingsRepository())); 
+                FormManager.instance.showForm("settingsView", () => new SettingsPresenter(new SettingsView())); 
             };
 
             menuView.showPatientView += delegate 
             {
-                FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView(), new PatientRepository(), "newContainer")); 
+                FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView())); 
             };
 
             menuView.showTemplateView += delegate 
@@ -32,7 +31,7 @@ namespace DMMDigital.Presenters
 
             menuView.showNewExamView += delegate 
             {
-                FormManager.instance.showForm("patientExamView", () => new PatientExamPresenter(new PatientExamView(), new PatientRepository())); 
+                FormManager.instance.showForm("selectExamPatientView", () => new SelectExamPatientPresenter(new SelectExamPatientView())); 
             };
 
             generateDatabaseBackup();

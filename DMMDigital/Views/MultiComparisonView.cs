@@ -59,11 +59,11 @@ namespace DMMDigital.Views
 
         private void importExamImage()
         {
-            IFramesComparisonImportView importExamImageView = new FramesComparisonImportView("multi");
+            IFramesComparisonImportView framesComparisonImportView = new FramesComparisonImportView("multi");
 
-            new ImportExamImagePresenter(importExamImageView, patientId);
+            new ImportExamImagePresenter(framesComparisonImportView, patientId);
 
-            List<Image> images = importExamImageView.getSelectedImages();
+            List<Image> images = framesComparisonImportView.getSelectedImages();
 
             getForms(images);
         }

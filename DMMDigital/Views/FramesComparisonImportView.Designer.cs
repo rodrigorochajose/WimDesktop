@@ -235,7 +235,7 @@
             this.columnTemplate.ReadOnly = true;
             this.columnTemplate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // ImportExamImageView
+            // FramesComparisonImportView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -248,7 +248,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ImportExamImageView";
+            this.Name = "FramesComparisonImportView";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();

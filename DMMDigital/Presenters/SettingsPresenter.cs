@@ -14,7 +14,7 @@ namespace DMMDigital.Presenters
         public SettingsView view { get; }
 
         private SettingsModel currentSettings;
-        private readonly ISettingsRepository settingsRepository;
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
 
         private readonly List<string> acquireModes = new List<string>
@@ -22,10 +22,9 @@ namespace DMMDigital.Presenters
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public SettingsPresenter(SettingsView settingsView, ISettingsRepository repository) 
+        public SettingsPresenter(SettingsView settingsView) 
         {
             view = settingsView;
-            settingsRepository = repository;
             settingsView.saveSettings += saveSettings;
             settingsView.loadSettings += loadSettings;
         }

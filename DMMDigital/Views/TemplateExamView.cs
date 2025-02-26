@@ -127,7 +127,6 @@ namespace DMMDigital.Views
             };
         }
 
-
         public void setTemplateList(List<TemplateModel> templateList)
         {
             comboBoxTemplate.InnerControl.DataSource = templateList;

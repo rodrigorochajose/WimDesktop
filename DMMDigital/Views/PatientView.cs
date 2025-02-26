@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using DMMDigital.Presenters;
 using DMMDigital.Properties;
 using System;
 using System.Windows.Forms;
@@ -13,27 +14,15 @@ namespace DMMDigital.Views
             set { textBoxSearchPatient.Text = value; }
         }
         public int selectedPatientId { get; set; }
-        public int selectedExamId { get; set; }
-        public int selectedTemplateId { get; set; }
-        public string selectedExamPath { get; set; }
 
         public event EventHandler eventSearchPatient;
         public event EventHandler eventShowAddPatientForm;
         public event EventHandler eventShowEditPatientForm;
         public event EventHandler eventDeletePatient;
-        
-        public event EventHandler eventShowFormNewExam;
-        public event EventHandler eventGetPatientExams;
-        public event EventHandler eventOpenExam;
-        public event EventHandler eventDeleteExam;
-        public event EventHandler eventExportExam;
-        public event EventHandler eventSwitchTemplate;
 
         public PatientView()
         {
             InitializeComponent();
-
-            DoubleBuffered = true;
 
             associateEvents();
         }
@@ -55,15 +44,6 @@ namespace DMMDigital.Views
                     if (dataGridViewPatient.SelectedRows.Count > 0)
                     {
                         selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["columnPatientId"].Value.ToString());
-                        eventGetPatientExams?.Invoke(this, EventArgs.Empty);
-                    }
-                };
-
-                dataGridViewExam.SelectionChanged += delegate
-                {
-                    if (dataGridViewExam.SelectedRows.Count > 0)
-                    {
-                        selectedExamId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["columnExamId"].Value.ToString());
                     }
                 };
             };
@@ -91,36 +71,6 @@ namespace DMMDigital.Views
                 }
             };
 
-            dataGridViewExam.CellClick += (s, e) =>
-            {
-                if (e.ColumnIndex == 0)
-                {
-                    selectedTemplateId = int.Parse(dataGridViewExam.Rows[dataGridViewExam.SelectedCells[0].RowIndex].Cells["columnTemplateId"].Value.ToString());
-                    eventSwitchTemplate?.Invoke(this, EventArgs.Empty);
-                }
-                else if (e.ColumnIndex == 1)
-                {
-                    if (selectedExamId == 0)
-                    {
-                        MessageBox.Show(Resources.messageExamNotSelected);
-                        return;
-                    }
-
-                    int selectedRowIndex = dataGridViewExam.SelectedCells[0].RowIndex;
-
-                    string selectedExamSessionName = dataGridViewExam.Rows[selectedRowIndex].Cells["columnSessionName"].Value.ToString();
-                    DateTime selectedExamDate = DateTime.Parse(dataGridViewExam.Rows[selectedRowIndex].Cells["columnExamDate"].Value.ToString());
-
-                    selectedExamPath = $"\\Paciente-{selectedPatientId}\\{selectedExamSessionName}_{selectedExamDate:dd-MM-yyyy-HH-m}";
-                    eventDeleteExam?.Invoke(this, EventArgs.Empty);
-                }
-            };
-
-            dataGridViewExam.CellDoubleClick += (s, e) =>
-            {
-                eventOpenExam?.Invoke(this, EventArgs.Empty);
-            };
-
             buttonSearchPatient.Click += delegate 
             { 
                 eventSearchPatient?.Invoke(this, EventArgs.Empty); 
@@ -130,36 +80,6 @@ namespace DMMDigital.Views
             { 
                 eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); 
             };
-
-            buttonNewExam.Click += delegate 
-            {
-                if (selectedPatientId == 0)
-                {
-                    MessageBox.Show(Resources.messagePatientNotSelected);
-                    return;
-                }
-                eventShowFormNewExam?.Invoke(this, EventArgs.Empty); 
-            };
-
-            buttonOpenExam.Click += delegate 
-            {
-                if (selectedExamId == 0)
-                {
-                    MessageBox.Show(Resources.messageExamNotSelected);
-                    return;
-                } 
-                eventOpenExam?.Invoke(this, EventArgs.Empty); 
-            };
-
-            buttonExportExam.Click += delegate 
-            {
-                if (selectedExamId == 0)
-                {
-                    MessageBox.Show(Resources.messageExamNotSelected);
-                    return;
-                }
-                eventExportExam?.Invoke(this, EventArgs.Empty);
-            };
         }
 
         public void setPatientList(BindingSource patientList)
@@ -167,9 +87,15 @@ namespace DMMDigital.Views
             dataGridViewPatient.DataSource = patientList;
         }
 
-        public void setExamList(BindingSource examList)
+        private void buttonPatientExamsClick(object sender, EventArgs e)
         {
-            dataGridViewExam.DataSource = examList;
+            if (selectedPatientId == 0)
+            {
+                MessageBox.Show(Resources.messagePatientNotSelected);
+                return;
+            }
+
+            new PatientExamPresenter(new PatientExamView(), selectedPatientId, "newContainer");
         }
     }
 }

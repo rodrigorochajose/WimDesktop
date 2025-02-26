@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class PatientExamView
+    partial class SelectExamPatientView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientExamView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectExamPatientView));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -220,7 +220,7 @@
             this.columnPhone.Name = "columnPhone";
             this.columnPhone.ReadOnly = true;
             // 
-            // PatientExamView
+            // SelectExamPatientView
             // 
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
@@ -235,7 +235,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PatientExamView";
+            this.Name = "SelectExamPatientView";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();

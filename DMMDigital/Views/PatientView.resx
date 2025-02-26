@@ -117,59 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label11.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 15.75pt, style=Bold</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 17</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 30</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>Exames do Paciente</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 15.75pt, style=Bold</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 17</value>
+    <value>21, 19</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 30</value>
@@ -190,321 +151,96 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dataGridViewExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom</value>
-  </data>
-  <data name="dataGridViewExam.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="columnExamId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnExamId.HeaderText" xml:space="preserve">
-    <value>examId</value>
-  </data>
-  <data name="columnExamId.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="columnTemplateId.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnTemplateId.HeaderText" xml:space="preserve">
-    <value>templateId</value>
-  </data>
-  <data name="columnTemplateId.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="columnSessionName.HeaderText" xml:space="preserve">
-    <value>Nome da Sessão</value>
-  </data>
-  <data name="columnSessionName.Width" type="System.Int32, mscorlib">
-    <value>197</value>
-  </data>
-  <data name="columnExamDate.HeaderText" xml:space="preserve">
-    <value>Data do Exame</value>
-  </data>
-  <data name="columnExamDate.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="columnTemplate.HeaderText" xml:space="preserve">
-    <value>Template</value>
-  </data>
-  <data name="columnTemplate.Width" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <metadata name="columnEditExam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnEditExam.HeaderText" xml:space="preserve">
-    <value>Editar</value>
-  </data>
-  <data name="columnEditExam.Width" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <metadata name="columnDeleteExam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="columnDeleteExam.HeaderText" xml:space="preserve">
-    <value>Excluir</value>
-  </data>
-  <data name="columnDeleteExam.Width" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="dataGridViewExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 99</value>
-  </data>
-  <data name="dataGridViewExam.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="dataGridViewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>609, 397</value>
-  </data>
-  <data name="dataGridViewExam.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewExam.Name" xml:space="preserve">
-    <value>dataGridViewExam</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewExam.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedDataGridView, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewExam.Parent" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewExam.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonExportExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="buttonExportExam.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="buttonExportExam.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Bold</value>
-  </data>
-  <data name="buttonExportExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="buttonExportExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonExportExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>465, 35</value>
-  </data>
-  <data name="buttonExportExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 42</value>
-  </data>
-  <data name="buttonExportExam.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <data name="buttonExportExam.Text" xml:space="preserve">
-    <value>Exportar Exame</value>
-  </data>
-  <data name="&gt;&gt;buttonExportExam.Name" xml:space="preserve">
-    <value>buttonExportExam</value>
-  </data>
-  <data name="&gt;&gt;buttonExportExam.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonExportExam.Parent" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;buttonExportExam.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonNewExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="buttonOpenExams.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="buttonNewExam.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="buttonOpenExams.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="buttonNewExam.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="buttonOpenExams.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt, style=Bold</value>
   </data>
-  <data name="buttonNewExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="buttonOpenExams.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="buttonNewExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="buttonOpenExams.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonNewExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 35</value>
+  <data name="buttonOpenExams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>612, 354</value>
   </data>
-  <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 42</value>
+  <data name="buttonOpenExams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="buttonNewExam.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="buttonNewExam.Text" xml:space="preserve">
-    <value>Novo Exame</value>
-  </data>
-  <data name="&gt;&gt;buttonNewExam.Name" xml:space="preserve">
-    <value>buttonNewExam</value>
-  </data>
-  <data name="&gt;&gt;buttonNewExam.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonNewExam.Parent" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;buttonNewExam.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="buttonOpenExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="buttonOpenExam.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="buttonOpenExam.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Bold</value>
-  </data>
-  <data name="buttonOpenExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="buttonOpenExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonOpenExam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 35</value>
-  </data>
-  <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 42</value>
-  </data>
-  <data name="buttonOpenExam.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
-  </data>
-  <data name="buttonOpenExam.Text" xml:space="preserve">
-    <value>Abrir Exame</value>
-  </data>
-  <data name="&gt;&gt;buttonOpenExam.Name" xml:space="preserve">
-    <value>buttonOpenExam</value>
-  </data>
-  <data name="&gt;&gt;buttonOpenExam.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonOpenExam.Parent" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;buttonOpenExam.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>699, 61</value>
-  </data>
-  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>643, 520</value>
-  </data>
-  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
-    <value>roundedPanel2</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="textBoxSearchPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="textBoxSearchPatient.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>289, 26</value>
-  </data>
-  <data name="textBoxSearchPatient.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="buttonOpenExams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="textBoxSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 53</value>
+  <data name="buttonOpenExams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 42</value>
   </data>
-  <data name="textBoxSearchPatient.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+  <data name="buttonOpenExams.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
   </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Name" xml:space="preserve">
-    <value>textBoxSearchPatient</value>
+  <data name="buttonOpenExams.Text" xml:space="preserve">
+    <value>Abrir Exames</value>
   </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;buttonOpenExams.Name" xml:space="preserve">
+    <value>buttonOpenExams</value>
   </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOpenExams.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonOpenExams.Parent" xml:space="preserve">
     <value>roundedPanel1</value>
   </data>
-  <data name="&gt;&gt;textBoxSearchPatient.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonOpenExams.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="dataGridViewPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
+  <data name="buttonPatientExams.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="dataGridViewPatient.ColumnHeadersHeight" type="System.Int32, mscorlib">
-    <value>30</value>
+  <data name="buttonPatientExams.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="columnPatientId.HeaderText" xml:space="preserve">
-    <value>id</value>
+  <data name="buttonPatientExams.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
   </data>
-  <data name="columnPatientId.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="buttonPatientExams.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
-  <data name="columnPatientName.HeaderText" xml:space="preserve">
-    <value>Nome</value>
+  <data name="buttonPatientExams.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="columnPatientName.Width" type="System.Int32, mscorlib">
-    <value>250</value>
+  <data name="buttonPatientExams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>612, 173</value>
   </data>
-  <data name="columnPatientBirthDate.HeaderText" xml:space="preserve">
-    <value>Data de Nascimento</value>
+  <data name="buttonPatientExams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="columnPatientBirthDate.Width" type="System.Int32, mscorlib">
-    <value>160</value>
+  <data name="buttonPatientExams.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
-  <data name="columnPatientPhone.HeaderText" xml:space="preserve">
-    <value>Telefone</value>
+  <data name="buttonPatientExams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 53</value>
   </data>
-  <data name="columnEditPatient.HeaderText" xml:space="preserve">
-    <value>Editar</value>
+  <data name="buttonPatientExams.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
   </data>
-  <data name="columnEditPatient.Width" type="System.Int32, mscorlib">
-    <value>55</value>
+  <data name="buttonPatientExams.Text" xml:space="preserve">
+    <value>Visualizar Paciente</value>
   </data>
-  <data name="columnDeletePatient.HeaderText" xml:space="preserve">
-    <value>Excluir</value>
+  <data name="&gt;&gt;buttonPatientExams.Name" xml:space="preserve">
+    <value>buttonPatientExams</value>
   </data>
-  <data name="columnDeletePatient.Width" type="System.Int32, mscorlib">
-    <value>75</value>
+  <data name="&gt;&gt;buttonPatientExams.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 99</value>
-  </data>
-  <data name="dataGridViewPatient.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>641, 396</value>
-  </data>
-  <data name="dataGridViewPatient.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewPatient.Name" xml:space="preserve">
-    <value>dataGridViewPatient</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewPatient.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedDataGridView, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewPatient.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonPatientExams.Parent" xml:space="preserve">
     <value>roundedPanel1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewPatient.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonPatientExams.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="buttonNewPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -523,7 +259,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 32</value>
+    <value>612, 19</value>
   </data>
   <data name="buttonNewPatient.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -552,6 +288,108 @@
   <data name="&gt;&gt;buttonNewPatient.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="dataGridViewPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="dataGridViewPatient.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="columnPatientId.HeaderText" xml:space="preserve">
+    <value>id</value>
+  </data>
+  <data name="columnPatientId.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="columnPatientName.HeaderText" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="columnPatientName.Width" type="System.Int32, mscorlib">
+    <value>350</value>
+  </data>
+  <metadata name="columnLastChange.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="columnLastChange.HeaderText" xml:space="preserve">
+    <value>Ultima Modificação</value>
+  </data>
+  <data name="columnLastChange.Width" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 19</value>
+  </data>
+  <data name="dataGridViewPatient.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
+    <value>553, 377</value>
+  </data>
+  <data name="dataGridViewPatient.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewPatient.Name" xml:space="preserve">
+    <value>dataGridViewPatient</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewPatient.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedDataGridView, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewPatient.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewPatient.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="roundedPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 202</value>
+  </data>
+  <data name="roundedPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 420</value>
+  </data>
+  <data name="roundedPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.Name" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxSearchPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="textBoxSearchPatient.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="textBoxSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 48</value>
+  </data>
+  <data name="textBoxSearchPatient.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="textBoxSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
+    <value>309, 46</value>
+  </data>
+  <data name="textBoxSearchPatient.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Name" xml:space="preserve">
+    <value>textBoxSearchPatient</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="buttonSearchPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -565,7 +403,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 32</value>
+    <value>730, 48</value>
   </data>
   <data name="buttonSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 42</value>
@@ -583,31 +421,190 @@
     <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;buttonSearchPatient.Parent" xml:space="preserve">
-    <value>roundedPanel1</value>
+    <value>roundedPanel2</value>
   </data>
   <data name="&gt;&gt;buttonSearchPatient.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>519, 26</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 21</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Até</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>342, 26</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 21</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 24</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 21</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="roundedDateTimePicker2.CalendarFont" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedDateTimePicker2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="roundedDateTimePicker2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>523, 55</value>
+  </data>
+  <data name="roundedDateTimePicker2.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>4, 35</value>
+  </data>
+  <data name="roundedDateTimePicker2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 35</value>
+  </data>
+  <data name="roundedDateTimePicker2.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker2.Name" xml:space="preserve">
+    <value>roundedDateTimePicker2</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker2.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedDateTimePicker, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker2.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="roundedPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 61</value>
+  <data name="roundedDateTimePicker1.CalendarFont" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
-  <data name="roundedPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 519</value>
+  <data name="roundedDateTimePicker1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
   </data>
-  <data name="roundedPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="roundedDateTimePicker1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>346, 55</value>
   </data>
-  <data name="&gt;&gt;roundedPanel1.Name" xml:space="preserve">
-    <value>roundedPanel1</value>
+  <data name="roundedDateTimePicker1.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>4, 35</value>
   </data>
-  <data name="&gt;&gt;roundedPanel1.Type" xml:space="preserve">
+  <data name="roundedDateTimePicker1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 35</value>
+  </data>
+  <data name="roundedDateTimePicker1.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker1.Name" xml:space="preserve">
+    <value>roundedDateTimePicker1</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker1.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedDateTimePicker, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker1.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedDateTimePicker1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 72</value>
+  </data>
+  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>793, 110</value>
+  </data>
+  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
     <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;roundedPanel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;roundedPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -616,7 +613,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1353, 599</value>
+    <value>822, 645</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1263,48 +1260,6 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Pacientes</value>
   </data>
-  <data name="&gt;&gt;columnExamId.Name" xml:space="preserve">
-    <value>columnExamId</value>
-  </data>
-  <data name="&gt;&gt;columnExamId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnTemplateId.Name" xml:space="preserve">
-    <value>columnTemplateId</value>
-  </data>
-  <data name="&gt;&gt;columnTemplateId.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnSessionName.Name" xml:space="preserve">
-    <value>columnSessionName</value>
-  </data>
-  <data name="&gt;&gt;columnSessionName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnExamDate.Name" xml:space="preserve">
-    <value>columnExamDate</value>
-  </data>
-  <data name="&gt;&gt;columnExamDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnTemplate.Name" xml:space="preserve">
-    <value>columnTemplate</value>
-  </data>
-  <data name="&gt;&gt;columnTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnEditExam.Name" xml:space="preserve">
-    <value>columnEditExam</value>
-  </data>
-  <data name="&gt;&gt;columnEditExam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnDeleteExam.Name" xml:space="preserve">
-    <value>columnDeleteExam</value>
-  </data>
-  <data name="&gt;&gt;columnDeleteExam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;columnPatientId.Name" xml:space="preserve">
     <value>columnPatientId</value>
   </data>
@@ -1317,29 +1272,11 @@
   <data name="&gt;&gt;columnPatientName.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;columnPatientBirthDate.Name" xml:space="preserve">
-    <value>columnPatientBirthDate</value>
+  <data name="&gt;&gt;columnLastChange.Name" xml:space="preserve">
+    <value>columnLastChange</value>
   </data>
-  <data name="&gt;&gt;columnPatientBirthDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnLastChange.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnPatientPhone.Name" xml:space="preserve">
-    <value>columnPatientPhone</value>
-  </data>
-  <data name="&gt;&gt;columnPatientPhone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnEditPatient.Name" xml:space="preserve">
-    <value>columnEditPatient</value>
-  </data>
-  <data name="&gt;&gt;columnEditPatient.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;columnDeletePatient.Name" xml:space="preserve">
-    <value>columnDeletePatient</value>
-  </data>
-  <data name="&gt;&gt;columnDeletePatient.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>PatientView</value>

@@ -64,9 +64,10 @@ namespace DMMDigital.Views
             }
 
             textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
+            textBoxBirthDate.InnerMaskedTextBox.ValidatingType = typeof(DateTime);
+
             textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
             textBoxPhone.InnerMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            textBoxBirthDate.InnerMaskedTextBox.ValidatingType = typeof(DateTime);
 
 
             pictureBoxIcon.Left = (Width - (pictureBoxIcon.Width + labelTitle.Width + 10)) / 2;

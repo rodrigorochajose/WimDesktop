@@ -182,10 +182,10 @@ namespace DMMDigital.Views
 
         private void buttonImportExamImageClick(object sender, EventArgs e)
         {
-            IFramesComparisonImportView importExamImageView = new FramesComparisonImportView("single");
-            new ImportExamImagePresenter(importExamImageView, patientId);
+            IFramesComparisonImportView framesComparisonImportView = new FramesComparisonImportView("single");
+            new ImportExamImagePresenter(framesComparisonImportView, patientId);
 
-            selectedPictureBox.Image = importExamImageView.getSelectedImages().First();
+            selectedPictureBox.Image = framesComparisonImportView.getSelectedImages().First();
         }
     }
 }

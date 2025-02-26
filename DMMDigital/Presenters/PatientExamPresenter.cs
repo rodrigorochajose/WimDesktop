@@ -1,10 +1,13 @@
 ﻿using DMMDigital._Repositories;
+using DMMDigital.Components;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,68 +16,73 @@ namespace DMMDigital.Presenters
 {
     public class PatientExamPresenter
     {
-        public PatientExamView view { get; }
+        private IPatientExamView view;
+        private PatientModel selectedPatient;
 
-        private readonly IPatientRepository patientRepository;
+        private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly IExamRepository examRepository = new ExamRepository();
+        private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
-        private readonly BindingSource pacientesBindingSource;
-        private IEnumerable<PatientModel> patientList;
 
-        public PatientExamPresenter(PatientExamView patientExamView, IPatientRepository repository)
+        private readonly string examOpeningMode;
+
+        private IEnumerable<ExamModel> examList;
+        private readonly BindingSource examBindingSource;
+
+        public PatientExamPresenter(IPatientExamView view, int patientId, string examOpeningMode)
         {
-            pacientesBindingSource = new BindingSource();
-            view = patientExamView;
-            patientRepository = repository;
+            this.view = view;
+            this.examOpeningMode = examOpeningMode;
+            examBindingSource = new BindingSource();
 
-            view.eventSearchPatient += searchPatient;
-            view.eventNewPatient += newPatient;
-            view.eventSelectPatient += showSelectTemplateForm;
+            associateEvents();
 
-            view.setPatientList(pacientesBindingSource);
+            loadPatientData(patientId);
+            view.setExamList(examBindingSource);
+            getExamByPatient(this, EventArgs.Empty);
 
-            loadAllPatients();
+            (view as Form).ShowDialog();
         }
 
-        private void loadAllPatients()
+        private void associateEvents()
         {
-            patientList = patientRepository.getAllPatients();
+            view.eventEditPatient += editPatient;
+            view.eventDeletePatient += deletePatient;
 
-            if (patientList.Any())
-            {
-                view.selectedPatientId = patientList.First().id;
-                pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-                view.dataGridViewHandler();
-            }
+            view.eventShowFormNewExam += newExam;
+            view.eventGetPatientExams += getExamByPatient;
+            view.eventOpenExam += openExam;
+            view.eventDeleteExam += deleteExam;
+            view.eventExportExam += exportExam;
+            view.eventSwitchTemplate += switchTemplate;
+
         }
 
-        private void newPatient(object sender, EventArgs e)
+        private void loadPatientData(int patientId)
         {
-            IPatientManagerView patientHandlerView = new PatientManagerView("add");
-            patientHandlerView.eventAddNewPatient += addNewPatient;
-            (patientHandlerView as Form).ShowDialog();
-
-            loadAllPatients();
+            selectedPatient = patientRepository.getPatientById(patientId);
+            view.patientId = selectedPatient.id;
+            view.patientName = selectedPatient.name;
+            view.patientBirthDate = selectedPatient.birthDate;
+            view.patientPhone = selectedPatient.phone;
+            view.patientRecommendation = selectedPatient.recommendation;
+            view.patientObservation = selectedPatient.observation;
         }
 
-        private void addNewPatient(object sender, EventArgs e)
+        public void editPatient(object sender, EventArgs e)
         {
             try
             {
-                PatientModel newPatient = new PatientModel
-                {
-                    id = (sender as PatientManagerView).patientId,
-                    name = (sender as PatientManagerView).patientName,
-                    birthDate = (sender as PatientManagerView).patientBirthDate,
-                    phone = (sender as PatientManagerView).patientPhone,
-                    recommendation = (sender as PatientManagerView).patientRecommendation,
-                    observation = (sender as PatientManagerView).patientObservation,
-                };
+                selectedPatient.id = (sender as IPatientExamView).patientId;
+                selectedPatient.name = (sender as IPatientExamView).patientName;
+                selectedPatient.birthDate = (sender as IPatientExamView).patientBirthDate;
+                selectedPatient.phone = (sender as IPatientExamView).patientPhone;
+                selectedPatient.recommendation = (sender as IPatientExamView).patientRecommendation;
+                selectedPatient.observation = (sender as IPatientExamView).patientObservation;
 
-                new Common.ModelDataValidation().Validate(newPatient);
-                patientRepository.addPatient(newPatient);
-                (sender as PatientManagerView).Close();
-
-                string examPath = settingsRepository.getExamPath();
+                new Common.ModelDataValidation().Validate(selectedPatient);
+                patientRepository.editPatient();
             }
             catch (Exception ex)
             {
@@ -82,32 +90,169 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void searchPatient(object sender, EventArgs e)
+        private void deletePatient(object sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
-            pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            if (examRepository.getPatientExams(view.patientId).Any())
+            {
+                MessageBox.Show(Resources.messagePatientCannotDelete);
+                return;
+            }
+
+            DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DialogResult.Yes.Equals(res))
+            {
+                string fullPath = $"{settingsRepository.getExamPath()}\\{view.patientId}";
+
+                if (Directory.Exists(fullPath))
+                {
+                    Directory.Delete(fullPath, true);
+                }
+
+                patientRepository.deletePatient(view.patientId);
+
+                (view as Form).Close();
+            }
         }
 
-        private void showSelectTemplateForm(object sender, EventArgs e)
+        private void newExam(object sender, EventArgs e)
         {
-            ITemplateExamView templateView = new TemplateExamView();
-            
-            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
-            templateView.patientId = selectedPatient.id;
-            templateView.patientName = selectedPatient.name;
-            templateView.patientBirthDate = selectedPatient.birthDate;
-            templateView.patientPhone = selectedPatient.phone;
-            templateView.patientRecommendation = selectedPatient.recommendation;
-            templateView.patientObservation = selectedPatient.observation;
+            ITemplateExamView templateExamView = new TemplateExamView();
+
+            PatientModel selectedPatient = patientRepository.getPatientById(view.patientId);
+            templateExamView.patientId = selectedPatient.id;
+            templateExamView.patientName = selectedPatient.name;
+            templateExamView.patientBirthDate = selectedPatient.birthDate;
+            templateExamView.patientPhone = selectedPatient.phone;
+            templateExamView.patientRecommendation = selectedPatient.recommendation;
+            templateExamView.patientObservation = selectedPatient.observation;
 
             foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
             {
-                //loadAllPatients();
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateView, new TemplateRepository(), view.GetType());
+            new TemplateExamPresenter(templateExamView, new TemplateRepository(), view.GetType());
+        }
+
+        private void getExamByPatient(object sender, EventArgs e)
+        {
+            examList = examRepository.getPatientExams(view.patientId);
+            if (examList.Any())
+            {
+                view.selectedExamId = examList.First().id;
+                examBindingSource.DataSource = examList.Select(ex => new { ex.id, ex.templateId, ex.sessionName, ex.createdAt, ex.template.name });
+            }
+            else
+            {
+                view.selectedExamId = 0;
+                examBindingSource.Clear();
+            }
+        }
+
+        private void openExam(object sender, EventArgs e)
+        {
+            SettingsModel settings = settingsRepository.getAllSettings();
+
+            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, settings), new ExamRepository(), true, examOpeningMode);
+            Application.OpenForms.Cast<Form>().First().Hide();
+            (view as Form).Close();
+        }
+
+        private void deleteExam(object sender, EventArgs e)
+        {
+            if (examRepository.examHasImages(view.selectedExamId))
+            {
+                MessageBox.Show(Resources.messageExamCannotDelete);
+                return;
+            }
+
+            DialogResult res = MessageBox.Show(Resources.messageConfirmDelete, Resources.titleDelete, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (DialogResult.Yes.Equals(res))
+            {
+                string fullPath = $"{settingsRepository.getExamPath()}{view.selectedExamPath}";
+
+                if (Directory.Exists(fullPath))
+                {
+                    Directory.Delete(fullPath, true);
+                }
+
+                examRepository.deleteExam(view.selectedExamId);
+
+                MessageBox.Show(Resources.messageExamDeleted);
+                getExamByPatient(this, EventArgs.Empty);
+            }
+        }
+
+        private void exportExam(object sender, EventArgs e)
+        {
+            ExamModel selectedExam = examRepository.getExam(view.selectedExamId);
+
+            List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
+            List<ExamImageModel> examImages = examImageRepository.getExamImages(view.selectedExamId).ToList();
+
+            if (!examImages.Any())
+            {
+                MessageBox.Show(Resources.messageExamCannotExport);
+                return;
+            }
+
+            string examPath = $"{settingsRepository.getExamPath()}\\{selectedExam.patient.id}\\{selectedExam.id}";
+
+            List<Frame> frames = new List<Frame>();
+
+            foreach (TemplateFrameModel frame in templateFrames)
+            {
+                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.templateFrameId == frame.id);
+
+                if (selectedExamImage != null)
+                {
+                    Frame newFrame = new Frame
+                    {
+                        BackColor = Color.Black,
+                        order = frame.order,
+                        Name = "frame" + frame.id,
+                        orientation = frame.orientation
+                    };
+
+                    string imagePath = Path.Combine(examPath, selectedExamImage.file);
+
+                    if (File.Exists(Path.Combine(examPath, $"{newFrame.order}_filtered.png")))
+                    {
+                        imagePath = Path.Combine(examPath, $"{newFrame.order}_filtered.png");
+                    }
+
+                    using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        Bitmap image = new Bitmap(Image.FromStream(fs));
+                        Bitmap thumb = new Bitmap(image, newFrame.Width, newFrame.Height);
+
+                        newFrame.originalImage = new Bitmap(image);
+                        newFrame.Image = thumb;
+                        image.Dispose();
+                    }
+
+                    frames.Add(newFrame);
+                }
+            }
+
+            new ExportExamPresenter(
+                new ExportExamView
+                {
+                    pathImages = examPath,
+                    framesToExport = frames,
+                    patientName = selectedExam.patient.name
+                },
+                view.selectedExamId
+            );
+        }
+
+        private void switchTemplate(object sender, EventArgs e)
+        {
+            ITemplateSwitchView templateSwitchView = new TemplateSwitchView();
+            new TemplateSwitchPresenter(templateSwitchView, view.selectedExamId, view.selectedTemplateId);
+
+            (templateSwitchView as Form).ShowDialog();
+            getExamByPatient(sender, e);
         }
     }
 }

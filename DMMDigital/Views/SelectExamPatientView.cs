@@ -5,7 +5,7 @@ using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
-    public partial class PatientExamView : Form, ISelectExamPatientView
+    public partial class SelectExamPatientView : Form, ISelectExamPatientView
     {
         public string searchedValue 
         {
@@ -25,7 +25,7 @@ namespace DMMDigital.Views
         public event EventHandler eventNewPatient;
         public event EventHandler eventSelectPatient;
 
-        public PatientExamView()
+        public SelectExamPatientView()
         {
             InitializeComponent();
             adjustComponent();
