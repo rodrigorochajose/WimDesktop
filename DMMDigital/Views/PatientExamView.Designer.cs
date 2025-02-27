@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientExamView));
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.buttonDeletePatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonEditPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
@@ -60,7 +61,6 @@
             this.buttonNewExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonOpenExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.roundedButton1 = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel1.SuspendLayout();
             this.roundedPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExam)).BeginInit();
@@ -70,7 +70,7 @@
             // 
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel1.BorderWidth = 5F;
-            this.roundedPanel1.Controls.Add(this.roundedButton1);
+            this.roundedPanel1.Controls.Add(this.buttonDeletePatient);
             this.roundedPanel1.Controls.Add(this.buttonEditPatient);
             this.roundedPanel1.Controls.Add(this.textBoxObservation);
             this.roundedPanel1.Controls.Add(this.textBoxRecommendation);
@@ -87,6 +87,26 @@
             this.roundedPanel1.Name = "roundedPanel1";
             this.roundedPanel1.Size = new System.Drawing.Size(348, 480);
             this.roundedPanel1.TabIndex = 19;
+            // 
+            // buttonDeletePatient
+            // 
+            this.buttonDeletePatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonDeletePatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonDeletePatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonDeletePatient.BorderWidth = 5F;
+            this.buttonDeletePatient.CornerRadius = 5;
+            this.buttonDeletePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeletePatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonDeletePatient.ForeColor = System.Drawing.Color.White;
+            this.buttonDeletePatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDeletePatient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.buttonDeletePatient.Location = new System.Drawing.Point(40, 437);
+            this.buttonDeletePatient.Name = "buttonDeletePatient";
+            this.buttonDeletePatient.Size = new System.Drawing.Size(118, 30);
+            this.buttonDeletePatient.TabIndex = 45;
+            this.buttonDeletePatient.Text = "Excluir";
+            this.buttonDeletePatient.UseVisualStyleBackColor = false;
+            this.buttonDeletePatient.Click += new System.EventHandler(this.buttonDeletePatientClick);
             // 
             // buttonEditPatient
             // 
@@ -479,25 +499,6 @@
             this.label1.TabIndex = 47;
             this.label1.Text = "Exames do Paciente";
             // 
-            // roundedButton1
-            // 
-            this.roundedButton1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.roundedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.roundedButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.roundedButton1.BorderWidth = 5F;
-            this.roundedButton1.CornerRadius = 5;
-            this.roundedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundedButton1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.roundedButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.roundedButton1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.roundedButton1.Location = new System.Drawing.Point(40, 437);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(118, 30);
-            this.roundedButton1.TabIndex = 45;
-            this.roundedButton1.Text = "Editar";
-            this.roundedButton1.UseVisualStyleBackColor = false;
-            // 
             // PatientExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -513,7 +514,7 @@
             this.MinimizeBox = false;
             this.Name = "PatientExamView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PatientExamView";
+            this.Text = "Exames do Paciente";
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel1.PerformLayout();
             this.roundedPanel2.ResumeLayout(false);
@@ -551,6 +552,6 @@
         private Components.Rounded.RoundedButton buttonOpenExam;
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedButton buttonEditPatient;
-        private Components.Rounded.RoundedButton roundedButton1;
+        private Components.Rounded.RoundedButton buttonDeletePatient;
     }
 }

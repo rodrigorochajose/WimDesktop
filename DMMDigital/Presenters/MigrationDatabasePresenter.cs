@@ -105,7 +105,7 @@ namespace DMMDigital.Presenters
 
         public void getExams(SqlConnection connection)
         {
-            string query = "SELECT StudyNumber as ID, PatientNumber as PATIENT_ID, 0 as TEMPLATE_ID, '' as SESSION_NAME, StudyDate as CREATED_AT from Study";
+            string query = "SELECT StudyNumber as ID, PatientNumber as PATIENT_ID, 0 as TEMPLATE_ID, '' as SESSION_NAME, StudyDate as CREATED_AT, ModifiedDate as UPDATED_AT from Study";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -119,7 +119,8 @@ namespace DMMDigital.Presenters
                             patientId = (int)reader["PATIENT_ID"],
                             templateId = (int)reader["TEMPLATE_ID"],
                             sessionName = (string)reader["SESSION_NAME"],
-                            createdAt = (DateTime)reader["CREATED_AT"]
+                            createdAt = (DateTime)reader["CREATED_AT"],
+                            updatedAt = (DateTime)reader["UPDATED_AT"]
                         };
 
                         migrationDatabaseView.exams.Add(exam);
@@ -219,7 +220,7 @@ namespace DMMDigital.Presenters
 
             sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "exam.csv").Replace("\\", "/")}', " +
                 "'SELECT XRAY_EXAM.ID, MEDICAL_RECORD.PATIENT_ID AS PATIENT_ID, XRAY_EXAM_TEMPLATE_ID AS TEMPLATE_ID, " +
-                "NAME AS SESSION_NAME, XRAY_EXAM.CREATED_AT FROM XRAY_EXAM INNER JOIN TREATMENT ON TREATMENT.ID = XRAY_EXAM.TREATMENT_ID " +
+                "NAME AS SESSION_NAME, XRAY_EXAM.CREATED_AT, XRAY_EXAM.CREATED_AT AS UPDATED_AT FROM XRAY_EXAM INNER JOIN TREATMENT ON TREATMENT.ID = XRAY_EXAM.TREATMENT_ID " +
                 "INNER JOIN MEDICAL_RECORD ON TREATMENT.MEDICAL_RECORD_ID = MEDICAL_RECORD.ID');");
 
             sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "exam_image.csv").Replace("\\", "/")}', " +
@@ -290,7 +291,6 @@ namespace DMMDigital.Presenters
 
             return argbInt.ToString();
         }
-
 
         private void importPatient(object sender, EventArgs e)
         {

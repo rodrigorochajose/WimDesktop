@@ -1,7 +1,6 @@
 ﻿using DMMDigital.Interface.IView;
 using DMMDigital.Properties;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -47,7 +46,6 @@ namespace DMMDigital.Views
         public event EventHandler eventDeletePatient;
 
         public event EventHandler eventShowFormNewExam;
-        public event EventHandler eventGetPatientExams;
         public event EventHandler eventOpenExam;
         public event EventHandler eventDeleteExam;
         public event EventHandler eventExportExam;
@@ -75,14 +73,6 @@ namespace DMMDigital.Views
                     Close();
                 }
             };
-
-            Load += (sender, e) =>
-            {
-                dataGridViewExam.SelectionChanged += delegate
-                {
-                    
-                };
-            };
         }
 
         public void setExamList(BindingSource examList)
@@ -105,6 +95,11 @@ namespace DMMDigital.Views
                 handleTextBoxes(false);
                 buttonEditPatient.Text = "Editar";
             }
+        }
+
+        private void buttonDeletePatientClick(object sender, EventArgs e)
+        {
+            eventDeletePatient?.Invoke(this, EventArgs.Empty);
         }
 
         private void handleTextBoxes(bool enable)
@@ -183,6 +178,5 @@ namespace DMMDigital.Views
         {
             eventOpenExam?.Invoke(this, EventArgs.Empty);
         }
-
     }
 }

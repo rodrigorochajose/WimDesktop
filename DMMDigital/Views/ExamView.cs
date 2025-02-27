@@ -33,6 +33,7 @@ namespace DMMDigital.Views
         public bool sensorConnected { get; set; }
         public string acquireMode { get; set; }
         public bool twainAutoTake { get; set; }
+        public SettingsModel settings { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventUpdateExamLastChange;
@@ -93,10 +94,9 @@ namespace DMMDigital.Views
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
+        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
         {
             InitializeComponent();
-            associateSettings(settings);
 
             ActiveControl = labelPatientName;
 
@@ -110,6 +110,8 @@ namespace DMMDigital.Views
 
             Load += delegate
             {
+                associateSettings();
+
                 drawTemplate();
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
                 DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\{patient.id}\\{examId}");
@@ -127,19 +129,20 @@ namespace DMMDigital.Views
             };
         }
 
-        public ExamView(int examId, PatientModel patient, SettingsModel settings)
+        public ExamView(int examId, PatientModel patient)
         {
             InitializeComponent();
-            associateSettings(settings);
 
             this.examId = examId;
             this.patient = patient;
 
-            recyclePath = Path.Combine(examPath, $"{patient.id}\\{examId}\\recycle");
-            Directory.CreateDirectory(recyclePath);
-
             Load += delegate
             {
+                associateSettings();
+
+                recyclePath = Path.Combine(examPath, $"{patient.id}\\{examId}\\recycle");
+                Directory.CreateDirectory(recyclePath);
+
                 drawTemplate();
 
                 selectInitialFrame();
@@ -250,9 +253,8 @@ namespace DMMDigital.Views
             mainPictureBox.Invoke((MethodInvoker)(() => mainPictureBox.Refresh()));
         }
 
-        private void associateSettings(SettingsModel settings)
+        private void associateSettings()
         {
-            examPath = settings.examPath;
             drawingColor = Color.FromArgb(int.Parse(settings.drawingColor));
             textColor = Color.FromArgb(int.Parse(settings.textColor));
             rulerColor = Color.FromArgb(int.Parse(settings.rulerColor));
@@ -1081,7 +1083,7 @@ namespace DMMDigital.Views
             chooseTemplateView.patientRecommendation = patient.recommendation;
             chooseTemplateView.patientObservation = patient.observation;
 
-            new TemplateExamPresenter(chooseTemplateView, new TemplateRepository(), this.GetType());
+            new TemplateExamPresenter(chooseTemplateView, GetType());
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)

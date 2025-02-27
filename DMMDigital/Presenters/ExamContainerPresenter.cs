@@ -52,7 +52,7 @@ namespace DMMDigital.Presenters
                 examContainerView.twainInitialized = false;
             }
 
-            initialize();
+            examContainerView.initialize();
         }
 
         private void associateEvents()
@@ -130,9 +130,12 @@ namespace DMMDigital.Presenters
 
         private void closeTwain(object sender, EventArgs e)
         {
-            twain.CloseDataSource();
-            twain.CloseDSM();
-            twain.Dispose();
+            if (twain != null)
+            {
+                twain.CloseDataSource();
+                twain.CloseDSM();
+                twain.Dispose();
+            }
         }
 
         private void setDefaultSensor()
@@ -252,11 +255,6 @@ namespace DMMDigital.Presenters
 
             int correction = (int)(Enm_CorrectOption.Enm_CorrectOp_SW_PostOffset | Enm_CorrectOption.Enm_CorrectOp_SW_Gain | Enm_CorrectOption.Enm_CorrectOp_SW_Defect);
             d.SetCorrectionOption(correction);
-        }
-
-        private void initialize()
-        {
-            examContainerView.initialize();
         }
 
         private void destroySensor(object sender, EventArgs e)

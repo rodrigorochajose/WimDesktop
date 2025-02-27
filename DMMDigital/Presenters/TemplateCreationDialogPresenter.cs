@@ -34,33 +34,32 @@ namespace DMMDigital.Presenters
         {
             try
             {
+                TemplateCreationView templateHandlerView;
+
                 new Common.ModelDataValidation().Validate(templateCreationDialog);
 
                 if (templateCreationDialog.generateByTemplate)
                 {
                     List<TemplateFrameModel> selectedFrames = templateCreationDialog.templateFrames.Where(t => t.templateId == templateCreationDialog.selectedTemplateId).ToList();
 
-                    TemplateCreationView templateHandlerView = new TemplateCreationView(
+                    templateHandlerView = new TemplateCreationView(
                         templateCreationDialog.templateName,
                         selectedFrames
                     );
-
-                    (templateCreationDialog as Form).Close();
-                    new TemplateCreationPresenter(templateHandlerView, new TemplateRepository());
                 }
                 else
                 {
-                    TemplateCreationView templateHandlerView = new TemplateCreationView(
+                    templateHandlerView = new TemplateCreationView(
                         templateCreationDialog.templateName,
                         templateCreationDialog.rows,
                         templateCreationDialog.columns,
                         templateCreationDialog.orientation
                     );
-
-                    (templateCreationDialog as Form).Close();
-                    new TemplateCreationPresenter(templateHandlerView, new TemplateRepository());
                 }
-                
+
+                (templateCreationDialog as Form).Close();
+                new TemplateCreationPresenter(templateHandlerView);
+
             } 
             catch (Exception ex)
             {

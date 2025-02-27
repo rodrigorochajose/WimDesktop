@@ -5,6 +5,7 @@ using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Properties;
 using DMMDigital.Views;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,7 +41,7 @@ namespace DMMDigital.Presenters
 
             loadPatientData(patientId);
             view.setExamList(examBindingSource);
-            getExamByPatient(this, EventArgs.Empty);
+            getPatientExams(this, EventArgs.Empty);
 
             (view as Form).ShowDialog();
         }
@@ -51,12 +52,10 @@ namespace DMMDigital.Presenters
             view.eventDeletePatient += deletePatient;
 
             view.eventShowFormNewExam += newExam;
-            view.eventGetPatientExams += getExamByPatient;
             view.eventOpenExam += openExam;
             view.eventDeleteExam += deleteExam;
             view.eventExportExam += exportExam;
             view.eventSwitchTemplate += switchTemplate;
-
         }
 
         private void loadPatientData(int patientId)
@@ -126,15 +125,15 @@ namespace DMMDigital.Presenters
             templateExamView.patientRecommendation = selectedPatient.recommendation;
             templateExamView.patientObservation = selectedPatient.observation;
 
-            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            foreach (Form form in Application.OpenForms)
             {
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateExamView, new TemplateRepository(), view.GetType());
+            new TemplateExamPresenter(templateExamView, view.GetType());
         }
 
-        private void getExamByPatient(object sender, EventArgs e)
+        private void getPatientExams(object sender, EventArgs e)
         {
             examList = examRepository.getPatientExams(view.patientId);
             if (examList.Any())
@@ -153,9 +152,20 @@ namespace DMMDigital.Presenters
         {
             SettingsModel settings = settingsRepository.getAllSettings();
 
-            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, settings), new ExamRepository(), true, examOpeningMode);
-            Application.OpenForms.Cast<Form>().First().Hide();
-            (view as Form).Close();
+            FormCollection openForms = Application.OpenForms;
+
+            for (int counter = 0; counter < openForms.Count; counter++)
+            {
+                if (counter == 0)
+                {
+                    openForms[counter].Hide();
+                    continue;
+                }
+
+                openForms[counter].Close();
+            }
+
+            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient), true, examOpeningMode);
         }
 
         private void deleteExam(object sender, EventArgs e)
@@ -179,7 +189,7 @@ namespace DMMDigital.Presenters
                 examRepository.deleteExam(view.selectedExamId);
 
                 MessageBox.Show(Resources.messageExamDeleted);
-                getExamByPatient(this, EventArgs.Empty);
+                getPatientExams(this, EventArgs.Empty);
             }
         }
 
@@ -252,7 +262,7 @@ namespace DMMDigital.Presenters
             new TemplateSwitchPresenter(templateSwitchView, view.selectedExamId, view.selectedTemplateId);
 
             (templateSwitchView as Form).ShowDialog();
-            getExamByPatient(sender, e);
+            getPatientExams(sender, e);
         }
     }
 }

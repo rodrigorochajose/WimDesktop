@@ -100,5 +100,10 @@ namespace DMMDigital._Repositories
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public bool patientHasExams(int patientId)
+        {
+            return context.exam.Any(e => e.patientId == patientId);
+        }
     }
 }

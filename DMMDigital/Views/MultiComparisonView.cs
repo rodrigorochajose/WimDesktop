@@ -139,10 +139,7 @@ namespace DMMDigital.Views
         {
             List<MultiComparisonView> openedForms = Application.OpenForms.OfType<MultiComparisonView>().ToList();
 
-            foreach (MultiComparisonView form in openedForms)
-            {
-                form.Close();
-            }
+            openedForms.ForEach(f => f.Close());
         }
 
         private void zoomIn()

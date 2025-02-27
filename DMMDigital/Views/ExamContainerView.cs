@@ -111,7 +111,7 @@ namespace DMMDigital.Views
 
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.OpenForms.Cast<Form>().First().Show();
+            Application.OpenForms[0].Show();
             eventDestroySensor?.Invoke(this, e);
         }
 
@@ -119,10 +119,7 @@ namespace DMMDigital.Views
         {
             List<ExamView> openedExams = Application.OpenForms.OfType<ExamView>().ToList();
 
-            foreach (ExamView exam in openedExams)
-            {
-                exam.Close();
-            }
+            openedExams.ForEach(exam => exam.Close());
 
             eventCloseTwain?.Invoke(this, e);
         }

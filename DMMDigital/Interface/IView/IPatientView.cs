@@ -12,6 +12,7 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventShowEditPatientForm;
         event EventHandler eventShowAddPatientForm;
         event EventHandler eventDeletePatient;
+        event EventHandler eventOpenAllExams;
 
         void setPatientList(BindingSource patientList);
     }

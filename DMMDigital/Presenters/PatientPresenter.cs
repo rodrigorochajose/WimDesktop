@@ -31,6 +31,7 @@ namespace DMMDigital.Presenters
 
             view.eventSearchPatient += searchPatient;
             view.eventShowAddPatientForm += showAddPatientForm;
+            view.eventOpenAllExams += openAllExams;
 
             view.setPatientList(patientBindingSource);
 
@@ -109,5 +110,33 @@ namespace DMMDigital.Presenters
 
             return null;
         }
+
+        private void openAllExams(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!examRepository.patientHasExams(view.selectedPatientId))
+                {
+                    MessageBox.Show("O Paciente não possui exames");
+                    return;
+                }
+
+                PatientModel patient = patientRepository.getPatientById(view.selectedPatientId);
+
+                List<ExamModel> patientExams = examRepository.getPatientExams(view.selectedPatientId).ToList();
+
+                new ExamPresenter(new ExamView(patientExams.First().id, patient), true, "newContainer");
+
+                foreach (ExamModel exam in patientExams.Skip(1))
+                {
+                    new ExamPresenter(new ExamView(exam.id, patient), true, "newPage");
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
+

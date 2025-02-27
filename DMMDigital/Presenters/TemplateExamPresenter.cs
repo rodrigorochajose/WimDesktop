@@ -12,16 +12,15 @@ namespace DMMDigital.Presenters
     public class TemplateExamPresenter
     {
         private readonly ITemplateExamView templateExamView;
-        private readonly ITemplateRepository templateRepository;
+        private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         private string examOpeningMode = "newPage";
 
-        public TemplateExamPresenter(ITemplateExamView view, ITemplateRepository repository, Type calledFromView)
+        public TemplateExamPresenter(ITemplateExamView view, Type calledFromView)
         {
             templateExamView = view;
-            templateRepository = repository;
 
             templateExamView.eventInitializeExam += showExamForm;
             templateExamView.eventAddNewTemplate += showAddTemplateForm;
@@ -37,16 +36,15 @@ namespace DMMDigital.Presenters
                 {
                     examOpeningMode = "newContainer";
 
-                    foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+                    foreach (Form form in Application.OpenForms)
                     {
-                        if (form.Text.Contains("WIM Desktop"))
+                        if (form.GetType() == typeof(MenuView))
                         {
                             form.Show();
+                            continue;
                         }
-                        else
-                        {
-                            form.Close();
-                        }
+
+                        form.Close();
                     };
                 }
             };
@@ -60,13 +58,11 @@ namespace DMMDigital.Presenters
                 name = templateExamView.patientName,
             };
 
-            SettingsModel settings = settingsRepository.getAllSettings();
-
-            ExamView examView = new ExamView(patient, templateExamView.selectedTemplateId, templateExamView.templateFrames, templateExamView.selectedTemplateName, templateExamView.sessionName, settings);
+            ExamView examView = new ExamView(patient, templateExamView.selectedTemplateId, templateExamView.templateFrames, templateExamView.selectedTemplateName, templateExamView.sessionName);
             (templateExamView as Form).Close();
             Application.OpenForms.Cast<Form>().First().Hide();
 
-            new ExamPresenter(examView, new ExamRepository(), false, examOpeningMode);
+            new ExamPresenter(examView, false, examOpeningMode);
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

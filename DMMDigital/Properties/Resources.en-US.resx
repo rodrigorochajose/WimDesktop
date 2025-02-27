@@ -470,4 +470,7 @@
   <data name="messageBinAlreadyEmpty" xml:space="preserve">
     <value>The Recycle Bin is already empty</value>
   </data>
+  <data name="messageNoPathToExport" xml:space="preserve">
+    <value>Choose a path to export !</value>
+  </data>
 </root>

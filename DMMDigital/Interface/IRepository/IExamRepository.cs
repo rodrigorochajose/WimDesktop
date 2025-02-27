@@ -13,5 +13,6 @@ namespace DMMDigital.Interface.IRepository
         bool examHasImages(int examId);
         void updateExamTemplate(int examId, int templateId);
         void updateExamLastChange(int examId);
+        bool patientHasExams(int patientId);
     }
 }

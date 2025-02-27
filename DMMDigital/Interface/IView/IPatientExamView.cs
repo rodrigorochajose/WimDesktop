@@ -19,13 +19,11 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventDeletePatient;
 
         event EventHandler eventShowFormNewExam;
-        event EventHandler eventGetPatientExams;
         event EventHandler eventOpenExam;
         event EventHandler eventDeleteExam;
         event EventHandler eventExportExam;
         event EventHandler eventSwitchTemplate;
 
         void setExamList(BindingSource examList);
-
     }
 }

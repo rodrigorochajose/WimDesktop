@@ -8,6 +8,7 @@ using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -16,26 +17,23 @@ namespace DMMDigital.Presenters
     public class ExamPresenter
     {
         private readonly IExamView examView;
-        private readonly IExamRepository examRepository;
+        private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IRulerLengthRepository rulerLengthRepository = new RulerLengthRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly string examOpeningMode;
 
-        public ExamPresenter(IExamView view, IExamRepository repository, bool openingExam, string examOpeningMode)
+        public ExamPresenter(IExamView view, bool openingExam, string examOpeningMode)
         {
-            examView = view;
-            examRepository = repository;
             this.examOpeningMode = examOpeningMode;
-
-            examView.eventSaveExam += saveExam;
-            examView.eventUpdateExamLastChange += updateExamLastChange;
-            examView.eventSaveExamImage += saveExamImage;
-            examView.eventSaveExamImageDrawing += saveExamImageDrawing;
-            examView.eventGetPatient += getPatient;
+            
+            examView = view;
+            examView.settings = settingsRepository.getAllSettings();
+            associateEvents();
 
             if (openingExam)
             {
@@ -43,6 +41,15 @@ namespace DMMDigital.Presenters
             }
 
             initializeExam();
+        }
+
+        public void associateEvents()
+        {
+            examView.eventSaveExam += saveExam;
+            examView.eventUpdateExamLastChange += updateExamLastChange;
+            examView.eventSaveExamImage += saveExamImage;
+            examView.eventSaveExamImageDrawing += saveExamImageDrawing;
+            examView.eventGetPatient += getPatient;
         }
 
         public void initializeExam()
@@ -53,7 +60,7 @@ namespace DMMDigital.Presenters
             }
             else
             {
-                Form examContainerView = Application.OpenForms.Cast<Form>().First(f => f.GetType() == typeof(ExamContainerView));
+                Form examContainerView = Application.OpenForms.Cast<ExamContainerView>().FirstOrDefault();
 
                 if ((examContainerView as ExamContainerView).patientId != examView.patient.id)
                 {
@@ -76,13 +83,11 @@ namespace DMMDigital.Presenters
             try
             {
                 ExamModel exam = examRepository.getExam(examView.examId);
-                examView.examId = exam.id;
-                examView.patient.id = exam.patientId;
                 examView.sessionName = exam.sessionName;
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath += $"\\{examView.patient.id}\\{examView.examId}";
+                examView.examPath = Path.Combine(settingsRepository.getExamPath(), $"{examView.patient.id}\\{examView.examId}");
                 examView.templateId = exam.templateId;
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.examId).ToList();

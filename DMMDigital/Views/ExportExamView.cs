@@ -180,98 +180,103 @@ namespace DMMDigital.Views
             if (!checkBoxExportOriginalImage.Checked && !checkBoxExportEditedImage.Checked)
             {
                 MessageBox.Show(Resources.messageExamExportMode);
+                return;
+            }
+
+            if (pathToExport == "" || pathToExport == null)
+            {
+                MessageBox.Show(Resources.messageNoPathToExport);
+                return;
+            }
+
+            eventSaveExportPath?.Invoke(this, EventArgs.Empty);
+
+            string path = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
+            Directory.CreateDirectory(path);
+
+            ImageFormat format = ImageFormat.Bmp;
+            string extension = ".bmp";
+
+            List<string> files = new List<string>();
+
+            List<CheckBox> checkBoxes = getAllFrameCheckBox();
+                
+            switch (comboBoxFormat.InnerControl.SelectedItem)
+            {
+                case "TIFF":
+                    format = ImageFormat.Tiff;
+                    extension = ".tiff";
+                    break;
+                case "JPG":
+                    format = ImageFormat.Jpeg;
+                    extension = ".jpg";
+                    break;
+                case "JPEG":
+                    format = ImageFormat.Jpeg;
+                    extension = ".jpeg";
+                    break;
+                case "PNG":
+                    format = ImageFormat.Png;
+                    extension = ".png";
+                    break;
+                case "DICOM":
+                    extension = ".dicom";
+                    break;
+                case "RAW":
+                    extension = ".raw";
+                    break;
+                        
+            }
+
+            if (checkBoxExportOriginalImage.Checked)
+            {
+                foreach (CheckBox cb in checkBoxes)
+                {
+                    files.Add(Path.Combine(pathImages, $"{cb.Tag}_original.png"));
+                }
+            }
+
+            if (checkBoxExportEditedImage.Checked)
+            {
+                foreach (CheckBox cb in checkBoxes)
+                {
+                    string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}_edited.png");
+
+                    if (File.Exists(currentImagePath))
+                    {
+                        files.Add(currentImagePath);
+                    }
+                }
+            }
+
+            if (extension == ".dicom")
+            {
+                foreach (string file in files)
+                {
+                    Bitmap bmp = new Bitmap(file);
+                    getAndSaveDicomFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
+                }
+            }
+            else if (extension == ".raw")
+            {
+                foreach (string file in files)
+                {
+                    Bitmap bmp = new Bitmap(file);
+                    getAndSaveRawFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
+                }
             }
             else
             {
-                eventSaveExportPath?.Invoke(this, EventArgs.Empty);
-
-                string path = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
-                Directory.CreateDirectory(path);
-
-                ImageFormat format = ImageFormat.Bmp;
-                string extension = ".bmp";
-
-                List<string> files = new List<string>();
-
-                List<CheckBox> checkBoxes = getAllFrameCheckBox();
-                
-                switch (comboBoxFormat.InnerControl.SelectedItem)
+                foreach (string file in files)
                 {
-                    case "TIFF":
-                        format = ImageFormat.Tiff;
-                        extension = ".tiff";
-                        break;
-                    case "JPG":
-                        format = ImageFormat.Jpeg;
-                        extension = ".jpg";
-                        break;
-                    case "JPEG":
-                        format = ImageFormat.Jpeg;
-                        extension = ".jpeg";
-                        break;
-                    case "PNG":
-                        format = ImageFormat.Png;
-                        extension = ".png";
-                        break;
-                    case "DICOM":
-                        extension = ".dicom";
-                        break;
-                    case "RAW":
-                        extension = ".raw";
-                        break;
-                        
+                    Bitmap imageToExport = new Bitmap(file);
+                    string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(file), extension);
+                    imageToExport.Save(Path.Combine(path, fileName));
                 }
-
-                if (checkBoxExportOriginalImage.Checked)
-                {
-                    foreach (CheckBox cb in checkBoxes)
-                    {
-                        files.Add(Path.Combine(pathImages, $"{cb.Tag}_original.png"));
-                    }
-                }
-
-                if (checkBoxExportEditedImage.Checked)
-                {
-                    foreach (CheckBox cb in checkBoxes)
-                    {
-                        string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}_edited.png");
-
-                        if (File.Exists(currentImagePath))
-                        {
-                            files.Add(currentImagePath);
-                        }
-                    }
-                }
-
-                if (extension == ".dicom")
-                {
-                    foreach (string file in files)
-                    {
-                        Bitmap bmp = new Bitmap(file);
-                        getAndSaveDicomFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
-                    }
-                }
-                else if (extension == ".raw")
-                {
-                    foreach (string file in files)
-                    {
-                        Bitmap bmp = new Bitmap(file);
-                        getAndSaveRawFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
-                    }
-                }
-                else
-                {
-                    foreach (string file in files)
-                    {
-                        Bitmap imageToExport = new Bitmap(file);
-                        string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(file), extension);
-                        imageToExport.Save(Path.Combine(path, fileName));
-                    }
-                }
-
-                MessageBox.Show(Resources.messageExamExportSucess);
-                Close();
             }
+
+            MessageBox.Show(Resources.messageExamExportSucess);
+            Close();
         }
 
         private void getAndSaveDicomFile(Bitmap bitmap, string path)

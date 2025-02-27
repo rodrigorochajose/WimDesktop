@@ -19,8 +19,8 @@ namespace DMMDigital.Interface.IView
         SensorModel sensor { get; set; }
         bool sensorConnected { get; set; }
         string acquireMode { get; set; }
-
         bool twainAutoTake { get; set; }
+        SettingsModel settings { get; set; }
 
         event EventHandler eventSaveExam;
         event EventHandler eventUpdateExamLastChange;
@@ -30,7 +30,6 @@ namespace DMMDigital.Interface.IView
         event EventHandler eventCloseSingleExam;
         event EventHandler eventChangeAcquireMode;
         event EventHandler eventAcquireTwain;
-
 
         void selectFrame(Frame frameToSelected = null);
         void loadImageOnMainPictureBox();

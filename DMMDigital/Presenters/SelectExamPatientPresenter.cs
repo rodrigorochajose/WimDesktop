@@ -101,13 +101,12 @@ namespace DMMDigital.Presenters
             templateView.patientRecommendation = selectedPatient.recommendation;
             templateView.patientObservation = selectedPatient.observation;
 
-            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            foreach (Form form in Application.OpenForms)
             {
-                //loadAllPatients();
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateView, new TemplateRepository(), view.GetType());
+            new TemplateExamPresenter(templateView, view.GetType());
         }
     }
 }

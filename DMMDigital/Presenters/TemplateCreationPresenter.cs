@@ -11,13 +11,12 @@ namespace DMMDigital.Presenters
     public class TemplateCreationPresenter
     {
         private readonly ITemplateCreationView templateCreationView;
-        private readonly ITemplateRepository templateRepository;
+        private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public TemplateCreationPresenter(ITemplateCreationView view, ITemplateRepository repository) 
+        public TemplateCreationPresenter(ITemplateCreationView view) 
         { 
             templateCreationView = view;
-            templateRepository = repository;
 
             templateCreationView.eventSaveTemplate += saveTemplate;
 

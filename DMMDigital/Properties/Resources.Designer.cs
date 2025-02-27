@@ -829,6 +829,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Selecione um caminho para exportar !.
+        /// </summary>
+        internal static string messageNoPathToExport {
+            get {
+                return ResourceManager.GetString("messageNoPathToExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente possui exames, não será possível excluí-lo..
         /// </summary>
         internal static string messagePatientCannotDelete {

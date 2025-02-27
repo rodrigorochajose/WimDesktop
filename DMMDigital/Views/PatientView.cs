@@ -19,6 +19,7 @@ namespace DMMDigital.Views
         public event EventHandler eventShowAddPatientForm;
         public event EventHandler eventShowEditPatientForm;
         public event EventHandler eventDeletePatient;
+        public event EventHandler eventOpenAllExams;
 
         public PatientView()
         {
@@ -95,7 +96,19 @@ namespace DMMDigital.Views
                 return;
             }
 
+            Hide();
+            
             new PatientExamPresenter(new PatientExamView(), selectedPatientId, "newContainer");
+            
+            if (!IsDisposed)
+            {
+                Show();
+            }
+        }
+
+        private void buttonOpenExamsClick(object sender, EventArgs e)
+        {
+            eventOpenAllExams?.Invoke(this, EventArgs.Empty);
         }
     }
 }
