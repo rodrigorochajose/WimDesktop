@@ -60,7 +60,7 @@ namespace DMMDigital.Presenters
             }
             else
             {
-                Form examContainerView = Application.OpenForms.Cast<ExamContainerView>().FirstOrDefault();
+                Form examContainerView = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
 
                 if ((examContainerView as ExamContainerView).patientId != examView.patient.id)
                 {

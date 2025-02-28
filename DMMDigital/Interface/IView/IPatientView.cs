@@ -7,12 +7,16 @@ namespace DMMDigital.Interface.IView
     {
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
+        string columnNameToOrder { get; set; }
+        bool isAsceding { get; set; }
 
         event EventHandler eventSearchPatient;
         event EventHandler eventShowEditPatientForm;
         event EventHandler eventShowAddPatientForm;
         event EventHandler eventDeletePatient;
         event EventHandler eventOpenAllExams;
+        event EventHandler eventOrderDataGridView;
+
 
         void setPatientList(BindingSource patientList);
     }

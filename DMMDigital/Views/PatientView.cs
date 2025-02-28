@@ -14,12 +14,15 @@ namespace DMMDigital.Views
             set { textBoxSearchPatient.Text = value; }
         }
         public int selectedPatientId { get; set; }
+        public string columnNameToOrder { get; set; }
+        public bool isAsceding { get; set; } = false;
 
         public event EventHandler eventSearchPatient;
         public event EventHandler eventShowAddPatientForm;
         public event EventHandler eventShowEditPatientForm;
         public event EventHandler eventDeletePatient;
         public event EventHandler eventOpenAllExams;
+        public event EventHandler eventOrderDataGridView;
 
         public PatientView()
         {
@@ -38,48 +41,21 @@ namespace DMMDigital.Views
                 }
             };
 
-            Load += (sender, e) =>
-            {
-                dataGridViewPatient.SelectionChanged += (s, ev) =>
-                {
-                    if (dataGridViewPatient.SelectedRows.Count > 0)
-                    {
-                        selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["columnPatientId"].Value.ToString());
-                    }
-                };
-            };
-
             textBoxSearchPatient.InnerTextBox.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
+        }
 
-            dataGridViewPatient.CellContentClick += (s, e) =>
+        private void patientViewLoad(object sender, EventArgs e)
+        {
+            dataGridViewPatient.SelectionChanged += (s, ev) =>
             {
-                if (e.RowIndex != -1)
+                if (dataGridViewPatient.SelectedRows.Count > 0)
                 {
-                    if (e.ColumnIndex == 0)
-                    {
-                        eventShowEditPatientForm?.Invoke(this, EventArgs.Empty);
-                    }
-                    else if (e.ColumnIndex == 1)
-                    {
-                        eventDeletePatient?.Invoke(this, EventArgs.Empty);
-
-                        dataGridViewPatient.Rows[0].Selected = true;
-                    }
+                    selectedPatientId = int.Parse(dataGridViewPatient.CurrentRow.Cells["columnPatientId"].Value.ToString());
                 }
-            };
-
-            buttonSearchPatient.Click += delegate 
-            { 
-                eventSearchPatient?.Invoke(this, EventArgs.Empty); 
-            };
-
-            buttonNewPatient.Click += delegate 
-            { 
-                eventShowAddPatientForm?.Invoke(this, EventArgs.Empty); 
             };
         }
 
@@ -110,5 +86,29 @@ namespace DMMDigital.Views
         {
             eventOpenAllExams?.Invoke(this, EventArgs.Empty);
         }
+
+        private void buttonNewPatientClick(object sender, EventArgs e)
+        {
+            eventShowAddPatientForm?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void buttonSearchPatientClick(object sender, EventArgs e)
+        {
+            eventSearchPatient?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void dataGridViewPatientColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            columnNameToOrder = dataGridViewPatient.Columns[e.ColumnIndex].Name;
+
+            eventOrderDataGridView?.Invoke(sender, EventArgs.Empty);
+        }
+    }
+
+    public class PatientModelDGV
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public DateTime? lastChange { get; set; }
     }
 }

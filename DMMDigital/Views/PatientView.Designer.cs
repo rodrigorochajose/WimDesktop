@@ -134,6 +134,7 @@
             this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
             this.buttonSearchPatient.Name = "buttonSearchPatient";
             this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            this.buttonSearchPatient.Click += new System.EventHandler(this.buttonSearchPatientClick);
             // 
             // roundedPanel1
             // 
@@ -185,11 +186,13 @@
             this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
             this.buttonNewPatient.Name = "buttonNewPatient";
             this.buttonNewPatient.UseVisualStyleBackColor = false;
+            this.buttonNewPatient.Click += new System.EventHandler(this.buttonNewPatientClick);
             // 
             // dataGridViewPatient
             // 
             this.dataGridViewPatient.AllowUserToAddRows = false;
             this.dataGridViewPatient.AllowUserToDeleteRows = false;
+            this.dataGridViewPatient.AllowUserToOrderColumns = true;
             this.dataGridViewPatient.AllowUserToResizeColumns = false;
             this.dataGridViewPatient.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
@@ -243,6 +246,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPatient.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatientColumnHeaderMouseClick);
             // 
             // columnPatientId
             // 
@@ -259,6 +263,7 @@
             resources.ApplyResources(this.columnPatientName, "columnPatientName");
             this.columnPatientName.Name = "columnPatientName";
             this.columnPatientName.ReadOnly = true;
+            this.columnPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // columnLastChange
             // 
@@ -267,6 +272,7 @@
             resources.ApplyResources(this.columnLastChange, "columnLastChange");
             this.columnLastChange.Name = "columnLastChange";
             this.columnLastChange.ReadOnly = true;
+            this.columnLastChange.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // PatientView
             // 
@@ -281,6 +287,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PatientView";
+            this.Load += new System.EventHandler(this.patientViewLoad);
             this.roundedPanel2.ResumeLayout(false);
             this.roundedPanel2.PerformLayout();
             this.roundedPanel1.ResumeLayout(false);
@@ -299,14 +306,14 @@
         private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private Components.Rounded.RoundedButton buttonOpenExams;
         private Components.Rounded.RoundedButton buttonPatientExams;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLastChange;
         private Components.Rounded.RoundedPanel roundedPanel2;
         private Components.Rounded.RoundedDateTimePicker roundedDateTimePicker1;
         private Components.Rounded.RoundedDateTimePicker roundedDateTimePicker2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnLastChange;
     }
 }

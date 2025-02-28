@@ -7,6 +7,7 @@ using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using DMMDigital.Views;
+using MoreLinq;
 using MoreLinq.Extensions;
 
 namespace DMMDigital.Presenters
@@ -15,7 +16,7 @@ namespace DMMDigital.Presenters
     {
         public PatientView view { get; }
 
-        private PatientModel selectedPatient;
+        private List<PatientModelDGV> patientsDGV = new List<PatientModelDGV>();
         private IEnumerable<PatientModel> patientList;
         private readonly BindingSource patientBindingSource;
         private readonly IPatientRepository patientRepository = new PatientRepository();
@@ -30,6 +31,7 @@ namespace DMMDigital.Presenters
             view.eventSearchPatient += searchPatient;
             view.eventShowAddPatientForm += showAddPatientForm;
             view.eventOpenAllExams += openAllExams;
+            view.eventOrderDataGridView += orderDataGridView;
 
             view.setPatientList(patientBindingSource);
 
@@ -38,18 +40,29 @@ namespace DMMDigital.Presenters
 
         private void searchPatient(object sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
+            //bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
+            //patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
 
-            if (patientList.Any())
-            {
-                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
-            }
-            else
-            {
-                view.selectedPatientId = 0;
-                patientBindingSource.Clear();
-            }
+            //if (patientList.Any())
+            //{
+            //    patientsDGV = new List<PatientModelDGV>();
+
+            //    patientsDGV = patientList.Select(p => new PatientModelDGV 
+            //    { 
+            //        id = p.id, 
+            //        name = p.name, 
+            //        lastChange = getLastUpdatedExam(p.id) 
+            //    }).ToList();
+
+
+
+            //    patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.lastChange });
+            //}
+            //else
+            //{
+            //    view.selectedPatientId = 0;
+            //    patientBindingSource.Clear();
+            //}
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
@@ -62,13 +75,20 @@ namespace DMMDigital.Presenters
 
         private void loadAllPatients()
         {
-            patientList = patientRepository.getAllPatients();
+            IEnumerable<PatientModel> patients = patientRepository.getAllPatients();
 
-            if (patientList.Any())
+            if (patients.Any())
             {
-                view.selectedPatientId = patientList.First().id;
+                view.selectedPatientId = patients.First().id;
 
-                patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, lastChange = getLastUpdatedExam(p.id)});
+                patientsDGV = patients.Select(p => new PatientModelDGV
+                {
+                    id = p.id,
+                    name = p.name,
+                    lastChange = getLastUpdatedExam(p.id)
+                }).ToList();
+
+                patientBindingSource.DataSource = patientsDGV;
             }
         }
 
@@ -109,6 +129,23 @@ namespace DMMDigital.Presenters
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void orderDataGridView(object sender, EventArgs e)
+        {
+            OrderByDirection sortMode = view.isAsceding ? OrderByDirection.Ascending : OrderByDirection.Descending;
+
+            if (view.columnNameToOrder == "columnPatientName")
+            {
+                patientBindingSource.DataSource = view.isAsceding ? patientsDGV.OrderBy(p => p.name) : patientsDGV.OrderByDescending(p => p.name);
+            }
+            else
+            {
+                patientBindingSource.DataSource = view.isAsceding ? patientsDGV.OrderBy(p => p.lastChange) : patientsDGV.OrderByDescending(p => p.lastChange);
+
+            }
+
+            view.isAsceding = !view.isAsceding;
         }
     }
 }
