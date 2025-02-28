@@ -1,12 +1,11 @@
 ﻿using DMMDigital.Interface.IView;
 using DMMDigital.Properties;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class PatientManagerView : Form, IPatientManagerView
+    public partial class PatientCreationView : Form, IPatientCreationView
     {
         public int patientId { get; set; }
 
@@ -41,14 +40,10 @@ namespace DMMDigital.Views
         }
 
         public event EventHandler eventAddNewPatient;
-        public event EventHandler eventSaveEditedPatient;
 
-        private string action;
-
-        public PatientManagerView(string action)
+        public PatientCreationView()
         {
             InitializeComponent();
-            this.action = action;
 
             adjustComponent();
             associateEvents();
@@ -56,13 +51,6 @@ namespace DMMDigital.Views
 
         private void adjustComponent()
         {
-            if (action == "edit")
-            {
-                Text = Resources.titleEditPatient;
-                labelTitle.Text = Text;
-                labelTitle.Location = new Point(labelTitle.Location.X - 25, labelTitle.Location.Y);
-            }
-
             textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
             textBoxBirthDate.InnerMaskedTextBox.ValidatingType = typeof(DateTime);
 
@@ -80,7 +68,7 @@ namespace DMMDigital.Views
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    save();
+                    eventAddNewPatient?.Invoke(this, EventArgs.Empty);
                 }
                 else if (e.KeyChar == (char)Keys.Escape)
                 {
@@ -95,7 +83,7 @@ namespace DMMDigital.Views
 
             buttonSave.Click += delegate
             {
-                save();
+                eventAddNewPatient?.Invoke(this, EventArgs.Empty);
             };
 
             textBoxBirthDate.InnerMaskedTextBox.KeyPress += (s, e) =>
@@ -125,18 +113,6 @@ namespace DMMDigital.Views
             {
                 Close();
             };
-        }
-
-        private void save()
-        {
-            if (action == "edit")
-            {
-                eventSaveEditedPatient?.Invoke(this, EventArgs.Empty);
-            }
-            else
-            {
-                eventAddNewPatient?.Invoke(this, EventArgs.Empty);
-            }
         }
     }
 }

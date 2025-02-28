@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class FramesComparisonDialog
+    partial class FramesComparisonSelectionView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FramesComparisonDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FramesComparisonSelectionView));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -101,7 +101,7 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = false;
             // 
-            // FramesComparisonDialog
+            // FramesComparisonSelectionView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,7 +111,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FramesComparisonDialog";
+            this.Name = "FramesComparisonSelectionView";
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();

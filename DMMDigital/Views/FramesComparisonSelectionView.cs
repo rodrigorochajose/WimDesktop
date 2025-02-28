@@ -9,14 +9,14 @@ using DMMDigital.Properties;
 
 namespace DMMDigital.Views
 {
-    public partial class FramesComparisonDialog : Form, IFramesComparisonDialog
+    public partial class FramesComparisonSelectionView : Form, IFramesComparisonSelectionView
     {
         public List<Frame> frames { get; set; }
         public List<Frame> selectedFrames { get; set; }
 
         private int patientId = 0;
 
-        public FramesComparisonDialog(List<Frame> frames, int patientId)
+        public FramesComparisonSelectionView(List<Frame> frames, int patientId)
         {
             InitializeComponent();
             adjustComponent();

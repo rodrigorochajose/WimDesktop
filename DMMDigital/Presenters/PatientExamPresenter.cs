@@ -115,22 +115,22 @@ namespace DMMDigital.Presenters
 
         private void newExam(object sender, EventArgs e)
         {
-            ITemplateExamView templateExamView = new TemplateExamView();
+            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
 
             PatientModel selectedPatient = patientRepository.getPatientById(view.patientId);
-            templateExamView.patientId = selectedPatient.id;
-            templateExamView.patientName = selectedPatient.name;
-            templateExamView.patientBirthDate = selectedPatient.birthDate;
-            templateExamView.patientPhone = selectedPatient.phone;
-            templateExamView.patientRecommendation = selectedPatient.recommendation;
-            templateExamView.patientObservation = selectedPatient.observation;
+            examTemplateSelectionView.patientId = selectedPatient.id;
+            examTemplateSelectionView.patientName = selectedPatient.name;
+            examTemplateSelectionView.patientBirthDate = selectedPatient.birthDate;
+            examTemplateSelectionView.patientPhone = selectedPatient.phone;
+            examTemplateSelectionView.patientRecommendation = selectedPatient.recommendation;
+            examTemplateSelectionView.patientObservation = selectedPatient.observation;
 
             foreach (Form form in Application.OpenForms)
             {
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateExamView, view.GetType());
+            new ExamTemplateSelectionPresenter(examTemplateSelectionView, view.GetType());
         }
 
         private void getPatientExams(object sender, EventArgs e)

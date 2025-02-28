@@ -38,7 +38,7 @@ namespace DMMDigital.Presenters
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
-            new TemplateCreationDialogPresenter(new TemplateCreationDialog());
+            new TemplateCreationSetupPresenter(new TemplateCreationSetupView());
             templateSwitchView.setTemplateList(templateRepository.getAllTemplates());
             templateSwitchView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }

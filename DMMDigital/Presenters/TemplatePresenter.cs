@@ -36,7 +36,7 @@ namespace DMMDigital.Presenters
         private void showNewTemplateForm(object sender, EventArgs e)
         {
             view.Hide();
-            new TemplateCreationDialogPresenter(new TemplateCreationDialog());
+            new TemplateCreationSetupPresenter(new TemplateCreationSetupView());
             view.Show();
             getTemplates();
         }

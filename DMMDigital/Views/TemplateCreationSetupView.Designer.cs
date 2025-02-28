@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class TemplateCreationDialog
+    partial class TemplateCreationSetupView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationDialog));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationSetupView));
             this.label4 = new System.Windows.Forms.Label();
             this.checkBoxGenerateMode = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -219,7 +219,7 @@
             resources.ApplyResources(this.panelGenerateTemplate, "panelGenerateTemplate");
             this.panelGenerateTemplate.Name = "panelGenerateTemplate";
             // 
-            // TemplateCreationDialog
+            // TemplateCreationSetupView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -230,7 +230,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TemplateCreationDialog";
+            this.Name = "TemplateCreationSetupView";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);

@@ -18,8 +18,6 @@ namespace DMMDigital.Presenters
         private PatientModel selectedPatient;
         private IEnumerable<PatientModel> patientList;
         private readonly BindingSource patientBindingSource;
-
-        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IExamRepository examRepository = new ExamRepository();
 
@@ -56,35 +54,10 @@ namespace DMMDigital.Presenters
 
         private void showAddPatientForm(object sender, EventArgs e)
         {
-            IPatientManagerView patientHandlerView = new PatientManagerView("add");
-            patientHandlerView.eventAddNewPatient += addNewPatient;
-            (patientHandlerView as Form).ShowDialog();
+            IPatientCreationView patientCreationView = new PatientCreationView();
+            new PatientCreationPresenter(patientCreationView);
+            (patientCreationView as Form).ShowDialog();
             loadAllPatients();
-        }
-
-        private void addNewPatient(object sender, EventArgs e)
-        {
-            try
-            {
-                selectedPatient = new PatientModel
-                {
-                    name = (sender as PatientManagerView).patientName,
-                    birthDate = (sender as PatientManagerView).patientBirthDate,
-                    phone = (sender as PatientManagerView).patientPhone,
-                    recommendation = (sender as PatientManagerView).patientRecommendation,
-                    observation = (sender as PatientManagerView).patientObservation
-                };
-
-                new Common.ModelDataValidation().Validate(selectedPatient);
-                patientRepository.addPatient(selectedPatient);
-                (sender as PatientManagerView).Close();
-
-                string examPath = settingsRepository.getExamPath();
-            } 
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void loadAllPatients()

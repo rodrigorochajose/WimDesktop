@@ -1073,7 +1073,7 @@ namespace DMMDigital.Views
 
         private void buttonNewExamClick(object sender, EventArgs e)
         {
-            ITemplateExamView chooseTemplateView = new TemplateExamView();
+            IExamTemplateSelectionView chooseTemplateView = new ExamTemplateSelectionView();
             eventGetPatient?.Invoke(this, e);
 
             chooseTemplateView.patientId = patient.id;
@@ -1083,7 +1083,7 @@ namespace DMMDigital.Views
             chooseTemplateView.patientRecommendation = patient.recommendation;
             chooseTemplateView.patientObservation = patient.observation;
 
-            new TemplateExamPresenter(chooseTemplateView, GetType());
+            new ExamTemplateSelectionPresenter(chooseTemplateView, GetType());
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)
@@ -1251,7 +1251,7 @@ namespace DMMDigital.Views
         {
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
-            IFramesComparisonDialog compareFrames = new FramesComparisonDialog(frames, patient.id);
+            IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patient.id);
             (compareFrames as Form).ShowDialog();
         }
 

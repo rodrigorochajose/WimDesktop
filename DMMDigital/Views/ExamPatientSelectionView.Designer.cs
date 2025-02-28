@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class SelectExamPatientView
+    partial class ExamPatientSelectionView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectExamPatientView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamPatientSelectionView));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,12 +37,12 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.panelHeader = new System.Windows.Forms.Panel();
+            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.dataGridViewPatient = new DMMDigital.Components.Rounded.RoundedDataGridView();
-            this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +72,42 @@
             resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.Name = "panelHeader";
             // 
+            // textBoxSearchPatient
+            // 
+            resources.ApplyResources(this.textBoxSearchPatient, "textBoxSearchPatient");
+            this.textBoxSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.White;
+            this.textBoxSearchPatient.BorderRadius = 10;
+            this.textBoxSearchPatient.BorderSize = 10;
+            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
+            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
+            // 
+            // buttonCancel
+            // 
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseVisualStyleBackColor = false;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancelClick);
+            // 
+            // buttonSelectPatient
+            // 
+            resources.ApplyResources(this.buttonSelectPatient, "buttonSelectPatient");
+            this.buttonSelectPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSelectPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSelectPatient.BorderWidth = 5F;
+            this.buttonSelectPatient.CornerRadius = 5;
+            this.buttonSelectPatient.FlatAppearance.BorderSize = 0;
+            this.buttonSelectPatient.ForeColor = System.Drawing.Color.White;
+            this.buttonSelectPatient.Name = "buttonSelectPatient";
+            this.buttonSelectPatient.UseVisualStyleBackColor = false;
+            this.buttonSelectPatient.Click += new System.EventHandler(this.buttonSelectPatientClick);
+            // 
             // buttonNewPatient
             // 
             resources.ApplyResources(this.buttonNewPatient, "buttonNewPatient");
@@ -83,6 +119,7 @@
             this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
             this.buttonNewPatient.Name = "buttonNewPatient";
             this.buttonNewPatient.UseVisualStyleBackColor = false;
+            this.buttonNewPatient.Click += new System.EventHandler(this.buttonNewPatientClick);
             // 
             // buttonSearchPatient
             // 
@@ -94,6 +131,7 @@
             this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
             this.buttonSearchPatient.Name = "buttonSearchPatient";
             this.buttonSearchPatient.UseVisualStyleBackColor = false;
+            this.buttonSearchPatient.Click += new System.EventHandler(this.buttonSearchPatientClick);
             // 
             // dataGridViewPatient
             // 
@@ -153,40 +191,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridViewPatient.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewPatient.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            // 
-            // buttonSelectPatient
-            // 
-            resources.ApplyResources(this.buttonSelectPatient, "buttonSelectPatient");
-            this.buttonSelectPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSelectPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSelectPatient.BorderWidth = 5F;
-            this.buttonSelectPatient.CornerRadius = 5;
-            this.buttonSelectPatient.FlatAppearance.BorderSize = 0;
-            this.buttonSelectPatient.ForeColor = System.Drawing.Color.White;
-            this.buttonSelectPatient.Name = "buttonSelectPatient";
-            this.buttonSelectPatient.UseVisualStyleBackColor = false;
-            // 
-            // buttonCancel
-            // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
-            this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            // 
-            // textBoxSearchPatient
-            // 
-            resources.ApplyResources(this.textBoxSearchPatient, "textBoxSearchPatient");
-            this.textBoxSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.White;
-            this.textBoxSearchPatient.BorderRadius = 10;
-            this.textBoxSearchPatient.BorderSize = 10;
-            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
+            this.dataGridViewPatient.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPatientCellDoubleClick);
             // 
             // columnId
             // 
@@ -220,7 +225,7 @@
             this.columnPhone.Name = "columnPhone";
             this.columnPhone.ReadOnly = true;
             // 
-            // SelectExamPatientView
+            // ExamPatientSelectionView
             // 
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
@@ -235,7 +240,8 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "SelectExamPatientView";
+            this.Name = "ExamPatientSelectionView";
+            this.Load += new System.EventHandler(this.examPatientSelectionViewLoad);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();

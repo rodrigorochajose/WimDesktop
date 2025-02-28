@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Views
 {
-    public partial class TemplateCreationDialog : Form, ITemplateCreationDialog
+    public partial class TemplateCreationSetupView : Form, ITemplateCreationSetupView
     {
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messageTemplateRequiredName")]
         public string templateName 
@@ -70,7 +70,7 @@ namespace DMMDigital.Views
             { enumDict.horizontalRight, Resources.textHorizontalRight }
         };
 
-        public TemplateCreationDialog()
+        public TemplateCreationSetupView()
         {
             InitializeComponent();
             associateEvents();

@@ -5,29 +5,27 @@ using DMMDigital.Models;
 using DMMDigital.Views;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
-    public class SelectExamPatientPresenter
+    public class ExamPatientSelectionPresenter
     {
-        public SelectExamPatientView view { get; }
+        public ExamPatientSelectionView view { get; }
 
         private IEnumerable<PatientModel> patientList;
         private readonly BindingSource pacientesBindingSource;
 
         private readonly IPatientRepository patientRepository = new PatientRepository();
-        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
-        public SelectExamPatientPresenter(SelectExamPatientView view)
+        public ExamPatientSelectionPresenter(ExamPatientSelectionView view)
         {
             pacientesBindingSource = new BindingSource();
             this.view = view;
 
             view.eventSearchPatient += searchPatient;
-            view.eventNewPatient += newPatient;
+            view.eventAddNewPatient += showAddPatientForm;
             view.eventSelectPatient += showSelectTemplateForm;
 
             view.setPatientList(pacientesBindingSource);
@@ -47,39 +45,12 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void newPatient(object sender, EventArgs e)
+        private void showAddPatientForm(object sender, EventArgs e)
         {
-            IPatientManagerView patientHandlerView = new PatientManagerView("add");
-            patientHandlerView.eventAddNewPatient += addNewPatient;
-            (patientHandlerView as Form).ShowDialog();
-
+            IPatientCreationView patientCreationView = new PatientCreationView();
+            new PatientCreationPresenter(patientCreationView);
+            (patientCreationView as Form).ShowDialog();
             loadAllPatients();
-        }
-
-        private void addNewPatient(object sender, EventArgs e)
-        {
-            try
-            {
-                PatientModel newPatient = new PatientModel
-                {
-                    id = (sender as PatientManagerView).patientId,
-                    name = (sender as PatientManagerView).patientName,
-                    birthDate = (sender as PatientManagerView).patientBirthDate,
-                    phone = (sender as PatientManagerView).patientPhone,
-                    recommendation = (sender as PatientManagerView).patientRecommendation,
-                    observation = (sender as PatientManagerView).patientObservation,
-                };
-
-                new Common.ModelDataValidation().Validate(newPatient);
-                patientRepository.addPatient(newPatient);
-                (sender as PatientManagerView).Close();
-
-                string examPath = settingsRepository.getExamPath();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void searchPatient(object sender, EventArgs e)
@@ -91,7 +62,7 @@ namespace DMMDigital.Presenters
 
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
-            ITemplateExamView templateView = new TemplateExamView();
+            IExamTemplateSelectionView templateView = new ExamTemplateSelectionView();
             
             PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
             templateView.patientId = selectedPatient.id;
@@ -106,7 +77,7 @@ namespace DMMDigital.Presenters
                 form.Hide();
             }
 
-            new TemplateExamPresenter(templateView, view.GetType());
+            new ExamTemplateSelectionPresenter(templateView, view.GetType());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DMMDigital.Views
 {
-    partial class TemplateExamView
+    partial class ExamTemplateSelectionView
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateExamView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExamTemplateSelectionView));
             this.titulo = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -252,7 +252,7 @@
             resources.ApplyResources(this.label14, "label14");
             this.label14.Name = "label14";
             // 
-            // TemplateExamView
+            // ExamTemplateSelectionView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -267,7 +267,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TemplateExamView";
+            this.Name = "ExamTemplateSelectionView";
             this.roundedPanel2.ResumeLayout(false);
             this.roundedPanel2.PerformLayout();
             this.roundedPanel1.ResumeLayout(false);

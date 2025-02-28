@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface ISelectExamPatientView
+    public interface IExamPatientSelectionView
     {
         string searchedValue { get; set; }
         int selectedPatientId { get; set; }
 
         event EventHandler eventSearchPatient;
-        event EventHandler eventNewPatient;
+        event EventHandler eventAddNewPatient;
         event EventHandler eventSelectPatient;
 
         void setPatientList(BindingSource patientList);

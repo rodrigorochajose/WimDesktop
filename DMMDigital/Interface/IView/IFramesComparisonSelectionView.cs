@@ -3,7 +3,7 @@ using DMMDigital.Components;
 
 namespace DMMDigital.Interface.IView
 {
-    public interface IFramesComparisonDialog
+    public interface IFramesComparisonSelectionView
     {
         List<Frame> frames { get; set; }
         List<Frame> selectedFrames { get; set; }
