@@ -112,7 +112,7 @@ namespace DMMDigital.Views
         }
 
         private void buttonNewExamClick(object sender, EventArgs e)
-        {
+        { 
             if (patientId == 0)
             {
                 MessageBox.Show(Resources.messagePatientNotSelected);

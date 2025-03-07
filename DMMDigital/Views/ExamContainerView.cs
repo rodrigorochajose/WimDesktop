@@ -2,6 +2,7 @@
 using DMMDigital.Properties;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -142,6 +143,24 @@ namespace DMMDigital.Views
                     (sender as Form).Close();
                     return;
                 }
+            }
+        }
+
+        private void tabControlDrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabPage tabPage = tabControl.TabPages[e.Index];
+
+            Color backColor = e.Index == tabControl.SelectedIndex ? Color.FromArgb(191, 229, 235) : Color.White;
+            Color textColor = Color.Black;
+
+            using (Brush backBrush = new SolidBrush(backColor))
+            using (Brush textBrush = new SolidBrush(textColor))
+            using (Font font = new Font("Segoe UI", 8))
+            {
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+
+                StringFormat stringFormat = new StringFormat { LineAlignment = StringAlignment.Center, Alignment = StringAlignment.Center };
+                e.Graphics.DrawString(tabPage.Text, font, textBrush, e.Bounds, stringFormat);
             }
         }
     }

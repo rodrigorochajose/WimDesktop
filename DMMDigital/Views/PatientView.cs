@@ -2,6 +2,7 @@
 using DMMDigital.Presenters;
 using DMMDigital.Properties;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -17,10 +18,32 @@ namespace DMMDigital.Views
         public string columnNameToOrder { get; set; }
         public bool isAsceding { get; set; } = false;
 
+        public bool checkBoxFromState
+        {
+            get { return checkBoxFrom.Checked; }
+            set { checkBoxFrom.Checked = value; }
+        }
+
+        public DateTime dateFrom
+        {
+            get { return dateTimePickerFrom.Value; }
+            set { dateTimePickerFrom.Value = value; }
+        }
+
+        public bool checkBoxToState
+        {
+            get { return checkBoxTo.Checked; }
+            set { checkBoxTo.Checked = value; }
+        }
+
+        public DateTime dateTo
+        {
+            get { return dateTimePickerTo.Value; }
+            set { dateTimePickerTo.Value = value; }
+        }
+
         public event EventHandler eventSearchPatient;
         public event EventHandler eventShowAddPatientForm;
-        public event EventHandler eventShowEditPatientForm;
-        public event EventHandler eventDeletePatient;
         public event EventHandler eventOpenAllExams;
         public event EventHandler eventOrderDataGridView;
 
@@ -102,6 +125,34 @@ namespace DMMDigital.Views
             columnNameToOrder = dataGridViewPatient.Columns[e.ColumnIndex].Name;
 
             eventOrderDataGridView?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void checkBoxFromCheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerFrom.Enabled = checkBoxFrom.Checked;
+
+            if (checkBoxFrom.Checked)
+            {
+                dateTimePickerFrom.TextColor = Color.Gray;
+            }
+            else
+            {
+                dateTimePickerFrom.TextColor = Color.Silver;
+            }
+        }
+
+        private void checkBoxToCheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePickerTo.Enabled = checkBoxTo.Checked;
+
+            if (checkBoxTo.Checked)
+            {
+                dateTimePickerTo.TextColor = Color.Gray;
+            }
+            else
+            {
+                dateTimePickerTo.TextColor = Color.Silver;
+            }
         }
     }
 

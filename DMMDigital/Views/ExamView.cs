@@ -10,11 +10,9 @@ using System.Linq;
 using System.Windows.Forms;
 using DMMDigital.Models.Drawings;
 using DMMDigital.Components;
-using DMMDigital._Repositories;
 using DMMDigital.Presenters;
 using MoreLinq;
 using DMMDigital.Properties;
-using Emgu.CV;
 
 namespace DMMDigital.Views
 {
@@ -1088,7 +1086,7 @@ namespace DMMDigital.Views
 
         private void buttonOpenExamClick(object sender, EventArgs e)
         {
-            FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView()));
+            FormManager.instance.openForm<PatientView>(() => new PatientPresenter(new PatientView()));
         }
 
         private void buttonCloseExamClick(object sender, EventArgs e)

@@ -9,11 +9,14 @@ namespace DMMDigital.Interface.IView
         int selectedPatientId { get; set; }
         string columnNameToOrder { get; set; }
         bool isAsceding { get; set; }
+        bool checkBoxFromState { get; set; }
+        DateTime dateFrom { get; set; }
+        bool checkBoxToState { get; set; }
+        DateTime dateTo { get; set; }
+
 
         event EventHandler eventSearchPatient;
-        event EventHandler eventShowEditPatientForm;
         event EventHandler eventShowAddPatientForm;
-        event EventHandler eventDeletePatient;
         event EventHandler eventOpenAllExams;
         event EventHandler eventOrderDataGridView;
 

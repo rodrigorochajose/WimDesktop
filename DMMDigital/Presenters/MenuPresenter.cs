@@ -16,22 +16,22 @@ namespace DMMDigital.Presenters
 
             menuView.showSettingsView += delegate 
             {
-                FormManager.instance.showForm("settingsView", () => new SettingsPresenter(new SettingsView())); 
+                FormManager.instance.openForm<SettingsView>(() => new SettingsPresenter(new SettingsView())); 
             };
 
             menuView.showPatientView += delegate 
             {
-                FormManager.instance.showForm("patientView", () => new PatientPresenter(new PatientView())); 
+                FormManager.instance.openForm<PatientView>(() => new PatientPresenter(new PatientView())); 
             };
 
             menuView.showTemplateView += delegate 
             {
-                FormManager.instance.showForm("templateView", () => new TemplatePresenter(new TemplateView())); 
+                FormManager.instance.openForm<TemplateView>(() => new TemplatePresenter(new TemplateView())); 
             };
 
             menuView.showNewExamView += delegate 
             {
-                FormManager.instance.showForm("examPatientSelectionView", () => new ExamPatientSelectionPresenter(new ExamPatientSelectionView())); 
+                FormManager.instance.openForm<ExamPatientSelectionView>(() => new ExamPatientSelectionPresenter(new ExamPatientSelectionView())); 
             };
 
             generateDatabaseBackup();

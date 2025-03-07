@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DMMDigital.Views;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DMMDigital
@@ -7,29 +9,50 @@ namespace DMMDigital
     public class FormManager
     {
         private static readonly Lazy<FormManager> lazy = new Lazy<FormManager>(() => new FormManager());
-
         public static FormManager instance => lazy.Value;
 
-        private readonly Dictionary<string, Form> openForms;
+        private readonly Dictionary<Type, Form> openForms;
 
         public FormManager()
         {
-            openForms = new Dictionary<string, Form>();
+            openForms = new Dictionary<Type, Form>();
         }
 
-        public void showForm(string formKey, Func<object> createPresenter)
+        public void openForm<T>(Func<object> createPresenter) where T : Form
         {
-            if (openForms.ContainsKey(formKey))
+            Type formType = typeof(T);
+
+            if (openForms.ContainsKey(formType))
             {
-                openForms[formKey].BringToFront();
+                openForms[formType].BringToFront();
             }
             else
             {
                 var presenter = createPresenter();
                 var form = ((dynamic)presenter).view as Form;
-                form.FormClosed += (s, args) => openForms.Remove(formKey);
-                openForms[formKey] = form;
+
+                form.FormClosed += (s, args) => openForms.Remove(formType);
+                openForms[formType] = form;
+
                 form.Show();
+            }
+        }
+
+        public void closeAllExceptExamAndMenu()
+        {
+            List<Form> forms = Application.OpenForms.Cast<Form>().ToList();
+
+            for (int counter = 0; counter < forms.Count; counter++)
+            {
+                Type formType = forms[counter].GetType();
+
+                if (formType == typeof(MenuView))
+                {
+                    forms[counter].Hide();
+                    continue;
+                }
+                
+                forms[counter].Close();
             }
         }
     }

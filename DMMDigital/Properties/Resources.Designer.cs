@@ -72,9 +72,9 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap darkCalendar {
+        internal static System.Drawing.Bitmap grid {
             get {
-                object obj = ResourceManager.GetObject("darkCalendar", resourceCulture);
+                object obj = ResourceManager.GetObject("grid", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -82,9 +82,19 @@ namespace DMMDigital.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap grid {
+        internal static System.Drawing.Bitmap icon_16x16_calendar_gray {
             get {
-                object obj = ResourceManager.GetObject("grid", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_16x16_calendar_gray", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_16x16_calendar_silver {
+            get {
+                object obj = ResourceManager.GetObject("icon_16x16_calendar_silver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

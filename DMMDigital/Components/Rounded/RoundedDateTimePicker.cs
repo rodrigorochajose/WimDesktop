@@ -15,7 +15,7 @@ namespace DMMDigital.Components.Rounded
         private int borderRadius = 1;
 
         private bool droppedDown = false;
-        private Image calendarIcon = Resources.darkCalendar;
+        private Image calendarIcon = Resources.icon_16x16_calendar_gray;
         private RectangleF iconButtonArea;
         private const int calendarIconWidth = 34;
         private const int arrowIconWidth = 17;
@@ -108,6 +108,21 @@ namespace DMMDigital.Components.Rounded
         {
             base.OnKeyPress(e);
             e.Handled = true;
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (Enabled)
+            {
+                calendarIcon = Resources.icon_16x16_calendar_gray;
+            }
+            else
+            {
+                calendarIcon = Resources.icon_16x16_calendar_silver;
+            }
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)

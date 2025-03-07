@@ -17,7 +17,6 @@ namespace DMMDigital.Presenters
         public PatientView view { get; }
 
         private List<PatientModelDGV> patientsDGV = new List<PatientModelDGV>();
-        private IEnumerable<PatientModel> patientList;
         private readonly BindingSource patientBindingSource;
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IExamRepository examRepository = new ExamRepository();
@@ -40,29 +39,23 @@ namespace DMMDigital.Presenters
 
         private void searchPatient(object sender, EventArgs e)
         {
-            //bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
-            //patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
+            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
 
-            //if (patientList.Any())
-            //{
-            //    patientsDGV = new List<PatientModelDGV>();
+            string patientName = view.searchedValue == null ? "" : view.searchedValue;
+            DateTime dateFrom = view.checkBoxFromState ? view.dateFrom : new DateTime(2000, 01, 01);
+            DateTime dateTo = view.checkBoxToState ? view.dateTo : DateTime.Now;
 
-            //    patientsDGV = patientList.Select(p => new PatientModelDGV 
-            //    { 
-            //        id = p.id, 
-            //        name = p.name, 
-            //        lastChange = getLastUpdatedExam(p.id) 
-            //    }).ToList();
+            IEnumerable<PatientModelDGV> filteredPatients = patientsDGV.Where(p => p.name.ToLower().Contains(view.searchedValue.ToLower()) && p.lastChange?.Date > dateFrom.Date && p.lastChange?.Date < dateTo.Date);
 
-
-
-            //    patientBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.lastChange });
-            //}
-            //else
-            //{
-            //    view.selectedPatientId = 0;
-            //    patientBindingSource.Clear();
-            //}
+            if (filteredPatients.Any())
+            {
+                patientBindingSource.DataSource = filteredPatients;
+            }
+            else
+            {
+                view.selectedPatientId = 0;
+                patientBindingSource.Clear();
+            }
         }
 
         private void showAddPatientForm(object sender, EventArgs e)
@@ -113,6 +106,8 @@ namespace DMMDigital.Presenters
                     MessageBox.Show("O Paciente não possui exames");
                     return;
                 }
+
+                FormManager.instance.closeAllExceptExamAndMenu();
 
                 PatientModel patient = patientRepository.getPatientById(view.selectedPatientId);
 

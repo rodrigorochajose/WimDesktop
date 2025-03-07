@@ -36,11 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.roundedPanel2 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.checkBoxTo = new System.Windows.Forms.CheckBox();
+            this.checkBoxFrom = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.roundedDateTimePicker2 = new DMMDigital.Components.Rounded.RoundedDateTimePicker();
-            this.roundedDateTimePicker1 = new DMMDigital.Components.Rounded.RoundedDateTimePicker();
+            this.dateTimePickerTo = new DMMDigital.Components.Rounded.RoundedDateTimePicker();
+            this.dateTimePickerFrom = new DMMDigital.Components.Rounded.RoundedDateTimePicker();
             this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSearchPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
@@ -66,16 +68,32 @@
             this.roundedPanel2.BackColor = System.Drawing.Color.White;
             this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel2.BorderWidth = 5F;
+            this.roundedPanel2.Controls.Add(this.checkBoxTo);
+            this.roundedPanel2.Controls.Add(this.checkBoxFrom);
             this.roundedPanel2.Controls.Add(this.label4);
             this.roundedPanel2.Controls.Add(this.label3);
             this.roundedPanel2.Controls.Add(this.label2);
-            this.roundedPanel2.Controls.Add(this.roundedDateTimePicker2);
-            this.roundedPanel2.Controls.Add(this.roundedDateTimePicker1);
+            this.roundedPanel2.Controls.Add(this.dateTimePickerTo);
+            this.roundedPanel2.Controls.Add(this.dateTimePickerFrom);
             this.roundedPanel2.Controls.Add(this.textBoxSearchPatient);
             this.roundedPanel2.Controls.Add(this.buttonSearchPatient);
             this.roundedPanel2.CornerRadius = 20;
             resources.ApplyResources(this.roundedPanel2, "roundedPanel2");
             this.roundedPanel2.Name = "roundedPanel2";
+            // 
+            // checkBoxTo
+            // 
+            resources.ApplyResources(this.checkBoxTo, "checkBoxTo");
+            this.checkBoxTo.Name = "checkBoxTo";
+            this.checkBoxTo.UseVisualStyleBackColor = true;
+            this.checkBoxTo.CheckedChanged += new System.EventHandler(this.checkBoxToCheckedChanged);
+            // 
+            // checkBoxFrom
+            // 
+            resources.ApplyResources(this.checkBoxFrom, "checkBoxFrom");
+            this.checkBoxFrom.Name = "checkBoxFrom";
+            this.checkBoxFrom.UseVisualStyleBackColor = true;
+            this.checkBoxFrom.CheckedChanged += new System.EventHandler(this.checkBoxFromCheckedChanged);
             // 
             // label4
             // 
@@ -92,27 +110,29 @@
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
             // 
-            // roundedDateTimePicker2
+            // dateTimePickerTo
             // 
-            this.roundedDateTimePicker2.BorderColor = System.Drawing.Color.White;
-            this.roundedDateTimePicker2.BorderRadius = 5;
-            this.roundedDateTimePicker2.BorderSize = 0;
-            resources.ApplyResources(this.roundedDateTimePicker2, "roundedDateTimePicker2");
-            this.roundedDateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.roundedDateTimePicker2.Name = "roundedDateTimePicker2";
-            this.roundedDateTimePicker2.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedDateTimePicker2.TextColor = System.Drawing.Color.Gray;
+            this.dateTimePickerTo.BorderColor = System.Drawing.Color.White;
+            this.dateTimePickerTo.BorderRadius = 5;
+            this.dateTimePickerTo.BorderSize = 0;
+            resources.ApplyResources(this.dateTimePickerTo, "dateTimePickerTo");
+            this.dateTimePickerTo.Checked = false;
+            this.dateTimePickerTo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerTo.Name = "dateTimePickerTo";
+            this.dateTimePickerTo.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.dateTimePickerTo.TextColor = System.Drawing.Color.Silver;
             // 
-            // roundedDateTimePicker1
+            // dateTimePickerFrom
             // 
-            this.roundedDateTimePicker1.BorderColor = System.Drawing.Color.White;
-            this.roundedDateTimePicker1.BorderRadius = 5;
-            this.roundedDateTimePicker1.BorderSize = 0;
-            resources.ApplyResources(this.roundedDateTimePicker1, "roundedDateTimePicker1");
-            this.roundedDateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.roundedDateTimePicker1.Name = "roundedDateTimePicker1";
-            this.roundedDateTimePicker1.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedDateTimePicker1.TextColor = System.Drawing.Color.Gray;
+            this.dateTimePickerFrom.BorderColor = System.Drawing.Color.White;
+            this.dateTimePickerFrom.BorderRadius = 5;
+            this.dateTimePickerFrom.BorderSize = 0;
+            resources.ApplyResources(this.dateTimePickerFrom, "dateTimePickerFrom");
+            this.dateTimePickerFrom.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
+            this.dateTimePickerFrom.ShowCheckBox = true;
+            this.dateTimePickerFrom.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.dateTimePickerFrom.TextColor = System.Drawing.Color.Silver;
             // 
             // textBoxSearchPatient
             // 
@@ -307,13 +327,15 @@
         private Components.Rounded.RoundedButton buttonOpenExams;
         private Components.Rounded.RoundedButton buttonPatientExams;
         private Components.Rounded.RoundedPanel roundedPanel2;
-        private Components.Rounded.RoundedDateTimePicker roundedDateTimePicker1;
-        private Components.Rounded.RoundedDateTimePicker roundedDateTimePicker2;
+        private Components.Rounded.RoundedDateTimePicker dateTimePickerFrom;
+        private Components.Rounded.RoundedDateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnLastChange;
+        private System.Windows.Forms.CheckBox checkBoxTo;
+        private System.Windows.Forms.CheckBox checkBoxFrom;
     }
 }

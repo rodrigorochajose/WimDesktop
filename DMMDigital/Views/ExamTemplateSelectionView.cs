@@ -92,12 +92,6 @@ namespace DMMDigital.Views
                 else if (e.KeyChar == (char)Keys.Escape)
                 {
                     Close();
-
-                    MenuView menu = Application.OpenForms.OfType<MenuView>().First();
-                    if (!menu.Visible)
-                    {
-                        menu.Show();
-                    }
                 }
             };
 

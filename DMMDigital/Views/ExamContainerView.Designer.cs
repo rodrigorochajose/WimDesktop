@@ -35,14 +35,17 @@
             // tabControl
             // 
             resources.ApplyResources(this.tabControl, "tabControl");
+            this.tabControl.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
+            this.tabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControl.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlDrawItem);
             // 
             // ExamContainerView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.tabControl);
             this.Name = "ExamContainerView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -150,20 +150,7 @@ namespace DMMDigital.Presenters
 
         private void openExam(object sender, EventArgs e)
         {
-            SettingsModel settings = settingsRepository.getAllSettings();
-
-            FormCollection openForms = Application.OpenForms;
-
-            for (int counter = 0; counter < openForms.Count; counter++)
-            {
-                if (counter == 0)
-                {
-                    openForms[counter].Hide();
-                    continue;
-                }
-
-                openForms[counter].Close();
-            }
+            FormManager.instance.closeAllExceptExamAndMenu();
 
             new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient), true, examOpeningMode);
         }

@@ -777,6 +777,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\icon_16x16_calendar_gray.png" />
+    <None Include="Resources\icon_16x16_calendar_silver.png" />
     <None Include="Resources\whiteCalendar.png" />
     <None Include="Resources\darkCalendar.png" />
     <None Include="Resources\icon_32x32_recyclebin.png" />
