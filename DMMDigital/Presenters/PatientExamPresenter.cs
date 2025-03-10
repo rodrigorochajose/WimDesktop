@@ -125,10 +125,7 @@ namespace DMMDigital.Presenters
             examTemplateSelectionView.patientRecommendation = selectedPatient.recommendation;
             examTemplateSelectionView.patientObservation = selectedPatient.observation;
 
-            foreach (Form form in Application.OpenForms)
-            {
-                form.Hide();
-            }
+            FormManager.instance.closeAllExceptExamAndMenu();
 
             new ExamTemplateSelectionPresenter(examTemplateSelectionView, view.GetType());
         }

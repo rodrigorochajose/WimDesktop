@@ -92,6 +92,7 @@ namespace DMMDigital.Views
                 else if (e.KeyChar == (char)Keys.Escape)
                 {
                     Close();
+                    FormManager.instance.unhideMainForm();
                 }
             };
 
@@ -107,7 +108,8 @@ namespace DMMDigital.Views
 
             buttonCancel.Click += delegate 
             { 
-                Close(); 
+                Close();
+                FormManager.instance.unhideMainForm();
             };
 
             comboBoxTemplate.InnerControl.SelectionChangeCommitted += delegate 

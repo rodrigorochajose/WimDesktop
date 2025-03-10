@@ -23,6 +23,7 @@ namespace DMMDigital.Views
         public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
+
         public Frame selectedFrame { get; set; }
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
@@ -108,21 +109,15 @@ namespace DMMDigital.Views
 
             Load += delegate
             {
-                associateSettings();
-
-                drawTemplate();
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
-                DirectoryInfo di = Directory.CreateDirectory($"{examPath}\\{patient.id}\\{examId}");
-                examPath = di.FullName;
-                recyclePath = Path.Combine(examPath, "recycle");
-                Directory.CreateDirectory(recyclePath);
+
+                associateSettings();
+                drawTemplate();
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
                 selectInitialFrame();
-
                 setAcquireStatus();
-
                 timerSensorStatus.Start();
             };
         }
@@ -137,14 +132,9 @@ namespace DMMDigital.Views
             Load += delegate
             {
                 associateSettings();
-
-                recyclePath = Path.Combine(examPath, $"{patient.id}\\{examId}\\recycle");
-                Directory.CreateDirectory(recyclePath);
-
                 drawTemplate();
 
                 selectInitialFrame();
-
                 loadExamDrawings();
 
                 if (examImageDrawings.Any())
@@ -253,6 +243,15 @@ namespace DMMDigital.Views
 
         private void associateSettings()
         {
+            examPath = Path.Combine(settings.examPath, $"{patient.id}\\{examId}");
+            recyclePath = Path.Combine(examPath, "recycle");
+
+            if (!Directory.Exists(examPath))
+            {
+                Directory.CreateDirectory(examPath);
+                Directory.CreateDirectory(recyclePath);
+            }
+
             drawingColor = Color.FromArgb(int.Parse(settings.drawingColor));
             textColor = Color.FromArgb(int.Parse(settings.textColor));
             rulerColor = Color.FromArgb(int.Parse(settings.rulerColor));

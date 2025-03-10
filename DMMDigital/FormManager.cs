@@ -55,5 +55,10 @@ namespace DMMDigital
                 forms[counter].Close();
             }
         }
+
+        public void unhideMainForm()
+        {
+            Application.OpenForms.Cast<Form>().First().Show();
+        }
     }
 }
