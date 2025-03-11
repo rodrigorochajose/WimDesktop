@@ -6,6 +6,7 @@ using DMMDigital._Repositories;
 using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
+using DMMDigital.Properties;
 using DMMDigital.Views;
 using MoreLinq;
 using MoreLinq.Extensions;
@@ -20,6 +21,7 @@ namespace DMMDigital.Presenters
         private readonly BindingSource patientBindingSource;
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IExamRepository examRepository = new ExamRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         public PatientPresenter(PatientView patientView)
         {
@@ -28,7 +30,9 @@ namespace DMMDigital.Presenters
             view = patientView;
 
             view.eventSearchPatient += searchPatient;
-            view.eventShowAddPatientForm += showAddPatientForm;
+            view.eventNewPatient += showCreatePatientForm;
+            view.eventNewExam += showNewExamForm;
+            view.eventShowPatientExams += showPatientExamsForm;
             view.eventOpenAllExams += openAllExams;
             view.eventOrderDataGridView += orderDataGridView;
 
@@ -58,12 +62,53 @@ namespace DMMDigital.Presenters
             }
         }
 
-        private void showAddPatientForm(object sender, EventArgs e)
+        private void showCreatePatientForm(object sender, EventArgs e)
         {
             IPatientCreationView patientCreationView = new PatientCreationView();
             new PatientCreationPresenter(patientCreationView);
             (patientCreationView as Form).ShowDialog();
             loadAllPatients();
+        }
+
+        private void showNewExamForm(object sender, EventArgs e)
+        {
+            if (view.selectedPatientId == 0)
+            {
+                MessageBox.Show(Resources.messagePatientNotSelected);
+                return;
+            }
+
+            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
+
+            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
+            examTemplateSelectionView.patientId = selectedPatient.id;
+            examTemplateSelectionView.patientName = selectedPatient.name;
+            examTemplateSelectionView.patientBirthDate = selectedPatient.birthDate;
+            examTemplateSelectionView.patientPhone = selectedPatient.phone;
+            examTemplateSelectionView.patientRecommendation = selectedPatient.recommendation;
+            examTemplateSelectionView.patientObservation = selectedPatient.observation;
+
+            FormManager.instance.closeAllExceptExamAndMenu();
+
+            new ExamTemplateSelectionPresenter(examTemplateSelectionView, view.GetType());
+        }
+
+        private void showPatientExamsForm(object sender, EventArgs e)
+        {
+            if (view.selectedPatientId == 0)
+            {
+                MessageBox.Show(Resources.messagePatientNotSelected);
+                return;
+            }
+
+            PatientExamView patientExamView = new PatientExamView();
+
+            new PatientExamPresenter(patientExamView, view.selectedPatientId, "newContainer");
+
+            if (patientExamView.patientHasChanges)
+            {
+                loadAllPatients();
+            }
         }
 
         private void loadAllPatients()
@@ -113,11 +158,11 @@ namespace DMMDigital.Presenters
 
                 List<ExamModel> patientExams = examRepository.getPatientExams(view.selectedPatientId).ToList();
 
-                new ExamPresenter(new ExamView(patientExams.First().id, patient), true, "newContainer");
+                new ExamPresenter(new ExamView(patientExams.First().id, patient, settingsRepository.getAllSettings()), true, "newContainer");
 
                 foreach (ExamModel exam in patientExams.Skip(1))
                 {
-                    new ExamPresenter(new ExamView(exam.id, patient), true, "newPage");
+                    new ExamPresenter(new ExamView(exam.id, patient, settingsRepository.getAllSettings()), true, "newPage");
                 }
             }
             catch (Exception ex) 

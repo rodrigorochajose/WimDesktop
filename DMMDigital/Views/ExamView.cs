@@ -93,7 +93,7 @@ namespace DMMDigital.Views
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName)
+        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
         {
             InitializeComponent();
 
@@ -105,13 +105,15 @@ namespace DMMDigital.Views
             setLabelPatientTemplate(patient.name, templateName);
             this.templateFrames = templateFrames;
 
+            this.settings = settings;
+            associateSettings();
+
             examImages = new List<ExamImageModel>();
 
             Load += delegate
             {
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
 
-                associateSettings();
                 drawTemplate();
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
@@ -122,16 +124,18 @@ namespace DMMDigital.Views
             };
         }
 
-        public ExamView(int examId, PatientModel patient)
+        public ExamView(int examId, PatientModel patient, SettingsModel settings)
         {
             InitializeComponent();
 
             this.examId = examId;
             this.patient = patient;
 
+            this.settings = settings;
+            associateSettings();
+
             Load += delegate
             {
-                associateSettings();
                 drawTemplate();
 
                 selectInitialFrame();

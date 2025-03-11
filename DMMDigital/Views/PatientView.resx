@@ -153,6 +153,135 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;checkBoxTo.Name" xml:space="preserve">
+    <value>checkBoxTo</value>
+  </data>
+  <data name="&gt;&gt;checkBoxTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxTo.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;checkBoxTo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFrom.Name" xml:space="preserve">
+    <value>checkBoxFrom</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFrom.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;checkBoxFrom.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTo.Name" xml:space="preserve">
+    <value>dateTimePickerTo</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTo.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedDateTimePicker, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTo.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerTo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerFrom.Name" xml:space="preserve">
+    <value>dateTimePickerFrom</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerFrom.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedDateTimePicker, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerFrom.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;dateTimePickerFrom.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Name" xml:space="preserve">
+    <value>textBoxSearchPatient</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSearchPatient.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;buttonSearchPatient.Name" xml:space="preserve">
+    <value>buttonSearchPatient</value>
+  </data>
+  <data name="&gt;&gt;buttonSearchPatient.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonSearchPatient.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonSearchPatient.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 67</value>
+  </data>
+  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>808, 110</value>
+  </data>
+  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="checkBoxTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -435,25 +564,49 @@
   <data name="&gt;&gt;buttonSearchPatient.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 67</value>
+  <data name="buttonNewExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
   </data>
-  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>808, 110</value>
+  <data name="buttonNewExam.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="buttonNewExam.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="buttonNewExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonNewExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonNewExam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>627, 143</value>
+  </data>
+  <data name="buttonNewExam.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="buttonNewExam.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 42</value>
+  </data>
+  <data name="buttonNewExam.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
-    <value>roundedPanel2</value>
+  <data name="buttonNewExam.Text" xml:space="preserve">
+    <value>Novo Exame</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;buttonNewExam.Name" xml:space="preserve">
+    <value>buttonNewExam</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;buttonNewExam.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;buttonNewExam.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;buttonNewExam.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonOpenExams.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -472,7 +625,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOpenExams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 337</value>
+    <value>627, 337</value>
   </data>
   <data name="buttonOpenExams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -499,7 +652,7 @@
     <value>roundedPanel1</value>
   </data>
   <data name="&gt;&gt;buttonOpenExams.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="buttonPatientExams.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -517,7 +670,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPatientExams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 178</value>
+    <value>627, 207</value>
   </data>
   <data name="buttonPatientExams.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -544,7 +697,7 @@
     <value>roundedPanel1</value>
   </data>
   <data name="&gt;&gt;buttonPatientExams.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="buttonNewPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -562,7 +715,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 19</value>
+    <value>627, 19</value>
   </data>
   <data name="buttonNewPatient.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -589,7 +742,7 @@
     <value>roundedPanel1</value>
   </data>
   <data name="&gt;&gt;buttonNewPatient.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="dataGridViewPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
@@ -640,7 +793,7 @@
     <value>roundedPanel1</value>
   </data>
   <data name="&gt;&gt;dataGridViewPatient.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="roundedPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 197</value>
@@ -1310,6 +1463,9 @@
         //////4AAAAAAAH///////+AAAAAAAP////////gAAAAAA/////////4AAAAAD/////////+AAAAAP//
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -149,8 +149,22 @@ namespace DMMDigital
 
         public static Mat colorImage(Mat img)
         {
+            if (img.NumberOfChannels == 1)
+            {
+                CvInvoke.CvtColor(img, img, ColorConversion.Gray2Bgr);
+            }
+            else if (img.NumberOfChannels == 4)
+            {
+                CvInvoke.CvtColor(img, img, ColorConversion.Bgra2Bgr);
+            }
+
             VectorOfMat bgrChannels = new VectorOfMat();
             CvInvoke.Split(img, bgrChannels);
+
+            if (bgrChannels.Size != 3)
+            {
+                throw new Exception("Erro ao dividir os canais da imagem.");
+            }
 
             using (Mat channel0 = bgrChannels[0], channel1 = bgrChannels[1], channel2 = bgrChannels[2])
             {

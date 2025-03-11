@@ -42,6 +42,8 @@ namespace DMMDigital.Views
             set { textBoxObservation.InnerTextBox.Text = value; }
         }
 
+        public bool patientHasChanges { get; set; } = false;
+
         public event EventHandler eventEditPatient;
         public event EventHandler eventDeletePatient;
 
@@ -91,7 +93,8 @@ namespace DMMDigital.Views
             else
             {
                 eventEditPatient?.Invoke(this, EventArgs.Empty);
-                
+                patientHasChanges = true;
+
                 handleTextBoxes(false);
                 buttonEditPatient.Text = "Editar";
             }
@@ -100,6 +103,8 @@ namespace DMMDigital.Views
         private void buttonDeletePatientClick(object sender, EventArgs e)
         {
             eventDeletePatient?.Invoke(this, EventArgs.Empty);
+
+            patientHasChanges = true;
         }
 
         private void handleTextBoxes(bool enable)

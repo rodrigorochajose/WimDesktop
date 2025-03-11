@@ -14,6 +14,8 @@ namespace DMMDigital.Interface.IView
         string patientPhone { get; set; }
         string patientRecommendation { get; set; }
         string patientObservation { get; set; }
+        bool patientHasChanges { get; set; }
+
 
         event EventHandler eventEditPatient;
         event EventHandler eventDeletePatient;

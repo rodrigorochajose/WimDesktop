@@ -13,6 +13,7 @@ namespace DMMDigital.Presenters
         private readonly IExamTemplateSelectionView view;
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         private string examOpeningMode = "newPage";
 
@@ -44,7 +45,7 @@ namespace DMMDigital.Presenters
 
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName);
+            ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
             new ExamPresenter(examView, false, examOpeningMode);
         }
 

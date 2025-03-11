@@ -1,6 +1,4 @@
 ﻿using DMMDigital.Interface.IView;
-using DMMDigital.Presenters;
-using DMMDigital.Properties;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -43,7 +41,9 @@ namespace DMMDigital.Views
         }
 
         public event EventHandler eventSearchPatient;
-        public event EventHandler eventShowAddPatientForm;
+        public event EventHandler eventNewPatient;
+        public event EventHandler eventNewExam;
+        public event EventHandler eventShowPatientExams;
         public event EventHandler eventOpenAllExams;
         public event EventHandler eventOrderDataGridView;
 
@@ -89,20 +89,7 @@ namespace DMMDigital.Views
 
         private void buttonPatientExamsClick(object sender, EventArgs e)
         {
-            if (selectedPatientId == 0)
-            {
-                MessageBox.Show(Resources.messagePatientNotSelected);
-                return;
-            }
-
-            Hide();
-            
-            new PatientExamPresenter(new PatientExamView(), selectedPatientId, "newContainer");
-            
-            if (!IsDisposed)
-            {
-                Show();
-            }
+            eventShowPatientExams?.Invoke(this, EventArgs.Empty);
         }
 
         private void buttonOpenExamsClick(object sender, EventArgs e)
@@ -112,7 +99,12 @@ namespace DMMDigital.Views
 
         private void buttonNewPatientClick(object sender, EventArgs e)
         {
-            eventShowAddPatientForm?.Invoke(this, EventArgs.Empty);
+            eventNewPatient?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void buttonNewExamClick(object sender, EventArgs e)
+        {
+            eventNewExam?.Invoke(this, EventArgs.Empty);
         }
 
         private void buttonSearchPatientClick(object sender, EventArgs e)

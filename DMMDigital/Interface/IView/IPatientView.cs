@@ -14,9 +14,10 @@ namespace DMMDigital.Interface.IView
         bool checkBoxToState { get; set; }
         DateTime dateTo { get; set; }
 
-
         event EventHandler eventSearchPatient;
-        event EventHandler eventShowAddPatientForm;
+        event EventHandler eventNewPatient;
+        event EventHandler eventNewExam;
+        event EventHandler eventShowPatientExams;
         event EventHandler eventOpenAllExams;
         event EventHandler eventOrderDataGridView;
 
