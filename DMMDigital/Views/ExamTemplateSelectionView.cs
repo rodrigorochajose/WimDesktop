@@ -102,7 +102,7 @@ namespace DMMDigital.Views
             };
 
             buttonInitializeExam.Click += delegate 
-            { 
+            {
                 eventInitializeExam?.Invoke(this, EventArgs.Empty); 
             };
 

@@ -149,7 +149,7 @@ namespace DMMDigital.Presenters
         {
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            new ExamPresenter(new ExamView(view.selectedExamId, selectedPatient, settingsRepository.getAllSettings()), true, examOpeningMode);
+            new ExamPresenter(new ExamView(examRepository.getExam(view.selectedExamId), selectedPatient, settingsRepository.getAllSettings()), true, examOpeningMode);
         }
 
         private void deleteExam(object sender, EventArgs e)

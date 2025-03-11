@@ -18,8 +18,7 @@ namespace DMMDigital.Views
 {
     public partial class ExamView : Form, IExamView
     {
-        public int examId { get; set; }
-        public string sessionName { get; set; }
+        public ExamModel exam { get; set; }
         public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
@@ -99,7 +98,7 @@ namespace DMMDigital.Views
 
             ActiveControl = labelPatientName;
 
-            this.sessionName = sessionName;
+            this.exam.sessionName = sessionName;
             this.patient = patient;
             this.templateId = templateId;
             setLabelPatientTemplate(patient.name, templateName);
@@ -124,11 +123,11 @@ namespace DMMDigital.Views
             };
         }
 
-        public ExamView(int examId, PatientModel patient, SettingsModel settings)
+        public ExamView(ExamModel exam, PatientModel patient, SettingsModel settings)
         {
             InitializeComponent();
 
-            this.examId = examId;
+            this.exam = exam;
             this.patient = patient;
 
             this.settings = settings;
@@ -247,7 +246,7 @@ namespace DMMDigital.Views
 
         private void associateSettings()
         {
-            examPath = Path.Combine(settings.examPath, $"{patient.id}\\{examId}");
+            examPath = Path.Combine(settings.examPath, $"{patient.id}\\{exam.id}");
             recyclePath = Path.Combine(examPath, "recycle");
 
             if (!Directory.Exists(examPath))
@@ -493,7 +492,7 @@ namespace DMMDigital.Views
 
             examImages.Add(new ExamImageModel
             {
-                examId = examId,
+                examId = exam.id,
                 templateFrameId = selectedFrame.id,
                 file = $"{selectedFrame.order}_original.png",
                 notes = selectedFrame.notes
@@ -1128,7 +1127,7 @@ namespace DMMDigital.Views
                     framesToExport = framesWithImages,
                     patientName = patient.name
                 },
-                examId
+                exam.id
             );
         }
 
@@ -2057,7 +2056,7 @@ namespace DMMDigital.Views
                 {
                     ExamImageDrawingModel drawingToSave = new ExamImageDrawingModel
                     {
-                        examId = examId,
+                        examId = exam.id,
                         examImageId = d.examImageId,
                         drawingColor = d.drawingColor.ToArgb().ToString(),
                         drawingSize = (int)d.drawingSize,

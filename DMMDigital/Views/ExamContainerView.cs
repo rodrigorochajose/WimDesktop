@@ -54,14 +54,14 @@ namespace DMMDigital.Views
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
-                Text = examView.sessionName,
-                Margin = new Padding(0)
+                Text = examView.exam.createdAt.ToString(),
+                Margin = new Padding(3)
             };
 
             selectedExamView = examView as ExamView;
             eventGetSensorInfo?.Invoke(this, EventArgs.Empty);
 
-            openExamsId.Add(examView.examId);
+            openExamsId.Add(examView.exam.id);
             addFormIntoPage(newTabPage, examView as Form);
 
             tabControl.TabPages.Add(newTabPage);
@@ -133,11 +133,11 @@ namespace DMMDigital.Views
                 return;
             }
 
-            openExamsId.Remove((sender as ExamView).examId);
+            openExamsId.Remove((sender as ExamView).exam.id);
 
             foreach (TabPage tp in tabControl.TabPages)
             {
-                if (tp.Text == (sender as ExamView).sessionName)
+                if (tp.Text == (sender as ExamView).exam.sessionName)
                 {
                     tabControl.TabPages.Remove(tp);
                     (sender as Form).Close();

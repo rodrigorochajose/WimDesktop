@@ -7,8 +7,7 @@ namespace DMMDigital.Interface.IView
 {
     public interface IExamView
     {
-        int examId { get; set; }
-        string sessionName { get; set; }
+        ExamModel exam { get; set; }
         PatientModel patient { get; set; }
         int templateId { get; set; }
         string examPath { get; set; }
