@@ -11,8 +11,8 @@ namespace DMMDigital.Views
 
         public string patientName
         {
-            get { return textBoxName.Text; }
-            set { textBoxName.Text = value; }
+            get { return roundedTextBoxName.Texts; }
+            set { roundedTextBoxName.Texts = value; }
         }
 
         public DateTime patientBirthDate
@@ -29,14 +29,14 @@ namespace DMMDigital.Views
 
         public string patientRecommendation
         {
-            get { return textBoxRecommendation.Text; }
-            set { textBoxRecommendation.Text = value; }
+            get { return roundedTextBoxRecommendation.Texts; }
+            set { roundedTextBoxRecommendation.Texts = value; }
         }
 
         public string patientObservation
         {
-            get { return textBoxObservation.Text; }
-            set { textBoxObservation.Text = value; }
+            get { return roundedTextBoxObservation.Texts; }
+            set { roundedTextBoxObservation.Texts = value; }
         }
 
         public event EventHandler eventAddNewPatient;

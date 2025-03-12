@@ -118,10 +118,71 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="roundedTextBoxOrientation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="roundedTextBoxOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 128</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="roundedTextBoxOrientation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxOrientation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 35</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="roundedTextBoxOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxOrientation.Name" xml:space="preserve">
+    <value>roundedTextBoxOrientation</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxOrientation.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxOrientation.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxOrientation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 42</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 35</value>
+  </data>
+  <data name="roundedTextBoxSelectedFrame.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectedFrame.Name" xml:space="preserve">
+    <value>roundedTextBoxSelectedFrame</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectedFrame.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectedFrame.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectedFrame.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="buttonSaveTemplate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt, style=Bold</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonSaveTemplate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -131,7 +192,6 @@
   <data name="buttonSaveTemplate.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 46</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonSaveTemplate.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
   </data>
@@ -148,7 +208,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonSaveTemplate.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="buttonDeleteFrame.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -178,7 +238,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonDeleteFrame.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="buttonRotateRight.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -202,7 +262,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonRotateRight.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="buttonNewFrame.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -232,7 +292,7 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonNewFrame.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="buttonRotateLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -256,60 +316,6 @@
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;buttonRotateLeft.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="textBoxOrientation.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textBoxOrientation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 118</value>
-  </data>
-  <data name="textBoxOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 44</value>
-  </data>
-  <data name="textBoxOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;textBoxOrientation.Name" xml:space="preserve">
-    <value>textBoxOrientation</value>
-  </data>
-  <data name="&gt;&gt;textBoxOrientation.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxOrientation.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;textBoxOrientation.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="textBoxSelectedFrame.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="textBoxSelectedFrame.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxSelectedFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 41</value>
-  </data>
-  <data name="textBoxSelectedFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 44</value>
-  </data>
-  <data name="textBoxSelectedFrame.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;textBoxSelectedFrame.Name" xml:space="preserve">
-    <value>textBoxSelectedFrame</value>
-  </data>
-  <data name="&gt;&gt;textBoxSelectedFrame.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxSelectedFrame.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;textBoxSelectedFrame.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
@@ -1082,9 +1088,6 @@
         //////4AAAAAAAH///////+AAAAAAAP////////gAAAAAA/////////4AAAAAD/////////+AAAAAP//
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

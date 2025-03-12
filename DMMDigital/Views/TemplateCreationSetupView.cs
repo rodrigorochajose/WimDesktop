@@ -16,8 +16,8 @@ namespace DMMDigital.Views
         [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "messageTemplateRequiredName")]
         public string templateName 
         { 
-            get { return textBoxTemplateName.Text; } 
-            set { textBoxTemplateName.Text = value; } 
+            get { return roundedTextBoxTemplateName.Texts; } 
+            set { roundedTextBoxTemplateName.Texts = value; } 
         }
 
         public bool generateByTemplate
@@ -82,7 +82,7 @@ namespace DMMDigital.Views
             panelGenerateDefault.Location = new Point((panelGenerateTemplate.Width - panelGenerateDefault.Width) / 2, panelGenerateDefault.Location.Y);
             panelGenerateByTemplate.Location = new Point((panelGenerateTemplate.Width - panelGenerateByTemplate.Width) / 2, panelGenerateByTemplate.Location.Y);
 
-            ActiveControl = textBoxTemplateName;
+            ActiveControl = roundedTextBoxTemplateName;
         }
 
         private void associateEvents()

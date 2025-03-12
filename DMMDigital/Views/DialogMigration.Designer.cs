@@ -30,27 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogMigration));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonContinue = new DMMDigital.Components.Rounded.RoundedButton();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.roundedTextBoxPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            // 
-            // textBoxPath
-            // 
-            this.textBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxPath.BorderRadius = 10;
-            this.textBoxPath.BorderSize = 10;
-            resources.ApplyResources(this.textBoxPath, "textBoxPath");
-            this.textBoxPath.Name = "textBoxPath";
-            this.textBoxPath.PlaceholderText = null;
             // 
             // buttonSelectPath
             // 
@@ -87,14 +77,31 @@
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.UseVisualStyleBackColor = false;
             // 
+            // roundedTextBoxPath
+            // 
+            this.roundedTextBoxPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxPath.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxPath.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxPath.BorderRadius = 10;
+            this.roundedTextBoxPath.BorderSize = 2;
+            resources.ApplyResources(this.roundedTextBoxPath, "roundedTextBoxPath");
+            this.roundedTextBoxPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxPath.Multiline = false;
+            this.roundedTextBoxPath.Name = "roundedTextBoxPath";
+            this.roundedTextBoxPath.PasswordChar = false;
+            this.roundedTextBoxPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxPath.PlaceholderText = "";
+            this.roundedTextBoxPath.Texts = "";
+            this.roundedTextBoxPath.UnderlinedStyle = false;
+            // 
             // DialogMigration
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.roundedTextBoxPath);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonContinue);
-            this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.buttonSelectPath);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -109,10 +116,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private Components.Rounded.RoundedTextBox textBoxPath;
         private Components.Rounded.RoundedButton buttonSelectPath;
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedButton buttonContinue;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private Components.Rounded.RoundedTextBox roundedTextBoxPath;
     }
 }

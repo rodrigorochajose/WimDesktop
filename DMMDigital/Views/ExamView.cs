@@ -18,7 +18,7 @@ namespace DMMDigital.Views
 {
     public partial class ExamView : Form, IExamView
     {
-        public ExamModel exam { get; set; }
+        public ExamModel exam { get; set; } = new ExamModel();
         public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }

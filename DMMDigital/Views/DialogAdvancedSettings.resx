@@ -151,7 +151,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelInserText.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="buttonUnlock.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -196,7 +196,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonUnlock.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -241,31 +241,37 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="textBox.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="roundedTextBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
-  <data name="textBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 53</value>
+  <data name="roundedTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 53</value>
   </data>
-  <data name="textBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 44</value>
+  <data name="roundedTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="textBox.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
+  <data name="roundedTextBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
   </data>
-  <data name="&gt;&gt;textBox.Name" xml:space="preserve">
-    <value>textBox</value>
+  <data name="roundedTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 36</value>
   </data>
-  <data name="&gt;&gt;textBox.Type" xml:space="preserve">
+  <data name="roundedTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBox.Name" xml:space="preserve">
+    <value>roundedTextBox</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBox.Type" xml:space="preserve">
     <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;textBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;roundedTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;roundedTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -914,9 +920,6 @@
         //////4AAAAAAAH///////+AAAAAAAP////////gAAAAAA/////////4AAAAAD/////////+AAAAAP//
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -14,8 +14,8 @@ namespace DMMDigital.Views
 
         public string patientName
         {
-            get { return textBoxName.InnerTextBox.Text; }
-            set { textBoxName.InnerTextBox.Text = value; }
+            get { return roundedTextBoxName.Texts; }
+            set { roundedTextBoxName.Texts = value; }
         }
 
         public DateTime patientBirthDate
@@ -32,14 +32,14 @@ namespace DMMDigital.Views
 
         public string patientRecommendation
         {
-            get { return textBoxRecommendation.InnerTextBox.Text; }
-            set { textBoxRecommendation.InnerTextBox.Text = value; }
+            get { return roundedTextBoxRecommendation.Texts; }
+            set { roundedTextBoxRecommendation.Texts = value; }
         }
 
         public string patientObservation
         {
-            get { return textBoxObservation.InnerTextBox.Text; }
-            set { textBoxObservation.InnerTextBox.Text = value; }
+            get { return roundedTextBoxObservation.Texts; }
+            set { roundedTextBoxObservation.Texts = value; }
         }
 
         public bool patientHasChanges { get; set; } = false;
@@ -109,11 +109,11 @@ namespace DMMDigital.Views
 
         private void handleTextBoxes(bool enable)
         {
-            textBoxName.Enabled = enable;
+            roundedTextBoxName.Enabled = enable;
             textBoxBirthDate.Enabled = enable;
             textBoxPhone.Enabled = enable;
-            textBoxRecommendation.Enabled = enable;
-            textBoxObservation.Enabled = enable;
+            roundedTextBoxRecommendation.Enabled = enable;
+            roundedTextBoxObservation.Enabled = enable;
         }
 
         private void buttonNewExamClick(object sender, EventArgs e)

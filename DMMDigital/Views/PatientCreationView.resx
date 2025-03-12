@@ -361,7 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxIcon.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="buttonSave.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -406,7 +406,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonSave.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -451,55 +451,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="textBoxObservation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxObservation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 390</value>
-  </data>
-  <data name="textBoxObservation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 106</value>
-  </data>
-  <data name="textBoxObservation.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;textBoxObservation.Name" xml:space="preserve">
-    <value>textBoxObservation</value>
-  </data>
-  <data name="&gt;&gt;textBoxObservation.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxObservation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxObservation.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="textBoxRecommendation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxRecommendation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 319</value>
-  </data>
-  <data name="textBoxRecommendation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 44</value>
-  </data>
-  <data name="textBoxRecommendation.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="&gt;&gt;textBoxRecommendation.Name" xml:space="preserve">
-    <value>textBoxRecommendation</value>
-  </data>
-  <data name="&gt;&gt;textBoxRecommendation.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxRecommendation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxRecommendation.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="textBoxPhone.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 248</value>
@@ -520,7 +472,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxPhone.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBoxBirthDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 177</value>
@@ -541,31 +493,97 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;textBoxBirthDate.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
-  <data name="textBoxName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="roundedTextBoxObservation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
-  <data name="textBoxName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 106</value>
+  <data name="roundedTextBoxObservation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 391</value>
   </data>
-  <data name="textBoxName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 44</value>
+  <data name="roundedTextBoxObservation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="textBoxName.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+  <data name="roundedTextBoxObservation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Name" xml:space="preserve">
-    <value>textBoxName</value>
+  <data name="roundedTextBoxObservation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>302, 93</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Type" xml:space="preserve">
+  <data name="roundedTextBoxObservation.TabIndex" type="System.Int32, mscorlib">
+    <value>84</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxObservation.Name" xml:space="preserve">
+    <value>roundedTextBoxObservation</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxObservation.Type" xml:space="preserve">
     <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;textBoxName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;roundedTextBoxObservation.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;textBoxName.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;roundedTextBoxObservation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 320</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>302, 36</value>
+  </data>
+  <data name="roundedTextBoxRecommendation.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Name" xml:space="preserve">
+    <value>roundedTextBoxRecommendation</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="roundedTextBoxName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 107</value>
+  </data>
+  <data name="roundedTextBoxName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>302, 36</value>
+  </data>
+  <data name="roundedTextBoxName.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Name" xml:space="preserve">
+    <value>roundedTextBoxName</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1215,9 +1233,6 @@
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1225,7 +1240,7 @@
     <value>Cadastrar Paciente</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PatientManagerView</value>
+    <value>PatientCreationView</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

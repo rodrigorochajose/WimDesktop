@@ -35,18 +35,18 @@
             this.buttonInitializeExam = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel2 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.textBoxSessionName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.comboBoxTemplate = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             this.buttonNewTemplate = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSessionName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
-            this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxPhone = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
             this.textBoxBirthDate = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
-            this.textBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -99,15 +99,32 @@
             // 
             this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel2.BorderWidth = 5F;
+            this.roundedPanel2.Controls.Add(this.textBoxSessionName);
             this.roundedPanel2.Controls.Add(this.comboBoxTemplate);
             this.roundedPanel2.Controls.Add(this.panelShowTemplate);
             this.roundedPanel2.Controls.Add(this.buttonNewTemplate);
-            this.roundedPanel2.Controls.Add(this.textBoxSessionName);
             this.roundedPanel2.Controls.Add(this.label8);
             this.roundedPanel2.Controls.Add(this.label10);
             this.roundedPanel2.CornerRadius = 20;
             resources.ApplyResources(this.roundedPanel2, "roundedPanel2");
             this.roundedPanel2.Name = "roundedPanel2";
+            // 
+            // textBoxSessionName
+            // 
+            this.textBoxSessionName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.textBoxSessionName.BorderColor = System.Drawing.Color.White;
+            this.textBoxSessionName.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.textBoxSessionName.BorderRadius = 10;
+            this.textBoxSessionName.BorderSize = 1;
+            resources.ApplyResources(this.textBoxSessionName, "textBoxSessionName");
+            this.textBoxSessionName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxSessionName.Multiline = false;
+            this.textBoxSessionName.Name = "textBoxSessionName";
+            this.textBoxSessionName.PasswordChar = false;
+            this.textBoxSessionName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.textBoxSessionName.PlaceholderText = "";
+            this.textBoxSessionName.Texts = "";
+            this.textBoxSessionName.UnderlinedStyle = false;
             // 
             // comboBoxTemplate
             // 
@@ -139,16 +156,6 @@
             this.buttonNewTemplate.Name = "buttonNewTemplate";
             this.buttonNewTemplate.UseVisualStyleBackColor = false;
             // 
-            // textBoxSessionName
-            // 
-            this.textBoxSessionName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSessionName.BorderColor = System.Drawing.Color.White;
-            this.textBoxSessionName.BorderRadius = 10;
-            this.textBoxSessionName.BorderSize = 10;
-            resources.ApplyResources(this.textBoxSessionName, "textBoxSessionName");
-            this.textBoxSessionName.Name = "textBoxSessionName";
-            this.textBoxSessionName.PlaceholderText = null;
-            // 
             // label8
             // 
             resources.ApplyResources(this.label8, "label8");
@@ -163,11 +170,11 @@
             // 
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel1.BorderWidth = 5F;
-            this.roundedPanel1.Controls.Add(this.textBoxObservation);
-            this.roundedPanel1.Controls.Add(this.textBoxRecommendation);
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxObservation);
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxRecommendation);
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxName);
             this.roundedPanel1.Controls.Add(this.textBoxPhone);
             this.roundedPanel1.Controls.Add(this.textBoxBirthDate);
-            this.roundedPanel1.Controls.Add(this.textBoxName);
             this.roundedPanel1.Controls.Add(this.label9);
             this.roundedPanel1.Controls.Add(this.label11);
             this.roundedPanel1.Controls.Add(this.label12);
@@ -177,25 +184,56 @@
             resources.ApplyResources(this.roundedPanel1, "roundedPanel1");
             this.roundedPanel1.Name = "roundedPanel1";
             // 
-            // textBoxObservation
+            // roundedTextBoxObservation
             // 
-            this.textBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxObservation.BorderColor = System.Drawing.Color.White;
-            this.textBoxObservation.BorderRadius = 10;
-            this.textBoxObservation.BorderSize = 10;
-            resources.ApplyResources(this.textBoxObservation, "textBoxObservation");
-            this.textBoxObservation.Name = "textBoxObservation";
-            this.textBoxObservation.PlaceholderText = null;
+            this.roundedTextBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxObservation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxObservation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxObservation.BorderRadius = 10;
+            this.roundedTextBoxObservation.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxObservation, "roundedTextBoxObservation");
+            this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxObservation.Multiline = true;
+            this.roundedTextBoxObservation.Name = "roundedTextBoxObservation";
+            this.roundedTextBoxObservation.PasswordChar = false;
+            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxObservation.PlaceholderText = "";
+            this.roundedTextBoxObservation.Texts = "";
+            this.roundedTextBoxObservation.UnderlinedStyle = false;
             // 
-            // textBoxRecommendation
+            // roundedTextBoxRecommendation
             // 
-            this.textBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxRecommendation.BorderColor = System.Drawing.Color.White;
-            this.textBoxRecommendation.BorderRadius = 10;
-            this.textBoxRecommendation.BorderSize = 10;
-            resources.ApplyResources(this.textBoxRecommendation, "textBoxRecommendation");
-            this.textBoxRecommendation.Name = "textBoxRecommendation";
-            this.textBoxRecommendation.PlaceholderText = null;
+            this.roundedTextBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxRecommendation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxRecommendation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxRecommendation.BorderRadius = 10;
+            this.roundedTextBoxRecommendation.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxRecommendation, "roundedTextBoxRecommendation");
+            this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxRecommendation.Multiline = false;
+            this.roundedTextBoxRecommendation.Name = "roundedTextBoxRecommendation";
+            this.roundedTextBoxRecommendation.PasswordChar = false;
+            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxRecommendation.PlaceholderText = "";
+            this.roundedTextBoxRecommendation.Texts = "";
+            this.roundedTextBoxRecommendation.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxName
+            // 
+            this.roundedTextBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxName.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxName.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxName.BorderRadius = 10;
+            this.roundedTextBoxName.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxName, "roundedTextBoxName");
+            this.roundedTextBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxName.Multiline = false;
+            this.roundedTextBoxName.Name = "roundedTextBoxName";
+            this.roundedTextBoxName.PasswordChar = false;
+            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxName.PlaceholderText = "";
+            this.roundedTextBoxName.Texts = "";
+            this.roundedTextBoxName.UnderlinedStyle = false;
             // 
             // textBoxPhone
             // 
@@ -216,16 +254,6 @@
             this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.textBoxBirthDate, "textBoxBirthDate");
             this.textBoxBirthDate.Name = "textBoxBirthDate";
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxName.BorderColor = System.Drawing.Color.White;
-            this.textBoxName.BorderRadius = 10;
-            this.textBoxName.BorderSize = 10;
-            resources.ApplyResources(this.textBoxName, "textBoxName");
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.PlaceholderText = null;
             // 
             // label9
             // 
@@ -284,22 +312,22 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private Components.Rounded.RoundedPanel roundedPanel1;
-        private Components.Rounded.RoundedTextBox textBoxObservation;
-        private Components.Rounded.RoundedTextBox textBoxRecommendation;
         private Components.Rounded.RoundedMaskedTextBox textBoxPhone;
         private Components.Rounded.RoundedMaskedTextBox textBoxBirthDate;
-        private Components.Rounded.RoundedTextBox textBoxName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private Components.Rounded.RoundedPanel roundedPanel2;
-        private Components.Rounded.RoundedTextBox textBoxSessionName;
         private Components.Rounded.RoundedButton buttonNewTemplate;
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedPanel panelShowTemplate;
         private Components.Rounded.RoundedButton buttonInitializeExam;
         private Components.Rounded.RoundedComboBox comboBoxTemplate;
+        private Components.Rounded.RoundedTextBox textBoxSessionName;
+        private Components.Rounded.RoundedTextBox roundedTextBoxObservation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxRecommendation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxName;
     }
 }

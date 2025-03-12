@@ -10,7 +10,7 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
-            ActiveControl = textBox;
+            ActiveControl = roundedTextBox;
 
             associateEvents();
         }
@@ -38,7 +38,7 @@ namespace DMMDigital.Views
 
         private void confirm()
         {
-            textToDraw = textBox.Text;
+            textToDraw = roundedTextBox.Texts;
             DialogResult = DialogResult.OK;
             Close();
         }

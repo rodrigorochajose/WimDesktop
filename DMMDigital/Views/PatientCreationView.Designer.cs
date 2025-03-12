@@ -38,11 +38,11 @@
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxPhone = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
             this.textBoxBirthDate = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
-            this.textBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,26 +107,6 @@
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.UseVisualStyleBackColor = false;
             // 
-            // textBoxObservation
-            // 
-            this.textBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxObservation.BorderColor = System.Drawing.Color.White;
-            this.textBoxObservation.BorderRadius = 10;
-            this.textBoxObservation.BorderSize = 10;
-            resources.ApplyResources(this.textBoxObservation, "textBoxObservation");
-            this.textBoxObservation.Name = "textBoxObservation";
-            this.textBoxObservation.PlaceholderText = null;
-            // 
-            // textBoxRecommendation
-            // 
-            this.textBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxRecommendation.BorderColor = System.Drawing.Color.White;
-            this.textBoxRecommendation.BorderRadius = 10;
-            this.textBoxRecommendation.BorderSize = 10;
-            resources.ApplyResources(this.textBoxRecommendation, "textBoxRecommendation");
-            this.textBoxRecommendation.Name = "textBoxRecommendation";
-            this.textBoxRecommendation.PlaceholderText = null;
-            // 
             // textBoxPhone
             // 
             this.textBoxPhone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
@@ -147,29 +127,70 @@
             resources.ApplyResources(this.textBoxBirthDate, "textBoxBirthDate");
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             // 
-            // textBoxName
+            // roundedTextBoxObservation
             // 
-            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxName.BorderColor = System.Drawing.Color.White;
-            this.textBoxName.BorderRadius = 10;
-            this.textBoxName.BorderSize = 10;
-            resources.ApplyResources(this.textBoxName, "textBoxName");
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.PlaceholderText = null;
+            this.roundedTextBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxObservation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxObservation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxObservation.BorderRadius = 10;
+            this.roundedTextBoxObservation.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxObservation, "roundedTextBoxObservation");
+            this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxObservation.Multiline = true;
+            this.roundedTextBoxObservation.Name = "roundedTextBoxObservation";
+            this.roundedTextBoxObservation.PasswordChar = false;
+            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxObservation.PlaceholderText = "";
+            this.roundedTextBoxObservation.Texts = "";
+            this.roundedTextBoxObservation.UnderlinedStyle = false;
             // 
-            // PatientManagerView
+            // roundedTextBoxRecommendation
+            // 
+            this.roundedTextBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxRecommendation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxRecommendation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxRecommendation.BorderRadius = 10;
+            this.roundedTextBoxRecommendation.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxRecommendation, "roundedTextBoxRecommendation");
+            this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxRecommendation.Multiline = false;
+            this.roundedTextBoxRecommendation.Name = "roundedTextBoxRecommendation";
+            this.roundedTextBoxRecommendation.PasswordChar = false;
+            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxRecommendation.PlaceholderText = "";
+            this.roundedTextBoxRecommendation.Texts = "";
+            this.roundedTextBoxRecommendation.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxName
+            // 
+            this.roundedTextBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxName.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxName.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxName.BorderRadius = 10;
+            this.roundedTextBoxName.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxName, "roundedTextBoxName");
+            this.roundedTextBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxName.Multiline = false;
+            this.roundedTextBoxName.Name = "roundedTextBoxName";
+            this.roundedTextBoxName.PasswordChar = false;
+            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxName.PlaceholderText = "";
+            this.roundedTextBoxName.Texts = "";
+            this.roundedTextBoxName.UnderlinedStyle = false;
+            // 
+            // PatientCreationView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.roundedTextBoxObservation);
+            this.Controls.Add(this.roundedTextBoxRecommendation);
+            this.Controls.Add(this.roundedTextBoxName);
             this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.textBoxObservation);
-            this.Controls.Add(this.textBoxRecommendation);
             this.Controls.Add(this.textBoxPhone);
             this.Controls.Add(this.textBoxBirthDate);
-            this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -180,7 +201,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "PatientManagerView";
+            this.Name = "PatientCreationView";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -194,13 +215,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelTitle;
-        private Components.Rounded.RoundedTextBox textBoxName;
         private Components.Rounded.RoundedMaskedTextBox textBoxBirthDate;
         private Components.Rounded.RoundedMaskedTextBox textBoxPhone;
-        private Components.Rounded.RoundedTextBox textBoxRecommendation;
-        private Components.Rounded.RoundedTextBox textBoxObservation;
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedButton buttonSave;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
+        private Components.Rounded.RoundedTextBox roundedTextBoxObservation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxRecommendation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxName;
     }
 }

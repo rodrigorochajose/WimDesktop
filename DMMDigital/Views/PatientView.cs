@@ -9,8 +9,8 @@ namespace DMMDigital.Views
     {
         public string searchedValue 
         {
-            get { return textBoxSearchPatient.Text; }
-            set { textBoxSearchPatient.Text = value; }
+            get { return roundedTextBoxSearchPatient.Texts; }
+            set { roundedTextBoxSearchPatient.Texts = value; }
         }
         public int selectedPatientId { get; set; }
         public string columnNameToOrder { get; set; }
@@ -64,7 +64,7 @@ namespace DMMDigital.Views
                 }
             };
 
-            textBoxSearchPatient.InnerTextBox.KeyDown += (s, e) =>
+            roundedTextBoxSearchPatient.KeyDown += (s, e) =>
             {
                 if (e.KeyCode == Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);

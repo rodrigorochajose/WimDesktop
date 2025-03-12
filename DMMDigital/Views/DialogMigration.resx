@@ -126,7 +126,7 @@
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 24</value>
+    <value>12, 23</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>246, 21</value>
@@ -149,36 +149,12 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="textBoxPath.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="textBoxPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 58</value>
-  </data>
-  <data name="textBoxPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 42</value>
-  </data>
-  <data name="textBoxPath.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;textBoxPath.Name" xml:space="preserve">
-    <value>textBoxPath</value>
-  </data>
-  <data name="&gt;&gt;textBoxPath.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxPath.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonSelectPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 58</value>
+    <value>393, 58</value>
   </data>
   <data name="buttonSelectPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 42</value>
@@ -214,7 +190,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 125</value>
+    <value>29, 125</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -241,7 +217,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="buttonContinue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -259,7 +235,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonContinue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>413, 125</value>
+    <value>348, 125</value>
   </data>
   <data name="buttonContinue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -286,11 +262,41 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonContinue.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="folderBrowserDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="roundedTextBoxPath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 58</value>
+  </data>
+  <data name="roundedTextBoxPath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxPath.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>370, 36</value>
+  </data>
+  <data name="roundedTextBoxPath.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxPath.Name" xml:space="preserve">
+    <value>roundedTextBoxPath</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxPath.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxPath.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -298,7 +304,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>509, 166</value>
+    <value>456, 166</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

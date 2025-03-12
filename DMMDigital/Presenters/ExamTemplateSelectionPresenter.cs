@@ -43,9 +43,10 @@ namespace DMMDigital.Presenters
                 name = view.patientName,
             };
 
+            ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
+
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
             new ExamPresenter(examView, false, examOpeningMode);
         }
 

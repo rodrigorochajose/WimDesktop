@@ -136,7 +136,7 @@ namespace DMMDigital.Presenters
                 };
             
                 examRepository.addExam(exam);
-                examView.exam.id = examRepository.getExamId(exam);
+                examView.exam = exam;
             }
             catch (Exception ex)
             {

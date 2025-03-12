@@ -71,9 +71,9 @@ namespace DMMDigital.Views
             loadExamFrames();
             eventGetExportPath?.Invoke(this, EventArgs.Empty);
 
-            textBoxSelectPath.Text = pathToExport;
+            roundedTextBoxSelectPath.Texts = pathToExport;
 
-            textBoxSelectPath.Click += selectPath;
+            roundedTextBoxSelectPath.Click += selectPath;
             buttonSelectPath.Click += selectPath;
         }
 
@@ -133,7 +133,7 @@ namespace DMMDigital.Views
         {
             folderBrowserDialog1.ShowDialog();         
             pathToExport = folderBrowserDialog1.SelectedPath;
-            textBoxSelectPath.Text = folderBrowserDialog1.SelectedPath;
+            roundedTextBoxSelectPath.Texts = folderBrowserDialog1.SelectedPath;
         }
 
         private void checkBoxSelectAllMouseCaptureChanged(object sender, EventArgs e)

@@ -9,8 +9,8 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
 
-            textBox.InnerTextBox.PasswordChar = '*';
-            ActiveControl = textBox;
+            roundedTextBox.PasswordChar = true;
+            ActiveControl = roundedTextBox;
 
             associateEvents();
         }
@@ -42,7 +42,7 @@ namespace DMMDigital.Views
 
         private void unlock()
         {
-            if (textBox.Text == "WIMDESKTOPADMIN")
+            if (roundedTextBox.Texts == "WIMDESKTOPADMIN")
             {
                 DialogResult = DialogResult.OK;
                 Close();

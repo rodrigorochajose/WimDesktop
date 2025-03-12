@@ -88,7 +88,7 @@ namespace DMMDigital.Views
             twain.OpenDSM();
 
             Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
-            textBoxTwainSource.Text = currentSource.Name;
+            roundedTextBoxTwainSource.PlaceholderText = currentSource.Name;
         }
 
         private void adjustComponent()
@@ -139,7 +139,7 @@ namespace DMMDigital.Views
                 languageChanged = !languageChanged;
             };
 
-            textBoxTwainSource.InnerTextBox.Click += delegate 
+            roundedTextBoxTwainSource.Click += delegate 
             {
                 selectTwainSource(); 
             };
@@ -257,7 +257,7 @@ namespace DMMDigital.Views
             twain.SelectSource();
 
             var currentSource = twain.GetSourceIdentity(twain.SourceIndex);
-            textBoxTwainSource.Text = currentSource.Name;
+            roundedTextBoxTwainSource.PlaceholderText = currentSource.Name;
         }
 
         private void buttonEmptyAllRecycleBinClick(object sender, EventArgs e)

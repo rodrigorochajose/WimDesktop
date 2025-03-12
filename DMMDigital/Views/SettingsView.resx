@@ -138,6 +138,9 @@
   <data name="buttonCancel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 12</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="buttonSave.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonSave.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonSave.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 12</value>
@@ -237,6 +243,39 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="roundedTextBoxTwainSource.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 195</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 35</value>
+  </data>
+  <data name="roundedTextBoxTwainSource.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxTwainSource.Name" xml:space="preserve">
+    <value>roundedTextBoxTwainSource</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxTwainSource.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxTwainSource.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxTwainSource.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -289,7 +328,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="comboBoxLanguage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
@@ -316,7 +355,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;comboBoxLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -349,7 +388,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="comboBoxAcquireMode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
@@ -379,7 +418,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;comboBoxAcquireMode.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="comboBoxSensorModel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
@@ -391,7 +430,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="comboBoxSensorModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 45</value>
+    <value>146, 45</value>
   </data>
   <data name="comboBoxSensorModel.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -406,40 +445,16 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;comboBoxSensorModel.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="textBoxTwainSource.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="textBoxTwainSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 189</value>
-  </data>
-  <data name="textBoxTwainSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 44</value>
-  </data>
-  <data name="textBoxTwainSource.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;textBoxTwainSource.Name" xml:space="preserve">
-    <value>textBoxTwainSource</value>
-  </data>
-  <data name="&gt;&gt;textBoxTwainSource.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxTwainSource.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;textBoxTwainSource.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="buttonSelectTwainSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="buttonSelectTwainSource.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 189</value>
+    <value>305, 193</value>
   </data>
   <data name="buttonSelectTwainSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 42</value>
+    <value>40, 40</value>
   </data>
   <data name="buttonSelectTwainSource.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1260,6 +1275,9 @@
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="pictureBoxIcon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="pictureBoxIcon.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 19</value>
   </data>
@@ -1292,6 +1310,9 @@
   </data>
   <data name="labelTitle.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="labelTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="labelTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 19</value>

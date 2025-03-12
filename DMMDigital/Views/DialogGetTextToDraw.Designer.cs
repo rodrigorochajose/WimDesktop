@@ -32,7 +32,7 @@
             this.buttonConfirm = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.labelInserText = new System.Windows.Forms.Label();
-            this.textBox = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBox = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.SuspendLayout();
             // 
             // buttonConfirm
@@ -64,22 +64,29 @@
             resources.ApplyResources(this.labelInserText, "labelInserText");
             this.labelInserText.Name = "labelInserText";
             // 
-            // textBox
+            // roundedTextBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBox.BorderColor = System.Drawing.Color.White;
-            this.textBox.BorderRadius = 10;
-            this.textBox.BorderSize = 10;
-            resources.ApplyResources(this.textBox, "textBox");
-            this.textBox.Name = "textBox";
-            this.textBox.PlaceholderText = null;
+            this.roundedTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBox.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBox.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBox.BorderRadius = 10;
+            this.roundedTextBox.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBox, "roundedTextBox");
+            this.roundedTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBox.Multiline = false;
+            this.roundedTextBox.Name = "roundedTextBox";
+            this.roundedTextBox.PasswordChar = false;
+            this.roundedTextBox.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBox.PlaceholderText = "";
+            this.roundedTextBox.Texts = "";
+            this.roundedTextBox.UnderlinedStyle = false;
             // 
             // DialogGetTextToDraw
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.textBox);
+            this.Controls.Add(this.roundedTextBox);
             this.Controls.Add(this.labelInserText);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonConfirm);
@@ -96,6 +103,6 @@
         private Components.Rounded.RoundedButton buttonConfirm;
         private Components.Rounded.RoundedButton buttonCancel;
         private System.Windows.Forms.Label labelInserText;
-        private Components.Rounded.RoundedTextBox textBox;
+        private Components.Rounded.RoundedTextBox roundedTextBox;
     }
 }

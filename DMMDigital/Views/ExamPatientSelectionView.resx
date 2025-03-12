@@ -210,36 +210,6 @@
   <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="textBoxSearchPatient.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="textBoxSearchPatient.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="textBoxSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 98</value>
-  </data>
-  <data name="textBoxSearchPatient.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 5, 2</value>
-  </data>
-  <data name="textBoxSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 53</value>
-  </data>
-  <data name="textBoxSearchPatient.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
-  </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Name" xml:space="preserve">
-    <value>textBoxSearchPatient</value>
-  </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxSearchPatient.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxSearchPatient.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="buttonCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -388,7 +358,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 103</value>
+    <value>366, 103</value>
   </data>
   <data name="buttonSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 42</value>
@@ -470,6 +440,36 @@
   </data>
   <data name="&gt;&gt;dataGridViewPatient.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.Location" type="System.Drawing.Point, System.Drawing">
+    <value>25, 103</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
+    <value>331, 36</value>
+  </data>
+  <data name="roundedTextBoxSearchPatient.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSearchPatient.Name" xml:space="preserve">
+    <value>roundedTextBoxSearchPatient</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSearchPatient.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSearchPatient.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSearchPatient.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1115,9 +1115,6 @@
         //////4AAAAAAAH///////+AAAAAAAP////////gAAAAAA/////////4AAAAAD/////////+AAAAAP//
         ////////wAAAB////////////AAAf/////////////g///////8=
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

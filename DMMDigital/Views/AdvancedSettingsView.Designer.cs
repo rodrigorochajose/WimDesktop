@@ -38,15 +38,15 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonOk = new DMMDigital.Components.Rounded.RoundedButton();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.buttonExamPath = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSensorPath = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxSensorPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedButtonMigrateCDR = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedButtonMigrateWimDesktop = new DMMDigital.Components.Rounded.RoundedButton();
+            this.roundedTextBoxSensorPath = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -143,16 +143,6 @@
             this.buttonExamPath.Name = "buttonExamPath";
             this.buttonExamPath.UseVisualStyleBackColor = false;
             // 
-            // textBoxExamPath
-            // 
-            this.textBoxExamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxExamPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxExamPath.BorderRadius = 10;
-            this.textBoxExamPath.BorderSize = 10;
-            resources.ApplyResources(this.textBoxExamPath, "textBoxExamPath");
-            this.textBoxExamPath.Name = "textBoxExamPath";
-            this.textBoxExamPath.PlaceholderText = null;
-            // 
             // buttonSensorPath
             // 
             this.buttonSensorPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
@@ -163,16 +153,6 @@
             resources.ApplyResources(this.buttonSensorPath, "buttonSensorPath");
             this.buttonSensorPath.Name = "buttonSensorPath";
             this.buttonSensorPath.UseVisualStyleBackColor = false;
-            // 
-            // textBoxSensorPath
-            // 
-            this.textBoxSensorPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSensorPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxSensorPath.BorderRadius = 10;
-            this.textBoxSensorPath.BorderSize = 10;
-            resources.ApplyResources(this.textBoxSensorPath, "textBoxSensorPath");
-            this.textBoxSensorPath.Name = "textBoxSensorPath";
-            this.textBoxSensorPath.PlaceholderText = null;
             // 
             // roundedButtonMigrateCDR
             // 
@@ -198,17 +178,51 @@
             this.roundedButtonMigrateWimDesktop.Name = "roundedButtonMigrateWimDesktop";
             this.roundedButtonMigrateWimDesktop.UseVisualStyleBackColor = false;
             // 
+            // roundedTextBoxSensorPath
+            // 
+            this.roundedTextBoxSensorPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxSensorPath.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxSensorPath.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxSensorPath.BorderRadius = 10;
+            this.roundedTextBoxSensorPath.BorderSize = 2;
+            resources.ApplyResources(this.roundedTextBoxSensorPath, "roundedTextBoxSensorPath");
+            this.roundedTextBoxSensorPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxSensorPath.Multiline = false;
+            this.roundedTextBoxSensorPath.Name = "roundedTextBoxSensorPath";
+            this.roundedTextBoxSensorPath.PasswordChar = false;
+            this.roundedTextBoxSensorPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxSensorPath.PlaceholderText = "";
+            this.roundedTextBoxSensorPath.Texts = "";
+            this.roundedTextBoxSensorPath.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxExamPath
+            // 
+            this.roundedTextBoxExamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxExamPath.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxExamPath.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxExamPath.BorderRadius = 10;
+            this.roundedTextBoxExamPath.BorderSize = 2;
+            resources.ApplyResources(this.roundedTextBoxExamPath, "roundedTextBoxExamPath");
+            this.roundedTextBoxExamPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxExamPath.Multiline = false;
+            this.roundedTextBoxExamPath.Name = "roundedTextBoxExamPath";
+            this.roundedTextBoxExamPath.PasswordChar = false;
+            this.roundedTextBoxExamPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxExamPath.PlaceholderText = "";
+            this.roundedTextBoxExamPath.Texts = "";
+            this.roundedTextBoxExamPath.UnderlinedStyle = false;
+            // 
             // AdvancedSettingsView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.roundedTextBoxExamPath);
+            this.Controls.Add(this.roundedTextBoxSensorPath);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.buttonExamPath);
-            this.Controls.Add(this.textBoxExamPath);
             this.Controls.Add(this.buttonSensorPath);
-            this.Controls.Add(this.textBoxSensorPath);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.labelCaminho);
             this.Controls.Add(this.panel8);
@@ -239,9 +253,7 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label6;
         private Components.Rounded.RoundedButton buttonExamPath;
-        private Components.Rounded.RoundedTextBox textBoxExamPath;
         private Components.Rounded.RoundedButton buttonSensorPath;
-        private Components.Rounded.RoundedTextBox textBoxSensorPath;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelCaminho;
         private System.Windows.Forms.Panel panel8;
@@ -252,5 +264,7 @@
         private Components.Rounded.RoundedButton buttonCancel;
         private Components.Rounded.RoundedButton buttonOk;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private Components.Rounded.RoundedTextBox roundedTextBoxSensorPath;
+        private Components.Rounded.RoundedTextBox roundedTextBoxExamPath;
     }
 }

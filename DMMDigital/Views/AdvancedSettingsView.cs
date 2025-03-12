@@ -7,14 +7,14 @@ namespace DMMDigital.Views
     {
         public string sensorPath
         {
-            get { return textBoxSensorPath.Text; }
-            set { textBoxSensorPath.Text = value; }
+            get { return roundedTextBoxSensorPath.Texts; }
+            set { roundedTextBoxSensorPath.Texts = value; }
         }
 
         public string examPath
         {
-            get { return textBoxExamPath.Text; }
-            set { textBoxExamPath.Text = value; }
+            get { return roundedTextBoxExamPath.Texts; }
+            set { roundedTextBoxExamPath.Texts = value; }
         }
 
         public AdvancedSettingsView(string sensorPath, string examPath)

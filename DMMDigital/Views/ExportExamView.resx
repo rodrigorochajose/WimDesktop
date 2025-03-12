@@ -210,28 +210,34 @@
   <data name="&gt;&gt;panelHeader.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="textBoxSelectPath.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="roundedTextBoxSelectPath.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
-  <data name="textBoxSelectPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>63, 7</value>
+  <data name="roundedTextBoxSelectPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>63, 9</value>
   </data>
-  <data name="textBoxSelectPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 44</value>
+  <data name="roundedTextBoxSelectPath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
-  <data name="textBoxSelectPath.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+  <data name="roundedTextBoxSelectPath.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
   </data>
-  <data name="&gt;&gt;textBoxSelectPath.Name" xml:space="preserve">
-    <value>textBoxSelectPath</value>
+  <data name="roundedTextBoxSelectPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 36</value>
   </data>
-  <data name="&gt;&gt;textBoxSelectPath.Type" xml:space="preserve">
+  <data name="roundedTextBoxSelectPath.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectPath.Name" xml:space="preserve">
+    <value>roundedTextBoxSelectPath</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSelectPath.Type" xml:space="preserve">
     <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;textBoxSelectPath.Parent" xml:space="preserve">
+  <data name="&gt;&gt;roundedTextBoxSelectPath.Parent" xml:space="preserve">
     <value>panel2</value>
   </data>
-  <data name="&gt;&gt;textBoxSelectPath.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;roundedTextBoxSelectPath.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="buttonSelectPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

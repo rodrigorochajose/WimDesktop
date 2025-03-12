@@ -33,7 +33,7 @@
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxSelectPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSelectPath = new DMMDigital.Components.Rounded.RoundedButton();
             this.checkBoxClearSelection = new System.Windows.Forms.CheckBox();
             this.checkBoxSelectAll = new System.Windows.Forms.CheckBox();
@@ -81,7 +81,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.textBoxSelectPath);
+            this.panel2.Controls.Add(this.roundedTextBoxSelectPath);
             this.panel2.Controls.Add(this.buttonSelectPath);
             this.panel2.Controls.Add(this.checkBoxClearSelection);
             this.panel2.Controls.Add(this.checkBoxSelectAll);
@@ -93,16 +93,22 @@
             resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
-            // textBoxSelectPath
+            // roundedTextBoxSelectPath
             // 
-            this.textBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSelectPath.BorderColor = System.Drawing.Color.White;
-            this.textBoxSelectPath.BorderRadius = 10;
-            this.textBoxSelectPath.BorderSize = 10;
-            resources.ApplyResources(this.textBoxSelectPath, "textBoxSelectPath");
-            this.textBoxSelectPath.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxSelectPath.Name = "textBoxSelectPath";
-            this.textBoxSelectPath.PlaceholderText = null;
+            this.roundedTextBoxSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxSelectPath.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxSelectPath.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxSelectPath.BorderRadius = 10;
+            this.roundedTextBoxSelectPath.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxSelectPath, "roundedTextBoxSelectPath");
+            this.roundedTextBoxSelectPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxSelectPath.Multiline = false;
+            this.roundedTextBoxSelectPath.Name = "roundedTextBoxSelectPath";
+            this.roundedTextBoxSelectPath.PasswordChar = false;
+            this.roundedTextBoxSelectPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxSelectPath.PlaceholderText = "";
+            this.roundedTextBoxSelectPath.Texts = "";
+            this.roundedTextBoxSelectPath.UnderlinedStyle = false;
             // 
             // buttonSelectPath
             // 
@@ -270,11 +276,11 @@
         private System.Windows.Forms.CheckBox checkBoxExportEditedImage;
         private System.Windows.Forms.CheckBox checkBoxExportOriginalImage;
         private Components.Rounded.RoundedButton buttonSelectPath;
-        private Components.Rounded.RoundedTextBox textBoxSelectPath;
         private Components.Rounded.RoundedComboBox comboBoxFormat;
         private Components.Rounded.RoundedButton buttonExportExam;
         private Components.Rounded.RoundedButton buttonCancel;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.Label labelTitle;
+        private Components.Rounded.RoundedTextBox roundedTextBoxSelectPath;
     }
 }

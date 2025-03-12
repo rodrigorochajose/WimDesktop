@@ -190,8 +190,8 @@ namespace DMMDigital.Views
             }
 
             selectedFrame = (FrameTemplate)sender;
-            textBoxSelectedFrame.Text = selectedFrame.Name;
-            textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
+            roundedTextBoxSelectedFrame.Texts = selectedFrame.Name;
+            roundedTextBoxOrientation.Texts = dictOrientation[(EnumOrientation)selectedFrame.orientation];
             selectedFrame.Tag = Color.LimeGreen;
             selectedFrame.Invalidate();
 
@@ -268,8 +268,8 @@ namespace DMMDigital.Views
             framesCounter--;
             framesList.Remove(selectedFrame);
             panelTemplate.Controls.Remove(selectedFrame);
-            textBoxSelectedFrame.Text = "";
-            textBoxOrientation.Text = "";
+            roundedTextBoxSelectedFrame.Texts = "";
+            roundedTextBoxOrientation.Texts = "";
         }
 
         private void rotateFrameLeft()
@@ -296,7 +296,7 @@ namespace DMMDigital.Views
                 }
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-                textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
+                roundedTextBoxOrientation.Texts = dictOrientation[(EnumOrientation)selectedFrame.orientation];
                 selectedFrame.Refresh();
             }
         }
@@ -325,7 +325,7 @@ namespace DMMDigital.Views
                 }
 
                 (selectedFrame.Width, selectedFrame.Height) = (selectedFrame.Height, selectedFrame.Width);
-                textBoxOrientation.Text = dictOrientation[(EnumOrientation)selectedFrame.orientation];
+                roundedTextBoxOrientation.Texts = dictOrientation[(EnumOrientation)selectedFrame.orientation];
                 selectedFrame.Refresh();
             }
         }

@@ -33,26 +33,26 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelTemplate = new System.Windows.Forms.Panel();
+            this.roundedTextBoxOrientation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxSelectedFrame = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSaveTemplate = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonDeleteFrame = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRotateRight = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonNewFrame = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRotateLeft = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxOrientation = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.textBoxSelectedFrame = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.roundedTextBoxOrientation);
+            this.panel1.Controls.Add(this.roundedTextBoxSelectedFrame);
             this.panel1.Controls.Add(this.buttonSaveTemplate);
             this.panel1.Controls.Add(this.buttonDeleteFrame);
             this.panel1.Controls.Add(this.buttonRotateRight);
             this.panel1.Controls.Add(this.buttonNewFrame);
             this.panel1.Controls.Add(this.buttonRotateLeft);
-            this.panel1.Controls.Add(this.textBoxOrientation);
-            this.panel1.Controls.Add(this.textBoxSelectedFrame);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             resources.ApplyResources(this.panel1, "panel1");
@@ -74,6 +74,40 @@
             resources.ApplyResources(this.panelTemplate, "panelTemplate");
             this.panelTemplate.Name = "panelTemplate";
             this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);
+            // 
+            // roundedTextBoxOrientation
+            // 
+            this.roundedTextBoxOrientation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxOrientation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxOrientation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxOrientation.BorderRadius = 10;
+            this.roundedTextBoxOrientation.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxOrientation, "roundedTextBoxOrientation");
+            this.roundedTextBoxOrientation.ForeColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxOrientation.Multiline = false;
+            this.roundedTextBoxOrientation.Name = "roundedTextBoxOrientation";
+            this.roundedTextBoxOrientation.PasswordChar = false;
+            this.roundedTextBoxOrientation.PlaceholderColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxOrientation.PlaceholderText = "";
+            this.roundedTextBoxOrientation.Texts = "";
+            this.roundedTextBoxOrientation.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxSelectedFrame
+            // 
+            this.roundedTextBoxSelectedFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxSelectedFrame.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxSelectedFrame.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxSelectedFrame.BorderRadius = 10;
+            this.roundedTextBoxSelectedFrame.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxSelectedFrame, "roundedTextBoxSelectedFrame");
+            this.roundedTextBoxSelectedFrame.ForeColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxSelectedFrame.Multiline = false;
+            this.roundedTextBoxSelectedFrame.Name = "roundedTextBoxSelectedFrame";
+            this.roundedTextBoxSelectedFrame.PasswordChar = false;
+            this.roundedTextBoxSelectedFrame.PlaceholderColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxSelectedFrame.PlaceholderText = "";
+            this.roundedTextBoxSelectedFrame.Texts = "";
+            this.roundedTextBoxSelectedFrame.UnderlinedStyle = false;
             // 
             // buttonSaveTemplate
             // 
@@ -127,28 +161,6 @@
             this.buttonRotateLeft.Name = "buttonRotateLeft";
             this.buttonRotateLeft.UseVisualStyleBackColor = false;
             // 
-            // textBoxOrientation
-            // 
-            this.textBoxOrientation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxOrientation.BorderColor = System.Drawing.Color.White;
-            this.textBoxOrientation.BorderRadius = 10;
-            this.textBoxOrientation.BorderSize = 10;
-            resources.ApplyResources(this.textBoxOrientation, "textBoxOrientation");
-            this.textBoxOrientation.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxOrientation.Name = "textBoxOrientation";
-            this.textBoxOrientation.PlaceholderText = null;
-            // 
-            // textBoxSelectedFrame
-            // 
-            this.textBoxSelectedFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSelectedFrame.BorderColor = System.Drawing.Color.White;
-            this.textBoxSelectedFrame.BorderRadius = 10;
-            this.textBoxSelectedFrame.BorderSize = 10;
-            resources.ApplyResources(this.textBoxSelectedFrame, "textBoxSelectedFrame");
-            this.textBoxSelectedFrame.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxSelectedFrame.Name = "textBoxSelectedFrame";
-            this.textBoxSelectedFrame.PlaceholderText = null;
-            // 
             // TemplateCreationView
             // 
             resources.ApplyResources(this, "$this");
@@ -171,13 +183,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelTemplate;
-        private Components.Rounded.RoundedTextBox textBoxSelectedFrame;
-        private Components.Rounded.RoundedTextBox textBoxOrientation;
         private Components.Rounded.RoundedButton buttonRotateLeft;
         private Components.Rounded.RoundedButton buttonRotateRight;
         private Components.Rounded.RoundedButton buttonNewFrame;
         private Components.Rounded.RoundedButton buttonDeleteFrame;
         private Components.Rounded.RoundedButton buttonSaveTemplate;
+        private Components.Rounded.RoundedTextBox roundedTextBoxSelectedFrame;
+        private Components.Rounded.RoundedTextBox roundedTextBoxOrientation;
     }
 }
 

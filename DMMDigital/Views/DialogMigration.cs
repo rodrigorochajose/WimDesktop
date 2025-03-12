@@ -1,5 +1,4 @@
-﻿using DMMDigital.Interface.IView;
-using DMMDigital.Presenters;
+﻿using DMMDigital.Presenters;
 using System;
 using System.Windows.Forms;
 
@@ -27,7 +26,7 @@ namespace DMMDigital.Views
                 path = @"C:\images\";
             }
 
-            textBoxPath.Text = path;
+            roundedTextBoxPath.Texts = path;
         }
 
         private void associateEvents()

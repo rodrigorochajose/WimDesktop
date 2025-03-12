@@ -39,7 +39,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
@@ -54,6 +54,7 @@
             // buttonNewExam
             // 
             resources.ApplyResources(this.buttonNewExam, "buttonNewExam");
+            this.buttonNewExam.ForeColor = System.Drawing.Color.White;
             this.buttonNewExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_xray_new;
             this.buttonNewExam.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonNewExam.Name = "buttonNewExam";
@@ -61,12 +62,14 @@
             // buttonPatient
             // 
             resources.ApplyResources(this.buttonPatient, "buttonPatient");
+            this.buttonPatient.ForeColor = System.Drawing.Color.White;
             this.buttonPatient.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonPatient.Name = "buttonPatient";
             // 
             // buttonTemplate
             // 
             resources.ApplyResources(this.buttonTemplate, "buttonTemplate");
+            this.buttonTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_template;
             this.buttonTemplate.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonTemplate.Name = "buttonTemplate";
@@ -74,6 +77,7 @@
             // buttonSettings
             // 
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
+            this.buttonSettings.ForeColor = System.Drawing.Color.White;
             this.buttonSettings.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonSettings.Name = "buttonSettings";
             // 

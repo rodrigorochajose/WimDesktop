@@ -36,13 +36,13 @@
             this.buttonSave = new DMMDigital.Components.Rounded.RoundedButton();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.roundedTextBoxTwainSource = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLanguage = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.comboBoxAcquireMode = new DMMDigital.Components.Rounded.RoundedComboBox();
             this.comboBoxSensorModel = new DMMDigital.Components.Rounded.RoundedComboBox();
-            this.textBoxTwainSource = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSelectTwainSource = new DMMDigital.Components.Rounded.RoundedButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
@@ -143,12 +143,12 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.roundedTextBoxTwainSource);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.comboBoxLanguage);
             this.tabPage1.Controls.Add(this.label17);
             this.tabPage1.Controls.Add(this.comboBoxAcquireMode);
             this.tabPage1.Controls.Add(this.comboBoxSensorModel);
-            this.tabPage1.Controls.Add(this.textBoxTwainSource);
             this.tabPage1.Controls.Add(this.buttonSelectTwainSource);
             this.tabPage1.Controls.Add(this.panel6);
             this.tabPage1.Controls.Add(this.label14);
@@ -156,6 +156,23 @@
             this.tabPage1.Controls.Add(this.label12);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
+            // 
+            // roundedTextBoxTwainSource
+            // 
+            this.roundedTextBoxTwainSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxTwainSource.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxTwainSource.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxTwainSource.BorderRadius = 10;
+            this.roundedTextBoxTwainSource.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxTwainSource, "roundedTextBoxTwainSource");
+            this.roundedTextBoxTwainSource.ForeColor = System.Drawing.Color.Black;
+            this.roundedTextBoxTwainSource.Multiline = false;
+            this.roundedTextBoxTwainSource.Name = "roundedTextBoxTwainSource";
+            this.roundedTextBoxTwainSource.PasswordChar = false;
+            this.roundedTextBoxTwainSource.PlaceholderColor = System.Drawing.Color.Black;
+            this.roundedTextBoxTwainSource.PlaceholderText = "";
+            this.roundedTextBoxTwainSource.Texts = "";
+            this.roundedTextBoxTwainSource.UnderlinedStyle = false;
             // 
             // panel2
             // 
@@ -203,16 +220,6 @@
             resources.ApplyResources(this.comboBoxSensorModel, "comboBoxSensorModel");
             this.comboBoxSensorModel.ForeColor = System.Drawing.Color.Black;
             this.comboBoxSensorModel.Name = "comboBoxSensorModel";
-            // 
-            // textBoxTwainSource
-            // 
-            this.textBoxTwainSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxTwainSource.BorderColor = System.Drawing.Color.White;
-            this.textBoxTwainSource.BorderRadius = 10;
-            this.textBoxTwainSource.BorderSize = 10;
-            resources.ApplyResources(this.textBoxTwainSource, "textBoxTwainSource");
-            this.textBoxTwainSource.Name = "textBoxTwainSource";
-            this.textBoxTwainSource.PlaceholderText = null;
             // 
             // buttonSelectTwainSource
             // 
@@ -519,7 +526,6 @@
         private System.Windows.Forms.Label label17;
         private Components.Rounded.RoundedComboBox comboBoxAcquireMode;
         private Components.Rounded.RoundedComboBox comboBoxSensorModel;
-        private Components.Rounded.RoundedTextBox textBoxTwainSource;
         private Components.Rounded.RoundedButton buttonSelectTwainSource;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label15;
@@ -547,5 +553,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label2;
         private Components.Rounded.RoundedButton buttonEmptyAllRecycleBin;
+        private Components.Rounded.RoundedTextBox roundedTextBoxTwainSource;
     }
 }

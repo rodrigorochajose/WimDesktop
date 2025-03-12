@@ -37,7 +37,6 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.panelHeader = new System.Windows.Forms.Panel();
-            this.textBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonSelectPatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonNewPatient = new DMMDigital.Components.Rounded.RoundedButton();
@@ -47,6 +46,7 @@
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnBirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roundedTextBoxSearchPatient = new DMMDigital.Components.Rounded.RoundedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatient)).BeginInit();
@@ -71,16 +71,6 @@
             this.panelHeader.Controls.Add(this.pictureBoxIcon);
             resources.ApplyResources(this.panelHeader, "panelHeader");
             this.panelHeader.Name = "panelHeader";
-            // 
-            // textBoxSearchPatient
-            // 
-            resources.ApplyResources(this.textBoxSearchPatient, "textBoxSearchPatient");
-            this.textBoxSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxSearchPatient.BorderColor = System.Drawing.Color.White;
-            this.textBoxSearchPatient.BorderRadius = 10;
-            this.textBoxSearchPatient.BorderSize = 10;
-            this.textBoxSearchPatient.Name = "textBoxSearchPatient";
-            this.textBoxSearchPatient.PlaceholderText = "Buscar Paciente";
             // 
             // buttonCancel
             // 
@@ -225,11 +215,28 @@
             this.columnPhone.Name = "columnPhone";
             this.columnPhone.ReadOnly = true;
             // 
+            // roundedTextBoxSearchPatient
+            // 
+            this.roundedTextBoxSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxSearchPatient.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxSearchPatient.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxSearchPatient.BorderRadius = 10;
+            this.roundedTextBoxSearchPatient.BorderSize = 1;
+            resources.ApplyResources(this.roundedTextBoxSearchPatient, "roundedTextBoxSearchPatient");
+            this.roundedTextBoxSearchPatient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxSearchPatient.Multiline = false;
+            this.roundedTextBoxSearchPatient.Name = "roundedTextBoxSearchPatient";
+            this.roundedTextBoxSearchPatient.PasswordChar = false;
+            this.roundedTextBoxSearchPatient.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxSearchPatient.PlaceholderText = "";
+            this.roundedTextBoxSearchPatient.Texts = "";
+            this.roundedTextBoxSearchPatient.UnderlinedStyle = false;
+            // 
             // ExamPatientSelectionView
             // 
             this.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.textBoxSearchPatient);
+            this.Controls.Add(this.roundedTextBoxSearchPatient);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSelectPatient);
             this.Controls.Add(this.buttonNewPatient);
@@ -260,10 +267,10 @@
         private Components.Rounded.RoundedDataGridView dataGridViewPatient;
         private Components.Rounded.RoundedButton buttonSelectPatient;
         private Components.Rounded.RoundedButton buttonCancel;
-        private Components.Rounded.RoundedTextBox textBoxSearchPatient;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnBirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnPhone;
+        private Components.Rounded.RoundedTextBox roundedTextBoxSearchPatient;
     }
 }

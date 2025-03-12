@@ -17,38 +17,34 @@ namespace DMMDigital.Views
 
         public string patientName
         {
-            get { return textBoxName.InnerTextBox.Text; }
-            set { textBoxName.InnerTextBox.Text = value; }
+            get { return roundedTextBoxName.Texts; }
+            set { roundedTextBoxName.Texts = value; }
         }
 
         public DateTime patientBirthDate
         {
-            get { return DateTime.Parse(textBoxBirthDate.InnerMaskedTextBox.Text); }
             set { textBoxBirthDate.InnerMaskedTextBox.Text = value.ToString(); }
         }
 
         public string patientPhone
         {
-            get { return textBoxPhone.InnerMaskedTextBox.Text; }
             set { textBoxPhone.InnerMaskedTextBox.Text = value; }
         }
 
         public string patientRecommendation
         {
-            get { return textBoxRecommendation.InnerTextBox.Text; }
-            set { textBoxRecommendation.InnerTextBox.Text = value; }
+            set { roundedTextBoxRecommendation.Texts = value; }
         }
 
         public string patientObservation
         {
-            get { return textBoxObservation.InnerTextBox.Text; }
-            set { textBoxObservation.InnerTextBox.Text = value; }
+            set { roundedTextBoxObservation.Texts = value; }
         }
 
         public string sessionName 
         {
-            get { return textBoxSessionName.InnerTextBox.Text; }
-            set { textBoxSessionName.InnerTextBox.Text = value; }
+            get { return textBoxSessionName.Texts; }
+            set { textBoxSessionName.Texts = value; }
         }
 
         public int selectedTemplateId 

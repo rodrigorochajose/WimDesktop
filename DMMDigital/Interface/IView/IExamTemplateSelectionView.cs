@@ -8,10 +8,10 @@ namespace DMMDigital.Interface.IView
     {
         int patientId { get; set; }
         string patientName { get; set; }
-        DateTime patientBirthDate { get; set; }
-        string patientPhone { get; set; }
-        string patientRecommendation { get; set; }
-        string patientObservation { get; set; }
+        DateTime patientBirthDate { set; }
+        string patientPhone { set; }
+        string patientRecommendation { set; }
+        string patientObservation { set; }
         string sessionName { get; set; }
         int selectedTemplateId { get; }
         string selectedTemplateName { get; }

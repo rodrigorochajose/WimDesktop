@@ -35,13 +35,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientExamView));
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
+            this.roundedTextBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.roundedTextBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonDeletePatient = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonEditPatient = new DMMDigital.Components.Rounded.RoundedButton();
-            this.textBoxObservation = new DMMDigital.Components.Rounded.RoundedTextBox();
-            this.textBoxRecommendation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.textBoxPhone = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
             this.textBoxBirthDate = new DMMDigital.Components.Rounded.RoundedMaskedTextBox();
-            this.textBoxName = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -70,13 +70,13 @@
             // 
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxObservation);
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxRecommendation);
+            this.roundedPanel1.Controls.Add(this.roundedTextBoxName);
             this.roundedPanel1.Controls.Add(this.buttonDeletePatient);
             this.roundedPanel1.Controls.Add(this.buttonEditPatient);
-            this.roundedPanel1.Controls.Add(this.textBoxObservation);
-            this.roundedPanel1.Controls.Add(this.textBoxRecommendation);
             this.roundedPanel1.Controls.Add(this.textBoxPhone);
             this.roundedPanel1.Controls.Add(this.textBoxBirthDate);
-            this.roundedPanel1.Controls.Add(this.textBoxName);
             this.roundedPanel1.Controls.Add(this.label9);
             this.roundedPanel1.Controls.Add(this.label11);
             this.roundedPanel1.Controls.Add(this.label12);
@@ -87,6 +87,72 @@
             this.roundedPanel1.Name = "roundedPanel1";
             this.roundedPanel1.Size = new System.Drawing.Size(348, 480);
             this.roundedPanel1.TabIndex = 19;
+            // 
+            // roundedTextBoxObservation
+            // 
+            this.roundedTextBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxObservation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxObservation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxObservation.BorderRadius = 10;
+            this.roundedTextBoxObservation.BorderSize = 1;
+            this.roundedTextBoxObservation.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxObservation.Location = new System.Drawing.Point(30, 326);
+            this.roundedTextBoxObservation.Margin = new System.Windows.Forms.Padding(4);
+            this.roundedTextBoxObservation.Multiline = true;
+            this.roundedTextBoxObservation.Name = "roundedTextBoxObservation";
+            this.roundedTextBoxObservation.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.roundedTextBoxObservation.PasswordChar = false;
+            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxObservation.PlaceholderText = "";
+            this.roundedTextBoxObservation.Size = new System.Drawing.Size(302, 96);
+            this.roundedTextBoxObservation.TabIndex = 84;
+            this.roundedTextBoxObservation.Texts = "";
+            this.roundedTextBoxObservation.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxRecommendation
+            // 
+            this.roundedTextBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxRecommendation.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxRecommendation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxRecommendation.BorderRadius = 10;
+            this.roundedTextBoxRecommendation.BorderSize = 1;
+            this.roundedTextBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxRecommendation.Location = new System.Drawing.Point(30, 255);
+            this.roundedTextBoxRecommendation.Margin = new System.Windows.Forms.Padding(4);
+            this.roundedTextBoxRecommendation.Multiline = false;
+            this.roundedTextBoxRecommendation.Name = "roundedTextBoxRecommendation";
+            this.roundedTextBoxRecommendation.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.roundedTextBoxRecommendation.PasswordChar = false;
+            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxRecommendation.PlaceholderText = "";
+            this.roundedTextBoxRecommendation.Size = new System.Drawing.Size(302, 36);
+            this.roundedTextBoxRecommendation.TabIndex = 83;
+            this.roundedTextBoxRecommendation.Texts = "";
+            this.roundedTextBoxRecommendation.UnderlinedStyle = false;
+            // 
+            // roundedTextBoxName
+            // 
+            this.roundedTextBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedTextBoxName.BorderColor = System.Drawing.Color.White;
+            this.roundedTextBoxName.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedTextBoxName.BorderRadius = 10;
+            this.roundedTextBoxName.BorderSize = 1;
+            this.roundedTextBoxName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.roundedTextBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxName.Location = new System.Drawing.Point(30, 42);
+            this.roundedTextBoxName.Margin = new System.Windows.Forms.Padding(4);
+            this.roundedTextBoxName.Multiline = false;
+            this.roundedTextBoxName.Name = "roundedTextBoxName";
+            this.roundedTextBoxName.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.roundedTextBoxName.PasswordChar = false;
+            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxName.PlaceholderText = "";
+            this.roundedTextBoxName.Size = new System.Drawing.Size(302, 36);
+            this.roundedTextBoxName.TabIndex = 82;
+            this.roundedTextBoxName.Texts = "";
+            this.roundedTextBoxName.UnderlinedStyle = false;
             // 
             // buttonDeletePatient
             // 
@@ -100,7 +166,7 @@
             this.buttonDeletePatient.ForeColor = System.Drawing.Color.White;
             this.buttonDeletePatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonDeletePatient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonDeletePatient.Location = new System.Drawing.Point(40, 437);
+            this.buttonDeletePatient.Location = new System.Drawing.Point(35, 437);
             this.buttonDeletePatient.Name = "buttonDeletePatient";
             this.buttonDeletePatient.Size = new System.Drawing.Size(118, 30);
             this.buttonDeletePatient.TabIndex = 45;
@@ -120,41 +186,13 @@
             this.buttonEditPatient.ForeColor = System.Drawing.Color.White;
             this.buttonEditPatient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonEditPatient.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.buttonEditPatient.Location = new System.Drawing.Point(202, 437);
+            this.buttonEditPatient.Location = new System.Drawing.Point(214, 437);
             this.buttonEditPatient.Name = "buttonEditPatient";
             this.buttonEditPatient.Size = new System.Drawing.Size(118, 30);
             this.buttonEditPatient.TabIndex = 44;
             this.buttonEditPatient.Text = "Editar";
             this.buttonEditPatient.UseVisualStyleBackColor = false;
             this.buttonEditPatient.Click += new System.EventHandler(this.buttonEditPatientClick);
-            // 
-            // textBoxObservation
-            // 
-            this.textBoxObservation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxObservation.BorderColor = System.Drawing.Color.White;
-            this.textBoxObservation.BorderRadius = 10;
-            this.textBoxObservation.BorderSize = 10;
-            this.textBoxObservation.Enabled = false;
-            this.textBoxObservation.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textBoxObservation.Location = new System.Drawing.Point(35, 325);
-            this.textBoxObservation.Name = "textBoxObservation";
-            this.textBoxObservation.PlaceholderText = null;
-            this.textBoxObservation.Size = new System.Drawing.Size(285, 106);
-            this.textBoxObservation.TabIndex = 42;
-            // 
-            // textBoxRecommendation
-            // 
-            this.textBoxRecommendation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxRecommendation.BorderColor = System.Drawing.Color.White;
-            this.textBoxRecommendation.BorderRadius = 10;
-            this.textBoxRecommendation.BorderSize = 10;
-            this.textBoxRecommendation.Enabled = false;
-            this.textBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textBoxRecommendation.Location = new System.Drawing.Point(35, 254);
-            this.textBoxRecommendation.Name = "textBoxRecommendation";
-            this.textBoxRecommendation.PlaceholderText = null;
-            this.textBoxRecommendation.Size = new System.Drawing.Size(285, 44);
-            this.textBoxRecommendation.TabIndex = 41;
             // 
             // textBoxPhone
             // 
@@ -164,7 +202,7 @@
             this.textBoxPhone.BorderSize = 10;
             this.textBoxPhone.Enabled = false;
             this.textBoxPhone.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxPhone.Location = new System.Drawing.Point(35, 183);
+            this.textBoxPhone.Location = new System.Drawing.Point(25, 183);
             this.textBoxPhone.Name = "textBoxPhone";
             this.textBoxPhone.Size = new System.Drawing.Size(185, 44);
             this.textBoxPhone.TabIndex = 40;
@@ -177,24 +215,10 @@
             this.textBoxBirthDate.BorderSize = 10;
             this.textBoxBirthDate.Enabled = false;
             this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
-            this.textBoxBirthDate.Location = new System.Drawing.Point(35, 112);
+            this.textBoxBirthDate.Location = new System.Drawing.Point(25, 112);
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             this.textBoxBirthDate.Size = new System.Drawing.Size(185, 44);
             this.textBoxBirthDate.TabIndex = 39;
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.textBoxName.BorderColor = System.Drawing.Color.White;
-            this.textBoxName.BorderRadius = 10;
-            this.textBoxName.BorderSize = 10;
-            this.textBoxName.Enabled = false;
-            this.textBoxName.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textBoxName.Location = new System.Drawing.Point(35, 41);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.PlaceholderText = null;
-            this.textBoxName.Size = new System.Drawing.Size(285, 44);
-            this.textBoxName.TabIndex = 38;
             // 
             // label9
             // 
@@ -203,7 +227,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label9.Location = new System.Drawing.Point(36, 303);
+            this.label9.Location = new System.Drawing.Point(26, 303);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 19);
             this.label9.TabIndex = 37;
@@ -216,7 +240,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label11.Location = new System.Drawing.Point(36, 232);
+            this.label11.Location = new System.Drawing.Point(26, 232);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(66, 19);
             this.label11.TabIndex = 36;
@@ -229,7 +253,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label12.Location = new System.Drawing.Point(36, 161);
+            this.label12.Location = new System.Drawing.Point(26, 161);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(59, 19);
             this.label12.TabIndex = 35;
@@ -242,7 +266,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label13.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label13.Location = new System.Drawing.Point(36, 90);
+            this.label13.Location = new System.Drawing.Point(26, 90);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(133, 19);
             this.label13.TabIndex = 34;
@@ -255,7 +279,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label14.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label14.Location = new System.Drawing.Point(36, 19);
+            this.label14.Location = new System.Drawing.Point(26, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(46, 19);
             this.label14.TabIndex = 33;
@@ -528,11 +552,8 @@
         #endregion
 
         private Components.Rounded.RoundedPanel roundedPanel1;
-        private Components.Rounded.RoundedTextBox textBoxObservation;
-        private Components.Rounded.RoundedTextBox textBoxRecommendation;
         private Components.Rounded.RoundedMaskedTextBox textBoxPhone;
         private Components.Rounded.RoundedMaskedTextBox textBoxBirthDate;
-        private Components.Rounded.RoundedTextBox textBoxName;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -554,5 +575,8 @@
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedButton buttonEditPatient;
         private Components.Rounded.RoundedButton buttonDeletePatient;
+        private Components.Rounded.RoundedTextBox roundedTextBoxObservation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxRecommendation;
+        private Components.Rounded.RoundedTextBox roundedTextBoxName;
     }
 }

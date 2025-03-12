@@ -238,7 +238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel9.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -469,7 +469,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -496,31 +496,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonExamPath.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="textBoxExamPath.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="textBoxExamPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 257</value>
-  </data>
-  <data name="textBoxExamPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 40</value>
-  </data>
-  <data name="textBoxExamPath.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="&gt;&gt;textBoxExamPath.Name" xml:space="preserve">
-    <value>textBoxExamPath</value>
-  </data>
-  <data name="&gt;&gt;textBoxExamPath.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxExamPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxExamPath.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonSensorPath.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -544,30 +520,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonSensorPath.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="textBoxSensorPath.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="textBoxSensorPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 165</value>
-  </data>
-  <data name="textBoxSensorPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 40</value>
-  </data>
-  <data name="textBoxSensorPath.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="&gt;&gt;textBoxSensorPath.Name" xml:space="preserve">
-    <value>textBoxSensorPath</value>
-  </data>
-  <data name="&gt;&gt;textBoxSensorPath.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;textBoxSensorPath.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;textBoxSensorPath.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="roundedButtonMigrateCDR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -659,6 +611,66 @@
   </data>
   <data name="&gt;&gt;roundedButtonMigrateWimDesktop.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 165</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 36</value>
+  </data>
+  <data name="roundedTextBoxSensorPath.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSensorPath.Name" xml:space="preserve">
+    <value>roundedTextBoxSensorPath</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSensorPath.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSensorPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxSensorPath.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="roundedTextBoxExamPath.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="roundedTextBoxExamPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 261</value>
+  </data>
+  <data name="roundedTextBoxExamPath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxExamPath.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxExamPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 36</value>
+  </data>
+  <data name="roundedTextBoxExamPath.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxExamPath.Name" xml:space="preserve">
+    <value>roundedTextBoxExamPath</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxExamPath.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxExamPath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxExamPath.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
