@@ -736,7 +736,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="numericUpDownTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 45</value>
+    <value>92, 39</value>
   </data>
   <data name="numericUpDownTextSize.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -763,7 +763,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="numericUpDownDrawingSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 45</value>
+    <value>92, 38</value>
   </data>
   <data name="numericUpDownDrawingSize.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -945,14 +945,17 @@
   <data name="labelRulerColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelRulerColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
   <data name="labelRulerColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelRulerColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 314</value>
+    <value>141, 311</value>
   </data>
   <data name="labelRulerColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 15</value>
+    <value>31, 19</value>
   </data>
   <data name="labelRulerColor.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -975,14 +978,17 @@
   <data name="labelTextSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelTextSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
   <data name="labelTextSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelTextSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 190</value>
+    <value>228, 187</value>
   </data>
   <data name="labelTextSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 15</value>
+    <value>64, 19</value>
   </data>
   <data name="labelTextSize.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1005,14 +1011,17 @@
   <data name="labelShapeSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelShapeSize.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
   <data name="labelShapeSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelShapeSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 50</value>
+    <value>228, 47</value>
   </data>
   <data name="labelShapeSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 15</value>
+    <value>64, 19</value>
   </data>
   <data name="labelShapeSize.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1035,14 +1044,17 @@
   <data name="labelTextColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelTextColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
   <data name="labelTextColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelTextColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 190</value>
+    <value>57, 187</value>
   </data>
   <data name="labelTextColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 15</value>
+    <value>31, 19</value>
   </data>
   <data name="labelTextColor.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1065,14 +1077,17 @@
   <data name="labelShapeColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelShapeColor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
+  </data>
   <data name="labelShapeColor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="labelShapeColor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 51</value>
+    <value>57, 48</value>
   </data>
   <data name="labelShapeColor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 15</value>
+    <value>31, 19</value>
   </data>
   <data name="labelShapeColor.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1189,7 +1204,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonEmptyAllRecycleBin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 180</value>
+    <value>83, 194</value>
   </data>
   <data name="buttonEmptyAllRecycleBin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

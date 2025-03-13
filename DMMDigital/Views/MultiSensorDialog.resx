@@ -150,7 +150,7 @@
     <value>2</value>
   </data>
   <data name="comboBoxSensor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+    <value>Segoe UI, 10pt</value>
   </data>
   <data name="comboBoxSensor.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 54</value>
@@ -874,7 +874,7 @@
     <value>Selecionar sensor</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>DialogChooseSensor</value>
+    <value>MultiSensorDialog</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

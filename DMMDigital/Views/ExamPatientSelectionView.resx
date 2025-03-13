@@ -361,7 +361,7 @@
     <value>366, 103</value>
   </data>
   <data name="buttonSearchPatient.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 42</value>
+    <value>41, 37</value>
   </data>
   <data name="buttonSearchPatient.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>

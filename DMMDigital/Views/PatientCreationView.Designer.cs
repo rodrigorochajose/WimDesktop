@@ -113,7 +113,7 @@
             this.textBoxPhone.BorderColor = System.Drawing.Color.White;
             this.textBoxPhone.BorderRadius = 10;
             this.textBoxPhone.BorderSize = 10;
-            this.textBoxPhone.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxPhone.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             resources.ApplyResources(this.textBoxPhone, "textBoxPhone");
             this.textBoxPhone.Name = "textBoxPhone";
             // 
@@ -123,7 +123,7 @@
             this.textBoxBirthDate.BorderColor = System.Drawing.Color.White;
             this.textBoxBirthDate.BorderRadius = 10;
             this.textBoxBirthDate.BorderSize = 10;
-            this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
+            this.textBoxBirthDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             resources.ApplyResources(this.textBoxBirthDate, "textBoxBirthDate");
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             // 
@@ -139,7 +139,7 @@
             this.roundedTextBoxObservation.Multiline = true;
             this.roundedTextBoxObservation.Name = "roundedTextBoxObservation";
             this.roundedTextBoxObservation.PasswordChar = false;
-            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxObservation.PlaceholderText = "";
             this.roundedTextBoxObservation.Texts = "";
             this.roundedTextBoxObservation.UnderlinedStyle = false;
@@ -156,7 +156,7 @@
             this.roundedTextBoxRecommendation.Multiline = false;
             this.roundedTextBoxRecommendation.Name = "roundedTextBoxRecommendation";
             this.roundedTextBoxRecommendation.PasswordChar = false;
-            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxRecommendation.PlaceholderText = "";
             this.roundedTextBoxRecommendation.Texts = "";
             this.roundedTextBoxRecommendation.UnderlinedStyle = false;
@@ -173,7 +173,7 @@
             this.roundedTextBoxName.Multiline = false;
             this.roundedTextBoxName.Name = "roundedTextBoxName";
             this.roundedTextBoxName.PasswordChar = false;
-            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxName.PlaceholderText = "";
             this.roundedTextBoxName.Texts = "";
             this.roundedTextBoxName.UnderlinedStyle = false;

@@ -121,7 +121,7 @@
             this.textBoxSessionName.Multiline = false;
             this.textBoxSessionName.Name = "textBoxSessionName";
             this.textBoxSessionName.PasswordChar = false;
-            this.textBoxSessionName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.textBoxSessionName.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBoxSessionName.PlaceholderText = "";
             this.textBoxSessionName.Texts = "";
             this.textBoxSessionName.UnderlinedStyle = false;
@@ -133,6 +133,7 @@
             this.comboBoxTemplate.BorderRadius = 10;
             this.comboBoxTemplate.BorderSize = 10;
             resources.ApplyResources(this.comboBoxTemplate, "comboBoxTemplate");
+            this.comboBoxTemplate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.comboBoxTemplate.Name = "comboBoxTemplate";
             // 
             // panelShowTemplate
@@ -192,11 +193,11 @@
             this.roundedTextBoxObservation.BorderRadius = 10;
             this.roundedTextBoxObservation.BorderSize = 1;
             resources.ApplyResources(this.roundedTextBoxObservation, "roundedTextBoxObservation");
-            this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxObservation.Multiline = true;
             this.roundedTextBoxObservation.Name = "roundedTextBoxObservation";
             this.roundedTextBoxObservation.PasswordChar = false;
-            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxObservation.PlaceholderColor = System.Drawing.Color.Gray;
             this.roundedTextBoxObservation.PlaceholderText = "";
             this.roundedTextBoxObservation.Texts = "";
             this.roundedTextBoxObservation.UnderlinedStyle = false;
@@ -209,11 +210,11 @@
             this.roundedTextBoxRecommendation.BorderRadius = 10;
             this.roundedTextBoxRecommendation.BorderSize = 1;
             resources.ApplyResources(this.roundedTextBoxRecommendation, "roundedTextBoxRecommendation");
-            this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxRecommendation.Multiline = false;
             this.roundedTextBoxRecommendation.Name = "roundedTextBoxRecommendation";
             this.roundedTextBoxRecommendation.PasswordChar = false;
-            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxRecommendation.PlaceholderColor = System.Drawing.Color.Gray;
             this.roundedTextBoxRecommendation.PlaceholderText = "";
             this.roundedTextBoxRecommendation.Texts = "";
             this.roundedTextBoxRecommendation.UnderlinedStyle = false;
@@ -226,11 +227,11 @@
             this.roundedTextBoxName.BorderRadius = 10;
             this.roundedTextBoxName.BorderSize = 1;
             resources.ApplyResources(this.roundedTextBoxName, "roundedTextBoxName");
-            this.roundedTextBoxName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.roundedTextBoxName.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxName.Multiline = false;
             this.roundedTextBoxName.Name = "roundedTextBoxName";
             this.roundedTextBoxName.PasswordChar = false;
-            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.Gray;
             this.roundedTextBoxName.PlaceholderText = "";
             this.roundedTextBoxName.Texts = "";
             this.roundedTextBoxName.UnderlinedStyle = false;

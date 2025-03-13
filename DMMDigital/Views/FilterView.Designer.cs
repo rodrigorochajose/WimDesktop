@@ -173,6 +173,7 @@
             this.buttonRestoreImage.BorderWidth = 10F;
             this.buttonRestoreImage.CornerRadius = 10;
             resources.ApplyResources(this.buttonRestoreImage, "buttonRestoreImage");
+            this.buttonRestoreImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonRestoreImage.Name = "buttonRestoreImage";
             this.buttonRestoreImage.UseVisualStyleBackColor = false;
             this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
@@ -184,6 +185,7 @@
             this.numericUpDownGamma.BorderRadius = 10;
             this.numericUpDownGamma.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownGamma, "numericUpDownGamma");
+            this.numericUpDownGamma.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownGamma.Maximum = new decimal(new int[] {
             20,
             0,
@@ -203,6 +205,7 @@
             this.numericUpDownNoise.BorderRadius = 10;
             this.numericUpDownNoise.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownNoise, "numericUpDownNoise");
+            this.numericUpDownNoise.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownNoise.Maximum = new decimal(new int[] {
             50,
             0,
@@ -222,6 +225,7 @@
             this.numericUpDownEdge.BorderRadius = 10;
             this.numericUpDownEdge.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownEdge, "numericUpDownEdge");
+            this.numericUpDownEdge.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownEdge.Maximum = new decimal(new int[] {
             50,
             0,
@@ -241,6 +245,7 @@
             this.numericUpDownSmartSharpen.BorderRadius = 10;
             this.numericUpDownSmartSharpen.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownSmartSharpen, "numericUpDownSmartSharpen");
+            this.numericUpDownSmartSharpen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownSmartSharpen.Maximum = new decimal(new int[] {
             100,
             0,
@@ -260,6 +265,7 @@
             this.numericUpDownReveal.BorderRadius = 10;
             this.numericUpDownReveal.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownReveal, "numericUpDownReveal");
+            this.numericUpDownReveal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownReveal.Maximum = new decimal(new int[] {
             15,
             0,
@@ -279,6 +285,7 @@
             this.numericUpDownContrast.BorderRadius = 10;
             this.numericUpDownContrast.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownContrast, "numericUpDownContrast");
+            this.numericUpDownContrast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownContrast.Maximum = new decimal(new int[] {
             100,
             0,
@@ -298,6 +305,7 @@
             this.numericUpDownBrightness.BorderRadius = 10;
             this.numericUpDownBrightness.BorderSize = 10;
             resources.ApplyResources(this.numericUpDownBrightness, "numericUpDownBrightness");
+            this.numericUpDownBrightness.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownBrightness.Maximum = new decimal(new int[] {
             100,
             0,

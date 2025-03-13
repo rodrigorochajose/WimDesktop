@@ -355,7 +355,7 @@
     <value>0</value>
   </data>
   <data name="buttonRestoreImage.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+    <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="buttonRestoreImage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

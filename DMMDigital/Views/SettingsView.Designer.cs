@@ -165,11 +165,11 @@
             this.roundedTextBoxTwainSource.BorderRadius = 10;
             this.roundedTextBoxTwainSource.BorderSize = 1;
             resources.ApplyResources(this.roundedTextBoxTwainSource, "roundedTextBoxTwainSource");
-            this.roundedTextBoxTwainSource.ForeColor = System.Drawing.Color.Black;
+            this.roundedTextBoxTwainSource.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxTwainSource.Multiline = false;
             this.roundedTextBoxTwainSource.Name = "roundedTextBoxTwainSource";
             this.roundedTextBoxTwainSource.PasswordChar = false;
-            this.roundedTextBoxTwainSource.PlaceholderColor = System.Drawing.Color.Black;
+            this.roundedTextBoxTwainSource.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxTwainSource.PlaceholderText = "";
             this.roundedTextBoxTwainSource.Texts = "";
             this.roundedTextBoxTwainSource.UnderlinedStyle = false;
@@ -193,7 +193,7 @@
             this.comboBoxLanguage.BorderRadius = 10;
             this.comboBoxLanguage.BorderSize = 10;
             resources.ApplyResources(this.comboBoxLanguage, "comboBoxLanguage");
-            this.comboBoxLanguage.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxLanguage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.comboBoxLanguage.Name = "comboBoxLanguage";
             // 
             // label17
@@ -218,7 +218,7 @@
             this.comboBoxSensorModel.BorderRadius = 10;
             this.comboBoxSensorModel.BorderSize = 10;
             resources.ApplyResources(this.comboBoxSensorModel, "comboBoxSensorModel");
-            this.comboBoxSensorModel.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxSensorModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.comboBoxSensorModel.Name = "comboBoxSensorModel";
             // 
             // buttonSelectTwainSource

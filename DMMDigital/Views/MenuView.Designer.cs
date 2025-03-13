@@ -39,7 +39,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Black;
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
@@ -50,11 +50,13 @@
             this.buttonSettings});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
             // buttonNewExam
             // 
+            this.buttonNewExam.BackColor = System.Drawing.Color.White;
             resources.ApplyResources(this.buttonNewExam, "buttonNewExam");
-            this.buttonNewExam.ForeColor = System.Drawing.Color.White;
+            this.buttonNewExam.ForeColor = System.Drawing.Color.Black;
             this.buttonNewExam.Image = global::DMMDigital.Properties.Resources.icon_32x32_xray_new;
             this.buttonNewExam.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonNewExam.Name = "buttonNewExam";
@@ -62,14 +64,14 @@
             // buttonPatient
             // 
             resources.ApplyResources(this.buttonPatient, "buttonPatient");
-            this.buttonPatient.ForeColor = System.Drawing.Color.White;
+            this.buttonPatient.ForeColor = System.Drawing.Color.Black;
             this.buttonPatient.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonPatient.Name = "buttonPatient";
             // 
             // buttonTemplate
             // 
             resources.ApplyResources(this.buttonTemplate, "buttonTemplate");
-            this.buttonTemplate.ForeColor = System.Drawing.Color.White;
+            this.buttonTemplate.ForeColor = System.Drawing.Color.Black;
             this.buttonTemplate.Image = global::DMMDigital.Properties.Resources.icon_32x32_template;
             this.buttonTemplate.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonTemplate.Name = "buttonTemplate";
@@ -77,7 +79,7 @@
             // buttonSettings
             // 
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
-            this.buttonSettings.ForeColor = System.Drawing.Color.White;
+            this.buttonSettings.ForeColor = System.Drawing.Color.Black;
             this.buttonSettings.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonSettings.Name = "buttonSettings";
             // 
@@ -85,15 +87,14 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::DMMDigital.Properties.Resources.IMAGEMBG;
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MenuView";
-            this.TransparencyKey = System.Drawing.Color.Transparent;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.menuViewLoad);
             this.menuStrip1.ResumeLayout(false);

@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateSwitchView));
+            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.buttonSwitchTemplate = new DMMDigital.Components.Rounded.RoundedButton();
+            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedPanel1 = new DMMDigital.Components.Rounded.RoundedPanel();
             this.panelCurrentTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             this.labelCurrentTemplate = new System.Windows.Forms.Label();
@@ -37,14 +41,46 @@
             this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             this.buttonNewTemplate = new DMMDigital.Components.Rounded.RoundedButton();
             this.label8 = new System.Windows.Forms.Label();
-            this.buttonSwitchTemplate = new DMMDigital.Components.Rounded.RoundedButton();
-            this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
-            this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.labelTitle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.roundedPanel1.SuspendLayout();
             this.roundedPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pictureBoxIcon
+            // 
+            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_change_sides;
+            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
+            this.pictureBoxIcon.Name = "pictureBoxIcon";
+            this.pictureBoxIcon.TabStop = false;
+            // 
+            // labelTitle
+            // 
+            resources.ApplyResources(this.labelTitle, "labelTitle");
+            this.labelTitle.Name = "labelTitle";
+            // 
+            // buttonSwitchTemplate
+            // 
+            resources.ApplyResources(this.buttonSwitchTemplate, "buttonSwitchTemplate");
+            this.buttonSwitchTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSwitchTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSwitchTemplate.BorderWidth = 5F;
+            this.buttonSwitchTemplate.CornerRadius = 5;
+            this.buttonSwitchTemplate.FlatAppearance.BorderSize = 0;
+            this.buttonSwitchTemplate.ForeColor = System.Drawing.Color.White;
+            this.buttonSwitchTemplate.Name = "buttonSwitchTemplate";
+            this.buttonSwitchTemplate.UseVisualStyleBackColor = false;
+            // 
+            // buttonCancel
+            // 
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
+            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonCancel.BorderWidth = 5F;
+            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.FlatAppearance.BorderSize = 0;
+            this.buttonCancel.ForeColor = System.Drawing.Color.White;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.UseVisualStyleBackColor = false;
             // 
             // roundedPanel1
             // 
@@ -58,7 +94,7 @@
             // 
             // panelCurrentTemplate
             // 
-            this.panelCurrentTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelCurrentTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelCurrentTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.panelCurrentTemplate.BorderWidth = 5F;
             this.panelCurrentTemplate.CornerRadius = 20;
@@ -89,11 +125,12 @@
             this.comboBoxTemplate.BorderRadius = 10;
             this.comboBoxTemplate.BorderSize = 10;
             resources.ApplyResources(this.comboBoxTemplate, "comboBoxTemplate");
+            this.comboBoxTemplate.ForeColor = System.Drawing.Color.DimGray;
             this.comboBoxTemplate.Name = "comboBoxTemplate";
             // 
             // panelShowTemplate
             // 
-            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.panelShowTemplate.BorderWidth = 5F;
             this.panelShowTemplate.CornerRadius = 20;
@@ -117,42 +154,6 @@
             resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
             // 
-            // buttonSwitchTemplate
-            // 
-            resources.ApplyResources(this.buttonSwitchTemplate, "buttonSwitchTemplate");
-            this.buttonSwitchTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSwitchTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSwitchTemplate.BorderWidth = 5F;
-            this.buttonSwitchTemplate.CornerRadius = 5;
-            this.buttonSwitchTemplate.FlatAppearance.BorderSize = 0;
-            this.buttonSwitchTemplate.ForeColor = System.Drawing.Color.White;
-            this.buttonSwitchTemplate.Name = "buttonSwitchTemplate";
-            this.buttonSwitchTemplate.UseVisualStyleBackColor = false;
-            // 
-            // buttonCancel
-            // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
-            this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
-            this.buttonCancel.FlatAppearance.BorderSize = 0;
-            this.buttonCancel.ForeColor = System.Drawing.Color.White;
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.UseVisualStyleBackColor = false;
-            // 
-            // pictureBoxIcon
-            // 
-            this.pictureBoxIcon.Image = global::DMMDigital.Properties.Resources.icon_32x32_change_sides;
-            resources.ApplyResources(this.pictureBoxIcon, "pictureBoxIcon");
-            this.pictureBoxIcon.Name = "pictureBoxIcon";
-            this.pictureBoxIcon.TabStop = false;
-            // 
-            // labelTitle
-            // 
-            resources.ApplyResources(this.labelTitle, "labelTitle");
-            this.labelTitle.Name = "labelTitle";
-            // 
             // TemplateSwitchView
             // 
             resources.ApplyResources(this, "$this");
@@ -168,11 +169,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TemplateSwitchView";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel1.PerformLayout();
             this.roundedPanel2.ResumeLayout(false);
             this.roundedPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

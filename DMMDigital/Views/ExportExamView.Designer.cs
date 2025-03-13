@@ -105,7 +105,7 @@
             this.roundedTextBoxSelectPath.Multiline = false;
             this.roundedTextBoxSelectPath.Name = "roundedTextBoxSelectPath";
             this.roundedTextBoxSelectPath.PasswordChar = false;
-            this.roundedTextBoxSelectPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxSelectPath.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxSelectPath.PlaceholderText = "";
             this.roundedTextBoxSelectPath.Texts = "";
             this.roundedTextBoxSelectPath.UnderlinedStyle = false;
@@ -160,7 +160,7 @@
             this.comboBoxFormat.BorderRadius = 10;
             this.comboBoxFormat.BorderSize = 10;
             resources.ApplyResources(this.comboBoxFormat, "comboBoxFormat");
-            this.comboBoxFormat.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxFormat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.comboBoxFormat.Name = "comboBoxFormat";
             // 
             // checkBoxExportOriginalImage

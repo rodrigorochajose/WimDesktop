@@ -158,11 +158,13 @@ namespace DMMDigital.Presenters
 
                 List<ExamModel> patientExams = examRepository.getPatientExams(view.selectedPatientId).ToList();
 
-                new ExamPresenter(new ExamView(examRepository.getExam(patientExams.First().id), patient, settingsRepository.getAllSettings()), true, "newContainer");
+                SettingsModel settings = settingsRepository.getAllSettings();
+
+                new ExamPresenter(new ExamView(examRepository.getExam(patientExams.First().id), patient, settings), true, "newContainer");
 
                 foreach (ExamModel exam in patientExams.Skip(1))
                 {
-                    new ExamPresenter(new ExamView(examRepository.getExam(exam.id), patient, settingsRepository.getAllSettings()), true, "newPage");
+                    new ExamPresenter(new ExamView(examRepository.getExam(exam.id), patient, settings), true, "newPage");
                 }
             }
             catch (Exception ex) 

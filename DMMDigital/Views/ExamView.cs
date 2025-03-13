@@ -105,13 +105,13 @@ namespace DMMDigital.Views
             this.templateFrames = templateFrames;
 
             this.settings = settings;
-            associateSettings();
-
             examImages = new List<ExamImageModel>();
 
             Load += delegate
             {
                 eventSaveExam?.Invoke(this, EventArgs.Empty);
+
+                associateSettings();
 
                 drawTemplate();
 
@@ -638,17 +638,21 @@ namespace DMMDigital.Views
                     );
 
                     mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
-                    mainPictureBox.Refresh();
                 }));
 
-                if (mainPictureBox.Width != 0 && previousSizeMainPictureBox.Width != 0)
+                if (selectedDrawingHistory.Count > 1)
                 {
                     if (previousSizeMainPictureBox != mainPictureBox.Size)
                     {
-                        resizeDrawings((float)mainPictureBox.Height / previousSizeMainPictureBox.Height);
-                    }
-                }
+                        float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
 
+                        if (scale > 1)
+                        {
+                            resizeDrawings(scale);
+                        }
+                    }
+                    mainPictureBox.Refresh();
+                }
             }
         }
 
@@ -1407,7 +1411,6 @@ namespace DMMDigital.Views
             string rotationDirection = "left";
             rotateImage(rotationDirection);
             rotateDrawing(rotationDirection, previousMainPictureBoxSize);
-
             examHasChanges = true;
         }
 
@@ -1434,18 +1437,23 @@ namespace DMMDigital.Views
                 currentImage.RotateFlip(RotateFlipType.Rotate270FlipNone);
             }
 
-            selectedFrame.filteredImage = currentImage;
-            currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
-
             mainPictureBox.Image = currentImage;
+            selectedFrame.filteredImage = currentImage;
             selectedFrame.Image = new Bitmap(currentImage).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-            selectedFrame.Refresh();
 
             resizeMainPictureBox();
+
+            currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
         }
 
         private void rotateDrawing(string rotationDirection, SizeF previousMainPictureBoxSize)
         {
+            PointF previousCenter = new PointF(previousMainPictureBoxSize.Width / 2f, previousMainPictureBoxSize.Height / 2f);
+            PointF newCenter = new PointF(mainPictureBox.Width / 2f, mainPictureBox.Height / 2f);
+
+            float scaleX = mainPictureBox.Width / previousMainPictureBoxSize.Height;
+            float scaleY = mainPictureBox.Height / previousMainPictureBoxSize.Width;
+
             for (int currentIndex = 0; currentIndex < selectedDrawingHistory.Count; currentIndex++)
             {
                 List<IDrawing> frameDrawings = new List<IDrawing>();
@@ -1453,31 +1461,28 @@ namespace DMMDigital.Views
                 foreach (IDrawing drawing in selectedDrawingHistory[currentIndex])
                 {
                     IDrawing drawingCopy = drawing.deepCopy();
-                    List<PointF> points = drawingCopy.points.Select(p => new PointF(p.X, p.Y)).ToList();
+                    List<Point> newPoints = new List<Point>(drawingCopy.points.Count);
 
-                    for (int counter = 0; counter < points.Count; counter++)
+                    float invertX = (rotationDirection == "right") ? -1 : 1;
+                    float invertY = (rotationDirection == "right") ? 1 : -1;
+
+                    foreach (Point p in drawingCopy.points)
                     {
-                        PointF distance = new PointF(previousMainPictureBoxSize.Width / 2 - points[counter].X, previousMainPictureBoxSize.Height / 2 - points[counter].Y);
+                        PointF distance = new PointF(invertX * (previousCenter.X - p.X), invertY * (previousCenter.Y - p.Y));
 
-                        if (rotationDirection == "right")
-                        {
-                            distance.X *= -1;
-                        }
-                        else
-                        {
-                            distance.Y *= -1;
-                        }
+                        PointF newDistance = new PointF(distance.Y * scaleX, distance.X * scaleY);
 
-                        PointF newDistance = new PointF(distance.Y * mainPictureBox.Width / previousMainPictureBoxSize.Height, distance.X * mainPictureBox.Height / previousMainPictureBoxSize.Width);
-
-                        drawingCopy.points[counter] = Point.Round(new PointF(mainPictureBox.Width / 2 + newDistance.X, mainPictureBox.Height / 2 + newDistance.Y));
+                        newPoints.Add(Point.Round(new PointF(newCenter.X + newDistance.X, newCenter.Y + newDistance.Y)));
                     }
+
+                    drawingCopy.points = newPoints;
                     frameDrawings.Add(drawingCopy);
                 }
 
                 selectedDrawingHistory[currentIndex] = frameDrawings;
-                mainPictureBox.Refresh();
             }
+
+            mainPictureBox.Refresh();
         }
 
         private void buttonRestoreImageClick(object sender, EventArgs e)

@@ -30,9 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TemplateCreationView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelTemplate = new System.Windows.Forms.Panel();
             this.roundedTextBoxOrientation = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedTextBoxSelectedFrame = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.buttonSaveTemplate = new DMMDigital.Components.Rounded.RoundedButton();
@@ -40,6 +37,9 @@
             this.buttonRotateRight = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonNewFrame = new DMMDigital.Components.Rounded.RoundedButton();
             this.buttonRotateLeft = new DMMDigital.Components.Rounded.RoundedButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panelTemplate = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,23 +57,6 @@
             this.panel1.Controls.Add(this.label1);
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // panelTemplate
-            // 
-            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
-            resources.ApplyResources(this.panelTemplate, "panelTemplate");
-            this.panelTemplate.Name = "panelTemplate";
-            this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);
             // 
             // roundedTextBoxOrientation
             // 
@@ -100,11 +83,11 @@
             this.roundedTextBoxSelectedFrame.BorderRadius = 10;
             this.roundedTextBoxSelectedFrame.BorderSize = 1;
             resources.ApplyResources(this.roundedTextBoxSelectedFrame, "roundedTextBoxSelectedFrame");
-            this.roundedTextBoxSelectedFrame.ForeColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxSelectedFrame.ForeColor = System.Drawing.Color.DimGray;
             this.roundedTextBoxSelectedFrame.Multiline = false;
             this.roundedTextBoxSelectedFrame.Name = "roundedTextBoxSelectedFrame";
             this.roundedTextBoxSelectedFrame.PasswordChar = false;
-            this.roundedTextBoxSelectedFrame.PlaceholderColor = System.Drawing.Color.Gray;
+            this.roundedTextBoxSelectedFrame.PlaceholderColor = System.Drawing.Color.DimGray;
             this.roundedTextBoxSelectedFrame.PlaceholderText = "";
             this.roundedTextBoxSelectedFrame.Texts = "";
             this.roundedTextBoxSelectedFrame.UnderlinedStyle = false;
@@ -116,6 +99,7 @@
             this.buttonSaveTemplate.BorderWidth = 5F;
             this.buttonSaveTemplate.CornerRadius = 10;
             resources.ApplyResources(this.buttonSaveTemplate, "buttonSaveTemplate");
+            this.buttonSaveTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonSaveTemplate.Name = "buttonSaveTemplate";
             this.buttonSaveTemplate.UseVisualStyleBackColor = false;
             // 
@@ -126,6 +110,7 @@
             this.buttonDeleteFrame.BorderWidth = 5F;
             this.buttonDeleteFrame.CornerRadius = 10;
             resources.ApplyResources(this.buttonDeleteFrame, "buttonDeleteFrame");
+            this.buttonDeleteFrame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonDeleteFrame.Name = "buttonDeleteFrame";
             this.buttonDeleteFrame.UseVisualStyleBackColor = false;
             // 
@@ -147,6 +132,7 @@
             this.buttonNewFrame.BorderWidth = 5F;
             this.buttonNewFrame.CornerRadius = 10;
             resources.ApplyResources(this.buttonNewFrame, "buttonNewFrame");
+            this.buttonNewFrame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewFrame.Name = "buttonNewFrame";
             this.buttonNewFrame.UseVisualStyleBackColor = false;
             // 
@@ -160,6 +146,23 @@
             resources.ApplyResources(this.buttonRotateLeft, "buttonRotateLeft");
             this.buttonRotateLeft.Name = "buttonRotateLeft";
             this.buttonRotateLeft.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // panelTemplate
+            // 
+            this.panelTemplate.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.panelTemplate, "panelTemplate");
+            this.panelTemplate.Name = "panelTemplate";
+            this.panelTemplate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemplatePaint);
             // 
             // TemplateCreationView
             // 

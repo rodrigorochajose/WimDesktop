@@ -125,11 +125,11 @@ namespace DMMDigital.Views
 
             if (checkBoxFrom.Checked)
             {
-                dateTimePickerFrom.TextColor = Color.Gray;
+                dateTimePickerFrom.TextColor = Color.FromArgb(64, 64, 64);
             }
             else
             {
-                dateTimePickerFrom.TextColor = Color.Silver;
+                dateTimePickerFrom.TextColor = Color.Gray;
             }
         }
 
@@ -139,11 +139,11 @@ namespace DMMDigital.Views
 
             if (checkBoxTo.Checked)
             {
-                dateTimePickerTo.TextColor = Color.Gray;
+                dateTimePickerTo.TextColor = Color.FromArgb(64, 64, 64);
             }
             else
             {
-                dateTimePickerTo.TextColor = Color.Silver;
+                dateTimePickerTo.TextColor = Color.Gray;
             }
         }
     }

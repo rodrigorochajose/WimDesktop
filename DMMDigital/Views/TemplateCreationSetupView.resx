@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="label4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
+    <value>Segoe UI, 12pt</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -133,7 +133,7 @@
     <value>12, 16</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 19</value>
+    <value>141, 21</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -157,19 +157,19 @@
     <value>True</value>
   </data>
   <data name="checkBoxGenerateMode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
+    <value>Segoe UI, 12pt</value>
   </data>
   <data name="checkBoxGenerateMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="checkBoxGenerateMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>427, 18</value>
+    <value>452, 17</value>
   </data>
   <data name="checkBoxGenerateMode.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="checkBoxGenerateMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 23</value>
+    <value>183, 25</value>
   </data>
   <data name="checkBoxGenerateMode.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -188,6 +188,24 @@
   </data>
   <data name="&gt;&gt;checkBoxGenerateMode.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 11pt</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 10</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 7, 10, 7</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 35</value>
+  </data>
+  <data name="roundedTextBoxTemplateName.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
   </data>
   <data name="&gt;&gt;roundedTextBoxTemplateName.Name" xml:space="preserve">
     <value>roundedTextBoxTemplateName</value>
@@ -208,7 +226,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 54</value>
+    <value>641, 54</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -224,6 +242,39 @@
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="buttonGenerateTemplate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="buttonGenerateTemplate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="buttonGenerateTemplate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="buttonGenerateTemplate.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="buttonGenerateTemplate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonGenerateTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 7</value>
+  </data>
+  <data name="buttonGenerateTemplate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="buttonGenerateTemplate.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="buttonGenerateTemplate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 40</value>
+  </data>
+  <data name="buttonGenerateTemplate.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="buttonGenerateTemplate.Text" xml:space="preserve">
+    <value>Gerar</value>
   </data>
   <data name="&gt;&gt;buttonGenerateTemplate.Name" xml:space="preserve">
     <value>buttonGenerateTemplate</value>
@@ -244,7 +295,7 @@
     <value>0, 333</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 57</value>
+    <value>641, 57</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -261,324 +312,6 @@
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;comboBoxTemplate.Name" xml:space="preserve">
-    <value>comboBoxTemplate</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTemplate.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedComboBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTemplate.Parent" xml:space="preserve">
-    <value>panelGenerateByTemplate</value>
-  </data>
-  <data name="&gt;&gt;comboBoxTemplate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Name" xml:space="preserve">
-    <value>panelShowTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Parent" xml:space="preserve">
-    <value>panelGenerateByTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>panelGenerateByTemplate</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="panelGenerateByTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 0</value>
-  </data>
-  <data name="panelGenerateByTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 278</value>
-  </data>
-  <data name="panelGenerateByTemplate.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="panelGenerateByTemplate.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateByTemplate.Name" xml:space="preserve">
-    <value>panelGenerateByTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateByTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateByTemplate.Parent" xml:space="preserve">
-    <value>panelGenerateTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateByTemplate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 16</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 19</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Template</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>panelGenerateByTemplate</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="comboBoxOrientation.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="comboBoxOrientation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 199</value>
-  </data>
-  <data name="comboBoxOrientation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="comboBoxOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 46</value>
-  </data>
-  <data name="comboBoxOrientation.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;comboBoxOrientation.Name" xml:space="preserve">
-    <value>comboBoxOrientation</value>
-  </data>
-  <data name="&gt;&gt;comboBoxOrientation.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedComboBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;comboBoxOrientation.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;comboBoxOrientation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="numericUpDownRows.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="numericUpDownRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 96</value>
-  </data>
-  <data name="numericUpDownRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="numericUpDownRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 42</value>
-  </data>
-  <data name="numericUpDownRows.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownRows.Name" xml:space="preserve">
-    <value>numericUpDownRows</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownRows.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedNumericUpDown, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownRows.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownRows.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="numericUpDownColumns.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="numericUpDownColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 21</value>
-  </data>
-  <data name="numericUpDownColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
-  </data>
-  <data name="numericUpDownColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 42</value>
-  </data>
-  <data name="numericUpDownColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownColumns.Name" xml:space="preserve">
-    <value>numericUpDownColumns</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownColumns.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedNumericUpDown, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownColumns.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;numericUpDownColumns.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 106</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 19</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Quantidade de Linhas</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 171</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 19</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Orientação</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt</value>
-  </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 30</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 19</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Quantidade de Colunas</value>
-  </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="panelGenerateDefault.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelGenerateDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 278</value>
-  </data>
-  <data name="panelGenerateDefault.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateDefault.Name" xml:space="preserve">
-    <value>panelGenerateDefault</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateDefault.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateDefault.Parent" xml:space="preserve">
-    <value>panelGenerateTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateDefault.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="panelGenerateTemplate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="panelGenerateTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 54</value>
-  </data>
-  <data name="panelGenerateTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>624, 279</value>
-  </data>
-  <data name="panelGenerateTemplate.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateTemplate.Name" xml:space="preserve">
-    <value>panelGenerateTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateTemplate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateTemplate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelGenerateTemplate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="comboBoxTemplate.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
@@ -589,7 +322,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="comboBoxTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 43</value>
+    <value>222, 45</value>
   </data>
   <data name="comboBoxTemplate.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -627,79 +360,286 @@
   <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonGenerateTemplate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="buttonGenerateTemplate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="label5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
   </data>
-  <data name="buttonGenerateTemplate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Bold</value>
-  </data>
-  <data name="buttonGenerateTemplate.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="buttonGenerateTemplate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="buttonGenerateTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 7</value>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>35, 16</value>
   </data>
-  <data name="buttonGenerateTemplate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 21</value>
   </data>
-  <data name="buttonGenerateTemplate.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="buttonGenerateTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 40</value>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Template</value>
   </data>
-  <data name="buttonGenerateTemplate.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
   </data>
-  <data name="buttonGenerateTemplate.Text" xml:space="preserve">
-    <value>Gerar</value>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonGenerateTemplate.Name" xml:space="preserve">
-    <value>buttonGenerateTemplate</value>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>panelGenerateByTemplate</value>
   </data>
-  <data name="&gt;&gt;buttonGenerateTemplate.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;buttonGenerateTemplate.Parent" xml:space="preserve">
-    <value>panel3</value>
+  <data name="panelGenerateByTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 0</value>
   </data>
-  <data name="&gt;&gt;buttonGenerateTemplate.ZOrder" xml:space="preserve">
+  <data name="panelGenerateByTemplate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 278</value>
+  </data>
+  <data name="panelGenerateByTemplate.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="panelGenerateByTemplate.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateByTemplate.Name" xml:space="preserve">
+    <value>panelGenerateByTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateByTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateByTemplate.Parent" xml:space="preserve">
+    <value>panelGenerateTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateByTemplate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="roundedTextBoxTemplateName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 11pt</value>
+  <data name="comboBoxOrientation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt</value>
   </data>
-  <data name="roundedTextBoxTemplateName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 10</value>
+  <data name="comboBoxOrientation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 199</value>
   </data>
-  <data name="roundedTextBoxTemplateName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="comboBoxOrientation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
   </data>
-  <data name="roundedTextBoxTemplateName.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 7, 10, 7</value>
+  <data name="comboBoxOrientation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 46</value>
   </data>
-  <data name="roundedTextBoxTemplateName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 35</value>
+  <data name="comboBoxOrientation.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
   </data>
-  <data name="roundedTextBoxTemplateName.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
+  <data name="&gt;&gt;comboBoxOrientation.Name" xml:space="preserve">
+    <value>comboBoxOrientation</value>
   </data>
-  <data name="&gt;&gt;roundedTextBoxTemplateName.Name" xml:space="preserve">
-    <value>roundedTextBoxTemplateName</value>
+  <data name="&gt;&gt;comboBoxOrientation.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedComboBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;roundedTextBoxTemplateName.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedTextBox, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;comboBoxOrientation.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
   </data>
-  <data name="&gt;&gt;roundedTextBoxTemplateName.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="&gt;&gt;comboBoxOrientation.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;roundedTextBoxTemplateName.ZOrder" xml:space="preserve">
+  <data name="numericUpDownRows.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="numericUpDownRows.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 96</value>
+  </data>
+  <data name="numericUpDownRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="numericUpDownRows.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 42</value>
+  </data>
+  <data name="numericUpDownRows.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownRows.Name" xml:space="preserve">
+    <value>numericUpDownRows</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownRows.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedNumericUpDown, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownRows.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownRows.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="numericUpDownColumns.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="numericUpDownColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 21</value>
+  </data>
+  <data name="numericUpDownColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="numericUpDownColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 42</value>
+  </data>
+  <data name="numericUpDownColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownColumns.Name" xml:space="preserve">
+    <value>numericUpDownColumns</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownColumns.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedNumericUpDown, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownColumns.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownColumns.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 106</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>161, 21</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Quantidade de Linhas</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>87, 171</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 21</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Orientação</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 30</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 21</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Quantidade de Colunas</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="panelGenerateDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelGenerateDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>266, 278</value>
+  </data>
+  <data name="panelGenerateDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateDefault.Name" xml:space="preserve">
+    <value>panelGenerateDefault</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateDefault.Parent" xml:space="preserve">
+    <value>panelGenerateTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateDefault.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="panelGenerateTemplate.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelGenerateTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 54</value>
+  </data>
+  <data name="panelGenerateTemplate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>641, 279</value>
+  </data>
+  <data name="panelGenerateTemplate.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateTemplate.Name" xml:space="preserve">
+    <value>panelGenerateTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateTemplate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelGenerateTemplate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -709,7 +649,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>624, 390</value>
+    <value>641, 390</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

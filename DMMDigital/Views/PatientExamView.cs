@@ -1,6 +1,7 @@
 ﻿using DMMDigital.Interface.IView;
 using DMMDigital.Properties;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -109,11 +110,22 @@ namespace DMMDigital.Views
 
         private void handleTextBoxes(bool enable)
         {
+            Color color = enable ? Color.FromArgb(64, 64, 64) : Color.Gray;
+
             roundedTextBoxName.Enabled = enable;
+            roundedTextBoxName.ForeColor = color;
+
             textBoxBirthDate.Enabled = enable;
+            textBoxBirthDate.ForeColor = color;
+
             textBoxPhone.Enabled = enable;
+            textBoxPhone.ForeColor = color;
+
             roundedTextBoxRecommendation.Enabled = enable;
+            roundedTextBoxRecommendation.ForeColor = color;
+
             roundedTextBoxObservation.Enabled = enable;
+            roundedTextBoxObservation.ForeColor = color;
         }
 
         private void buttonNewExamClick(object sender, EventArgs e)

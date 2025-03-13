@@ -89,7 +89,7 @@
             this.roundedTextBoxPath.Multiline = false;
             this.roundedTextBoxPath.Name = "roundedTextBoxPath";
             this.roundedTextBoxPath.PasswordChar = false;
-            this.roundedTextBoxPath.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.roundedTextBoxPath.PlaceholderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.roundedTextBoxPath.PlaceholderText = "";
             this.roundedTextBoxPath.Texts = "";
             this.roundedTextBoxPath.UnderlinedStyle = false;

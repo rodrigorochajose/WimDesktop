@@ -46,6 +46,7 @@
             this.comboBoxSensor.BorderRadius = 10;
             this.comboBoxSensor.BorderSize = 10;
             resources.ApplyResources(this.comboBoxSensor, "comboBoxSensor");
+            this.comboBoxSensor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.comboBoxSensor.Name = "comboBoxSensor";
             // 
             // buttonConfirm
@@ -60,7 +61,7 @@
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.UseVisualStyleBackColor = false;
             // 
-            // DialogChooseSensor
+            // MultiSensorDialog
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,7 +72,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DialogChooseSensor";
+            this.Name = "MultiSensorDialog";
             this.ResumeLayout(false);
             this.PerformLayout();
 

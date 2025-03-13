@@ -58,6 +58,7 @@
             this.numericUpDown.BorderRadius = 10;
             this.numericUpDown.BorderSize = 10;
             resources.ApplyResources(this.numericUpDown, "numericUpDown");
+            this.numericUpDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDown.Maximum = new decimal(new int[] {
             100,
             0,
