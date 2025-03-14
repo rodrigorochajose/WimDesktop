@@ -1410,7 +1410,6 @@ namespace DMMDigital.Views
             SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
             string rotationDirection = "left";
             rotateImage(rotationDirection);
-            rotateDrawing(rotationDirection, previousMainPictureBoxSize);
             examHasChanges = true;
         }
 
@@ -1419,7 +1418,6 @@ namespace DMMDigital.Views
             SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
             string rotationDirection = "right";
             rotateImage(rotationDirection);
-            rotateDrawing(rotationDirection, previousMainPictureBoxSize);
 
             examHasChanges = true;
         }
@@ -1441,18 +1439,26 @@ namespace DMMDigital.Views
             selectedFrame.filteredImage = currentImage;
             selectedFrame.Image = new Bitmap(currentImage).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
 
+            if (selectedDrawingHistory.Count > 1)
+            {
+                rotateDrawing(rotationDirection);
+            }
+
             resizeMainPictureBox();
 
             currentImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
         }
 
-        private void rotateDrawing(string rotationDirection, SizeF previousMainPictureBoxSize)
+        private void rotateDrawing(string rotationDirection)
         {
-            PointF previousCenter = new PointF(previousMainPictureBoxSize.Width / 2f, previousMainPictureBoxSize.Height / 2f);
-            PointF newCenter = new PointF(mainPictureBox.Width / 2f, mainPictureBox.Height / 2f);
+            SizeF newSize = new Size(panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height, panelImage.Height);
 
-            float scaleX = mainPictureBox.Width / previousMainPictureBoxSize.Height;
-            float scaleY = mainPictureBox.Height / previousMainPictureBoxSize.Width;
+            PointF previousCenter = new PointF(mainPictureBox.Width / 2f, mainPictureBox.Height / 2f);
+
+            PointF newCenter = new PointF(newSize.Width / 2f, newSize.Height / 2f);
+
+            float scaleX = newSize.Width / mainPictureBox.Height;
+            float scaleY = newSize.Height / mainPictureBox.Width;
 
             for (int currentIndex = 0; currentIndex < selectedDrawingHistory.Count; currentIndex++)
             {
@@ -1481,8 +1487,6 @@ namespace DMMDigital.Views
 
                 selectedDrawingHistory[currentIndex] = frameDrawings;
             }
-
-            mainPictureBox.Refresh();
         }
 
         private void buttonRestoreImageClick(object sender, EventArgs e)
@@ -1502,9 +1506,9 @@ namespace DMMDigital.Views
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
 
                 restoreFrameDrawings();
-                examHasChanges = true;
+                resizeMainPictureBox();
 
-                mainPictureBox.Refresh();
+                examHasChanges = true;
             }
         }
 
