@@ -32,7 +32,6 @@ namespace DMMDigital.Components.Rounded
         }
 
         #region -> Properties
-        [Category("RJ Code Advance")]
         public Color BorderColor
         {
             get { return borderColor; }
@@ -43,14 +42,12 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public Color BorderFocusColor
         {
             get { return borderFocusColor; }
             set { borderFocusColor = value; }
         }
 
-        [Category("RJ Code Advance")]
         public int BorderSize
         {
             get { return borderSize; }
@@ -64,7 +61,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public bool UnderlinedStyle
         {
             get { return underlinedStyle; }
@@ -75,7 +71,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public bool PasswordChar
         {
             get { return isPasswordChar; }
@@ -87,14 +82,12 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public bool Multiline
         {
             get { return textBox1.Multiline; }
             set { textBox1.Multiline = value; }
         }
 
-        [Category("RJ Code Advance")]
         public override Color BackColor
         {
             get { return base.BackColor; }
@@ -105,7 +98,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public override Color ForeColor
         {
             get { return base.ForeColor; }
@@ -116,7 +108,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public override Font Font
         {
             get { return base.Font; }
@@ -129,7 +120,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public string Texts
         {
             get
@@ -145,7 +135,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -159,7 +148,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public Color PlaceholderColor
         {
             get { return placeholderColor; }
@@ -171,7 +159,6 @@ namespace DMMDigital.Components.Rounded
             }
         }
 
-        [Category("RJ Code Advance")]
         public string PlaceholderText
         {
             get { return placeholderText; }
@@ -306,13 +293,12 @@ namespace DMMDigital.Components.Rounded
             if (textBox1.Multiline == false)
             {
                 int txtHeight = TextRenderer.MeasureText("Text", this.Font).Height + 1;
-                textBox1.Multiline = true;
                 textBox1.MinimumSize = new Size(0, txtHeight);
-                textBox1.Multiline = false;
 
                 this.Height = textBox1.Height + this.Padding.Top + this.Padding.Bottom;
             }
         }
+
         #endregion
 
         #region -> TextBox events

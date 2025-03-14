@@ -125,6 +125,10 @@
   <data name="titulo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 20pt</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="titulo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="titulo.Location" type="System.Drawing.Point, System.Drawing">
     <value>363, 19</value>
   </data>
@@ -154,6 +158,9 @@
   </data>
   <data name="label6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt, style=Bold</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 84</value>
@@ -185,6 +192,9 @@
   <data name="label7.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt, style=Bold</value>
   </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
     <value>484, 84</value>
   </data>
@@ -209,7 +219,6 @@
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonInitializeExam.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -221,6 +230,9 @@
   </data>
   <data name="buttonInitializeExam.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonInitializeExam.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonInitializeExam.Location" type="System.Drawing.Point, System.Drawing">
     <value>822, 572</value>
@@ -263,6 +275,9 @@
   </data>
   <data name="buttonCancel.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
+  </data>
+  <data name="buttonCancel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 572</value>
@@ -384,6 +399,9 @@
   <data name="buttonNewTemplate.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="buttonNewTemplate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonNewTemplate.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 123</value>
   </data>
@@ -420,6 +438,9 @@
   <data name="label8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 96</value>
   </data>
@@ -449,6 +470,9 @@
   </data>
   <data name="label10.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>28, 17</value>
@@ -495,11 +519,14 @@
   <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="roundedTextBoxObservation.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="roundedTextBoxObservation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="roundedTextBoxObservation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 321</value>
+    <value>38, 321</value>
   </data>
   <data name="roundedTextBoxObservation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -525,11 +552,14 @@
   <data name="&gt;&gt;roundedTextBoxObservation.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="roundedTextBoxRecommendation.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="roundedTextBoxRecommendation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="roundedTextBoxRecommendation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 250</value>
+    <value>38, 250</value>
   </data>
   <data name="roundedTextBoxRecommendation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -555,11 +585,14 @@
   <data name="&gt;&gt;roundedTextBoxRecommendation.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="roundedTextBoxName.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="roundedTextBoxName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
   <data name="roundedTextBoxName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 37</value>
+    <value>38, 37</value>
   </data>
   <data name="roundedTextBoxName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -585,8 +618,11 @@
   <data name="&gt;&gt;roundedTextBoxName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="textBoxPhone.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="textBoxPhone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 178</value>
+    <value>36, 178</value>
   </data>
   <data name="textBoxPhone.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 44</value>
@@ -606,8 +642,11 @@
   <data name="&gt;&gt;textBoxPhone.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="textBoxBirthDate.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="textBoxBirthDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 107</value>
+    <value>36, 107</value>
   </data>
   <data name="textBoxBirthDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 44</value>
@@ -635,6 +674,9 @@
   </data>
   <data name="label9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>36, 298</value>
@@ -669,6 +711,9 @@
   <data name="label11.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>36, 227</value>
   </data>
@@ -701,6 +746,9 @@
   </data>
   <data name="label12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
     <value>36, 156</value>
@@ -735,6 +783,9 @@
   <data name="label13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
   </data>
+  <data name="label13.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
     <value>36, 85</value>
   </data>
@@ -767,6 +818,9 @@
   </data>
   <data name="label14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 10pt</value>
+  </data>
+  <data name="label14.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
     <value>36, 14</value>

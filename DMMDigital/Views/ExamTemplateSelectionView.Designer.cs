@@ -242,8 +242,8 @@
             this.textBoxPhone.BorderColor = System.Drawing.Color.White;
             this.textBoxPhone.BorderRadius = 10;
             this.textBoxPhone.BorderSize = 10;
-            this.textBoxPhone.ForeColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.textBoxPhone, "textBoxPhone");
+            this.textBoxPhone.ForeColor = System.Drawing.Color.Gray;
             this.textBoxPhone.Name = "textBoxPhone";
             // 
             // textBoxBirthDate
@@ -252,8 +252,8 @@
             this.textBoxBirthDate.BorderColor = System.Drawing.Color.White;
             this.textBoxBirthDate.BorderRadius = 10;
             this.textBoxBirthDate.BorderSize = 10;
-            this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
             resources.ApplyResources(this.textBoxBirthDate, "textBoxBirthDate");
+            this.textBoxBirthDate.ForeColor = System.Drawing.Color.Gray;
             this.textBoxBirthDate.Name = "textBoxBirthDate";
             // 
             // label9
