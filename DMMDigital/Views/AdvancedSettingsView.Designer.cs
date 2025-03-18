@@ -113,8 +113,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";
@@ -125,8 +125,8 @@
             resources.ApplyResources(this.buttonOk, "buttonOk");
             this.buttonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonOk.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonOk.BorderWidth = 5F;
-            this.buttonOk.CornerRadius = 5;
+            this.buttonOk.BorderWidth = 1;
+            this.buttonOk.CornerRadius = 10;
             this.buttonOk.FlatAppearance.BorderSize = 0;
             this.buttonOk.ForeColor = System.Drawing.Color.White;
             this.buttonOk.Name = "buttonOk";
@@ -136,7 +136,7 @@
             // 
             this.buttonExamPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonExamPath.BorderColor = System.Drawing.Color.White;
-            this.buttonExamPath.BorderWidth = 5F;
+            this.buttonExamPath.BorderWidth = 5;
             this.buttonExamPath.CornerRadius = 10;
             this.buttonExamPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
             resources.ApplyResources(this.buttonExamPath, "buttonExamPath");
@@ -147,7 +147,7 @@
             // 
             this.buttonSensorPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonSensorPath.BorderColor = System.Drawing.Color.White;
-            this.buttonSensorPath.BorderWidth = 5F;
+            this.buttonSensorPath.BorderWidth = 5;
             this.buttonSensorPath.CornerRadius = 10;
             this.buttonSensorPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
             resources.ApplyResources(this.buttonSensorPath, "buttonSensorPath");
@@ -159,8 +159,8 @@
             resources.ApplyResources(this.roundedButtonMigrateCDR, "roundedButtonMigrateCDR");
             this.roundedButtonMigrateCDR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedButtonMigrateCDR.BorderColor = System.Drawing.Color.White;
-            this.roundedButtonMigrateCDR.BorderWidth = 5F;
-            this.roundedButtonMigrateCDR.CornerRadius = 5;
+            this.roundedButtonMigrateCDR.BorderWidth = 1;
+            this.roundedButtonMigrateCDR.CornerRadius = 10;
             this.roundedButtonMigrateCDR.FlatAppearance.BorderSize = 0;
             this.roundedButtonMigrateCDR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedButtonMigrateCDR.Name = "roundedButtonMigrateCDR";
@@ -171,8 +171,8 @@
             resources.ApplyResources(this.roundedButtonMigrateWimDesktop, "roundedButtonMigrateWimDesktop");
             this.roundedButtonMigrateWimDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.roundedButtonMigrateWimDesktop.BorderColor = System.Drawing.Color.White;
-            this.roundedButtonMigrateWimDesktop.BorderWidth = 5F;
-            this.roundedButtonMigrateWimDesktop.CornerRadius = 5;
+            this.roundedButtonMigrateWimDesktop.BorderWidth = 1;
+            this.roundedButtonMigrateWimDesktop.CornerRadius = 10;
             this.roundedButtonMigrateWimDesktop.FlatAppearance.BorderSize = 0;
             this.roundedButtonMigrateWimDesktop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedButtonMigrateWimDesktop.Name = "roundedButtonMigrateWimDesktop";

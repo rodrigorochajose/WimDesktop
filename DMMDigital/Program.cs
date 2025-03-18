@@ -2,6 +2,7 @@
 using DMMDigital.Interface.IView;
 using DMMDigital.Presenters;
 using DMMDigital.Views;
+using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
 using System.Data.Common;
@@ -19,9 +20,40 @@ namespace DMMDigital
         [STAThread]
         static void Main()
         {
+            if (!connectDatabase())
+            {
+                return;
+            }
+
+            loadLanguage();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            openApplication();
+        }
+
+        static bool connectDatabase()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+
+            try
+            {
+                using (FbConnection conexao = new FbConnection(connectionString))
+                {
+                    conexao.Open();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao conectar no banco de dados: {ex.Message}");
+                return false;
+            }
+        }
+
+        static void loadLanguage()
+        {
             SettingsRepository settingsRepository = new SettingsRepository();
 
             string culture = "";
@@ -37,10 +69,49 @@ namespace DMMDigital
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+        }
 
-            IMenuView view = new MenuView();
-            new MenuPresenter(view);
-            Application.Run((Form)view);
+        static void openApplication()
+        {
+            ClinicRepository clinicRepository = new ClinicRepository();
+            DialogResult result = DialogResult.Cancel;
+
+            if (!clinicRepository.hasClinic())
+            {
+                using (var clinicView = new ClinicHandlerView(false))
+                {
+                    new ClinicPresenter(clinicView);
+                    if (clinicView.ShowDialog() == DialogResult.Cancel)
+                    {
+                        FormManager.instance.closeAllForms();
+                    }
+                }
+            }
+
+            if (!clinicRepository.keepConnected())
+            {
+                using (var loginView = new LoginView())
+                {
+                    new LoginPresenter(loginView);
+                    result = loginView.ShowDialog();
+                }
+            }
+            else
+            {
+                result = DialogResult.OK;
+            }
+
+            if (result == DialogResult.OK)
+            {
+                runApplication();
+            }
+        }
+
+        static void runApplication()
+        {
+            IMenuView menuView = new MenuView();
+            new MenuPresenter(menuView);
+            Application.Run((Form)menuView);
         }
 
         static void configDatabase()

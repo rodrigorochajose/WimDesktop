@@ -144,16 +144,20 @@
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="FormManager.cs" />
+    <Compile Include="Interface\IRepository\IClinicRepository.cs" />
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
+    <Compile Include="Interface\IView\IClinicCreationView.cs" />
     <Compile Include="Interface\IView\IFramesComparisonImportView.cs" />
+    <Compile Include="Interface\IView\ILoginView.cs" />
     <Compile Include="Interface\IView\IMigrationDatabaseView.cs" />
     <Compile Include="Interface\IView\IPatientExamView.cs" />
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Interface\IView\IRecycleBinView.cs" />
     <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
+    <Compile Include="Models\ClinicModel.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IRepository\ISettingsRepository.cs" />
@@ -169,7 +173,9 @@
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Filters.cs" />
+    <Compile Include="Presenters\ClinicPresenter.cs" />
     <Compile Include="Presenters\ImportExamImagePresenter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MigrationDatabasePresenter.cs" />
     <Compile Include="Presenters\PatientCreationPresenter.cs" />
     <Compile Include="Presenters\PatientExamPresenter.cs" />
@@ -197,6 +203,18 @@
     </Compile>
     <Compile Include="Views\AdvancedSettingsView.Designer.cs">
       <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClinicHandlerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ClinicHandlerView.Designer.cs">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\MultiComparisonView.cs">
       <SubType>Form</SubType>
@@ -408,6 +426,7 @@
     <Compile Include="Views\TemplateView.Designer.cs">
       <DependentUpon>TemplateView.cs</DependentUpon>
     </Compile>
+    <Compile Include="_Repositories\ClinicRepository.cs" />
     <Compile Include="_Repositories\SettingsRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingPointsRepository.cs" />
     <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
@@ -440,8 +459,20 @@
       <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicHandlerView.en-US.resx">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicHandlerView.resx">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\FramesComparisonImportView.en-US.resx">
       <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginView.en-US.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginView.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MultiComparisonView.en-US.resx">
       <DependentUpon>MultiComparisonView.cs</DependentUpon>
@@ -655,6 +686,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next">
+      <Version>4.0.3</Version>
+    </PackageReference>
     <PackageReference Include="CsvHelper">
       <Version>33.0.1</Version>
     </PackageReference>
@@ -778,6 +812,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\logo-wim-96x96.png" />
+    <None Include="Resources\icon-96x96-transparent.png" />
+    <None Include="Resources\logo-wimdental-login.png" />
     <None Include="Resources\icon_16x16_calendar_gray.png" />
     <None Include="Resources\icon_16x16_calendar_silver.png" />
     <None Include="Resources\whiteCalendar.png" />

@@ -60,5 +60,15 @@ namespace DMMDigital
         {
             Application.OpenForms.Cast<Form>().First().Show();
         }
+
+        public void closeAllForms()
+        {
+            List<Form> forms = Application.OpenForms.Cast<Form>().ToList();
+
+            for (int counter = 0; counter < forms.Count; counter++)
+            {
+                forms[counter].Close();
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using DMMDigital.Interface.IView;
 using System.IO;
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
 {
@@ -35,6 +36,8 @@ namespace DMMDigital.Presenters
             };
 
             generateDatabaseBackup();
+
+            (menuView as Form).Show();
         }
 
         public void generateDatabaseBackup()

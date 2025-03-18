@@ -112,8 +112,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";
@@ -124,8 +124,8 @@
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSave.BorderWidth = 5F;
-            this.buttonSave.CornerRadius = 5;
+            this.buttonSave.BorderWidth = 1;
+            this.buttonSave.CornerRadius = 10;
             this.buttonSave.FlatAppearance.BorderSize = 0;
             this.buttonSave.ForeColor = System.Drawing.Color.White;
             this.buttonSave.Name = "buttonSave";
@@ -225,7 +225,7 @@
             // 
             this.buttonSelectTwainSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonSelectTwainSource.BorderColor = System.Drawing.Color.White;
-            this.buttonSelectTwainSource.BorderWidth = 5F;
+            this.buttonSelectTwainSource.BorderWidth = 5;
             this.buttonSelectTwainSource.CornerRadius = 10;
             this.buttonSelectTwainSource.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
             resources.ApplyResources(this.buttonSelectTwainSource, "buttonSelectTwainSource");
@@ -282,7 +282,7 @@
             // 
             this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
             this.buttonRulerColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonRulerColorPicker.BorderWidth = 7F;
+            this.buttonRulerColorPicker.BorderWidth = 7;
             this.buttonRulerColorPicker.CornerRadius = 5;
             this.buttonRulerColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.buttonRulerColorPicker, "buttonRulerColorPicker");
@@ -294,7 +294,7 @@
             // 
             this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
             this.buttonTextColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonTextColorPicker.BorderWidth = 7F;
+            this.buttonTextColorPicker.BorderWidth = 7;
             this.buttonTextColorPicker.CornerRadius = 5;
             this.buttonTextColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.buttonTextColorPicker, "buttonTextColorPicker");
@@ -306,7 +306,7 @@
             // 
             this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
             this.buttonDrawingColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonDrawingColorPicker.BorderWidth = 7F;
+            this.buttonDrawingColorPicker.BorderWidth = 7;
             this.buttonDrawingColorPicker.CornerRadius = 5;
             this.buttonDrawingColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
             resources.ApplyResources(this.buttonDrawingColorPicker, "buttonDrawingColorPicker");
@@ -438,7 +438,7 @@
             resources.ApplyResources(this.buttonEmptyAllRecycleBin, "buttonEmptyAllRecycleBin");
             this.buttonEmptyAllRecycleBin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonEmptyAllRecycleBin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonEmptyAllRecycleBin.BorderWidth = 5F;
+            this.buttonEmptyAllRecycleBin.BorderWidth = 5;
             this.buttonEmptyAllRecycleBin.CornerRadius = 5;
             this.buttonEmptyAllRecycleBin.FlatAppearance.BorderSize = 0;
             this.buttonEmptyAllRecycleBin.ForeColor = System.Drawing.Color.White;

@@ -76,8 +76,8 @@
             resources.ApplyResources(this.buttonInitializeExam, "buttonInitializeExam");
             this.buttonInitializeExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonInitializeExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonInitializeExam.BorderWidth = 5F;
-            this.buttonInitializeExam.CornerRadius = 5;
+            this.buttonInitializeExam.BorderWidth = 1;
+            this.buttonInitializeExam.CornerRadius = 10;
             this.buttonInitializeExam.FlatAppearance.BorderSize = 0;
             this.buttonInitializeExam.ForeColor = System.Drawing.Color.White;
             this.buttonInitializeExam.Name = "buttonInitializeExam";
@@ -88,8 +88,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";
@@ -150,8 +150,8 @@
             resources.ApplyResources(this.buttonNewTemplate, "buttonNewTemplate");
             this.buttonNewTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewTemplate.BorderWidth = 5F;
-            this.buttonNewTemplate.CornerRadius = 5;
+            this.buttonNewTemplate.BorderWidth = 1;
+            this.buttonNewTemplate.CornerRadius = 10;
             this.buttonNewTemplate.FlatAppearance.BorderSize = 0;
             this.buttonNewTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonNewTemplate.Name = "buttonNewTemplate";

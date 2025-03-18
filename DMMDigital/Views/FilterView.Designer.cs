@@ -158,7 +158,7 @@
             // 
             this.buttonApplyChanges.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonApplyChanges.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonApplyChanges.BorderWidth = 10F;
+            this.buttonApplyChanges.BorderWidth = 5;
             this.buttonApplyChanges.CornerRadius = 10;
             resources.ApplyResources(this.buttonApplyChanges, "buttonApplyChanges");
             this.buttonApplyChanges.ForeColor = System.Drawing.Color.White;
@@ -170,7 +170,7 @@
             // 
             this.buttonRestoreImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonRestoreImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonRestoreImage.BorderWidth = 10F;
+            this.buttonRestoreImage.BorderWidth = 5;
             this.buttonRestoreImage.CornerRadius = 10;
             resources.ApplyResources(this.buttonRestoreImage, "buttonRestoreImage");
             this.buttonRestoreImage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));

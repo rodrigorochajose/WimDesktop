@@ -614,11 +614,58 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_wim_96x96 {
+            get {
+                object obj = ResourceManager.GetObject("logo_wim_96x96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_wimdental_login {
+            get {
+                object obj = ResourceManager.GetObject("logo_wimdental_login", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A lixeira já está vazia.
         /// </summary>
         internal static string messageBinAlreadyEmpty {
             get {
                 return ResourceManager.GetString("messageBinAlreadyEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email é obrigatório !.
+        /// </summary>
+        internal static string messageClinicRequiredEmail {
+            get {
+                return ResourceManager.GetString("messageClinicRequiredEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome é obrigatório !.
+        /// </summary>
+        internal static string messageClinicRequiredName {
+            get {
+                return ResourceManager.GetString("messageClinicRequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha é obrigatória !.
+        /// </summary>
+        internal static string messageClinicRequiredPassword {
+            get {
+                return ResourceManager.GetString("messageClinicRequiredPassword", resourceCulture);
             }
         }
         
@@ -655,6 +702,24 @@ namespace DMMDigital.Properties {
         internal static string messageConfirmEmptyAllRecycleBin {
             get {
                 return ResourceManager.GetString("messageConfirmEmptyAllRecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Cadastro feito com sucesso!.
+        /// </summary>
+        internal static string messageCreateSuccess {
+            get {
+                return ResourceManager.GetString("messageCreateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email não encontrado.
+        /// </summary>
+        internal static string messageEmailNotFound {
+            get {
+                return ResourceManager.GetString("messageEmailNotFound", resourceCulture);
             }
         }
         
@@ -848,6 +913,24 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Email não encontrado !.
+        /// </summary>
+        internal static string messageNotFoundEmail {
+            get {
+                return ResourceManager.GetString("messageNotFoundEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Senha Atualizada !.
+        /// </summary>
+        internal static string messagePasswordUpdated {
+            get {
+                return ResourceManager.GetString("messagePasswordUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Paciente possui exames, não será possível excluí-lo..
         /// </summary>
         internal static string messagePatientCannotDelete {
@@ -1037,6 +1120,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Atualizar.
+        /// </summary>
+        internal static string textButtonUpdate {
+            get {
+                return ResourceManager.GetString("textButtonUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Medição Multipla.
         /// </summary>
         internal static string textCheckBoxMultiRuler {
@@ -1082,6 +1174,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Preencha os campos para recuperar sua senha.
+        /// </summary>
+        internal static string textPasswordRecovery {
+            get {
+                return ResourceManager.GetString("textPasswordRecovery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Vertical Baixo.
         /// </summary>
         internal static string textVerticalBottom {
@@ -1123,6 +1224,15 @@ namespace DMMDigital.Properties {
         internal static string titleDialogText {
             get {
                 return ResourceManager.GetString("titleDialogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Recuperação de Senha.
+        /// </summary>
+        internal static string titleEditClinic {
+            get {
+                return ResourceManager.GetString("titleEditClinic", resourceCulture);
             }
         }
         

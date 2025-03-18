@@ -134,26 +134,17 @@
   <data name="messageImageNotSelected" xml:space="preserve">
     <value>Nenhuma Imagem foi selecionada.</value>
   </data>
-  <data name="icon_32x32_new_patient" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-patients1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="messageConfigSucess" xml:space="preserve">
-    <value>Configuração Salva !</value>
-    <comment>Config</comment>
-  </data>
-  <data name="textHorizontalLeft" xml:space="preserve">
-    <value>Horizontal Esquerda</value>
-  </data>
-  <data name="messageExamIsOpened" xml:space="preserve">
-    <value>Exame já está aberto</value>
-    <comment>Exam</comment>
-  </data>
-  <data name="messagePatientCreated" xml:space="preserve">
-    <value>Paciente cadastrado com sucesso !</value>
-    <comment>Patient</comment>
-  </data>
   <data name="messageRecalibrateRuler" xml:space="preserve">
     <value>Digite o valor de {0} pixels em milímetros</value>
+  </data>
+  <data name="icon_32x32_recyclebin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_32x32_recyclebin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="textButtonSetCalibration" xml:space="preserve">
+    <value>Recalibrar</value>
+  </data>
+  <data name="messageNoPathToExport" xml:space="preserve">
+    <value>Selecione um caminho para exportar !</value>
   </data>
   <data name="messageImageConfirmRestore" xml:space="preserve">
     <value>Tem certeza que deseja restaurar a imagem original ?</value>
@@ -166,6 +157,12 @@
   </data>
   <data name="labelEllipse" xml:space="preserve">
     <value>Círculo</value>
+  </data>
+  <data name="icon_16x16_calendar_silver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_16x16_calendar_silver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="titleEmptyRecycleBin" xml:space="preserve">
+    <value>Esvaziar Lixeira</value>
   </data>
   <data name="messagePatientCannotDelete" xml:space="preserve">
     <value>Paciente possui exames, não será possível excluí-lo.</value>
@@ -186,9 +183,8 @@
   <data name="messageImageConfirmOverwrite" xml:space="preserve">
     <value>Deseja realmente sobrescrever a imagem atual?</value>
   </data>
-  <data name="messagePatientEdited" xml:space="preserve">
-    <value>As informações do paciente foram atualizadas com sucesso !</value>
-    <comment>Patient</comment>
+  <data name="labelRectangle" xml:space="preserve">
+    <value>Retângulo</value>
   </data>
   <data name="icon_32x32_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-green.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,12 +192,17 @@
   <data name="textLabelColor" xml:space="preserve">
     <value>Cor</value>
   </data>
+  <data name="labelRuler" xml:space="preserve">
+    <value>Régua</value>
+  </data>
   <data name="icon_32x32_undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="messageConfirmDelete" xml:space="preserve">
-    <value>Deseja realmente realizar a exclusão?</value>
-    <comment>Confirm Delete</comment>
+  <data name="icon_32x32_new_patient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-patients1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="messageNotFoundEmail" xml:space="preserve">
+    <value>Email não encontrado !</value>
   </data>
   <data name="messageTemplateFrameSucess" xml:space="preserve">
     <value>Template Cadastrado com sucesso !</value>
@@ -209,6 +210,12 @@
   </data>
   <data name="icon_32x32_change_sides" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-change-sides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo_wimdental_login" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo-wimdental-login.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="messageClinicRequiredName" xml:space="preserve">
+    <value>Nome é obrigatório !</value>
   </data>
   <data name="icon_32x32_cursor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-cursor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,8 +233,8 @@
     <value>Data de Nascimento é obrigatória!</value>
     <comment>Patient</comment>
   </data>
-  <data name="icon_32x32_exposure" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-exposure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IMAGEMBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IMAGEMBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="titleSaveTemplate" xml:space="preserve">
     <value>Salvar Template</value>
@@ -239,12 +246,13 @@
   <data name="titleImageRestore" xml:space="preserve">
     <value>Restaurar Imagem</value>
   </data>
-  <data name="messageSensorCannotConnect" xml:space="preserve">
-    <value>Não foi possível conectar o sensor, verifique se o apontamento está correto.</value>
-    <comment>Sensor</comment>
+  <data name="messageConfirmDelete" xml:space="preserve">
+    <value>Deseja realmente realizar a exclusão?</value>
+    <comment>Confirm Delete</comment>
   </data>
-  <data name="labelRuler" xml:space="preserve">
-    <value>Régua</value>
+  <data name="messagePatientEdited" xml:space="preserve">
+    <value>As informações do paciente foram atualizadas com sucesso !</value>
+    <comment>Patient</comment>
   </data>
   <data name="messageErrorConnectingDatabase" xml:space="preserve">
     <value>Erro ao se conectar com banco de dados.</value>
@@ -258,8 +266,11 @@
   <data name="messagePatientNotSelected" xml:space="preserve">
     <value>Nenhum Paciente foi selecionado!</value>
   </data>
-  <data name="labelRectangle" xml:space="preserve">
-    <value>Retângulo</value>
+  <data name="messageEmptyAllRecycleBinSuccess" xml:space="preserve">
+    <value>Todas as Lixeiras foram esvaziadas com sucesso !</value>
+  </data>
+  <data name="messageBinAlreadyEmpty" xml:space="preserve">
+    <value>A lixeira já está vazia</value>
   </data>
   <data name="messageWrongPassword" xml:space="preserve">
     <value>Senha Incorreta</value>
@@ -267,11 +278,17 @@
   <data name="messageExamNotSelected" xml:space="preserve">
     <value>Nenhum Exame foi selecionado!</value>
   </data>
-  <data name="textButtonSetCalibration" xml:space="preserve">
-    <value>Recalibrar</value>
+  <data name="icon_32x32_rotate_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-rotate-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="textLabelSize" xml:space="preserve">
     <value>Tamanho</value>
+  </data>
+  <data name="messageSwitchTemplateSuccess" xml:space="preserve">
+    <value>Troca de Template realizada com sucesso!</value>
+  </data>
+  <data name="messageConfirmEmptyAllRecycleBin" xml:space="preserve">
+    <value>Deseja realmente esvaziar todas as lixeiras?</value>
   </data>
   <data name="grid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\grid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -285,6 +302,9 @@
   <data name="textHorizontalRight" xml:space="preserve">
     <value>Horizontal Direita</value>
   </data>
+  <data name="messageExportExam" xml:space="preserve">
+    <value>Exportar as imagens selecionadas?</value>
+  </data>
   <data name="icon_32x32_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -293,6 +313,9 @@
   </data>
   <data name="icon_32x32_compare_overlap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-compare-overlap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="messageCreateSuccess" xml:space="preserve">
+    <value>Cadastro feito com sucesso!</value>
   </data>
   <data name="banner_principal_f3639437" xml:space="preserve">
     <value />
@@ -303,14 +326,15 @@
   <data name="icon_32x32_ruler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-ruler.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_32x32_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_32x32_rotate_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-rotate-right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="messageClinicRequiredPassword" xml:space="preserve">
+    <value>Senha é obrigatória !</value>
   </data>
   <data name="imageConfigFilter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1-original.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="messageTemplateDeleteSucess" xml:space="preserve">
+    <value>Template Removido com sucesso !</value>
+    <comment>Template</comment>
   </data>
   <data name="icon_32x32_open_exam" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_32x32_open_exam.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -320,6 +344,9 @@
   </data>
   <data name="titleDialogText" xml:space="preserve">
     <value>Inserir Texto</value>
+  </data>
+  <data name="messageClinicRequiredEmail" xml:space="preserve">
+    <value>Email é obrigatório !</value>
   </data>
   <data name="icon_96x96_transparent" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-96x96-transparent.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -344,14 +371,14 @@
   <data name="messageImportData" xml:space="preserve">
     <value>Importando os dados...</value>
   </data>
-  <data name="icon_32x32_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-32x32-autotake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-autotake1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon-32x32-right-arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-right-arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_32x32_rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-rotate-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="titleEditPatient" xml:space="preserve">
+    <value>Editar Paciente</value>
   </data>
   <data name="messageTemplateCannotDelete" xml:space="preserve">
     <value>Template não pode ser excluido pois existem exames que o utilizam.</value>
@@ -363,12 +390,19 @@
   <data name="icon_32x32_pencil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-pencil2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="messagePatientConditionName" xml:space="preserve">
-    <value>Nome do Paciente deve ser entre 4 e 65 letras.</value>
-    <comment>Patient</comment>
+  <data name="icon_32x32_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="titleOverwriteImage" xml:space="preserve">
     <value>Sobrescrever Imagem</value>
+  </data>
+  <data name="messageSensorCannotConnect" xml:space="preserve">
+    <value>Não foi possível conectar o sensor, verifique se o apontamento está correto.</value>
+    <comment>Sensor</comment>
+  </data>
+  <data name="messagePatientConditionName" xml:space="preserve">
+    <value>Nome do Paciente deve ser entre 4 e 65 letras.</value>
+    <comment>Patient</comment>
   </data>
   <data name="messageExamExportSucess" xml:space="preserve">
     <value>Exportado com sucesso !</value>
@@ -381,11 +415,12 @@
     <value>Exame possui imagens, não será possível excluí-lo.</value>
     <comment>Exam</comment>
   </data>
-  <data name="messageExportExam" xml:space="preserve">
-    <value>Exportar as imagens selecionadas?</value>
+  <data name="icon_32x32_cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-cancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="labelArrow" xml:space="preserve">
-    <value>Seta</value>
+  <data name="messagePatientCreated" xml:space="preserve">
+    <value>Paciente cadastrado com sucesso !</value>
+    <comment>Patient</comment>
   </data>
   <data name="messageExamExportMode" xml:space="preserve">
     <value>Selecione como deseja exportar a imagem!</value>
@@ -393,11 +428,17 @@
   <data name="icon_32x32_capture" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-capture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="titleEditPatient" xml:space="preserve">
-    <value>Editar Paciente</value>
+  <data name="textVerticalBottom" xml:space="preserve">
+    <value>Vertical Baixo</value>
+  </data>
+  <data name="labelArrow" xml:space="preserve">
+    <value>Seta</value>
   </data>
   <data name="icon_32x32_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-template.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_32x32_redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="textVerticalTop" xml:space="preserve">
     <value>Vertical Cima</value>
@@ -417,9 +458,9 @@
   <data name="icon_32x32_reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="messageTemplateDeleteSucess" xml:space="preserve">
-    <value>Template Removido com sucesso !</value>
-    <comment>Template</comment>
+  <data name="messageConfigSucess" xml:space="preserve">
+    <value>Configuração Salva !</value>
+    <comment>Config</comment>
   </data>
   <data name="icon_32x32_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -427,8 +468,8 @@
   <data name="icon_32x32_xray_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-xray-new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-32x32-autotake" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-autotake1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_16x16_calendar_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_16x16_calendar_gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="messageComparisonSelection" xml:space="preserve">
     <value>Selecione mais de uma imagem para comparação.</value>
@@ -436,24 +477,28 @@
   <data name="textButtonResetCalibration" xml:space="preserve">
     <value>Padrão do Sensor</value>
   </data>
-  <data name="icon_32x32_redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_32x32_exposure" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-exposure.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="messagePatientRequiredName" xml:space="preserve">
     <value>Nome do Paciente é obrigatório!</value>
     <comment>Patient</comment>
   </data>
-  <data name="messageSwitchTemplateSuccess" xml:space="preserve">
-    <value>Troca de Template realizada com sucesso!</value>
+  <data name="icon_32x32_left_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-left-arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_32x32_rotate_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-32x32-rotate-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="messageSaveTemplate" xml:space="preserve">
     <value>Confirma salvar o template ?</value>
   </data>
-  <data name="textVerticalBottom" xml:space="preserve">
-    <value>Vertical Baixo</value>
+  <data name="messageExamIsOpened" xml:space="preserve">
+    <value>Exame já está aberto</value>
+    <comment>Exam</comment>
   </data>
-  <data name="icon_32x32_left_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon-32x32-left-arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="textHorizontalLeft" xml:space="preserve">
+    <value>Horizontal Esquerda</value>
   </data>
   <data name="icon_32x32_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -467,31 +512,22 @@
   <data name="icon_16x16_original_size" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-16x16-original-size.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IMAGEMBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IMAGEMBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_wim_96x96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo-wim-96x96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_32x32_recyclebin" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_32x32_recyclebin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="titleEditClinic" xml:space="preserve">
+    <value>Recuperação de Senha</value>
   </data>
-  <data name="messageConfirmEmptyAllRecycleBin" xml:space="preserve">
-    <value>Deseja realmente esvaziar todas as lixeiras?</value>
+  <data name="textPasswordRecovery" xml:space="preserve">
+    <value>Preencha os campos para recuperar sua senha</value>
   </data>
-  <data name="titleEmptyRecycleBin" xml:space="preserve">
-    <value>Esvaziar Lixeira</value>
+  <data name="textButtonUpdate" xml:space="preserve">
+    <value>Atualizar</value>
   </data>
-  <data name="messageEmptyAllRecycleBinSuccess" xml:space="preserve">
-    <value>Todas as Lixeiras foram esvaziadas com sucesso !</value>
+  <data name="messagePasswordUpdated" xml:space="preserve">
+    <value>Senha Atualizada !</value>
   </data>
-  <data name="messageBinAlreadyEmpty" xml:space="preserve">
-    <value>A lixeira já está vazia</value>
-  </data>
-  <data name="messageNoPathToExport" xml:space="preserve">
-    <value>Selecione um caminho para exportar !</value>
-  </data>
-  <data name="icon_16x16_calendar_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_16x16_calendar_gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_16x16_calendar_silver" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_16x16_calendar_silver.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="messageEmailNotFound" xml:space="preserve">
+    <value>Email não encontrado</value>
   </data>
 </root>

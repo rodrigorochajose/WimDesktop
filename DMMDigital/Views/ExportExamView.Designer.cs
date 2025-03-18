@@ -114,7 +114,7 @@
             // 
             this.buttonSelectPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonSelectPath.BorderColor = System.Drawing.Color.White;
-            this.buttonSelectPath.BorderWidth = 5F;
+            this.buttonSelectPath.BorderWidth = 5;
             this.buttonSelectPath.CornerRadius = 10;
             this.buttonSelectPath.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
             resources.ApplyResources(this.buttonSelectPath, "buttonSelectPath");
@@ -214,8 +214,8 @@
             resources.ApplyResources(this.buttonExportExam, "buttonExportExam");
             this.buttonExportExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonExportExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonExportExam.BorderWidth = 5F;
-            this.buttonExportExam.CornerRadius = 5;
+            this.buttonExportExam.BorderWidth = 1;
+            this.buttonExportExam.CornerRadius = 10;
             this.buttonExportExam.FlatAppearance.BorderSize = 0;
             this.buttonExportExam.ForeColor = System.Drawing.Color.White;
             this.buttonExportExam.Name = "buttonExportExam";
@@ -227,8 +227,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";

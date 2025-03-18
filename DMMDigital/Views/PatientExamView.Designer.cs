@@ -146,6 +146,7 @@
             this.roundedTextBoxName.Multiline = false;
             this.roundedTextBoxName.Name = "roundedTextBoxName";
             this.roundedTextBoxName.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.roundedTextBoxName.PasswordChar = false;
             this.roundedTextBoxName.PlaceholderColor = System.Drawing.Color.Gray;
             this.roundedTextBoxName.PlaceholderText = "";
             this.roundedTextBoxName.Size = new System.Drawing.Size(302, 36);
@@ -158,8 +159,8 @@
             this.buttonDeletePatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonDeletePatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonDeletePatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonDeletePatient.BorderWidth = 5F;
-            this.buttonDeletePatient.CornerRadius = 5;
+            this.buttonDeletePatient.BorderWidth = 1;
+            this.buttonDeletePatient.CornerRadius = 10;
             this.buttonDeletePatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDeletePatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonDeletePatient.ForeColor = System.Drawing.Color.White;
@@ -178,8 +179,8 @@
             this.buttonEditPatient.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonEditPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonEditPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonEditPatient.BorderWidth = 5F;
-            this.buttonEditPatient.CornerRadius = 5;
+            this.buttonEditPatient.BorderWidth = 1;
+            this.buttonEditPatient.CornerRadius = 10;
             this.buttonEditPatient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEditPatient.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonEditPatient.ForeColor = System.Drawing.Color.White;
@@ -455,8 +456,8 @@
             this.buttonExportExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonExportExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonExportExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonExportExam.BorderWidth = 5F;
-            this.buttonExportExam.CornerRadius = 5;
+            this.buttonExportExam.BorderWidth = 1;
+            this.buttonExportExam.CornerRadius = 10;
             this.buttonExportExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExportExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonExportExam.ForeColor = System.Drawing.Color.White;
@@ -475,8 +476,8 @@
             this.buttonNewExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonNewExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewExam.BorderWidth = 5F;
-            this.buttonNewExam.CornerRadius = 5;
+            this.buttonNewExam.BorderWidth = 1;
+            this.buttonNewExam.CornerRadius = 10;
             this.buttonNewExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNewExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonNewExam.ForeColor = System.Drawing.Color.White;
@@ -495,8 +496,8 @@
             this.buttonOpenExam.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonOpenExam.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonOpenExam.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonOpenExam.BorderWidth = 5F;
-            this.buttonOpenExam.CornerRadius = 5;
+            this.buttonOpenExam.BorderWidth = 1;
+            this.buttonOpenExam.CornerRadius = 10;
             this.buttonOpenExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOpenExam.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.buttonOpenExam.ForeColor = System.Drawing.Color.White;

@@ -110,8 +110,8 @@
             resources.ApplyResources(this.buttonRestoreImage, "buttonRestoreImage");
             this.buttonRestoreImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonRestoreImage.BorderColor = System.Drawing.Color.White;
-            this.buttonRestoreImage.BorderWidth = 5F;
-            this.buttonRestoreImage.CornerRadius = 5;
+            this.buttonRestoreImage.BorderWidth = 1;
+            this.buttonRestoreImage.CornerRadius = 10;
             this.buttonRestoreImage.FlatAppearance.BorderSize = 0;
             this.buttonRestoreImage.ForeColor = System.Drawing.Color.Black;
             this.buttonRestoreImage.Name = "buttonRestoreImage";
@@ -123,8 +123,8 @@
             resources.ApplyResources(this.buttonImport, "buttonImport");
             this.buttonImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonImport.BorderColor = System.Drawing.Color.White;
-            this.buttonImport.BorderWidth = 5F;
-            this.buttonImport.CornerRadius = 5;
+            this.buttonImport.BorderWidth = 1;
+            this.buttonImport.CornerRadius = 10;
             this.buttonImport.FlatAppearance.BorderSize = 0;
             this.buttonImport.ForeColor = System.Drawing.Color.Black;
             this.buttonImport.Name = "buttonImport";
@@ -136,8 +136,8 @@
             resources.ApplyResources(this.buttonRestoreValues, "buttonRestoreValues");
             this.buttonRestoreValues.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonRestoreValues.BorderColor = System.Drawing.Color.White;
-            this.buttonRestoreValues.BorderWidth = 5F;
-            this.buttonRestoreValues.CornerRadius = 5;
+            this.buttonRestoreValues.BorderWidth = 1;
+            this.buttonRestoreValues.CornerRadius = 10;
             this.buttonRestoreValues.FlatAppearance.BorderSize = 0;
             this.buttonRestoreValues.ForeColor = System.Drawing.Color.Black;
             this.buttonRestoreValues.Name = "buttonRestoreValues";
@@ -154,8 +154,8 @@
             resources.ApplyResources(this.buttonSave, "buttonSave");
             this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonSave.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSave.BorderWidth = 5F;
-            this.buttonSave.CornerRadius = 5;
+            this.buttonSave.BorderWidth = 1;
+            this.buttonSave.CornerRadius = 10;
             this.buttonSave.FlatAppearance.BorderSize = 0;
             this.buttonSave.ForeColor = System.Drawing.Color.White;
             this.buttonSave.Name = "buttonSave";
@@ -167,8 +167,8 @@
             resources.ApplyResources(this.buttonApply, "buttonApply");
             this.buttonApply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonApply.BorderColor = System.Drawing.Color.White;
-            this.buttonApply.BorderWidth = 5F;
-            this.buttonApply.CornerRadius = 5;
+            this.buttonApply.BorderWidth = 1;
+            this.buttonApply.CornerRadius = 10;
             this.buttonApply.FlatAppearance.BorderSize = 0;
             this.buttonApply.ForeColor = System.Drawing.Color.Black;
             this.buttonApply.Name = "buttonApply";

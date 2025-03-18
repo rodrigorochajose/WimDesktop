@@ -95,9 +95,9 @@
             // buttonSaveTemplate
             // 
             this.buttonSaveTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSaveTemplate.BorderColor = System.Drawing.Color.White;
-            this.buttonSaveTemplate.BorderWidth = 5F;
-            this.buttonSaveTemplate.CornerRadius = 10;
+            this.buttonSaveTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonSaveTemplate.BorderWidth = 5;
+            this.buttonSaveTemplate.CornerRadius = 15;
             resources.ApplyResources(this.buttonSaveTemplate, "buttonSaveTemplate");
             this.buttonSaveTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonSaveTemplate.Name = "buttonSaveTemplate";
@@ -106,9 +106,9 @@
             // buttonDeleteFrame
             // 
             this.buttonDeleteFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonDeleteFrame.BorderColor = System.Drawing.Color.White;
-            this.buttonDeleteFrame.BorderWidth = 5F;
-            this.buttonDeleteFrame.CornerRadius = 10;
+            this.buttonDeleteFrame.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonDeleteFrame.BorderWidth = 5;
+            this.buttonDeleteFrame.CornerRadius = 15;
             resources.ApplyResources(this.buttonDeleteFrame, "buttonDeleteFrame");
             this.buttonDeleteFrame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonDeleteFrame.Name = "buttonDeleteFrame";
@@ -118,7 +118,7 @@
             // 
             this.buttonRotateRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonRotateRight.BorderColor = System.Drawing.Color.White;
-            this.buttonRotateRight.BorderWidth = 5F;
+            this.buttonRotateRight.BorderWidth = 5;
             this.buttonRotateRight.CornerRadius = 10;
             this.buttonRotateRight.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_right;
             resources.ApplyResources(this.buttonRotateRight, "buttonRotateRight");
@@ -128,9 +128,9 @@
             // buttonNewFrame
             // 
             this.buttonNewFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonNewFrame.BorderColor = System.Drawing.Color.White;
-            this.buttonNewFrame.BorderWidth = 5F;
-            this.buttonNewFrame.CornerRadius = 10;
+            this.buttonNewFrame.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.buttonNewFrame.BorderWidth = 5;
+            this.buttonNewFrame.CornerRadius = 15;
             resources.ApplyResources(this.buttonNewFrame, "buttonNewFrame");
             this.buttonNewFrame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewFrame.Name = "buttonNewFrame";
@@ -140,7 +140,7 @@
             // 
             this.buttonRotateLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonRotateLeft.BorderColor = System.Drawing.Color.White;
-            this.buttonRotateLeft.BorderWidth = 5F;
+            this.buttonRotateLeft.BorderWidth = 5;
             this.buttonRotateLeft.CornerRadius = 10;
             this.buttonRotateLeft.Image = global::DMMDigital.Properties.Resources.icon_32x32_rotate_left;
             resources.ApplyResources(this.buttonRotateLeft, "buttonRotateLeft");

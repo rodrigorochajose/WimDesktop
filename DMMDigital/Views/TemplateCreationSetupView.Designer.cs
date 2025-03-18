@@ -104,8 +104,8 @@
             resources.ApplyResources(this.buttonGenerateTemplate, "buttonGenerateTemplate");
             this.buttonGenerateTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonGenerateTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonGenerateTemplate.BorderWidth = 5F;
-            this.buttonGenerateTemplate.CornerRadius = 5;
+            this.buttonGenerateTemplate.BorderWidth = 1;
+            this.buttonGenerateTemplate.CornerRadius = 15;
             this.buttonGenerateTemplate.FlatAppearance.BorderSize = 0;
             this.buttonGenerateTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonGenerateTemplate.Name = "buttonGenerateTemplate";

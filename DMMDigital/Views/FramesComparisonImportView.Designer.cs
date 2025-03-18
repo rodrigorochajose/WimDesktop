@@ -81,8 +81,8 @@
             resources.ApplyResources(this.buttonSelect, "buttonSelect");
             this.buttonSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonSelect.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSelect.BorderWidth = 5F;
-            this.buttonSelect.CornerRadius = 5;
+            this.buttonSelect.BorderWidth = 1;
+            this.buttonSelect.CornerRadius = 10;
             this.buttonSelect.FlatAppearance.BorderSize = 0;
             this.buttonSelect.ForeColor = System.Drawing.Color.White;
             this.buttonSelect.Name = "buttonSelect";
@@ -93,8 +93,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";

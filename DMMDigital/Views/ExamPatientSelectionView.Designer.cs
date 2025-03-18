@@ -77,8 +77,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";
@@ -90,8 +90,8 @@
             resources.ApplyResources(this.buttonSelectPatient, "buttonSelectPatient");
             this.buttonSelectPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonSelectPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSelectPatient.BorderWidth = 5F;
-            this.buttonSelectPatient.CornerRadius = 5;
+            this.buttonSelectPatient.BorderWidth = 1;
+            this.buttonSelectPatient.CornerRadius = 10;
             this.buttonSelectPatient.FlatAppearance.BorderSize = 0;
             this.buttonSelectPatient.ForeColor = System.Drawing.Color.White;
             this.buttonSelectPatient.Name = "buttonSelectPatient";
@@ -103,8 +103,8 @@
             resources.ApplyResources(this.buttonNewPatient, "buttonNewPatient");
             this.buttonNewPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewPatient.BorderWidth = 5F;
-            this.buttonNewPatient.CornerRadius = 5;
+            this.buttonNewPatient.BorderWidth = 1;
+            this.buttonNewPatient.CornerRadius = 10;
             this.buttonNewPatient.FlatAppearance.BorderSize = 0;
             this.buttonNewPatient.ForeColor = System.Drawing.Color.White;
             this.buttonNewPatient.Name = "buttonNewPatient";
@@ -116,8 +116,8 @@
             resources.ApplyResources(this.buttonSearchPatient, "buttonSearchPatient");
             this.buttonSearchPatient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonSearchPatient.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.buttonSearchPatient.BorderWidth = 5F;
-            this.buttonSearchPatient.CornerRadius = 5;
+            this.buttonSearchPatient.BorderWidth = 5;
+            this.buttonSearchPatient.CornerRadius = 10;
             this.buttonSearchPatient.Image = global::DMMDigital.Properties.Resources.icon_32x32_search;
             this.buttonSearchPatient.Name = "buttonSearchPatient";
             this.buttonSearchPatient.UseVisualStyleBackColor = false;

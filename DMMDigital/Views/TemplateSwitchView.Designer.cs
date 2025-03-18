@@ -63,8 +63,8 @@
             resources.ApplyResources(this.buttonSwitchTemplate, "buttonSwitchTemplate");
             this.buttonSwitchTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonSwitchTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonSwitchTemplate.BorderWidth = 5F;
-            this.buttonSwitchTemplate.CornerRadius = 5;
+            this.buttonSwitchTemplate.BorderWidth = 1;
+            this.buttonSwitchTemplate.CornerRadius = 10;
             this.buttonSwitchTemplate.FlatAppearance.BorderSize = 0;
             this.buttonSwitchTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonSwitchTemplate.Name = "buttonSwitchTemplate";
@@ -75,8 +75,8 @@
             resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonCancel.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonCancel.BorderWidth = 5F;
-            this.buttonCancel.CornerRadius = 5;
+            this.buttonCancel.BorderWidth = 1;
+            this.buttonCancel.CornerRadius = 10;
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.ForeColor = System.Drawing.Color.White;
             this.buttonCancel.Name = "buttonCancel";
@@ -85,7 +85,7 @@
             // roundedPanel1
             // 
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedPanel1.BorderWidth = 5F;
+            this.roundedPanel1.BorderWidth = 1F;
             this.roundedPanel1.Controls.Add(this.panelCurrentTemplate);
             this.roundedPanel1.Controls.Add(this.labelCurrentTemplate);
             this.roundedPanel1.CornerRadius = 20;
@@ -96,7 +96,7 @@
             // 
             this.panelCurrentTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelCurrentTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelCurrentTemplate.BorderWidth = 5F;
+            this.panelCurrentTemplate.BorderWidth = 1F;
             this.panelCurrentTemplate.CornerRadius = 20;
             resources.ApplyResources(this.panelCurrentTemplate, "panelCurrentTemplate");
             this.panelCurrentTemplate.Name = "panelCurrentTemplate";
@@ -109,7 +109,7 @@
             // roundedPanel2
             // 
             this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedPanel2.BorderWidth = 5F;
+            this.roundedPanel2.BorderWidth = 1F;
             this.roundedPanel2.Controls.Add(this.comboBoxTemplate);
             this.roundedPanel2.Controls.Add(this.panelShowTemplate);
             this.roundedPanel2.Controls.Add(this.buttonNewTemplate);
@@ -132,7 +132,7 @@
             // 
             this.panelShowTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelShowTemplate.BorderWidth = 5F;
+            this.panelShowTemplate.BorderWidth = 1F;
             this.panelShowTemplate.CornerRadius = 20;
             resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
             this.panelShowTemplate.Name = "panelShowTemplate";
@@ -142,8 +142,8 @@
             resources.ApplyResources(this.buttonNewTemplate, "buttonNewTemplate");
             this.buttonNewTemplate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.buttonNewTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonNewTemplate.BorderWidth = 5F;
-            this.buttonNewTemplate.CornerRadius = 5;
+            this.buttonNewTemplate.BorderWidth = 1;
+            this.buttonNewTemplate.CornerRadius = 10;
             this.buttonNewTemplate.FlatAppearance.BorderSize = 0;
             this.buttonNewTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonNewTemplate.Name = "buttonNewTemplate";

@@ -154,10 +154,10 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 58</value>
+    <value>393, 54</value>
   </data>
   <data name="buttonSelectPath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 42</value>
+    <value>45, 45</value>
   </data>
   <data name="buttonSelectPath.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -190,7 +190,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 125</value>
+    <value>16, 116</value>
   </data>
   <data name="buttonCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -235,7 +235,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonContinue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 125</value>
+    <value>348, 116</value>
   </data>
   <data name="buttonContinue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -304,7 +304,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>456, 166</value>
+    <value>456, 156</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
