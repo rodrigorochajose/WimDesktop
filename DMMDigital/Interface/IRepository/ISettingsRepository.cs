@@ -8,6 +8,7 @@ namespace DMMDigital.Interface.IRepository
         SettingsModel getAllSettings();
         string getSensorPath();
         string getSensorModel();
+        int getAcquireMode();
         string getExamPath();
         float[] getFiltersValues();
         string getLanguage();

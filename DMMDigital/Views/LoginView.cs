@@ -28,9 +28,17 @@ namespace DMMDigital.Views
 
         public event EventHandler eventLogin;
 
-        public LoginView()
+        public LoginView(string email, bool keepConnected)
         {
             InitializeComponent();
+
+            this.email = email;
+            this.keepCredentials = keepConnected;
+
+            if (email != "")
+            {
+                ActiveControl = roundedTextBoxPassword;
+            }
 
             associateEvents();
         }

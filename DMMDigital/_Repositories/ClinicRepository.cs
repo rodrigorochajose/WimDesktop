@@ -64,14 +64,14 @@ namespace DMMDigital._Repositories
             }
         }
 
+        public ClinicModel getClinic()
+        {
+            return context.clinic.FirstOrDefault();
+        }
+
         public ClinicModel getClinicByEmail(string email)
         {
             return context.clinic.AsNoTracking().FirstOrDefault(c => c.email == email);
-        }
-
-        public bool hasClinic()
-        {
-            return context.clinic.Any();
         }
 
         public bool keepConnected()

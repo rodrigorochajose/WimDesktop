@@ -1,11 +1,11 @@
 ﻿using DMMDigital._Repositories;
 using DMMDigital.Interface.IView;
+using DMMDigital.Models;
 using DMMDigital.Presenters;
 using DMMDigital.Views;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
-using System.Data.Common;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -74,9 +74,11 @@ namespace DMMDigital
         static void openApplication()
         {
             ClinicRepository clinicRepository = new ClinicRepository();
+            ClinicModel clinic = clinicRepository.getClinic();
+
             DialogResult result = DialogResult.Cancel;
 
-            if (!clinicRepository.hasClinic())
+            if (clinic == null)
             {
                 using (var clinicView = new ClinicHandlerView(false))
                 {
@@ -88,17 +90,19 @@ namespace DMMDigital
                 }
             }
 
-            if (!clinicRepository.keepConnected())
+            string email = "";
+            bool keepConnected = false;
+
+            if (clinicRepository.keepConnected())
             {
-                using (var loginView = new LoginView())
-                {
-                    new LoginPresenter(loginView);
-                    result = loginView.ShowDialog();
-                }
+                email = clinic.email; 
+                keepConnected = true;
             }
-            else
+
+            using (var loginView = new LoginView(email, keepConnected))
             {
-                result = DialogResult.OK;
+                new LoginPresenter(loginView);
+                result = loginView.ShowDialog();
             }
 
             if (result == DialogResult.OK)
@@ -112,37 +116,6 @@ namespace DMMDigital
             IMenuView menuView = new MenuView();
             new MenuPresenter(menuView);
             Application.Run((Form)menuView);
-        }
-
-        static void configDatabase()
-        {
-            string connectionStringName = "Database";
-            string newClientLibraryPath = @"C:\WimDesktopDB\db\Firebird\fbclient.dll";
-
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var connectionStringsSection = (ConnectionStringsSection)configFile.GetSection("connectionStrings");
-
-            var connectionStringConfig = connectionStringsSection.ConnectionStrings[connectionStringName];
-            if (connectionStringConfig != null)
-            {
-                DbConnectionStringBuilder builder = new DbConnectionStringBuilder();
-                builder.ConnectionString = connectionStringConfig.ConnectionString;
-
-                builder["ClientLibrary"] = newClientLibraryPath;
-
-                builder["Password"] = "q6xG3yyJGwOPIHmFh6m1";
-                builder["Database"] = "env-7096808.sp1.br.saveincloud.net.br:/opt/firebird/data/WIMDESKTOPDB.FDB";
-                builder["DataSource"] = "env-7096808.sp1.br.saveincloud.net.br";
-                builder["Port"] = "3050";
-                builder["Dialect"] = "3";
-                builder["ServerType"] = "0";
-
-
-                connectionStringConfig.ConnectionString = builder.ConnectionString;
-
-                configFile.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("connectionStrings");
-            }
         }
     }
 }

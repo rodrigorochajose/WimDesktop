@@ -2,7 +2,6 @@
 using DMMDigital.Models;
 using DMMDigital.Properties;
 using System;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Windows;
 
@@ -45,6 +44,11 @@ namespace DMMDigital._Repositories
         public string getSensorModel()
         {
             return context.settings.First().sensorModel;
+        }
+
+        public int getAcquireMode()
+        {
+            return context.settings.First().acquireMode;
         }
 
         public string getExamPath()

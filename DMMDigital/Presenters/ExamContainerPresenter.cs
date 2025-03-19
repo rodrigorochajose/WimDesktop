@@ -32,6 +32,11 @@ namespace DMMDigital.Presenters
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
         private readonly ISensorRepository sensorRepository = new SensorRepository();
 
+        private readonly List<string> acquireModes = new List<string>
+        {
+           Resources.nativeAquireMode, "TWAIN"
+        };
+
         public ExamContainerPresenter(IExamContainerView view, int patientId)
         {
             examContainerView = view as ExamContainerView;
@@ -39,7 +44,10 @@ namespace DMMDigital.Presenters
 
             associateEvents();
 
-            if (examContainerView.selectedExamView.acquireMode == "TWAIN")
+            string acquireMode = acquireModes[settingsRepository.getAcquireMode()];
+            view.selectedExamView.acquireMode = acquireMode;
+
+            if (acquireMode == "TWAIN")
             {
                 initializeTwain(this, EventArgs.Empty);
                 examContainerView.twainInitialized = true;

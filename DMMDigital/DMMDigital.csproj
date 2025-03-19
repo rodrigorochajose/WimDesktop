@@ -440,6 +440,9 @@
     <EmbeddedResource Include="Components\Rounded\RoundedComboBox.resx">
       <DependentUpon>RoundedComboBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\Rounded\RoundedMaskedTextBox.resx">
+      <DependentUpon>RoundedMaskedTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\Rounded\RoundedNumericUpDown.resx">
       <DependentUpon>RoundedNumericUpDown.cs</DependentUpon>
     </EmbeddedResource>

@@ -87,11 +87,6 @@ namespace DMMDigital.Views
 
         string recyclePath;
 
-        private readonly List<string> acquireModes = new List<string>
-        {
-           Resources.nativeAquireMode, "TWAIN"
-        };
-
         public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
         {
             InitializeComponent();
@@ -260,7 +255,6 @@ namespace DMMDigital.Views
             rulerColor = Color.FromArgb(int.Parse(settings.rulerColor));
             textDrawingPreviousSize = settings.textSize;
             drawingSize = settings.drawingSize;
-            acquireMode = acquireModes[settings.acquireMode];
 
             if (acquireMode == "TWAIN")
             {
