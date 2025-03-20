@@ -36,6 +36,9 @@ namespace DMMDigital.Models
 
         [Column("KEEP_CONNECTED")]
         public int keepConnected { get; set; } = 0;
+
+        [Column("AUTOMATIC_LOGIN")]
+        public int automaticLogin { get; set; } = 0;
     }
 
     public class ClinicModelMap : ClassMap<ClinicModel>

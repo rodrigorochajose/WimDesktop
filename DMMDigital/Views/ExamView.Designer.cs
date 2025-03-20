@@ -58,9 +58,9 @@ namespace DMMDigital.Views
             this.buttonAcquireMode = new System.Windows.Forms.ToolStripButton();
             this.buttonAutoTake = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonExport = new System.Windows.Forms.ToolStripButton();
             this.buttonImport = new System.Windows.Forms.ToolStripButton();
             this.buttonRecycleBin = new System.Windows.Forms.ToolStripButton();
+            this.buttonExport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDeleteImage = new System.Windows.Forms.ToolStripButton();
             this.buttonCompareFrame = new System.Windows.Forms.ToolStripButton();
@@ -234,8 +234,8 @@ namespace DMMDigital.Views
             this.buttonSelect,
             this.buttonMagnifier,
             this.buttonRuler,
-            this.buttonUndo,
             this.buttonFilter,
+            this.buttonUndo,
             this.buttonRedo,
             this.buttonFreeDraw,
             this.buttonText,
@@ -311,17 +311,6 @@ namespace DMMDigital.Views
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
-            // buttonExport
-            // 
-            this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
-            resources.ApplyResources(this.buttonExport, "buttonExport");
-            this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonExport.Tag = "";
-            this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
-            // 
             // buttonImport
             // 
             this.buttonImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -342,6 +331,17 @@ namespace DMMDigital.Views
             this.buttonRecycleBin.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.buttonRecycleBin.Tag = "";
             this.buttonRecycleBin.Click += new System.EventHandler(this.buttonRecycleBinClick);
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonExport.Image = global::DMMDigital.Properties.Resources.icon_32x32_export;
+            resources.ApplyResources(this.buttonExport, "buttonExport");
+            this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonExport.Tag = "";
+            this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
             // 
             // toolStripSeparator3
             // 

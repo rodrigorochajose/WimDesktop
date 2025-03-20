@@ -39,6 +39,10 @@ namespace DMMDigital.Presenters
             {
                 loadFullExam();
             }
+            else
+            {
+                saveExam(this, EventArgs.Empty);
+            }
 
             initializeExam();
         }

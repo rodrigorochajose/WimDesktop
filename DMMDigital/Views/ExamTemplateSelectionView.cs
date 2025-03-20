@@ -72,6 +72,8 @@ namespace DMMDigital.Views
             textBoxBirthDate.InnerMaskedTextBox.Mask = "00/00/0000";
             textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
 
+            roundedTextBoxObservation.Size = new Size(302, 96);
+
             associateEvents();
 
             ActiveControl = textBoxSessionName;

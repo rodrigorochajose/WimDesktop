@@ -74,11 +74,10 @@ namespace DMMDigital
         static void openApplication()
         {
             ClinicRepository clinicRepository = new ClinicRepository();
-            ClinicModel clinic = clinicRepository.getClinic();
 
             DialogResult result = DialogResult.Cancel;
 
-            if (clinic == null)
+            if (!clinicRepository.hasClinic())
             {
                 using (var clinicView = new ClinicHandlerView(false))
                 {
@@ -90,19 +89,28 @@ namespace DMMDigital
                 }
             }
 
-            string email = "";
-            bool keepConnected = false;
+            ClinicModel clinic = clinicRepository.getClinic();
 
-            if (clinicRepository.keepConnected())
+            if (clinic.automaticLogin == 1)
             {
-                email = clinic.email; 
-                keepConnected = true;
+                result = DialogResult.OK;
             }
-
-            using (var loginView = new LoginView(email, keepConnected))
+            else
             {
-                new LoginPresenter(loginView);
-                result = loginView.ShowDialog();
+                string email = "";
+                bool keepConnected = false;
+
+                if (clinicRepository.keepConnected())
+                {
+                    email = clinic.email;
+                    keepConnected = true;
+                }
+
+                using (var loginView = new LoginView(email, keepConnected))
+                {
+                    new LoginPresenter(loginView);
+                    result = loginView.ShowDialog();
+                }
             }
 
             if (result == DialogResult.OK)

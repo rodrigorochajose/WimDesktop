@@ -51,6 +51,10 @@ namespace DMMDigital
                     forms[counter].Hide();
                     continue;
                 }
+
+                if (formType == typeof(ExamContainerView)) continue;
+
+                if (formType == typeof(ExamView)) continue;
                 
                 forms[counter].Close();
             }

@@ -37,6 +37,7 @@
             this.roundedTextBoxEmail = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedButtonSignIn = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedTextBoxPassword = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.checkBoxAutomaticLogin = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // panel1
@@ -119,11 +120,19 @@
             this.roundedTextBoxPassword.Texts = "";
             this.roundedTextBoxPassword.UnderlinedStyle = false;
             // 
+            // checkBoxAutomaticLogin
+            // 
+            resources.ApplyResources(this.checkBoxAutomaticLogin, "checkBoxAutomaticLogin");
+            this.checkBoxAutomaticLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.checkBoxAutomaticLogin.Name = "checkBoxAutomaticLogin";
+            this.checkBoxAutomaticLogin.UseVisualStyleBackColor = true;
+            // 
             // LoginView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.checkBoxAutomaticLogin);
             this.Controls.Add(this.labelForgotPassword);
             this.Controls.Add(this.checkBoxKeepCredentials);
             this.Controls.Add(this.panel1);
@@ -151,5 +160,6 @@
         private System.Windows.Forms.CheckBox checkBoxKeepCredentials;
         private System.Windows.Forms.Label labelForgotPassword;
         private Components.Rounded.RoundedButton roundedButtonSignIn;
+        private System.Windows.Forms.CheckBox checkBoxAutomaticLogin;
     }
 }

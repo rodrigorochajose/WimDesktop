@@ -44,21 +44,21 @@ namespace DMMDigital.Presenters
 
             associateEvents();
 
-            string acquireMode = acquireModes[settingsRepository.getAcquireMode()];
-            view.selectedExamView.acquireMode = acquireMode;
+            //string acquireMode = acquireModes[settingsRepository.getAcquireMode()];
+            //view.selectedExamView.acquireMode = acquireMode;
 
-            if (acquireMode == "TWAIN")
-            {
+            //if (acquireMode == "TWAIN")
+            //{
                 initializeTwain(this, EventArgs.Empty);
                 examContainerView.twainInitialized = true;
 
                 setDefaultSensor();
-            }
-            else
-            {
-                connectSensor(this, EventArgs.Empty);
-                examContainerView.twainInitialized = false;
-            }
+            //}
+            //else
+            //{
+            //    connectSensor(this, EventArgs.Empty);
+            //    examContainerView.twainInitialized = false;
+            //}
 
             examContainerView.initialize();
         }

@@ -535,7 +535,7 @@
     <value>10, 7, 10, 7</value>
   </data>
   <data name="roundedTextBoxObservation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 36</value>
+    <value>302, 96</value>
   </data>
   <data name="roundedTextBoxObservation.TabIndex" type="System.Int32, mscorlib">
     <value>81</value>

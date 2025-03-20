@@ -57,9 +57,10 @@ namespace DMMDigital.Views
             textBoxPhone.InnerMaskedTextBox.Mask = "(00) 00000-0000";
             textBoxPhone.InnerMaskedTextBox.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
 
-
             pictureBoxIcon.Left = (Width - (pictureBoxIcon.Width + labelTitle.Width + 10)) / 2;
             labelTitle.Left = pictureBoxIcon.Left + pictureBoxIcon.Width;
+
+            roundedTextBoxObservation.Size = new System.Drawing.Size(302, 102);
         }
 
         private void associateEvents()

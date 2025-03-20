@@ -6,9 +6,10 @@ namespace DMMDigital.Interface.IRepository
     {
         void addClinic(ClinicModel clinic);
         void updatePassword (string email, string password);
-        void updateConnectedInfo(bool keepConnected);
+        void update(bool keepConnected, bool automaticLogin);
         ClinicModel getClinic();
         ClinicModel getClinicByEmail(string email);
+        bool hasClinic();
         bool keepConnected();
     }
 }

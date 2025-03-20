@@ -50,12 +50,14 @@ namespace DMMDigital._Repositories
         }
 
 
-        public void updateConnectedInfo(bool keepConnected)
+        public void update(bool keepConnected, bool automaticLogin)
         {
             try
             {
-                int value = keepConnected ? 1 : 0;
-                context.clinic.FirstOrDefault().keepConnected = value;
+                int login = automaticLogin ? 1 : 0;
+                int connected = keepConnected ? 1 : 0;
+                context.clinic.FirstOrDefault().keepConnected = connected;
+                context.clinic.FirstOrDefault().automaticLogin = login;
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -66,12 +68,17 @@ namespace DMMDigital._Repositories
 
         public ClinicModel getClinic()
         {
-            return context.clinic.FirstOrDefault();
+            return context.clinic.AsNoTracking().FirstOrDefault();
         }
 
         public ClinicModel getClinicByEmail(string email)
         {
             return context.clinic.AsNoTracking().FirstOrDefault(c => c.email == email);
+        }
+
+        public bool hasClinic()
+        {
+            return context.clinic.Any();
         }
 
         public bool keepConnected()

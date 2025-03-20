@@ -39,7 +39,7 @@ namespace DMMDigital.Presenters
                     return;
                 }
 
-                clinicRepository.updateConnectedInfo(view.keepCredentials);
+                clinicRepository.update(view.keepCredentials, view.automaticLogin);
 
                 view.DialogResult = System.Windows.Forms.DialogResult.OK;
                 view.Close();

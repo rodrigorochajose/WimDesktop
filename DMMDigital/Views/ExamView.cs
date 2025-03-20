@@ -104,8 +104,6 @@ namespace DMMDigital.Views
 
             Load += delegate
             {
-                eventSaveExam?.Invoke(this, EventArgs.Empty);
-
                 associateSettings();
 
                 drawTemplate();
@@ -256,12 +254,12 @@ namespace DMMDigital.Views
             textDrawingPreviousSize = settings.textSize;
             drawingSize = settings.drawingSize;
 
-            if (acquireMode == "TWAIN")
-            {
+            //if (acquireMode == "TWAIN")
+            //{
                 eventChangeAcquireMode?.Invoke(this, EventArgs.Empty);
                 buttonAcquireMode.Image = Resources.icon_32x32_scanner;
                 buttonAcquireMode.ToolTipText = acquireMode;
-            }
+            //}
         }
 
         public void setLabelPatientTemplate(string patient, string template)
@@ -585,11 +583,11 @@ namespace DMMDigital.Views
 
         private void frameDoubleClick(object sender, EventArgs e)
         {
-            if (acquireMode == "TWAIN")
-            {
+            //if (acquireMode == "TWAIN")
+            //{
                 twainAutoTake = false;
                 eventAcquireTwain?.Invoke(this, EventArgs.Empty);
-            }
+            //}
         }
 
         public bool dialogOverwriteCurrentImage()
@@ -1035,53 +1033,53 @@ namespace DMMDigital.Views
 
         private void buttonAcquireModeClick(object sender, EventArgs e)
         {
-            eventChangeAcquireMode?.Invoke(this, e);
+            //eventChangeAcquireMode?.Invoke(this, e);
 
-            if (acquireMode == "TWAIN")
-            {
-                buttonAcquireMode.Image = Resources.icon_32x32_scanner;
-                buttonAcquireMode.ToolTipText = "TWAIN";
+            //if (acquireMode == "TWAIN")
+            //{
+            //    buttonAcquireMode.Image = Resources.icon_32x32_scanner;
+            //    buttonAcquireMode.ToolTipText = "TWAIN";
 
-                sensorConnected = true;
-            }
-            else
-            {
-                buttonAcquireMode.Image = Resources.icon_32x32_capture;
-                buttonAcquireMode.ToolTipText = Resources.nativeAquireMode;
+            //    sensorConnected = true;
+            //}
+            //else
+            //{
+            //    buttonAcquireMode.Image = Resources.icon_32x32_capture;
+            //    buttonAcquireMode.ToolTipText = Resources.nativeAquireMode;
 
-                if (sensorConnected)
-                {
-                    sensorStatusColor = Color.Green;
-                }
-                else
-                {
-                    sensorStatusColor = Color.Red;
-                }
-            }
+            //    if (sensorConnected)
+            //    {
+            //        sensorStatusColor = Color.Green;
+            //    }
+            //    else
+            //    {
+            //        sensorStatusColor = Color.Red;
+            //    }
+            //}
         }
 
         private void buttonAutoTakeClick(object sender, EventArgs e)
         {
-            if (acquireMode == "TWAIN")
-            {
+            //if (acquireMode == "TWAIN")
+            //{
                 twainAutoTake = true;
                 eventAcquireTwain?.Invoke(this, EventArgs.Empty);
-            }
+            //}
         }
 
         private void buttonNewExamClick(object sender, EventArgs e)
         {
-            IExamTemplateSelectionView chooseTemplateView = new ExamTemplateSelectionView();
+            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
             eventGetPatient?.Invoke(this, e);
 
-            chooseTemplateView.patientId = patient.id;
-            chooseTemplateView.patientName = patient.name;
-            chooseTemplateView.patientBirthDate = patient.birthDate;
-            chooseTemplateView.patientPhone = patient.phone;
-            chooseTemplateView.patientRecommendation = patient.recommendation;
-            chooseTemplateView.patientObservation = patient.observation;
+            examTemplateSelectionView.patientId = patient.id;
+            examTemplateSelectionView.patientName = patient.name;
+            examTemplateSelectionView.patientBirthDate = patient.birthDate;
+            examTemplateSelectionView.patientPhone = patient.phone;
+            examTemplateSelectionView.patientRecommendation = patient.recommendation;
+            examTemplateSelectionView.patientObservation = patient.observation;
 
-            new ExamTemplateSelectionPresenter(chooseTemplateView, GetType());
+            new ExamTemplateSelectionPresenter(examTemplateSelectionView, GetType());
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)

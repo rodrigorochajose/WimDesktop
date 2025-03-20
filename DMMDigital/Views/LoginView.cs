@@ -26,6 +26,12 @@ namespace DMMDigital.Views
             set { checkBoxKeepCredentials.Checked = value; }
         }
 
+        public bool automaticLogin
+        {
+            get { return checkBoxAutomaticLogin.Checked; }
+            set { checkBoxAutomaticLogin.Checked = value; }
+        }
+
         public event EventHandler eventLogin;
 
         public LoginView(string email, bool keepConnected)

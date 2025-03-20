@@ -819,24 +819,6 @@
   <data name="buttonRuler.ToolTipText" xml:space="preserve">
     <value>Régua</value>
   </data>
-  <data name="buttonUndo.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="buttonUndo.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="buttonUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="buttonUndo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 40</value>
-  </data>
-  <data name="buttonUndo.Text" xml:space="preserve">
-    <value>buttonUndo</value>
-  </data>
-  <data name="buttonUndo.ToolTipText" xml:space="preserve">
-    <value>Desfazer</value>
-  </data>
   <data name="buttonFilter.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -854,6 +836,24 @@
   </data>
   <data name="buttonFilter.ToolTipText" xml:space="preserve">
     <value>Filtro</value>
+  </data>
+  <data name="buttonUndo.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="buttonUndo.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="buttonUndo.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="buttonUndo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 40</value>
+  </data>
+  <data name="buttonUndo.Text" xml:space="preserve">
+    <value>buttonUndo</value>
+  </data>
+  <data name="buttonUndo.ToolTipText" xml:space="preserve">
+    <value>Desfazer</value>
   </data>
   <data name="buttonRedo.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1896,12 +1896,6 @@
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonExport.Name" xml:space="preserve">
-    <value>buttonExport</value>
-  </data>
-  <data name="&gt;&gt;buttonExport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;buttonImport.Name" xml:space="preserve">
     <value>buttonImport</value>
   </data>
@@ -1912,6 +1906,12 @@
     <value>buttonRecycleBin</value>
   </data>
   <data name="&gt;&gt;buttonRecycleBin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.Name" xml:space="preserve">
+    <value>buttonExport</value>
+  </data>
+  <data name="&gt;&gt;buttonExport.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
