@@ -832,6 +832,15 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A quantidade limite de frames foi atingida!.
+        /// </summary>
+        internal static string messageFramesLimit {
+            get {
+                return ResourceManager.GetString("messageFramesLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Obtendo dados....
         /// </summary>
         internal static string messageGettingData {
@@ -864,6 +873,15 @@ namespace DMMDigital.Properties {
         internal static string messageImageConfirmRestore {
             get {
                 return ResourceManager.GetString("messageImageConfirmRestore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Imagem não encontrada!.
+        /// </summary>
+        internal static string messageImageNotFound {
+            get {
+                return ResourceManager.GetString("messageImageNotFound", resourceCulture);
             }
         }
         

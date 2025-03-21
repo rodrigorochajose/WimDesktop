@@ -307,27 +307,36 @@ namespace DMMDigital.Views
                 if (selectedExamImage != null)
                 {
                     Image img;
-                    using (Bitmap bmpTemp = new Bitmap(Path.Combine(examPath, selectedExamImage.file)))
-                    {
-                        img = new Bitmap(bmpTemp);
-                    }
-                    newFrame.originalImage = img;
-                    newFrame.filteredImage = img;
-                    newFrame.notes = selectedExamImage.notes;
-                    newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
+                    string path = Path.Combine(examPath, selectedExamImage.file);
 
-                    string filteredFile = $"{newFrame.order}_filtered.png";
-
-                    if (File.Exists(Path.Combine(examPath, filteredFile)))
+                    if (File.Exists(path))
                     {
-                        using (var bmpTemp = new Bitmap(Path.Combine(examPath, filteredFile)))
+                        using (Bitmap bmpTemp = new Bitmap(path))
                         {
                             img = new Bitmap(bmpTemp);
                         }
+                        newFrame.originalImage = img;
                         newFrame.filteredImage = img;
-                    }
+                        newFrame.notes = selectedExamImage.notes;
+                        newFrame.datePhotoTook = selectedExamImage.createdAt.ToString();
 
-                    newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
+                        string filteredFile = $"{newFrame.order}_filtered.png";
+
+                        if (File.Exists(Path.Combine(examPath, filteredFile)))
+                        {
+                            using (var bmpTemp = new Bitmap(Path.Combine(examPath, filteredFile)))
+                            {
+                                img = new Bitmap(bmpTemp);
+                            }
+                            newFrame.filteredImage = img;
+                        }
+
+                        newFrame.Image = img.GetThumbnailImage(newFrame.Width, newFrame.Height, () => false, IntPtr.Zero);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Resources.messageImageNotFound);
+                    }
                 }
 
                 frameDrawingHistories.Add(new FrameDrawingHistory(frame.id, new List<List<IDrawing>> { new List<IDrawing>() }));

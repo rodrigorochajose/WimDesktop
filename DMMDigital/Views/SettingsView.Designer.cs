@@ -67,9 +67,9 @@
             this.labelTextColor = new System.Windows.Forms.Label();
             this.labelShapeColor = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonEmptyAllRecycleBin = new DMMDigital.Components.Rounded.RoundedButton();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.buttonEmptyAllRecycleBin = new DMMDigital.Components.Rounded.RoundedButton();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -225,8 +225,8 @@
             // 
             this.buttonSelectTwainSource.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
             this.buttonSelectTwainSource.BorderColor = System.Drawing.Color.White;
-            this.buttonSelectTwainSource.BorderWidth = 5;
-            this.buttonSelectTwainSource.CornerRadius = 10;
+            this.buttonSelectTwainSource.BorderWidth = 2;
+            this.buttonSelectTwainSource.CornerRadius = 2;
             this.buttonSelectTwainSource.Image = global::DMMDigital.Properties.Resources.icon_16x16_folder;
             resources.ApplyResources(this.buttonSelectTwainSource, "buttonSelectTwainSource");
             this.buttonSelectTwainSource.Name = "buttonSelectTwainSource";
@@ -281,10 +281,9 @@
             // buttonRulerColorPicker
             // 
             this.buttonRulerColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonRulerColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonRulerColorPicker.BorderWidth = 7;
-            this.buttonRulerColorPicker.CornerRadius = 5;
-            this.buttonRulerColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonRulerColorPicker.BorderColor = System.Drawing.Color.Red;
+            this.buttonRulerColorPicker.BorderWidth = 5;
+            this.buttonRulerColorPicker.CornerRadius = 10;
             resources.ApplyResources(this.buttonRulerColorPicker, "buttonRulerColorPicker");
             this.buttonRulerColorPicker.Name = "buttonRulerColorPicker";
             this.buttonRulerColorPicker.UseVisualStyleBackColor = false;
@@ -293,10 +292,9 @@
             // buttonTextColorPicker
             // 
             this.buttonTextColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonTextColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonTextColorPicker.BorderWidth = 7;
-            this.buttonTextColorPicker.CornerRadius = 5;
-            this.buttonTextColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonTextColorPicker.BorderColor = System.Drawing.Color.Red;
+            this.buttonTextColorPicker.BorderWidth = 5;
+            this.buttonTextColorPicker.CornerRadius = 10;
             resources.ApplyResources(this.buttonTextColorPicker, "buttonTextColorPicker");
             this.buttonTextColorPicker.Name = "buttonTextColorPicker";
             this.buttonTextColorPicker.UseVisualStyleBackColor = false;
@@ -305,10 +303,9 @@
             // buttonDrawingColorPicker
             // 
             this.buttonDrawingColorPicker.BackColor = System.Drawing.Color.Red;
-            this.buttonDrawingColorPicker.BorderColor = System.Drawing.Color.WhiteSmoke;
-            this.buttonDrawingColorPicker.BorderWidth = 7;
-            this.buttonDrawingColorPicker.CornerRadius = 5;
-            this.buttonDrawingColorPicker.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonDrawingColorPicker.BorderColor = System.Drawing.Color.Red;
+            this.buttonDrawingColorPicker.BorderWidth = 5;
+            this.buttonDrawingColorPicker.CornerRadius = 10;
             resources.ApplyResources(this.buttonDrawingColorPicker, "buttonDrawingColorPicker");
             this.buttonDrawingColorPicker.Name = "buttonDrawingColorPicker";
             this.buttonDrawingColorPicker.UseVisualStyleBackColor = false;
@@ -415,11 +412,23 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3.Controls.Add(this.panel7);
+            this.tabPage3.BackColor = System.Drawing.Color.White;
             this.tabPage3.Controls.Add(this.buttonEmptyAllRecycleBin);
+            this.tabPage3.Controls.Add(this.panel7);
             resources.ApplyResources(this.tabPage3, "tabPage3");
             this.tabPage3.Name = "tabPage3";
+            // 
+            // buttonEmptyAllRecycleBin
+            // 
+            this.buttonEmptyAllRecycleBin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonEmptyAllRecycleBin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.buttonEmptyAllRecycleBin.BorderWidth = 5;
+            this.buttonEmptyAllRecycleBin.CornerRadius = 10;
+            resources.ApplyResources(this.buttonEmptyAllRecycleBin, "buttonEmptyAllRecycleBin");
+            this.buttonEmptyAllRecycleBin.ForeColor = System.Drawing.Color.White;
+            this.buttonEmptyAllRecycleBin.Name = "buttonEmptyAllRecycleBin";
+            this.buttonEmptyAllRecycleBin.UseVisualStyleBackColor = false;
+            this.buttonEmptyAllRecycleBin.Click += new System.EventHandler(this.buttonEmptyAllRecycleBinClick);
             // 
             // panel7
             // 
@@ -432,19 +441,6 @@
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            // 
-            // buttonEmptyAllRecycleBin
-            // 
-            resources.ApplyResources(this.buttonEmptyAllRecycleBin, "buttonEmptyAllRecycleBin");
-            this.buttonEmptyAllRecycleBin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonEmptyAllRecycleBin.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.buttonEmptyAllRecycleBin.BorderWidth = 5;
-            this.buttonEmptyAllRecycleBin.CornerRadius = 5;
-            this.buttonEmptyAllRecycleBin.FlatAppearance.BorderSize = 0;
-            this.buttonEmptyAllRecycleBin.ForeColor = System.Drawing.Color.White;
-            this.buttonEmptyAllRecycleBin.Name = "buttonEmptyAllRecycleBin";
-            this.buttonEmptyAllRecycleBin.UseVisualStyleBackColor = false;
-            this.buttonEmptyAllRecycleBin.Click += new System.EventHandler(this.buttonEmptyAllRecycleBinClick);
             // 
             // panelHeader
             // 
@@ -533,9 +529,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage2;
-        private Components.Rounded.RoundedButton buttonRulerColorPicker;
-        private Components.Rounded.RoundedButton buttonTextColorPicker;
-        private Components.Rounded.RoundedButton buttonDrawingColorPicker;
         private Components.Rounded.RoundedNumericUpDown numericUpDownTextSize;
         private Components.Rounded.RoundedNumericUpDown numericUpDownDrawingSize;
         private System.Windows.Forms.Panel panel5;
@@ -552,7 +545,10 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label2;
-        private Components.Rounded.RoundedButton buttonEmptyAllRecycleBin;
         private Components.Rounded.RoundedTextBox roundedTextBoxTwainSource;
+        private Components.Rounded.RoundedButton buttonDrawingColorPicker;
+        private Components.Rounded.RoundedButton buttonRulerColorPicker;
+        private Components.Rounded.RoundedButton buttonTextColorPicker;
+        private Components.Rounded.RoundedButton buttonEmptyAllRecycleBin;
     }
 }

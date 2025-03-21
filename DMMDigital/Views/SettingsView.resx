@@ -658,13 +658,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonRulerColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 332</value>
+    <value>145, 333</value>
   </data>
   <data name="buttonRulerColorPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 38</value>
+    <value>94, 34</value>
   </data>
   <data name="buttonRulerColorPicker.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
+    <value>68</value>
   </data>
   <data name="&gt;&gt;buttonRulerColorPicker.Name" xml:space="preserve">
     <value>buttonRulerColorPicker</value>
@@ -682,13 +682,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonTextColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 208</value>
+    <value>51, 207</value>
   </data>
   <data name="buttonTextColorPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 38</value>
+    <value>94, 34</value>
   </data>
   <data name="buttonTextColorPicker.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>67</value>
   </data>
   <data name="&gt;&gt;buttonTextColorPicker.Name" xml:space="preserve">
     <value>buttonTextColorPicker</value>
@@ -702,17 +702,14 @@
   <data name="&gt;&gt;buttonTextColorPicker.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="buttonDrawingColorPicker.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="buttonDrawingColorPicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 69</value>
+    <value>51, 73</value>
   </data>
   <data name="buttonDrawingColorPicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 38</value>
+    <value>94, 34</value>
   </data>
   <data name="buttonDrawingColorPicker.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
+    <value>66</value>
   </data>
   <data name="&gt;&gt;buttonDrawingColorPicker.Name" xml:space="preserve">
     <value>buttonDrawingColorPicker</value>
@@ -1134,6 +1131,33 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonEmptyAllRecycleBin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
+  </data>
+  <data name="buttonEmptyAllRecycleBin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>66, 71</value>
+  </data>
+  <data name="buttonEmptyAllRecycleBin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 54</value>
+  </data>
+  <data name="buttonEmptyAllRecycleBin.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="buttonEmptyAllRecycleBin.Text" xml:space="preserve">
+    <value>Esvaziar Todas as Lixeiras</value>
+  </data>
+  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Name" xml:space="preserve">
+    <value>buttonEmptyAllRecycleBin</value>
+  </data>
+  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Parent" xml:space="preserve">
+    <value>tabPage3</value>
+  </data>
+  <data name="&gt;&gt;buttonEmptyAllRecycleBin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1186,51 +1210,6 @@
     <value>tabPage3</value>
   </data>
   <data name="&gt;&gt;panel7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Bold</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 194</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 32</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="buttonEmptyAllRecycleBin.Text" xml:space="preserve">
-    <value>Esvaziar Todas as Lixeiras</value>
-  </data>
-  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Name" xml:space="preserve">
-    <value>buttonEmptyAllRecycleBin</value>
-  </data>
-  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedButton, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;buttonEmptyAllRecycleBin.Parent" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;buttonEmptyAllRecycleBin.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">

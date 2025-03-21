@@ -195,7 +195,7 @@
             resources.ApplyResources(this.numericUpDownColumns, "numericUpDownColumns");
             this.numericUpDownColumns.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.numericUpDownColumns.Maximum = new decimal(new int[] {
-            15,
+            10,
             0,
             0,
             0});

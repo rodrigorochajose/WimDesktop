@@ -503,4 +503,10 @@
   <data name="messageEmailNotFound" xml:space="preserve">
     <value>Email not found</value>
   </data>
+  <data name="messageFramesLimit" xml:space="preserve">
+    <value>The limit of frames has been reached!</value>
+  </data>
+  <data name="messageImageNotFound" xml:space="preserve">
+    <value>Image Not Found!</value>
+  </data>
 </root>

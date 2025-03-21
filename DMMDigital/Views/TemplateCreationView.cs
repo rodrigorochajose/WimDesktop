@@ -155,6 +155,12 @@ namespace DMMDigital.Views
 
         private void createNewFrame(int orientation, int width, int height, int locationX, int locationY)
         {
+            if (framesCounter > 49)
+            {
+                MessageBox.Show(Resources.messageFramesLimit);
+                return;
+            }
+
             framesCounter++;
             FrameTemplate newFrame = new FrameTemplate
             {

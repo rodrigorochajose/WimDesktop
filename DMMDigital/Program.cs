@@ -91,6 +91,11 @@ namespace DMMDigital
 
             ClinicModel clinic = clinicRepository.getClinic();
 
+            if (clinic == null)
+            {
+                return;
+            }
+
             if (clinic.automaticLogin == 1)
             {
                 result = DialogResult.OK;

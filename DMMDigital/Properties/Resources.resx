@@ -530,4 +530,10 @@
   <data name="messageEmailNotFound" xml:space="preserve">
     <value>Email não encontrado</value>
   </data>
+  <data name="messageFramesLimit" xml:space="preserve">
+    <value>A quantidade limite de frames foi atingida!</value>
+  </data>
+  <data name="messageImageNotFound" xml:space="preserve">
+    <value>Imagem não encontrada!</value>
+  </data>
 </root>
