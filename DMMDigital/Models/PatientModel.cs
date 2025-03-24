@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace DMMDigital.Models
 {
@@ -43,6 +44,7 @@ namespace DMMDigital.Models
         [Column("CREATED_AT")]
         public DateTime createdAt { get; set; } = DateTime.Now;
 
+        [JsonIgnore]
         public virtual ICollection<ExamModel> exams { get; set; }
     }
 

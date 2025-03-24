@@ -47,10 +47,14 @@
             this.roundedButtonMigrateWimDesktop = new DMMDigital.Components.Rounded.RoundedButton();
             this.roundedTextBoxSensorPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedTextBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.roundedButtonUpdatePatientData = new DMMDigital.Components.Rounded.RoundedButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.panel9.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxIcon
@@ -212,11 +216,38 @@
             this.roundedTextBoxExamPath.Texts = "";
             this.roundedTextBoxExamPath.UnderlinedStyle = false;
             // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel2.Controls.Add(this.label1);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // roundedButtonUpdatePatientData
+            // 
+            resources.ApplyResources(this.roundedButtonUpdatePatientData, "roundedButtonUpdatePatientData");
+            this.roundedButtonUpdatePatientData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.roundedButtonUpdatePatientData.BorderColor = System.Drawing.Color.White;
+            this.roundedButtonUpdatePatientData.BorderWidth = 1;
+            this.roundedButtonUpdatePatientData.CornerRadius = 10;
+            this.roundedButtonUpdatePatientData.FlatAppearance.BorderSize = 0;
+            this.roundedButtonUpdatePatientData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.roundedButtonUpdatePatientData.Name = "roundedButtonUpdatePatientData";
+            this.roundedButtonUpdatePatientData.UseVisualStyleBackColor = false;
+            this.roundedButtonUpdatePatientData.Click += new System.EventHandler(this.roundedButtonUpdatePatientDataClick);
+            // 
             // AdvancedSettingsView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.roundedButtonUpdatePatientData);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.roundedTextBoxExamPath);
             this.Controls.Add(this.roundedTextBoxSensorPath);
             this.Controls.Add(this.panel1);
@@ -241,6 +272,8 @@
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,5 +299,8 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private Components.Rounded.RoundedTextBox roundedTextBoxSensorPath;
         private Components.Rounded.RoundedTextBox roundedTextBoxExamPath;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private Components.Rounded.RoundedButton roundedButtonUpdatePatientData;
     }
 }

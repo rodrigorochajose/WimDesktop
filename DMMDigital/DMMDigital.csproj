@@ -173,6 +173,7 @@
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Filters.cs" />
+    <Compile Include="Presenters\AdvancedSettingsPresenter.cs" />
     <Compile Include="Presenters\ClinicPresenter.cs" />
     <Compile Include="Presenters\ImportExamImagePresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />

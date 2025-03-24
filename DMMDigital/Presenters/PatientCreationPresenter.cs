@@ -3,6 +3,8 @@ using DMMDigital.Interface.IRepository;
 using DMMDigital.Interface.IView;
 using DMMDigital.Models;
 using System;
+using System.IO;
+using System.Text.Json;
 using System.Windows.Forms;
 
 namespace DMMDigital.Presenters
@@ -11,6 +13,7 @@ namespace DMMDigital.Presenters
     {
         private IPatientCreationView view;
         private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         public PatientCreationPresenter(IPatientCreationView view)
         {
@@ -35,12 +38,27 @@ namespace DMMDigital.Presenters
 
                 new Common.ModelDataValidation().Validate(newPatient);
                 patientRepository.addPatient(newPatient);
+
+                generatePatientFile(newPatient);
                 (view as Form).Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void generatePatientFile(PatientModel patient)
+        {
+            string patientPath = Path.Combine(settingsRepository.getExamPath(), $"{patient.id}");
+
+            Directory.CreateDirectory(patientPath);
+
+            string filePath = Path.Combine(patientPath, "patient.txt");
+
+            string patientData = JsonSerializer.Serialize(patient);
+
+            File.WriteAllText(filePath, patientData);
         }
     }
 }

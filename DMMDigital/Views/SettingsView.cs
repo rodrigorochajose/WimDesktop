@@ -11,6 +11,7 @@ using DMMDigital.Components.Rounded;
 using DMMDigital.Properties;
 using System.IO;
 using Saraff.Twain;
+using DMMDigital.Presenters;
 
 namespace DMMDigital.Views
 {
@@ -113,6 +114,8 @@ namespace DMMDigital.Views
                         if (dialogAdvancedSettings.ShowDialog() == DialogResult.OK)
                         {
                             IAdvancedSettingsView advancedSettingsView = new AdvancedSettingsView(sensorPath, examPath);
+
+                            new AdvancedSettingsPresenter(advancedSettingsView);
 
                             if ((advancedSettingsView as Form).ShowDialog() == DialogResult.OK)
                             {

@@ -1,4 +1,5 @@
 ﻿using DMMDigital.Interface.IView;
+using System;
 using System.Windows.Forms;
 
 namespace DMMDigital.Views
@@ -16,6 +17,9 @@ namespace DMMDigital.Views
             get { return roundedTextBoxExamPath.Texts; }
             set { roundedTextBoxExamPath.Texts = value; }
         }
+
+        public event EventHandler eventUpdatePatientFiles;
+
 
         public AdvancedSettingsView(string sensorPath, string examPath)
         {
@@ -85,5 +89,9 @@ namespace DMMDigital.Views
             }
         }
 
+        private void roundedButtonUpdatePatientDataClick(object sender, EventArgs e)
+        {
+            eventUpdatePatientFiles?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
