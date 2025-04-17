@@ -6,6 +6,7 @@ using DMMDigital.Views;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
+using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -24,6 +25,9 @@ namespace DMMDigital
             {
                 return;
             }
+
+            var migrator = new DbMigrator(new Migrations.Configuration());
+            migrator.Update();
 
             loadLanguage();
 

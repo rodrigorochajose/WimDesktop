@@ -15,5 +15,7 @@ namespace DMMDigital.Interface.IRepository
         void importSettings(SettingsModel settings);
         void saveExportPath(string path);
         string getExportPath();
+        void updateWaterMark(bool waterMark);
+        bool getWaterMark();
     }
 }

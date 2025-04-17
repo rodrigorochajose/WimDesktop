@@ -31,11 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedSettingsView));
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.labelCaminho = new System.Windows.Forms.Label();
-            this.panel8 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonCancel = new DMMDigital.Components.Rounded.RoundedButton();
@@ -48,13 +46,20 @@
             this.roundedTextBoxSensorPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.roundedTextBoxExamPath = new DMMDigital.Components.Rounded.RoundedTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.roundedButtonUpdatePatientData = new DMMDigital.Components.Rounded.RoundedButton();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.checkBoxWaterMark = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
-            this.panel9.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxIcon
@@ -70,13 +75,6 @@
             this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelTitle.Name = "labelTitle";
             // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel9.Controls.Add(this.label6);
-            resources.ApplyResources(this.panel9, "panel9");
-            this.panel9.Name = "panel9";
-            // 
             // label6
             // 
             resources.ApplyResources(this.label6, "label6");
@@ -91,13 +89,6 @@
             // 
             resources.ApplyResources(this.labelCaminho, "labelCaminho");
             this.labelCaminho.Name = "labelCaminho";
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel8.Controls.Add(this.label3);
-            resources.ApplyResources(this.panel8, "panel8");
-            this.panel8.Name = "panel8";
             // 
             // label3
             // 
@@ -221,13 +212,6 @@
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel2.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
             // roundedButtonUpdatePatientData
             // 
             resources.ApplyResources(this.roundedButtonUpdatePatientData, "roundedButtonUpdatePatientData");
@@ -241,24 +225,73 @@
             this.roundedButtonUpdatePatientData.UseVisualStyleBackColor = false;
             this.roundedButtonUpdatePatientData.Click += new System.EventHandler(this.roundedButtonUpdatePatientDataClick);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.labelCaminho);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.roundedTextBoxExamPath);
+            this.tabPage1.Controls.Add(this.buttonSensorPath);
+            this.tabPage1.Controls.Add(this.roundedTextBoxSensorPath);
+            this.tabPage1.Controls.Add(this.buttonExamPath);
+            this.tabPage1.ForeColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label3);
+            this.tabPage2.Controls.Add(this.roundedButtonMigrateWimDesktop);
+            this.tabPage2.Controls.Add(this.roundedButtonMigrateCDR);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label1);
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.checkBoxWaterMark);
+            this.tabPage3.Controls.Add(this.panel2);
+            this.tabPage3.Controls.Add(this.roundedButtonUpdatePatientData);
+            resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxWaterMark
+            // 
+            resources.ApplyResources(this.checkBoxWaterMark, "checkBoxWaterMark");
+            this.checkBoxWaterMark.Name = "checkBoxWaterMark";
+            this.checkBoxWaterMark.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.WhiteSmoke;
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
             // AdvancedSettingsView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.roundedButtonUpdatePatientData);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.roundedTextBoxExamPath);
-            this.Controls.Add(this.roundedTextBoxSensorPath);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel9);
-            this.Controls.Add(this.buttonExamPath);
-            this.Controls.Add(this.buttonSensorPath);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.labelCaminho);
-            this.Controls.Add(this.panel8);
-            this.Controls.Add(this.roundedButtonMigrateCDR);
-            this.Controls.Add(this.roundedButtonMigrateWimDesktop);
             this.Controls.Add(this.pictureBoxIcon);
             this.Controls.Add(this.labelTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -267,13 +300,14 @@
             this.Name = "AdvancedSettingsView";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.advancedSettingsViewKeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,13 +317,11 @@
 
         private System.Windows.Forms.PictureBox pictureBoxIcon;
         private System.Windows.Forms.Label labelTitle;
-        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label6;
         private Components.Rounded.RoundedButton buttonExamPath;
         private Components.Rounded.RoundedButton buttonSensorPath;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelCaminho;
-        private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label3;
         private Components.Rounded.RoundedButton roundedButtonMigrateCDR;
         private Components.Rounded.RoundedButton roundedButtonMigrateWimDesktop;
@@ -300,7 +332,13 @@
         private Components.Rounded.RoundedTextBox roundedTextBoxSensorPath;
         private Components.Rounded.RoundedTextBox roundedTextBoxExamPath;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
         private Components.Rounded.RoundedButton roundedButtonUpdatePatientData;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.CheckBox checkBoxWaterMark;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
     }
 }

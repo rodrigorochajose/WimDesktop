@@ -18,15 +18,22 @@ namespace DMMDigital.Views
             set { roundedTextBoxExamPath.Texts = value; }
         }
 
+        public bool waterMark
+        {
+            get { return checkBoxWaterMark.Checked; }
+            set { checkBoxWaterMark.Checked = value; }
+        }
+
         public event EventHandler eventUpdatePatientFiles;
+        public event EventHandler eventUpdateWaterMark;
 
-
-        public AdvancedSettingsView(string sensorPath, string examPath)
+        public AdvancedSettingsView(string sensorPath, string examPath, int waterMark)
         {
             InitializeComponent();
 
             this.sensorPath = sensorPath;
             this.examPath = examPath;
+            this.waterMark = waterMark == 0 ? false : true;
 
             associateEvents();
         }
@@ -44,7 +51,10 @@ namespace DMMDigital.Views
             roundedButtonMigrateCDR.Click += delegate{ openMigrationForm("CDR"); };
 
             roundedButtonMigrateWimDesktop.Click += delegate{ openMigrationForm("WIM"); };
+
+            checkBoxWaterMark.CheckedChanged += delegate { eventUpdateWaterMark?.Invoke(this, EventArgs.Empty); };
         }
+
         private void advancedSettingsViewKeyPress(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

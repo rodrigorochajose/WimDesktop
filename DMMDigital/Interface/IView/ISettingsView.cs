@@ -14,6 +14,7 @@ namespace DMMDigital.Interface.IView
         string textColor { get; set; }
         int textSize { get; set; }
         string rulerColor { get; set; }
+        int waterMark { get; set; }
         float brightness { get; set; }
         float contrast { get; set; }
         float reveal { get; set; }

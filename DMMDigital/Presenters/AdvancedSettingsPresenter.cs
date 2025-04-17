@@ -15,11 +15,13 @@ namespace DMMDigital.Presenters
         public IAdvancedSettingsView view { get; }
 
         private readonly IPatientRepository patientRepository = new PatientRepository();
+        private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
         public AdvancedSettingsPresenter(IAdvancedSettingsView view)
         {
             this.view = view;
             view.eventUpdatePatientFiles += updatePatientFiles;
+            view.eventUpdateWaterMark += updateWaterMark;
         }
 
         private void updatePatientFiles(object sender, EventArgs e)
@@ -48,6 +50,11 @@ namespace DMMDigital.Presenters
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void updateWaterMark(object sender, EventArgs e)
+        {
+            settingsRepository.updateWaterMark(view.waterMark);
         }
     }
 }

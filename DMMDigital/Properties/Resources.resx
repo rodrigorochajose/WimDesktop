@@ -397,7 +397,7 @@
     <value>Sobrescrever Imagem</value>
   </data>
   <data name="messageSensorCannotConnect" xml:space="preserve">
-    <value>Não foi possível conectar o sensor, verifique se o apontamento está correto.</value>
+    <value>Nenhum sensor foi localizado. Verifique se a fonte de dados está correta e o sensor conectado!</value>
     <comment>Sensor</comment>
   </data>
   <data name="messagePatientConditionName" xml:space="preserve">

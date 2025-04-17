@@ -1039,7 +1039,7 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível conectar o sensor, verifique se o apontamento está correto..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nenhum sensor foi localizado. Verifique se a fonte de dados está correta e o sensor conectado!.
         /// </summary>
         internal static string messageSensorCannotConnect {
             get {

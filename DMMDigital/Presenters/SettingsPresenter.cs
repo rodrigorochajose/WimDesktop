@@ -47,6 +47,7 @@ namespace DMMDigital.Presenters
             view.textSize = currentSettings.textSize;
             view.textColor = currentSettings.textColor;
             view.rulerColor = currentSettings.rulerColor;
+            view.waterMark = currentSettings.waterMark;
             view.brightness = currentSettings.brightness;
             view.contrast = currentSettings.contrast;
             view.reveal = currentSettings.reveal;
@@ -67,6 +68,7 @@ namespace DMMDigital.Presenters
                 currentSettings.textColor = view.textColor;
                 currentSettings.textSize = view.textSize;
                 currentSettings.rulerColor = view.rulerColor;
+                currentSettings.waterMark = view.waterMark;
                 currentSettings.brightness = view.brightness;
                 currentSettings.contrast = view.contrast;
                 currentSettings.reveal = view.reveal;

@@ -376,7 +376,7 @@
     <value>Overwrite Image</value>
   </data>
   <data name="messageSensorCannotConnect" xml:space="preserve">
-    <value>Could not connect the sensor, please check if the pointing is correct.</value>
+    <value>No sensors were found. Please check that the data source is correct and the sensor is connected!</value>
     <comment>Sensor</comment>
   </data>
   <data name="messagePatientConditionName" xml:space="preserve">

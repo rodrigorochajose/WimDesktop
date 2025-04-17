@@ -19,6 +19,7 @@ namespace DMMDigital.Views
         public string patientName { get; set; }
         public string pathImages { get; set; }
         public string pathToExport { get; set; }
+        public bool waterMark { get; set; }
         public List<Frame> framesToExport { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
@@ -249,34 +250,57 @@ namespace DMMDigital.Views
                 }
             }
 
+            Dictionary<string, Bitmap> images = files.ToDictionary(file => file, file => new Bitmap(file));
+
+            if (waterMark)
+            {
+                insertWaterMarkOnImages(images);
+            }
+
             if (extension == ".dicom")
             {
-                foreach (string file in files)
+                foreach (var item in images)
                 {
-                    Bitmap bmp = new Bitmap(file);
-                    getAndSaveDicomFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
+                    getAndSaveDicomFile(item.Value, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(item.Key)}{extension}"));
                 }
             }
             else if (extension == ".raw")
             {
-                foreach (string file in files)
+                foreach (var item in images)
                 {
-                    Bitmap bmp = new Bitmap(file);
-                    getAndSaveRawFile(bmp, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(file)}{extension}"));
+                    getAndSaveRawFile(item.Value, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(item.Key)}{extension}"));
                 }
             }
             else
             {
-                foreach (string file in files)
+                foreach (var item in images)
                 {
-                    Bitmap imageToExport = new Bitmap(file);
-                    string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(file), extension);
-                    imageToExport.Save(Path.Combine(path, fileName));
+                    string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(item.Key), extension);
+                    item.Value.Save(Path.Combine(path, fileName));
                 }
             }
 
             MessageBox.Show(Resources.messageExamExportSucess);
             Close();
+        }
+
+        private void insertWaterMarkOnImages(Dictionary<string, Bitmap> images)
+        {
+            string text = "WIM";
+            Font f = new Font("Arial", 24, FontStyle.Bold);
+
+            foreach (var item in images)
+            {
+                Bitmap image = item.Value;
+
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    PointF p = new PointF((image.Width - g.MeasureString(text, f).Width) / 2, image.Height - 50);
+
+                    g.DrawString(text, f, Brushes.Black, p);
+                    g.DrawString(text, f, Brushes.White, new PointF(p.X + 3, p.Y + 2));
+                }
+            }
         }
 
         private void getAndSaveDicomFile(Bitmap bitmap, string path)

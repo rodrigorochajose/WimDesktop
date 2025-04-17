@@ -69,6 +69,7 @@ namespace DMMDigital.Views
             set { buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
         }
 
+        public int waterMark { get; set; }
         public float brightness { get; set; }
         public float contrast { get; set; }
         public float reveal { get; set; }
@@ -113,7 +114,7 @@ namespace DMMDigital.Views
                     {
                         if (dialogAdvancedSettings.ShowDialog() == DialogResult.OK)
                         {
-                            IAdvancedSettingsView advancedSettingsView = new AdvancedSettingsView(sensorPath, examPath);
+                            IAdvancedSettingsView advancedSettingsView = new AdvancedSettingsView(sensorPath, examPath, waterMark);
 
                             new AdvancedSettingsPresenter(advancedSettingsView);
 

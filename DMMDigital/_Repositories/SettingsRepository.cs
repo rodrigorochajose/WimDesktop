@@ -94,5 +94,19 @@ namespace DMMDigital._Repositories
         {
             return context.settings.First().exportPath;
         }
+
+        public void updateWaterMark(bool waterMark)
+        {
+            SettingsModel currentSettings = context.settings.First();
+
+            currentSettings.waterMark = waterMark ? 1 : 0;
+
+            context.SaveChanges();
+        }
+
+        public bool getWaterMark()
+        {
+            return context.settings.First().waterMark == 0 ? false : true;
+        }
     }
 }

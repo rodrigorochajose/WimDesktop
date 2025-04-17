@@ -22,6 +22,8 @@ namespace DMMDigital.Presenters
 
             getImageDrawings(examId);
 
+            setWaterMark();
+
             (exportExamView as Form).ShowDialog();
         }
 
@@ -38,6 +40,11 @@ namespace DMMDigital.Presenters
         private void getExportPath(object sender, EventArgs e)
         {
             exportExamView.pathToExport = settingsRepository.getExportPath();
+        }
+
+        private void setWaterMark()
+        {
+            exportExamView.waterMark = settingsRepository.getWaterMark();
         }
     }
 }

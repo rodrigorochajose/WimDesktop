@@ -157,6 +157,11 @@
     <Compile Include="Interface\IView\IPostProcessView.cs" />
     <Compile Include="Interface\IView\IRecycleBinView.cs" />
     <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
+    <Compile Include="Migrations\202503271842251_Initial.cs" />
+    <Compile Include="Migrations\202503271842251_Initial.Designer.cs">
+      <DependentUpon>202503271842251_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClinicModel.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
@@ -450,6 +455,9 @@
     <EmbeddedResource Include="Components\Rounded\RoundedTextBox.resx">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503271842251_Initial.resx">
+      <DependentUpon>202503271842251_Initial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
@@ -707,9 +715,6 @@
     </PackageReference>
     <PackageReference Include="Emgu.CV.UI">
       <Version>4.9.0.5494</Version>
-    </PackageReference>
-    <PackageReference Include="EntityFramework">
-      <Version>6.5.1</Version>
     </PackageReference>
     <PackageReference Include="EntityFramework.Firebird">
       <Version>10.1.0</Version>

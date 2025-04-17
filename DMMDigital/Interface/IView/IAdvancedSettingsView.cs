@@ -7,6 +7,9 @@ namespace DMMDigital.Interface.IView
         string sensorPath { get; set; }
         string examPath { get; set; }
 
+        bool waterMark { get; set; }
+
         event EventHandler eventUpdatePatientFiles;
+        event EventHandler eventUpdateWaterMark;
     }
 }

@@ -42,6 +42,9 @@ namespace DMMDigital.Models
         [Column("RULER_COLOR")]
         public string rulerColor { get; set; }
 
+        [Column("WATERMARK")]
+        public int waterMark { get; set; } = 0;
+
         [Column("FILTER_BRIGHTNESS")]
         public float brightness { get; set; }
 
@@ -70,6 +73,7 @@ namespace DMMDigital.Models
             Map(m => m.textColor).Name("TEXT_COLOR");
             Map(m => m.textSize).Name("TEXT_SIZE");
             Map(m => m.rulerColor).Name("RULER_COLOR");
+            Map(m => m.waterMark).Name("WATERMARK");
             Map(m => m.brightness).Name("FILTER_BRIGHTNESS");
             Map(m => m.contrast).Name("FILTER_CONTRAST");
             Map(m => m.reveal).Name("FILTER_REVEAL");

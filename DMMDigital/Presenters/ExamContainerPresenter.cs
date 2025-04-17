@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using DMMDigital.Properties;
 using Saraff.Twain;
+using Emgu.CV.CvEnum;
 
 namespace DMMDigital.Presenters
 {
@@ -49,10 +50,15 @@ namespace DMMDigital.Presenters
 
             //if (acquireMode == "TWAIN")
             //{
-                initializeTwain(this, EventArgs.Empty);
-                examContainerView.twainInitialized = true;
+            initializeTwain(this, EventArgs.Empty);
+            examContainerView.twainInitialized = true;
 
-                setDefaultSensor();
+            if (!isSensorConnected())
+            {
+                MessageBox.Show(Resources.messageSensorCannotConnect);
+            }
+
+            setDefaultSensor();
             //}
             //else
             //{
@@ -178,6 +184,48 @@ namespace DMMDigital.Presenters
             {
                 MessageBox.Show(Resources.messageSensorCannotConnect);
             }
+        }
+
+        private bool isSensorConnected()
+        {
+            Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
+
+            string source = currentSource.Name;
+
+            if (source.Contains("iRay"))
+            {
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
+                {
+                    ManagementObjectCollection objectCollection = searcher.Get();
+
+                    if (objectCollection.Count > 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            string query = "SELECT * FROM Win32_PnPEntity WHERE Name LIKE ";
+
+            if (source.Contains("CDR"))
+            {
+                query += "'CDR%'";
+            }
+            else
+            {
+                query += "'Intra-oral%'";
+            }
+
+            using (var searcher = new ManagementObjectSearcher(query))
+            {
+                var results = searcher.Get();
+                if (results.Count > 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void setConnectedSensor(string sensor)

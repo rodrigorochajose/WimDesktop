@@ -10,6 +10,8 @@ namespace DMMDigital.Interface.IView
         string patientName { get; set; }
         string pathImages { get; set; }
         string pathToExport { get; set; }
+
+        bool waterMark { get; set; }
         List<Frame> framesToExport { get; set; }
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
