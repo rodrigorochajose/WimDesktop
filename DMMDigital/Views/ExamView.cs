@@ -1520,12 +1520,16 @@ namespace DMMDigital.Views
             {
                 File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
 
+                //new List<List<IDrawing>> { new List<IDrawing>() })
+
                 selectedDrawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
                 frameDrawingHistories[indexFrame].drawingHistory = selectedDrawingHistory;
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                 flowLayoutPanel1.Controls.Clear();
 
                 examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
+
+                mainPictureBox.Refresh();
             }
         }
 
@@ -2017,7 +2021,7 @@ namespace DMMDigital.Views
         {
             if (selectedDrawingHistory.Any())
             {
-                if (selectedDrawingHistory[indexSelectedDrawingHistory].Any())
+                if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
                 {
                     selectedDrawingHistory[indexSelectedDrawingHistory].ForEach(d => d.draw(e.Graphics));
                 }

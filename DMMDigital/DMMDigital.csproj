@@ -821,6 +821,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\watermark.png" />
     <None Include="Resources\logo-wim-96x96.png" />
     <None Include="Resources\icon-96x96-transparent.png" />
     <None Include="Resources\logo-wimdental-login.png" />

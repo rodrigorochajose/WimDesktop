@@ -49,7 +49,7 @@ namespace DMMDigital.Presenters
             DateTime dateFrom = view.checkBoxFromState ? view.dateFrom : new DateTime(2000, 01, 01);
             DateTime dateTo = view.checkBoxToState ? view.dateTo : DateTime.Now;
 
-            IEnumerable<PatientModelDGV> filteredPatients = patientsDGV.Where(p => p.name.ToLower().Contains(view.searchedValue.ToLower()) && p.lastChange?.Date > dateFrom.Date && p.lastChange?.Date < dateTo.Date);
+            IEnumerable<PatientModelDGV> filteredPatients = patientsDGV.Where(p => p.name.ToLower().Contains(view.searchedValue.ToLower()) && p.lastChange?.Date >= dateFrom.Date && p.lastChange?.Date <= dateTo.Date).ToList();
 
             if (filteredPatients.Any())
             {

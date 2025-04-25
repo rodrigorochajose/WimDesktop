@@ -64,9 +64,9 @@ namespace DMMDigital.Views
                 }
             };
 
-            roundedTextBoxSearchPatient.KeyDown += (s, e) =>
+            roundedTextBoxSearchPatient.KeyPress += (s, e) =>
             {
-                if (e.KeyCode == Keys.Enter)
+                if (e.KeyChar == (char)Keys.Enter)
                     eventSearchPatient?.Invoke(this, EventArgs.Empty);
             };
         }

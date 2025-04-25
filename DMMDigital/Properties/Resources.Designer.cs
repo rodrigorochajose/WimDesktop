@@ -1307,5 +1307,15 @@ namespace DMMDigital.Properties {
                 return ResourceManager.GetString("titleSaveTemplate", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap watermark {
+            get {
+                object obj = ResourceManager.GetObject("watermark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
