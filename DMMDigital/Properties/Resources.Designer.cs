@@ -634,7 +634,7 @@ namespace DMMDigital.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a A lixeira já está vazia.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A lixeira está vazia.
         /// </summary>
         internal static string messageBinAlreadyEmpty {
             get {

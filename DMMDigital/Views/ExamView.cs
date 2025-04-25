@@ -1141,6 +1141,7 @@ namespace DMMDigital.Views
             if (!Directory.GetFiles(recyclePath).Any())
             {
                 MessageBox.Show(Resources.messageBinAlreadyEmpty);
+                return;
             }
 
             checkOverwriteImage();
@@ -1611,6 +1612,11 @@ namespace DMMDigital.Views
         private void checkBoxMultiRulerCheckedChanged(object sender, EventArgs e)
         {
             multiRuler = (sender as CheckBox).Checked;
+
+            if (currentDrawing is Ruler)
+            {
+                completeMultiRuler();
+            }
         }
 
         private void textBoxFrameNotesTextChanged(object sender, EventArgs e)
@@ -1635,6 +1641,24 @@ namespace DMMDigital.Views
             {
                 differenceBetweenPoints.Add(new Point(p.X - points.First().X, p.Y - points.First().Y));
             }
+        }
+
+        private void completeMultiRuler()
+        {
+            if (currentDrawing.points.Count > 1)
+            {
+                (currentDrawing as Ruler).lineLength.Remove((currentDrawing as Ruler).lineLength.Last());
+            }
+            else
+            {
+                selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
+                indexSelectedDrawingHistory--;
+            }
+
+            rulerDrawed = false;
+            draw = false;
+            selectedDrawingHistoryHandler();
+            mainPictureBox.Refresh();
         }
 
         private void mainPictureBoxMouseDown(object sender, MouseEventArgs e)
@@ -1717,57 +1741,39 @@ namespace DMMDigital.Views
                         case 2:
                             if (multiRuler)
                             {
-                                if (e.Button == MouseButtons.Right)
+                                if (!rulerDrawed)
                                 {
-                                    if (currentDrawing.points.Count > 1)
+                                    currentDrawing = new Ruler
                                     {
-                                        (currentDrawing as Ruler).lineLength.Remove((currentDrawing as Ruler).lineLength.Last());
-                                    }
-                                    else
-                                    {
-                                        selectedDrawingHistory.Remove(selectedDrawingHistory.Last());
-                                        indexSelectedDrawingHistory--;
-                                    }
+                                        id = counterDrawings,
+                                        examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
+                                        graphicsPath = new GraphicsPath(),
+                                        drawingColor = rulerColor,
+                                        drawingSize = 2,
+                                        points = new List<Point> { clickPosition },
+                                        previewPoint = clickPosition,
+                                        lineLength = new List<float> { 0 },
+                                        multiple = true,
+                                    };
 
-                                    rulerDrawed = false;
-                                    draw = false;
-                                    selectedDrawingHistoryHandler();
+                                    selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
+                                    {
+                                        currentDrawing
+                                    });
+                                    indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+
+                                    rulerDrawed = true;
                                     mainPictureBox.Refresh();
+
                                 }
                                 else
                                 {
-                                    if (!rulerDrawed)
-                                    {
-                                        currentDrawing = new Ruler
-                                        {
-                                            id = counterDrawings,
-                                            examImageId = examImages.FirstOrDefault(ei => ei.templateFrameId == selectedFrame.id).id,
-                                            graphicsPath = new GraphicsPath(),
-                                            drawingColor = rulerColor,
-                                            drawingSize = 2,
-                                            points = new List<Point> { clickPosition },
-                                            previewPoint = clickPosition,
-                                            lineLength = new List<float> { 0 },
-                                            multiple = true,
-                                        };
+                                    currentDrawing.points.Add((currentDrawing as Ruler).previewPoint);
 
-                                        selectedDrawingHistory.Add(new List<IDrawing>(selectedDrawingHistory[indexSelectedDrawingHistory])
-                                        {
-                                            currentDrawing
-                                        });
-                                        indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                                    int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
+                                    (currentDrawing as Ruler).lineLength[index] = getRulerLength(currentDrawing.points.SkipLast(1).Last(), (currentDrawing as Ruler).points.Last());
 
-                                        rulerDrawed = true;
-                                    }
-                                    else
-                                    {
-                                        currentDrawing.points.Add((currentDrawing as Ruler).previewPoint);
-
-                                        int index = (currentDrawing as Ruler).lineLength.LastIndexOf((currentDrawing as Ruler).lineLength.Last());
-                                        (currentDrawing as Ruler).lineLength[index] = getRulerLength(currentDrawing.points.SkipLast(1).Last(), (currentDrawing as Ruler).points.Last());
-
-                                        (currentDrawing as Ruler).lineLength.Add(0);
-                                    }
+                                    (currentDrawing as Ruler).lineLength.Add(0);
                                 }
                             }
                             else
@@ -1873,64 +1879,68 @@ namespace DMMDigital.Views
                     }
                 }
             }
+            else if (e.Button == MouseButtons.Right)
+            {
+                if (action == 2)
+                {
+                    completeMultiRuler();
+                }
+            }
         }
 
         private void mainPictureBoxMouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (draw)
             {
-                if (draw)
+                if (action < 4)
                 {
-                    if (action < 4)
+                    if (action == 1)
                     {
-                        if (action == 1)
+                        if (selectedDrawingToMove != null)
                         {
-                            if (selectedDrawingToMove != null)
+                            List<Point> drawingPointsToMove = selectedDrawingToMove.points;
+
+                            int indexFirstPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.First());
+                            int indexLastPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.Last());
+
+                            drawingPointsToMove[indexFirstPoint] = new Point(
+                                e.X + currentDrawing.points.First().X - clickPosition.X,
+                                e.Y + currentDrawing.points.First().Y - clickPosition.Y
+                            );
+                            drawingPointsToMove[indexLastPoint] = new Point(
+                                e.X + currentDrawing.points.Last().X - clickPosition.X,
+                                e.Y + currentDrawing.points.Last().Y - clickPosition.Y
+                            );
+
+                            if (currentDrawing is FreeDraw || (currentDrawing is Ruler ruler && ruler.multiple))
                             {
-                                List<Point> drawingPointsToMove = selectedDrawingToMove.points;
+                                Point firstPoint = drawingPointsToMove.First();
 
-                                int indexFirstPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.First());
-                                int indexLastPoint = drawingPointsToMove.IndexOf(drawingPointsToMove.Last());
-
-                                drawingPointsToMove[indexFirstPoint] = new Point(
-                                    e.X + currentDrawing.points.First().X - clickPosition.X,
-                                    e.Y + currentDrawing.points.First().Y - clickPosition.Y
-                                );
-                                drawingPointsToMove[indexLastPoint] = new Point(
-                                    e.X + currentDrawing.points.Last().X - clickPosition.X,
-                                    e.Y + currentDrawing.points.Last().Y - clickPosition.Y
-                                );
-
-                                if (currentDrawing is FreeDraw || (currentDrawing is Ruler ruler && ruler.multiple))
+                                for (int counterPoints = 1, counterDifference = 0; counterPoints < differenceBetweenPoints.Count; counterPoints++, counterDifference++)
                                 {
-                                    Point firstPoint = drawingPointsToMove.First();
-
-                                    for (int counterPoints = 1, counterDifference = 0; counterPoints < differenceBetweenPoints.Count; counterPoints++, counterDifference++)
-                                    {
-                                        drawingPointsToMove[counterPoints] = new Point(
-                                            firstPoint.X + differenceBetweenPoints[counterDifference].X,
-                                            firstPoint.Y + differenceBetweenPoints[counterDifference].Y
-                                        );
-                                    }
+                                    drawingPointsToMove[counterPoints] = new Point(
+                                        firstPoint.X + differenceBetweenPoints[counterDifference].X,
+                                        firstPoint.Y + differenceBetweenPoints[counterDifference].Y
+                                    );
                                 }
                             }
                         }
-                        else if (action == 2)
-                        {
-                            (currentDrawing as Ruler).previewPoint = e.Location;
-                        }
-                        else if (action == 3)
-                        {
-                            currentDrawing.points.Add(e.Location);
-                        }
                     }
-                    else
+                    else if (action == 2)
                     {
-                        int indexLastPoint = currentDrawing.points.IndexOf(currentDrawing.points.Last());
-                        currentDrawing.points[indexLastPoint] = e.Location;
+                        (currentDrawing as Ruler).previewPoint = e.Location;
                     }
-                    mainPictureBox.Invalidate();
+                    else if (action == 3)
+                    {
+                        currentDrawing.points.Add(e.Location);
+                    }
                 }
+                else
+                {
+                    int indexLastPoint = currentDrawing.points.IndexOf(currentDrawing.points.Last());
+                    currentDrawing.points[indexLastPoint] = e.Location;
+                }
+                mainPictureBox.Invalidate();
             }
 
             if (action == 8)

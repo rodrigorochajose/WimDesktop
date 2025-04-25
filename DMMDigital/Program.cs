@@ -26,8 +26,7 @@ namespace DMMDigital
                 return;
             }
 
-            var migrator = new DbMigrator(new Migrations.Configuration());
-            migrator.Update();
+            checkMigrations();
 
             loadLanguage();
 
@@ -53,6 +52,24 @@ namespace DMMDigital
             {
                 MessageBox.Show($"Erro ao conectar no banco de dados: {ex.Message}");
                 return false;
+            }
+        }
+
+        static void checkMigrations()
+        {
+            var configuration = new Migrations.Configuration();
+            var migrator = new DbMigrator(configuration);
+            migrator.Update();
+
+            var seedMethod = configuration.GetType().GetMethod("Seed", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+            if (seedMethod != null)
+            {
+                using (Context context = new Context())
+                {
+                    seedMethod.Invoke(configuration, new object[] { context });
+                    context.SaveChanges();
+                }
             }
         }
 

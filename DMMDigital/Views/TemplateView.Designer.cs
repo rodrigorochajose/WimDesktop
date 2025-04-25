@@ -36,11 +36,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonNewTemplate = new DMMDigital.Components.Rounded.RoundedButton();
-            this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             this.dataGridViewTemplate = new DMMDigital.Components.Rounded.RoundedDataGridView();
             this.columnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnDeleteTemplate = new System.Windows.Forms.DataGridViewImageColumn();
+            this.panelShowTemplate = new DMMDigital.Components.Rounded.RoundedPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTemplate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,15 +60,6 @@
             this.buttonNewTemplate.ForeColor = System.Drawing.Color.White;
             this.buttonNewTemplate.Name = "buttonNewTemplate";
             this.buttonNewTemplate.UseVisualStyleBackColor = false;
-            // 
-            // panelShowTemplate
-            // 
-            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
-            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelShowTemplate.BorderWidth = 5F;
-            this.panelShowTemplate.CornerRadius = 20;
-            resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
-            this.panelShowTemplate.Name = "panelShowTemplate";
             // 
             // dataGridViewTemplate
             // 
@@ -155,6 +146,15 @@
             this.columnDeleteTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.columnDeleteTemplate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // panelShowTemplate
+            // 
+            this.panelShowTemplate.BackColor = System.Drawing.Color.Silver;
+            this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
+            this.panelShowTemplate.BorderWidth = 5F;
+            this.panelShowTemplate.CornerRadius = 20;
+            resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
+            this.panelShowTemplate.Name = "panelShowTemplate";
+            // 
             // TemplateView
             // 
             resources.ApplyResources(this, "$this");
@@ -179,10 +179,10 @@
         #endregion
         private System.Windows.Forms.Label label1;
         private Components.Rounded.RoundedDataGridView dataGridViewTemplate;
-        private Components.Rounded.RoundedPanel panelShowTemplate;
         private Components.Rounded.RoundedButton buttonNewTemplate;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewImageColumn columnDeleteTemplate;
+        private Components.Rounded.RoundedPanel panelShowTemplate;
     }
 }

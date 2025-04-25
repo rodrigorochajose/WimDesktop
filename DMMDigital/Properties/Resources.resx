@@ -270,7 +270,7 @@
     <value>Todas as Lixeiras foram esvaziadas com sucesso !</value>
   </data>
   <data name="messageBinAlreadyEmpty" xml:space="preserve">
-    <value>A lixeira já está vazia</value>
+    <value>A lixeira está vazia</value>
   </data>
   <data name="messageWrongPassword" xml:space="preserve">
     <value>Senha Incorreta</value>

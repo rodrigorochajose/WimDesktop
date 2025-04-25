@@ -18,7 +18,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using DMMDigital.Properties;
 using Saraff.Twain;
-using Emgu.CV.CvEnum;
 
 namespace DMMDigital.Presenters
 {
@@ -53,10 +52,7 @@ namespace DMMDigital.Presenters
             initializeTwain(this, EventArgs.Empty);
             examContainerView.twainInitialized = true;
 
-            if (!isSensorConnected())
-            {
-                MessageBox.Show(Resources.messageSensorCannotConnect);
-            }
+            view.sensorConnected = isSensorConnected();
 
             setDefaultSensor();
             //}

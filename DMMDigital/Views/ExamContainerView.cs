@@ -14,6 +14,7 @@ namespace DMMDigital.Views
         public List<int> openExamsId { get; set; }
         public ExamView selectedExamView { get; set; }
         public bool twainInitialized { get; set; }
+        public bool sensorConnected { get; set; }
 
         public event EventHandler eventConnectSensor;
         public event EventHandler eventDestroySensor;
@@ -33,6 +34,11 @@ namespace DMMDigital.Views
         {
             InitializeComponent();
             addNewPage(selectedExamView);
+
+            if (!sensorConnected)
+            {
+                MessageBox.Show(Resources.messageSensorCannotConnect);
+            }
         }
 
         private void examContainerViewLoad(object sender, EventArgs e)

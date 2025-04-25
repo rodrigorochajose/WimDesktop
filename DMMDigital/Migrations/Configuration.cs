@@ -25,21 +25,21 @@
                 context.Database.ExecuteSqlCommand(@"INSERT INTO SENSOR VALUES (4, 'TWAIN', 'TWAIN', 20.0, 30.0)");
                 context.Database.ExecuteSqlCommand(@"INSERT INTO SENSOR VALUES (5, 'CDR ELITE', 'CDR', 26.0, 36.0)");
 
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('BITEWINGS')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('CHECKUP')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('FULL MOUTH SERIES (18)')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('FULL MOUTH SERIES (21)')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('VERTICAL ENDO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('HORIZONTAL ENDO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('CENTRAL INFERIOR')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('CENTRAL SUPERIOR')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MANDIBULAR DIREITO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MAXILAR DIREITO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MANDIBULAR ESQUERDO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MAXILAR ESQUERDO')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MIGRACAO (5)')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MIGRACAO (15)')");
-                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE(NAME) VALUES('MIGRACAO (25)')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(1, 'BITEWINGS')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(2, 'CHECKUP')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(3, 'FULL MOUTH SERIES (18)')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(4, 'FULL MOUTH SERIES (21)')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(5, 'VERTICAL ENDO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(6, 'HORIZONTAL ENDO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(7, 'CENTRAL INFERIOR')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(8, 'CENTRAL SUPERIOR')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(9, 'MANDIBULAR DIREITO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(10, 'MAXILAR DIREITO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(11, 'MANDIBULAR ESQUERDO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(12, 'MAXILAR ESQUERDO')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(13, 'MIGRACAO (5)')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(14, 'MIGRACAO (15)')");
+                context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE VALUES(15, 'MIGRACAO (25)')");
 
                 context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE_FRAME(TEMPLATE_ID, ORDINATION, LOCATION_X, LOCATION_Y, ORIENTATION) VALUES(1, 1, 185, 180, 2)");
                 context.Database.ExecuteSqlCommand(@"INSERT INTO TEMPLATE_FRAME(TEMPLATE_ID, ORDINATION, LOCATION_X, LOCATION_Y, ORIENTATION) VALUES(1, 2, 275, 180, 2)");

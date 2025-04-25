@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonNewTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>575, 54</value>
+    <value>584, 54</value>
   </data>
   <data name="buttonNewTemplate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -197,27 +197,6 @@
   </data>
   <data name="&gt;&gt;buttonNewTemplate.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="panelShowTemplate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 112</value>
-  </data>
-  <data name="panelShowTemplate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 225</value>
-  </data>
-  <data name="panelShowTemplate.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Name" xml:space="preserve">
-    <value>panelShowTemplate</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Type" xml:space="preserve">
-    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="dataGridViewTemplate.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>30</value>
@@ -270,6 +249,27 @@
   <data name="&gt;&gt;dataGridViewTemplate.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="panelShowTemplate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>377, 112</value>
+  </data>
+  <data name="panelShowTemplate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>363, 228</value>
+  </data>
+  <data name="panelShowTemplate.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Name" xml:space="preserve">
+    <value>panelShowTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Type" xml:space="preserve">
+    <value>DMMDigital.Components.Rounded.RoundedPanel, DMMDigital, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -277,7 +277,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>741, 355</value>
+    <value>758, 355</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

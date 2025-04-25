@@ -9,8 +9,8 @@ namespace DMMDigital.Interface.IView
         int patientId { get; set; }
         List<int> openExamsId { get; set; }
         ExamView selectedExamView { get; set; }
-
         bool twainInitialized { get; set; }
+        bool sensorConnected { get; set; }
 
         event EventHandler eventConnectSensor;
         event EventHandler eventDestroySensor;

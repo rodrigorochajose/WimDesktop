@@ -7,6 +7,7 @@ using DMMDigital.Models;
 using DMMDigital.Interface.IView;
 using System.Linq;
 using DMMDigital.Properties;
+using System.Runtime.InteropServices;
 
 namespace DMMDigital.Views
 {
@@ -212,6 +213,21 @@ namespace DMMDigital.Views
                 Point newLocation = selectedFrame.Location;
                 newLocation.X += (e.X - lastLocation.X) / 10 * 10;
                 newLocation.Y += (e.Y - lastLocation.Y) / 10 * 10;
+
+                Point newLocationLower = new Point(newLocation.X + selectedFrame.Width, newLocation.Y + selectedFrame.Height);
+
+                Point pontoLimiteTop = new Point(20, 20);
+                Point pontoLimiteBot = new Point(panelTemplate.Width - 35, panelTemplate.Height - 35);
+
+                Point pontoFrameTop = new Point(newLocation.X, newLocation.Y);
+                Point pontoFrameBot = new Point(newLocation.X + selectedFrame.Width, newLocation.Y + selectedFrame.Height);
+
+                //if (!framesLimit.Contains(newLocation) || !framesLimit.Contains(newLocationLower))
+
+                if (pontoFrameTop.X <= pontoLimiteTop.X || pontoFrameTop.Y <= pontoLimiteTop.Y || pontoFrameBot.X >= pontoLimiteBot.X || pontoFrameBot.Y >= pontoLimiteBot.Y)
+                {
+                    return;
+                }
 
                 selectedFrame.Location = newLocation;
                 selectedFrame.topPoint = selectedFrame.Location;
