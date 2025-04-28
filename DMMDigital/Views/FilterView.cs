@@ -126,7 +126,9 @@ namespace DMMDigital.Views
 
         private void buttonRestoreImageClick(object sender, EventArgs e)
         {
-            pictureBoxEditedImage.Image = pictureBoxOriginalImage.Image;
+            pictureBoxEditedImage.Image.Dispose();
+
+            pictureBoxEditedImage.Image = originalImage.Clone();
             resetControls();
             editedImage = originalImage.Clone();
         }
