@@ -30,7 +30,6 @@ namespace DMMDigital.Components
                 else
                 {
                     ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
-
                 }
             }
 
@@ -79,6 +78,17 @@ namespace DMMDigital.Components
                 e.Graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", orderFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
                 e.Graphics.DrawString(direction, new Font("TimesNewRoman", directionFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, directionPoint);
             }
+        }
+
+        public Frame CloneToExport()
+        {
+            return new Frame
+            {
+                order = this.order,
+                orientation = this.orientation,
+                Image = (Image)this.Image.Clone(),
+                originalImage = (Image)this.Image.Clone(),
+            };
         }
     }
 }

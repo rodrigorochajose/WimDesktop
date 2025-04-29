@@ -23,6 +23,8 @@ namespace DMMDigital.Views
         public List<Frame> framesToExport { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
+        private List<CheckBox> checkBoxFrames = new List<CheckBox>();
+
         public event EventHandler eventSaveExportPath;
         public event EventHandler eventGetExportPath;
 
@@ -88,19 +90,19 @@ namespace DMMDigital.Views
                     Size = new Size(450, 94)
                 };
 
-                PictureBox pictureBox = new PictureBox { 
-                    Name = $"pictureBoxFrame{frame.order}",
-                    Location = new Point(20, 5),
-                    Size = new Size(60, 85)
-                };
-
                 if (frame.orientation > 1)
                 {
-                    pictureBox.Location = new Point(17, 10);
-                    pictureBox.Size = new Size(85, 60);
+                    frame.Location = new Point(17, 10);
+                    frame.Size = new Size(85, 70);
+                }
+                else
+                {
+                    frame.Location = new Point(20, 5);
+                    frame.Size = new Size(70, 85);
                 }
 
-                pictureBox.Image = frame.Image.GetThumbnailImage(pictureBox.Width, pictureBox.Height, () => false, IntPtr.Zero);
+                frame.Name = $"frame{frame.order}";
+                frame.Image = frame.Image.GetThumbnailImage(frame.Width, frame.Height, () => false, IntPtr.Zero);
 
                 Label label = new Label { 
                     Name = $"labelFrame{frame.order}",
@@ -122,9 +124,11 @@ namespace DMMDigital.Views
                     Tag = frame.order
                 };
 
+                checkBoxFrames.Add(checkBox);
+
                 panel.Controls.Add(checkBox);
                 panel.Controls.Add(label);
-                panel.Controls.Add(pictureBox);
+                panel.Controls.Add(frame);
 
                 flowLayoutPanel.Controls.Add(panel);
             }
@@ -144,7 +148,7 @@ namespace DMMDigital.Views
                 checkBoxClearSelection.Checked = false;
             }
 
-            foreach (CheckBox cb in getAllFrameCheckBox())
+            foreach (CheckBox cb in checkBoxFrames)
             {
                 cb.Checked = true;
             }
@@ -157,7 +161,7 @@ namespace DMMDigital.Views
                 checkBoxSelectAll.Checked = false;
             }
 
-            foreach (CheckBox cb in getAllFrameCheckBox())
+            foreach (CheckBox cb in checkBoxFrames)
             {
                 cb.Checked = false;
             }
@@ -165,15 +169,41 @@ namespace DMMDigital.Views
             checkBoxClearSelection.Checked = true;
         }
 
-        private List<CheckBox> getAllFrameCheckBox()
+        private List<ImageInfoExport> getImagesInfoToExport()
         {
-            List<CheckBox> checkBoxes = new List<CheckBox>();
-            foreach (Panel panel in flowLayoutPanel.Controls.OfType<Panel>())
+            List<Frame> selectedFrames = flowLayoutPanel.Controls.OfType<Panel>()
+                    .Where(panel => panel.Controls.OfType<CheckBox>().Any(c => c.Checked))
+                    .Select(panel => panel.Controls.OfType<Frame>().FirstOrDefault())
+                    .Where(frame => frame != null)
+                    .ToList();
+
+            List<ImageInfoExport> imagesInfo = new List<ImageInfoExport>();
+
+            if (checkBoxExportOriginalImage.Checked)
             {
-                checkBoxes.AddRange(panel.Controls.OfType<CheckBox>().Where(c => c.Checked == true));
+                string originalImagePath = "";
+
+                foreach (Frame frame in selectedFrames)
+                {
+                    originalImagePath = Path.Combine(pathImages, $"{frame.order}_original.png");
+
+                    imagesInfo.Add(new ImageInfoExport(frame.orientation, originalImagePath, new Bitmap(frame.originalImage)));
+                }
             }
 
-            return checkBoxes;
+            if (checkBoxExportEditedImage.Checked)
+            {
+                string editedImagePath = "";
+
+                foreach (Frame frame in selectedFrames)
+                {
+                    editedImagePath = Path.Combine(pathImages, $"{frame.order}_edited.png");
+
+                    imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, new Bitmap(frame.originalImage)));
+                }
+            }
+
+            return imagesInfo;
         }
 
         private void buttonExportExamClick(object sender, EventArgs e)
@@ -192,16 +222,12 @@ namespace DMMDigital.Views
 
             eventSaveExportPath?.Invoke(this, EventArgs.Empty);
 
-            string path = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
-            Directory.CreateDirectory(path);
+            string exportPath = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
+            Directory.CreateDirectory(exportPath);
 
             ImageFormat format = ImageFormat.Bmp;
             string extension = ".bmp";
 
-            List<string> files = new List<string>();
-
-            List<CheckBox> checkBoxes = getAllFrameCheckBox();
-                
             switch (comboBoxFormat.InnerControl.SelectedItem)
             {
                 case "TIFF":
@@ -229,54 +255,38 @@ namespace DMMDigital.Views
                         
             }
 
-            if (checkBoxExportOriginalImage.Checked)
-            {
-                foreach (CheckBox cb in checkBoxes)
-                {
-                    files.Add(Path.Combine(pathImages, $"{cb.Tag}_original.png"));
-                }
-            }
-
-            if (checkBoxExportEditedImage.Checked)
-            {
-                foreach (CheckBox cb in checkBoxes)
-                {
-                    string currentImagePath = Path.Combine(pathImages, $"{cb.Tag}_edited.png");
-
-                    if (File.Exists(currentImagePath))
-                    {
-                        files.Add(currentImagePath);
-                    }
-                }
-            }
-
-            Dictionary<string, Bitmap> images = files.ToDictionary(file => file, file => new Bitmap(file));
+            List<ImageInfoExport> imagesInfo = getImagesInfoToExport();
 
             if (waterMark)
             {
-                insertWaterMarkOnImages(images);
+                insertWaterMarkOnImages(imagesInfo);
             }
+
+            string fileName;
 
             if (extension == ".dicom")
             {
-                foreach (var item in images)
+                foreach (ImageInfoExport imgInfo in imagesInfo)
                 {
-                    getAndSaveDicomFile(item.Value, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(item.Key)}{extension}"));
+                    fileName = $"{Path.GetFileNameWithoutExtension(imgInfo.path)}{extension}";
+                    getAndSaveDicomFile(imgInfo.img, Path.Combine(exportPath, fileName));
                 }
             }
             else if (extension == ".raw")
             {
-                foreach (var item in images)
+                foreach (ImageInfoExport imgInfo in imagesInfo)
                 {
-                    getAndSaveRawFile(item.Value, Path.Combine(path, $"{Path.GetFileNameWithoutExtension(item.Key)}{extension}"));
+                    fileName = $"{Path.GetFileNameWithoutExtension(imgInfo.path)}{extension}";
+
+                    getAndSaveRawFile(imgInfo.img, Path.Combine(exportPath, fileName));
                 }
             }
             else
             {
-                foreach (var item in images)
+                foreach (ImageInfoExport imgInfo in imagesInfo)
                 {
-                    string fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(item.Key), extension);
-                    item.Value.Save(Path.Combine(path, fileName));
+                    fileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(imgInfo.path), extension);
+                    imgInfo.img.Save(Path.Combine(exportPath, fileName));
                 }
             }
 
@@ -284,21 +294,26 @@ namespace DMMDigital.Views
             Close();
         }
 
-        private void insertWaterMarkOnImages(Dictionary<string, Bitmap> images)
+        private void insertWaterMarkOnImages(List<ImageInfoExport> imagesInfo)
         {
-            string text = "WIM";
-            Font f = new Font("Arial", 24, FontStyle.Bold);
-
-            foreach (var item in images)
+            foreach (ImageInfoExport imgInfo in imagesInfo)
             {
-                Bitmap image = item.Value;
+                Bitmap watermark = Resources.watermark;
 
-                using (Graphics g = Graphics.FromImage(image))
+                PointF p = new PointF(0, 0);
+
+                if (imgInfo.orientation == 1)
                 {
-                    PointF p = new PointF((image.Width - g.MeasureString(text, f).Width) / 2, image.Height - 50);
+                    p = new PointF(0, imgInfo.img.Height - watermark.Height - 40);
+                }
+                else if (imgInfo.orientation == 3)
+                {
+                    p = new PointF(imgInfo.img.Width - watermark.Width - 40, 0);
+                }
 
-                    g.DrawString(text, f, Brushes.Black, p);
-                    g.DrawString(text, f, Brushes.White, new PointF(p.X + 3, p.Y + 2));
+                using (Graphics g = Graphics.FromImage(imgInfo.img))
+                {
+                    g.DrawImage(watermark, p);
                 }
             }
         }
@@ -373,6 +388,20 @@ namespace DMMDigital.Views
             }
 
             return pixelData;
+        }
+    }
+
+    class ImageInfoExport
+    {
+        public int orientation { get; set; }
+        public string path { get; set; }
+        public Bitmap img { get; set; }
+
+        public ImageInfoExport(int orientation, string path, Bitmap img)
+        {
+            this.orientation = orientation;
+            this.path = path;
+            this.img = img;
         }
     }
 }

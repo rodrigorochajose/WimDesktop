@@ -293,9 +293,7 @@
     <Compile Include="Views\DialogRecalibrateRuler.Designer.cs">
       <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExportExamView.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Views\ExportExamView.cs" />
     <Compile Include="Views\ExportExamView.Designer.cs">
       <DependentUpon>ExportExamView.cs</DependentUpon>
     </Compile>

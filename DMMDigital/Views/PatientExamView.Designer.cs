@@ -95,6 +95,7 @@
             this.roundedTextBoxObservation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedTextBoxObservation.BorderRadius = 10;
             this.roundedTextBoxObservation.BorderSize = 1;
+            this.roundedTextBoxObservation.Enabled = false;
             this.roundedTextBoxObservation.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.roundedTextBoxObservation.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxObservation.Location = new System.Drawing.Point(30, 326);
@@ -117,6 +118,7 @@
             this.roundedTextBoxRecommendation.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedTextBoxRecommendation.BorderRadius = 10;
             this.roundedTextBoxRecommendation.BorderSize = 1;
+            this.roundedTextBoxRecommendation.Enabled = false;
             this.roundedTextBoxRecommendation.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.roundedTextBoxRecommendation.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxRecommendation.Location = new System.Drawing.Point(30, 255);
@@ -139,6 +141,7 @@
             this.roundedTextBoxName.BorderFocusColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
             this.roundedTextBoxName.BorderRadius = 10;
             this.roundedTextBoxName.BorderSize = 1;
+            this.roundedTextBoxName.Enabled = false;
             this.roundedTextBoxName.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.roundedTextBoxName.ForeColor = System.Drawing.Color.Gray;
             this.roundedTextBoxName.Location = new System.Drawing.Point(30, 42);

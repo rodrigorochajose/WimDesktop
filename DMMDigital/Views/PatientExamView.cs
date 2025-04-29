@@ -99,6 +99,11 @@ namespace DMMDigital.Views
                 handleTextBoxes(false);
                 buttonEditPatient.Text = "Editar";
             }
+
+            roundedTextBoxName.ResetSelection();
+            roundedTextBoxObservation.ResetSelection();
+            roundedTextBoxRecommendation.ResetSelection();
+
         }
 
         private void buttonDeletePatientClick(object sender, EventArgs e)

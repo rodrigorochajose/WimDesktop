@@ -335,5 +335,13 @@ namespace DMMDigital.Components.Rounded
             SetPlaceholder();
         }
         #endregion
+
+        public void ResetSelection()
+        {
+            if (textBox1 != null)
+            {
+                textBox1.SelectionStart = 0;
+            }
+        }
     }
 }

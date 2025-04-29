@@ -22,7 +22,6 @@ namespace DMMDigital.Views
         public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
-
         public Frame selectedFrame { get; set; }
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
@@ -1115,7 +1114,7 @@ namespace DMMDigital.Views
 
         private void buttonExportClick(object sender, EventArgs e)
         {
-            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).ToList();
+            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).Select(f => f.CloneToExport()).ToList();
 
             if (!framesWithImages.Any())
             {
