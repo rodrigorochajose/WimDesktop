@@ -20,7 +20,79 @@
                         AUTOMATIC_LOGIN = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
-            
+
+            CreateTable(
+                "dbo.SENSOR",
+                c => new
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NAME = c.String(),
+                    NICKNAME = c.String(),
+                    WIDTH = c.Single(nullable: false),
+                    HEIGHT = c.Single(nullable: false),
+                })
+                .PrimaryKey(t => t.ID);
+
+            CreateTable(
+                "dbo.SETTINGS",
+                c => new
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    LANGUAGE = c.String(),
+                    SENSOR_PATH = c.String(),
+                    EXAM_PATH = c.String(),
+                    EXPORT_PATH = c.String(),
+                    SENSOR_MODEL = c.String(),
+                    ACQUIRE_MODE = c.Int(nullable: false),
+                    DRAWING_COLOR = c.String(),
+                    DRAWING_SIZE = c.Int(nullable: false),
+                    TEXT_COLOR = c.String(),
+                    TEXT_SIZE = c.Int(nullable: false),
+                    RULER_COLOR = c.String(),
+                    FILTER_BRIGHTNESS = c.Single(nullable: false),
+                    FILTER_CONTRAST = c.Single(nullable: false),
+                    FILTER_REVEAL = c.Single(nullable: false),
+                    FILTER_SMART_SHARPEN = c.Single(nullable: false),
+                })
+                .PrimaryKey(t => t.ID);
+
+            CreateTable(
+                "dbo.TEMPLATE",
+                c => new
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NAME = c.String(),
+                })
+                .PrimaryKey(t => t.ID);
+
+            CreateTable(
+                "dbo.TEMPLATE_FRAME",
+                c => new
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    TEMPLATE_ID = c.Int(nullable: false),
+                    ORDINATION = c.Int(nullable: false),
+                    LOCATION_X = c.Int(nullable: false),
+                    LOCATION_Y = c.Int(nullable: false),
+                    ORIENTATION = c.Int(nullable: false),
+                })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.TEMPLATE", t => t.TEMPLATE_ID, cascadeDelete: true, name: "FK_TF_T_ID");
+
+            CreateTable(
+                "dbo.PATIENT",
+                c => new
+                {
+                    ID = c.Int(nullable: false, identity: true),
+                    NAME = c.String(nullable: false, maxLength: 130),
+                    BIRTH_DATE = c.DateTime(nullable: false),
+                    PHONE = c.String(),
+                    RECOMMENDATION = c.String(),
+                    OBSERVATION = c.String(),
+                    CREATED_AT = c.DateTime(nullable: false),
+                })
+                .PrimaryKey(t => t.ID);
+
             CreateTable(
                 "dbo.EXAM",
                 c => new
@@ -33,8 +105,8 @@
                         UPDATED_AT = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.PATIENT", t => t.PATIENT_ID, cascadeDelete: true)
-                .ForeignKey("dbo.TEMPLATE", t => t.TEMPLATE_ID, cascadeDelete: true)
+                .ForeignKey("dbo.PATIENT", t => t.PATIENT_ID, cascadeDelete: true, name: "FK_E_P_ID")
+                .ForeignKey("dbo.TEMPLATE", t => t.TEMPLATE_ID, cascadeDelete: true, name: "FK_E_T_ID")
                 .Index(t => t.PATIENT_ID)
                 .Index(t => t.TEMPLATE_ID);
             
@@ -50,31 +122,9 @@
                         CREATED_AT = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.EXAM", t => t.EXAM_ID, cascadeDelete: true)
+                .ForeignKey("dbo.EXAM", t => t.EXAM_ID, cascadeDelete: true, name: "FK_EI_E_ID")
+                .ForeignKey("dbo.TEMPLATE_FRAME", t => t.TEMPLATE_FRAME_ID, cascadeDelete: true, name: "FK_EI_TF_ID")
                 .Index(t => t.EXAM_ID);
-            
-            CreateTable(
-                "dbo.PATIENT",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NAME = c.String(nullable: false, maxLength: 130),
-                        BIRTH_DATE = c.DateTime(nullable: false),
-                        PHONE = c.String(),
-                        RECOMMENDATION = c.String(),
-                        OBSERVATION = c.String(),
-                        CREATED_AT = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.TEMPLATE",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NAME = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.EXAM_IMAGE_DRAWING",
@@ -88,8 +138,10 @@
                         DRAWING_TYPE = c.String(),
                         DRAWING_TEXT = c.String(),
                     })
-                .PrimaryKey(t => t.ID);
-            
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.EXAM", t => t.EXAM_ID, cascadeDelete: true, name: "FK_EID_E_ID")
+                .ForeignKey("dbo.EXAM_IMAGE", t => t.EXAM_IMAGE_ID, cascadeDelete: true, name: "FK_EID_EI_ID");
+
             CreateTable(
                 "dbo.EXAM_IMAGE_DRAWING_POINTS",
                 c => new
@@ -99,8 +151,9 @@
                         POINT_X = c.Int(nullable: false),
                         POINT_Y = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
-            
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.EXAM_IMAGE_DRAWING", t => t.EXAM_IMAGE_DRAWING_ID, cascadeDelete: true, name: "FK_EIDP_EID_ID");
+
             CreateTable(
                 "dbo.RULER_LENGTH",
                 c => new
@@ -109,56 +162,9 @@
                         EXAM_IMAGE_DRAWING_ID = c.Int(nullable: false),
                         LINE_LENGTH = c.Single(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.SENSOR",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        NAME = c.String(),
-                        NICKNAME = c.String(),
-                        WIDTH = c.Single(nullable: false),
-                        HEIGHT = c.Single(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.SETTINGS",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        LANGUAGE = c.String(),
-                        SENSOR_PATH = c.String(),
-                        EXAM_PATH = c.String(),
-                        EXPORT_PATH = c.String(),
-                        SENSOR_MODEL = c.String(),
-                        ACQUIRE_MODE = c.Int(nullable: false),
-                        DRAWING_COLOR = c.String(),
-                        DRAWING_SIZE = c.Int(nullable: false),
-                        TEXT_COLOR = c.String(),
-                        TEXT_SIZE = c.Int(nullable: false),
-                        RULER_COLOR = c.String(),
-                        FILTER_BRIGHTNESS = c.Single(nullable: false),
-                        FILTER_CONTRAST = c.Single(nullable: false),
-                        FILTER_REVEAL = c.Single(nullable: false),
-                        FILTER_SMART_SHARPEN = c.Single(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            CreateTable(
-                "dbo.TEMPLATE_FRAME",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        TEMPLATE_ID = c.Int(nullable: false),
-                        ORDINATION = c.Int(nullable: false),
-                        LOCATION_X = c.Int(nullable: false),
-                        LOCATION_Y = c.Int(nullable: false),
-                        ORIENTATION = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID);
-            
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.EXAM_IMAGE_DRAWING", t => t.EXAM_IMAGE_DRAWING_ID, cascadeDelete: true, name: "FK_RL_EID_ID");
+
             CreateTable(
                 "dbo.HistoryRows",
                 c => new
@@ -169,7 +175,6 @@
                         ProductVersion = c.String(),
                     })
                 .PrimaryKey(t => new { t.MigrationId, t.ContextKey });
-
         }
 
         public override void Down()

@@ -187,7 +187,9 @@ namespace DMMDigital.Views
                 {
                     originalImagePath = Path.Combine(pathImages, $"{frame.order}_original.png");
 
-                    imagesInfo.Add(new ImageInfoExport(frame.orientation, originalImagePath, new Bitmap(frame.originalImage)));
+                    Bitmap img = new Bitmap(originalImagePath);
+
+                    imagesInfo.Add(new ImageInfoExport(frame.orientation, originalImagePath, img));
                 }
             }
 
@@ -199,7 +201,9 @@ namespace DMMDigital.Views
                 {
                     editedImagePath = Path.Combine(pathImages, $"{frame.order}_edited.png");
 
-                    imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, new Bitmap(frame.originalImage)));
+                    Bitmap img = new Bitmap(editedImagePath);
+
+                    imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, img));
                 }
             }
 
