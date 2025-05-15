@@ -158,6 +158,8 @@ namespace DMMDigital.Presenters
 
         private void getData_WIM()
         {
+            checkAndDeleteOldFiles();
+
             generateSQLFile_WIM();
 
             unzipFolders();
@@ -197,6 +199,23 @@ namespace DMMDigital.Presenters
             generateModels_WIM();
         }
 
+        private void checkAndDeleteOldFiles()
+        {
+            string migrationDataDir = @"C:\WIMDesktopDB\migration\data";
+
+            if (Directory.Exists(migrationDataDir))
+            {
+                Directory.Delete(migrationDataDir);
+            }
+
+            string scriptPath = Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql");
+
+            if (File.Exists(scriptPath))
+            {
+                File.Delete(scriptPath);
+            }
+        }
+
         private void generateSQLFile_WIM()
         {
             StringBuilder sb = new StringBuilder();
@@ -232,6 +251,11 @@ namespace DMMDigital.Presenters
 
         private void unzipFolders()
         {
+            if (Directory.Exists(Path.Combine(wimMigrationPath, "jdk-21.0.4")) && Directory.Exists(Path.Combine(wimMigrationPath, "h2")))
+            {
+                return;
+            }
+
             string jdkFolder = Path.Combine(wimMigrationPath, @"jdk-21_windows-x64_bin.zip");
             string h2Folder = Path.Combine(wimMigrationPath, @"h2-2019-10-14.zip");
 
@@ -243,21 +267,24 @@ namespace DMMDigital.Presenters
             if (File.Exists(h2Folder))
             {
                 ZipFile.ExtractToDirectory(h2Folder, wimMigrationPath);
-            }
-
+            }        
         }
 
         private void generateModels_WIM()
         {
-            migrationDatabaseView.settingsToImport = generateModel<SettingsModel, SettingsModelMap>(@"C:\WIMDesktopDB\migration\data\settings.csv").First();
+            string migrationDataPath = @"C:\WIMDesktopDB\migration\data";
+
+            Directory.CreateDirectory(migrationDataPath);
+
+            migrationDatabaseView.settingsToImport = generateModel<SettingsModel, SettingsModelMap>(Path.Combine(migrationDataPath, "settings.csv")).First();
 
             migrationDatabaseView.settingsToImport.drawingColor = convertHexToARGB(migrationDatabaseView.settingsToImport.drawingColor);
             migrationDatabaseView.settingsToImport.textColor = convertHexToARGB(migrationDatabaseView.settingsToImport.textColor);
             migrationDatabaseView.settingsToImport.rulerColor = convertHexToARGB(migrationDatabaseView.settingsToImport.rulerColor);
 
-            migrationDatabaseView.patients = generateModel<PatientModel, PatientModelMap>(@"C:\WIMDesktopDB\migration\data\patient.csv");
-            migrationDatabaseView.exams = generateModel<ExamModel, ExamModelMap>(@"C:\WIMDesktopDB\migration\data\exam.csv");
-            migrationDatabaseView.examImages = generateModel<ExamImageModel, ExamImageModelMap>(@"C:\WIMDesktopDB\migration\data\exam_image.csv");
+            migrationDatabaseView.patients = generateModel<PatientModel, PatientModelMap>(Path.Combine(migrationDataPath, "patient.csv"));
+            migrationDatabaseView.exams = generateModel<ExamModel, ExamModelMap>(Path.Combine(migrationDataPath, "exam.csv"));
+            migrationDatabaseView.examImages = generateModel<ExamImageModel, ExamImageModelMap>(Path.Combine(migrationDataPath, "exam_image.csv"));
         }
 
         public static List<T> generateModel<T, TMap>(string caminhoArquivoCsv)

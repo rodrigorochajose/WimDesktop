@@ -201,9 +201,12 @@ namespace DMMDigital.Views
                 {
                     editedImagePath = Path.Combine(pathImages, $"{frame.order}_edited.png");
 
-                    Bitmap img = new Bitmap(editedImagePath);
+                    if (File.Exists(editedImagePath))
+                    {
+                        Bitmap img = new Bitmap(editedImagePath);
 
-                    imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, img));
+                        imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, img));
+                    }
                 }
             }
 
