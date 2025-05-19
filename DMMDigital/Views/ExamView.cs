@@ -646,7 +646,7 @@ namespace DMMDigital.Views
                     {
                         float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
 
-                        if (scale > 1)
+                        if (scale > 0 && !float.IsInfinity(scale))
                         {
                             resizeDrawings(scale);
                         }
@@ -1558,6 +1558,8 @@ namespace DMMDigital.Views
         private void buttonZoomInClick(object sender, EventArgs e)
         {
             mainPictureBoxZoom(1.25f);
+
+            Console.WriteLine((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
 
             resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
         }

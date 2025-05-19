@@ -195,17 +195,17 @@ namespace DMMDigital.Views
 
             if (checkBoxExportEditedImage.Checked)
             {
-                string editedImagePath = "";
-
                 foreach (Frame frame in selectedFrames)
                 {
-                    editedImagePath = Path.Combine(pathImages, $"{frame.order}_edited.png");
+                    string editedImagePath = Path.Combine(pathImages, $"{frame.order}_edited.png");
+                    string filteredImagePath = Path.Combine(pathImages, $"{frame.order}_filtered.png");
 
-                    if (File.Exists(editedImagePath))
+                    string imagePathToUse = File.Exists(editedImagePath) ? editedImagePath : File.Exists(filteredImagePath) ? filteredImagePath : null;
+
+                    if (imagePathToUse != null)
                     {
-                        Bitmap img = new Bitmap(editedImagePath);
-
-                        imagesInfo.Add(new ImageInfoExport(frame.orientation, editedImagePath, img));
+                        Bitmap img = new Bitmap(imagePathToUse);
+                        imagesInfo.Add(new ImageInfoExport(frame.orientation, imagePathToUse, new Bitmap(img)));
                     }
                 }
             }
