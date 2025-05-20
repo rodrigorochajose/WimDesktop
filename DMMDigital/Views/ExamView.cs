@@ -1886,7 +1886,7 @@ namespace DMMDigital.Views
             }
             else if (e.Button == MouseButtons.Right)
             {
-                if (action == 2)
+                if (draw && action == 2)
                 {
                     completeMultiRuler();
                 }
