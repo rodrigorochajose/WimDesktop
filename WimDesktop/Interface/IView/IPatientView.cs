@@ -1,0 +1,27 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace WimDesktop.Interface.IView
+{
+    public interface IPatientView
+    {
+        string searchedValue { get; set; }
+        int selectedPatientId { get; set; }
+        string columnNameToOrder { get; set; }
+        bool isAsceding { get; set; }
+        bool checkBoxFromState { get; set; }
+        DateTime dateFrom { get; set; }
+        bool checkBoxToState { get; set; }
+        DateTime dateTo { get; set; }
+
+        event EventHandler eventSearchPatient;
+        event EventHandler eventNewPatient;
+        event EventHandler eventNewExam;
+        event EventHandler eventShowPatientExams;
+        event EventHandler eventOpenAllExams;
+        event EventHandler eventOrderDataGridView;
+
+
+        void setPatientList(BindingSource patientList);
+    }
+}

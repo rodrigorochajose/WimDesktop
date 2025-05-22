@@ -1,0 +1,94 @@
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace WimDesktop.Components
+{
+    public class Frame : PictureBox
+    {
+        public int id { get; set; }
+        public int order { get ; set; }
+        public int orientation { get; set; }
+        public Image originalImage { get; set; }
+        public Image filteredImage { get; set; }
+        public Image editedImage { get; set; }
+        public string datePhotoTook { get; set; }
+        public string notes { get; set; }
+        public bool resize { get; set; }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            Frame frame = this;
+
+            if (frame.Tag != null)
+            {
+                if ((Color)frame.Tag == Color.Black)
+                {
+                    ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, ButtonBorderStyle.None);
+                }
+                else
+                {
+                    ControlPaint.DrawBorder(e.Graphics, frame.ClientRectangle, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid, (Color)frame.Tag, 2, ButtonBorderStyle.Solid);
+                }
+            }
+
+            if (originalImage == null)
+            {
+                int orderFontSize;
+                int directionFontSize;
+                string direction = "";
+                PointF directionPoint;
+
+                if (Width > 35)
+                {
+                    orderFontSize = 20;
+                    directionFontSize = 12;
+                    directionPoint = new Point(frame.Width - 20, frame.Height - 20);
+                }
+                else
+                {
+                    orderFontSize = 10;
+                    directionFontSize = 6;
+                    directionPoint = new Point(frame.Width - 17, frame.Height - 12);
+                }
+
+                switch (frame.orientation)
+                {
+                    case 0:
+                        direction = "\u2191";
+                        directionPoint.X += 7;
+                        break;
+                    
+                    case 1:
+                        direction = "\u2193";
+                        directionPoint.X += 7;
+                        break;
+
+                    case 2:
+                        direction = "\u2190";
+                        break;
+
+
+                    case 3:
+                        direction = "\u2192";
+                        break;
+                }
+
+                e.Graphics.DrawString(frame.order.ToString(), new Font("TimesNewRoman", orderFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, new Point(0, 0));
+                e.Graphics.DrawString(direction, new Font("TimesNewRoman", directionFontSize, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.White, directionPoint);
+            }
+        }
+
+        public Frame CloneToExport()
+        {
+            return new Frame
+            {
+                order = this.order,
+                orientation = this.orientation,
+                Image = (Image)this.Image.Clone(),
+                originalImage = (Image)this.Image.Clone(),
+            };
+        }
+    }
+}

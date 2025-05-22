@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E30BDFA5-1D8D-462C-82E0-D8E6DFA8FFDA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WimDesktop</RootNamespace>
+    <AssemblyName>WimDesktop</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftps://waws-prod-yt1-079.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://wimdesktopco-cjbsbyfbgnaqhvef.canadacentral-01.azurewebsites.net/</InstallUrl>
+    <UpdateUrl>https://wimdesktopco-cjbsbyfbgnaqhvef.canadacentral-01.azurewebsites.net/</UpdateUrl>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon-96x96-transparent.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>BDBB6D840DB300EC657B54A2A5AA191CEB10B62A</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>DMMDigital_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\FrameTemplate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedButton.Designer.cs">
+      <DependentUpon>RoundedButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedComboBox.Designer.cs">
+      <DependentUpon>RoundedComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedDataGridView.Designer.cs">
+      <DependentUpon>RoundedDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedMaskedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedMaskedTextBox.Designer.cs">
+      <DependentUpon>RoundedMaskedTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedNumericUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedNumericUpDown.Designer.cs">
+      <DependentUpon>RoundedNumericUpDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedPanel.Designer.cs">
+      <DependentUpon>RoundedPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Rounded\RoundedTextBox.Designer.cs">
+      <DependentUpon>RoundedTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManager.cs" />
+    <Compile Include="Interface\IRepository\IClinicRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
+    <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
+    <Compile Include="Interface\IRepository\ISensorRepository.cs" />
+    <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
+    <Compile Include="Interface\IView\IClinicCreationView.cs" />
+    <Compile Include="Interface\IView\IFramesComparisonImportView.cs" />
+    <Compile Include="Interface\IView\ILoginView.cs" />
+    <Compile Include="Interface\IView\IMigrationDatabaseView.cs" />
+    <Compile Include="Interface\IView\IPatientExamView.cs" />
+    <Compile Include="Interface\IView\IPostProcessView.cs" />
+    <Compile Include="Interface\IView\IRecycleBinView.cs" />
+    <Compile Include="Interface\IView\ITemplateSwitchView.cs" />
+    <Compile Include="Migrations\202503271842251_Initial.cs" />
+    <Compile Include="Migrations\202503271842251_Initial.Designer.cs">
+      <DependentUpon>202503271842251_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ClinicModel.cs" />
+    <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
+    <Compile Include="Models\FrameDrawingHistory.cs" />
+    <Compile Include="Interface\IRepository\ISettingsRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageDrawingRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamImageRepository.cs" />
+    <Compile Include="Interface\IRepository\IExamRepository.cs" />
+    <Compile Include="Interface\IRepository\ITemplateLayoutRepository.cs" />
+    <Compile Include="Interface\IRepository\ITemplateRepository.cs" />
+    <Compile Include="Models\Detector.cs" />
+    <Compile Include="Interface\iRay\IEventReceiver.cs" />
+    <Compile Include="Models\Drawings\Ruler.cs" />
+    <Compile Include="Models\ExamImageDrawingModel.cs" />
+    <Compile Include="Models\RulerLengthModel.cs" />
+    <Compile Include="Models\SensorModel.cs" />
+    <Compile Include="Filters.cs" />
+    <Compile Include="Presenters\AdvancedSettingsPresenter.cs" />
+    <Compile Include="Presenters\ClinicPresenter.cs" />
+    <Compile Include="Presenters\ImportExamImagePresenter.cs" />
+    <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\MigrationDatabasePresenter.cs" />
+    <Compile Include="Presenters\PatientCreationPresenter.cs" />
+    <Compile Include="Presenters\PatientExamPresenter.cs" />
+    <Compile Include="Presenters\ExamTemplateSelectionPresenter.cs" />
+    <Compile Include="Presenters\ExamPatientSelectionPresenter.cs" />
+    <Compile Include="Presenters\TemplateCreationSetupPresenter.cs" />
+    <Compile Include="Presenters\ExamContainerPresenter.cs" />
+    <Compile Include="Presenters\ExamPresenter.cs" />
+    <Compile Include="Presenters\ExportExamPresenter.cs" />
+    <Compile Include="Presenters\TemplateCreationPresenter.cs" />
+    <Compile Include="Presenters\TemplatePresenter.cs" />
+    <Compile Include="Presenters\TemplateSwitchPresenter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.en-US.Designer.cs">
+      <DependentUpon>Resources.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\AdvancedSettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AdvancedSettingsView.Designer.cs">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClinicHandlerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ClinicHandlerView.Designer.cs">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoginView.Designer.cs">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MultiComparisonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MultiComparisonView.Designer.cs">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogAdvancedSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogAdvancedSettings.Designer.cs">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogGetTextToDraw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogGetTextToDraw.Designer.cs">
+      <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FramesComparisonImportView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FramesComparisonImportView.Designer.cs">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogMigration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogMigration.Designer.cs">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FramesComparisonSelectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FramesComparisonSelectionView.Designer.cs">
+      <DependentUpon>FramesComparisonSelectionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FramesComparisonView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FramesComparisonView.Designer.cs">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PatientExamView.Designer.cs">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecycleBinView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RecycleBinView.Designer.cs">
+      <DependentUpon>RecycleBinView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SettingsView.Designer.cs">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamModel.cs" />
+    <Compile Include="Models\ExamImageModel.cs" />
+    <Compile Include="Interface\IRepository\IPatientRepository.cs" />
+    <Compile Include="Presenters\Common\ModelDataValidation.cs" />
+    <Compile Include="Presenters\SettingsPresenter.cs" />
+    <Compile Include="Views\DialogRecalibrateRuler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogRecalibrateRuler.Designer.cs">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExportExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExportExamView.Designer.cs">
+      <DependentUpon>ExportExamView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilterView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FilterView.Designer.cs">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MigrationDatabaseView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MigrationDatabaseView.Designer.cs">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MultiSensorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MultiSensorDialog.Designer.cs">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PostProcessView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PostProcessView.Designer.cs">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IView\IFramesComparisonSelectionView.cs" />
+    <Compile Include="Interface\IView\IExamTemplateSelectionView.cs" />
+    <Compile Include="Interface\IView\ISettingsView.cs" />
+    <Compile Include="Interface\IView\IExamPatientSelectionView.cs" />
+    <Compile Include="Interface\IView\ITemplateCreationSetupView.cs" />
+    <Compile Include="Interface\IView\IExamContainerView.cs" />
+    <Compile Include="Interface\IView\IExamView.cs" />
+    <Compile Include="Interface\IView\IExportExamView.cs" />
+    <Compile Include="Interface\IView\IFilterView.cs" />
+    <Compile Include="Interface\IView\ITemplateCreationView.cs" />
+    <Compile Include="Interface\IView\ITemplateView.cs" />
+    <Compile Include="Views\PatientCreationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PatientCreationView.Designer.cs">
+      <DependentUpon>PatientCreationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateCreationSetupView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateCreationSetupView.Designer.cs">
+      <DependentUpon>TemplateCreationSetupView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExamView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExamView.Designer.cs">
+      <DependentUpon>ExamView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateCreationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateCreationView.Designer.cs">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Frame.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\ExamPatientSelectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExamPatientSelectionView.Designer.cs">
+      <DependentUpon>ExamPatientSelectionView.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interface\IView\IPatientCreationView.cs" />
+    <Compile Include="Views\MenuView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MenuView.Designer.cs">
+      <DependentUpon>MenuView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExamTemplateSelectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExamTemplateSelectionView.Designer.cs">
+      <DependentUpon>ExamTemplateSelectionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IDrawing.cs" />
+    <Compile Include="Interface\iRay\IRayAttrDef.cs" />
+    <Compile Include="Interface\iRay\IRayCmdDef.cs" />
+    <Compile Include="Interface\iRay\IRayDetFinder.cs" />
+    <Compile Include="Interface\iRay\IRayEnumDef.cs" />
+    <Compile Include="Interface\iRay\IRayErrDef.cs" />
+    <Compile Include="Interface\iRay\IRayEventDef.cs" />
+    <Compile Include="Interface\iRay\IRayFpdSys.cs" />
+    <Compile Include="Interface\iRay\IRayFpdSysEx.cs" />
+    <Compile Include="Interface\iRay\IRayImage.cs" />
+    <Compile Include="Interface\iRay\IRayVariant.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\Context.cs" />
+    <Compile Include="Models\Drawings\Ellipse.cs" />
+    <Compile Include="Models\Drawings\FreeDraw.cs" />
+    <Compile Include="Models\Drawings\RectangleDraw.cs" />
+    <Compile Include="Models\Drawings\Arrow.cs" />
+    <Compile Include="Models\Drawings\Text.cs" />
+    <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\TemplateModel.cs" />
+    <Compile Include="Models\TemplateFrameModel.cs" />
+    <Compile Include="Presenters\MenuPresenter.cs" />
+    <Compile Include="Presenters\PatientPresenter.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interface\IView\IMenuView.cs" />
+    <Compile Include="Interface\IView\IPatientView.cs" />
+    <Compile Include="Views\ExamContainerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ExamContainerView.Designer.cs">
+      <DependentUpon>ExamContainerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PatientView.Designer.cs">
+      <DependentUpon>PatientView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateSwitchView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateSwitchView.Designer.cs">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplateView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\TemplateView.Designer.cs">
+      <DependentUpon>TemplateView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_Repositories\ClinicRepository.cs" />
+    <Compile Include="_Repositories\SettingsRepository.cs" />
+    <Compile Include="_Repositories\ExamImageDrawingPointsRepository.cs" />
+    <Compile Include="_Repositories\ExamImageDrawingRepository.cs" />
+    <Compile Include="_Repositories\ExamImageRepository.cs" />
+    <Compile Include="_Repositories\ExamRepository.cs" />
+    <Compile Include="_Repositories\PatientRepository.cs" />
+    <Compile Include="_Repositories\RulerLengthRepository.cs" />
+    <Compile Include="_Repositories\SensorRepository.cs" />
+    <Compile Include="_Repositories\TemplateFrameRepository.cs" />
+    <Compile Include="_Repositories\TemplateRepository.cs" />
+    <EmbeddedResource Include="Components\Rounded\RoundedComboBox.resx">
+      <DependentUpon>RoundedComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Rounded\RoundedMaskedTextBox.resx">
+      <DependentUpon>RoundedMaskedTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Rounded\RoundedNumericUpDown.resx">
+      <DependentUpon>RoundedNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Rounded\RoundedTextBox.resx">
+      <DependentUpon>RoundedTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202503271842251_Initial.resx">
+      <DependentUpon>202503271842251_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AdvancedSettingsView.en-US.resx">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AdvancedSettingsView.resx">
+      <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicHandlerView.en-US.resx">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicHandlerView.resx">
+      <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonImportView.en-US.resx">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginView.en-US.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginView.resx">
+      <DependentUpon>LoginView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiComparisonView.en-US.resx">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiComparisonView.resx">
+      <DependentUpon>MultiComparisonView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogAdvancedSettings.en-US.resx">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogAdvancedSettings.resx">
+      <DependentUpon>DialogAdvancedSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogGetTextToDraw.en-US.resx">
+      <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogGetTextToDraw.resx">
+      <DependentUpon>DialogGetTextToDraw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonImportView.resx">
+      <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogMigration.en-US.resx">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogMigration.resx">
+      <DependentUpon>DialogMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonSelectionView.en-US.resx">
+      <DependentUpon>FramesComparisonSelectionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonSelectionView.resx">
+      <DependentUpon>FramesComparisonSelectionView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MenuView.en-US.resx">
+      <DependentUpon>MenuView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MigrationDatabaseView.en-US.resx">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MigrationDatabaseView.resx">
+      <DependentUpon>MigrationDatabaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientExamView.resx">
+      <DependentUpon>PatientExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamPatientSelectionView.en-US.resx">
+      <DependentUpon>ExamPatientSelectionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RecycleBinView.en-US.resx">
+      <DependentUpon>RecycleBinView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RecycleBinView.resx">
+      <DependentUpon>RecycleBinView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamTemplateSelectionView.en-US.resx">
+      <DependentUpon>ExamTemplateSelectionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonView.en-US.resx">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FramesComparisonView.resx">
+      <DependentUpon>FramesComparisonView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SettingsView.en-US.resx">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SettingsView.resx">
+      <DependentUpon>SettingsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiSensorDialog.en-US.resx">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateCreationSetupView.en-US.resx">
+      <DependentUpon>TemplateCreationSetupView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogRecalibrateRuler.en-US.resx">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogRecalibrateRuler.resx">
+      <DependentUpon>DialogRecalibrateRuler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamContainerView.en-US.resx">
+      <DependentUpon>ExamContainerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamView.en-US.resx">
+      <DependentUpon>ExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExportExamView.en-US.resx">
+      <DependentUpon>ExportExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExportExamView.resx">
+      <DependentUpon>ExportExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FilterView.en-US.resx">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FilterView.resx">
+      <DependentUpon>FilterView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MultiSensorDialog.resx">
+      <DependentUpon>MultiSensorDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientCreationView.en-US.resx">
+      <DependentUpon>PatientCreationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientView.en-US.resx">
+      <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PostProcessView.en-US.resx">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PostProcessView.resx">
+      <DependentUpon>PostProcessView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientCreationView.resx">
+      <DependentUpon>PatientCreationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateCreationSetupView.resx">
+      <DependentUpon>TemplateCreationSetupView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamView.resx">
+      <DependentUpon>ExamView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateCreationView.en-US.resx">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateCreationView.resx">
+      <DependentUpon>TemplateCreationView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MenuView.resx">
+      <DependentUpon>MenuView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamPatientSelectionView.resx">
+      <DependentUpon>ExamPatientSelectionView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamTemplateSelectionView.resx">
+      <DependentUpon>ExamTemplateSelectionView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ExamContainerView.resx">
+      <DependentUpon>ExamContainerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\PatientView.resx">
+      <DependentUpon>PatientView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateSwitchView.en-US.resx">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateSwitchView.resx">
+      <DependentUpon>TemplateSwitchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateView.en-US.resx">
+      <DependentUpon>TemplateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\TemplateView.resx">
+      <DependentUpon>TemplateView.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-pencil2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-green.png" />
+    <None Include="Resources\icon-32x32-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-autotake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-patients.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-rotate-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-rotate-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next">
+      <Version>4.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="CsvHelper">
+      <Version>33.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV">
+      <Version>4.9.0.5494</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.Bitmap">
+      <Version>4.9.0.5494</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.runtime.windows">
+      <Version>4.9.0.5494</Version>
+    </PackageReference>
+    <PackageReference Include="Emgu.CV.UI">
+      <Version>4.9.0.5494</Version>
+    </PackageReference>
+    <PackageReference Include="EntityFramework.Firebird">
+      <Version>10.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient">
+      <Version>10.3.2</Version>
+    </PackageReference>
+    <PackageReference Include="fo-dicom">
+      <Version>5.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="morelinq">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="Saraff.Twain">
+      <Version>1.0.33.756</Version>
+    </PackageReference>
+    <PackageReference Include="System.Drawing.Primitives">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.IO.Compression.ZipFile">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation">
+      <Version>4.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-compare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-cursor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-exposure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-text.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-ruler.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-96x96-transparent.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-16x16-trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-32x32-cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_32x32_open_exam.png" />
+    <None Include="Resources\icon-32x32-open-exam.png" />
+    <None Include="Resources\icon-32x32-xray-new.png" />
+    <None Include="Resources\icon-32x32-patients1.png" />
+    <None Include="Resources\icon_32x32_new_patient.png" />
+    <None Include="Resources\icon-16x16-zoom-out.png" />
+    <None Include="Resources\icon-16x16-zoom-in.png" />
+    <None Include="Resources\icon-16x16-original-size.png" />
+    <None Include="Resources\icon-16x16-fit.png" />
+    <None Include="Resources\icon-32x32-right-arrow.png" />
+    <None Include="Resources\icon-32x32-compare-side-by-side.png" />
+    <None Include="Resources\icon-32x32-compare-overlap.png" />
+    <None Include="Resources\icon-32x32-change-sides.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon-96x96-transparent.ico" />
+    <None Include="Resources\watermark.png" />
+    <None Include="Resources\logo-wim-96x96.png" />
+    <None Include="Resources\icon-96x96-transparent.png" />
+    <None Include="Resources\logo-wimdental-login.png" />
+    <None Include="Resources\icon_16x16_calendar_gray.png" />
+    <None Include="Resources\icon_16x16_calendar_silver.png" />
+    <None Include="Resources\whiteCalendar.png" />
+    <None Include="Resources\darkCalendar.png" />
+    <None Include="Resources\icon_32x32_recyclebin.png" />
+    <None Include="Resources\IMAGEMBG.png" />
+    <None Include="Resources\icon-32x32-autotake1.png" />
+    <None Include="Resources\grid.png" />
+    <None Include="Resources\icon_32x32_scanner.png" />
+    <None Include="Resources\icon-16x16-folder.png" />
+    <None Include="Resources\icon-32x32-capture.png" />
+    <None Include="Resources\1-original.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

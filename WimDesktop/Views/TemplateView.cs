@@ -1,0 +1,139 @@
+﻿using WimDesktop.Models;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
+using WimDesktop.Interface.IView;
+using WimDesktop.Components;
+
+namespace WimDesktop.Views
+{
+    public partial class TemplateView : Form, ITemplateView
+    {
+        public List<TemplateFrameModel> templateFrameList { get; set; }
+        public int selectedTemplateId { get; set; }
+
+        public event EventHandler showNewTemplateForm;
+        public event EventHandler eventDeleteTemplate;
+
+        public TemplateView()
+        {
+            InitializeComponent();
+            associateEvents();
+        }
+
+        private void associateEvents()
+        {
+            KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Escape)
+                {
+                    Close();
+                }
+            };
+
+            dataGridViewTemplate.CellContentClick += (s, e) =>
+            {
+                if (e.ColumnIndex == 1)
+                {
+                    eventDeleteTemplate?.Invoke(this, EventArgs.Empty);
+                }
+            };
+
+            buttonNewTemplate.Click += delegate
+            {
+                showNewTemplateForm?.Invoke(this, EventArgs.Empty);
+            };
+
+            panelShowTemplate.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
+            };
+        }
+
+        private void templateViewLoad(object sender, EventArgs e)
+        {
+            showTemplateOnPanel();
+
+            dataGridViewTemplate.CurrentCellChanged += (s, ev) =>
+            {
+                if (dataGridViewTemplate.CurrentCell != null)
+                {
+                    selectedTemplateId = int.Parse(dataGridViewTemplate.CurrentCell.OwningRow.Cells["id"].Value.ToString());
+                    showTemplateOnPanel();
+                }
+            };
+        }
+
+        public void setTemplateList(BindingSource templateList)
+        {
+            dataGridViewTemplate.DataSource = templateList;
+        }
+
+        public void templateDataGridViewHandler()
+        {
+            dataGridViewTemplate.Columns["id"].Visible = false;
+            columnDeleteTemplate.Frozen = true;
+            columnDeleteTemplate.Image = Properties.Resources.icon_32x32_delete;
+            columnDeleteTemplate.ImageLayout = DataGridViewImageCellLayout.Zoom;
+        }
+
+        private void showTemplateOnPanel()
+        {
+            clearTemplatePanel();
+
+            if (selectedTemplateId == 0)
+            {
+                selectedTemplateId = int.Parse(dataGridViewTemplate.CurrentCell.OwningRow.Cells["id"].Value.ToString());
+            }
+
+            List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == selectedTemplateId).ToList();
+
+            foreach (TemplateFrameModel frame in framesToShow)
+            {
+                int height;
+                int width;
+
+                if (frame.orientation < 2)
+                {
+                    height = 35;
+                    width = 25;
+                }
+                else
+                {
+                    height = 25;
+                    width = 35;
+                }
+
+                Frame newFrame = new Frame
+                {
+                    Width = width,
+                    Height = height,
+                    BackColor = Color.Black,
+                    orientation = frame.orientation,
+                    order = frame.order
+                };
+
+
+                Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
+                Graphics graphics = Graphics.FromImage(image);
+                newFrame.Image = image;
+                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
+
+                panelShowTemplate.Controls.Add(newFrame);
+            }
+        }
+
+        private void clearTemplatePanel()
+        {
+            List<Frame> framesOnPanel = panelShowTemplate.Controls.Cast<Frame>().ToList();
+
+            if (!framesOnPanel.Any()) return;
+            foreach (Frame pb in framesOnPanel)
+            {
+                panelShowTemplate.Controls.Remove(pb);
+            }
+        }
+    }
+}

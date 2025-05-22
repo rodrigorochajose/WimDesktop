@@ -1,0 +1,30 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Documents;
+
+namespace WimDesktop.Models
+{
+    [Table("TEMPLATE_FRAME")]
+    public class TemplateFrameModel
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("ID")]
+        public int id {  get; set; }
+
+        [Column("TEMPLATE_ID")]
+        public int templateId { get; set; }
+
+        [Column("ORDINATION")]
+        public int order { get; set; }
+
+        [Column("LOCATION_X")]
+        public int locationX { get; set; }
+
+        [Column("LOCATION_Y")]
+        public int locationY { get; set; }
+
+        [Column("ORIENTATION")]
+        public int orientation { get; set; }
+    }
+}

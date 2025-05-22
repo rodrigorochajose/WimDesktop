@@ -1,0 +1,15 @@
+﻿using WimDesktop.Models;
+using System.Collections.Generic;
+
+namespace WimDesktop.Interface.IRepository
+{
+    public interface IExamImageDrawingRepository
+    {
+        void save();
+        void addDrawing(ExamImageDrawingModel drawing);
+        void deleteRangeDrawing(List<ExamImageDrawingModel> drawings);
+        void deleteAllDrawings(int examId);
+        IEnumerable<ExamImageDrawingModel> getDrawings(int examId);
+        IEnumerable<ExamImageDrawingModel> getDrawingsByExamImage(int examId, int examImageId);
+    }
+}

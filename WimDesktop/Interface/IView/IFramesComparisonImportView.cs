@@ -1,0 +1,22 @@
+﻿using WimDesktop.Models;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace WimDesktop.Interface.IView
+{
+    public interface IFramesComparisonImportView
+    {
+        int patientId { get; set;  }
+        int examId { get; set; }
+        List<ExamModel> exams { get; set; }
+        List<string> imageFiles { get; set; }
+
+        event EventHandler eventGetExamImages;
+
+        void setExamList(BindingSource examList);
+
+        List<Image> getSelectedImages();
+    }
+}
