@@ -509,4 +509,7 @@
   <data name="messageImageNotFound" xml:space="preserve">
     <value>Image Not Found!</value>
   </data>
+  <data name="messageImageRegisteredNotFound" xml:space="preserve">
+    <value>Some images associated with this exam could not be found on the computer. Please contact support.</value>
+  </data>
 </root>

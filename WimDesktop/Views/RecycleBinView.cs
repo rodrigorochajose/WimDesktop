@@ -6,7 +6,6 @@ using System.Linq;
 using System;
 using MoreLinq;
 using WimDesktop.Interface.IView;
-using WimDesktop.Properties;
 
 namespace WimDesktop.Views
 {
@@ -62,7 +61,15 @@ namespace WimDesktop.Views
 
             foreach (var file in files)
             {
-                Bitmap bmp = new Bitmap(file.FullPath);
+                Bitmap bitmap;
+                
+                using (var fs = new FileStream(file.FullPath, FileMode.Open, FileAccess.Read))
+                {
+                    bitmap = new Bitmap(fs);
+                }
+
+                Bitmap bmp = new Bitmap(bitmap);
+                bitmap.Dispose();
 
                 Panel panel = new Panel
                 {
@@ -75,7 +82,8 @@ namespace WimDesktop.Views
                 {
                     SizeMode = PictureBoxSizeMode.Zoom,
                     Dock = DockStyle.Fill,
-                    Image = bmp
+                    Image = bmp,
+                    Tag = file.FullPath
                 };
 
                 pictureBox.Click += selectImage;
@@ -143,6 +151,8 @@ namespace WimDesktop.Views
         private void restoreImage()
         {
             PictureBox pb = selectedPanel.Controls.OfType<PictureBox>().First();
+
+            File.Delete(pb.Tag.ToString());
 
             imageToRestore = pb.Image;
 

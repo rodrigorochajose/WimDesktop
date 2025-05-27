@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftps://waws-prod-yt1-079.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
+    <PublishUrl>ftps://waws-prod-cq1-019.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,8 +26,11 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://wimdesktopco-cjbsbyfbgnaqhvef.canadacentral-01.azurewebsites.net/</InstallUrl>
-    <UpdateUrl>https://wimdesktopco-cjbsbyfbgnaqhvef.canadacentral-01.azurewebsites.net/</UpdateUrl>
-    <ApplicationRevision>0</ApplicationRevision>
+    <UpdateUrl>https://wimdesktopco-cjbsbyfbgnaqhvef.brazilsouth-01.azurewebsites.net/</UpdateUrl>
+    <ProductName>WimDesktop7.0</ProductName>
+    <PublisherName>DMM Health</PublisherName>
+    <SuiteName>WimDesktop</SuiteName>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

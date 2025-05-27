@@ -895,6 +895,15 @@ namespace WimDesktop.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Há imagens vinculadas a esse exame que não foram encontradas no computador. Contate o suporte !.
+        /// </summary>
+        internal static string messageImageRegisteredNotFound {
+            get {
+                return ResourceManager.GetString("messageImageRegisteredNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Importando os dados....
         /// </summary>
         internal static string messageImportData {

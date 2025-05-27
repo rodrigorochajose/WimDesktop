@@ -334,7 +334,7 @@ namespace WimDesktop.Views
                     }
                     else
                     {
-                        MessageBox.Show(Resources.messageImageNotFound);
+                        MessageBox.Show(Resources.messageImageRegisteredNotFound);
                     }
                 }
 
@@ -575,6 +575,21 @@ namespace WimDesktop.Views
             panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
         }
 
+        private bool checkOverwriteImage()
+        {
+            selectTool(buttonSelect);
+
+            if (frames[indexFrame].originalImage != null)
+            {
+                if (dialogOverwriteCurrentImage())
+                {
+                    restoreFrameDrawings();
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void frameClick(object sender, EventArgs e)
         {
             selectTool(buttonSelect);
@@ -593,6 +608,8 @@ namespace WimDesktop.Views
         {
             //if (acquireMode == "TWAIN")
             //{
+                if (!checkOverwriteImage()) return;
+
                 twainAutoTake = false;
                 eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
@@ -614,6 +631,11 @@ namespace WimDesktop.Views
             using (FileStream fs = File.Open(Path.Combine(examPath, $"{selectedFrame.order}_original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 image = Image.FromStream(fs);
+            }
+
+            if (selectedFrame.Image != null)
+            {
+                recycleCurrentImage();
             }
 
             frameHandler(image);
@@ -1070,6 +1092,8 @@ namespace WimDesktop.Views
         {
             //if (acquireMode == "TWAIN")
             //{
+                if (!checkOverwriteImage()) return;
+
                 twainAutoTake = true;
                 eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
@@ -1102,11 +1126,12 @@ namespace WimDesktop.Views
 
         private void buttonImportClick(object sender, EventArgs e)
         {
-            checkOverwriteImage();
+            if (!checkOverwriteImage()) return;
 
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
+                recycleCurrentImage();
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
                 importImage(new Bitmap(selectedImage));
             }
@@ -1137,36 +1162,38 @@ namespace WimDesktop.Views
 
         private void buttonRecycleBinClick(object sender, EventArgs e)
         {
-            if (!Directory.GetFiles(recyclePath).Any())
+            if (!Directory.EnumerateFiles(recyclePath).Any())
             {
                 MessageBox.Show(Resources.messageBinAlreadyEmpty);
                 return;
             }
 
-            checkOverwriteImage();
+            bool shouldRecycleCurrentImage = frames[indexFrame].originalImage != null && dialogOverwriteCurrentImage();
 
-            Form recycleBinView = new RecycleBinView(recyclePath);
-            DialogResult result = recycleBinView.ShowDialog();
-
-            if (result == DialogResult.OK)
+            if (frames[indexFrame].originalImage != null && !shouldRecycleCurrentImage)
             {
-                Image image = (recycleBinView as IRecycleBinView).imageToRestore;
-                importImage(new Bitmap(image));
+                return;
             }
-        }
 
-        private void checkOverwriteImage()
-        {
-            if (frames[indexFrame].originalImage != null)
+            using (Form recycleBinView = new RecycleBinView(recyclePath))
             {
-                if (dialogOverwriteCurrentImage() == false)
+                if (recycleBinView.ShowDialog() != DialogResult.OK)
                 {
                     return;
                 }
-                restoreFrameDrawings();
-            }
 
-            selectTool(buttonSelect);
+                if (shouldRecycleCurrentImage)
+                {
+                    recycleCurrentImage();
+                }
+
+                Image imageToRestore = (recycleBinView as IRecycleBinView)?.imageToRestore;
+
+                if (imageToRestore != null)
+                {
+                    importImage(new Bitmap(imageToRestore));
+                }
+            }
         }
 
         private void importImage(Bitmap img)
@@ -1208,23 +1235,7 @@ namespace WimDesktop.Views
 
                 selectTool(buttonSelect);
 
-                string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
-                string filteredImagePath = originalImagePath.Replace("original", "filtered");
-                string editedImagePath = originalImagePath.Replace("original", "edited");
-
-                string originalFileDestName = $"{selectedFrame.order}_original_{DateTime.Now:dd-MM-yyyy_HH-m-s}.png";
-
-                File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
-
-                if (File.Exists(filteredImagePath)) 
-                {
-                     File.Delete(filteredImagePath);
-                }
-
-                if (File.Exists(editedImagePath))
-                {
-                    File.Delete(editedImagePath);
-                }
+                recycleCurrentImage();
 
                 frameDrawingHistories[indexFrame].drawingHistory = new List<List<IDrawing>> { new List<IDrawing>() };
 
@@ -1249,6 +1260,27 @@ namespace WimDesktop.Views
                 provideTools(false);
 
                 examHasChanges = true;
+            }
+        }
+
+        private void recycleCurrentImage()
+        {
+            string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
+            string filteredImagePath = originalImagePath.Replace("original", "filtered");
+            string editedImagePath = originalImagePath.Replace("original", "edited");
+
+            string originalFileDestName = $"{selectedFrame.order}_original_{DateTime.Now:dd-MM-yyyy_HH-m-s}.png";
+
+            File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
+
+            if (File.Exists(filteredImagePath))
+            {
+                File.Delete(filteredImagePath);
+            }
+
+            if (File.Exists(editedImagePath))
+            {
+                File.Delete(editedImagePath);
             }
         }
 
@@ -1559,8 +1591,6 @@ namespace WimDesktop.Views
         {
             mainPictureBoxZoom(1.25f);
 
-            Console.WriteLine((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
-
             resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
         }
 
@@ -1618,7 +1648,7 @@ namespace WimDesktop.Views
         {
             multiRuler = (sender as CheckBox).Checked;
 
-            if (currentDrawing is Ruler)
+            if (draw && currentDrawing is Ruler)
             {
                 completeMultiRuler();
             }
