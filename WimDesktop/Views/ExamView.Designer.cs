@@ -69,8 +69,8 @@ namespace WimDesktop.Views
             this.buttonSelect = new System.Windows.Forms.ToolStripButton();
             this.buttonMagnifier = new System.Windows.Forms.ToolStripButton();
             this.buttonRuler = new System.Windows.Forms.ToolStripButton();
-            this.buttonUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonFreeDraw = new System.Windows.Forms.ToolStripButton();
             this.buttonText = new System.Windows.Forms.ToolStripButton();
@@ -294,6 +294,7 @@ namespace WimDesktop.Views
             this.buttonAcquireMode.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonAcquireMode.Name = "buttonAcquireMode";
             this.buttonAcquireMode.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonAcquireMode.Tag = "0";
             this.buttonAcquireMode.Click += new System.EventHandler(this.buttonAcquireModeClick);
             // 
             // buttonAutoTake
@@ -304,6 +305,7 @@ namespace WimDesktop.Views
             this.buttonAutoTake.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonAutoTake.Name = "buttonAutoTake";
             this.buttonAutoTake.Padding = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.buttonAutoTake.Tag = "0";
             this.buttonAutoTake.Click += new System.EventHandler(this.buttonAutoTakeClick);
             // 
             // toolStripSeparator2
@@ -319,6 +321,7 @@ namespace WimDesktop.Views
             this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonImport.Tag = "0";
             this.buttonImport.Click += new System.EventHandler(this.buttonImportClick);
             // 
             // buttonRecycleBin
@@ -329,7 +332,7 @@ namespace WimDesktop.Views
             this.buttonRecycleBin.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRecycleBin.Name = "buttonRecycleBin";
             this.buttonRecycleBin.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRecycleBin.Tag = "";
+            this.buttonRecycleBin.Tag = "0";
             this.buttonRecycleBin.Click += new System.EventHandler(this.buttonRecycleBinClick);
             // 
             // buttonExport
@@ -340,7 +343,7 @@ namespace WimDesktop.Views
             this.buttonExport.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonExport.Tag = "";
+            this.buttonExport.Tag = "0";
             this.buttonExport.Click += new System.EventHandler(this.buttonExportClick);
             // 
             // toolStripSeparator3
@@ -356,7 +359,7 @@ namespace WimDesktop.Views
             this.buttonDeleteImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonDeleteImage.Name = "buttonDeleteImage";
             this.buttonDeleteImage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonDeleteImage.Tag = "stateChangeable";
+            this.buttonDeleteImage.Tag = "0";
             this.buttonDeleteImage.Click += new System.EventHandler(this.buttonDeleteClick);
             // 
             // buttonCompareFrame
@@ -367,7 +370,7 @@ namespace WimDesktop.Views
             this.buttonCompareFrame.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonCompareFrame.Name = "buttonCompareFrame";
             this.buttonCompareFrame.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonCompareFrame.Tag = "stateChangeable";
+            this.buttonCompareFrame.Tag = "0";
             this.buttonCompareFrame.Click += new System.EventHandler(this.buttonCompareFrameClick);
             // 
             // toolStripSeparator4
@@ -383,7 +386,7 @@ namespace WimDesktop.Views
             this.buttonMoveDrawing.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonMoveDrawing.Name = "buttonMoveDrawing";
             this.buttonMoveDrawing.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonMoveDrawing.Tag = "stateChangeable";
+            this.buttonMoveDrawing.Tag = "1";
             this.buttonMoveDrawing.Click += new System.EventHandler(this.buttonMoveDrawingClick);
             // 
             // buttonSelect
@@ -394,7 +397,7 @@ namespace WimDesktop.Views
             this.buttonSelect.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonSelect.Tag = "stateChangeable";
+            this.buttonSelect.Tag = "0";
             this.buttonSelect.Click += new System.EventHandler(this.buttonSelectClick);
             // 
             // buttonMagnifier
@@ -405,7 +408,7 @@ namespace WimDesktop.Views
             this.buttonMagnifier.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonMagnifier.Name = "buttonMagnifier";
             this.buttonMagnifier.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonMagnifier.Tag = "stateChangeable";
+            this.buttonMagnifier.Tag = "8";
             this.buttonMagnifier.Click += new System.EventHandler(this.buttonMagnifierClick);
             // 
             // buttonRuler
@@ -416,19 +419,8 @@ namespace WimDesktop.Views
             this.buttonRuler.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRuler.Name = "buttonRuler";
             this.buttonRuler.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRuler.Tag = "stateChangeable";
+            this.buttonRuler.Tag = "2";
             this.buttonRuler.Click += new System.EventHandler(this.buttonRulerClick);
-            // 
-            // buttonUndo
-            // 
-            this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(this.buttonUndo, "buttonUndo");
-            this.buttonUndo.Image = global::WimDesktop.Properties.Resources.icon_32x32_undo;
-            this.buttonUndo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.buttonUndo.Name = "buttonUndo";
-            this.buttonUndo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonUndo.Tag = "stateChangeable";
-            this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
             // buttonFilter
             // 
@@ -438,8 +430,19 @@ namespace WimDesktop.Views
             this.buttonFilter.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFilter.Tag = "stateChangeable";
+            this.buttonFilter.Tag = "0";
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilterClick);
+            // 
+            // buttonUndo
+            // 
+            this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(this.buttonUndo, "buttonUndo");
+            this.buttonUndo.Image = global::WimDesktop.Properties.Resources.icon_32x32_undo;
+            this.buttonUndo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.buttonUndo.Tag = "0";
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndoClick);
             // 
             // buttonRedo
             // 
@@ -449,7 +452,7 @@ namespace WimDesktop.Views
             this.buttonRedo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRedo.Name = "buttonRedo";
             this.buttonRedo.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRedo.Tag = "stateChangeable";
+            this.buttonRedo.Tag = "0";
             this.buttonRedo.Click += new System.EventHandler(this.buttonRedoClick);
             // 
             // buttonFreeDraw
@@ -460,7 +463,7 @@ namespace WimDesktop.Views
             this.buttonFreeDraw.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonFreeDraw.Name = "buttonFreeDraw";
             this.buttonFreeDraw.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonFreeDraw.Tag = "stateChangeable";
+            this.buttonFreeDraw.Tag = "3";
             this.buttonFreeDraw.Click += new System.EventHandler(this.buttonFreeDrawClick);
             // 
             // buttonText
@@ -471,7 +474,7 @@ namespace WimDesktop.Views
             this.buttonText.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonText.Name = "buttonText";
             this.buttonText.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonText.Tag = "stateChangeable";
+            this.buttonText.Tag = "4";
             this.buttonText.Click += new System.EventHandler(this.buttonTextClick);
             // 
             // buttonArrow
@@ -482,7 +485,7 @@ namespace WimDesktop.Views
             this.buttonArrow.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonArrow.Name = "buttonArrow";
             this.buttonArrow.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonArrow.Tag = "stateChangeable";
+            this.buttonArrow.Tag = "5";
             this.buttonArrow.Click += new System.EventHandler(this.buttonArrowClick);
             // 
             // buttonRectangle
@@ -493,7 +496,7 @@ namespace WimDesktop.Views
             this.buttonRectangle.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRectangle.Name = "buttonRectangle";
             this.buttonRectangle.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRectangle.Tag = "stateChangeable";
+            this.buttonRectangle.Tag = "7";
             this.buttonRectangle.Click += new System.EventHandler(this.buttonRectangleDrawClick);
             // 
             // buttonEllipse
@@ -504,7 +507,7 @@ namespace WimDesktop.Views
             this.buttonEllipse.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonEllipse.Name = "buttonEllipse";
             this.buttonEllipse.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonEllipse.Tag = "stateChangeable";
+            this.buttonEllipse.Tag = "6";
             this.buttonEllipse.Click += new System.EventHandler(this.buttonEllipseClick);
             // 
             // buttonRotateLeft
@@ -515,7 +518,7 @@ namespace WimDesktop.Views
             this.buttonRotateLeft.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRotateLeft.Name = "buttonRotateLeft";
             this.buttonRotateLeft.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRotateLeft.Tag = "stateChangeable";
+            this.buttonRotateLeft.Tag = "0";
             this.buttonRotateLeft.Click += new System.EventHandler(this.buttonRotateLeftClick);
             // 
             // buttonRotateRight
@@ -526,7 +529,7 @@ namespace WimDesktop.Views
             this.buttonRotateRight.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRotateRight.Name = "buttonRotateRight";
             this.buttonRotateRight.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRotateRight.Tag = "stateChangeable";
+            this.buttonRotateRight.Tag = "0";
             this.buttonRotateRight.Click += new System.EventHandler(this.buttonRotateRightClick);
             // 
             // buttonRestoreImage
@@ -537,7 +540,7 @@ namespace WimDesktop.Views
             this.buttonRestoreImage.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.buttonRestoreImage.Name = "buttonRestoreImage";
             this.buttonRestoreImage.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.buttonRestoreImage.Tag = "stateChangeable";
+            this.buttonRestoreImage.Tag = "0";
             this.buttonRestoreImage.Click += new System.EventHandler(this.buttonRestoreImageClick);
             // 
             // toolStripSeparator5
@@ -552,6 +555,7 @@ namespace WimDesktop.Views
             this.buttonFitZoom.Image = global::WimDesktop.Properties.Resources.icon_16x16_fit;
             this.buttonFitZoom.Margin = new System.Windows.Forms.Padding(10, 0, 0, 2);
             this.buttonFitZoom.Name = "buttonFitZoom";
+            this.buttonFitZoom.Tag = "0";
             this.buttonFitZoom.Click += new System.EventHandler(this.buttonFitZoomClick);
             // 
             // buttonZoomOut
@@ -561,6 +565,7 @@ namespace WimDesktop.Views
             this.buttonZoomOut.Image = global::WimDesktop.Properties.Resources.icon_16x16_zoom_out;
             this.buttonZoomOut.Margin = new System.Windows.Forms.Padding(10, 0, 3, 2);
             this.buttonZoomOut.Name = "buttonZoomOut";
+            this.buttonZoomOut.Tag = "0";
             this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOutClick);
             // 
             // buttonZoomSquare
@@ -570,6 +575,7 @@ namespace WimDesktop.Views
             this.buttonZoomSquare.Image = global::WimDesktop.Properties.Resources.icon_16x16_original_size;
             this.buttonZoomSquare.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.buttonZoomSquare.Name = "buttonZoomSquare";
+            this.buttonZoomSquare.Tag = "0";
             this.buttonZoomSquare.Click += new System.EventHandler(this.buttonZoomSquareClick);
             // 
             // buttonZoomIn
@@ -579,6 +585,7 @@ namespace WimDesktop.Views
             this.buttonZoomIn.Image = global::WimDesktop.Properties.Resources.icon_16x16_zoom_in;
             this.buttonZoomIn.Margin = new System.Windows.Forms.Padding(3, 0, 3, 2);
             this.buttonZoomIn.Name = "buttonZoomIn";
+            this.buttonZoomIn.Tag = "0";
             this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomInClick);
             // 
             // dialogFileImage

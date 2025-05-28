@@ -147,6 +147,171 @@
   <data name="panelDetails.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="&gt;&gt;labelImageDate.Name" xml:space="preserve">
+    <value>labelImageDate</value>
+  </data>
+  <data name="&gt;&gt;labelImageDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelImageDate.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelImageDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBoxFrameNotes.Name" xml:space="preserve">
+    <value>textBoxFrameNotes</value>
+  </data>
+  <data name="&gt;&gt;textBoxFrameNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxFrameNotes.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;textBoxFrameNotes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelNotes.Name" xml:space="preserve">
+    <value>labelNotes</value>
+  </data>
+  <data name="&gt;&gt;labelNotes.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelNotes.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelNotes.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;labelImageData.Name" xml:space="preserve">
+    <value>labelImageData</value>
+  </data>
+  <data name="&gt;&gt;labelImageData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelImageData.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelImageData.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Name" xml:space="preserve">
+    <value>flowLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;panelAnnotation.Name" xml:space="preserve">
+    <value>panelAnnotation</value>
+  </data>
+  <data name="&gt;&gt;panelAnnotation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelAnnotation.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;panelAnnotation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Name" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;panelToolOptions.Name" xml:space="preserve">
+    <value>panelToolOptions</value>
+  </data>
+  <data name="&gt;&gt;panelToolOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelToolOptions.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;panelToolOptions.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;labelTemplate.Name" xml:space="preserve">
+    <value>labelTemplate</value>
+  </data>
+  <data name="&gt;&gt;labelTemplate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTemplate.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelTemplate.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;labelPatient.Name" xml:space="preserve">
+    <value>labelPatient</value>
+  </data>
+  <data name="&gt;&gt;labelPatient.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPatient.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelPatient.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;labelTemplateName.Name" xml:space="preserve">
+    <value>labelTemplateName</value>
+  </data>
+  <data name="&gt;&gt;labelTemplateName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTemplateName.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelTemplateName.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;labelPatientName.Name" xml:space="preserve">
+    <value>labelPatientName</value>
+  </data>
+  <data name="&gt;&gt;labelPatientName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPatientName.Parent" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;labelPatientName.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="panelDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 50</value>
+  </data>
+  <data name="panelDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>363, 619</value>
+  </data>
+  <data name="panelDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelDetails.Name" xml:space="preserve">
+    <value>panelDetails</value>
+  </data>
+  <data name="&gt;&gt;panelDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelDetails.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelDetails.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="labelImageDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -297,24 +462,6 @@
   <data name="&gt;&gt;flowLayoutPanel1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="labelAnnotations.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelAnnotations.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 12pt</value>
-  </data>
-  <data name="labelAnnotations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 5</value>
-  </data>
-  <data name="labelAnnotations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 21</value>
-  </data>
-  <data name="labelAnnotations.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="labelAnnotations.Text" xml:space="preserve">
-    <value>Anotações</value>
-  </data>
   <data name="&gt;&gt;labelAnnotations.Name" xml:space="preserve">
     <value>labelAnnotations</value>
   </data>
@@ -348,23 +495,35 @@
   <data name="&gt;&gt;panelAnnotation.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="labelToolOptions.AutoSize" type="System.Boolean, mscorlib">
+  <data name="labelAnnotations.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="labelToolOptions.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="labelAnnotations.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
-  <data name="labelToolOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 4</value>
+  <data name="labelAnnotations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 5</value>
   </data>
-  <data name="labelToolOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 21</value>
+  <data name="labelAnnotations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 21</value>
   </data>
-  <data name="labelToolOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="labelAnnotations.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="labelToolOptions.Text" xml:space="preserve">
-    <value>Opções da Ferramenta</value>
+  <data name="labelAnnotations.Text" xml:space="preserve">
+    <value>Anotações</value>
+  </data>
+  <data name="&gt;&gt;labelAnnotations.Name" xml:space="preserve">
+    <value>labelAnnotations</value>
+  </data>
+  <data name="&gt;&gt;labelAnnotations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelAnnotations.Parent" xml:space="preserve">
+    <value>panelAnnotation</value>
+  </data>
+  <data name="&gt;&gt;labelAnnotations.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;labelToolOptions.Name" xml:space="preserve">
     <value>labelToolOptions</value>
@@ -398,6 +557,36 @@
   </data>
   <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="labelToolOptions.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelToolOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 12pt</value>
+  </data>
+  <data name="labelToolOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 4</value>
+  </data>
+  <data name="labelToolOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 21</value>
+  </data>
+  <data name="labelToolOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="labelToolOptions.Text" xml:space="preserve">
+    <value>Opções da Ferramenta</value>
+  </data>
+  <data name="&gt;&gt;labelToolOptions.Name" xml:space="preserve">
+    <value>labelToolOptions</value>
+  </data>
+  <data name="&gt;&gt;labelToolOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelToolOptions.Parent" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;labelToolOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="panelToolOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 418</value>
@@ -549,27 +738,6 @@
   <data name="&gt;&gt;labelPatientName.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="panelDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 50</value>
-  </data>
-  <data name="panelDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 619</value>
-  </data>
-  <data name="panelDetails.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;panelDetails.Name" xml:space="preserve">
-    <value>panelDetails</value>
-  </data>
-  <data name="&gt;&gt;panelDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelDetails.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelDetails.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>241, 25</value>
   </metadata>
@@ -578,24 +746,6 @@
   </data>
   <data name="toolStrip.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="buttonOpenExam.Text" xml:space="preserve">
-    <value>Abrir Exame</value>
-  </data>
-  <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="buttonNewExam.Text" xml:space="preserve">
-    <value>Novo Exame</value>
-  </data>
-  <data name="buttonCloseExam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="buttonCloseExam.Text" xml:space="preserve">
-    <value>Fechar Exame</value>
   </data>
   <data name="toolStripDropDownButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1130,6 +1280,24 @@
   </data>
   <data name="&gt;&gt;panelTools.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="buttonOpenExam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="buttonOpenExam.Text" xml:space="preserve">
+    <value>Abrir Exame</value>
+  </data>
+  <data name="buttonNewExam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="buttonNewExam.Text" xml:space="preserve">
+    <value>Novo Exame</value>
+  </data>
+  <data name="buttonCloseExam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="buttonCloseExam.Text" xml:space="preserve">
+    <value>Fechar Exame</value>
   </data>
   <metadata name="dialogFileImage.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -1962,16 +2130,16 @@
   <data name="&gt;&gt;buttonRuler.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;buttonUndo.Name" xml:space="preserve">
-    <value>buttonUndo</value>
-  </data>
-  <data name="&gt;&gt;buttonUndo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;buttonFilter.Name" xml:space="preserve">
     <value>buttonFilter</value>
   </data>
   <data name="&gt;&gt;buttonFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonUndo.Name" xml:space="preserve">
+    <value>buttonUndo</value>
+  </data>
+  <data name="&gt;&gt;buttonUndo.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonRedo.Name" xml:space="preserve">

@@ -41,6 +41,12 @@ namespace WimDesktop.Views
                 }
             };
 
+            buttonCancel.Click += delegate
+            {
+                Close();
+                DialogResult = DialogResult.Cancel;
+            };
+
             buttonRestoreImage.Click += delegate { restoreImage(); };
         }
 

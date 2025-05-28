@@ -10,6 +10,7 @@ using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace WimDesktop
 {
@@ -150,6 +151,17 @@ namespace WimDesktop
             IMenuView menuView = new MenuView();
             new MenuPresenter(menuView);
             Application.Run((Form)menuView);
+
+            setupAutoUpdate();
+        }
+
+        static void setupAutoUpdate()
+        {
+            AutoUpdater.ShowRemindLaterButton = false;
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.Mandatory = false;
+
+            AutoUpdater.Start("https://wimdesktop.z15.web.core.windows.net/wimdesktopupdate.xml");
         }
     }
 }

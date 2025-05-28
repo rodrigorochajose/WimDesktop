@@ -103,6 +103,8 @@ namespace WimDesktop.Views
 
             Load += delegate
             {
+                toolStrip.Renderer = new CustomToolStripRenderer();
+
                 associateSettings();
 
                 drawTemplate();
@@ -127,6 +129,8 @@ namespace WimDesktop.Views
 
             Load += delegate
             {
+                toolStrip.Renderer = new CustomToolStripRenderer();
+
                 drawTemplate();
 
                 selectInitialFrame();
@@ -579,15 +583,14 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
-            if (frames[indexFrame].originalImage != null)
+            bool overwrite = dialogOverwriteCurrentImage();
+
+            if (overwrite)
             {
-                if (dialogOverwriteCurrentImage())
-                {
-                    restoreFrameDrawings();
-                    return true;
-                }
+                restoreFrameDrawings();
             }
-            return false;
+
+            return overwrite;
         }
 
         private void frameClick(object sender, EventArgs e)
@@ -687,7 +690,12 @@ namespace WimDesktop.Views
 
         private void selectTool(object sender)
         {
-            ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => (string)b.Tag == "selected");
+            action = int.Parse((sender as ToolStripButton).Tag.ToString());
+
+            loadToolOptions();
+
+            ToolStripButton selectedButton = toolStrip.Items.OfType<ToolStripButton>().SingleOrDefault(b => b.Checked);
+
             if (selectedButton != null)
             {
                 if (selectedButton.Name == "buttonMagnifier")
@@ -699,16 +707,19 @@ namespace WimDesktop.Views
                 {
                     multiRuler = false;
                 }
-                selectedButton.BackColor = Color.WhiteSmoke;
-                selectedButton.Tag = "selectable";
+
+                selectedButton.Checked = false;
             }
-            (sender as ToolStripButton).BackColor = Color.LightGray;
-            (sender as ToolStripButton).Tag = "selected";
+
+            (sender as ToolStripButton).Checked = true;
         }
 
         private void loadToolOptions()
         {
             panelToolOptions.Controls.Clear();
+
+            if (action == 0) return;
+
             switch (action)
             {
                 case 2:
@@ -1092,6 +1103,8 @@ namespace WimDesktop.Views
         {
             //if (acquireMode == "TWAIN")
             //{
+                selectTool(buttonSelect);
+
                 if (!checkOverwriteImage()) return;
 
                 twainAutoTake = true;
@@ -1101,6 +1114,8 @@ namespace WimDesktop.Views
 
         private void buttonNewExamClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
             eventGetPatient?.Invoke(this, e);
 
@@ -1116,84 +1131,16 @@ namespace WimDesktop.Views
 
         private void buttonOpenExamClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             FormManager.instance.openForm<PatientView>(() => new PatientPresenter(new PatientView()));
         }
 
         private void buttonCloseExamClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             eventCloseSingleExam?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void buttonImportClick(object sender, EventArgs e)
-        {
-            if (!checkOverwriteImage()) return;
-
-            DialogResult result = dialogFileImage.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                recycleCurrentImage();
-                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-                importImage(new Bitmap(selectedImage));
-            }
-        }
-
-        private void buttonExportClick(object sender, EventArgs e)
-        {
-            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).Select(f => f.CloneToExport()).ToList();
-
-            if (!framesWithImages.Any())
-            {
-                MessageBox.Show(Resources.messageExamCannotExport);
-                return;
-            }
-
-            generateEditedImage();
-
-            new ExportExamPresenter(
-                new ExportExamView
-                {
-                    pathImages = examPath,
-                    framesToExport = framesWithImages,
-                    patientName = patient.name
-                },
-                exam.id
-            );
-        }
-
-        private void buttonRecycleBinClick(object sender, EventArgs e)
-        {
-            if (!Directory.EnumerateFiles(recyclePath).Any())
-            {
-                MessageBox.Show(Resources.messageBinAlreadyEmpty);
-                return;
-            }
-
-            bool shouldRecycleCurrentImage = frames[indexFrame].originalImage != null && dialogOverwriteCurrentImage();
-
-            if (frames[indexFrame].originalImage != null && !shouldRecycleCurrentImage)
-            {
-                return;
-            }
-
-            using (Form recycleBinView = new RecycleBinView(recyclePath))
-            {
-                if (recycleBinView.ShowDialog() != DialogResult.OK)
-                {
-                    return;
-                }
-
-                if (shouldRecycleCurrentImage)
-                {
-                    recycleCurrentImage();
-                }
-
-                Image imageToRestore = (recycleBinView as IRecycleBinView)?.imageToRestore;
-
-                if (imageToRestore != null)
-                {
-                    importImage(new Bitmap(imageToRestore));
-                }
-            }
         }
 
         private void importImage(Bitmap img)
@@ -1226,14 +1173,132 @@ namespace WimDesktop.Views
             examHasChanges = true;
         }
 
+        private void buttonImportClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            bool hasImage = frames[indexFrame].originalImage != null ? true : false;
+            bool confirmOverwrite = true;
+
+            if (hasImage)
+            {
+                confirmOverwrite = checkOverwriteImage();
+            }
+
+            if (!confirmOverwrite)
+            {
+                return;
+            }
+
+            DialogResult result = dialogFileImage.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (hasImage && confirmOverwrite)
+                {
+                    recycleCurrentImage();
+                }
+
+                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
+                importImage(new Bitmap(selectedImage));
+            }
+        }
+
+        private void recycleCurrentImage()
+        {
+            string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
+            string filteredImagePath = originalImagePath.Replace("original", "filtered");
+            string editedImagePath = originalImagePath.Replace("original", "edited");
+
+            string originalFileDestName = $"{selectedFrame.order}_original_{DateTime.Now:dd-MM-yyyy_HH-m-s}.png";
+
+            File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
+
+            if (File.Exists(filteredImagePath))
+            {
+                File.Delete(filteredImagePath);
+            }
+
+            if (File.Exists(editedImagePath))
+            {
+                File.Delete(editedImagePath);
+            }
+        }
+
+        private void buttonRecycleBinClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            if (!Directory.EnumerateFiles(recyclePath).Any())
+            {
+                MessageBox.Show(Resources.messageBinAlreadyEmpty);
+                return;
+            }
+
+            bool hasImage = frames[indexFrame].originalImage != null ? true : false;
+            bool confirmOverwrite = true;
+
+            if (hasImage)
+            {
+                confirmOverwrite = checkOverwriteImage();
+            }
+
+            if (!confirmOverwrite)
+            {
+                return;
+            }
+
+            using (Form recycleBinView = new RecycleBinView(recyclePath))
+            {
+                if (recycleBinView.ShowDialog() == DialogResult.OK)
+                {
+                    if (hasImage && confirmOverwrite)
+                    {
+                        recycleCurrentImage();
+                    }
+
+                    Image imageToRestore = (recycleBinView as IRecycleBinView)?.imageToRestore;
+
+                    if (imageToRestore != null)
+                    {
+                        importImage(new Bitmap(imageToRestore));
+                    }
+                }
+            }
+        }
+
+        private void buttonExportClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).Select(f => f.CloneToExport()).ToList();
+
+            if (!framesWithImages.Any())
+            {
+                MessageBox.Show(Resources.messageExamCannotExport);
+                return;
+            }
+
+            generateEditedImage();
+
+            new ExportExamPresenter(
+                new ExportExamView
+                {
+                    pathImages = examPath,
+                    framesToExport = framesWithImages,
+                    patientName = patient.name
+                },
+                exam.id
+            );
+        }
+
         private void buttonDeleteClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             if (selectedFrame.originalImage != null)
             {
                 DialogResult result = MessageBox.Show(Resources.messageImageConfirmDelete, Resources.titleImageDelete, MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) { return; }
-
-                selectTool(buttonSelect);
 
                 recycleCurrentImage();
 
@@ -1263,29 +1328,10 @@ namespace WimDesktop.Views
             }
         }
 
-        private void recycleCurrentImage()
-        {
-            string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
-            string filteredImagePath = originalImagePath.Replace("original", "filtered");
-            string editedImagePath = originalImagePath.Replace("original", "edited");
-
-            string originalFileDestName = $"{selectedFrame.order}_original_{DateTime.Now:dd-MM-yyyy_HH-m-s}.png";
-
-            File.Move(originalImagePath, Path.Combine(recyclePath, originalFileDestName));
-
-            if (File.Exists(filteredImagePath))
-            {
-                File.Delete(filteredImagePath);
-            }
-
-            if (File.Exists(editedImagePath))
-            {
-                File.Delete(editedImagePath);
-            }
-        }
-
         private void buttonCompareFrameClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
             IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patient.id);
@@ -1294,22 +1340,16 @@ namespace WimDesktop.Views
 
         private void buttonSelectClick(object sender, EventArgs e)
         {
-            action = 0;
             selectTool(sender);
-            panelToolOptions.Controls.Clear();
         }
 
         private void buttonMoveDrawingClick(object sender, EventArgs e)
         {
-            action = 1;
             selectTool(sender);
-            panelToolOptions.Controls.Clear();
         }
 
         private void buttonMagnifierClick(object sender, EventArgs e)
         {
-            action = 8;
-            loadToolOptions();
             selectTool(sender);
 
             pictureBoxMagnifier = new PictureBox
@@ -1343,38 +1383,12 @@ namespace WimDesktop.Views
 
         private void buttonRulerClick(object sender, EventArgs e)
         {
-            action = 2;
-            loadToolOptions();
             selectTool(sender);
-        }
-
-        private void buttonUndoClick(object sender, EventArgs e)
-        {
-            if (indexSelectedDrawingHistory - 1 > -1)
-            {
-                indexSelectedDrawingHistory--;
-                mainPictureBox.Invalidate();
-                selectedDrawingHistoryHandler();
-
-                examHasChanges = true;
-            }
-        }
-
-        private void buttonRedoClick(object sender, EventArgs e)
-        {
-            if (indexSelectedDrawingHistory + 1 < selectedDrawingHistory.Count)
-            {
-                indexSelectedDrawingHistory++;
-                mainPictureBox.Invalidate();
-                selectedDrawingHistoryHandler();
-
-                examHasChanges = true;
-            }
         }
 
         private void buttonFilterClick(object sender, EventArgs e)
         {
-            selectTool(sender);
+            selectTool(buttonSelect);
 
             string imagePath = Path.Combine(examPath, $"{selectedFrame.order}_filtered.png");
 
@@ -1398,61 +1412,62 @@ namespace WimDesktop.Views
                 }));
 
                 mainPictureBox.Image = bit;
-                
+
+                examHasChanges = true;
+            }
+        }
+
+        private void buttonUndoClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            if (indexSelectedDrawingHistory - 1 > -1)
+            {
+                indexSelectedDrawingHistory--;
+                mainPictureBox.Invalidate();
+                selectedDrawingHistoryHandler();
+
+                examHasChanges = true;
+            }
+        }
+
+        private void buttonRedoClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            if (indexSelectedDrawingHistory + 1 < selectedDrawingHistory.Count)
+            {
+                indexSelectedDrawingHistory++;
+                mainPictureBox.Invalidate();
+                selectedDrawingHistoryHandler();
+
                 examHasChanges = true;
             }
         }
 
         private void buttonFreeDrawClick(object sender, EventArgs e)
         {
-            action = 3;
-            loadToolOptions();
             selectTool(sender);
         }
 
         private void buttonTextClick(object sender, EventArgs e)
         {
-            action = 4;
-            loadToolOptions();
             selectTool(sender);
         }
 
         private void buttonArrowClick(object sender, EventArgs e)
         {
-            action = 5;
-            loadToolOptions();
-            selectTool(sender);
-        }
-
-        private void buttonEllipseClick(object sender, EventArgs e)
-        {
-            action = 6;
-            loadToolOptions();
             selectTool(sender);
         }
 
         private void buttonRectangleDrawClick(object sender, EventArgs e)
         {
-            action = 7;
-            loadToolOptions();
             selectTool(sender);
         }
 
-        private void buttonRotateLeftClick(object sender, EventArgs e)
+        private void buttonEllipseClick(object sender, EventArgs e)
         {
-            SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
-            string rotationDirection = "left";
-            rotateImage(rotationDirection);
-            examHasChanges = true;
-        }
-
-        private void buttonRotateRightClick(object sender, EventArgs e)
-        {
-            SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
-            string rotationDirection = "right";
-            rotateImage(rotationDirection);
-
-            examHasChanges = true;
+            selectTool(sender);
         }
 
         private void rotateImage(string rotationDirection)
@@ -1522,27 +1537,52 @@ namespace WimDesktop.Views
             }
         }
 
+        private void buttonRotateLeftClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
+            string rotationDirection = "left";
+            rotateImage(rotationDirection);
+            examHasChanges = true;
+        }
+
+        private void buttonRotateRightClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            SizeF previousMainPictureBoxSize = new Size(mainPictureBox.Width, mainPictureBox.Height);
+            string rotationDirection = "right";
+            rotateImage(rotationDirection);
+
+            examHasChanges = true;
+        }
+
         private void buttonRestoreImageClick(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Resources.messageImageConfirmRestore, Resources.titleImageRestore, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            selectTool(buttonSelect);
+
+            if (MessageBox.Show(Resources.messageImageConfirmRestore, Resources.titleImageRestore, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
-                Image img = selectedFrame.originalImage;
-                selectedFrame.filteredImage = img;
-                mainPictureBox.Image = img;
-
-                selectedFrame.Invoke((MethodInvoker)(() =>
-                {
-                    selectedFrame.Image = new Bitmap(img).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
-                    selectedFrame.Refresh();
-                }));
-
-                File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
-
-                restoreFrameDrawings();
-                resizeMainPictureBox();
-
-                examHasChanges = true;
+                return;
             }
+
+            Image img = selectedFrame.originalImage;
+            selectedFrame.filteredImage = img;
+            mainPictureBox.Image = img;
+
+            selectedFrame.Invoke((MethodInvoker)(() =>
+            {
+                selectedFrame.Image = new Bitmap(img).GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
+                selectedFrame.Refresh();
+            }));
+
+            File.Delete(Path.Combine(examPath, $"{selectedFrame.order}_filtered.png"));
+
+            restoreFrameDrawings();
+            resizeMainPictureBox();
+
+            examHasChanges = true;
         }
 
         private void restoreFrameDrawings()
@@ -1566,6 +1606,8 @@ namespace WimDesktop.Views
 
         private void buttonFitZoomClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             mainPictureBoxPreviousSize = mainPictureBox.Size;
 
             resizeMainPictureBox();
@@ -1575,6 +1617,8 @@ namespace WimDesktop.Views
 
         private void buttonZoomOutClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             mainPictureBoxZoom(1 / 1.25f);
 
             resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
@@ -1582,6 +1626,8 @@ namespace WimDesktop.Views
 
         private void buttonZoomSquareClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             mainPictureBoxZoom(3.25f);
 
             resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
@@ -1589,6 +1635,8 @@ namespace WimDesktop.Views
 
         private void buttonZoomInClick(object sender, EventArgs e)
         {
+            selectTool(buttonSelect);
+
             mainPictureBoxZoom(1.25f);
 
             resizeDrawings((float)mainPictureBox.Height / mainPictureBoxPreviousSize.Height);
