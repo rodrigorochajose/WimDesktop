@@ -152,7 +152,7 @@ namespace WimDesktop
             new MenuPresenter(menuView);
             Application.Run((Form)menuView);
 
-            setupAutoUpdate();
+            //setupAutoUpdate();
         }
 
         static void setupAutoUpdate()
