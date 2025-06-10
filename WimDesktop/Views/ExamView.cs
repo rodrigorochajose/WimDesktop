@@ -60,6 +60,8 @@ namespace WimDesktop.Views
         bool examHasChanges = false;
         bool blinking = false;
 
+        bool nextFrameSelection = true;
+
         Color sensorStatusColor = Color.Red;
         Color drawingColor = Color.Red;
         Color textColor = Color.Red;
@@ -69,8 +71,6 @@ namespace WimDesktop.Views
         PictureBox pictureBoxMagnifier;
         NumericUpDown numericUpDownDrawingSize;
         Graphics magnifierGraphics;
-
-        Frame nextFrame;
 
         List<Frame> frames = new List<Frame>();
         List<Point> differenceBetweenPoints = new List<Point>();
@@ -111,7 +111,7 @@ namespace WimDesktop.Views
 
                 mainPictureBoxOriginalSize = mainPictureBox.Size;
 
-                selectInitialFrame();
+                setInitialFrame();
                 setAcquireStatus();
                 timerSensorStatus.Start();
             };
@@ -133,7 +133,7 @@ namespace WimDesktop.Views
 
                 drawTemplate();
 
-                selectInitialFrame();
+                setInitialFrame();
                 loadExamDrawings();
 
                 if (examImageDrawings.Any())
@@ -156,27 +156,35 @@ namespace WimDesktop.Views
             }
         }
 
-        private void selectInitialFrame()
+        private void setInitialFrame()
         {
-            Frame emptyFrame = frames.FirstOrDefault(f => f.originalImage == null);
+            List<Frame> emptyFrames = frames.Where(f => f.originalImage == null).ToList();
 
-            if (emptyFrame != null)
-            {
-                selectedFrame = emptyFrame;
-                indexFrame = frames.IndexOf(selectedFrame);
-                selectedFrame.Tag = Color.LimeGreen;
-            }
-            else
+            if (!emptyFrames.Any())
             {
                 selectedFrame = frames.First();
                 selectedFrame.Tag = Color.LimeGreen;
+                indexFrame = frames.IndexOf(selectedFrame);
 
-                if (selectedFrame.filteredImage != null)
-                {
-                    mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
-                    provideTools(true);
-                }
+                return;
+            }
 
+            if (emptyFrames.Count > 1)
+            {
+                Frame nextEmptyFrame = emptyFrames.Skip(1).First();
+
+                nextEmptyFrame.Tag = Color.Orange;
+            }
+
+            selectedFrame = emptyFrames.First();
+            selectedFrame.Tag = Color.LimeGreen;
+            indexFrame = frames.IndexOf(selectedFrame);
+
+            if (selectedFrame.filteredImage != null)
+            {
+                mainPictureBox.Image = selectedFrame.filteredImage.Clone() as Image;
+                provideTools(true);
+                    
                 resizeMainPictureBox();
 
                 labelImageDate.Text = selectedFrame.datePhotoTook;
@@ -510,11 +518,46 @@ namespace WimDesktop.Views
             selectedFrame.originalImage = new Bitmap(image);
             selectedFrame.filteredImage = new Bitmap(image);
 
-            selectedFrame.Tag = Color.Black;
             selectedFrame.Invoke((MethodInvoker)(() =>
             {
                 selectedFrame.Image = image.GetThumbnailImage(selectedFrame.Width, selectedFrame.Height, () => false, IntPtr.Zero);
                 selectedFrame.Refresh();
+            }));
+        }
+
+        private void clearNextFrameSelection()
+        {
+            Frame nextFrameSelected = frames.FirstOrDefault(f => (Color)f.Tag == Color.Orange);
+
+            if (nextFrameSelected != null)
+            {
+                nextFrameSelected.Tag = Color.Black;
+                nextFrameSelected.Refresh();
+            }
+        }
+
+        private void setFrame()
+        {
+            selectedFrame.Tag = Color.Black;
+            selectedFrame.Refresh();
+
+            List<Frame> emptyFrames = frames.Where(f => f.originalImage == null).ToList();
+
+            if (indexFrame + 1 > frames.Count || !emptyFrames.Any())
+            {
+                nextFrameSelection = false;
+                clearNextFrameSelection();
+                return;
+            }
+
+            Frame frame = emptyFrames.FirstOrDefault(f => frames.IndexOf(f) > indexFrame) ?? emptyFrames.First();
+
+            indexFrame = frames.IndexOf(frame);
+
+            Invoke((MethodInvoker)(() =>
+            {
+                frames[indexFrame].Tag = Color.LimeGreen;
+                frames[indexFrame].Refresh();
             }));
 
             setNextFrame();
@@ -522,34 +565,25 @@ namespace WimDesktop.Views
 
         private void setNextFrame()
         {
-            int nextIndex = indexFrame + 1;
-
-            if (nextIndex < frames.Count)
+            if (!nextFrameSelection)
             {
-                for (; nextIndex < frames.Count; nextIndex++)
-                {
-                    if (frames[nextIndex].originalImage == null)
-                    {
-                        indexFrame = nextIndex;
-                        nextIndex = frames.Count;
-                    }
-                }
-            }
-            else
-            {
-                nextFrame = frames.FirstOrDefault(f => f.originalImage == null);
-
-                if (nextFrame != null)
-                {
-                    indexFrame = frames.IndexOf(nextFrame);
-                }
+                clearNextFrameSelection();
+                return;
             }
 
-            Invoke((MethodInvoker)(() =>
+            List<Frame> emptyFrames = frames.Where(f => f.originalImage == null).ToList();
+
+            if (indexFrame + 1 > frames.Count || !emptyFrames.Any())
             {
-                frames[indexFrame].Tag = Color.LimeGreen;
-                frames[indexFrame].Refresh();
-            }));
+                nextFrameSelection = false;
+                clearNextFrameSelection();
+                return;
+            }
+
+            Frame nextFrame = emptyFrames.FirstOrDefault(f => frames.IndexOf(f) > indexFrame) ?? emptyFrames.First();
+
+            nextFrame.Tag = Color.Orange;
+            nextFrame.Refresh();
         }
 
         public void selectFrame(Frame frameToSelect = null)
@@ -564,14 +598,7 @@ namespace WimDesktop.Views
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
             selectedDrawingHistoryHandler();
 
-            if (selectedFrame.originalImage != null)
-            {
-                provideTools(true);
-            }
-            else
-            {
-                provideTools(false);
-            }
+            provideTools(selectedFrame.originalImage != null);
 
             labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
             textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
@@ -595,6 +622,9 @@ namespace WimDesktop.Views
 
         private void frameClick(object sender, EventArgs e)
         {
+            nextFrameSelection = false;
+            clearNextFrameSelection();
+
             selectTool(buttonSelect);
 
             frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
@@ -611,10 +641,18 @@ namespace WimDesktop.Views
         {
             //if (acquireMode == "TWAIN")
             //{
-                if (!checkOverwriteImage()) return;
 
-                twainAutoTake = false;
-                eventAcquireTwain?.Invoke(this, EventArgs.Empty);
+            if (nextFrameSelection)
+            {
+                setFrame();
+            }
+
+            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
+            
+            twainAutoTake = false;
+            nextFrameSelection = true;
+            setNextFrame();
+            eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
         }
 
@@ -647,6 +685,11 @@ namespace WimDesktop.Views
             provideTools(true);
 
             examHasChanges = true;
+
+            if (twainAutoTake)
+            {
+                setFrame();
+            }
         }
 
         public void resizeMainPictureBox()
@@ -1103,12 +1146,18 @@ namespace WimDesktop.Views
         {
             //if (acquireMode == "TWAIN")
             //{
-                selectTool(buttonSelect);
+            selectTool(buttonSelect);
 
-                if (!checkOverwriteImage()) return;
+            if (nextFrameSelection && selectedFrame.originalImage != null)
+            {
+                setFrame();
+            }
 
-                twainAutoTake = true;
-                eventAcquireTwain?.Invoke(this, EventArgs.Empty);
+            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
+
+            twainAutoTake = true;
+            nextFrameSelection = true;
+            eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
         }
 
@@ -1177,6 +1226,11 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
+            if (nextFrameSelection && selectedFrame.originalImage != null)
+            {
+                setFrame();
+            }
+
             bool hasImage = frames[indexFrame].originalImage != null ? true : false;
             bool confirmOverwrite = true;
 
@@ -1198,7 +1252,11 @@ namespace WimDesktop.Views
                     recycleCurrentImage();
                 }
 
+                nextFrameSelection = true;
+                setNextFrame();
+
                 Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
+
                 importImage(new Bitmap(selectedImage));
             }
         }

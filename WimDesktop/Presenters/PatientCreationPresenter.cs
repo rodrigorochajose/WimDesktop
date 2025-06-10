@@ -4,7 +4,6 @@ using WimDesktop.Interface.IView;
 using WimDesktop.Models;
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Windows.Forms;
 
 namespace WimDesktop.Presenters
@@ -56,9 +55,16 @@ namespace WimDesktop.Presenters
 
             string filePath = Path.Combine(patientPath, "patient.txt");
 
-            string patientData = JsonSerializer.Serialize(patient);
+            try
+            {
+                string patientData = $"Nome: {patient.name}{Environment.NewLine}Criado em: {patient.createdAt:yyyy-MM-dd HH:mm:ss}";
 
-            File.WriteAllText(filePath, patientData);
+                File.WriteAllText(filePath, patientData);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Erro ao serializar: {e.Message}\n{e.StackTrace}");
+            }
         }
     }
 }

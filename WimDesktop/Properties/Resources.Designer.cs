@@ -162,6 +162,16 @@ namespace WimDesktop.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_advanced_settings {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_advanced_settings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_arrow {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_arrow", resourceCulture);
@@ -272,6 +282,26 @@ namespace WimDesktop.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_dentist {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_dentist", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_exit {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_export {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_export", resourceCulture);
@@ -322,6 +352,16 @@ namespace WimDesktop.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_logout {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_logout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_32x32_move {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_move", resourceCulture);
@@ -365,6 +405,16 @@ namespace WimDesktop.Properties {
         internal static System.Drawing.Bitmap icon_32x32_pencil {
             get {
                 object obj = ResourceManager.GetObject("icon_32x32_pencil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_32x32_profile {
+            get {
+                object obj = ResourceManager.GetObject("icon_32x32_profile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -913,6 +963,15 @@ namespace WimDesktop.Properties {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A Chave está incorreta.
+        /// </summary>
+        internal static string messageKeyWrong {
+            get {
+                return ResourceManager.GetString("messageKeyWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Migração do banco de dados feita com sucesso!.
         /// </summary>
         internal static string messageMigrationSuccess {
@@ -945,6 +1004,15 @@ namespace WimDesktop.Properties {
         internal static string messageNotFoundEmail {
             get {
                 return ResourceManager.GetString("messageNotFoundEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a As senhas não coincidem!.
+        /// </summary>
+        internal static string messagePasswordNotMatch {
+            get {
+                return ResourceManager.GetString("messagePasswordNotMatch", resourceCulture);
             }
         }
         

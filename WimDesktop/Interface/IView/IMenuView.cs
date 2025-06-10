@@ -8,6 +8,8 @@ namespace WimDesktop.Interface.IView
         event EventHandler showNewExamView;
         event EventHandler showTemplateView;
         event EventHandler showSettingsView;
+        event EventHandler showProfileView;
+        event EventHandler eventLogout;
     }
 }
  

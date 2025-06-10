@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBoxKeepCredentials = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.labelLogin = new System.Windows.Forms.Label();
             this.labelForgotPassword = new System.Windows.Forms.Label();
@@ -45,13 +44,6 @@
             this.panel1.BackgroundImage = global::WimDesktop.Properties.Resources.logo_wimdental_login;
             resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
-            // 
-            // checkBoxKeepCredentials
-            // 
-            resources.ApplyResources(this.checkBoxKeepCredentials, "checkBoxKeepCredentials");
-            this.checkBoxKeepCredentials.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.checkBoxKeepCredentials.Name = "checkBoxKeepCredentials";
-            this.checkBoxKeepCredentials.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -101,7 +93,6 @@
             this.roundedButtonSignIn.ForeColor = System.Drawing.Color.White;
             this.roundedButtonSignIn.Name = "roundedButtonSignIn";
             this.roundedButtonSignIn.UseVisualStyleBackColor = false;
-            this.roundedButtonSignIn.Click += new System.EventHandler(this.roundedButtonSignInClick);
             // 
             // roundedTextBoxPassword
             // 
@@ -134,7 +125,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.checkBoxAutomaticLogin);
             this.Controls.Add(this.labelForgotPassword);
-            this.Controls.Add(this.checkBoxKeepCredentials);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelLogin);
@@ -157,7 +147,6 @@
         private Components.Rounded.RoundedTextBox roundedTextBoxEmail;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelLogin;
-        private System.Windows.Forms.CheckBox checkBoxKeepCredentials;
         private System.Windows.Forms.Label labelForgotPassword;
         private Components.Rounded.RoundedButton roundedButtonSignIn;
         private System.Windows.Forms.CheckBox checkBoxAutomaticLogin;

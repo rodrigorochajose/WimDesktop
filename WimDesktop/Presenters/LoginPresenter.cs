@@ -39,7 +39,7 @@ namespace WimDesktop.Presenters
                     return;
                 }
 
-                clinicRepository.update(view.keepCredentials, view.automaticLogin);
+                clinicRepository.updateLoginMethod(view.automaticLogin);
 
                 view.DialogResult = System.Windows.Forms.DialogResult.OK;
                 view.Close();

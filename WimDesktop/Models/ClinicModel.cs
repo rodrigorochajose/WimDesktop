@@ -34,8 +34,8 @@ namespace WimDesktop.Models
         [Column("CREATED_AT")]
         public DateTime createdAt { get; set; } = DateTime.Now;
 
-        [Column("KEEP_CONNECTED")]
-        public int keepConnected { get; set; } = 0;
+        [Column("ISADMIN")]
+        public int isAdmin { get; set; } = 0;
 
         [Column("AUTOMATIC_LOGIN")]
         public int automaticLogin { get; set; } = 0;

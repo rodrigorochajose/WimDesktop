@@ -14,20 +14,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\USER\Documents\DMM\Deploy Novo Wim Desktop\Output\</PublishUrl>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftps://waws-prod-cq1-055.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>https://wimdesktop-hndyb3arhcdphzch.brazilsouth-01.azurewebsites.net/</InstallUrl>
+    <UpdateUrl>https://wimdesktop-hndyb3arhcdphzch.brazilsouth-01.azurewebsites.net/</UpdateUrl>
     <ProductName>WimDesktop7.0</ProductName>
     <SuiteName>WimDesktop</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -94,7 +96,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -166,7 +168,10 @@
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
     <Compile Include="Interface\IRepository\ISensorRepository.cs" />
     <Compile Include="Interface\IView\IAdvancedSettingsView.cs" />
+    <Compile Include="Interface\IView\IClinicChangePasswordView.cs" />
     <Compile Include="Interface\IView\IClinicCreationView.cs" />
+    <Compile Include="Interface\IView\IClinicProfileView.cs" />
+    <Compile Include="Interface\IView\IDialogForgotPasswordView.cs" />
     <Compile Include="Interface\IView\IFramesComparisonImportView.cs" />
     <Compile Include="Interface\IView\ILoginView.cs" />
     <Compile Include="Interface\IView\IMigrationDatabaseView.cs" />
@@ -177,6 +182,10 @@
     <Compile Include="Migrations\202503271842251_Initial.cs" />
     <Compile Include="Migrations\202503271842251_Initial.Designer.cs">
       <DependentUpon>202503271842251_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506101717100_CreateAdminAccess.cs" />
+    <Compile Include="Migrations\202506101717100_CreateAdminAccess.Designer.cs">
+      <DependentUpon>202506101717100_CreateAdminAccess.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClinicModel.cs" />
@@ -196,7 +205,10 @@
     <Compile Include="Models\SensorModel.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="Presenters\AdvancedSettingsPresenter.cs" />
+    <Compile Include="Presenters\ChangePasswordPresenter.cs" />
     <Compile Include="Presenters\ClinicPresenter.cs" />
+    <Compile Include="Presenters\ClinicProfilePresenter.cs" />
+    <Compile Include="Presenters\ForgotPasswordPresenter.cs" />
     <Compile Include="Presenters\ImportExamImagePresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MigrationDatabasePresenter.cs" />
@@ -227,11 +239,29 @@
     <Compile Include="Views\AdvancedSettingsView.Designer.cs">
       <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangePasswordView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ChangePasswordView.Designer.cs">
+      <DependentUpon>ChangePasswordView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ClinicHandlerView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ClinicHandlerView.Designer.cs">
       <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClinicProfileView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ClinicProfileView.Designer.cs">
+      <DependentUpon>ClinicProfileView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogForgotPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogForgotPassword.Designer.cs">
+      <DependentUpon>DialogForgotPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
@@ -475,6 +505,9 @@
     <EmbeddedResource Include="Migrations\202503271842251_Initial.resx">
       <DependentUpon>202503271842251_Initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506101717100_CreateAdminAccess.resx">
+      <DependentUpon>202506101717100_CreateAdminAccess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
@@ -488,11 +521,26 @@
       <DependentUpon>AdvancedSettingsView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChangePasswordView.resx">
+      <DependentUpon>ChangePasswordView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ClinicHandlerView.en-US.resx">
       <DependentUpon>ClinicHandlerView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ClinicHandlerView.resx">
       <DependentUpon>ClinicHandlerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicProfileView.en-US.resx">
+      <DependentUpon>ClinicProfileView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ClinicProfileView.resx">
+      <DependentUpon>ClinicProfileView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogForgotPassword.en-US.resx">
+      <DependentUpon>DialogForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogForgotPassword.resx">
+      <DependentUpon>DialogForgotPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FramesComparisonImportView.en-US.resx">
       <DependentUpon>FramesComparisonImportView.cs</DependentUpon>
@@ -715,9 +763,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Autoupdater.NET.Official">
-      <Version>1.9.2</Version>
-    </PackageReference>
     <PackageReference Include="BCrypt.Net-Next">
       <Version>4.0.3</Version>
     </PackageReference>
@@ -844,6 +889,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>%(Filename)%(Extension)</TargetPath>
     </Content>
+    <None Include="Resources\icon-32x32-advanced-settings.png" />
+    <None Include="Resources\icon-32x32-dentist.png" />
+    <None Include="Resources\icon-32x32-exit.png" />
+    <None Include="Resources\icon-32x32-logout.png" />
+    <None Include="Resources\icon-32x32-profile.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon-96x96-transparent.ico" />
@@ -865,26 +915,4 @@
     <None Include="Resources\1-original.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="CleanLangFolders" AfterTargets="Build">
-    <RemoveDir Directories="$(OutputPath)\ar" />
-    <RemoveDir Directories="$(OutputPath)\cs" />
-    <RemoveDir Directories="$(OutputPath)\da" />
-    <RemoveDir Directories="$(OutputPath)\de" />
-    <RemoveDir Directories="$(OutputPath)\es" />
-    <RemoveDir Directories="$(OutputPath)\fr" />
-    <RemoveDir Directories="$(OutputPath)\it" />
-    <RemoveDir Directories="$(OutputPath)\ja-JP" />
-    <RemoveDir Directories="$(OutputPath)\ko" />
-    <RemoveDir Directories="$(OutputPath)\lv" />
-    <RemoveDir Directories="$(OutputPath)\nl" />
-    <RemoveDir Directories="$(OutputPath)\pl" />
-    <RemoveDir Directories="$(OutputPath)\ru" />
-    <RemoveDir Directories="$(OutputPath)\sk" />
-    <RemoveDir Directories="$(OutputPath)\sv" />
-    <RemoveDir Directories="$(OutputPath)\th" />
-    <RemoveDir Directories="$(OutputPath)\tr" />
-    <RemoveDir Directories="$(OutputPath)\zh" />
-    <RemoveDir Directories="$(OutputPath)\zh-TW" />
-    <RemoveDir Directories="$(OutputPath)\pt" />
-  </Target>
 </Project>

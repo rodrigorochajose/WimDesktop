@@ -1,7 +1,7 @@
 ﻿using WimDesktop.Interface.IView;
-using WimDesktop.Properties;
 using System;
 using System.Windows.Forms;
+using WimDesktop.Properties;
 
 namespace WimDesktop.Views
 {
@@ -26,40 +26,12 @@ namespace WimDesktop.Views
         }
 
         public event EventHandler eventSaveClinic;
-        public event EventHandler eventUpdatePassword;
 
-        private readonly bool recoverPassword;
-
-
-        public ClinicHandlerView(bool recoverPassword)
+        public ClinicHandlerView()
         {
             InitializeComponent();
 
             associateEvents();
-
-            this.recoverPassword = recoverPassword;
-
-            if (recoverPassword)
-            {
-                Text = Resources.titleEditClinic;
-                labelDescription.Text = Resources.textPasswordRecovery;
-                labelDescription.Left -= 20;
-
-                labelName.Visible = false;
-                roundedTextBoxName.Visible = false;
-
-                labelEmail.Top -= 50;
-                roundedTextBoxEmail.Top -= 50;
-
-                labelPassword.Top -= 50;
-                roundedTextBoxPassword.Top -= 50;
-
-                labelConfirmPassword.Top -= 50;
-                roundedTextBoxConfirmPassword.Top -= 50;
-
-                roundedButtonSignUp.Top -= 50;
-                roundedButtonSignUp.Text = Resources.textButtonUpdate;
-            }
         }
 
         private void associateEvents()
@@ -76,6 +48,14 @@ namespace WimDesktop.Views
                 }
             };
 
+            roundedTextBoxConfirmPassword.KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    signUp();
+                }
+            };
+
             roundedButtonSignUp.Click += delegate { signUp(); };
         }
 
@@ -83,13 +63,7 @@ namespace WimDesktop.Views
         {
             if (password != roundedTextBoxConfirmPassword.Texts)
             {
-                MessageBox.Show("As senhas não coincidem");
-                return;
-            }
-
-            if (recoverPassword)
-            {
-                eventUpdatePassword?.Invoke(this, EventArgs.Empty);
+                MessageBox.Show(Resources.messagePasswordNotMatch);
                 return;
             }
 

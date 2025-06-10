@@ -10,7 +10,6 @@ using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using AutoUpdaterDotNET;
 
 namespace WimDesktop
 {
@@ -34,7 +33,7 @@ namespace WimDesktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            openApplication();
+            getClinicToLogin();
         }
 
         static bool connectDatabase()
@@ -93,54 +92,44 @@ namespace WimDesktop
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
         }
 
-        static void openApplication()
+        static void getClinicToLogin()
         {
             ClinicRepository clinicRepository = new ClinicRepository();
-
-            DialogResult result = DialogResult.Cancel;
-
-            if (!clinicRepository.hasClinic())
-            {
-                using (var clinicView = new ClinicHandlerView(false))
-                {
-                    new ClinicPresenter(clinicView);
-                    if (clinicView.ShowDialog() == DialogResult.Cancel)
-                    {
-                        FormManager.instance.closeAllForms();
-                    }
-                }
-            }
-
             ClinicModel clinic = clinicRepository.getClinic();
 
             if (clinic == null)
             {
-                return;
-            }
-
-            if (clinic.automaticLogin == 1)
-            {
-                result = DialogResult.OK;
-            }
-            else
-            {
-                string email = "";
-                bool keepConnected = false;
-
-                if (clinicRepository.keepConnected())
+                using (var clinicView = new ClinicHandlerView())
                 {
-                    email = clinic.email;
-                    keepConnected = true;
-                }
+                    new ClinicPresenter(clinicView);
+                    DialogResult res = clinicView.ShowDialog();
 
-                using (var loginView = new LoginView(email, keepConnected))
+                    if (res == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            clinic = clinicRepository.getClinic();
+
+            login(clinic);
+        }
+
+        static void login(ClinicModel clinic)
+        {
+            DialogResult loginResult = DialogResult.OK;
+
+            if (clinic.automaticLogin == 0)
+            {
+                using (var loginView = new LoginView(clinic.email))
                 {
                     new LoginPresenter(loginView);
-                    result = loginView.ShowDialog();
+                    loginResult = loginView.ShowDialog();
                 }
             }
 
-            if (result == DialogResult.OK)
+            if (loginResult == DialogResult.OK)
             {
                 runApplication();
             }
@@ -151,17 +140,43 @@ namespace WimDesktop
             IMenuView menuView = new MenuView();
             new MenuPresenter(menuView);
             Application.Run((Form)menuView);
-
-            //setupAutoUpdate();
         }
 
         static void setupAutoUpdate()
         {
-            AutoUpdater.ShowRemindLaterButton = false;
-            AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.Mandatory = false;
+            //AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
 
-            AutoUpdater.Start("https://wimdesktop.z15.web.core.windows.net/wimdesktopupdate.xml");
+            //AutoUpdater.ShowRemindLaterButton = false;
+            //AutoUpdater.ShowSkipButton = false;
+            //AutoUpdater.Mandatory = false;
+
+            //AutoUpdater.Start("https://wimdesktop.z15.web.core.windows.net/wimdesktop/update.xml");
+        }
+
+        private static void AutoUpdaterOnCheckForUpdateEvent()
+        {
+            //UpdateInfoEventArgs args
+
+            //if (args.IsUpdateAvailable)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show(
+            //        $"Há uma nova versão {args.CurrentVersion} disponível. Deseja atualizar agora?",
+            //        "Atualização disponível",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Information);
+
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //        try
+            //        {
+            //            AutoUpdater.DownloadUpdate(args);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //}
         }
     }
 }

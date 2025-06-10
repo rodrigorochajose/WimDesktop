@@ -34,7 +34,11 @@
             this.buttonPatient = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonTemplate = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.roundedButtonLogout = new WimDesktop.Components.Rounded.RoundedButton();
+            this.roundedButtonProfile = new WimDesktop.Components.Rounded.RoundedButton();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -83,13 +87,43 @@
             this.buttonSettings.Margin = new System.Windows.Forms.Padding(0, 0, 15, 0);
             this.buttonSettings.Name = "buttonSettings";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.roundedButtonLogout);
+            this.panel1.Controls.Add(this.roundedButtonProfile);
+            this.panel1.Controls.Add(this.menuStrip1);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // roundedButtonLogout
+            // 
+            resources.ApplyResources(this.roundedButtonLogout, "roundedButtonLogout");
+            this.roundedButtonLogout.BorderColor = System.Drawing.Color.White;
+            this.roundedButtonLogout.BorderWidth = 5;
+            this.roundedButtonLogout.CornerRadius = 15;
+            this.roundedButtonLogout.Image = global::WimDesktop.Properties.Resources.icon_32x32_exit;
+            this.roundedButtonLogout.Name = "roundedButtonLogout";
+            this.roundedButtonLogout.UseVisualStyleBackColor = true;
+            this.roundedButtonLogout.Click += new System.EventHandler(this.roundedButtonLogoutClick);
+            // 
+            // roundedButtonProfile
+            // 
+            resources.ApplyResources(this.roundedButtonProfile, "roundedButtonProfile");
+            this.roundedButtonProfile.BorderColor = System.Drawing.Color.White;
+            this.roundedButtonProfile.BorderWidth = 5;
+            this.roundedButtonProfile.CornerRadius = 15;
+            this.roundedButtonProfile.Image = global::WimDesktop.Properties.Resources.icon_32x32_dentist;
+            this.roundedButtonProfile.Name = "roundedButtonProfile";
+            this.roundedButtonProfile.UseVisualStyleBackColor = true;
+            // 
             // MenuView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = global::WimDesktop.Properties.Resources.IMAGEMBG;
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -99,8 +133,9 @@
             this.Load += new System.EventHandler(this.menuViewLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -111,5 +146,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem buttonSettings;
         private System.Windows.Forms.ToolStripMenuItem buttonTemplate;
+        private System.Windows.Forms.Panel panel1;
+        private Components.Rounded.RoundedButton roundedButtonProfile;
+        private Components.Rounded.RoundedButton roundedButtonLogout;
     }
 }

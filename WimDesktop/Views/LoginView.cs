@@ -1,8 +1,9 @@
-﻿using WimDesktop.Interface.IView;
-using WimDesktop.Presenters;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using WimDesktop.Components.Rounded;
+using WimDesktop.Interface.IView;
+using WimDesktop.Presenters;
 
 namespace WimDesktop.Views
 {
@@ -20,12 +21,6 @@ namespace WimDesktop.Views
             set { roundedTextBoxPassword.Texts = value; }
         }
 
-        public bool keepCredentials
-        {
-            get { return checkBoxKeepCredentials.Checked; }
-            set { checkBoxKeepCredentials.Checked = value; }
-        }
-
         public bool automaticLogin
         {
             get { return checkBoxAutomaticLogin.Checked; }
@@ -34,12 +29,11 @@ namespace WimDesktop.Views
 
         public event EventHandler eventLogin;
 
-        public LoginView(string email, bool keepConnected)
+        public LoginView(string email)
         {
             InitializeComponent();
 
             this.email = email;
-            this.keepCredentials = keepConnected;
 
             if (email != "")
             {
@@ -54,28 +48,37 @@ namespace WimDesktop.Views
             labelForgotPassword.MouseEnter += delegate
             {
                 labelForgotPassword.ForeColor = Color.MediumBlue;
-
             };
 
             labelForgotPassword.MouseLeave += delegate
             {
                 labelForgotPassword.ForeColor = Color.DodgerBlue;
+            };
 
+            roundedButtonSignIn.Click += delegate
+            {
+                login();
+            };
+
+            roundedTextBoxPassword.KeyPress += (s, e) =>
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    login();
+                }
             };
         }
 
-        private void roundedButtonSignInClick(object sender, EventArgs e)
+        private void login()
         {
             eventLogin?.Invoke(this, EventArgs.Empty);
         }
 
         private void labelForgotPasswordClick(object sender, EventArgs e)
         {
-            ClinicHandlerView view = new ClinicHandlerView(true);
-
-            new ClinicPresenter(view);
-
-            view.ShowDialog();
+            DialogForgotPassword dialogForgotPassword = new DialogForgotPassword();
+            ForgotPasswordPresenter forgotPasswordPresenter = new ForgotPasswordPresenter(dialogForgotPassword);
+            dialogForgotPassword.ShowDialog();
         }
     }
 }

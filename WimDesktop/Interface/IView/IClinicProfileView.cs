@@ -2,12 +2,11 @@
 
 namespace WimDesktop.Interface.IView
 {
-    public interface IClinicCreationView
+    public interface IClinicProfileView
     {
         string name { get; set; }
         string email { get; set; }
-        string password { get; set; }
 
-        event EventHandler eventSaveClinic;
+        event EventHandler eventGetClinicInfo;
     }
 }

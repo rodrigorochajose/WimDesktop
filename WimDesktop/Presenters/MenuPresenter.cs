@@ -1,15 +1,20 @@
-﻿using WimDesktop.Views;
-using WimDesktop.Interface.IView;
+﻿using System;
 using System.IO;
-using System;
 using System.Linq;
 using System.Windows.Forms;
+using WimDesktop._Repositories;
+using WimDesktop.Interface.IRepository;
+using WimDesktop.Interface.IView;
+using WimDesktop.Views;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WimDesktop.Presenters
 {
     public class MenuPresenter
     {
         private readonly IMenuView menuView;
+
+        private readonly IClinicRepository clinicRepository = new ClinicRepository();
 
         public MenuPresenter(IMenuView view)
         {
@@ -35,9 +40,23 @@ namespace WimDesktop.Presenters
                 FormManager.instance.openForm<ExamPatientSelectionView>(() => new ExamPatientSelectionPresenter(new ExamPatientSelectionView())); 
             };
 
+            menuView.showProfileView += delegate
+            {
+                FormManager.instance.openForm<ClinicProfileView>(() => new ClinicProfilePresenter(new ClinicProfileView()));
+            };
+
+            view.eventLogout += logout;
+
             generateDatabaseBackup();
 
             (menuView as Form).Show();
+        }
+
+        private void logout(object sender, EventArgs ev)
+        {
+            clinicRepository.updateLoginMethod(false);
+            Application.Restart();
+            Application.Exit();
         }
 
         public void generateDatabaseBackup()

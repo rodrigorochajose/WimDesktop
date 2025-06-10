@@ -18,7 +18,6 @@ namespace WimDesktop.Presenters
             this.view = view;
 
             view.eventSaveClinic += addClinic;
-            view.eventUpdatePassword += updateClinicPassword;
         }
 
         private void addClinic(object sender, EventArgs e)
@@ -36,19 +35,6 @@ namespace WimDesktop.Presenters
                 clinicRepository.addClinic(newClinic);
 
                 view.DialogResult = System.Windows.Forms.DialogResult.OK;
-                view.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void updateClinicPassword(object sender, EventArgs e)
-        {
-            try
-            {
-                clinicRepository.updatePassword(view.email, BCrypt.Net.BCrypt.HashPassword(view.password));
                 view.Close();
             }
             catch (Exception ex)

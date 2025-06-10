@@ -7,7 +7,6 @@ namespace WimDesktop.Interface.IView
     {
         string email { get; set; }
         string password { get; set; }
-        bool keepCredentials { get; set; }
         bool automaticLogin { get; set; }
 
         event EventHandler eventLogin;

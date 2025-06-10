@@ -512,4 +512,10 @@
   <data name="messageImageRegisteredNotFound" xml:space="preserve">
     <value>Some images associated with this exam could not be found on the computer. Please contact support.</value>
   </data>
+  <data name="messagePasswordNotMatch" xml:space="preserve">
+    <value>Passwords do not match!</value>
+  </data>
+  <data name="messageKeyWrong" xml:space="preserve">
+    <value>Key is wrong!</value>
+  </data>
 </root>

@@ -145,36 +145,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="checkBoxKeepCredentials.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBoxKeepCredentials.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="checkBoxKeepCredentials.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 277</value>
-  </data>
-  <data name="checkBoxKeepCredentials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 19</value>
-  </data>
-  <data name="checkBoxKeepCredentials.TabIndex" type="System.Int32, mscorlib">
-    <value>87</value>
-  </data>
-  <data name="checkBoxKeepCredentials.Text" xml:space="preserve">
-    <value>Manter Credenciais</value>
-  </data>
-  <data name="&gt;&gt;checkBoxKeepCredentials.Name" xml:space="preserve">
-    <value>checkBoxKeepCredentials</value>
-  </data>
-  <data name="&gt;&gt;checkBoxKeepCredentials.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxKeepCredentials.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;checkBoxKeepCredentials.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
@@ -205,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="labelLogin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -235,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelLogin.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="labelForgotPassword.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -295,7 +265,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;roundedTextBoxEmail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="roundedButtonSignIn.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
@@ -340,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;roundedButtonSignIn.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="roundedTextBoxPassword.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
@@ -370,7 +340,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;roundedTextBoxPassword.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="checkBoxAutomaticLogin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
