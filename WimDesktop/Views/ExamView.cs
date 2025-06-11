@@ -26,11 +26,13 @@ namespace WimDesktop.Views
         public List<ExamImageModel> examImages { get; set; }
         public List<TemplateFrameModel> templateFrames { get; set; }
         public List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        public SettingsModel settings { get; set; }
         public SensorModel sensor { get; set; }
         public bool sensorConnected { get; set; }
         public string acquireMode { get; set; }
-        public bool twainAutoTake { get; set; }
-        public SettingsModel settings { get; set; }
+        public bool twainAutoTake { get; set; } = false;
+
+        public bool recycleImage { get; set; }
 
         public event EventHandler eventSaveExam;
         public event EventHandler eventUpdateExamLastChange;
@@ -615,6 +617,7 @@ namespace WimDesktop.Views
             if (overwrite)
             {
                 restoreFrameDrawings();
+                recycleImage = true;
             }
 
             return overwrite;
@@ -672,11 +675,6 @@ namespace WimDesktop.Views
             using (FileStream fs = File.Open(Path.Combine(examPath, $"{selectedFrame.order}_original.png"), FileMode.Open, FileAccess.ReadWrite, FileShare.Delete))
             {
                 image = Image.FromStream(fs);
-            }
-
-            if (selectedFrame.Image != null)
-            {
-                recycleCurrentImage();
             }
 
             frameHandler(image);
@@ -1231,23 +1229,12 @@ namespace WimDesktop.Views
                 setFrame();
             }
 
-            bool hasImage = frames[indexFrame].originalImage != null ? true : false;
-            bool confirmOverwrite = true;
-
-            if (hasImage)
-            {
-                confirmOverwrite = checkOverwriteImage();
-            }
-
-            if (!confirmOverwrite)
-            {
-                return;
-            }
+            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
 
             DialogResult result = dialogFileImage.ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (hasImage && confirmOverwrite)
+                if (recycleImage)
                 {
                     recycleCurrentImage();
                 }
@@ -1261,7 +1248,7 @@ namespace WimDesktop.Views
             }
         }
 
-        private void recycleCurrentImage()
+        public void recycleCurrentImage()
         {
             string originalImagePath = Path.Combine(examPath, $"{selectedFrame.order}_original.png");
             string filteredImagePath = originalImagePath.Replace("original", "filtered");
@@ -1280,6 +1267,8 @@ namespace WimDesktop.Views
             {
                 File.Delete(editedImagePath);
             }
+
+            recycleImage = false;
         }
 
         private void buttonRecycleBinClick(object sender, EventArgs e)
@@ -1292,24 +1281,14 @@ namespace WimDesktop.Views
                 return;
             }
 
-            bool hasImage = frames[indexFrame].originalImage != null ? true : false;
-            bool confirmOverwrite = true;
+            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
 
-            if (hasImage)
-            {
-                confirmOverwrite = checkOverwriteImage();
-            }
-
-            if (!confirmOverwrite)
-            {
-                return;
-            }
 
             using (Form recycleBinView = new RecycleBinView(recyclePath))
             {
                 if (recycleBinView.ShowDialog() == DialogResult.OK)
                 {
-                    if (hasImage && confirmOverwrite)
+                    if (recycleImage)
                     {
                         recycleCurrentImage();
                     }

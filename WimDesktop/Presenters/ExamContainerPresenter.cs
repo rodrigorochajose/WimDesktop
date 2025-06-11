@@ -90,6 +90,11 @@ namespace WimDesktop.Presenters
 
             if (e.Image != null)
             {
+                if (examContainerView.selectedExamView.recycleImage)
+                {
+                    examContainerView.selectedExamView.recycleCurrentImage();
+                }
+
                 examContainerView.selectedExamView.selectFrame();
 
                 string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
@@ -455,6 +460,11 @@ namespace WimDesktop.Presenters
 
                         if (getImage)
                         {
+                            if (examContainerView.selectedExamView.recycleImage)
+                            {
+                                examContainerView.selectedExamView.recycleCurrentImage();
+                            }
+
                             IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
                             //saveImg(image);
                             int imageWidth = image.nWidth;

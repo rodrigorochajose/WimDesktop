@@ -54,7 +54,7 @@ namespace WimDesktop._Repositories
             try
             {
                 int login = automaticLogin ? 1 : 0;
-                context.clinic.FirstOrDefault().automaticLogin = login;
+                context.clinic.FirstOrDefault(c => c.isAdmin == 0).automaticLogin = login;
                 context.SaveChanges();
             }
             catch (Exception ex)

@@ -15,11 +15,12 @@ namespace WimDesktop.Interface.IView
         List<ExamImageModel> examImages { get; set; }
         List<TemplateFrameModel> templateFrames { get; set; }
         List<ExamImageDrawingModel> examImageDrawings { get; set; }
+        SettingsModel settings { get; set; }
         SensorModel sensor { get; set; }
         bool sensorConnected { get; set; }
         string acquireMode { get; set; }
         bool twainAutoTake { get; set; }
-        SettingsModel settings { get; set; }
+        bool recycleImage { get; set; }
 
         event EventHandler eventSaveExam;
         event EventHandler eventUpdateExamLastChange;
@@ -30,6 +31,7 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventChangeAcquireMode;
         event EventHandler eventAcquireTwain;
 
+        void recycleCurrentImage();
         void selectFrame(Frame frameToSelected = null);
         void loadImageOnMainPictureBox();
         bool dialogOverwriteCurrentImage();
