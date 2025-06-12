@@ -309,6 +309,99 @@
   <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;textBoxSessionName.Name" xml:space="preserve">
+    <value>textBoxSessionName</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;textBoxSessionName.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.Name" xml:space="preserve">
+    <value>comboBoxTemplate</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedComboBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;comboBoxTemplate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Name" xml:space="preserve">
+    <value>panelShowTemplate</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedPanel, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;panelShowTemplate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Name" xml:space="preserve">
+    <value>buttonNewTemplate</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedButton, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;buttonNewTemplate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label10.Name" xml:space="preserve">
+    <value>label10</value>
+  </data>
+  <data name="&gt;&gt;label10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>488, 112</value>
+  </data>
+  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>438, 438</value>
+  </data>
+  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
+    <value>roundedPanel2</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedPanel, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="textBoxSessionName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 12pt</value>
   </data>
@@ -498,26 +591,146 @@
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="roundedPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>488, 112</value>
+  <data name="&gt;&gt;roundedTextBoxObservation.Name" xml:space="preserve">
+    <value>roundedTextBoxObservation</value>
   </data>
-  <data name="roundedPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>438, 438</value>
+  <data name="&gt;&gt;roundedTextBoxObservation.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="roundedPanel2.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+  <data name="&gt;&gt;roundedTextBoxObservation.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Name" xml:space="preserve">
-    <value>roundedPanel2</value>
+  <data name="&gt;&gt;roundedTextBoxObservation.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Name" xml:space="preserve">
+    <value>roundedTextBoxRecommendation</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxRecommendation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Name" xml:space="preserve">
+    <value>roundedTextBoxName</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;roundedTextBoxName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;textBoxPhone.Name" xml:space="preserve">
+    <value>textBoxPhone</value>
+  </data>
+  <data name="&gt;&gt;textBoxPhone.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedMaskedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxPhone.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;textBoxPhone.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;textBoxBirthDate.Name" xml:space="preserve">
+    <value>textBoxBirthDate</value>
+  </data>
+  <data name="&gt;&gt;textBoxBirthDate.Type" xml:space="preserve">
+    <value>WimDesktop.Components.Rounded.RoundedMaskedTextBox, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;textBoxBirthDate.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;textBoxBirthDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;label9.Name" xml:space="preserve">
+    <value>label9</value>
+  </data>
+  <data name="&gt;&gt;label9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label13.Name" xml:space="preserve">
+    <value>label13</value>
+  </data>
+  <data name="&gt;&gt;label13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;label14.Name" xml:space="preserve">
+    <value>label14</value>
+  </data>
+  <data name="&gt;&gt;label14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="roundedPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 112</value>
+  </data>
+  <data name="roundedPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 438</value>
+  </data>
+  <data name="roundedPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.Name" xml:space="preserve">
+    <value>roundedPanel1</value>
+  </data>
+  <data name="&gt;&gt;roundedPanel1.Type" xml:space="preserve">
     <value>WimDesktop.Components.Rounded.RoundedPanel, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;roundedPanel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;roundedPanel2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;roundedPanel1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="roundedTextBoxObservation.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -845,27 +1058,6 @@
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="roundedPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 112</value>
-  </data>
-  <data name="roundedPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 438</value>
-  </data>
-  <data name="roundedPanel1.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel1.Name" xml:space="preserve">
-    <value>roundedPanel1</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel1.Type" xml:space="preserve">
-    <value>WimDesktop.Components.Rounded.RoundedPanel, WimDesktop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;roundedPanel1.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -60,6 +60,29 @@ namespace WimDesktop
             }
         }
 
+        public void closeAllExceptMenu()
+        {
+            List<Form> forms = Application.OpenForms.Cast<Form>().ToList();
+
+            for (int counter = 0; counter < forms.Count; counter++)
+            {
+                Type formType = forms[counter].GetType();
+
+                if (formType == typeof(MenuView))
+                {
+                    forms[counter].Hide();
+                    continue;
+                }
+
+                forms[counter].Close();
+            }
+        }
+
+        public void hideMainForm()
+        {
+            Application.OpenForms.Cast<Form>().First().Hide();
+        }
+
         public void unhideMainForm()
         {
             Application.OpenForms.Cast<Form>().First().Show();

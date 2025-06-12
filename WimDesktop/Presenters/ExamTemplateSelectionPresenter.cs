@@ -46,6 +46,7 @@ namespace WimDesktop.Presenters
             ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
 
             FormManager.instance.closeAllExceptExamAndMenu();
+            FormManager.instance.hideMainForm();
 
             new ExamPresenter(examView, false, examOpeningMode);
         }

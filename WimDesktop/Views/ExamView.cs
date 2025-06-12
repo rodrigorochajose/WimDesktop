@@ -1635,7 +1635,10 @@ namespace WimDesktop.Views
                 indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
                 flowLayoutPanel1.Controls.Clear();
 
-                examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
+                if (examImageDrawings != null)
+                {
+                    examImageDrawings.RemoveAll(eid => eid.examImageId == selectedFrame.order);
+                }
 
                 mainPictureBox.Refresh();
             }

@@ -72,10 +72,7 @@ namespace WimDesktop.Presenters
             templateView.patientRecommendation = selectedPatient.recommendation;
             templateView.patientObservation = selectedPatient.observation;
 
-            foreach (Form form in Application.OpenForms)
-            {
-                form.Hide();
-            }
+            FormManager.instance.closeAllExceptMenu();
 
             new ExamTemplateSelectionPresenter(templateView, view.GetType());
         }

@@ -189,5 +189,10 @@ namespace WimDesktop.Views
                 panelShowTemplate.Controls.Remove(pb);
             }
         }
+
+        private void examTemplateSelectionViewFormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormManager.instance.unhideMainForm();
+        }
     }
 }

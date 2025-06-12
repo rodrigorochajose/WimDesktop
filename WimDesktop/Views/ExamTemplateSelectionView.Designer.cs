@@ -297,6 +297,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ExamTemplateSelectionView";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.examTemplateSelectionViewFormClosing);
             this.roundedPanel2.ResumeLayout(false);
             this.roundedPanel2.PerformLayout();
             this.roundedPanel1.ResumeLayout(false);
