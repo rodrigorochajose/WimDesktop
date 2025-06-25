@@ -31,7 +31,7 @@ namespace WimDesktop.Views
         public bool sensorConnected { get; set; }
         public string acquireMode { get; set; }
         public bool twainAutoTake { get; set; } = false;
-
+        public bool nextFrameSelection { get; set; } = true;
         public bool recycleImage { get; set; }
 
         public event EventHandler eventSaveExam;
@@ -61,8 +61,6 @@ namespace WimDesktop.Views
         bool recalibrate = false;
         bool examHasChanges = false;
         bool blinking = false;
-
-        bool nextFrameSelection = true;
 
         Color sensorStatusColor = Color.Red;
         Color drawingColor = Color.Red;
@@ -192,6 +190,10 @@ namespace WimDesktop.Views
                 labelImageDate.Text = selectedFrame.datePhotoTook;
                 textBoxFrameNotes.Text = selectedFrame.notes;
             }
+
+            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -495,13 +497,11 @@ namespace WimDesktop.Views
             }
         }
 
-        private void frameHandler(Image image)
+        private void loadFrameData(Image image)
         {
-            selectFrame();
-
             if (selectedFrame.originalImage != null)
             {
-                examImages.RemoveAll(i => i.templateFrameId == selectedFrame.id);
+                examImages.RemoveAll(i => i.templateFrameId == selectedFrame.id); // pq remove all
             }
 
             examImages.Add(new ExamImageModel
@@ -538,31 +538,65 @@ namespace WimDesktop.Views
             }
         }
 
-        private void setFrame()
+        public void selectFrame(Frame frameToSelect = null)
         {
+            checkChangesAndSave();
+
             selectedFrame.Tag = Color.Black;
             selectedFrame.Refresh();
 
-            List<Frame> emptyFrames = frames.Where(f => f.originalImage == null).ToList();
-
-            if (indexFrame + 1 > frames.Count || !emptyFrames.Any())
+            if (frameToSelect != null)
             {
-                nextFrameSelection = false;
-                clearNextFrameSelection();
-                return;
+                selectedFrame = frameToSelect;
+            }
+            else
+            {
+                Frame nextFrame = frames.FirstOrDefault(f => (Color)f.Tag == Color.Orange);
+
+                if (nextFrame != null)
+                {
+                    selectedFrame = nextFrame;
+                }
+                else
+                {
+                    List<Frame> emptyFrames = frames.Where(f => f.originalImage == null).ToList();
+
+                    if (indexFrame + 1 > frames.Count || !emptyFrames.Any())
+                    {
+                        nextFrameSelection = false;
+                        clearNextFrameSelection();
+                        return;
+                    }
+
+                    selectedFrame = emptyFrames.FirstOrDefault(f => frames.IndexOf(f) > indexFrame) ?? emptyFrames.First();
+                }
             }
 
-            Frame frame = emptyFrames.FirstOrDefault(f => frames.IndexOf(f) > indexFrame) ?? emptyFrames.First();
+            indexFrame = frames.IndexOf(selectedFrame);
 
-            indexFrame = frames.IndexOf(frame);
-
-            Invoke((MethodInvoker)(() =>
-            {
-                frames[indexFrame].Tag = Color.LimeGreen;
-                frames[indexFrame].Refresh();
-            }));
+            setupSelectedFrame();
 
             setNextFrame();
+        }
+
+        private void setupSelectedFrame()
+        {
+            Invoke((MethodInvoker)(() =>
+            {
+                selectedFrame.Tag = Color.LimeGreen;
+                selectedFrame.Refresh();
+            }));
+
+            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
+
+            provideTools(selectedFrame.originalImage != null);
+
+            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
+            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
+
+            panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
         }
 
         private void setNextFrame()
@@ -586,26 +620,6 @@ namespace WimDesktop.Views
 
             nextFrame.Tag = Color.Orange;
             nextFrame.Refresh();
-        }
-
-        public void selectFrame(Frame frameToSelect = null)
-        {
-            selectedFrame.BackColor = Color.Black;
-
-            checkChangesAndSave();
-            selectedFrame = frameToSelect ?? frames[indexFrame];
-            selectedFrame.Tag = Color.LimeGreen;
-
-            selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
-            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-            selectedDrawingHistoryHandler();
-
-            provideTools(selectedFrame.originalImage != null);
-
-            labelImageDate.Invoke((MethodInvoker)(() => labelImageDate.Text = selectedFrame.datePhotoTook));
-            textBoxFrameNotes.Invoke((MethodInvoker)(() => textBoxFrameNotes.Text = selectedFrame.notes));
-
-            panelTemplate.Invoke((MethodInvoker)(() => panelTemplate.Refresh()));
         }
 
         private bool checkOverwriteImage()
@@ -633,7 +647,6 @@ namespace WimDesktop.Views
             frames.Find(t => (Color)t.Tag == Color.LimeGreen).Tag = Color.Black;
 
             selectFrame((Frame)sender);
-            indexFrame = selectedFrame.order - 1;
 
             mainPictureBox.Image = selectedFrame.filteredImage;
 
@@ -645,16 +658,10 @@ namespace WimDesktop.Views
             //if (acquireMode == "TWAIN")
             //{
 
-            if (nextFrameSelection)
-            {
-                setFrame();
-            }
-
             if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
             
             twainAutoTake = false;
             nextFrameSelection = true;
-            setNextFrame();
             eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
         }
@@ -677,17 +684,13 @@ namespace WimDesktop.Views
                 image = Image.FromStream(fs);
             }
 
-            frameHandler(image);
+            loadFrameData(image);
             mainPictureBox.Image = image;
             resizeMainPictureBox();
             provideTools(true);
+            setNextFrame();
 
             examHasChanges = true;
-
-            if (twainAutoTake)
-            {
-                setFrame();
-            }
         }
 
         public void resizeMainPictureBox()
@@ -1146,12 +1149,17 @@ namespace WimDesktop.Views
             //{
             selectTool(buttonSelect);
 
-            if (nextFrameSelection && selectedFrame.originalImage != null)
+            if (selectedFrame.originalImage != null)
             {
-                setFrame();
+                if (nextFrameSelection)
+                {
+                    selectFrame();
+                } 
+                else if (!checkOverwriteImage())
+                {
+                    return;
+                }
             }
-
-            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
 
             twainAutoTake = true;
             nextFrameSelection = true;
@@ -1190,10 +1198,41 @@ namespace WimDesktop.Views
             eventCloseSingleExam?.Invoke(this, EventArgs.Empty);
         }
 
+        private void buttonImportClick(object sender, EventArgs e)
+        {
+            selectTool(buttonSelect);
+
+            if (selectedFrame.originalImage != null)
+            {
+                if (!nextFrameSelection && !checkOverwriteImage())
+                {
+                    return;
+                }
+            }
+
+            DialogResult result = dialogFileImage.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if (recycleImage)
+                {
+                    recycleCurrentImage();
+                }
+
+                nextFrameSelection = true;
+
+                if (nextFrameSelection && selectedFrame.originalImage != null)
+                {
+                    selectFrame();
+                }
+
+                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
+
+                importImage(new Bitmap(selectedImage));
+            }
+        }
+
         private void importImage(Bitmap img)
         {
-            selectFrame();
-
             if (img.Width > img.Height)
             {
                 if (selectedFrame.orientation < 2)
@@ -1209,7 +1248,7 @@ namespace WimDesktop.Views
                 }
             }
 
-            frameHandler(img);
+            loadFrameData(img);
 
             mainPictureBox.Image = img;
             img.Save(Path.Combine(examPath, $"{selectedFrame.order}_original.png"));
@@ -1218,34 +1257,6 @@ namespace WimDesktop.Views
 
             provideTools(true);
             examHasChanges = true;
-        }
-
-        private void buttonImportClick(object sender, EventArgs e)
-        {
-            selectTool(buttonSelect);
-
-            if (nextFrameSelection && selectedFrame.originalImage != null)
-            {
-                setFrame();
-            }
-
-            if (frames[indexFrame].originalImage != null && !checkOverwriteImage()) return;
-
-            DialogResult result = dialogFileImage.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                if (recycleImage)
-                {
-                    recycleCurrentImage();
-                }
-
-                nextFrameSelection = true;
-                setNextFrame();
-
-                Image selectedImage = Image.FromStream(dialogFileImage.OpenFile());
-
-                importImage(new Bitmap(selectedImage));
-            }
         }
 
         public void recycleCurrentImage()

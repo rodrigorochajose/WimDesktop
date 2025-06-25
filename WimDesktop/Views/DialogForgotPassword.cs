@@ -52,7 +52,7 @@ namespace WimDesktop.Views
 
         private void resetPassword()
         {
-            if (roundedTextBox.Texts == "" || roundedTextBox.Texts != "WIMRESTOREPWD")
+            if (roundedTextBox.Texts == "" || roundedTextBox.Texts != "WIMRESET")
             {
                 MessageBox.Show(Resources.messageKeyWrong);
                 return;

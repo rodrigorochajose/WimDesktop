@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202506101717100_CreateAdminAccess.Designer.cs">
       <DependentUpon>202506101717100_CreateAdminAccess.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506241713048_ChangeAdminPWD_ResizeColumns.cs" />
+    <Compile Include="Migrations\202506241713048_ChangeAdminPWD_ResizeColumns.Designer.cs">
+      <DependentUpon>202506241713048_ChangeAdminPWD_ResizeColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClinicModel.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
@@ -507,6 +511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506101717100_CreateAdminAccess.resx">
       <DependentUpon>202506101717100_CreateAdminAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506241713048_ChangeAdminPWD_ResizeColumns.resx">
+      <DependentUpon>202506241713048_ChangeAdminPWD_ResizeColumns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>

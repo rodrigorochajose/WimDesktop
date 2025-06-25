@@ -86,18 +86,22 @@ namespace WimDesktop.Presenters
 
         private void twainTransferImage(object sender, Twain32.EndXferEventArgs e)
         {
+            ExamView selectedExamView = examContainerView.selectedExamView;
             continueAcquiring = true;
 
             if (e.Image != null)
             {
-                if (examContainerView.selectedExamView.recycleImage)
+                if (selectedExamView.recycleImage)
                 {
-                    examContainerView.selectedExamView.recycleCurrentImage();
+                    selectedExamView.recycleCurrentImage();
                 }
 
-                examContainerView.selectedExamView.selectFrame();
+                if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
+                {
+                    selectedExamView.selectFrame();
+                }
 
-                string originalImagePath = Path.Combine(examContainerView.selectedExamView.examPath, $"{examContainerView.selectedExamView.selectedFrame.order}_original.png");
+                string originalImagePath = Path.Combine(selectedExamView.examPath, $"{selectedExamView.selectedFrame.order}_original.png");
 
                 Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
 
@@ -113,7 +117,7 @@ namespace WimDesktop.Presenters
                     bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
                 }
 
-                examContainerView.selectedExamView.loadImageOnMainPictureBox();
+                selectedExamView.loadImageOnMainPictureBox();
             }
         }
 
@@ -451,39 +455,39 @@ namespace WimDesktop.Presenters
                     break;
                 case SdkInterface.Evt_Image:
                     {
-                        examContainerView.selectedExamView.selectFrame();
-                        bool getImage = true;
-                        if (examContainerView.selectedExamView.selectedFrame.originalImage != null)
-                        {
-                            getImage = examContainerView.selectedExamView.dialogOverwriteCurrentImage();
-                        }
+                        //examContainerView.selectedExamView.selectFrame();
+                        //bool getImage = true;
+                        //if (examContainerView.selectedExamView.selectedFrame.originalImage != null)
+                        //{
+                        //    getImage = examContainerView.selectedExamView.dialogOverwriteCurrentImage();
+                        //}
 
-                        if (getImage)
-                        {
-                            if (examContainerView.selectedExamView.recycleImage)
-                            {
-                                examContainerView.selectedExamView.recycleCurrentImage();
-                            }
+                        //if (getImage)
+                        //{
+                        //    if (examContainerView.selectedExamView.recycleImage)
+                        //    {
+                        //        examContainerView.selectedExamView.recycleCurrentImage();
+                        //    }
 
-                            IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
-                            //saveImg(image);
-                            int imageWidth = image.nWidth;
-                            int imageHeight = image.nHeight;
-                            short[] imageData = new short[imageWidth * imageHeight];
-                            Marshal.Copy(image.pData, imageData, 0, imageData.Length);
+                        //    IRayImage image = (IRayImage)Marshal.PtrToStructure(pParam, typeof(IRayImage));
+                        //    //saveImg(image);
+                        //    int imageWidth = image.nWidth;
+                        //    int imageHeight = image.nHeight;
+                        //    short[] imageData = new short[imageWidth * imageHeight];
+                        //    Marshal.Copy(image.pData, imageData, 0, imageData.Length);
 
-                            for (int counter = 0; counter < imageData.Length; counter++)
-                            {
-                                if (imageData[counter] > 0)
-                                {
-                                    imageData[counter] = (short)(short.MaxValue - imageData[counter]);
-                                }
-                            }
+                        //    for (int counter = 0; counter < imageData.Length; counter++)
+                        //    {
+                        //        if (imageData[counter] > 0)
+                        //        {
+                        //            imageData[counter] = (short)(short.MaxValue - imageData[counter]);
+                        //        }
+                        //    }
 
-                            convertToBitmap(imageData, imageWidth, imageHeight);
+                        //    convertToBitmap(imageData, imageWidth, imageHeight);
 
-                            examContainerView.selectedExamView.loadImageOnMainPictureBox();
-                        }
+                        //    examContainerView.selectedExamView.loadImageOnMainPictureBox();
+                        //}
                     }
                     break;
                 case SdkInterface.Evt_Prev_Image:

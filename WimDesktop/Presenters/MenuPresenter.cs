@@ -6,7 +6,6 @@ using WimDesktop._Repositories;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
 using WimDesktop.Views;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace WimDesktop.Presenters
 {

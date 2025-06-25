@@ -42,7 +42,7 @@ namespace WimDesktop.Views
 
         private void unlock()
         {
-            if (roundedTextBox.Texts == "WIMDESKTOPADMIN")
+            if (roundedTextBox.Texts == "WIMVITOR")
             {
                 DialogResult = DialogResult.OK;
                 Close();

@@ -42,7 +42,11 @@ namespace WimDesktop.Views
         public string drawingColor 
         {
             get { return buttonDrawingColorPicker.BackColor.ToArgb().ToString(); } 
-            set { buttonDrawingColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
+            set 
+            { 
+                buttonDrawingColorPicker.BackColor = Color.FromArgb(int.Parse(value));
+                buttonDrawingColorPicker.BorderColor = Color.FromArgb(int.Parse(value));
+            } 
         }
 
         public int drawingSize
@@ -54,7 +58,11 @@ namespace WimDesktop.Views
         public string textColor 
         {
             get { return buttonTextColorPicker.BackColor.ToArgb().ToString(); } 
-            set { buttonTextColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
+            set 
+            { 
+                buttonTextColorPicker.BackColor = Color.FromArgb(int.Parse(value));
+                buttonTextColorPicker.BorderColor = Color.FromArgb(int.Parse(value));
+            }
         }
 
         public int textSize
@@ -66,7 +74,11 @@ namespace WimDesktop.Views
         public string rulerColor 
         {
             get { return buttonRulerColorPicker.BackColor.ToArgb().ToString(); } 
-            set { buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value)); } 
+            set 
+            { 
+                buttonRulerColorPicker.BackColor = Color.FromArgb(int.Parse(value));
+                buttonRulerColorPicker.BorderColor = Color.FromArgb(int.Parse(value));
+            } 
         }
 
         public int waterMark { get; set; }

@@ -20,6 +20,7 @@ namespace WimDesktop.Interface.IView
         bool sensorConnected { get; set; }
         string acquireMode { get; set; }
         bool twainAutoTake { get; set; }
+        bool nextFrameSelection { get; set; }
         bool recycleImage { get; set; }
 
         event EventHandler eventSaveExam;
@@ -32,7 +33,7 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventAcquireTwain;
 
         void recycleCurrentImage();
-        void selectFrame(Frame frameToSelected = null);
+        void selectFrame(Frame frameToSelect = null);
         void loadImageOnMainPictureBox();
         bool dialogOverwriteCurrentImage();
         void setLabelPatientTemplate(string patient, string template);
