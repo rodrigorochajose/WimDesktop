@@ -1,15 +1,19 @@
-﻿using WimDesktop.Interface.IView;
+﻿using FellowOakDicom;
+using FellowOakDicom.Imaging;
+using FellowOakDicom.Imaging.LUT;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WimDesktop.Components;
+using WimDesktop.Interface.IView;
 using WimDesktop.Models;
-using FellowOakDicom.Imaging;
-using FellowOakDicom;
 using WimDesktop.Properties;
 
 namespace WimDesktop.Views
@@ -229,7 +233,9 @@ namespace WimDesktop.Views
 
             eventSaveExportPath?.Invoke(this, EventArgs.Empty);
 
-            string exportPath = Path.Combine(pathToExport, $"{patientName}_{DateTime.Now:dd-MM-yyyy-HH-m}");
+            string pathComplement = getPathComplement();
+
+            string exportPath = Path.Combine(pathToExport, pathComplement);
             Directory.CreateDirectory(exportPath);
 
             ImageFormat format = ImageFormat.Bmp;
@@ -299,6 +305,32 @@ namespace WimDesktop.Views
 
             MessageBox.Show(Resources.messageExamExportSucess);
             Close();
+        }
+
+        private string getPathComplement()
+        {
+
+            string patientNameFormatted = Regex.Replace(patientName, @"\s+", "");
+            patientNameFormatted = removeAccents(patientNameFormatted);
+
+            return $"{patientNameFormatted}_{DateTime.Now:dd-MM-yyyy-HH-m}";
+        }
+
+        private string removeAccents(string texto)
+        {
+            var normalized = texto.Normalize(NormalizationForm.FormD);
+            var sb = new StringBuilder();
+
+            foreach (char c in normalized)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != System.Globalization.UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(c);
+                }
+            }
+
+            return sb.ToString().Normalize(NormalizationForm.FormC);
         }
 
         private void insertWaterMarkOnImages(List<ImageInfoExport> imagesInfo)
