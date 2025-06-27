@@ -22,13 +22,7 @@ Desenvolver um software para realização de exames radiográficos, corrigindo p
 
 ---
 
-### 📂 2. Abrir o Projeto
-
-Abra a pasta `WimDesktop` e execute o arquivo `WimDesktop.csproj`. Isso abrirá diretamente o projeto no Visual Studio.
-
----
-
-### 📁 3. Copiar a pasta `WimDesktopDB` para `C:\`
+### 📁 2. Copiar a pasta `WimDesktopDB` para `C:\`
 
 > A pasta `WimDesktopDB` está disponível em **[local a ser definido]**. Ela contém a estrutura necessária para o banco de dados e armazenamento das imagens.
 
@@ -56,5 +50,11 @@ WimDesktopDB
 └── migration
     └── Arquivos usados para migração de dados de versões anteriores (WimDesktop antigo ou CDR)
 ```
+
+---
+
+### 📂 3. Abrir o Projeto
+
+Abra a pasta `WimDesktop` e execute o arquivo `WimDesktop.csproj`. Isso abrirá diretamente o projeto no Visual Studio.
 
 ---
