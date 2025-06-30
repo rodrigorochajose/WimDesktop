@@ -165,20 +165,20 @@ namespace WimDesktop.Views
                 selectedFrame = frames.First();
                 selectedFrame.Tag = Color.LimeGreen;
                 indexFrame = frames.IndexOf(selectedFrame);
-
-                return;
-            }
-
-            if (emptyFrames.Count > 1)
+            } 
+            else
             {
-                Frame nextEmptyFrame = emptyFrames.Skip(1).First();
+                if (emptyFrames.Count > 1)
+                {
+                    Frame nextEmptyFrame = emptyFrames.Skip(1).First();
 
-                nextEmptyFrame.Tag = Color.Orange;
+                    nextEmptyFrame.Tag = Color.Orange;
+                }
+
+                selectedFrame = emptyFrames.First();
+                selectedFrame.Tag = Color.LimeGreen;
+                indexFrame = frames.IndexOf(selectedFrame);
             }
-
-            selectedFrame = emptyFrames.First();
-            selectedFrame.Tag = Color.LimeGreen;
-            indexFrame = frames.IndexOf(selectedFrame);
 
             if (selectedFrame.filteredImage != null)
             {
@@ -576,7 +576,10 @@ namespace WimDesktop.Views
 
             setupSelectedFrame();
 
-            setNextFrame();
+            if (selectedFrame.order != frames.Count)
+            {
+                setNextFrame();
+            }
         }
 
         private void setupSelectedFrame()
