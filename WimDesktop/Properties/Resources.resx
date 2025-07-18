@@ -468,9 +468,6 @@
   <data name="icon_32x32_xray_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon-32x32-xray-new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_16x16_calendar_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_16x16_calendar_gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="messageComparisonSelection" xml:space="preserve">
     <value>Selecione mais de uma imagem para comparação.</value>
   </data>
@@ -562,5 +559,14 @@
   </data>
   <data name="messageKeyWrong" xml:space="preserve">
     <value>A Chave está incorreta</value>
+  </data>
+  <data name="icon_16x16_calendar_gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_16x16_calendar_gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_32x32_zoomin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_32x32_zoomin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_32x32_zoomout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_32x32_zoomout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

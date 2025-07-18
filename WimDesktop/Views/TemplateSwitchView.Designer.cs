@@ -85,7 +85,7 @@
             // roundedPanel1
             // 
             this.roundedPanel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedPanel1.BorderWidth = 1F;
+            this.roundedPanel1.BorderWidth = 5F;
             this.roundedPanel1.Controls.Add(this.panelCurrentTemplate);
             this.roundedPanel1.Controls.Add(this.labelCurrentTemplate);
             this.roundedPanel1.CornerRadius = 20;
@@ -96,7 +96,7 @@
             // 
             this.panelCurrentTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelCurrentTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelCurrentTemplate.BorderWidth = 1F;
+            this.panelCurrentTemplate.BorderWidth = 5F;
             this.panelCurrentTemplate.CornerRadius = 20;
             resources.ApplyResources(this.panelCurrentTemplate, "panelCurrentTemplate");
             this.panelCurrentTemplate.Name = "panelCurrentTemplate";
@@ -109,7 +109,7 @@
             // roundedPanel2
             // 
             this.roundedPanel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.roundedPanel2.BorderWidth = 1F;
+            this.roundedPanel2.BorderWidth = 5F;
             this.roundedPanel2.Controls.Add(this.comboBoxTemplate);
             this.roundedPanel2.Controls.Add(this.panelShowTemplate);
             this.roundedPanel2.Controls.Add(this.buttonNewTemplate);
@@ -132,7 +132,7 @@
             // 
             this.panelShowTemplate.BackColor = System.Drawing.Color.Gainsboro;
             this.panelShowTemplate.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(194)))), ((int)(((byte)(207)))));
-            this.panelShowTemplate.BorderWidth = 1F;
+            this.panelShowTemplate.BorderWidth = 5F;
             this.panelShowTemplate.CornerRadius = 20;
             resources.ApplyResources(this.panelShowTemplate, "panelShowTemplate");
             this.panelShowTemplate.Name = "panelShowTemplate";

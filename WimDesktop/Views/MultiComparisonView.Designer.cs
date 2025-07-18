@@ -67,8 +67,8 @@
             this.toolStripButtonImportImage,
             this.toolStripButtonImportExamImage,
             this.toolStripSeparator1,
-            this.toolStripButtonZoomOut,
             this.toolStripButtonZoomIn,
+            this.toolStripButtonZoomOut,
             this.toolStripButtonRotateLeft,
             this.toolStripButtonRotateRight,
             this.toolStripSeparator2,
@@ -103,18 +103,18 @@
             // toolStripButtonZoomOut
             // 
             this.toolStripButtonZoomOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonZoomOut.Image = global::WimDesktop.Properties.Resources.icon_32x32_search;
+            this.toolStripButtonZoomOut.Image = global::WimDesktop.Properties.Resources.icon_32x32_zoomout;
             resources.ApplyResources(this.toolStripButtonZoomOut, "toolStripButtonZoomOut");
-            this.toolStripButtonZoomOut.Margin = new System.Windows.Forms.Padding(45, 1, 3, 1);
+            this.toolStripButtonZoomOut.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.toolStripButtonZoomOut.Name = "toolStripButtonZoomOut";
             this.toolStripButtonZoomOut.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             // 
             // toolStripButtonZoomIn
             // 
             this.toolStripButtonZoomIn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonZoomIn.Image = global::WimDesktop.Properties.Resources.icon_32x32_search;
+            this.toolStripButtonZoomIn.Image = global::WimDesktop.Properties.Resources.icon_32x32_zoomin;
             resources.ApplyResources(this.toolStripButtonZoomIn, "toolStripButtonZoomIn");
-            this.toolStripButtonZoomIn.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.toolStripButtonZoomIn.Margin = new System.Windows.Forms.Padding(45, 1, 3, 1);
             this.toolStripButtonZoomIn.Name = "toolStripButtonZoomIn";
             this.toolStripButtonZoomIn.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             // 
@@ -148,7 +148,7 @@
             this.toolStripButtonCloseAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonCloseAll.Image = global::WimDesktop.Properties.Resources.icon_32x32_cancel;
             resources.ApplyResources(this.toolStripButtonCloseAll, "toolStripButtonCloseAll");
-            this.toolStripButtonCloseAll.Margin = new System.Windows.Forms.Padding(125, 1, 0, 2);
+            this.toolStripButtonCloseAll.Margin = new System.Windows.Forms.Padding(110, 1, 0, 2);
             this.toolStripButtonCloseAll.Name = "toolStripButtonCloseAll";
             this.toolStripButtonCloseAll.Padding = new System.Windows.Forms.Padding(7, 5, 7, 5);
             // 
@@ -169,13 +169,13 @@
             resources.ApplyResources(this.openFileDialog, "openFileDialog");
             this.openFileDialog.Multiselect = true;
             // 
-            // ComparisonContainerView
+            // MultiComparisonView
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelHeader);
-            this.Name = "ComparisonContainerView";
+            this.Name = "MultiComparisonView";
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             this.toolStrip1.ResumeLayout(false);

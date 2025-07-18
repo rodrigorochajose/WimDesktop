@@ -82,13 +82,13 @@ namespace WimDesktop.Views
         private void selectSensorPath()
         {
             folderBrowserDialog1.ShowDialog();
-            sensorPath = folderBrowserDialog1.SelectedPath;
+            roundedTextBoxSensorPath.Texts = folderBrowserDialog1.SelectedPath;
         }
 
         private void selectExamPath()
         {
             folderBrowserDialog1.ShowDialog();
-            examPath = folderBrowserDialog1.SelectedPath;
+            roundedTextBoxExamPath.Texts = folderBrowserDialog1.SelectedPath;
         }
 
         private void openMigrationForm(string sw)

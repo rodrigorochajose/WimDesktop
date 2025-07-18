@@ -190,7 +190,15 @@ namespace WimDesktop.Views
 
                         string examContentPath = Path.Combine(dataPath, filePath.Substring(0, index), "SR000001");
 
-                        currentExamImages = getUsedImages(examContentPath, currentExamImages);
+                        if (File.Exists(examContentPath))
+                        {
+                            currentExamImages = getUsedImages(examContentPath, currentExamImages);
+                        }
+                        else
+                        {
+                            examContentPath = Path.Combine(dataPath, filePath);
+                        }
+
 
                         if (currentExamImages.Any())
                         {

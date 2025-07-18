@@ -117,20 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Start New Exam</value>
+  <data name="titulo.Text" xml:space="preserve">
+    <value>New Exam</value>
   </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Patient</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Radiographic</value>
   </data>
   <data name="buttonInitializeExam.Text" xml:space="preserve">
     <value>Start</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="buttonNewTemplate.Text" xml:space="preserve">
     <value>New Template</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
     <value>Radiographic Session Name</value>
+  </data>
+  <data name="label9.Text" xml:space="preserve">
+    <value>Observation</value>
   </data>
   <data name="label11.Text" xml:space="preserve">
     <value>Recommendation</value>
@@ -144,16 +153,7 @@
   <data name="label14.Text" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Patient</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Radiographic</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>Observation</value>
-  </data>
-  <data name="titulo.Text" xml:space="preserve">
-    <value>New Exam</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Template Selection</value>
   </data>
 </root>

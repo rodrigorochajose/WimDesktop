@@ -42,6 +42,7 @@ namespace WimDesktop.Views
             buttonSelectPath.Click += delegate
             {
                 folderBrowserDialog.ShowDialog();
+                roundedTextBoxPath.Texts = folderBrowserDialog.SelectedPath;
                 path = folderBrowserDialog.SelectedPath;
             };
 

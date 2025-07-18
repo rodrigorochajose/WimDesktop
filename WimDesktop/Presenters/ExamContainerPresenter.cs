@@ -26,7 +26,7 @@ namespace WimDesktop.Presenters
         private int sensorId = 0;
         private SensorModel connectedSensor = new SensorModel();
         private readonly ExamContainerView examContainerView;
-        private Twain32 twain;
+        private Twain32 twain = new Twain32();
         private bool isAcquireInterfaceOpen = false;
 
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
@@ -52,10 +52,8 @@ namespace WimDesktop.Presenters
 
             //if (acquireMode == "TWAIN")
             //{
-            initializeTwain(this, EventArgs.Empty);
-            examContainerView.twainInitialized = true;
 
-            view.sensorConnected = isSensorConnected();
+            checkSensorStatus();
 
             setDefaultSensor();
             //}
@@ -78,14 +76,22 @@ namespace WimDesktop.Presenters
             examContainerView.eventCloseTwain += closeTwain;
         }
 
+        private void checkSensorStatus()
+        {
+            twain.OpenDSM();
+            examContainerView.sensorConnected = isSensorConnected();
+            twain.CloseDSM();
+        }
+
         private void initializeTwain(object sender, EventArgs ev)
         {
-            twain = new Twain32();
             twain.OpenDSM();
 
             twain.EndXfer += twainTransferImage;
             twain.AcquireCompleted += twainAcquireCompleted;
             twain.TwainStateChanged += twainStateChanged;
+
+            examContainerView.twainInitialized = true;
         }
 
         private void twainStateChanged(object sender, Twain32.TwainStateEventArgs e)
@@ -94,14 +100,10 @@ namespace WimDesktop.Presenters
 
             if (isAcquireInterfaceOpen)
             {
-                if (previousTwainStateFlags.Contains("DSEnabled") && !currentStateFlags.Contains("DSEnabled"))
+                if (previousTwainStateFlags.Contains("DSEnabled"))
                 {
                     isAcquireInterfaceOpen = false;
-
-                    examContainerView.selectedExamView.BeginInvoke((MethodInvoker)(() =>
-                    {
-                        twain.CloseDSM();
-                    }));
+                    twain.CloseDSM();
                 }
             }
 
@@ -151,16 +153,12 @@ namespace WimDesktop.Presenters
                 int examImages = examContainerView.selectedExamView.examImages.Count();
                 int frames = examContainerView.selectedExamView.templateFrames.Count();
 
-                if (examImages < frames)
+                if (examImages == frames)
                 {
-                    if (frames - examImages == 1)
-                    {
-                        twain.DisableAfterAcquire = true;
-                    }
-
-                    isAcquireInterfaceOpen = true;
-                    twain.Acquire();
+                    return;
                 }
+
+                openTwain(sender, EventArgs.Empty);
             }
         }
 
@@ -168,8 +166,6 @@ namespace WimDesktop.Presenters
         {
             twain.OpenDSM();
             twain.OpenDataSource();
-            
-            twain.DisableAfterAcquire = !examContainerView.selectedExamView.twainAutoTake;
             twain.Capabilities.XferMech.Set(TwSX.Native);
 
             isAcquireInterfaceOpen = true;

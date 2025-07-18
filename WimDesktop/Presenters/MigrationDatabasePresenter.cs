@@ -205,7 +205,7 @@ namespace WimDesktop.Presenters
 
             if (Directory.Exists(migrationDataDir))
             {
-                Directory.Delete(migrationDataDir);
+                Directory.Delete(migrationDataDir, true);
             }
 
             string scriptPath = Path.Combine(wimMigrationPath, @"SQLGenerateCSV.sql");
@@ -222,11 +222,13 @@ namespace WimDesktop.Presenters
 
             string migrationPath = "C:/WimDesktopDB/migration/data";
 
-            if (!Directory.Exists(migrationPath))
+            if (Directory.Exists(migrationPath))
             {
-                Directory.CreateDirectory(migrationPath);
+                Directory.Delete(migrationPath, true);
             }
 
+            Directory.CreateDirectory(migrationPath);
+            
             sb.AppendLine($"CALL CSVWRITE('{Path.Combine(migrationPath, "settings.csv").Replace("\\", "/")}', " +
                 "'SELECT 1 as ID, ''pt-BR'' AS LANGUAGE, ''C:\\IRay\\IRayIntraoral_x86\\work_dir'' AS SENSOR_PATH, " +
                 "''C:\\WimDesktopDB\\img'' AS EXAM_PATH, ''PLUTO0002X'' AS SENSOR_MODEL, 0 AS ACQUIRE_MODE, " +

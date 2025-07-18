@@ -33,6 +33,7 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
             this.panelTools = new System.Windows.Forms.Panel();
+            this.buttonImportExamImage = new System.Windows.Forms.Button();
             this.buttonRotate = new System.Windows.Forms.Button();
             this.trackBarOpacity = new System.Windows.Forms.TrackBar();
             this.labelOpacity = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.buttonOverlay = new System.Windows.Forms.Button();
             this.dialogFileImage = new System.Windows.Forms.OpenFileDialog();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonImportExamImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarOpacity)).BeginInit();
@@ -85,6 +85,14 @@
             this.panelTools.Controls.Add(this.buttonOverlay);
             resources.ApplyResources(this.panelTools, "panelTools");
             this.panelTools.Name = "panelTools";
+            // 
+            // buttonImportExamImage
+            // 
+            resources.ApplyResources(this.buttonImportExamImage, "buttonImportExamImage");
+            this.buttonImportExamImage.Image = global::WimDesktop.Properties.Resources.icon_32x32_open_exam;
+            this.buttonImportExamImage.Name = "buttonImportExamImage";
+            this.buttonImportExamImage.UseVisualStyleBackColor = true;
+            this.buttonImportExamImage.Click += new System.EventHandler(this.buttonImportExamImageClick);
             // 
             // buttonRotate
             // 
@@ -139,14 +147,6 @@
             this.tableLayoutPanel.BackColor = System.Drawing.Color.WhiteSmoke;
             resources.ApplyResources(this.tableLayoutPanel, "tableLayoutPanel");
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            // 
-            // buttonImportExamImage
-            // 
-            resources.ApplyResources(this.buttonImportExamImage, "buttonImportExamImage");
-            this.buttonImportExamImage.Image = global::WimDesktop.Properties.Resources.icon_32x32_import;
-            this.buttonImportExamImage.Name = "buttonImportExamImage";
-            this.buttonImportExamImage.UseVisualStyleBackColor = true;
-            this.buttonImportExamImage.Click += new System.EventHandler(this.buttonImportExamImageClick);
             // 
             // FramesComparisonView
             // 

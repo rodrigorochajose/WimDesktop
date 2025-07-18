@@ -235,7 +235,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonImportExamImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 8</value>
+    <value>430, 8</value>
   </data>
   <data name="buttonImportExamImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 44</value>
@@ -271,7 +271,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="buttonRotate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>709, 7</value>
+    <value>768, 7</value>
   </data>
   <data name="buttonRotate.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 44</value>
@@ -301,7 +301,7 @@
     <value>None</value>
   </data>
   <data name="trackBarOpacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>998, 13</value>
+    <value>1057, 13</value>
   </data>
   <data name="trackBarOpacity.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 45</value>
@@ -334,7 +334,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="labelOpacity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>925, 21</value>
+    <value>984, 21</value>
   </data>
   <data name="labelOpacity.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 15</value>
@@ -370,7 +370,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="buttonImportImage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>411, 8</value>
+    <value>277, 7</value>
   </data>
   <data name="buttonImportImage.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 44</value>
@@ -406,7 +406,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="buttonChangeSides.Location" type="System.Drawing.Point, System.Drawing">
-    <value>578, 7</value>
+    <value>637, 7</value>
   </data>
   <data name="buttonChangeSides.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 44</value>
@@ -442,7 +442,7 @@
     <value>MiddleLeft</value>
   </data>
   <data name="buttonOverlay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>809, 7</value>
+    <value>868, 7</value>
   </data>
   <data name="buttonOverlay.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 44</value>

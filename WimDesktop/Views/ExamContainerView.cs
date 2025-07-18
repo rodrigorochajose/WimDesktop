@@ -102,6 +102,11 @@ namespace WimDesktop.Views
 
             examView.eventAcquireTwain += (s, e) =>
             {
+                if (!twainInitialized)
+                {
+                    eventInitializeTwain?.Invoke(this, e);
+                }
+
                 eventOpenTwain?.Invoke(s, e);
             };
         }
