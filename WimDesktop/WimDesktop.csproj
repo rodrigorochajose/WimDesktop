@@ -113,7 +113,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildInfo.cs" />
     <Compile Include="Components\FrameTemplate.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -897,6 +896,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>%(Filename)%(Extension)</TargetPath>
     </Content>
+    <None Include="Resources\loadgif.gif" />
+    <None Include="Resources\spinner.gif" />
+    <None Include="Resources\loading.gif" />
     <None Include="Resources\icon_32x32_zoomin.png" />
     <None Include="Resources\icon_32x32_zoomout.png" />
     <None Include="Resources\icon-32x32-advanced-settings.png" />
@@ -926,7 +928,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>powershell -NoProfile -ExecutionPolicy Bypass -Command "&amp; { $d = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; $code = 'public static class BuildInfo { public static readonly string BuildDate = \"' + $d + '\"; }'; Set-Content -Path '$(ProjectDir)BuildInfo.cs' -Value $code }"
-</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

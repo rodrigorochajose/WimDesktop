@@ -337,17 +337,19 @@ namespace WimDesktop.Views
         {
             foreach (ImageInfoExport imgInfo in imagesInfo)
             {
+                bool watermarkOnTopLeft = checkWatermarkCorner(imgInfo.img);
+
                 Bitmap watermark = Resources.watermark;
 
                 PointF p = new PointF(0, 0);
 
-                if (imgInfo.orientation == 1)
+                if (watermarkOnTopLeft)
                 {
-                    p = new PointF(0, imgInfo.img.Height - watermark.Height - 40);
+                    p = new PointF(0, 0);
                 }
-                else if (imgInfo.orientation == 3)
+                else
                 {
-                    p = new PointF(imgInfo.img.Width - watermark.Width - 40, 0);
+                    p = new PointF(imgInfo.img.Width - watermark.Width - 40, imgInfo.img.Height - watermark.Height - 40);
                 }
 
                 using (Graphics g = Graphics.FromImage(imgInfo.img))
@@ -355,6 +357,29 @@ namespace WimDesktop.Views
                     g.DrawImage(watermark, p);
                 }
             }
+        }
+
+        public static bool checkWatermarkCorner(Bitmap image)
+        {
+            Rectangle topLeft = new Rectangle(0, 0, 100, 100);
+
+            byte threshold = 15;
+            long sum = 0;
+            int count = 0;
+
+            for (int y = topLeft.Top; y < topLeft.Bottom; y++)
+            {
+                for (int x = topLeft.Left; x < topLeft.Right; x++)
+                {
+                    Color pixel = image.GetPixel(x, y);
+                    sum += pixel.R;
+                    count++;
+                }
+            }
+
+            double average = (double)sum / count;
+
+            return average <= threshold;
         }
 
         private void getAndSaveDicomFile(Bitmap bitmap, string path)
