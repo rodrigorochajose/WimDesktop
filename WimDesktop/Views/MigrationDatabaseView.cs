@@ -190,9 +190,14 @@ namespace WimDesktop.Views
 
                         string examContentPath = Path.Combine(dataPath, filePath.Substring(0, index), "SR000001");
 
-                        if (File.Exists(examContentPath))
+                        if (File.Exists(examContentPath)) 
                         {
                             currentExamImages = getUsedImages(examContentPath, currentExamImages);
+
+                            if (!currentExamImages.Any())
+                            {
+                                continue;
+                            }
                         }
                         else
                         {
@@ -254,6 +259,11 @@ namespace WimDesktop.Views
             }
 
             currentExamImages = examImagesCDR.Where(ei => imagesIdentifier.Contains(ei.uid)).ToList();
+
+            if (!currentExamImages.Any())
+            {
+                return new List<ExamImageCDR>();
+            }
 
             examImagesCDR.RemoveAll(ei => ei.examId == currentExamImages.First().examId);
 
