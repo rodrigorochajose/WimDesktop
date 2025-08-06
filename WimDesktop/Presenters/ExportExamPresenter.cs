@@ -10,26 +10,18 @@ namespace WimDesktop.Presenters
     public class ExportExamPresenter
     {
         private readonly IExportExamView exportExamView;
-        private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
-        public ExportExamPresenter(IExportExamView view, int examId) 
+        public ExportExamPresenter(IExportExamView view) 
         {
             exportExamView = view;
 
             view.eventSaveExportPath += saveExportPath;
             view.eventGetExportPath += getExportPath;
 
-            getImageDrawings(examId);
-
             setWaterMark();
 
             (exportExamView as Form).ShowDialog();
-        }
-
-        private void getImageDrawings(int examId)
-        {
-            exportExamView.examImageDrawings = examImageDrawingRepository.getDrawings(examId).ToList();
         }
 
         private void saveExportPath(object sender, EventArgs e)

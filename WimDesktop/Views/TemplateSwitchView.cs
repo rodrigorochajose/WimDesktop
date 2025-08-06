@@ -12,11 +12,10 @@ namespace WimDesktop.Views
     public partial class TemplateSwitchView : Form, ITemplateSwitchView
     {
         public int selectedTemplateId { get; set; }
+        public List<TemplateFrameModel> templateFrameList { get; set; }
 
         public event EventHandler eventAddNewTemplate;
         public event EventHandler eventSwitchTemplate;
-
-        private List<TemplateFrameModel> templateFrameList;
 
         public TemplateSwitchView()
         {
@@ -24,7 +23,7 @@ namespace WimDesktop.Views
 
             associateEvents();
         }
-        
+
         private void associateEvents()
         {
             comboBoxTemplate.InnerControl.SelectionChangeCommitted += delegate
@@ -75,37 +74,9 @@ namespace WimDesktop.Views
 
             List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == selectedTemplateId).ToList();
 
-            foreach (TemplateFrameModel frame in framesToShow)
-            {
-                int height;
-                int width;
-                if (frame.orientation < 2)
-                {
-                    height = 35;
-                    width = 25;
-                }
-                else
-                {
-                    height = 25;
-                    width = 35;
-                }
+            List<Frame> frames = generateFrames(framesToShow);
 
-                Frame newFrame = new Frame
-                {
-                    Width = width,
-                    Height = height,
-                    BackColor = Color.Black,
-                    orientation = frame.orientation,
-                    order = frame.order
-                };
-
-                Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
-                Graphics graphics = Graphics.FromImage(image);
-                newFrame.Image = image;
-                newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
-
-                panelShowTemplate.Controls.Add(newFrame);
-            }
+            panelShowTemplate.Controls.AddRange(frames.ToArray());
         }
 
         private void clearTemplatePanel()
@@ -122,9 +93,19 @@ namespace WimDesktop.Views
         public void showCurrentTemplate(int templateId, string templateName)
         {
             labelCurrentTemplate.Text += $" - {templateName}";
+
             List<TemplateFrameModel> framesToShow = templateFrameList.Where(tl => tl.templateId == templateId).ToList();
 
-            foreach (TemplateFrameModel frame in framesToShow)
+            List<Frame> frames = generateFrames(framesToShow);
+
+            panelCurrentTemplate.Controls.AddRange(frames.ToArray());
+        }
+
+        private List<Frame> generateFrames(List<TemplateFrameModel> framesToGenerate)
+        {
+            List<Frame> framesList = new List<Frame>();
+
+            foreach (TemplateFrameModel frame in framesToGenerate)
             {
                 int height;
                 int width;
@@ -149,12 +130,13 @@ namespace WimDesktop.Views
                 };
 
                 Bitmap image = new Bitmap(newFrame.Width, newFrame.Height);
-                Graphics graphics = Graphics.FromImage(image);
                 newFrame.Image = image;
                 newFrame.Location = new Point(frame.locationX / 2, frame.locationY / 2);
 
-                panelCurrentTemplate.Controls.Add(newFrame);
+                framesList.Add(newFrame);
             }
+
+            return framesList;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace WimDesktop.Interface.IView
 
         bool waterMark { get; set; }
         List<Frame> framesToExport { get; set; }
-        List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
         event EventHandler eventSaveExportPath;
         event EventHandler eventGetExportPath;

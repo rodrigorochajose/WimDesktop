@@ -1,5 +1,6 @@
-﻿using WimDesktop.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using WimDesktop.Models;
+using WimDesktop.Models.Dto;
 
 namespace WimDesktop.Interface.IRepository
 {
@@ -8,9 +9,9 @@ namespace WimDesktop.Interface.IRepository
         void addPatient(PatientModel patient);
         void editPatient();
         void deletePatient(int patientId);
-        IEnumerable<PatientModel> getAllPatients();
+        List<PatientDataToListDto> getAllPatientsDataToList();
         PatientModel getPatientById(int patientid);
-        IEnumerable<PatientModel> getPatientsByName(string value);
+        List<PatientDataToListDto> getPatientsByName(string value);
         void importPatient(PatientModel patient);
     }
 }

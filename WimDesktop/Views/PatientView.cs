@@ -147,11 +147,4 @@ namespace WimDesktop.Views
             }
         }
     }
-
-    public class PatientModelDGV
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public DateTime? lastChange { get; set; }
-    }
 }

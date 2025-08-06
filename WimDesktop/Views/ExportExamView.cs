@@ -25,7 +25,6 @@ namespace WimDesktop.Views
         public string pathToExport { get; set; }
         public bool waterMark { get; set; }
         public List<Frame> framesToExport { get; set; }
-        public List<ExamImageDrawingModel> examImageDrawings { get; set; }
 
         private List<CheckBox> checkBoxFrames = new List<CheckBox>();
 

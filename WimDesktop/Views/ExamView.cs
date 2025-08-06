@@ -1337,8 +1337,7 @@ namespace WimDesktop.Views
                     pathImages = examPath,
                     framesToExport = framesWithImages,
                     patientName = patient.name
-                },
-                exam.id
+                }
             );
         }
 

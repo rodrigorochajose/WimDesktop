@@ -98,6 +98,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -193,6 +196,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ClinicModel.cs" />
+    <Compile Include="Models\Dto\PatientDataToListDto.cs" />
     <Compile Include="Models\ExamImageDrawingPointsModel.cs" />
     <Compile Include="Models\FrameDrawingHistory.cs" />
     <Compile Include="Interface\IRepository\ISettingsRepository.cs" />
@@ -728,6 +732,7 @@
     <EmbeddedResource Include="Views\TemplateView.resx">
       <DependentUpon>TemplateView.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

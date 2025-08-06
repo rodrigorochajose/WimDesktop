@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MoreLinq;
+using MoreLinq.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -6,10 +8,9 @@ using WimDesktop._Repositories;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
 using WimDesktop.Models;
+using WimDesktop.Models.Dto;
 using WimDesktop.Properties;
 using WimDesktop.Views;
-using MoreLinq;
-using MoreLinq.Extensions;
 
 namespace WimDesktop.Presenters
 {
@@ -17,7 +18,7 @@ namespace WimDesktop.Presenters
     {
         public PatientView view { get; }
 
-        private List<PatientModelDGV> patientsDGV = new List<PatientModelDGV>();
+        private List<PatientDataToListDto> patients = new List<PatientDataToListDto>();
         private readonly BindingSource patientBindingSource;
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IExamRepository examRepository = new ExamRepository();
@@ -49,7 +50,7 @@ namespace WimDesktop.Presenters
             DateTime dateFrom = view.checkBoxFromState ? view.dateFrom : new DateTime(2000, 01, 01);
             DateTime dateTo = view.checkBoxToState ? view.dateTo : DateTime.Now;
 
-            IEnumerable<PatientModelDGV> filteredPatients = patientsDGV
+            List<PatientDataToListDto> filteredPatients = patients
                 .Where(p =>
                     p.name.ToLower().Contains(view.searchedValue.ToLower()) &&
                     (p.lastChange ?? dateFrom.Date).Date >= dateFrom.Date &&
@@ -118,33 +119,24 @@ namespace WimDesktop.Presenters
 
         private void loadAllPatients()
         {
-            IEnumerable<PatientModel> patients = patientRepository.getAllPatients();
+            patients = patientRepository.getAllPatientsDataToList();
 
             if (patients.Any())
             {
                 view.selectedPatientId = patients.First().id;
 
-                patientsDGV = patients.Select(p => new PatientModelDGV
+                foreach (PatientDataToListDto patient in patients)
                 {
-                    id = p.id,
-                    name = p.name,
-                    lastChange = getLastUpdatedExam(p.id)
-                }).ToList();
+                    patient.lastChange = getLastUpdatedExam(patient.id);
+                }
 
-                patientBindingSource.DataSource = patientsDGV;
+                patientBindingSource.DataSource = patients;
             }
         }
 
         private DateTime? getLastUpdatedExam(int patientId)
         {
-            List<ExamModel> patientExams = examRepository.getPatientExams(patientId).OrderBy(pe => pe.updatedAt).ToList();
-
-            if (patientExams.Any())
-            {
-                return patientExams.First().updatedAt;
-            }
-
-            return null;
+            return examRepository.getPatientLastUpdatedExam(patientId);
         }
 
         private void openAllExams(object sender, EventArgs e)
@@ -184,11 +176,11 @@ namespace WimDesktop.Presenters
 
             if (view.columnNameToOrder == "columnPatientName")
             {
-                patientBindingSource.DataSource = view.isAsceding ? patientsDGV.OrderBy(p => p.name) : patientsDGV.OrderByDescending(p => p.name);
+                patientBindingSource.DataSource = view.isAsceding ? patients.OrderBy(p => p.name) : patients.OrderByDescending(p => p.name);
             }
             else
             {
-                patientBindingSource.DataSource = view.isAsceding ? patientsDGV.OrderBy(p => p.lastChange) : patientsDGV.OrderByDescending(p => p.lastChange);
+                patientBindingSource.DataSource = view.isAsceding ? patients.OrderBy(p => p.lastChange) : patients.OrderByDescending(p => p.lastChange);
 
             }
 

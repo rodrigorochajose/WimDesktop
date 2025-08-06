@@ -1,5 +1,6 @@
 ﻿using WimDesktop.Models;
 using System.Collections.Generic;
+using System;
 
 namespace WimDesktop.Interface.IRepository
 {
@@ -9,6 +10,7 @@ namespace WimDesktop.Interface.IRepository
         void deleteExam(int examId);
         int getExamId(ExamModel exam);
         ExamModel getExam (int examId);
+        DateTime getPatientLastUpdatedExam(int patientId);
         IEnumerable<ExamModel> getPatientExams(int patientId);
         bool examHasImages(int examId);
         void updateExamTemplate(int examId, int templateId);

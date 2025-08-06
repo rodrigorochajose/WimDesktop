@@ -67,6 +67,8 @@ namespace WimDesktop.Presenters
                     getPatients(connection);
                     getExams(connection);
                     getExamImages(connection);
+
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {

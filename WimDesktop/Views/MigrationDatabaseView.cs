@@ -18,6 +18,8 @@ namespace WimDesktop.Views
     {
         private readonly string wimMigrationPath = @"C:\WimDesktopDB\migration\tools\";
         private readonly string dataPath = "";
+        private string migrationErrors = "";
+
 
         public string software { get; set; }
         public List<PatientModel> patients { get; set; } = new List<PatientModel>();
@@ -68,6 +70,15 @@ namespace WimDesktop.Views
 
                 if (progressBar.Value >= progressBar.Maximum)
                 {
+                    if (!string.IsNullOrEmpty(migrationErrors))
+                    {
+                        File.WriteAllText(Path.Combine(@"C:\WimDesktopDB\migration", "migration_errors.txt"), migrationErrors);
+
+                        MessageBox.Show("Houveram erros ao realizar a migração! Verificar os arquivos de logs!");
+                        Close();
+                        return;
+                    }
+
                     MessageBox.Show(Resources.messageMigrationSuccess);
 
                     string[] directoriesToDelete = new string[]
@@ -190,7 +201,7 @@ namespace WimDesktop.Views
 
                         string examContentPath = Path.Combine(dataPath, filePath.Substring(0, index), "SR000001");
 
-                        if (File.Exists(examContentPath)) 
+                        if (File.Exists(examContentPath))
                         {
                             currentExamImages = getUsedImages(examContentPath, currentExamImages);
 
@@ -208,6 +219,11 @@ namespace WimDesktop.Views
                         if (currentExamImages.Any())
                         {
                             patientExam.templateId = getTemplateId(examContentPath, currentExamImages.Count);
+
+                            if (patientExam.templateId == 0)
+                            {
+                                continue;
+                            }
 
                             examToImport = patientExam;
                             eventImportExam?.Invoke(this, EventArgs.Empty);
@@ -272,41 +288,49 @@ namespace WimDesktop.Views
 
         private int getTemplateId(string path, int imagesCount)
         {
-            string content = File.ReadAllText(path, Encoding.Default);
-
-            int init = content.IndexOf("Sirona Dental");
-            int final = content.IndexOf("CDR");
-
-            string text = content.Substring(init, final - init);
-
-            string resultClean = Regex.Replace(text, @"[^\x20-\x7E]", "");
-
-            string[] parts = resultClean.Split(new string[] { "LO" }, StringSplitOptions.None);
-
-            ITemplateRepository templateRepository = new TemplateRepository();
-
-            List<TemplateModel> templates = templateRepository.getAllTemplates();
-
-            TemplateModel matchedTemplate = findMatch(parts, templates);
-
-            if (matchedTemplate != null)
+            try
             {
-                return matchedTemplate.id;
-            }
-            else
-            {
-                if (imagesCount < 6)
+                string content = File.ReadAllText(path, Encoding.Default);
+
+                int init = content.IndexOf("Sirona Dental");
+                int final = content.IndexOf("CDR");
+
+                string text = content.Substring(init, final - init);
+
+                string resultClean = Regex.Replace(text, @"[^\x20-\x7E]", "");
+
+                string[] parts = resultClean.Split(new string[] { "LO" }, StringSplitOptions.None);
+
+                ITemplateRepository templateRepository = new TemplateRepository();
+
+                List<TemplateModel> templates = templateRepository.getAllTemplates();
+
+                TemplateModel matchedTemplate = findMatch(parts, templates);
+
+                if (matchedTemplate != null)
                 {
-                    return 13;
-                }
-                else if (imagesCount < 16)
-                {
-                    return 14;
+                    return matchedTemplate.id;
                 }
                 else
                 {
-                    return 15;
+                    if (imagesCount < 6)
+                    {
+                        return 13;
+                    }
+                    else if (imagesCount < 16)
+                    {
+                        return 14;
+                    }
+                    else
+                    {
+                        return 15;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                migrationErrors += "" + ex.Message + "\n\n";
+                return 0;
             }
         }
 
@@ -397,9 +421,7 @@ namespace WimDesktop.Views
             {
                 string originFile = Path.Combine(dataPath, examImage.file + ".jpeg");
 
-                examImage.file = $"{examImage.order}_original.png";
-
-                string dest = Path.Combine(folderDest, examImage.file);
+                string dest = Path.Combine(folderDest, $"{examImage.order}_original.png");
 
                 await Task.Run(() => File.Copy(originFile, dest, overwrite: true));
             }

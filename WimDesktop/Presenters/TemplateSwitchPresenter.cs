@@ -16,57 +16,60 @@ namespace WimDesktop.Presenters
         private readonly int examId;
         private readonly int currentTemplateId;
 
-        private readonly ITemplateSwitchView templateSwitchView;
+        private readonly ITemplateSwitchView view;
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
         private readonly ITemplateRepository templateRepository = new TemplateRepository();
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
 
-        public TemplateSwitchPresenter(ITemplateSwitchView templateSwitchView, int examId, int templateId) 
+        public TemplateSwitchPresenter(ITemplateSwitchView view, int examId, int templateId) 
         {
-            this.templateSwitchView = templateSwitchView;
+            this.view = view;
             this.examId = examId;
             currentTemplateId = templateId;
 
-            templateSwitchView.setTemplateList(templateRepository.getAllTemplates());
-            templateSwitchView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
-            templateSwitchView.showCurrentTemplate(currentTemplateId, templateRepository.getTemplateNameById(currentTemplateId));
+            setTemplateAndTemplateFrameList();
+            view.showCurrentTemplate(currentTemplateId, templateRepository.getTemplateNameById(currentTemplateId));
 
-            templateSwitchView.eventAddNewTemplate += showAddTemplateForm;
-            templateSwitchView.eventSwitchTemplate += switchTemplate;
+            view.eventAddNewTemplate += showAddTemplateForm;
+            view.eventSwitchTemplate += switchTemplate;
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)
         {
             new TemplateCreationSetupPresenter(new TemplateCreationSetupView());
-            templateSwitchView.setTemplateList(templateRepository.getAllTemplates());
-            templateSwitchView.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
+            setTemplateAndTemplateFrameList();
+        }
+
+        private void setTemplateAndTemplateFrameList()
+        {
+            view.setTemplateList(templateRepository.getAllTemplates());
+            view.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
         }
 
         private void switchTemplate(object sender, EventArgs e)
         {
             List<ExamImageModel> examImages = examImageRepository.getExamImages(examId).ToList();
 
-            List<TemplateFrameModel> selectedTemplateFrames = templateFrameRepository.getTemplateFrame(templateSwitchView.selectedTemplateId);
-
-            if (examImages.Count() > selectedTemplateFrames.Count())
+            if (examImages.Count() > view.templateFrameList.Count())
             {
                 System.Windows.MessageBox.Show(Resources.messageSwitchTemplateNotAvailable);
                 return;
             }
 
-            examRepository.updateExamTemplate(examId, templateSwitchView.selectedTemplateId);
+            examRepository.updateExamTemplate(examId, view.selectedTemplateId);
 
             for (int counter = 0; counter < examImages.Count(); counter++)
             {
-                examImages[counter].templateFrameId = selectedTemplateFrames[counter].id;
+                examImages[counter].templateFrameId = view.templateFrameList[counter].id;
             }
 
             examImageRepository.save();
 
-            MessageBox.Show(Resources.messageSwitchTemplateSuccess, (templateSwitchView as Form).Text);
+            MessageBox.Show(Resources.messageSwitchTemplateSuccess, (view as Form).Text);
 
-            (templateSwitchView as Form).Close();
+            (view as Form).Close();
         }
+
     }
 }

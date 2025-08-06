@@ -91,7 +91,7 @@ namespace WimDesktop.Presenters
 
         private void deletePatient(object sender, EventArgs e)
         {
-            if (examRepository.getPatientExams(view.patientId).Any())
+            if (examBindingSource.Count > 0)
             {
                 MessageBox.Show(Resources.messagePatientCannotDelete);
                 return;
@@ -117,13 +117,12 @@ namespace WimDesktop.Presenters
         {
             IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
 
-            PatientModel selectedPatient = patientRepository.getPatientById(view.patientId);
-            examTemplateSelectionView.patientId = selectedPatient.id;
-            examTemplateSelectionView.patientName = selectedPatient.name;
-            examTemplateSelectionView.patientBirthDate = selectedPatient.birthDate;
-            examTemplateSelectionView.patientPhone = selectedPatient.phone;
-            examTemplateSelectionView.patientRecommendation = selectedPatient.recommendation;
-            examTemplateSelectionView.patientObservation = selectedPatient.observation;
+            examTemplateSelectionView.patientId = view.patientId;
+            examTemplateSelectionView.patientName = view.patientName;
+            examTemplateSelectionView.patientBirthDate = view.patientBirthDate;
+            examTemplateSelectionView.patientPhone = view.patientPhone;
+            examTemplateSelectionView.patientRecommendation = view.patientRecommendation;
+            examTemplateSelectionView.patientObservation = view.patientObservation;
 
             FormManager.instance.closeAllExceptExamAndMenu();
 
@@ -179,6 +178,8 @@ namespace WimDesktop.Presenters
 
         private void exportExam(object sender, EventArgs e)
         {
+            // isso deveria ser lógica do presenter de export exam
+
             ExamModel selectedExam = examRepository.getExam(view.selectedExamId);
 
             List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
@@ -235,8 +236,7 @@ namespace WimDesktop.Presenters
                     pathImages = examPath,
                     framesToExport = frames,
                     patientName = selectedExam.patient.name
-                },
-                view.selectedExamId
+                }
             );
         }
 

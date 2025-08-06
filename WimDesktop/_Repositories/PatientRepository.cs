@@ -1,11 +1,12 @@
-﻿using WimDesktop.Interface.IRepository;
-using WimDesktop.Models;
-using WimDesktop.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
+using WimDesktop.Interface.IRepository;
+using WimDesktop.Models;
+using WimDesktop.Models.Dto;
+using WimDesktop.Properties;
 
 namespace WimDesktop._Repositories
 {
@@ -56,9 +57,13 @@ namespace WimDesktop._Repositories
             }
         }
 
-        public IEnumerable<PatientModel> getAllPatients()
+        public List<PatientDataToListDto> getAllPatientsDataToList()
         {
-            return context.patient;
+            return context.patient.Select(p => new PatientDataToListDto
+            {
+                id = p.id,
+                name = p.name
+            }).ToList();
         }
 
         public PatientModel getPatientById(int patientId)
@@ -66,9 +71,9 @@ namespace WimDesktop._Repositories
             return context.patient.Single(p => p.id == patientId);
         }
 
-        public IEnumerable<PatientModel> getPatientsByName(string value)
+        public List<PatientDataToListDto> getPatientsByName(string value)
         {
-            return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower()));
+            return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower())).Select(p => new PatientDataToListDto { id = p.id, name = p.name }).ToList();
         }
 
         public void importPatient (PatientModel patient)

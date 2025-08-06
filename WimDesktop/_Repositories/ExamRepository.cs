@@ -56,6 +56,14 @@ namespace WimDesktop._Repositories
             return context.exam.Where(e => e.id == examId).Include(e => e.patient).Include(e => e.template).First();
         }
 
+        public DateTime getPatientLastUpdatedExam(int patientId)
+        {
+            return context.exam.Where(e => e.patientId == patientId)
+                .OrderByDescending(e => e.updatedAt)
+                .Select(e => e.updatedAt)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<ExamModel> getPatientExams(int patientId)
         {
             return context.exam.Where(e => e.patientId == patientId).Include(e => e.template).AsNoTracking().ToList();

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WimDesktop.Models.Dto;
 
 namespace WimDesktop.Presenters
 {
@@ -14,7 +15,7 @@ namespace WimDesktop.Presenters
     {
         public ExamPatientSelectionView view { get; }
 
-        private IEnumerable<PatientModel> patientList;
+        private IEnumerable<PatientDataToListDto> patients;
         private readonly BindingSource pacientesBindingSource;
 
         private readonly IPatientRepository patientRepository = new PatientRepository();
@@ -35,12 +36,12 @@ namespace WimDesktop.Presenters
 
         private void loadAllPatients()
         {
-            patientList = patientRepository.getAllPatients();
+            patients = patientRepository.getAllPatientsDataToList();
 
-            if (patientList.Any())
+            if (patients.Any())
             {
-                view.selectedPatientId = patientList.First().id;
-                pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+                view.selectedPatientId = patients.First().id;
+                pacientesBindingSource.DataSource = patients;
                 view.dataGridViewHandler();
             }
         }
@@ -55,9 +56,10 @@ namespace WimDesktop.Presenters
 
         private void searchPatient(object sender, EventArgs e)
         {
+            // verificar essa lógica
             bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
-            patientList = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatients();
-            pacientesBindingSource.DataSource = patientList.Select(p => new { p.id, p.name, p.birthDate, p.phone });
+            patients = emptyValue == false ? patientRepository.getPatientsByName(view.searchedValue) : patientRepository.getAllPatientsDataToList();
+            pacientesBindingSource.DataSource = patients;
         }
 
         private void showSelectTemplateForm(object sender, EventArgs e)

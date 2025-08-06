@@ -7,6 +7,7 @@ namespace WimDesktop.Interface.IView
     public interface ITemplateSwitchView
     {
         int selectedTemplateId { get; set; }
+        List<TemplateFrameModel> templateFrameList { get; set; }
 
         event EventHandler eventAddNewTemplate;
         event EventHandler eventSwitchTemplate;

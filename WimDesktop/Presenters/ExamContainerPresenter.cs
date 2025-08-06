@@ -158,6 +158,7 @@ namespace WimDesktop.Presenters
                     return;
                 }
 
+                System.Threading.Thread.Sleep(2000);
                 openTwain(sender, EventArgs.Empty);
             }
         }
