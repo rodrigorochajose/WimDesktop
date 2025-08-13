@@ -1,80 +1,126 @@
-﻿using WimDesktop.Interface.IView;
-using WimDesktop.Properties;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime;
 using System.Windows.Forms;
+using WimDesktop.Interface.IView;
+using WimDesktop.Models;
+using WimDesktop.Presenters;
+using WimDesktop.Properties;
 
 namespace WimDesktop.Views
 {
     public partial class ExamContainerView : Form, IExamContainerView
     {
         public int patientId { get; set; }
-        public List<int> openExamsId { get; set; }
+        public List<ExamModel> patientExams { get; set; }
         public ExamView selectedExamView { get; set; }
         public bool twainInitialized { get; set; }
         public bool sensorConnected { get; set; }
 
+        private readonly SettingsModel settings;
+
         public event EventHandler eventConnectSensor;
         public event EventHandler eventDestroySensor;
-        public event EventHandler eventGetSensorInfo;
+        public event EventHandler eventSetSensorInfo;
         public event EventHandler eventOpenTwain;
         public event EventHandler eventInitializeTwain;
         public event EventHandler eventCloseTwain;
 
-        public ExamContainerView(IExamView examView)
-        {
-            openExamsId = new List<int>();
-            
-            selectedExamView = examView as ExamView;
-        }
-
-        public void initialize()
+        public ExamContainerView(ExamView view)
         {
             InitializeComponent();
-            addNewPage(selectedExamView);
+
+            DoubleBuffered = true;
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             if (!sensorConnected)
             {
                 MessageBox.Show(Resources.messageSensorCannotConnect);
             }
+
+            createExamPage(view);
+
+            Show();
         }
 
-        private void examContainerViewLoad(object sender, EventArgs e)
+        public ExamContainerView(List<ExamModel> patientExams, int patientId, SettingsModel settings)
         {
-            tabControl.Selected += (s, ev) =>
+            InitializeComponent();
+
+            this.patientExams = patientExams;
+            this.settings = settings;
+            this.patientId = patientId;
+
+            ExamView firstExamView = generateExamView(patientExams.First());
+
+            createExamPage(firstExamView);
+
+            if (!sensorConnected)
             {
-                if (ev.TabPage != null)
-                {
-                    Form examScreen = ev.TabPage.Controls.OfType<Form>().First();
-                    selectedExamView = examScreen as ExamView;
-                }
-            };
+                MessageBox.Show(Resources.messageSensorCannotConnect);
+            }
+
+            Show();
+
+            loadContainerContent();
         }
 
-        public void addNewPage(IExamView examView)
+        private void loadContainerContent()
         {
-            associateEvents(examView);
+            foreach (ExamModel exam in patientExams.Skip(1))
+            {
+                TabPage newTabPage = new TabPage
+                {
+                    Name = $"tabPage{tabControl.TabCount + 1}",
+                    Text = exam.createdAt.ToString(),
+                    Tag = false
+                };
 
+                tabControl.TabPages.Add(newTabPage);
+            }
+        }
+
+        private ExamView generateExamView(ExamModel exam)
+        {
+            ExamView newExamView = new ExamView(exam, patientId, settings);
+
+            new ExamPresenter(newExamView, true);
+
+            associateExamEvents(newExamView);
+
+            return newExamView;
+        }
+
+        private void createExamPage(IExamView examView)
+        {
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
                 Text = examView.exam.createdAt.ToString(),
-                Margin = new Padding(3)
+                Tag = true
             };
 
             selectedExamView = examView as ExamView;
-            eventGetSensorInfo?.Invoke(this, EventArgs.Empty);
+            eventSetSensorInfo?.Invoke(this, EventArgs.Empty);
 
-            openExamsId.Add(examView.exam.id);
-            addFormIntoPage(newTabPage, examView as Form);
+            loadExamIntoPage(newTabPage, examView as Form);
 
             tabControl.TabPages.Add(newTabPage);
             tabControl.SelectedTab = newTabPage;
         }
 
-        private void associateEvents(IExamView examView)
+        private void loadExamIntoPage(TabPage tabPage, Form examView)
+        {
+            examView.TopLevel = false;
+            examView.Dock = DockStyle.Fill;
+
+            tabPage.Controls.Add(examView);
+            examView.Show();
+        }
+
+        private void associateExamEvents(IExamView examView)
         {
             examView.eventCloseSingleExam += (s, e) =>
             {
@@ -111,14 +157,27 @@ namespace WimDesktop.Views
             };
         }
 
-        private void addFormIntoPage(TabPage tabPage, Form examView)
+        private void examContainerViewLoad(object sender, EventArgs e)
         {
-            examView.TopLevel = false;
-            examView.Dock = DockStyle.Fill;
+            tabControl.Selected += (s, ev) =>
+            {
+                if (!(bool)ev.TabPage.Tag)
+                {
+                    ExamModel selectedExam = patientExams.FirstOrDefault(ex => ev.TabPage.Text == ex.createdAt.ToString());
 
-            tabPage.Controls.Add(examView);
-            examView.Show();
-            Show();
+                    if (selectedExam == null)
+                    {
+                        MessageBox.Show(Resources.messageExamErrorOnLoad);
+                    }
+                    ev.TabPage.Tag = true;
+
+                    ExamView examViewToLoad = generateExamView(selectedExam);
+
+                    loadExamIntoPage(ev.TabPage, examViewToLoad);
+
+                    selectedExamView = examViewToLoad;
+                }
+            };
         }
 
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
@@ -143,8 +202,6 @@ namespace WimDesktop.Views
                 Close();
                 return;
             }
-
-            openExamsId.Remove((sender as ExamView).exam.id);
 
             foreach (TabPage tp in tabControl.TabPages)
             {
