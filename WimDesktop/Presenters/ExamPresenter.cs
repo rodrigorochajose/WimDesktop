@@ -19,13 +19,18 @@ namespace WimDesktop.Presenters
         private readonly IExamView examView;
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
+        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly IExamImageDrawingRepository examImageDrawingRepository = new ExamImageDrawingRepository();
         private readonly IExamImageDrawingPointsRepository examImageDrawingPointsRepository = new ExamImageDrawingPointsRepository();
         private readonly IRulerLengthRepository rulerLengthRepository = new RulerLengthRepository();
+        private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
+        private readonly string examOpeningMode;
 
-        public ExamPresenter(IExamView view, bool openingExam)
+        public ExamPresenter(IExamView view, bool openingExam, string examOpeningMode)
         {
+            this.examOpeningMode = examOpeningMode;
+            
             examView = view;
             examView.settings = settingsRepository.getAllSettings();
             associateEvents();
@@ -38,6 +43,8 @@ namespace WimDesktop.Presenters
             {
                 saveExam(this, EventArgs.Empty);
             }
+
+            initializeExam();
         }
 
         public void associateEvents()
@@ -46,22 +53,45 @@ namespace WimDesktop.Presenters
             examView.eventUpdateExamLastChange += updateExamLastChange;
             examView.eventSaveExamImage += saveExamImage;
             examView.eventSaveExamImageDrawing += saveExamImageDrawing;
-            examView.eventNewExam += createNewExam;
-            examView.eventExportExam += exportExam;
+            examView.eventGetPatient += getPatient;
+        }
+
+        public void initializeExam()
+        {
+            if (examOpeningMode == "newContainer")
+            {
+                new ExamContainerPresenter(new ExamContainerView(examView as ExamView), examView.patient.id);
+            }
+            else
+            {
+                Form examContainerView = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
+
+                if ((examContainerView as ExamContainerView).patientId != examView.patient.id)
+                {
+                    examContainerView.Close();
+                    new ExamContainerPresenter(new ExamContainerView(examView as ExamView), examView.patient.id);
+                }
+                else if (!(examContainerView as ExamContainerView).openExamsId.Contains(examView.exam.id))
+                {
+                    (examContainerView as ExamContainerView).addNewPage(examView);
+                }
+                else
+                {
+                    MessageBox.Show(Resources.messageExamIsOpened);
+                }
+            }
         }
 
         private void loadFullExam()
         {
             try
             {
-                ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
-
                 ExamModel exam = examRepository.getExam(examView.exam.id);
                 examView.exam.sessionName = exam.sessionName;
 
                 examView.setLabelPatientTemplate(exam.patient.name, exam.template.name);
 
-                examView.examPath = Path.Combine(settingsRepository.getExamPath(), $"{examView.patientId}\\{examView.exam.id}");
+                examView.examPath = Path.Combine(settingsRepository.getExamPath(), $"{examView.patient.id}\\{examView.exam.id}");
                 examView.templateId = exam.templateId;
                 examView.templateFrames = templateFrameRepository.getTemplateFrame(exam.templateId);
                 examView.examImages = examImageRepository.getExamImages(examView.exam.id).ToList();
@@ -103,7 +133,7 @@ namespace WimDesktop.Presenters
             {
                 ExamModel exam = new ExamModel
                 {
-                    patientId = examView.patientId,
+                    patientId = examView.patient.id,
                     templateId = examView.templateId,
                     sessionName = examView.exam.sessionName,
                     createdAt = DateTime.Now
@@ -244,14 +274,10 @@ namespace WimDesktop.Presenters
             }
         }
 
-        private void createNewExam(object sender, EventArgs e)
+        private void getPatient(object sender, EventArgs e)
         {
-            new ExamTemplateSelectionPresenter(new ExamTemplateSelectionView(), examView.patientId);
+            examView.patient = patientRepository.getPatientById(examView.patient.id);
         }
-
-        private void exportExam(object sender, EventArgs e)
-        {
-            new ExportExamPresenter(new ExportExamView(), examView.patientId, examView.exam.id);
-        }
+        
     }
 }

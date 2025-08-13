@@ -9,7 +9,6 @@ namespace WimDesktop.Interface.IRepository
         void addExam(ExamModel exam);
         void deleteExam(int examId);
         int getExamId(ExamModel exam);
-        int getTemplateId(int examId);
         ExamModel getExam (int examId);
         DateTime getPatientLastUpdatedExam(int patientId);
         IEnumerable<ExamModel> getPatientExams(int patientId);

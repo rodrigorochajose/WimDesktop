@@ -9,7 +9,6 @@ namespace WimDesktop.Interface.IRepository
         void addPatient(PatientModel patient);
         void editPatient();
         void deletePatient(int patientId);
-        string getPatientName(int patientId);
         List<PatientDataToListDto> getAllPatientsDataToList();
         PatientModel getPatientById(int patientid);
         List<PatientDataToListDto> getPatientsByName(string value);

@@ -51,11 +51,6 @@ namespace WimDesktop._Repositories
             return context.exam.OrderByDescending(e => e.id).First().id;
         }
 
-        public int getTemplateId(int examId)
-        {
-            return context.exam.Where(e => e.id == examId).Select(e => e.templateId).First();
-        }
-
         public ExamModel getExam(int examId)
         {
             return context.exam.Where(e => e.id == examId).Include(e => e.patient).Include(e => e.template).First();

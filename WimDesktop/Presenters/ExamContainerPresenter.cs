@@ -59,27 +59,18 @@ namespace WimDesktop.Presenters
             //}
             //else
             //{
-            //    iRayConnectSensor(this, EventArgs.Empty);
+            //    connectSensor(this, EventArgs.Empty);
             //    examContainerView.twainInitialized = false;
             //}
-        }
 
-        public ExamContainerPresenter(IExamContainerView view)
-        {
-            examContainerView = view as ExamContainerView;
-
-            associateEvents();
-
-            checkSensorStatus();
-
-            setDefaultSensor();
+            examContainerView.initialize();
         }
 
         private void associateEvents()
         {
-            examContainerView.eventConnectSensor += iRayConnectSensor;
+            examContainerView.eventConnectSensor += connectSensor;
             examContainerView.eventDestroySensor += destroySensor;
-            examContainerView.eventSetSensorInfo += setSensorInfo;
+            examContainerView.eventGetSensorInfo += getSensorInfo;
             examContainerView.eventOpenTwain += openTwain;
             examContainerView.eventInitializeTwain += initializeTwain;
             examContainerView.eventCloseTwain += closeTwain;
@@ -197,26 +188,27 @@ namespace WimDesktop.Presenters
             setConnectedSensor(sensorModel);
         }
 
-        private void iRayConnectSensor(object sender, EventArgs e)
+        private void connectSensor(object sender, EventArgs e)
         {
             try
             {
-                string workDir = iRayGetWorkDir();
+                string workDir = getWorkDir();
 
-                if (!workDir.Any())
+                if (workDir.Any())
+                {
+                    sensorId = Detector.CreateDetector(workDir, this);
+                    Detector d = Detector.DetectorList[sensorId];
+
+                    d.Connect();
+
+                    string sensor = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
+
+                    setConnectedSensor(sensor);
+                }
+                else
                 {
                     setDefaultSensor();
-                    return;
                 }
-
-                sensorId = Detector.CreateDetector(workDir, this);
-                Detector d = Detector.DetectorList[sensorId];
-
-                d.Connect();
-
-                string sensor = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
-
-                setConnectedSensor(sensor);
             }
             catch
             {
@@ -272,16 +264,18 @@ namespace WimDesktop.Presenters
 
             SensorModel matchedSensor = sensors.FirstOrDefault(s => s.name == sensor);
             
-            if (matchedSensor == null)
+            if (matchedSensor != null)
+            {
+                connectedSensor = matchedSensor;
+            }
+            else
             {
                 setDefaultSensor();
-                return;
             }
 
-            connectedSensor = matchedSensor;
         }
 
-        private string iRayGetWorkDir()
+        private string getWorkDir()
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
             {
@@ -335,13 +329,13 @@ namespace WimDesktop.Presenters
             }
         }
 
-        private void setSensorInfo(object sender, EventArgs e)
+        private void getSensorInfo(object sender, EventArgs e)
         {
             examContainerView.selectedExamView.sensorConnected = true;
             examContainerView.selectedExamView.sensor = connectedSensor;
         }
 
-        private void iRaySetSensorOption()
+        private void setSensorOption()
         {
             Detector d = Detector.DetectorList[sensorId];
 
@@ -371,7 +365,7 @@ namespace WimDesktop.Presenters
                         {
                             case SdkInterface.Cmd_Connect:
                                 //MessageBox.Show("Sensor Conectado");
-                                iRaySetSensorOption();
+                                setSensorOption();
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");

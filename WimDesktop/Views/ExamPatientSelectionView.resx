@@ -400,13 +400,28 @@
     <value>Nome</value>
   </data>
   <data name="columnName.Width" type="System.Int32, mscorlib">
-    <value>592</value>
+    <value>250</value>
+  </data>
+  <metadata name="columnBirthDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="columnBirthDate.HeaderText" xml:space="preserve">
+    <value>Data de Nascimento</value>
+  </data>
+  <data name="columnBirthDate.Width" type="System.Int32, mscorlib">
+    <value>175</value>
+  </data>
+  <metadata name="columnPhone.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="columnPhone.HeaderText" xml:space="preserve">
+    <value>Telefone</value>
+  </data>
+  <data name="columnPhone.Width" type="System.Int32, mscorlib">
+    <value>170</value>
   </data>
   <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
     <value>25, 163</value>
-  </data>
-  <data name="dataGridViewPatient.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
   </data>
   <data name="dataGridViewPatient.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 330</value>
@@ -1117,6 +1132,18 @@
     <value>columnName</value>
   </data>
   <data name="&gt;&gt;columnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnBirthDate.Name" xml:space="preserve">
+    <value>columnBirthDate</value>
+  </data>
+  <data name="&gt;&gt;columnBirthDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnPhone.Name" xml:space="preserve">
+    <value>columnPhone</value>
+  </data>
+  <data name="&gt;&gt;columnPhone.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

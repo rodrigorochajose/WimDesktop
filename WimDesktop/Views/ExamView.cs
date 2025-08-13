@@ -19,7 +19,7 @@ namespace WimDesktop.Views
     public partial class ExamView : Form, IExamView
     {
         public ExamModel exam { get; set; } = new ExamModel();
-        public int patientId { get; set; }
+        public PatientModel patient { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
         public Frame selectedFrame { get; set; }
@@ -38,11 +38,10 @@ namespace WimDesktop.Views
         public event EventHandler eventUpdateExamLastChange;
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
+        public event EventHandler eventGetPatient;
         public event EventHandler eventCloseSingleExam;
         public event EventHandler eventChangeAcquireMode;
         public event EventHandler eventAcquireTwain;
-        public event EventHandler eventNewExam;
-        public event EventHandler eventExportExam;
 
         int action = 0;
         int indexFrame = 0;
@@ -87,16 +86,16 @@ namespace WimDesktop.Views
 
         string recyclePath;
 
-        public ExamView(int patientId, string patientName, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
+        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
         {
             InitializeComponent();
 
             ActiveControl = labelPatientName;
 
-            exam.sessionName = sessionName;
-            this.patientId = patientId;
+            this.exam.sessionName = sessionName;
+            this.patient = patient;
             this.templateId = templateId;
-            setLabelPatientTemplate(patientName, templateName);
+            setLabelPatientTemplate(patient.name, templateName);
             this.templateFrames = templateFrames;
 
             this.settings = settings;
@@ -118,12 +117,12 @@ namespace WimDesktop.Views
             };
         }
 
-        public ExamView(ExamModel exam, int patientId, SettingsModel settings)
+        public ExamView(ExamModel exam, PatientModel patient, SettingsModel settings)
         {
             InitializeComponent();
 
             this.exam = exam;
-            this.patientId = patientId;
+            this.patient = patient;
 
             this.settings = settings;
             associateSettings();
@@ -135,10 +134,10 @@ namespace WimDesktop.Views
                 drawTemplate();
 
                 setInitialFrame();
+                loadExamDrawings();
 
                 if (examImageDrawings.Any())
                 {
-                    loadExamDrawings();
                     selectedDrawingHistoryHandler();
                 }
 
@@ -194,6 +193,7 @@ namespace WimDesktop.Views
 
             selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            selectedDrawingHistoryHandler();
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -203,12 +203,12 @@ namespace WimDesktop.Views
 
         private void examViewResize(object sender, EventArgs e)
         {
-            //IExamContainerView container = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
+            IExamContainerView container = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
 
-            //if (container == null)
-            //{
-            //    return;
-            //}
+            if (container == null)
+            {
+                return;
+            }
 
             mainPictureBoxPreviousSize = mainPictureBox.Size;
 
@@ -254,7 +254,7 @@ namespace WimDesktop.Views
 
         private void associateSettings()
         {
-            examPath = Path.Combine(settings.examPath, $"{patientId}\\{exam.id}");
+            examPath = Path.Combine(settings.examPath, $"{patient.id}\\{exam.id}");
             recyclePath = Path.Combine(examPath, "recycle");
 
             if (!Directory.Exists(examPath))
@@ -287,8 +287,18 @@ namespace WimDesktop.Views
         {
             foreach (TemplateFrameModel frame in templateFrames)
             {
-                int height = (frame.orientation < 2) ? 35 : 25;
-                int width = (frame.orientation < 2) ? 25 : 35;
+                int height;
+                int width;
+                if (frame.orientation < 2)
+                {
+                    height = 35;
+                    width = 25;
+                }
+                else
+                {
+                    height = 25;
+                    width = 35;
+                }
 
                 Frame newFrame = new Frame
                 {
@@ -363,125 +373,128 @@ namespace WimDesktop.Views
 
         private void loadExamDrawings()
         {
-            Dictionary<string, Func<ExamImageDrawingModel, IDrawing>> getDrawingModelByType = new Dictionary<string, Func<ExamImageDrawingModel, IDrawing>>
+            if (examImageDrawings != null)
             {
+                Dictionary<string, Func<ExamImageDrawingModel, IDrawing>> getDrawingModelByType = new Dictionary<string, Func<ExamImageDrawingModel, IDrawing>>
                 {
-                    "Arrow",
-                    (drawing) => {
-                        return new Arrow
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points
-                        };
-                    }
-                },
-                {
-                    "Ellipse",
-                    (drawing) => {
-                        return new Ellipse
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points
-                        };
-                    }
-                },
-                {
-                    "RectangleDraw",
-                    (drawing) => {
-                        return new RectangleDraw
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points
-                        };
-                    }
-                },
-                {
-                    "FreeDraw",
-                    (drawing) => {
-                        return new FreeDraw
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points,
-                        };
-                    }
-                },
-                {
-                    "Text",
-                    (drawing) => {
-                        return new Text
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points,
-                            text = drawing.drawingText,
-                            font = new Font("Arial", drawing.drawingSize),
-                            brush = new SolidBrush(Color.FromArgb(int.Parse(drawing.drawingColor))),
-                        };
-                    }
-                },
-                {
-                    "Ruler",
-                    (drawing) =>
                     {
-                        Ruler ruler = new Ruler
-                        {
-                            id = drawing.id,
-                            examImageId = drawing.examImageId,
-                            graphicsPath = new GraphicsPath(),
-                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                            drawingSize = drawing.drawingSize,
-                            points = drawing.points,
-                            lineLength = drawing.lineLength,
-                            multiple = false,
-                        };
-
-                        if (ruler.points.Count > 2)
-                        {
-                            ruler.multiple = true;
+                        "Arrow",
+                        (drawing) => {
+                            return new Arrow
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
                         }
+                    },
+                    {
+                        "Ellipse",
+                        (drawing) => {
+                            return new Ellipse
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
+                        }
+                    },
+                    {
+                        "RectangleDraw",
+                        (drawing) => {
+                            return new RectangleDraw
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points
+                            };
+                        }
+                    },
+                    {
+                        "FreeDraw",
+                        (drawing) => {
+                            return new FreeDraw
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                            };
+                        }
+                    },
+                    {
+                        "Text",
+                        (drawing) => {
+                            return new Text
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                                text = drawing.drawingText,
+                                font = new Font("Arial", drawing.drawingSize),
+                                brush = new SolidBrush(Color.FromArgb(int.Parse(drawing.drawingColor))),
+                            };
+                        }
+                    },
+                    {
+                        "Ruler",
+                        (drawing) =>
+                        {
+                            Ruler ruler = new Ruler
+                            {
+                                id = drawing.id,
+                                examImageId = drawing.examImageId,
+                                graphicsPath = new GraphicsPath(),
+                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                                drawingSize = drawing.drawingSize,
+                                points = drawing.points,
+                                lineLength = drawing.lineLength,
+                                multiple = false,
+                            };
 
-                        return ruler;
+                            if (ruler.points.Count > 2)
+                            {
+                                ruler.multiple = true;
+                            }
+
+                            return ruler;
+                        }
                     }
-                }
-            };
+                };
 
-            List<IDrawing> frameDrawings = new List<IDrawing>();
-            foreach (ExamImageDrawingModel examImageDrawing in examImageDrawings)
-            {
-                frameDrawings.Add(getDrawingModelByType[examImageDrawing.drawingType].Invoke(examImageDrawing));
-            }
-
-            foreach (IDrawing drawing in frameDrawings)
-            {
-                List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == examImages.FirstOrDefault(ei => ei.id == drawing.examImageId).templateFrameId).drawingHistory;
-
-                currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
+                List<IDrawing> frameDrawings = new List<IDrawing>();
+                foreach (ExamImageDrawingModel examImageDrawing in examImageDrawings)
                 {
-                    drawing
-                });
-            }
+                    frameDrawings.Add(getDrawingModelByType[examImageDrawing.drawingType].Invoke(examImageDrawing));
+                }
 
-            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                foreach (IDrawing drawing in frameDrawings)
+                {
+                    List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == examImages.FirstOrDefault(ei => ei.id == drawing.examImageId).templateFrameId).drawingHistory;
+
+                    currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
+                    {
+                        drawing
+                    });
+                }
+
+                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+            }
         }
 
         private void loadFrameData(Image image)
@@ -1161,7 +1174,17 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
-            eventNewExam?.Invoke(this, EventArgs.Empty);
+            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
+            eventGetPatient?.Invoke(this, e);
+
+            examTemplateSelectionView.patientId = patient.id;
+            examTemplateSelectionView.patientName = patient.name;
+            examTemplateSelectionView.patientBirthDate = patient.birthDate;
+            examTemplateSelectionView.patientPhone = patient.phone;
+            examTemplateSelectionView.patientRecommendation = patient.recommendation;
+            examTemplateSelectionView.patientObservation = patient.observation;
+
+            new ExamTemplateSelectionPresenter(examTemplateSelectionView, GetType());
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)
@@ -1298,7 +1321,9 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
-            if (!frames.Any(f => f.originalImage != null))
+            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).Select(f => f.CloneToExport()).ToList();
+
+            if (!framesWithImages.Any())
             {
                 MessageBox.Show(Resources.messageExamCannotExport);
                 return;
@@ -1306,7 +1331,14 @@ namespace WimDesktop.Views
 
             generateEditedImage();
 
-            eventExportExam?.Invoke(this, EventArgs.Empty);
+            new ExportExamPresenter(
+                new ExportExamView
+                {
+                    pathImages = examPath,
+                    framesToExport = framesWithImages,
+                    patientName = patient.name
+                }
+            );
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
@@ -1352,7 +1384,7 @@ namespace WimDesktop.Views
 
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
-            IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patientId);
+            IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patient.id);
             (compareFrames as Form).ShowDialog();
         }
 

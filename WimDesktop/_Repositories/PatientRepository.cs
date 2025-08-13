@@ -57,11 +57,6 @@ namespace WimDesktop._Repositories
             }
         }
 
-        public string getPatientName(int patientId)
-        {
-            return context.patient.Where(p => p.id == patientId).Select(p => p.name).First();
-        }
-
         public List<PatientDataToListDto> getAllPatientsDataToList()
         {
             return context.patient.Select(p => new PatientDataToListDto

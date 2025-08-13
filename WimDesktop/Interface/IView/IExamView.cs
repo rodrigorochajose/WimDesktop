@@ -8,7 +8,7 @@ namespace WimDesktop.Interface.IView
     public interface IExamView
     {
         ExamModel exam { get; set; }
-        int patientId { get; set; }
+        PatientModel patient { get; set; }
         int templateId { get; set; }
         string examPath { get; set; }
         Frame selectedFrame { get; set; }
@@ -27,11 +27,10 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventUpdateExamLastChange;
         event EventHandler eventSaveExamImage;
         event EventHandler eventSaveExamImageDrawing;
+        event EventHandler eventGetPatient;
         event EventHandler eventCloseSingleExam;
         event EventHandler eventChangeAcquireMode;
         event EventHandler eventAcquireTwain;
-        event EventHandler eventNewExam;
-        event EventHandler eventExportExam;
 
         void recycleCurrentImage();
         void selectFrame(Frame frameToSelect = null);
