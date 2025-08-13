@@ -10,6 +10,7 @@ using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WimDesktop
 {
@@ -21,6 +22,13 @@ namespace WimDesktop
         [STAThread]
         static void Main()
         {
+
+            if (!File.Exists(@"C:\WimDesktopDB\db\WIMDESKTOPDB.FDB"))
+            {
+                MessageBox.Show("O arquivo 'C:\\WimDesktopDB\\db\\WIMDESKTOPDB.FDB' não foi encontrado.");
+                return;
+            }
+
             if (!connectDatabase())
             {
                 return;
