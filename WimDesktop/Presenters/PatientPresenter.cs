@@ -84,19 +84,9 @@ namespace WimDesktop.Presenters
                 return;
             }
 
-            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
-
-            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
-            examTemplateSelectionView.patientId = selectedPatient.id;
-            examTemplateSelectionView.patientName = selectedPatient.name;
-            examTemplateSelectionView.patientBirthDate = selectedPatient.birthDate;
-            examTemplateSelectionView.patientPhone = selectedPatient.phone;
-            examTemplateSelectionView.patientRecommendation = selectedPatient.recommendation;
-            examTemplateSelectionView.patientObservation = selectedPatient.observation;
-
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            new ExamTemplateSelectionPresenter(examTemplateSelectionView, view.GetType());
+            new ExamTemplateSelectionPresenter(new ExamTemplateSelectionView(), view.selectedPatientId);
         }
 
         private void showPatientExamsForm(object sender, EventArgs e)
@@ -109,7 +99,7 @@ namespace WimDesktop.Presenters
 
             PatientExamView patientExamView = new PatientExamView();
 
-            new PatientExamPresenter(patientExamView, view.selectedPatientId, "newContainer");
+            new PatientExamPresenter(patientExamView, view.selectedPatientId);
 
             if (patientExamView.patientHasChanges)
             {
@@ -151,18 +141,11 @@ namespace WimDesktop.Presenters
 
                 FormManager.instance.closeAllExceptExamAndMenu();
 
-                PatientModel patient = patientRepository.getPatientById(view.selectedPatientId);
-
                 List<ExamModel> patientExams = examRepository.getPatientExams(view.selectedPatientId).ToList();
 
                 SettingsModel settings = settingsRepository.getAllSettings();
 
-                new ExamPresenter(new ExamView(examRepository.getExam(patientExams.First().id), patient, settings), true, "newContainer");
-
-                foreach (ExamModel exam in patientExams.Skip(1))
-                {
-                    new ExamPresenter(new ExamView(examRepository.getExam(exam.id), patient, settings), true, "newPage");
-                }
+                new ExamContainerPresenter(new ExamContainerView(patientExams, view.selectedPatientId, settings));
             }
             catch (Exception ex) 
             {

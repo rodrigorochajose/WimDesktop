@@ -1,10 +1,10 @@
-﻿using WimDesktop._Repositories;
+﻿using System;
+using System.Windows.Forms;
+using WimDesktop._Repositories;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
 using WimDesktop.Models;
 using WimDesktop.Views;
-using System;
-using System.Windows.Forms;
 
 namespace WimDesktop.Presenters
 {
@@ -15,19 +15,15 @@ namespace WimDesktop.Presenters
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
-        private string examOpeningMode = "newPage";
 
-        public ExamTemplateSelectionPresenter(IExamTemplateSelectionView view, Type calledFromView)
+        public ExamTemplateSelectionPresenter(IExamTemplateSelectionView view, int patientId)
         {
             this.view = view;
 
-            if (calledFromView != typeof(ExamView))
-            {
-                examOpeningMode = "newContainer";
-            }
-
             view.eventInitializeExam += showExamForm;
             view.eventAddNewTemplate += showAddTemplateForm;
+
+            setPatientData(patientId);
 
             view.setTemplateList(templateRepository.getAllTemplates());
             view.setTemplateFrameList(templateFrameRepository.getAllTemplateFrame());
@@ -35,20 +31,31 @@ namespace WimDesktop.Presenters
             (view as Form).Show();
         }
 
+        private void setPatientData(int patientId)
+        {
+            IPatientRepository patientRepository = new PatientRepository();
+
+            PatientModel patient = patientRepository.getPatientById(patientId);
+
+            view.patientId = patient.id;
+            view.patientName = patient.name;
+            view.patientBirthDate = patient.birthDate;
+            view.patientPhone = patient.phone;
+            view.patientRecommendation = patient.recommendation;
+            view.patientObservation = patient.observation;
+        }
+
         private void showExamForm(object sender, EventArgs e)
         {
-            PatientModel patient = new PatientModel
-            {
-                id = view.patientId,
-                name = view.patientName,
-            };
+            ExamView examView = new ExamView(view.patientId, view.patientName, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
 
-            ExamView examView = new ExamView(patient, view.selectedTemplateId, view.templateFrames, view.selectedTemplateName, view.sessionName, settingsRepository.getAllSettings());
+            new ExamPresenter(examView, false);
+
+            new ExamContainerPresenter(new ExamContainerView(examView));
 
             FormManager.instance.closeAllExceptExamAndMenu();
             FormManager.instance.hideMainForm();
 
-            new ExamPresenter(examView, false, examOpeningMode);
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

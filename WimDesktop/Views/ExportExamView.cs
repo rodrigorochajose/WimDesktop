@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WimDesktop.Components;
 using WimDesktop.Interface.IView;
-using WimDesktop.Models;
 using WimDesktop.Properties;
 
 namespace WimDesktop.Views
