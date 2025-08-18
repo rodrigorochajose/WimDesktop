@@ -139,13 +139,18 @@ namespace WimDesktop.Presenters
                     return;
                 }
 
-                FormManager.instance.closeAllExceptExamAndMenu();
+                FormManager.instance.closeAllExceptMenu();
 
                 List<ExamModel> patientExams = examRepository.getPatientExams(view.selectedPatientId).ToList();
 
                 SettingsModel settings = settingsRepository.getAllSettings();
 
-                new ExamContainerPresenter(new ExamContainerView(patientExams, view.selectedPatientId, settings));
+                ExamContainerView container = new ExamContainerView(patientExams, view.selectedPatientId, settings);
+
+                new ExamContainerPresenter(container);
+
+                container.loadDataAndShow();
+
             }
             catch (Exception ex) 
             {

@@ -15,7 +15,6 @@ namespace WimDesktop.Presenters
         private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
 
-
         public ExamTemplateSelectionPresenter(IExamTemplateSelectionView view, int patientId)
         {
             this.view = view;
@@ -51,11 +50,24 @@ namespace WimDesktop.Presenters
 
             new ExamPresenter(examView, false);
 
-            new ExamContainerPresenter(new ExamContainerView(examView));
+            ExamContainerView container = FormManager.instance.getContainer();
 
-            FormManager.instance.closeAllExceptExamAndMenu();
+            if (container != null)
+            {
+                if (container.patientId == view.patientId)
+                {
+                    container.createExamPage(examView);
+                    return;
+                }
+            }
+
+            FormManager.instance.closeAllExceptMenu();
             FormManager.instance.hideMainForm();
 
+            container = new ExamContainerView(examView, view.patientId);
+            new ExamContainerPresenter(container);
+
+            container.loadDataAndShow();
         }
 
         private void showAddTemplateForm(object sender, EventArgs e)

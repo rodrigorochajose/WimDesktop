@@ -1,6 +1,4 @@
-﻿using WimDesktop.Interface.IView;
-using WimDesktop.Interface;
-using WimDesktop.Models;
+﻿using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,10 +6,13 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WimDesktop.Models.Drawings;
+using System.Windows.Media.Media3D;
 using WimDesktop.Components;
+using WimDesktop.Interface;
+using WimDesktop.Interface.IView;
+using WimDesktop.Models;
+using WimDesktop.Models.Drawings;
 using WimDesktop.Presenters;
-using MoreLinq;
 using WimDesktop.Properties;
 
 namespace WimDesktop.Views
@@ -203,12 +204,12 @@ namespace WimDesktop.Views
 
         private void examViewResize(object sender, EventArgs e)
         {
-            //IExamContainerView container = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
+            IExamContainerView container = Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
 
-            //if (container == null)
-            //{
-            //    return;
-            //}
+            if (container == null)
+            {
+                return;
+            }
 
             mainPictureBoxPreviousSize = mainPictureBox.Size;
 
@@ -249,7 +250,7 @@ namespace WimDesktop.Views
             }
 
             selectedFrame.resize = false;
-            mainPictureBox.Invoke((MethodInvoker)(() => mainPictureBox.Refresh()));
+            mainPictureBox.Invalidate();
         }
 
         private void associateSettings()
@@ -685,32 +686,32 @@ namespace WimDesktop.Views
 
         public void resizeMainPictureBox()
         {
-            if (mainPictureBox.Image != null)
+            if (mainPictureBox.Image == null)
             {
-                Size previousSizeMainPictureBox = mainPictureBox.Size;
+                return;
+            }
 
-                mainPictureBox.Invoke((MethodInvoker)(() =>
+            Size previousSizeMainPictureBox = mainPictureBox.Size;
+
+            mainPictureBox.SuspendLayout();
+
+            int newWidth = panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height;
+            mainPictureBox.Size = new Size(newWidth, panelImage.Height);
+
+            mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
+
+            mainPictureBox.ResumeLayout(false);
+
+            if (previousSizeMainPictureBox != mainPictureBox.Size)
+            {
+                if (selectedDrawingHistory?.Any() == true)
                 {
-                    mainPictureBox.Size = new Size(
-                        panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                        panelImage.Height
-                    );
+                    float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
 
-                    mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
-                }));
-
-                if (selectedDrawingHistory.Count > 1)
-                {
-                    if (previousSizeMainPictureBox != mainPictureBox.Size)
+                    if (scale > 0 && !float.IsInfinity(scale) && !float.IsNaN(scale))
                     {
-                        float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
-
-                        if (scale > 0 && !float.IsInfinity(scale))
-                        {
-                            resizeDrawings(scale);
-                        }
+                        resizeDrawings(scale);
                     }
-                    mainPictureBox.Refresh();
                 }
             }
         }

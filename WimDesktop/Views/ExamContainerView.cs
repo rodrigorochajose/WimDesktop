@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime;
 using System.Windows.Forms;
 using WimDesktop.Interface.IView;
 using WimDesktop.Models;
@@ -28,43 +27,51 @@ namespace WimDesktop.Views
         public event EventHandler eventInitializeTwain;
         public event EventHandler eventCloseTwain;
 
-        public ExamContainerView(ExamView view)
+        public ExamContainerView(ExamView view, int patientId)
         {
             InitializeComponent();
-
             DoubleBuffered = true;
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
-            if (!sensorConnected)
-            {
-                MessageBox.Show(Resources.messageSensorCannotConnect);
-            }
-
-            createExamPage(view);
-
-            Show();
+            selectedExamView = view;
+            this.patientId = patientId;
         }
 
         public ExamContainerView(List<ExamModel> patientExams, int patientId, SettingsModel settings)
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             this.patientExams = patientExams;
             this.settings = settings;
             this.patientId = patientId;
+        }
 
-            ExamView firstExamView = generateExamView(patientExams.First());
+        public void loadDataAndShow()
+        {
+            Opacity = 0;
+            Show();
 
-            createExamPage(firstExamView);
+            SuspendLayout();
+
+            if (selectedExamView != null)
+            {
+                createExamPage(selectedExamView);
+            }
+            else if (patientExams != null && patientExams.Any())
+            {
+                ExamView firstExamView = generateExamView(patientExams.First());
+                createExamPage(firstExamView);
+                loadContainerContent();
+            }
+
+            ResumeLayout(true);
+
+            Opacity = 100;
 
             if (!sensorConnected)
             {
                 MessageBox.Show(Resources.messageSensorCannotConnect);
             }
-
-            Show();
-
-            loadContainerContent();
         }
 
         private void loadContainerContent()
@@ -88,13 +95,13 @@ namespace WimDesktop.Views
 
             new ExamPresenter(newExamView, true);
 
-            associateExamEvents(newExamView);
-
             return newExamView;
         }
 
-        private void createExamPage(IExamView examView)
+        public void createExamPage(IExamView examView)
         {
+            associateExamEvents(examView);
+
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",

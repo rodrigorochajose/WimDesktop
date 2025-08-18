@@ -89,8 +89,7 @@ namespace WimDesktop.Views
                 }
                 else if (e.KeyChar == (char)Keys.Escape)
                 {
-                    Close();
-                    FormManager.instance.unhideMainForm();
+                    closeForm();
                 }
             };
 
@@ -105,9 +104,8 @@ namespace WimDesktop.Views
             };
 
             buttonCancel.Click += delegate 
-            { 
-                Close();
-                FormManager.instance.unhideMainForm();
+            {
+                closeForm();
             };
 
             comboBoxTemplate.InnerControl.SelectionChangeCommitted += delegate 
@@ -119,6 +117,16 @@ namespace WimDesktop.Views
             {
                 ControlPaint.DrawBorder(e.Graphics, panelShowTemplate.ClientRectangle, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid, Color.DarkGray, 2, ButtonBorderStyle.Solid);
             };
+        }
+        
+        private void closeForm()
+        {
+            Close();
+
+            if (!FormManager.instance.hasContainerOpen())
+            {
+                FormManager.instance.unhideMainForm();
+            }
         }
 
         public void setTemplateList(List<TemplateModel> templateList)

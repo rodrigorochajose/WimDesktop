@@ -1,7 +1,6 @@
 ﻿using WimDesktop._Repositories;
 using WimDesktop.Interface.iRay;
 using WimDesktop.Interface.IRepository;
-using WimDesktop.Interface.IView;
 using WimDesktop.Models;
 using WimDesktop.Views;
 using System;
@@ -40,10 +39,9 @@ namespace WimDesktop.Presenters
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public ExamContainerPresenter(IExamContainerView view, int patientId)
+        public ExamContainerPresenter(ExamContainerView view)
         {
-            examContainerView = view as ExamContainerView;
-            view.patientId = patientId;
+            examContainerView = view;
 
             associateEvents();
 
@@ -62,17 +60,6 @@ namespace WimDesktop.Presenters
             //    iRayConnectSensor(this, EventArgs.Empty);
             //    examContainerView.twainInitialized = false;
             //}
-        }
-
-        public ExamContainerPresenter(IExamContainerView view)
-        {
-            examContainerView = view as ExamContainerView;
-
-            associateEvents();
-
-            checkSensorStatus();
-
-            setDefaultSensor();
         }
 
         private void associateEvents()
@@ -125,9 +112,12 @@ namespace WimDesktop.Presenters
 
             if (e.Image != null)
             {
+                string log = $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Captura Feita\n";
+
                 if (selectedExamView.recycleImage)
                 {
                     selectedExamView.recycleCurrentImage();
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Imagem Reciclada\n";
                 }
 
                 if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
@@ -149,8 +139,11 @@ namespace WimDesktop.Presenters
                     rotateImage(bitmap);
                     bitmap.Save(originalImagePath, ImageFormat.Png);
                     bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
+
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Imagem Salva: {originalImagePath}\n";
                 }
 
+                writeImageAcquireLog(log);
                 selectedExamView.loadImageOnMainPictureBox();
             }
         }
@@ -630,6 +623,12 @@ namespace WimDesktop.Presenters
             }
 
             return pixelFormats;
+        }
+
+        private void writeImageAcquireLog(string message)
+        {
+            File.AppendAllText("C:\\WimDesktopDB\\img\\imglog.txt", message);
+
         }
     }
 }

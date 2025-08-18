@@ -1,5 +1,4 @@
 ﻿using WimDesktop._Repositories;
-using WimDesktop.Components;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
 using WimDesktop.Models;
@@ -8,7 +7,6 @@ using WimDesktop.Views;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -139,7 +137,23 @@ namespace WimDesktop.Presenters
 
             new ExamPresenter(examView, true);
 
-            new ExamContainerPresenter(new ExamContainerView(examView));
+            ExamContainerView container = FormManager.instance.getContainer();
+
+            if (container != null)
+            {
+                if (container.patientId == selectedPatient.id)
+                {
+                    container.createExamPage(examView);
+                    return;
+                }
+
+                FormManager.instance.closeAllExceptMenu();
+            }
+
+            container = new ExamContainerView(examView, selectedPatient.id);
+            new ExamContainerPresenter(container);
+
+            container.loadDataAndShow();
         }
 
         private void deleteExam(object sender, EventArgs e)

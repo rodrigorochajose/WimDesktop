@@ -19,5 +19,8 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventOpenTwain;
         event EventHandler eventInitializeTwain;
         event EventHandler eventCloseTwain;
+
+        void loadDataAndShow();
+        void createExamPage(IExamView examView);
     }
 }

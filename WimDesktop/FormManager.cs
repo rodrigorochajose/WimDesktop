@@ -40,52 +40,38 @@ namespace WimDesktop
 
         public void closeAllExceptExamAndMenu()
         {
-            List<Form> forms = Application.OpenForms.Cast<Form>().ToList();
+            List<Form> forms = Application.OpenForms.Cast<Form>().Where(f => f.GetType() != typeof(MenuView) && f.GetType() != typeof(ExamContainerView) && f.GetType() != typeof(ExamView)).ToList();
 
-            for (int counter = 0; counter < forms.Count; counter++)
-            {
-                Type formType = forms[counter].GetType();
+            forms.ForEach(f => f.Close());
+        }
 
-                if (formType == typeof(MenuView))
-                {
-                    forms[counter].Hide();
-                    continue;
-                }
+        public ExamContainerView getContainer()
+        {
+            return Application.OpenForms.OfType<ExamContainerView>().FirstOrDefault();
+        }
 
-                if (formType == typeof(ExamContainerView)) continue;
-
-                if (formType == typeof(ExamView)) continue;
-                
-                forms[counter].Close();
-            }
+        public bool hasContainerOpen()
+        {
+            return Application.OpenForms.OfType<ExamContainerView>().Any();
         }
 
         public void closeAllExceptMenu()
         {
-            List<Form> forms = Application.OpenForms.Cast<Form>().ToList();
+            List<Form> forms = Application.OpenForms.Cast<Form>().Where(f => f.GetType() != typeof(MenuView)).ToList();
 
-            for (int counter = 0; counter < forms.Count; counter++)
-            {
-                Type formType = forms[counter].GetType();
+            forms.ForEach(f => f.Close());
 
-                if (formType == typeof(MenuView))
-                {
-                    forms[counter].Hide();
-                    continue;
-                }
-
-                forms[counter].Close();
-            }
+            hideMainForm();
         }
 
         public void hideMainForm()
         {
-            Application.OpenForms.Cast<Form>().First().Hide();
+            Application.OpenForms.OfType<MenuView>().First().Hide();
         }
 
         public void unhideMainForm()
         {
-            Application.OpenForms.Cast<Form>().First().Show();
+            Application.OpenForms.OfType<MenuView>().First().Show();
         }
 
         public void closeAllForms()
