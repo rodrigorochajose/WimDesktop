@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 using WimDesktop._Repositories;
@@ -47,6 +48,7 @@ namespace WimDesktop.Presenters
             view.eventLogout += logout;
 
             generateDatabaseBackup();
+            GenerateImageBackup();
 
             (menuView as Form).Show();
         }
@@ -79,6 +81,35 @@ namespace WimDesktop.Presenters
             {
                 var oldest = directories.Select(f => new FileInfo(f)).OrderBy(fi => fi.CreationTime).First();
                 Directory.Delete(oldest.FullName, true);
+            }
+        }
+
+        public void GenerateImageBackup()
+        {
+            string backupDirectory = "C:\\WimDesktopDB\\bkp\\img\\";
+            string sourceDirectory = "C:\\WimDesktopDB\\img\\";
+
+            string zipFileName = $"IMG_BKP_{DateTime.Now:dd-MM-yyyy-HH-mm-ss}.zip";
+            string zipFilePath = Path.Combine(backupDirectory, zipFileName);
+
+            if (!Directory.Exists(backupDirectory))
+            {
+                Directory.CreateDirectory(backupDirectory);
+            }
+
+            ZipFile.CreateFromDirectory(sourceDirectory, zipFilePath, CompressionLevel.Optimal, false);
+
+            var backups = Directory.GetFiles(backupDirectory, "*.zip")
+                                   .Select(f => new FileInfo(f))
+                                   .OrderByDescending(fi => fi.CreationTime)
+                                   .ToList();
+
+            if (backups.Count > 5)
+            {
+                foreach (var oldBackup in backups.Skip(5))
+                {
+                    oldBackup.Delete();
+                }
             }
         }
     }

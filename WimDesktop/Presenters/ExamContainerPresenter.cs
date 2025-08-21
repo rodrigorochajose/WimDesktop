@@ -116,12 +116,14 @@ namespace WimDesktop.Presenters
 
             if (e.Image != null)
             {
+                string log = $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Captura Feita\n";
+
                 if (selectedExamView.recycleImage)
                 {
                     selectedExamView.recycleCurrentImage();
-                }
-
-                if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Imagem Reciclada\n";
+                } 
+                else if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
                 {
                     selectedExamView.selectFrame();
                 }
@@ -136,12 +138,15 @@ namespace WimDesktop.Presenters
                     {
                         bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
                     }
-            
+
                     rotateImage(bitmap);
                     bitmap.Save(originalImagePath, ImageFormat.Png);
                     bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
+
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Imagem Salva: {originalImagePath}\n";
                 }
 
+                writeImageAcquireLog(log);
                 selectedExamView.loadImageOnMainPictureBox();
             }
         }
@@ -624,6 +629,12 @@ namespace WimDesktop.Presenters
             }
 
             return pixelFormats;
+        }
+
+        private void writeImageAcquireLog(string message)
+        {
+            File.AppendAllText("C:\\WimDesktopDB\\img\\imglog.txt", message);
+
         }
     }
 }
