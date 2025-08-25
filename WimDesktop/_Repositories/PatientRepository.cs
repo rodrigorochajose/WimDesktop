@@ -68,7 +68,7 @@ namespace WimDesktop._Repositories
 
         public PatientModel getPatientById(int patientId)
         {
-            return context.patient.Single(p => p.id == patientId);
+            return context.patient.FirstOrDefault(p => p.id == patientId);
         }
 
         public List<PatientDataToListDto> getPatientsByName(string value)
