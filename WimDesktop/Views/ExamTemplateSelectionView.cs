@@ -125,7 +125,7 @@ namespace WimDesktop.Views
 
             if (!FormManager.instance.hasContainerOpen())
             {
-                FormManager.instance.unhideMainForm();
+                FormManager.instance.showMainForm();
             }
         }
 
@@ -200,7 +200,7 @@ namespace WimDesktop.Views
 
         private void examTemplateSelectionViewFormClosing(object sender, FormClosingEventArgs e)
         {
-            FormManager.instance.unhideMainForm();
+            FormManager.instance.showMainForm();
         }
     }
 }

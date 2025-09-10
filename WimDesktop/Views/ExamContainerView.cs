@@ -100,8 +100,6 @@ namespace WimDesktop.Views
 
         public void createExamPage(IExamView examView)
         {
-            associateExamEvents(examView);
-
             TabPage newTabPage = new TabPage
             {
                 Name = $"tabPage{tabControl.TabCount + 1}",
@@ -110,7 +108,6 @@ namespace WimDesktop.Views
             };
 
             selectedExamView = examView as ExamView;
-            eventSetSensorInfo?.Invoke(this, EventArgs.Empty);
 
             loadExamIntoPage(newTabPage, examView as Form);
 
@@ -120,6 +117,10 @@ namespace WimDesktop.Views
 
         private void loadExamIntoPage(TabPage tabPage, Form examView)
         {
+            associateExamEvents(examView as IExamView);
+
+            eventSetSensorInfo?.Invoke(this, EventArgs.Empty);
+
             examView.TopLevel = false;
             examView.Dock = DockStyle.Fill;
 
@@ -162,6 +163,11 @@ namespace WimDesktop.Views
 
                 eventOpenTwain?.Invoke(s, e);
             };
+
+            examView.eventCloseTwainScreen += (s, e) =>
+            {
+                eventCloseTwain?.Invoke(this, e);
+            };
         }
 
         private void examContainerViewLoad(object sender, EventArgs e)
@@ -178,18 +184,15 @@ namespace WimDesktop.Views
                     }
                     ev.TabPage.Tag = true;
 
-                    ExamView examViewToLoad = generateExamView(selectedExam);
-
-                    loadExamIntoPage(ev.TabPage, examViewToLoad);
-
-                    selectedExamView = examViewToLoad;
+                    selectedExamView = generateExamView(selectedExam);
+                    loadExamIntoPage(ev.TabPage, selectedExamView);
                 }
             };
         }
 
         private void examContainerViewFormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.OpenForms[0].Show();
+            FormManager.instance.showMainForm();
             eventDestroySensor?.Invoke(this, e);
         }
 

@@ -33,6 +33,27 @@ namespace WimDesktop.Presenters
 
         private string previousTwainStateFlags = "";
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter,
+            int X, int Y, int cx, int cy, uint uFlags);
+
+        const uint SWP_NOSIZE = 0x0001;
+        const uint SWP_NOZORDER = 0x0004;
+
+        public void MoveTwainWindow()
+        {
+            IntPtr hwnd = FindWindow(null, "iRay sensor v1.0.2.005");
+
+            if (hwnd != IntPtr.Zero)
+            {
+                SetWindowPos(hwnd, IntPtr.Zero, Screen.PrimaryScreen.Bounds.Width - 235, Screen.PrimaryScreen.Bounds.Height - 400, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+            }
+        }
+
 
         private readonly List<string> acquireModes = new List<string>
         {
@@ -171,14 +192,17 @@ namespace WimDesktop.Presenters
             twain.OpenDataSource();
             twain.Capabilities.XferMech.Set(TwSX.Native);
 
+
             isAcquireInterfaceOpen = true;
             twain.Acquire();
+            MoveTwainWindow();
         }
 
         private void closeTwain(object sender, EventArgs e)
         {
             if (twain != null)
             {
+                twain.CloseDataSource();
                 twain.CloseDSM();
                 twain.Dispose();
             }

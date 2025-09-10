@@ -69,7 +69,7 @@ namespace WimDesktop
             Application.OpenForms.OfType<MenuView>().First().Hide();
         }
 
-        public void unhideMainForm()
+        public void showMainForm()
         {
             Application.OpenForms.OfType<MenuView>().First().Show();
         }

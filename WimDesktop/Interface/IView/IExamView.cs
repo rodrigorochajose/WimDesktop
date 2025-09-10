@@ -30,6 +30,7 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventCloseSingleExam;
         event EventHandler eventChangeAcquireMode;
         event EventHandler eventAcquireTwain;
+        event EventHandler eventCloseTwainScreen;
         event EventHandler eventNewExam;
         event EventHandler eventExportExam;
 

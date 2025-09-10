@@ -6,7 +6,6 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Media.Media3D;
 using WimDesktop.Components;
 using WimDesktop.Interface;
 using WimDesktop.Interface.IView;
@@ -42,6 +41,7 @@ namespace WimDesktop.Views
         public event EventHandler eventCloseSingleExam;
         public event EventHandler eventChangeAcquireMode;
         public event EventHandler eventAcquireTwain;
+        public event EventHandler eventCloseTwainScreen;
         public event EventHandler eventNewExam;
         public event EventHandler eventExportExam;
 
@@ -1304,6 +1304,8 @@ namespace WimDesktop.Views
                 MessageBox.Show(Resources.messageExamCannotExport);
                 return;
             }
+
+            checkChangesAndSave();
 
             generateEditedImage();
 

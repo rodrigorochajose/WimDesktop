@@ -30,7 +30,7 @@ namespace WimDesktop.Views
         {
             string caminho = @"WimDesktop.exe";
             DateTime data_hora = File.GetLastWriteTime(caminho);
-            string versao = $"WIM Desktop - Version 06/08";
+            string versao = $"WIM Desktop - VERSÃO DE TESTE OTIMIZADA 03/09";
             Text = versao;
         }
 
