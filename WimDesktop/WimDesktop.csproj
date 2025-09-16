@@ -154,8 +154,9 @@
     <Compile Include="Components\Rounded\RoundedTextBox.Designer.cs">
       <DependentUpon>RoundedTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomToolStripRenderer.cs" />
-    <Compile Include="FormManager.cs" />
+    <Compile Include="Utils\CustomToolStripRenderer.cs" />
+    <Compile Include="Utils\DicomConfig.cs" />
+    <Compile Include="Utils\FormManager.cs" />
     <Compile Include="Interface\IRepository\IClinicRepository.cs" />
     <Compile Include="Interface\IRepository\IExamImageDrawingPointsRepository.cs" />
     <Compile Include="Interface\IRepository\IRulerLengthRepository.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Models\ExamImageDrawingModel.cs" />
     <Compile Include="Models\RulerLengthModel.cs" />
     <Compile Include="Models\SensorModel.cs" />
-    <Compile Include="Filters.cs" />
+    <Compile Include="Utils\Filters.cs" />
     <Compile Include="Presenters\AdvancedSettingsPresenter.cs" />
     <Compile Include="Presenters\ChangePasswordPresenter.cs" />
     <Compile Include="Presenters\ClinicPresenter.cs" />
@@ -790,7 +791,13 @@
       <Version>10.3.2</Version>
     </PackageReference>
     <PackageReference Include="fo-dicom">
-      <Version>5.1.5</Version>
+      <Version>5.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="fo-dicom.Codecs">
+      <Version>5.16.4</Version>
+    </PackageReference>
+    <PackageReference Include="fo-dicom.Imaging.Desktop">
+      <Version>5.2.2</Version>
     </PackageReference>
     <PackageReference Include="morelinq">
       <Version>4.3.0</Version>

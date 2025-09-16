@@ -292,6 +292,7 @@
             // 
             // columnPatientId
             // 
+            this.columnPatientId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.columnPatientId.DataPropertyName = "id";
             this.columnPatientId.Frozen = true;
             resources.ApplyResources(this.columnPatientId, "columnPatientId");
@@ -300,8 +301,8 @@
             // 
             // columnPatientName
             // 
+            this.columnPatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnPatientName.DataPropertyName = "name";
-            this.columnPatientName.Frozen = true;
             resources.ApplyResources(this.columnPatientName, "columnPatientName");
             this.columnPatientName.Name = "columnPatientName";
             this.columnPatientName.ReadOnly = true;
@@ -309,8 +310,8 @@
             // 
             // columnLastChange
             // 
+            this.columnLastChange.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.columnLastChange.DataPropertyName = "lastChange";
-            this.columnLastChange.Frozen = true;
             resources.ApplyResources(this.columnLastChange, "columnLastChange");
             this.columnLastChange.Name = "columnLastChange";
             this.columnLastChange.ReadOnly = true;
@@ -353,12 +354,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnLastChange;
         private System.Windows.Forms.CheckBox checkBoxTo;
         private System.Windows.Forms.CheckBox checkBoxFrom;
         private Components.Rounded.RoundedButton buttonNewExam;
         private Components.Rounded.RoundedTextBox roundedTextBoxSearchPatient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnPatientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnLastChange;
     }
 }

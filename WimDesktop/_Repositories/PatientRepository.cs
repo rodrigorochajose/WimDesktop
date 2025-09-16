@@ -73,7 +73,7 @@ namespace WimDesktop._Repositories
 
         public PatientModel getPatientById(int patientId)
         {
-            return context.patient.Single(p => p.id == patientId);
+            return context.patient.FirstOrDefault(p => p.id == patientId);
         }
 
         public List<PatientDataToListDto> getPatientsByName(string value)
@@ -81,7 +81,7 @@ namespace WimDesktop._Repositories
             return context.patient.Where(p => p.name.ToLower().Contains(value.ToLower())).Select(p => new PatientDataToListDto { id = p.id, name = p.name }).ToList();
         }
 
-        public void importPatient (PatientModel patient)
+        public void importPatient(PatientModel patient)
         {
             try
             {
@@ -99,6 +99,11 @@ namespace WimDesktop._Repositories
 
                 MessageBox.Show(exceptionMessage);
             }
+        }
+
+        public bool patientExists(string name)
+        {
+            return context.patient.Any(p => p.name == name);
         }
        
     }

@@ -156,7 +156,7 @@ namespace WimDesktop.Presenters
                     {
                         bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
                     }
-            
+
                     rotateImage(bitmap);
                     bitmap.Save(originalImagePath, ImageFormat.Png);
                     bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);

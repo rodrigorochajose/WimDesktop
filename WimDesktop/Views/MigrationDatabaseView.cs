@@ -1,16 +1,19 @@
-﻿using WimDesktop._Repositories;
-using WimDesktop.Interface.IRepository;
-using WimDesktop.Models;
+﻿using FellowOakDicom;
+using FellowOakDicom.Imaging;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
-using System.Windows.Forms;
 using System.Linq;
-using System.Threading.Tasks;
-using WimDesktop.Properties;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using WimDesktop._Repositories;
+using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
+using WimDesktop.Models;
+using WimDesktop.Properties;
 
 namespace WimDesktop.Views
 {
@@ -20,17 +23,16 @@ namespace WimDesktop.Views
         private readonly string dataPath = "";
         private string migrationErrors = "";
 
-
         public string software { get; set; }
         public List<PatientModel> patients { get; set; } = new List<PatientModel>();
         public List<ExamModel> exams { get; set; } = new List<ExamModel>();
         public List<ExamImageModel> examImages { get; set; } = new List<ExamImageModel>();
         public List<ExamImageCDR> examImagesCDR { get; set; } = new List<ExamImageCDR>();
-
         public PatientModel patientToImport { get; set; }
         public ExamModel examToImport { get; set; }
         public List<ExamImageModel> examImagesToImport { get; set; } = new List<ExamImageModel>();
         public SettingsModel settingsToImport { get; set; }
+        public bool duplicatedPatient { get; set; }
 
         public event EventHandler eventImportPatient;
         public event EventHandler eventImportExam;
@@ -133,7 +135,16 @@ namespace WimDesktop.Views
                 List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
 
                 patientToImport = patient;
+                duplicatedPatient = false;
+
                 eventImportPatient?.Invoke(this, EventArgs.Empty);
+
+                if (duplicatedPatient)
+                {
+                    processedPatients++;
+                    progress.Report((processedPatients * 100) / totalPatients);
+                    continue;
+                }
 
                 if (patientExams.Any())
                 {
@@ -171,76 +182,91 @@ namespace WimDesktop.Views
 
         private async Task importData_CDR(IProgress<int> progress, int processedPatients)
         {
-            int totalPatients = patients.Count;
-
-            foreach (PatientModel patient in patients)
+            try
             {
-                int patientOldId = patient.id;
+                int totalPatients = patients.Count;
 
-                List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
-
-                patientToImport = patient;
-                eventImportPatient?.Invoke(this, EventArgs.Empty);
-
-                if (patientExams.Any())
+                foreach (PatientModel patient in patients)
                 {
-                    foreach (ExamModel patientExam in patientExams)
+                    int patientOldId = patient.id;
+
+                    List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
+
+                    patientToImport = patient;
+
+                    duplicatedPatient = false;
+                    eventImportPatient?.Invoke(this, EventArgs.Empty);
+
+                    if (duplicatedPatient)
                     {
-                        int examOldId = patientExam.id;
-                        patientExam.patientId = patient.id;
+                        processedPatients++;
+                        progress.Report((processedPatients * 100) / totalPatients);
+                        continue;
+                    }
 
-                        List<ExamImageCDR> currentExamImages = examImagesCDR.Where(ei => ei.examId == patientExam.id).ToList();
-
-                        if (!currentExamImages.Any())
+                    if (patientExams.Any())
+                    {
+                        foreach (ExamModel patientExam in patientExams)
                         {
-                            continue;
-                        }
+                            int examOldId = patientExam.id;
 
-                        string filePath = currentExamImages.First().file;
-                        int index = filePath.LastIndexOf('\\');
+                            patientExam.patientId = patient.id;
 
-                        string examContentPath = Path.Combine(dataPath, filePath.Substring(0, index), "SR000001");
-
-                        if (File.Exists(examContentPath))
-                        {
-                            currentExamImages = getUsedImages(examContentPath, currentExamImages);
+                            List<ExamImageCDR> currentExamImages = examImagesCDR.Where(ei => ei.examId == patientExam.id).ToList();
 
                             if (!currentExamImages.Any())
                             {
                                 continue;
                             }
-                        }
-                        else
-                        {
-                            examContentPath = Path.Combine(dataPath, filePath);
-                        }
 
+                            string filePath = currentExamImages.First().file;
+                            string examContentPath = Path.Combine(Path.Combine(dataPath, Path.GetDirectoryName(filePath)), "SR000001");
 
-                        if (currentExamImages.Any())
-                        {
-                            patientExam.templateId = getTemplateId(examContentPath, currentExamImages.Count);
-
-                            if (patientExam.templateId == 0)
+                            if (File.Exists(examContentPath))
                             {
-                                continue;
+                                currentExamImages = getUsedImages(examContentPath, currentExamImages);
+
+                                if (!currentExamImages.Any())
+                                {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                examContentPath = Path.Combine(dataPath, filePath);
                             }
 
-                            examToImport = patientExam;
-                            eventImportExam?.Invoke(this, EventArgs.Empty);
+                            if (currentExamImages.Any())
+                            {
+                                patientExam.templateId = getTemplateId(examContentPath, currentExamImages.Count);
 
-                            getTemplateFrameId(currentExamImages, patientExam.templateId);
+                                if (patientExam.templateId == 0)
+                                {
+                                    continue;
+                                }
 
-                            await importImages_CDR(currentExamImages, patient.id, patientExam.id);
+                                examToImport = patientExam;
+                                eventImportExam?.Invoke(this, EventArgs.Empty);
 
-                            List<ExamImageModel> patientExamImages = convertExamImageModels(currentExamImages, patientExam.id);
+                                getTemplateFrameId(currentExamImages, patientExam.templateId);
 
-                            examImagesToImport = patientExamImages;
-                            eventImportExamImages?.Invoke(this, EventArgs.Empty);
+                                await importImages_CDR(currentExamImages, patient.id, patientExam.id);
+
+                                List<ExamImageModel> patientExamImages = convertExamImageModels(currentExamImages, patientExam.id);
+
+                                examImagesToImport = patientExamImages;
+
+                                eventImportExamImages?.Invoke(this, EventArgs.Empty);
+                            }
                         }
                     }
+                    processedPatients++;
+                    progress.Report((processedPatients * 100) / totalPatients);
                 }
-                processedPatients++;
-                progress.Report((processedPatients * 100) / totalPatients);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
             }
         }
 
@@ -260,17 +286,16 @@ namespace WimDesktop.Views
         {
             string content = File.ReadAllText(path, Encoding.Default);
 
-            var lines = content.Split('à').Where(p => p.Contains("SCHICK TECHNOLOGIES"));
+            var matches = Regex.Matches(content, @"\b\d+(\.\d+)+\b");
 
-            List<string> imagesIdentifier = new List<string>();
+            HashSet<string> imagesIdentifier = new HashSet<string>();
 
-            foreach (var line in lines)
+            foreach (Match match in matches)
             {
-                Match match = Regex.Matches(line, @"\d+(\.\d+)*").Cast<Match>().FirstOrDefault(m => m.Length > 2);
-
-                if (match != null)
+                string uid = match.Value.Trim();
+                if (!string.IsNullOrWhiteSpace(uid))
                 {
-                    imagesIdentifier.Add(match.Value);
+                    imagesIdentifier.Add(uid);
                 }
             }
 
@@ -292,44 +317,35 @@ namespace WimDesktop.Views
             {
                 string content = File.ReadAllText(path, Encoding.Default);
 
-                int init = content.IndexOf("Sirona Dental");
-                int final = content.IndexOf("CDR");
+                string cleanContent = Regex.Replace(content, @"[^\x20-\x7E]", "");
 
-                string text = content.Substring(init, final - init);
+                string[] keywords = new string[] { "BITEWINGS", "CENTRAL INFERIOR", "CENTRAL SUPERIOR", "CHECKUP", "ENDO HORIZONTAL (15)", "FULL MOUTH SERIES (18)", "FULL MOUTH SERIES (21)", "MANDIBULAR DIREITO", "MANDIBULAR ESQUERDO", "MAXILAR DIREITO", "MAXILAR DIREITO", "VERTICAL ENDO" };
 
-                string resultClean = Regex.Replace(text, @"[^\x20-\x7E]", "");
-
-                string[] parts = resultClean.Split(new string[] { "LO" }, StringSplitOptions.None);
-
-                ITemplateRepository templateRepository = new TemplateRepository();
-
-                List<TemplateModel> templates = templateRepository.getAllTemplates();
-
-                TemplateModel matchedTemplate = findMatch(parts, templates);
-
-                if (matchedTemplate != null)
+                foreach (string keyword in keywords)
                 {
-                    return matchedTemplate.id;
+                    if (cleanContent.Contains(keyword))
+                    {
+                        ITemplateRepository templateRepository = new TemplateRepository();
+                        List<TemplateModel> templates = templateRepository.getAllTemplates();
+
+                        TemplateModel matchedTemplate = findMatch(new string[] { keyword }, templates);
+                        if (matchedTemplate != null)
+                        {
+                            return matchedTemplate.id;
+                        }
+                    }
                 }
+
+                if (imagesCount < 6)
+                    return 13;
+                else if (imagesCount < 16)
+                    return 14;
                 else
-                {
-                    if (imagesCount < 6)
-                    {
-                        return 13;
-                    }
-                    else if (imagesCount < 16)
-                    {
-                        return 14;
-                    }
-                    else
-                    {
-                        return 15;
-                    }
-                }
+                    return 15;
             }
             catch (Exception ex)
             {
-                migrationErrors += "" + ex.Message + "\n\n";
+                migrationErrors += ex.Message + "\n\n";
                 return 0;
             }
         }
@@ -408,22 +424,45 @@ namespace WimDesktop.Views
 
         private async Task importImages_CDR(List<ExamImageCDR> examImages, int patientId, int examId)
         {
-            string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
+            string folderDest = Path.Combine("C:\\WimDesktopDB\\img", patientId.ToString(), examId.ToString());
 
-            if (!Directory.Exists(folderDest))
-            {
-                Directory.CreateDirectory(folderDest);
-            }
-
+            Directory.CreateDirectory(folderDest);
             Directory.CreateDirectory(Path.Combine(folderDest, "recycle"));
+
+            DicomConfig.EnsureConfigured();
 
             foreach (var examImage in examImages)
             {
-                string originFile = Path.Combine(dataPath, examImage.file + ".jpeg");
+                string originFile = Path.Combine(dataPath, examImage.file);
 
-                string dest = Path.Combine(folderDest, $"{examImage.order}_original.png");
+                if (!File.Exists(originFile))
+                {
+                    migrationErrors += $"[ERRO] Arquivo não encontrado: {originFile} (PatientId={patientId}, ExamId={examId}){Environment.NewLine}";
+                    continue;
+                }
 
-                await Task.Run(() => File.Copy(originFile, dest, overwrite: true));
+                try
+                {
+                    await Task.Run(() => { 
+                        string destFile = Path.Combine(folderDest, $"{examImage.order}_original.png");
+
+                        var dicomFile = DicomFile.Open(originFile);
+                        var dicomImage = new DicomImage(dicomFile.Dataset);
+
+                        using (var rendered = dicomImage.RenderImage())
+                        {
+                            using (var bmp = rendered.AsSharedBitmap()){
+                                bmp.Save(destFile, ImageFormat.Png);
+                            }
+                        }
+
+                        examImage.file = destFile;
+                    });
+                }
+                catch (Exception ex)
+                {
+                    migrationErrors += $"[ERRO] Falha ao processar {originFile}: {ex.Message} (PatientId={patientId}, ExamId={examId}){Environment.NewLine}";
+                }
             }
         }
     }
