@@ -65,6 +65,11 @@ namespace WimDesktop._Repositories
             return context.examImage.FirstOrDefault(e => e.examId == examId && e.templateFrameId == frameId);
         }
 
+        public bool examHasImages(int examId)
+        {
+            return context.examImage.Any(e => e.examId == examId);
+        }
+
         public void importExamImages(List<ExamImageModel> examImages)
         {
             try

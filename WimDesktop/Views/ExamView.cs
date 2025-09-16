@@ -1,6 +1,4 @@
-﻿using WimDesktop.Interface.IView;
-using WimDesktop.Interface;
-using WimDesktop.Models;
+﻿using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,10 +6,12 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using WimDesktop.Models.Drawings;
 using WimDesktop.Components;
+using WimDesktop.Interface;
+using WimDesktop.Interface.IView;
+using WimDesktop.Models;
+using WimDesktop.Models.Drawings;
 using WimDesktop.Presenters;
-using MoreLinq;
 using WimDesktop.Properties;
 
 namespace WimDesktop.Views
@@ -19,7 +19,7 @@ namespace WimDesktop.Views
     public partial class ExamView : Form, IExamView
     {
         public ExamModel exam { get; set; } = new ExamModel();
-        public PatientModel patient { get; set; }
+        public int patientId { get; set; }
         public int templateId { get; set; }
         public string examPath { get; set; }
         public Frame selectedFrame { get; set; }
@@ -38,10 +38,12 @@ namespace WimDesktop.Views
         public event EventHandler eventUpdateExamLastChange;
         public event EventHandler eventSaveExamImage;
         public event EventHandler eventSaveExamImageDrawing;
-        public event EventHandler eventGetPatient;
         public event EventHandler eventCloseSingleExam;
         public event EventHandler eventChangeAcquireMode;
         public event EventHandler eventAcquireTwain;
+        public event EventHandler eventCloseTwainScreen;
+        public event EventHandler eventNewExam;
+        public event EventHandler eventExportExam;
 
         int action = 0;
         int indexFrame = 0;
@@ -86,16 +88,16 @@ namespace WimDesktop.Views
 
         string recyclePath;
 
-        public ExamView(PatientModel patient, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
+        public ExamView(int patientId, string patientName, int templateId, List<TemplateFrameModel> templateFrames, string templateName, string sessionName, SettingsModel settings)
         {
             InitializeComponent();
 
             ActiveControl = labelPatientName;
 
-            this.exam.sessionName = sessionName;
-            this.patient = patient;
+            exam.sessionName = sessionName;
+            this.patientId = patientId;
             this.templateId = templateId;
-            setLabelPatientTemplate(patient.name, templateName);
+            setLabelPatientTemplate(patientName, templateName);
             this.templateFrames = templateFrames;
 
             this.settings = settings;
@@ -117,12 +119,12 @@ namespace WimDesktop.Views
             };
         }
 
-        public ExamView(ExamModel exam, PatientModel patient, SettingsModel settings)
+        public ExamView(ExamModel exam, int patientId, SettingsModel settings)
         {
             InitializeComponent();
 
             this.exam = exam;
-            this.patient = patient;
+            this.patientId = patientId;
 
             this.settings = settings;
             associateSettings();
@@ -134,10 +136,10 @@ namespace WimDesktop.Views
                 drawTemplate();
 
                 setInitialFrame();
-                loadExamDrawings();
 
                 if (examImageDrawings.Any())
                 {
+                    loadExamDrawings();
                     selectedDrawingHistoryHandler();
                 }
 
@@ -193,7 +195,6 @@ namespace WimDesktop.Views
 
             selectedDrawingHistory = frameDrawingHistories.First(f => f.frameId == selectedFrame.id).drawingHistory;
             indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
-            selectedDrawingHistoryHandler();
         }
 
         private void examViewFormClosing(object sender, FormClosingEventArgs e)
@@ -249,12 +250,12 @@ namespace WimDesktop.Views
             }
 
             selectedFrame.resize = false;
-            mainPictureBox.Invoke((MethodInvoker)(() => mainPictureBox.Refresh()));
+            mainPictureBox.Invalidate();
         }
 
         private void associateSettings()
         {
-            examPath = Path.Combine(settings.examPath, $"{patient.id}\\{exam.id}");
+            examPath = Path.Combine(settings.examPath, $"{patientId}\\{exam.id}");
             recyclePath = Path.Combine(examPath, "recycle");
 
             if (!Directory.Exists(examPath))
@@ -287,18 +288,8 @@ namespace WimDesktop.Views
         {
             foreach (TemplateFrameModel frame in templateFrames)
             {
-                int height;
-                int width;
-                if (frame.orientation < 2)
-                {
-                    height = 35;
-                    width = 25;
-                }
-                else
-                {
-                    height = 25;
-                    width = 35;
-                }
+                int height = (frame.orientation < 2) ? 35 : 25;
+                int width = (frame.orientation < 2) ? 25 : 35;
 
                 Frame newFrame = new Frame
                 {
@@ -373,128 +364,125 @@ namespace WimDesktop.Views
 
         private void loadExamDrawings()
         {
-            if (examImageDrawings != null)
+            Dictionary<string, Func<ExamImageDrawingModel, IDrawing>> getDrawingModelByType = new Dictionary<string, Func<ExamImageDrawingModel, IDrawing>>
             {
-                Dictionary<string, Func<ExamImageDrawingModel, IDrawing>> getDrawingModelByType = new Dictionary<string, Func<ExamImageDrawingModel, IDrawing>>
                 {
-                    {
-                        "Arrow",
-                        (drawing) => {
-                            return new Arrow
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points
-                            };
-                        }
-                    },
-                    {
-                        "Ellipse",
-                        (drawing) => {
-                            return new Ellipse
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points
-                            };
-                        }
-                    },
-                    {
-                        "RectangleDraw",
-                        (drawing) => {
-                            return new RectangleDraw
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points
-                            };
-                        }
-                    },
-                    {
-                        "FreeDraw",
-                        (drawing) => {
-                            return new FreeDraw
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points,
-                            };
-                        }
-                    },
-                    {
-                        "Text",
-                        (drawing) => {
-                            return new Text
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points,
-                                text = drawing.drawingText,
-                                font = new Font("Arial", drawing.drawingSize),
-                                brush = new SolidBrush(Color.FromArgb(int.Parse(drawing.drawingColor))),
-                            };
-                        }
-                    },
-                    {
-                        "Ruler",
-                        (drawing) =>
+                    "Arrow",
+                    (drawing) => {
+                        return new Arrow
                         {
-                            Ruler ruler = new Ruler
-                            {
-                                id = drawing.id,
-                                examImageId = drawing.examImageId,
-                                graphicsPath = new GraphicsPath(),
-                                drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
-                                drawingSize = drawing.drawingSize,
-                                points = drawing.points,
-                                lineLength = drawing.lineLength,
-                                multiple = false,
-                            };
-
-                            if (ruler.points.Count > 2)
-                            {
-                                ruler.multiple = true;
-                            }
-
-                            return ruler;
-                        }
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points
+                        };
                     }
-                };
-
-                List<IDrawing> frameDrawings = new List<IDrawing>();
-                foreach (ExamImageDrawingModel examImageDrawing in examImageDrawings)
+                },
                 {
-                    frameDrawings.Add(getDrawingModelByType[examImageDrawing.drawingType].Invoke(examImageDrawing));
-                }
-
-                foreach (IDrawing drawing in frameDrawings)
+                    "Ellipse",
+                    (drawing) => {
+                        return new Ellipse
+                        {
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points
+                        };
+                    }
+                },
                 {
-                    List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == examImages.FirstOrDefault(ei => ei.id == drawing.examImageId).templateFrameId).drawingHistory;
-
-                    currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
+                    "RectangleDraw",
+                    (drawing) => {
+                        return new RectangleDraw
+                        {
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points
+                        };
+                    }
+                },
+                {
+                    "FreeDraw",
+                    (drawing) => {
+                        return new FreeDraw
+                        {
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points,
+                        };
+                    }
+                },
+                {
+                    "Text",
+                    (drawing) => {
+                        return new Text
+                        {
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points,
+                            text = drawing.drawingText,
+                            font = new Font("Arial", drawing.drawingSize),
+                            brush = new SolidBrush(Color.FromArgb(int.Parse(drawing.drawingColor))),
+                        };
+                    }
+                },
+                {
+                    "Ruler",
+                    (drawing) =>
                     {
-                        drawing
-                    });
-                }
+                        Ruler ruler = new Ruler
+                        {
+                            id = drawing.id,
+                            examImageId = drawing.examImageId,
+                            graphicsPath = new GraphicsPath(),
+                            drawingColor = Color.FromArgb(int.Parse(drawing.drawingColor)),
+                            drawingSize = drawing.drawingSize,
+                            points = drawing.points,
+                            lineLength = drawing.lineLength,
+                            multiple = false,
+                        };
 
-                selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
-                indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
+                        if (ruler.points.Count > 2)
+                        {
+                            ruler.multiple = true;
+                        }
+
+                        return ruler;
+                    }
+                }
+            };
+
+            List<IDrawing> frameDrawings = new List<IDrawing>();
+            foreach (ExamImageDrawingModel examImageDrawing in examImageDrawings)
+            {
+                frameDrawings.Add(getDrawingModelByType[examImageDrawing.drawingType].Invoke(examImageDrawing));
             }
+
+            foreach (IDrawing drawing in frameDrawings)
+            {
+                List<List<IDrawing>> currentDrawingHistory = frameDrawingHistories.FirstOrDefault(f => f.frameId == examImages.FirstOrDefault(ei => ei.id == drawing.examImageId).templateFrameId).drawingHistory;
+
+                currentDrawingHistory.Add(new List<IDrawing>(currentDrawingHistory.Last())
+                {
+                    drawing
+                });
+            }
+
+            selectedDrawingHistory = frameDrawingHistories[indexFrame].drawingHistory;
+            indexSelectedDrawingHistory = selectedDrawingHistory.IndexOf(selectedDrawingHistory.Last());
         }
 
         private void loadFrameData(Image image)
@@ -698,32 +686,32 @@ namespace WimDesktop.Views
 
         public void resizeMainPictureBox()
         {
-            if (mainPictureBox.Image != null)
+            if (mainPictureBox.Image == null)
             {
-                Size previousSizeMainPictureBox = mainPictureBox.Size;
+                return;
+            }
 
-                mainPictureBox.Invoke((MethodInvoker)(() =>
+            Size previousSizeMainPictureBox = mainPictureBox.Size;
+
+            mainPictureBox.SuspendLayout();
+
+            int newWidth = panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height;
+            mainPictureBox.Size = new Size(newWidth, panelImage.Height);
+
+            mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
+
+            mainPictureBox.ResumeLayout(false);
+
+            if (previousSizeMainPictureBox != mainPictureBox.Size)
+            {
+                if (selectedDrawingHistory?.Any() == true)
                 {
-                    mainPictureBox.Size = new Size(
-                        panelImage.Height * mainPictureBox.Image.Width / mainPictureBox.Image.Height,
-                        panelImage.Height
-                    );
+                    float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
 
-                    mainPictureBox.Location = new Point((panelImage.Width - mainPictureBox.Width) / 2, 0);
-                }));
-
-                if (selectedDrawingHistory.Count > 1)
-                {
-                    if (previousSizeMainPictureBox != mainPictureBox.Size)
+                    if (scale > 0 && !float.IsInfinity(scale) && !float.IsNaN(scale))
                     {
-                        float scale = (float)mainPictureBox.Height / previousSizeMainPictureBox.Height;
-
-                        if (scale > 0 && !float.IsInfinity(scale))
-                        {
-                            resizeDrawings(scale);
-                        }
+                        resizeDrawings(scale);
                     }
-                    mainPictureBox.Refresh();
                 }
             }
         }
@@ -1174,17 +1162,7 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
-            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
-            eventGetPatient?.Invoke(this, e);
-
-            examTemplateSelectionView.patientId = patient.id;
-            examTemplateSelectionView.patientName = patient.name;
-            examTemplateSelectionView.patientBirthDate = patient.birthDate;
-            examTemplateSelectionView.patientPhone = patient.phone;
-            examTemplateSelectionView.patientRecommendation = patient.recommendation;
-            examTemplateSelectionView.patientObservation = patient.observation;
-
-            new ExamTemplateSelectionPresenter(examTemplateSelectionView, GetType());
+            eventNewExam?.Invoke(this, EventArgs.Empty);
         }
 
         private void buttonOpenExamClick(object sender, EventArgs e)
@@ -1321,9 +1299,7 @@ namespace WimDesktop.Views
         {
             selectTool(buttonSelect);
 
-            List<Frame> framesWithImages = frames.Where(f => f.originalImage != null).Select(f => f.CloneToExport()).ToList();
-
-            if (!framesWithImages.Any())
+            if (!frames.Any(f => f.originalImage != null))
             {
                 MessageBox.Show(Resources.messageExamCannotExport);
                 return;
@@ -1333,14 +1309,7 @@ namespace WimDesktop.Views
 
             generateEditedImage();
 
-            new ExportExamPresenter(
-                new ExportExamView
-                {
-                    pathImages = examPath,
-                    framesToExport = framesWithImages,
-                    patientName = patient.name
-                }
-            );
+            eventExportExam?.Invoke(this, EventArgs.Empty);
         }
 
         private void buttonDeleteClick(object sender, EventArgs e)
@@ -1386,7 +1355,7 @@ namespace WimDesktop.Views
 
             frames.First(f => f == selectedFrame).Tag = Color.LimeGreen;
 
-            IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patient.id);
+            IFramesComparisonSelectionView compareFrames = new FramesComparisonSelectionView(frames, patientId);
             (compareFrames as Form).ShowDialog();
         }
 
