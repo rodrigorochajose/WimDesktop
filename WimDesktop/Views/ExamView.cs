@@ -1329,6 +1329,8 @@ namespace WimDesktop.Views
                 return;
             }
 
+            checkChangesAndSave();
+
             generateEditedImage();
 
             new ExportExamPresenter(

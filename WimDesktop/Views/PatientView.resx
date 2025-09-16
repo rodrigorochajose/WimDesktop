@@ -651,17 +651,11 @@
   <data name="columnPatientName.HeaderText" xml:space="preserve">
     <value>Nome</value>
   </data>
-  <data name="columnPatientName.Width" type="System.Int32, mscorlib">
-    <value>350</value>
-  </data>
   <metadata name="columnLastChange.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="columnLastChange.HeaderText" xml:space="preserve">
     <value>Ultima Modificação</value>
-  </data>
-  <data name="columnLastChange.Width" type="System.Int32, mscorlib">
-    <value>200</value>
   </data>
   <data name="dataGridViewPatient.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 19</value>

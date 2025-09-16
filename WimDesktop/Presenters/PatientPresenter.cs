@@ -44,18 +44,30 @@ namespace WimDesktop.Presenters
 
         private void searchPatient(object sender, EventArgs e)
         {
-            bool emptyValue = string.IsNullOrWhiteSpace(view.searchedValue);
+            DateTime dateFrom = view.dateFrom.Date;
+            DateTime dateTo = view.dateTo.Date;
 
-            string patientName = view.searchedValue == null ? "" : view.searchedValue;
-            DateTime dateFrom = view.checkBoxFromState ? view.dateFrom : new DateTime(2000, 01, 01);
-            DateTime dateTo = view.checkBoxToState ? view.dateTo : DateTime.Now;
+            string search = view.searchedValue?.Trim().ToLower() ?? string.Empty;
 
-            List<PatientDataToListDto> filteredPatients = patients
-                .Where(p =>
-                    p.name.ToLower().Contains(view.searchedValue.ToLower()) &&
-                    (p.lastChange ?? dateFrom.Date).Date >= dateFrom.Date &&
-                    (p.lastChange ?? dateTo.Date).Date <= dateTo.Date)
+            List<PatientDataToListDto> patientsByName = patients
+                .Where(p => !string.IsNullOrEmpty(p.name) && p.name.ToLower().Contains(search))
                 .ToList();
+
+            if (view.checkBoxFromState)
+            {
+                patientsByName = patientsByName
+                    .Where(p => p.lastChange.HasValue && p.lastChange.Value.Date >= dateFrom)
+                    .ToList();
+            }
+
+            if (view.checkBoxToState)
+            {
+                patientsByName = patientsByName
+                    .Where(p => p.lastChange.HasValue && p.lastChange.Value.Date <= dateTo)
+                    .ToList();
+            }
+
+            List<PatientDataToListDto> filteredPatients = patientsByName;
 
             if (filteredPatients.Any())
             {

@@ -1,16 +1,18 @@
-﻿using WimDesktop._Repositories;
-using WimDesktop.Interface.IView;
-using WimDesktop.Models;
-using WimDesktop.Presenters;
-using WimDesktop.Views;
+﻿using FellowOakDicom;
+using FellowOakDicom.Imaging;
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Configuration;
 using System.Data.Entity.Migrations;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using System.IO;
+using WimDesktop._Repositories;
+using WimDesktop.Interface.IView;
+using WimDesktop.Models;
+using WimDesktop.Presenters;
+using WimDesktop.Views;
 
 namespace WimDesktop
 {
@@ -22,7 +24,6 @@ namespace WimDesktop
         [STAThread]
         static void Main()
         {
-
             if (!File.Exists(@"C:\WimDesktopDB\db\WIMDESKTOPDB.FDB"))
             {
                 MessageBox.Show("O arquivo 'C:\\WimDesktopDB\\db\\WIMDESKTOPDB.FDB' não foi encontrado.");

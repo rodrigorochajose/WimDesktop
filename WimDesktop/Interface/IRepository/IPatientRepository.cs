@@ -13,5 +13,6 @@ namespace WimDesktop.Interface.IRepository
         PatientModel getPatientById(int patientid);
         List<PatientDataToListDto> getPatientsByName(string value);
         void importPatient(PatientModel patient);
+        bool patientExists(string name);
     }
 }

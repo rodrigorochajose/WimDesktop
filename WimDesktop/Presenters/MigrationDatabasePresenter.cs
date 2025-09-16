@@ -327,6 +327,12 @@ namespace WimDesktop.Presenters
 
         private void importPatient(object sender, EventArgs e)
         {
+            if (patientRepository.patientExists(migrationDatabaseView.patientToImport.name))
+            {
+                migrationDatabaseView.duplicatedPatient = true;
+                return;
+            }
+
             patientRepository.importPatient(migrationDatabaseView.patientToImport);
         }
 

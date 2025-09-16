@@ -1,6 +1,8 @@
 ﻿using FellowOakDicom;
+using FellowOakDicom.Imaging;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,11 +28,11 @@ namespace WimDesktop.Views
         public List<ExamModel> exams { get; set; } = new List<ExamModel>();
         public List<ExamImageModel> examImages { get; set; } = new List<ExamImageModel>();
         public List<ExamImageCDR> examImagesCDR { get; set; } = new List<ExamImageCDR>();
-
         public PatientModel patientToImport { get; set; }
         public ExamModel examToImport { get; set; }
         public List<ExamImageModel> examImagesToImport { get; set; } = new List<ExamImageModel>();
         public SettingsModel settingsToImport { get; set; }
+        public bool duplicatedPatient { get; set; }
 
         public event EventHandler eventImportPatient;
         public event EventHandler eventImportExam;
@@ -133,7 +135,16 @@ namespace WimDesktop.Views
                 List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
 
                 patientToImport = patient;
+                duplicatedPatient = false;
+
                 eventImportPatient?.Invoke(this, EventArgs.Empty);
+
+                if (duplicatedPatient)
+                {
+                    processedPatients++;
+                    progress.Report((processedPatients * 100) / totalPatients);
+                    continue;
+                }
 
                 if (patientExams.Any())
                 {
@@ -182,7 +193,16 @@ namespace WimDesktop.Views
                     List<ExamModel> patientExams = exams.Where(e => e.patientId == patient.id).ToList();
 
                     patientToImport = patient;
+
+                    duplicatedPatient = false;
                     eventImportPatient?.Invoke(this, EventArgs.Empty);
+
+                    if (duplicatedPatient)
+                    {
+                        processedPatients++;
+                        progress.Report((processedPatients * 100) / totalPatients);
+                        continue;
+                    }
 
                     if (patientExams.Any())
                     {
@@ -200,14 +220,7 @@ namespace WimDesktop.Views
                             }
 
                             string filePath = currentExamImages.First().file;
-                            string dirPath = Path.Combine(dataPath, Path.GetDirectoryName(filePath));
-
-                            if (Directory.Exists(dirPath) && !Directory.GetFiles(dirPath, "*.jpeg").Any())
-                            {
-                                continue;
-                            }
-
-                            string examContentPath = Path.Combine(dirPath, "SR000001");
+                            string examContentPath = Path.Combine(Path.Combine(dataPath, Path.GetDirectoryName(filePath)), "SR000001");
 
                             if (File.Exists(examContentPath))
                             {
@@ -234,7 +247,6 @@ namespace WimDesktop.Views
 
                                 examToImport = patientExam;
                                 eventImportExam?.Invoke(this, EventArgs.Empty);
-
 
                                 getTemplateFrameId(currentExamImages, patientExam.templateId);
 
@@ -276,7 +288,7 @@ namespace WimDesktop.Views
 
             var matches = Regex.Matches(content, @"\b\d+(\.\d+)+\b");
 
-            HashSet<string> imagesIdentifier = new HashSet<string>(); // evita duplicados
+            HashSet<string> imagesIdentifier = new HashSet<string>();
 
             foreach (Match match in matches)
             {
@@ -412,26 +424,44 @@ namespace WimDesktop.Views
 
         private async Task importImages_CDR(List<ExamImageCDR> examImages, int patientId, int examId)
         {
-            string folderDest = $"C:\\WimDesktopDB\\img\\{patientId}\\{examId}";
+            string folderDest = Path.Combine("C:\\WimDesktopDB\\img", patientId.ToString(), examId.ToString());
 
-            if (!Directory.Exists(folderDest))
-            {
-                Directory.CreateDirectory(folderDest);
-            }
-
+            Directory.CreateDirectory(folderDest);
             Directory.CreateDirectory(Path.Combine(folderDest, "recycle"));
 
-            foreach (ExamImageCDR examImage in examImages)
+            DicomConfig.EnsureConfigured();
+
+            foreach (var examImage in examImages)
             {
-                string originFile = Path.Combine(dataPath, examImage.file + ".jpeg");
+                string originFile = Path.Combine(dataPath, examImage.file);
 
-                if (File.Exists(originFile))
+                if (!File.Exists(originFile))
                 {
-                    string dest = Path.Combine(folderDest, $"{examImage.order}_original.png");
+                    migrationErrors += $"[ERRO] Arquivo não encontrado: {originFile} (PatientId={patientId}, ExamId={examId}){Environment.NewLine}";
+                    continue;
+                }
 
-                    await Task.Run(() => File.Copy(originFile, dest, overwrite: true));
+                try
+                {
+                    await Task.Run(() => { 
+                        string destFile = Path.Combine(folderDest, $"{examImage.order}_original.png");
 
-                    examImage.file = dest;
+                        var dicomFile = DicomFile.Open(originFile);
+                        var dicomImage = new DicomImage(dicomFile.Dataset);
+
+                        using (var rendered = dicomImage.RenderImage())
+                        {
+                            using (var bmp = rendered.AsSharedBitmap()){
+                                bmp.Save(destFile, ImageFormat.Png);
+                            }
+                        }
+
+                        examImage.file = destFile;
+                    });
+                }
+                catch (Exception ex)
+                {
+                    migrationErrors += $"[ERRO] Falha ao processar {originFile}: {ex.Message} (PatientId={patientId}, ExamId={examId}){Environment.NewLine}";
                 }
             }
         }

@@ -12,11 +12,12 @@ namespace WimDesktop.Interface.IView
         List<ExamModel> exams { get; set; }
         List<ExamImageModel> examImages { get; set; }
         List<ExamImageCDR> examImagesCDR { get; set; }
-
         PatientModel patientToImport { get; set; }
         ExamModel examToImport { get; set; }
         List<ExamImageModel> examImagesToImport { get; set; }
         SettingsModel settingsToImport { get; set; }
+        bool duplicatedPatient { get; set; }
+
 
         event EventHandler eventImportPatient;
         event EventHandler eventImportExam;
