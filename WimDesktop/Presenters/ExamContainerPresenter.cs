@@ -1,23 +1,26 @@
-﻿using WimDesktop._Repositories;
-using WimDesktop.Interface.iRay;
-using WimDesktop.Interface.IRepository;
-using WimDesktop.Interface.IView;
-using WimDesktop.Models;
-using WimDesktop.Views;
+﻿using Saraff.Twain;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using WimDesktop._Repositories;
+using WimDesktop.Interface.iRay;
+using WimDesktop.Interface.IRepository;
+using WimDesktop.Interface.IView;
+using WimDesktop.Models;
 using WimDesktop.Properties;
-using Saraff.Twain;
+using WimDesktop.Views;
 
 namespace WimDesktop.Presenters
 {
@@ -33,7 +36,6 @@ namespace WimDesktop.Presenters
         private readonly ISensorRepository sensorRepository = new SensorRepository();
 
         private string previousTwainStateFlags = "";
-
 
         private readonly List<string> acquireModes = new List<string>
         {
@@ -74,6 +76,7 @@ namespace WimDesktop.Presenters
             examContainerView.eventOpenTwain += openTwain;
             examContainerView.eventInitializeTwain += initializeTwain;
             examContainerView.eventCloseTwain += closeTwain;
+            examContainerView.eventCloseTwainWindow += closeTwainWindow;
         }
 
         private void checkSensorStatus()
@@ -176,14 +179,27 @@ namespace WimDesktop.Presenters
 
             isAcquireInterfaceOpen = true;
             twain.Acquire();
+            MoveTwainWindow();
         }
 
         private void closeTwain(object sender, EventArgs e)
         {
             if (twain != null)
             {
+                twain.CloseDataSource();
                 twain.CloseDSM();
-                twain.Dispose();
+            }
+        }
+
+        private void closeTwainWindow(object sender, EventArgs e)
+        {
+            if (twain != null)
+            {
+                IntPtr hwnd = FindWindowByTitleContains("iRay sensor v1.0.2.005");
+                if (hwnd != IntPtr.Zero)
+                {
+                    PostMessage(hwnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                }
             }
         }
 
@@ -636,5 +652,70 @@ namespace WimDesktop.Presenters
             File.AppendAllText("C:\\WimDesktopDB\\img\\imglog.txt", message);
 
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        private const uint WM_CLOSE = 0x0010;
+
+        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+        [DllImport("user32.dll")]
+        private static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool IsWindowVisible(IntPtr hWnd);
+
+        private IntPtr FindWindowByTitleContains(string fragment)
+        {
+            IntPtr found = IntPtr.Zero;
+            if (string.IsNullOrEmpty(fragment)) return IntPtr.Zero;
+
+            EnumWindows((hWnd, lParam) =>
+            {
+                try
+                {
+                    if (!IsWindowVisible(hWnd)) return true;
+
+                    int len = GetWindowTextLength(hWnd);
+                    if (len == 0) return true;
+
+                    StringBuilder sb = new StringBuilder(len + 1);
+                    GetWindowText(hWnd, sb, sb.Capacity);
+                    string title = sb.ToString();
+
+                    if (!string.IsNullOrEmpty(title) && title.IndexOf(fragment, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        found = hWnd;
+                        return false;
+                    }
+                }
+                catch { }
+                return true;
+            }, IntPtr.Zero);
+
+            return found;
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+
+        public void MoveTwainWindow()
+        {
+            IntPtr hwnd = FindWindowByTitleContains("iRay sensor v1.0.2.005");
+
+            if (hwnd != IntPtr.Zero)
+            {
+                SetWindowPos(hwnd, IntPtr.Zero, 50, Screen.PrimaryScreen.Bounds.Height - 400, 0, 0, 0x0001 | 0x0004);
+            }
+        }
+
     }
 }

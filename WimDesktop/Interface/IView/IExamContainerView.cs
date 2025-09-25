@@ -18,6 +18,7 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventOpenTwain;
         event EventHandler eventInitializeTwain;
         event EventHandler eventCloseTwain;
+        event EventHandler eventCloseTwainWindow;
 
 
         void initialize();

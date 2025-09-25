@@ -199,6 +199,8 @@ namespace WimDesktop.Views
 
                     if (duplicatedPatient)
                     {
+                        migrationErrors += $"[ALERTA] Paciente {patient.name} Duplicado.{Environment.NewLine}";
+
                         processedPatients++;
                         progress.Report((processedPatients * 100) / totalPatients);
                         continue;
@@ -259,6 +261,10 @@ namespace WimDesktop.Views
                                 eventImportExamImages?.Invoke(this, EventArgs.Empty);
                             }
                         }
+                    }
+                    else
+                    {
+                        migrationErrors += $"[ALERTA] Paciente {patient.name} não possui exames.{Environment.NewLine}";
                     }
                     processedPatients++;
                     progress.Report((processedPatients * 100) / totalPatients);

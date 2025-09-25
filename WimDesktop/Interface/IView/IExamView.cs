@@ -31,11 +31,10 @@ namespace WimDesktop.Interface.IView
         event EventHandler eventCloseSingleExam;
         event EventHandler eventChangeAcquireMode;
         event EventHandler eventAcquireTwain;
-
+        event EventHandler eventCloseTwainWindow;
         void recycleCurrentImage();
         void selectFrame(Frame frameToSelect = null);
         void loadImageOnMainPictureBox();
-        bool dialogOverwriteCurrentImage();
         void setLabelPatientTemplate(string patient, string template);
     }
 }

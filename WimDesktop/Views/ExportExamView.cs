@@ -190,9 +190,11 @@ namespace WimDesktop.Views
                 {
                     originalImagePath = Path.Combine(pathImages, $"{frame.order}_original.png");
 
-                    Bitmap img = new Bitmap(originalImagePath);
+                    using (Bitmap img = new Bitmap(originalImagePath))
+                    {
+                        imagesInfo.Add(new ImageInfoExport(frame.orientation, originalImagePath, (Bitmap) img.Clone()));
+                    }
 
-                    imagesInfo.Add(new ImageInfoExport(frame.orientation, originalImagePath, img));
                 }
             }
 
@@ -207,8 +209,10 @@ namespace WimDesktop.Views
 
                     if (imagePathToUse != null)
                     {
-                        Bitmap img = new Bitmap(imagePathToUse);
-                        imagesInfo.Add(new ImageInfoExport(frame.orientation, imagePathToUse, new Bitmap(img)));
+                        using (Bitmap img = new Bitmap(imagePathToUse))
+                        {
+                            imagesInfo.Add(new ImageInfoExport(frame.orientation, imagePathToUse, (Bitmap)img.Clone()));
+                        }
                     }
                 }
             }

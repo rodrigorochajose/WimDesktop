@@ -42,6 +42,7 @@ namespace WimDesktop.Views
         public event EventHandler eventCloseSingleExam;
         public event EventHandler eventChangeAcquireMode;
         public event EventHandler eventAcquireTwain;
+        public event EventHandler eventCloseTwainWindow;
 
         int action = 0;
         int indexFrame = 0;
@@ -627,9 +628,15 @@ namespace WimDesktop.Views
 
         private bool checkOverwriteImage()
         {
+            eventCloseTwainWindow?.Invoke(this, EventArgs.Empty);
+
             selectTool(buttonSelect);
 
-            bool overwrite = dialogOverwriteCurrentImage();
+            DialogOverwriteImage dialogOverwiteImage = new DialogOverwriteImage();
+
+            DialogResult res = dialogOverwiteImage.ShowDialog();
+
+            bool overwrite = res == DialogResult.Yes; 
 
             if (overwrite)
             {
@@ -667,16 +674,6 @@ namespace WimDesktop.Views
             nextFrameSelection = true;
             eventAcquireTwain?.Invoke(this, EventArgs.Empty);
             //}
-        }
-
-        public bool dialogOverwriteCurrentImage()
-        {
-            DialogResult res = MessageBox.Show(Resources.messageImageConfirmOverwrite, Resources.titleOverwriteImage, MessageBoxButtons.YesNo);
-            if (res == DialogResult.No)
-            {
-                return false;
-            }
-            return true;
         }
 
         public void loadImageOnMainPictureBox()
@@ -1332,7 +1329,7 @@ namespace WimDesktop.Views
             checkChangesAndSave();
 
             generateEditedImage();
-
+                
             new ExportExamPresenter(
                 new ExportExamView
                 {
@@ -2266,24 +2263,25 @@ namespace WimDesktop.Views
         {
             if (selectedDrawingHistory[indexSelectedDrawingHistory].Count > 0)
             {
-                Image frameImage = selectedFrame.filteredImage;
-
-                Bitmap imageToDraw = new Bitmap(frameImage, new Size(
-                    mainPictureBox.Height * frameImage.Width / frameImage.Height,
-                    mainPictureBox.Height
-                ));
-
-                Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
-
-                foreach (IDrawing drawing in selectedDrawingHistory[indexSelectedDrawingHistory])
+                using (Image frameImage = selectedFrame.filteredImage)
                 {
-                    drawing.draw(graphicsToDraw);
+                    Bitmap imageToDraw = new Bitmap(frameImage, new Size(
+                        mainPictureBox.Height * frameImage.Width / frameImage.Height,
+                        mainPictureBox.Height
+                    ));
+
+                    Graphics graphicsToDraw = Graphics.FromImage(imageToDraw);
+
+                    foreach (IDrawing drawing in selectedDrawingHistory[indexSelectedDrawingHistory])
+                    {
+                        drawing.draw(graphicsToDraw);
+                    }
+
+                    Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
+
+                    editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
+                    selectedFrame.editedImage = editedImage;
                 }
-
-                Bitmap editedImage = new Bitmap(imageToDraw, new Size(frameImage.Width, frameImage.Height));
-
-                editedImage.Save(Path.Combine(examPath, $"{selectedFrame.order}_edited.png"));
-                selectedFrame.editedImage = editedImage;
             }
         }
 

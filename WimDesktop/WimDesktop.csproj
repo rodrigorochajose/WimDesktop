@@ -14,27 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftps://waws-prod-cq1-055.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://wimdesktop-hndyb3arhcdphzch.brazilsouth-01.azurewebsites.net/</InstallUrl>
-    <UpdateUrl>https://wimdesktop-hndyb3arhcdphzch.brazilsouth-01.azurewebsites.net/</UpdateUrl>
-    <ProductName>WimDesktop7.0</ProductName>
-    <SuiteName>WimDesktop</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <CreateDesktopShortcut>true</CreateDesktopShortcut>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperEnabled>false</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -271,6 +251,12 @@
     </Compile>
     <Compile Include="Views\DialogForgotPassword.Designer.cs">
       <DependentUpon>DialogForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogOverwriteImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DialogOverwriteImage.Designer.cs">
+      <DependentUpon>DialogOverwriteImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.cs">
       <SubType>Form</SubType>
@@ -553,6 +539,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DialogForgotPassword.resx">
       <DependentUpon>DialogForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DialogOverwriteImage.resx">
+      <DependentUpon>DialogOverwriteImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FramesComparisonImportView.en-US.resx">
       <DependentUpon>FramesComparisonImportView.cs</DependentUpon>

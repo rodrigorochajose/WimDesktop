@@ -22,6 +22,7 @@ namespace WimDesktop.Views
         public event EventHandler eventOpenTwain;
         public event EventHandler eventInitializeTwain;
         public event EventHandler eventCloseTwain;
+        public event EventHandler eventCloseTwainWindow;
 
         public ExamContainerView(IExamView examView)
         {
@@ -108,6 +109,11 @@ namespace WimDesktop.Views
                 }
 
                 eventOpenTwain?.Invoke(s, e);
+            };
+
+            examView.eventCloseTwainWindow += (s, e) =>
+            {
+                eventCloseTwainWindow?.Invoke(s, e);
             };
         }
 
