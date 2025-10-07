@@ -112,6 +112,8 @@ namespace WimDesktop.Views
         {
             int processedPatients = 0;
 
+            orderData();
+
             if (software == "WIM")
             {
                 await importData_WIM(progress, processedPatients);
@@ -120,6 +122,13 @@ namespace WimDesktop.Views
             {
                 await importData_CDR(progress, processedPatients);
             }
+        }
+
+        private void orderData()
+        {
+            patients = patients.OrderBy(p => p.id).ToList();
+            exams = exams.OrderBy(e => e.id).ToList();
+            examImages = examImages.OrderBy(ei => ei.id).ToList();
         }
 
         private async Task importData_WIM(IProgress<int> progress, int processedPatients)
@@ -218,6 +227,7 @@ namespace WimDesktop.Views
 
                             if (!currentExamImages.Any())
                             {
+                                migrationErrors += $"[ALERTA] L221 - Paciente {patient.name} Não possui imagens no exame {patientExam.id}.{Environment.NewLine}";
                                 continue;
                             }
 
@@ -230,6 +240,7 @@ namespace WimDesktop.Views
 
                                 if (!currentExamImages.Any())
                                 {
+                                    migrationErrors += $"[ALERTA] L234 Paciente {patient.name} Não possui imagens no exame {patientExam.id}.{Environment.NewLine}";
                                     continue;
                                 }
                             }
@@ -244,7 +255,13 @@ namespace WimDesktop.Views
 
                                 if (patientExam.templateId == 0)
                                 {
+                                    migrationErrors += $"[ALERTA] L234 Paciente {patient.name}, Template ZERO  {patientExam.id}.{Environment.NewLine}";
                                     continue;
+                                }
+
+                                if (patient.name.ToUpper().Contains("CARLOS ALEXANDRE") || patient.name.ToUpper().Contains("CRISLAINE SIMIAO"))
+                                {
+                                    Console.WriteLine($"{patient.name} {patient.id} - examid {patientExam.id} | patientid {patientExam.id}");
                                 }
 
                                 examToImport = patientExam;
@@ -259,6 +276,11 @@ namespace WimDesktop.Views
                                 examImagesToImport = patientExamImages;
 
                                 eventImportExamImages?.Invoke(this, EventArgs.Empty);
+
+                            }
+                            else
+                            {
+                                migrationErrors += $"[ALERTA] L267 Paciente {patient.name} Não possui imagens no exame {patientExam.id}.{Environment.NewLine}";
                             }
                         }
                     }

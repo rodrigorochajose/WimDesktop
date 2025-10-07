@@ -1,7 +1,10 @@
-﻿using Saraff.Twain;
+﻿using WimDesktop._Repositories;
+using WimDesktop.Interface.iRay;
+using WimDesktop.Interface.IRepository;
+using WimDesktop.Models;
+using WimDesktop.Views;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -10,17 +13,11 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using WimDesktop._Repositories;
-using WimDesktop.Interface.iRay;
-using WimDesktop.Interface.IRepository;
-using WimDesktop.Interface.IView;
-using WimDesktop.Models;
 using WimDesktop.Properties;
-using WimDesktop.Views;
+using Saraff.Twain;
 
 namespace WimDesktop.Presenters
 {
@@ -42,10 +39,9 @@ namespace WimDesktop.Presenters
            Resources.nativeAquireMode, "TWAIN"
         };
 
-        public ExamContainerPresenter(IExamContainerView view, int patientId)
+        public ExamContainerPresenter(ExamContainerView view)
         {
-            examContainerView = view as ExamContainerView;
-            view.patientId = patientId;
+            examContainerView = view;
 
             associateEvents();
 
@@ -61,22 +57,19 @@ namespace WimDesktop.Presenters
             //}
             //else
             //{
-            //    connectSensor(this, EventArgs.Empty);
+            //    iRayConnectSensor(this, EventArgs.Empty);
             //    examContainerView.twainInitialized = false;
             //}
-
-            examContainerView.initialize();
         }
 
         private void associateEvents()
         {
-            examContainerView.eventConnectSensor += connectSensor;
+            examContainerView.eventConnectSensor += iRayConnectSensor;
             examContainerView.eventDestroySensor += destroySensor;
-            examContainerView.eventGetSensorInfo += getSensorInfo;
+            examContainerView.eventSetSensorInfo += setSensorInfo;
             examContainerView.eventOpenTwain += openTwain;
             examContainerView.eventInitializeTwain += initializeTwain;
             examContainerView.eventCloseTwain += closeTwain;
-            examContainerView.eventCloseTwainWindow += closeTwainWindow;
         }
 
         private void checkSensorStatus()
@@ -119,18 +112,25 @@ namespace WimDesktop.Presenters
 
             if (e.Image != null)
             {
-                string log = $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Captura Feita\n";
+                string log = $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Captura Feita\n";
+
+                if (!selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null && !selectedExamView.checkOverwriteImage())
+                {
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Não confirmou sobrescrever\n";
+                    return;
+                }
 
                 if (selectedExamView.recycleImage)
                 {
                     selectedExamView.recycleCurrentImage();
-                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Imagem Reciclada\n";
-                } 
-                else if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Imagem Reciclada\n";
+                }
+
+                if (selectedExamView.twainAutoTake && selectedExamView.nextFrameSelection && selectedExamView.selectedFrame.originalImage != null)
                 {
                     selectedExamView.selectFrame();
                 }
-
+                
                 string originalImagePath = Path.Combine(selectedExamView.examPath, $"{selectedExamView.selectedFrame.order}_original.png");
 
                 Twain32.Identity currentSource = twain.GetSourceIdentity(twain.SourceIndex);
@@ -146,7 +146,12 @@ namespace WimDesktop.Presenters
                     bitmap.Save(originalImagePath, ImageFormat.Png);
                     bitmap.Save(originalImagePath.Replace("original", "filtered"), ImageFormat.Png);
 
-                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patient.id} | D: {DateTime.Now} | S: Imagem Salva: {originalImagePath}\n";
+                    log += $"E: {selectedExamView.exam.id} | P: {selectedExamView.patientId} | D: {DateTime.Now} | S: Imagem Salva: {originalImagePath}\n";
+                }
+
+                if (selectedExamView.twainAutoTake)
+                {
+                    selectedExamView.nextFrameSelection = true;
                 }
 
                 writeImageAcquireLog(log);
@@ -163,10 +168,12 @@ namespace WimDesktop.Presenters
 
                 if (examImages == frames)
                 {
+                    examContainerView.selectedExamView.twainAutoTake = false;
+                    examContainerView.selectedExamView.nextFrameSelection = false;
                     return;
                 }
 
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(1000);
                 openTwain(sender, EventArgs.Empty);
             }
         }
@@ -176,6 +183,7 @@ namespace WimDesktop.Presenters
             twain.OpenDSM();
             twain.OpenDataSource();
             twain.Capabilities.XferMech.Set(TwSX.Native);
+
 
             isAcquireInterfaceOpen = true;
             twain.Acquire();
@@ -191,45 +199,32 @@ namespace WimDesktop.Presenters
             }
         }
 
-        private void closeTwainWindow(object sender, EventArgs e)
-        {
-            if (twain != null)
-            {
-                IntPtr hwnd = FindWindowByTitleContains("iRay sensor v1.0.2.005");
-                if (hwnd != IntPtr.Zero)
-                {
-                    PostMessage(hwnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
-                }
-            }
-        }
-
         private void setDefaultSensor()
         {
             string sensorModel = settingsRepository.getSensorModel();
             setConnectedSensor(sensorModel);
         }
 
-        private void connectSensor(object sender, EventArgs e)
+        private void iRayConnectSensor(object sender, EventArgs e)
         {
             try
             {
-                string workDir = getWorkDir();
+                string workDir = iRayGetWorkDir();
 
-                if (workDir.Any())
-                {
-                    sensorId = Detector.CreateDetector(workDir, this);
-                    Detector d = Detector.DetectorList[sensorId];
-
-                    d.Connect();
-
-                    string sensor = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
-
-                    setConnectedSensor(sensor);
-                }
-                else
+                if (!workDir.Any())
                 {
                     setDefaultSensor();
+                    return;
                 }
+
+                sensorId = Detector.CreateDetector(workDir, this);
+                Detector d = Detector.DetectorList[sensorId];
+
+                d.Connect();
+
+                string sensor = Regex.Match(workDir, "Pluto.*?(?=_)").ToString().ToUpper();
+
+                setConnectedSensor(sensor);
             }
             catch
             {
@@ -285,18 +280,16 @@ namespace WimDesktop.Presenters
 
             SensorModel matchedSensor = sensors.FirstOrDefault(s => s.name == sensor);
             
-            if (matchedSensor != null)
-            {
-                connectedSensor = matchedSensor;
-            }
-            else
+            if (matchedSensor == null)
             {
                 setDefaultSensor();
+                return;
             }
 
+            connectedSensor = matchedSensor;
         }
 
-        private string getWorkDir()
+        private string iRayGetWorkDir()
         {
             using (ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity WHERE DeviceID LIKE '%IRAY%'"))
             {
@@ -350,13 +343,13 @@ namespace WimDesktop.Presenters
             }
         }
 
-        private void getSensorInfo(object sender, EventArgs e)
+        private void setSensorInfo(object sender, EventArgs e)
         {
             examContainerView.selectedExamView.sensorConnected = true;
             examContainerView.selectedExamView.sensor = connectedSensor;
         }
 
-        private void setSensorOption()
+        private void iRaySetSensorOption()
         {
             Detector d = Detector.DetectorList[sensorId];
 
@@ -386,7 +379,7 @@ namespace WimDesktop.Presenters
                         {
                             case SdkInterface.Cmd_Connect:
                                 //MessageBox.Show("Sensor Conectado");
-                                setSensorOption();
+                                iRaySetSensorOption();
                                 break;
                             case SdkInterface.Cmd_ReadUserROM:
                                 MessageBox.Show("Read ram succeed!");

@@ -1,7 +1,6 @@
 ﻿using WimDesktop._Repositories;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
-using WimDesktop.Models;
 using WimDesktop.Views;
 using System;
 using System.Collections.Generic;
@@ -64,19 +63,9 @@ namespace WimDesktop.Presenters
 
         private void showSelectTemplateForm(object sender, EventArgs e)
         {
-            IExamTemplateSelectionView templateView = new ExamTemplateSelectionView();
-            
-            PatientModel selectedPatient = patientRepository.getPatientById(view.selectedPatientId);
-            templateView.patientId = selectedPatient.id;
-            templateView.patientName = selectedPatient.name;
-            templateView.patientBirthDate = selectedPatient.birthDate;
-            templateView.patientPhone = selectedPatient.phone;
-            templateView.patientRecommendation = selectedPatient.recommendation;
-            templateView.patientObservation = selectedPatient.observation;
-
             FormManager.instance.closeAllExceptMenu();
 
-            new ExamTemplateSelectionPresenter(templateView, view.GetType());
+            new ExamTemplateSelectionPresenter(new ExamTemplateSelectionView(), view.selectedPatientId);
         }
     }
 }

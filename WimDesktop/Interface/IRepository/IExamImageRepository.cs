@@ -11,6 +11,7 @@ namespace WimDesktop.Interface.IRepository
         IEnumerable<ExamImageModel> getExamImages(int examId);
         IEnumerable<string> getExamImagesPath(int examId);
         ExamImageModel getExamImageById(int examId, int frameId);
+        bool examHasImages(int examId);
         void importExamImages(List<ExamImageModel> examImages);
     }
 }

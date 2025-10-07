@@ -1,5 +1,4 @@
 ﻿using WimDesktop._Repositories;
-using WimDesktop.Components;
 using WimDesktop.Interface.IRepository;
 using WimDesktop.Interface.IView;
 using WimDesktop.Models;
@@ -8,7 +7,6 @@ using WimDesktop.Views;
 using MoreLinq;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -23,18 +21,14 @@ namespace WimDesktop.Presenters
         private readonly IPatientRepository patientRepository = new PatientRepository();
         private readonly IExamRepository examRepository = new ExamRepository();
         private readonly IExamImageRepository examImageRepository = new ExamImageRepository();
-        private readonly ITemplateFrameRepository templateFrameRepository = new TemplateFrameRepository();
         private readonly ISettingsRepository settingsRepository = new SettingsRepository();
-
-        private readonly string examOpeningMode;
 
         private IEnumerable<ExamModel> examList;
         private readonly BindingSource examBindingSource;
 
-        public PatientExamPresenter(IPatientExamView view, int patientId, string examOpeningMode)
+        public PatientExamPresenter(IPatientExamView view, int patientId)
         {
             this.view = view;
-            this.examOpeningMode = examOpeningMode;
             examBindingSource = new BindingSource();
 
             associateEvents();
@@ -115,18 +109,9 @@ namespace WimDesktop.Presenters
 
         private void newExam(object sender, EventArgs e)
         {
-            IExamTemplateSelectionView examTemplateSelectionView = new ExamTemplateSelectionView();
-
-            examTemplateSelectionView.patientId = view.patientId;
-            examTemplateSelectionView.patientName = view.patientName;
-            examTemplateSelectionView.patientBirthDate = view.patientBirthDate;
-            examTemplateSelectionView.patientPhone = view.patientPhone;
-            examTemplateSelectionView.patientRecommendation = view.patientRecommendation;
-            examTemplateSelectionView.patientObservation = view.patientObservation;
-
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            new ExamTemplateSelectionPresenter(examTemplateSelectionView, view.GetType());
+            new ExamTemplateSelectionPresenter(new ExamTemplateSelectionView(), view.patientId);
         }
 
         private void getPatientExams(object sender, EventArgs e)
@@ -148,7 +133,27 @@ namespace WimDesktop.Presenters
         {
             FormManager.instance.closeAllExceptExamAndMenu();
 
-            new ExamPresenter(new ExamView(examRepository.getExam(view.selectedExamId), selectedPatient, settingsRepository.getAllSettings()), true, examOpeningMode);
+            ExamView examView = new ExamView(examRepository.getExam(view.selectedExamId), selectedPatient.id, settingsRepository.getAllSettings());
+
+            new ExamPresenter(examView, true);
+
+            ExamContainerView container = FormManager.instance.getContainer();
+
+            if (container != null)
+            {
+                if (container.patientId == selectedPatient.id)
+                {
+                    container.createExamPage(examView);
+                    return;
+                }
+
+                FormManager.instance.closeAllExceptMenu();
+            }
+
+            container = new ExamContainerView(examView, selectedPatient.id);
+            new ExamContainerPresenter(container);
+
+            container.loadDataAndShow();
         }
 
         private void deleteExam(object sender, EventArgs e)
@@ -178,66 +183,13 @@ namespace WimDesktop.Presenters
 
         private void exportExam(object sender, EventArgs e)
         {
-            // isso deveria ser lógica do presenter de export exam
-
-            ExamModel selectedExam = examRepository.getExam(view.selectedExamId);
-
-            List<TemplateFrameModel> templateFrames = templateFrameRepository.getTemplateFrame(selectedExam.templateId);
-            List<ExamImageModel> examImages = examImageRepository.getExamImages(view.selectedExamId).ToList();
-
-            if (!examImages.Any())
+            if (!examImageRepository.examHasImages(view.selectedExamId))
             {
                 MessageBox.Show(Resources.messageExamCannotExport);
                 return;
             }
 
-            string examPath = $"{settingsRepository.getExamPath()}\\{selectedExam.patient.id}\\{selectedExam.id}";
-
-            List<Frame> frames = new List<Frame>();
-
-            foreach (TemplateFrameModel frame in templateFrames)
-            {
-                ExamImageModel selectedExamImage = examImages.FirstOrDefault(ex => ex.templateFrameId == frame.id);
-
-                if (selectedExamImage != null)
-                {
-                    Frame newFrame = new Frame
-                    {
-                        BackColor = Color.Black,
-                        order = frame.order,
-                        Name = "frame" + frame.id,
-                        orientation = frame.orientation
-                    };
-
-                    string imagePath = Path.Combine(examPath, selectedExamImage.file);
-
-                    if (File.Exists(Path.Combine(examPath, $"{newFrame.order}_filtered.png")))
-                    {
-                        imagePath = Path.Combine(examPath, $"{newFrame.order}_filtered.png");
-                    }
-
-                    using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    {
-                        Bitmap image = new Bitmap(Image.FromStream(fs));
-                        Bitmap thumb = new Bitmap(image, newFrame.Width, newFrame.Height);
-
-                        newFrame.originalImage = new Bitmap(image);
-                        newFrame.Image = thumb;
-                        image.Dispose();
-                    }
-
-                    frames.Add(newFrame);
-                }
-            }
-
-            new ExportExamPresenter(
-                new ExportExamView
-                {
-                    pathImages = examPath,
-                    framesToExport = frames,
-                    patientName = selectedExam.patient.name
-                }
-            );
+            new ExportExamPresenter(new ExportExamView(), selectedPatient.id, view.selectedExamId);
         }
 
         private void switchTemplate(object sender, EventArgs e)
